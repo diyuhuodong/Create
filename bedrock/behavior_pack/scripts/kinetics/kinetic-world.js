@@ -15,6 +15,10 @@ export const KINETIC_BLOCKS = {
 	"createbedrock:millstone": {
 		kind: "consumer",
 		stressImpact: 8
+	},
+	"createbedrock:mechanical_bearing": {
+		kind: "consumer",
+		stressImpact: 8
 	}
 };
 

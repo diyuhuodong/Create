@@ -6,6 +6,7 @@ import { TrainController } from "./train-controller.js";
 
 const TRACK_BLOCK = "createbedrock:track";
 const TRAIN_ENTITY = "createbedrock:train";
+const TRAIN_ID_PROPERTY = "createbedrock:train_id";
 const PERSISTENCE_KEY = "createbedrock:trains_v1";
 const HORIZONTAL_OFFSETS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
 const graphs = new Map();
@@ -46,11 +47,21 @@ function nodeLocation(dimensionId, id) {
 
 function spawnMarker(dimensionId, trainId, nodeIdValue) {
 	const location = nodeLocation(dimensionId, nodeIdValue);
-	return world.getDimension(dimensionId).spawnEntity(TRAIN_ENTITY, {
+	const dimension = world.getDimension(dimensionId);
+	const existing = dimension.getEntities({ type: TRAIN_ENTITY })
+		.find(entity => entity.getDynamicProperty(TRAIN_ID_PROPERTY) === trainId);
+	if (existing?.isValid) {
+		existing.teleport({ x: location.x + 0.5, y: location.y + 1, z: location.z + 0.5 });
+		return existing.id;
+	}
+
+	const entity = dimension.spawnEntity(TRAIN_ENTITY, {
 		x: location.x + 0.5,
 		y: location.y + 1,
 		z: location.z + 0.5
-	}).id;
+	});
+	entity.setDynamicProperty(TRAIN_ID_PROPERTY, trainId);
+	return entity.id;
 }
 
 function persist() {
@@ -163,6 +174,16 @@ export function registerTrains() {
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
 		if (event.block.typeId === TRACK_BLOCK)
 			addTrack(event.block);
+	});
+
+	world.beforeEvents.playerBreakBlock.subscribe(event => {
+		if (event.block.typeId !== TRACK_BLOCK)
+			return;
+		const graph = graphs.get(event.block.dimension.id);
+		if (!graph?.canRemoveNode(nodeId(event.block.location))) {
+			event.cancel = true;
+			event.player.sendMessage("Cannot remove a track reserved by an active train.");
+		}
 	});
 
 	world.afterEvents.playerBreakBlock.subscribe(event => {

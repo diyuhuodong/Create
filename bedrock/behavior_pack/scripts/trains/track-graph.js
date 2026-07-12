@@ -41,6 +41,12 @@ export class TrackGraph {
 		return true;
 	}
 
+	canRemoveNode(id) {
+		if (!this.#nodes.has(id))
+			return true;
+		return this.#edgesFor(id).every(edge => edge.reservedBy === undefined);
+	}
+
 	findRoute(startId, destinationId) {
 		if (!this.#nodes.has(startId) || !this.#nodes.has(destinationId))
 			throw new Error("Routes require registered start and destination nodes");

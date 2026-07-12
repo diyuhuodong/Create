@@ -2,6 +2,8 @@ import { cp, mkdir, rm } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { importJavaAssets } from "./import-java-assets.mjs";
+
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(toolDirectory, "..");
 const buildRoot = resolve(bedrockRoot, "build");
@@ -17,4 +19,5 @@ for (const pack of packs) {
 	});
 }
 
-console.log(`Built Bedrock packs in ${buildRoot}`);
+const importedTextureCount = await importJavaAssets(resolve(buildRoot, "resource_pack"));
+console.log(`Built Bedrock packs in ${buildRoot}; staged ${importedTextureCount} Java textures.`);

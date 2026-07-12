@@ -5,7 +5,7 @@ export class ContraptionController {
 	#world;
 
 	constructor(worldPort) {
-		for (const method of ["readBlock", "removeBlock", "placeBlock", "spawnContraption", "removeContraption", "canPlace"]) {
+		for (const method of ["readBlock", "removeBlock", "placeBlock", "spawnContraption", "removeContraption", "setContraptionRotation", "canPlace"]) {
 			if (typeof worldPort?.[method] !== "function")
 				throw new TypeError(`Contraption world port requires ${method}()`);
 		}
@@ -33,7 +33,7 @@ export class ContraptionController {
 				removed.push(block);
 			}
 			const entityId = this.#world.spawnContraption({ id, snapshot, origin: anchor });
-			this.#active.set(id, { entityId, origin: { ...anchor }, snapshot });
+			this.#active.set(id, { entityId, origin: { ...anchor }, rotation: 0, snapshot });
 			return { entityId, snapshot };
 		} catch (error) {
 			for (const block of removed)
@@ -62,10 +62,22 @@ export class ContraptionController {
 		return this.#active.get(id);
 	}
 
+	setRotation(id, rotation) {
+		if (!Number.isFinite(rotation))
+			throw new TypeError("Contraption rotation must be finite");
+		const active = this.#active.get(id);
+		if (!active)
+			throw new Error(`Unknown contraption ${id}`);
+
+		active.rotation = rotation;
+		this.#world.setContraptionRotation(active.entityId, rotation);
+	}
+
 	snapshot() {
 		return [...this.#active.entries()].map(([id, active]) => ({
 			id,
 			origin: { ...active.origin },
+			rotation: active.rotation,
 			snapshot: active.snapshot
 		}));
 	}
@@ -83,11 +95,14 @@ export class ContraptionController {
 				origin: record.origin,
 				snapshot: record.snapshot
 			});
+			const rotation = record.rotation ?? 0;
 			this.#active.set(record.id, {
 				entityId,
 				origin: { ...record.origin },
+				rotation,
 				snapshot: record.snapshot
 			});
+			this.#world.setContraptionRotation(entityId, rotation);
 		}
 	}
 }

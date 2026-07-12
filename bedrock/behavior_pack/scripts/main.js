@@ -9,6 +9,6 @@ import { registerTrains } from "./trains/train-runtime.js";
 
 registerKinetics();
 registerMillstones(getKineticWorldForTesting);
-registerContraptions();
+registerContraptions(getKineticWorldForTesting);
 registerTrains();
 system.run(startKernel);

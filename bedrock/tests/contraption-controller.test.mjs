@@ -13,9 +13,11 @@ function createWorld({ failSpawn = false } = {}) {
 		["1:64:0", { typeId: "createbedrock:millstone", data: { progress: 7 } }]
 	]);
 	const entities = new Set();
+	const rotations = new Map();
 	return {
 		blocks,
 		entities,
+		rotations,
 		canPlace(location) {
 			return !blocks.has(locationKey(location));
 		},
@@ -30,6 +32,9 @@ function createWorld({ failSpawn = false } = {}) {
 		},
 		removeContraption(entityId) {
 			entities.delete(entityId);
+		},
+		setContraptionRotation(entityId, rotation) {
+			rotations.set(entityId, rotation);
 		},
 		spawnContraption() {
 			if (failSpawn)
@@ -87,4 +92,19 @@ test("ContraptionController restores assembled contraptions after a restart", ()
 	restored.restore(source.snapshot());
 	assert.ok(restored.getActive("bearing-1"));
 	assert.deepEqual([...restoredWorld.entities], ["entity-1"]);
+});
+
+test("ContraptionController persists and restores its rotation state", () => {
+	const sourceWorld = createWorld();
+	const source = new ContraptionController(sourceWorld);
+	const locations = [{ x: 0, y: 64, z: 0 }, { x: 1, y: 64, z: 0 }];
+	source.assemble({ id: "bearing-1", anchor: locations[0], locations });
+	source.setRotation("bearing-1", 120);
+	assert.equal(sourceWorld.rotations.get("entity-1"), 120);
+
+	const restoredWorld = createWorld();
+	const restored = new ContraptionController(restoredWorld);
+	restored.restore(source.snapshot());
+	assert.equal(restored.getActive("bearing-1").rotation, 120);
+	assert.equal(restoredWorld.rotations.get("entity-1"), 120);
 });

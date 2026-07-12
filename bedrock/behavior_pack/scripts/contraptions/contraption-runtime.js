@@ -3,12 +3,15 @@ import { system, world } from "@minecraft/server";
 import { collectConnectedBlocks } from "./assembly-collector.js";
 import { BedrockContraptionWorldPort } from "./bedrock-world-port.js";
 import { ContraptionController } from "./contraption-controller.js";
+import { registerTickHandler } from "../kernel/index.js";
 
 const BEARING_BLOCK = "createbedrock:mechanical_bearing";
 const PERSISTENCE_KEY = "createbedrock:contraptions_v1";
 const MAX_PROTOTYPE_BLOCKS = 16;
 const activeBearings = new Map();
 const controllers = new Map();
+let ticksSincePersist = 0;
+let rotationDirty = false;
 
 function keyFor(dimensionId, location) {
 	return `${dimensionId}:${location.x}:${location.y}:${location.z}`;
@@ -26,7 +29,15 @@ function controllerFor(dimensionId) {
 function persist() {
 	const records = [];
 	for (const [bearingKey, active] of activeBearings) {
-		records.push({ bearingKey, dimensionId: active.dimensionId, id: active.id, origin: active.origin, snapshot: active.snapshot });
+		records.push({
+			bearingKey,
+			bearingLocation: active.bearingLocation,
+			dimensionId: active.dimensionId,
+			id: active.id,
+			origin: active.origin,
+			rotation: active.rotation,
+			snapshot: active.snapshot
+		});
 	}
 	world.setDynamicProperty(PERSISTENCE_KEY, JSON.stringify(records));
 }
@@ -40,8 +51,15 @@ function restore() {
 		for (const record of JSON.parse(serialized)) {
 			if (!record?.bearingKey || !record?.dimensionId || !record?.id || !record?.origin || !record?.snapshot)
 				continue;
-			controllerFor(record.dimensionId).restore([{ id: record.id, origin: record.origin, snapshot: record.snapshot }]);
-			activeBearings.set(record.bearingKey, record);
+			if (!record.bearingLocation)
+				continue;
+			controllerFor(record.dimensionId).restore([{
+				id: record.id,
+				origin: record.origin,
+				rotation: record.rotation ?? 0,
+				snapshot: record.snapshot
+			}]);
+			activeBearings.set(record.bearingKey, { ...record, rotation: record.rotation ?? 0 });
 		}
 	} catch (error) {
 		console.warn(`[Create Bedrock] Ignored invalid contraption state: ${error}`);
@@ -91,15 +109,17 @@ function toggleBearing(block) {
 	});
 	activeBearings.set(bearingKey, {
 		bearingKey,
+		bearingLocation: { ...block.location },
 		dimensionId: block.dimension.id,
 		id,
 		origin,
+		rotation: 0,
 		snapshot: assembled.snapshot
 	});
 	persist();
 }
 
-export function registerContraptions() {
+export function registerContraptions(getKineticWorld) {
 	world.afterEvents.playerInteractWithBlock.subscribe(event => {
 		if (event.block.typeId !== BEARING_BLOCK)
 			return;
@@ -108,6 +128,25 @@ export function registerContraptions() {
 			toggleBearing(event.block);
 		} catch (error) {
 			console.warn(`[Create Bedrock] Bearing interaction failed: ${error}`);
+		}
+	});
+
+	registerTickHandler(() => {
+		for (const active of activeBearings.values()) {
+			const speed = getKineticWorld().speedAt(active.dimensionId, active.bearingLocation);
+			if (speed === 0)
+				continue;
+
+			active.rotation = (active.rotation + speed) % 360;
+			controllerFor(active.dimensionId).setRotation(active.id, active.rotation);
+			rotationDirty = true;
+		}
+
+		ticksSincePersist++;
+		if (rotationDirty && ticksSincePersist >= 20) {
+			ticksSincePersist = 0;
+			rotationDirty = false;
+			persist();
 		}
 	});
 

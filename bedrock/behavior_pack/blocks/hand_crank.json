@@ -18,14 +18,14 @@
         },
         "material_instances": {
           "*": {
-            "texture": "dirt",
+            "texture": "createbedrock_axis",
             "render_method": "opaque"
           }
         }
       },
       "minecraft:material_instances": {
         "*": {
-          "texture": "dirt",
+          "texture": "createbedrock_axis",
           "render_method": "opaque"
         }
       }

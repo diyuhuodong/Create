@@ -39,6 +39,13 @@ export class BedrockContraptionWorldPort {
 	}
 
 	spawnContraption({ id, origin }) {
+		const existing = this.#dimension().getEntities({ type: CONTRAPTION_ENTITY })
+			.find(entity => entity.getDynamicProperty(CONTRAPTION_ID_PROPERTY) === id);
+		if (existing?.isValid) {
+			existing.teleport(origin);
+			return existing.id;
+		}
+
 		const entity = this.#dimension().spawnEntity(CONTRAPTION_ENTITY, origin);
 		entity.setDynamicProperty(CONTRAPTION_ID_PROPERTY, id);
 		return entity.id;
@@ -48,6 +55,12 @@ export class BedrockContraptionWorldPort {
 		const entity = world.getEntity(entityId);
 		if (entity?.isValid)
 			entity.remove();
+	}
+
+	setContraptionRotation(entityId, rotation) {
+		const entity = world.getEntity(entityId);
+		if (entity?.isValid)
+			entity.setRotation({ x: 0, y: rotation });
 	}
 
 	#dimension() {

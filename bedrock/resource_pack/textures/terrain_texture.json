@@ -1,0 +1,21 @@
+{
+  "resource_pack_name": "createbedrock",
+  "texture_name": "atlas.terrain",
+  "texture_data": {
+    "createbedrock_axis": {
+      "textures": "textures/create_java/block/axis"
+    },
+    "createbedrock_cogwheel": {
+      "textures": "textures/create_java/block/cogwheel"
+    },
+    "createbedrock_millstone": {
+      "textures": "textures/create_java/block/millstone"
+    },
+    "createbedrock_mechanical_bearing": {
+      "textures": "textures/create_java/block/mechanical_bearing_side"
+    },
+    "createbedrock_track": {
+      "textures": "textures/create_java/block/standard_track"
+    }
+  }
+}

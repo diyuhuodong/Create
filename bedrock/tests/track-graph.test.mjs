@@ -52,3 +52,13 @@ test("TrackGraph serializes and restores its topology", () => {
 	assert.equal(restored.removeNode("b"), true);
 	assert.equal(restored.findRoute("a", "d").length, 11);
 });
+
+test("TrackGraph rejects removal of a node on a reserved route", () => {
+	const graph = createGraph();
+	const route = graph.findRoute("a", "d");
+	graph.tryReserve("train_one", route.edgeIds);
+	assert.equal(graph.canRemoveNode("b"), false);
+	assert.throws(() => graph.removeNode("b"), /reserved/);
+	graph.releaseReservations("train_one");
+	assert.equal(graph.canRemoveNode("b"), true);
+});

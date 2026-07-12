@@ -18,14 +18,14 @@
         },
         "material_instances": {
           "*": {
-            "texture": "dirt",
+            "texture": "createbedrock_millstone",
             "render_method": "opaque"
           }
         }
       },
       "minecraft:material_instances": {
         "*": {
-          "texture": "dirt",
+          "texture": "createbedrock_millstone",
           "render_method": "opaque"
         }
       }
