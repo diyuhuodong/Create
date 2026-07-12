@@ -11,12 +11,20 @@
       "minecraft:destructible_by_mining": {
         "seconds_to_destroy": 1
       },
-      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:geometry": "geometry.createbedrock.mechanical_bearing",
       "minecraft:item_visual": {
         "geometry": {
-          "identifier": "minecraft:geometry.full_block"
+            "identifier": "geometry.createbedrock.mechanical_bearing"
         },
         "material_instances": {
+          "gearbox": {
+            "texture": "createbedrock_gearbox",
+            "render_method": "opaque"
+          },
+          "mechanical_bearing_side": {
+            "texture": "createbedrock_mechanical_bearing",
+            "render_method": "opaque"
+          },
           "*": {
             "texture": "createbedrock_mechanical_bearing",
             "render_method": "opaque"
@@ -24,6 +32,14 @@
         }
       },
       "minecraft:material_instances": {
+        "gearbox": {
+          "texture": "createbedrock_gearbox",
+          "render_method": "opaque"
+        },
+        "mechanical_bearing_side": {
+          "texture": "createbedrock_mechanical_bearing",
+          "render_method": "opaque"
+        },
         "*": {
           "texture": "createbedrock_mechanical_bearing",
           "render_method": "opaque"

@@ -6,7 +6,7 @@ This directory contains the Bedrock Add-On reimplementation of Create. It is iso
 
 Phase 0 establishes a reproducible Behavior Pack (BP), Resource Pack (RP), validation tooling, and a source-derived migration matrix. It does not yet claim runtime feature parity.
 
-The first runtime slice is `hand_crank -> shaft/cogwheel -> millstone`, with mechanical-bearing and basic track/train prototypes. `npm run build` stages eight selected Java block textures in the generated resource pack; they are not duplicated in source control. Java block-model JSON is not Bedrock geometry and still needs an explicit geometry-conversion pass before visual parity is claimed.
+The first runtime slice is `hand_crank -> shaft/cogwheel -> millstone`, with mechanical-bearing and basic track/train prototypes. `npm run build` stages selected Java block textures and converts the direct-element models for the crank base, shaft, cogwheel, millstone, and bearing into generated Bedrock geometry. They are not duplicated in source control. Parent composition, OBJ tracks, animated components, and the remaining model catalog still need explicit conversion before visual parity is claimed.
 
 ## Commands
 

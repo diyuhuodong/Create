@@ -3,6 +3,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { importJavaAssets } from "./import-java-assets.mjs";
+import { convertJavaModels } from "./convert-java-models.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(toolDirectory, "..");
@@ -20,4 +21,5 @@ for (const pack of packs) {
 }
 
 const importedTextureCount = await importJavaAssets(resolve(buildRoot, "resource_pack"));
-console.log(`Built Bedrock packs in ${buildRoot}; staged ${importedTextureCount} Java textures.`);
+const convertedModelCount = await convertJavaModels(resolve(buildRoot, "resource_pack"));
+console.log(`Built Bedrock packs in ${buildRoot}; staged ${importedTextureCount} Java textures and converted ${convertedModelCount} Java models.`);

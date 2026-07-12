@@ -11,12 +11,20 @@
       "minecraft:destructible_by_mining": {
         "seconds_to_destroy": 1
       },
-      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:geometry": "geometry.createbedrock.millstone",
       "minecraft:item_visual": {
         "geometry": {
-          "identifier": "minecraft:geometry.full_block"
+            "identifier": "geometry.createbedrock.millstone"
         },
         "material_instances": {
+          "gearbox": {
+            "texture": "createbedrock_gearbox",
+            "render_method": "opaque"
+          },
+          "millstone": {
+            "texture": "createbedrock_millstone",
+            "render_method": "opaque"
+          },
           "*": {
             "texture": "createbedrock_millstone",
             "render_method": "opaque"
@@ -24,6 +32,14 @@
         }
       },
       "minecraft:material_instances": {
+        "gearbox": {
+          "texture": "createbedrock_gearbox",
+          "render_method": "opaque"
+        },
+        "millstone": {
+          "texture": "createbedrock_millstone",
+          "render_method": "opaque"
+        },
         "*": {
           "texture": "createbedrock_millstone",
           "render_method": "opaque"

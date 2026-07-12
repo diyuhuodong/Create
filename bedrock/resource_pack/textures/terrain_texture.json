@@ -5,8 +5,17 @@
     "createbedrock_axis": {
       "textures": "textures/create_java/block/axis"
     },
+    "createbedrock_axis_top": {
+      "textures": "textures/create_java/block/axis_top"
+    },
     "createbedrock_cogwheel": {
       "textures": "textures/create_java/block/cogwheel"
+    },
+    "createbedrock_cogwheel_axis": {
+      "textures": "textures/create_java/block/cogwheel_axis"
+    },
+    "createbedrock_gearbox": {
+      "textures": "textures/create_java/block/gearbox"
     },
     "createbedrock_millstone": {
       "textures": "textures/create_java/block/millstone"

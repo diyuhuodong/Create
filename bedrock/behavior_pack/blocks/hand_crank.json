@@ -11,12 +11,20 @@
       "minecraft:destructible_by_mining": {
         "seconds_to_destroy": 1
       },
-      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:geometry": "geometry.createbedrock.hand_crank",
       "minecraft:item_visual": {
         "geometry": {
-          "identifier": "minecraft:geometry.full_block"
+            "identifier": "geometry.createbedrock.hand_crank"
         },
         "material_instances": {
+          "axis": {
+            "texture": "createbedrock_axis",
+            "render_method": "opaque"
+          },
+          "axis_top": {
+            "texture": "createbedrock_axis_top",
+            "render_method": "opaque"
+          },
           "*": {
             "texture": "createbedrock_axis",
             "render_method": "opaque"
@@ -24,6 +32,14 @@
         }
       },
       "minecraft:material_instances": {
+        "axis": {
+          "texture": "createbedrock_axis",
+          "render_method": "opaque"
+        },
+        "axis_top": {
+          "texture": "createbedrock_axis_top",
+          "render_method": "opaque"
+        },
         "*": {
           "texture": "createbedrock_axis",
           "render_method": "opaque"
