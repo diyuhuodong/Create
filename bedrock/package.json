@@ -9,6 +9,7 @@
   "scripts": {
     "build": "node tools/build.mjs",
     "deploy:win": "node tools/deploy-win.mjs",
+    "inventory": "node tools/generate-domain-inventory.mjs",
     "matrix": "node tools/generate-migration-matrix.mjs",
     "pack": "node tools/pack.mjs",
     "recipes:milling": "node tools/convert-milling-recipes.mjs",

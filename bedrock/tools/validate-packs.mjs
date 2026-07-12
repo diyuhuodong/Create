@@ -1,5 +1,6 @@
 import { readdir, readFile } from "node:fs/promises";
 import { dirname, extname, resolve } from "node:path";
+import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
@@ -12,6 +13,18 @@ async function jsonFiles(directory) {
 		if (entry.isDirectory())
 			files.push(...await jsonFiles(file));
 		else if (extname(entry.name) === ".json")
+			files.push(file);
+	}
+	return files;
+}
+
+async function filesWithExtension(directory, extension) {
+	const files = [];
+	for (const entry of await readdir(directory, { withFileTypes: true })) {
+		const file = resolve(directory, entry.name);
+		if (entry.isDirectory())
+			files.push(...await filesWithExtension(file, extension));
+		else if (extname(entry.name) === extension)
 			files.push(file);
 	}
 	return files;
@@ -50,4 +63,10 @@ if (!behaviorDependsOnResource || !resourceDependsOnBehavior)
 if (!behaviorManifest.modules.some(module => module.type === "script" && module.entry === "scripts/main.js"))
 	throw new Error("Behavior pack must define scripts/main.js as its script entry point.");
 
-console.log("Bedrock manifests and JSON files are valid.");
+for (const script of await filesWithExtension(resolve(bedrockRoot, "behavior_pack", "scripts"), ".js")) {
+	const result = spawnSync(process.execPath, ["--check", script], { encoding: "utf8" });
+	if (result.status !== 0)
+		throw new Error(`Invalid JavaScript in ${script}: ${result.stderr || result.stdout}`);
+}
+
+console.log("Bedrock manifests, JSON files, and JavaScript syntax are valid.");
