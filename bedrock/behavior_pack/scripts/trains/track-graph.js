@@ -111,6 +111,20 @@ export class TrackGraph {
 		return released;
 	}
 
+	releaseEdge(trainId, id) {
+		const edge = this.#edges.get(id);
+		if (!edge || edge.reservedBy !== trainId)
+			return false;
+
+		edge.reservedBy = undefined;
+		return true;
+	}
+
+	getEdge(id) {
+		const edge = this.#edges.get(id);
+		return edge && { ...edge };
+	}
+
 	#edgesFor(nodeId) {
 		return [...this.#edges.values()].filter(edge => edge.leftId === nodeId || edge.rightId === nodeId);
 	}
