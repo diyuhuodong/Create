@@ -4,4 +4,6 @@ tile.createbedrock:hand_crank.name=Hand Crank
 tile.createbedrock:shaft.name=Shaft
 tile.createbedrock:cogwheel.name=Cogwheel
 tile.createbedrock:millstone.name=Millstone
+tile.createbedrock:mechanical_bearing.name=Mechanical Bearing
+tile.createbedrock:track.name=Track
 item.createbedrock:wheat_flour.name=Wheat Flour

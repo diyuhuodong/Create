@@ -29,6 +29,18 @@ export class TrackGraph {
 		return id;
 	}
 
+	removeNode(id) {
+		if (!this.#nodes.has(id))
+			return false;
+		for (const edge of this.#edgesFor(id)) {
+			if (edge.reservedBy !== undefined)
+				throw new Error(`Cannot remove track node ${id} while ${edge.id} is reserved`);
+			this.#edges.delete(edge.id);
+		}
+		this.#nodes.delete(id);
+		return true;
+	}
+
 	findRoute(startId, destinationId) {
 		if (!this.#nodes.has(startId) || !this.#nodes.has(destinationId))
 			throw new Error("Routes require registered start and destination nodes");
@@ -123,6 +135,34 @@ export class TrackGraph {
 	getEdge(id) {
 		const edge = this.#edges.get(id);
 		return edge && { ...edge };
+	}
+
+	getNode(id) {
+		const node = this.#nodes.get(id);
+		return node && { id: node.id, location: { ...node.location } };
+	}
+
+	snapshot() {
+		return {
+			nodes: [...this.#nodes.values()].map(node => ({ id: node.id, location: { ...node.location } })),
+			edges: [...this.#edges.values()].map(edge => ({
+				id: edge.id,
+				leftId: edge.leftId,
+				rightId: edge.rightId,
+				length: edge.length
+			}))
+		};
+	}
+
+	restore(snapshot) {
+		if (!Array.isArray(snapshot?.nodes) || !Array.isArray(snapshot?.edges))
+			throw new TypeError("Invalid track graph snapshot");
+		this.#nodes.clear();
+		this.#edges.clear();
+		for (const node of snapshot.nodes)
+			this.addNode(node);
+		for (const edge of snapshot.edges)
+			this.connect(edge.leftId, edge.rightId, edge.length);
 	}
 
 	#edgesFor(nodeId) {

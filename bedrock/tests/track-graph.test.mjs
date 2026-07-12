@@ -42,3 +42,13 @@ test("TrackGraph routes around reserved edges when an alternative exists", () =>
 		length: 11
 	});
 });
+
+test("TrackGraph serializes and restores its topology", () => {
+	const source = createGraph();
+	const snapshot = source.snapshot();
+	const restored = new TrackGraph();
+	restored.restore(snapshot);
+	assert.deepEqual(restored.findRoute("a", "d"), source.findRoute("a", "d"));
+	assert.equal(restored.removeNode("b"), true);
+	assert.equal(restored.findRoute("a", "d").length, 11);
+});
