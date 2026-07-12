@@ -1,0 +1,7 @@
+pack.name=Create Bedrock
+pack.description=Create mechanics for Bedrock and Realms.
+tile.createbedrock:hand_crank.name=Hand Crank
+tile.createbedrock:shaft.name=Shaft
+tile.createbedrock:cogwheel.name=Cogwheel
+tile.createbedrock:millstone.name=Millstone
+item.createbedrock:wheat_flour.name=Wheat Flour

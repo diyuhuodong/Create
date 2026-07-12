@@ -1,0 +1,7 @@
+pack.name=Create Bedrock
+pack.description=适用于 Bedrock 与 Realm 的 Create 机械系统。
+tile.createbedrock:hand_crank.name=手摇曲柄
+tile.createbedrock:shaft.name=动力轴
+tile.createbedrock:cogwheel.name=齿轮
+tile.createbedrock:millstone.name=磨盘
+item.createbedrock:wheat_flour.name=小麦粉

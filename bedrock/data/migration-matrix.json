@@ -1,0 +1,2545 @@
+{
+	"schemaVersion": 1,
+	"generatedFrom": "Create 6.0.11 / Minecraft Java 1.21.1 registration entry points",
+	"generatedAt": "deterministic",
+	"entries": [
+		{
+			"javaIdentifier": "create:adjustable_chain_gearshift",
+			"bedrockIdentifier": "createbedrock:adjustable_chain_gearshift",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:adjustable_chain_gearshift",
+			"bedrockIdentifier": "createbedrock:adjustable_chain_gearshift",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:analog_lever",
+			"bedrockIdentifier": "createbedrock:analog_lever",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:analog_lever",
+			"bedrockIdentifier": "createbedrock:analog_lever",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:andesite_alloy_block",
+			"bedrockIdentifier": "createbedrock:andesite_alloy_block",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:andesite_belt_funnel",
+			"bedrockIdentifier": "createbedrock:andesite_belt_funnel",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:andesite_casing",
+			"bedrockIdentifier": "createbedrock:andesite_casing",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:andesite_door",
+			"bedrockIdentifier": "createbedrock:andesite_door",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:andesite_encased_cogwheel",
+			"bedrockIdentifier": "createbedrock:andesite_encased_cogwheel",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:andesite_encased_large_cogwheel",
+			"bedrockIdentifier": "createbedrock:andesite_encased_large_cogwheel",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:andesite_encased_shaft",
+			"bedrockIdentifier": "createbedrock:andesite_encased_shaft",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:andesite_funnel",
+			"bedrockIdentifier": "createbedrock:andesite_funnel",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:andesite_ladder",
+			"bedrockIdentifier": "createbedrock:andesite_ladder",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:andesite_scaffolding",
+			"bedrockIdentifier": "createbedrock:andesite_scaffolding",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:andesite_table_cloth",
+			"bedrockIdentifier": "createbedrock:andesite_table_cloth",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:andesite_tunnel",
+			"bedrockIdentifier": "createbedrock:andesite_tunnel",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:andesite_tunnel",
+			"bedrockIdentifier": "createbedrock:andesite_tunnel",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:attribute_filter",
+			"bedrockIdentifier": "createbedrock:attribute_filter",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:backtank",
+			"bedrockIdentifier": "createbedrock:backtank",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:bar_of_chocolate",
+			"bedrockIdentifier": "createbedrock:bar_of_chocolate",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:basin",
+			"bedrockIdentifier": "createbedrock:basin",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:basin",
+			"bedrockIdentifier": "createbedrock:basin",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:belt",
+			"bedrockIdentifier": "createbedrock:belt",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:belt",
+			"bedrockIdentifier": "createbedrock:belt",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:belt_connector",
+			"bedrockIdentifier": "createbedrock:belt_connector",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:blaze_burner",
+			"bedrockIdentifier": "createbedrock:blaze_burner",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:blaze_cake",
+			"bedrockIdentifier": "createbedrock:blaze_cake",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:blaze_cake_base",
+			"bedrockIdentifier": "createbedrock:blaze_cake_base",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:blaze_heater",
+			"bedrockIdentifier": "createbedrock:blaze_heater",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:bogey",
+			"bedrockIdentifier": "createbedrock:bogey",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:bound_cardboard_block",
+			"bedrockIdentifier": "createbedrock:bound_cardboard_block",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:brass_belt_funnel",
+			"bedrockIdentifier": "createbedrock:brass_belt_funnel",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:brass_block",
+			"bedrockIdentifier": "createbedrock:brass_block",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:brass_casing",
+			"bedrockIdentifier": "createbedrock:brass_casing",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:brass_door",
+			"bedrockIdentifier": "createbedrock:brass_door",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:brass_encased_cogwheel",
+			"bedrockIdentifier": "createbedrock:brass_encased_cogwheel",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:brass_encased_large_cogwheel",
+			"bedrockIdentifier": "createbedrock:brass_encased_large_cogwheel",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:brass_encased_shaft",
+			"bedrockIdentifier": "createbedrock:brass_encased_shaft",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:brass_funnel",
+			"bedrockIdentifier": "createbedrock:brass_funnel",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:brass_ladder",
+			"bedrockIdentifier": "createbedrock:brass_ladder",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:brass_scaffolding",
+			"bedrockIdentifier": "createbedrock:brass_scaffolding",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:brass_table_cloth",
+			"bedrockIdentifier": "createbedrock:brass_table_cloth",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:brass_tunnel",
+			"bedrockIdentifier": "createbedrock:brass_tunnel",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:brass_tunnel",
+			"bedrockIdentifier": "createbedrock:brass_tunnel",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:builders_tea",
+			"bedrockIdentifier": "createbedrock:builders_tea",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:cardboard",
+			"bedrockIdentifier": "createbedrock:cardboard",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:cardboard_block",
+			"bedrockIdentifier": "createbedrock:cardboard_block",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:cardboard_boots",
+			"bedrockIdentifier": "createbedrock:cardboard_boots",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:cardboard_chestplate",
+			"bedrockIdentifier": "createbedrock:cardboard_chestplate",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:cardboard_helmet",
+			"bedrockIdentifier": "createbedrock:cardboard_helmet",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:cardboard_leggings",
+			"bedrockIdentifier": "createbedrock:cardboard_leggings",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:cardboard_sword",
+			"bedrockIdentifier": "createbedrock:cardboard_sword",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:carriage_contraption",
+			"bedrockIdentifier": "createbedrock:carriage_contraption",
+			"kind": "entity",
+			"source": "src/main/java/com/simibubi/create/AllEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:cart_assembler",
+			"bedrockIdentifier": "createbedrock:cart_assembler",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:cart_assembler",
+			"bedrockIdentifier": "createbedrock:cart_assembler",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:chain_conveyor",
+			"bedrockIdentifier": "createbedrock:chain_conveyor",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:chain_conveyor",
+			"bedrockIdentifier": "createbedrock:chain_conveyor",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:chassis",
+			"bedrockIdentifier": "createbedrock:chassis",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:chest_minecart_contraption",
+			"bedrockIdentifier": "createbedrock:chest_minecart_contraption",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:chocolate_glazed_berries",
+			"bedrockIdentifier": "createbedrock:chocolate_glazed_berries",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:chromatic_compound",
+			"bedrockIdentifier": "createbedrock:chromatic_compound",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:chute",
+			"bedrockIdentifier": "createbedrock:chute",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:chute",
+			"bedrockIdentifier": "createbedrock:chute",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:clipboard",
+			"bedrockIdentifier": "createbedrock:clipboard",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:clipboard",
+			"bedrockIdentifier": "createbedrock:clipboard",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:clockwork_bearing",
+			"bedrockIdentifier": "createbedrock:clockwork_bearing",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:clockwork_bearing",
+			"bedrockIdentifier": "createbedrock:clockwork_bearing",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:clutch",
+			"bedrockIdentifier": "createbedrock:clutch",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:clutch",
+			"bedrockIdentifier": "createbedrock:clutch",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:cogwheel",
+			"bedrockIdentifier": "createbedrock:cogwheel",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:content_observer",
+			"bedrockIdentifier": "createbedrock:content_observer",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:content_observer",
+			"bedrockIdentifier": "createbedrock:content_observer",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:contraption",
+			"bedrockIdentifier": "createbedrock:contraption",
+			"kind": "entity",
+			"source": "src/main/java/com/simibubi/create/AllEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:contraption_controls",
+			"bedrockIdentifier": "createbedrock:contraption_controls",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:contraption_controls",
+			"bedrockIdentifier": "createbedrock:contraption_controls",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:controller_rail",
+			"bedrockIdentifier": "createbedrock:controller_rail",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:controls",
+			"bedrockIdentifier": "createbedrock:controls",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:copper_backtank",
+			"bedrockIdentifier": "createbedrock:copper_backtank",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:copper_backtank",
+			"bedrockIdentifier": "createbedrock:copper_backtank",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:copper_backtank_placeable",
+			"bedrockIdentifier": "createbedrock:copper_backtank_placeable",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:copper_casing",
+			"bedrockIdentifier": "createbedrock:copper_casing",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:copper_diving_boots",
+			"bedrockIdentifier": "createbedrock:copper_diving_boots",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:copper_diving_helmet",
+			"bedrockIdentifier": "createbedrock:copper_diving_helmet",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:copper_door",
+			"bedrockIdentifier": "createbedrock:copper_door",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:copper_ladder",
+			"bedrockIdentifier": "createbedrock:copper_ladder",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:copper_scaffolding",
+			"bedrockIdentifier": "createbedrock:copper_scaffolding",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:copper_table_cloth",
+			"bedrockIdentifier": "createbedrock:copper_table_cloth",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:copper_valve_handle",
+			"bedrockIdentifier": "createbedrock:copper_valve_handle",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:copycat",
+			"bedrockIdentifier": "createbedrock:copycat",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:copycat_bars",
+			"bedrockIdentifier": "createbedrock:copycat_bars",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:copycat_base",
+			"bedrockIdentifier": "createbedrock:copycat_base",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:copycat_panel",
+			"bedrockIdentifier": "createbedrock:copycat_panel",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:copycat_step",
+			"bedrockIdentifier": "createbedrock:copycat_step",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:crafting_blueprint",
+			"bedrockIdentifier": "createbedrock:crafting_blueprint",
+			"kind": "entity",
+			"source": "src/main/java/com/simibubi/create/AllEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:crafting_blueprint",
+			"bedrockIdentifier": "createbedrock:crafting_blueprint",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:creative_blaze_cake",
+			"bedrockIdentifier": "createbedrock:creative_blaze_cake",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:creative_crate",
+			"bedrockIdentifier": "createbedrock:creative_crate",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:creative_crate",
+			"bedrockIdentifier": "createbedrock:creative_crate",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:creative_fluid_tank",
+			"bedrockIdentifier": "createbedrock:creative_fluid_tank",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:creative_fluid_tank",
+			"bedrockIdentifier": "createbedrock:creative_fluid_tank",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:creative_motor",
+			"bedrockIdentifier": "createbedrock:creative_motor",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:crushed_raw_",
+			"bedrockIdentifier": "createbedrock:crushed_raw_",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:crushing_wheel",
+			"bedrockIdentifier": "createbedrock:crushing_wheel",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:crushing_wheel",
+			"bedrockIdentifier": "createbedrock:crushing_wheel",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:crushing_wheel_controller",
+			"bedrockIdentifier": "createbedrock:crushing_wheel_controller",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:crushing_wheel_controller",
+			"bedrockIdentifier": "createbedrock:crushing_wheel_controller",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:cuckoo_clock",
+			"bedrockIdentifier": "createbedrock:cuckoo_clock",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:cuckoo_clock",
+			"bedrockIdentifier": "createbedrock:cuckoo_clock",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:cursed_bell",
+			"bedrockIdentifier": "createbedrock:cursed_bell",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:deepslate_zinc_ore",
+			"bedrockIdentifier": "createbedrock:deepslate_zinc_ore",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:deployer",
+			"bedrockIdentifier": "createbedrock:deployer",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:deployer",
+			"bedrockIdentifier": "createbedrock:deployer",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:depot",
+			"bedrockIdentifier": "createbedrock:depot",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:depot",
+			"bedrockIdentifier": "createbedrock:depot",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:desk_bell",
+			"bedrockIdentifier": "createbedrock:desk_bell",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:desk_bell",
+			"bedrockIdentifier": "createbedrock:desk_bell",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:display_board",
+			"bedrockIdentifier": "createbedrock:display_board",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:display_link",
+			"bedrockIdentifier": "createbedrock:display_link",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:display_link",
+			"bedrockIdentifier": "createbedrock:display_link",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:drill",
+			"bedrockIdentifier": "createbedrock:drill",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:elevator_contact",
+			"bedrockIdentifier": "createbedrock:elevator_contact",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:elevator_contact",
+			"bedrockIdentifier": "createbedrock:elevator_contact",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:elevator_pulley",
+			"bedrockIdentifier": "createbedrock:elevator_pulley",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:elevator_pulley",
+			"bedrockIdentifier": "createbedrock:elevator_pulley",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:empty_blaze_burner",
+			"bedrockIdentifier": "createbedrock:empty_blaze_burner",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:empty_schematic",
+			"bedrockIdentifier": "createbedrock:empty_schematic",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:encased_chain_drive",
+			"bedrockIdentifier": "createbedrock:encased_chain_drive",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:encased_cogwheel",
+			"bedrockIdentifier": "createbedrock:encased_cogwheel",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:encased_fan",
+			"bedrockIdentifier": "createbedrock:encased_fan",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:encased_fan",
+			"bedrockIdentifier": "createbedrock:encased_fan",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:encased_fluid_pipe",
+			"bedrockIdentifier": "createbedrock:encased_fluid_pipe",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:encased_fluid_pipe",
+			"bedrockIdentifier": "createbedrock:encased_fluid_pipe",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:encased_large_cogwheel",
+			"bedrockIdentifier": "createbedrock:encased_large_cogwheel",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:encased_shaft",
+			"bedrockIdentifier": "createbedrock:encased_shaft",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:experience_block",
+			"bedrockIdentifier": "createbedrock:experience_block",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:experience_nugget",
+			"bedrockIdentifier": "createbedrock:experience_nugget",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:extendo_grip",
+			"bedrockIdentifier": "createbedrock:extendo_grip",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:factory_gauge",
+			"bedrockIdentifier": "createbedrock:factory_gauge",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:factory_panel",
+			"bedrockIdentifier": "createbedrock:factory_panel",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:fake_track",
+			"bedrockIdentifier": "createbedrock:fake_track",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:fake_track",
+			"bedrockIdentifier": "createbedrock:fake_track",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:filter",
+			"bedrockIdentifier": "createbedrock:filter",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:flap_display",
+			"bedrockIdentifier": "createbedrock:flap_display",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:fluid_pipe",
+			"bedrockIdentifier": "createbedrock:fluid_pipe",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:fluid_pipe",
+			"bedrockIdentifier": "createbedrock:fluid_pipe",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:fluid_tank",
+			"bedrockIdentifier": "createbedrock:fluid_tank",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:fluid_tank",
+			"bedrockIdentifier": "createbedrock:fluid_tank",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:fluid_valve",
+			"bedrockIdentifier": "createbedrock:fluid_valve",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:fluid_valve",
+			"bedrockIdentifier": "createbedrock:fluid_valve",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:flywheel",
+			"bedrockIdentifier": "createbedrock:flywheel",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:flywheel",
+			"bedrockIdentifier": "createbedrock:flywheel",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:framed_glass_door",
+			"bedrockIdentifier": "createbedrock:framed_glass_door",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:framed_glass_trapdoor",
+			"bedrockIdentifier": "createbedrock:framed_glass_trapdoor",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:funnel",
+			"bedrockIdentifier": "createbedrock:funnel",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:furnace_minecart_contraption",
+			"bedrockIdentifier": "createbedrock:furnace_minecart_contraption",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:gantry_carriage",
+			"bedrockIdentifier": "createbedrock:gantry_carriage",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:gantry_contraption",
+			"bedrockIdentifier": "createbedrock:gantry_contraption",
+			"kind": "entity",
+			"source": "src/main/java/com/simibubi/create/AllEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:gantry_pinion",
+			"bedrockIdentifier": "createbedrock:gantry_pinion",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:gantry_shaft",
+			"bedrockIdentifier": "createbedrock:gantry_shaft",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:gantry_shaft",
+			"bedrockIdentifier": "createbedrock:gantry_shaft",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:gearbox",
+			"bedrockIdentifier": "createbedrock:gearbox",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:gearbox",
+			"bedrockIdentifier": "createbedrock:gearbox",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:gearshift",
+			"bedrockIdentifier": "createbedrock:gearshift",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:gearshift",
+			"bedrockIdentifier": "createbedrock:gearshift",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:glass_fluid_pipe",
+			"bedrockIdentifier": "createbedrock:glass_fluid_pipe",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:glass_fluid_pipe",
+			"bedrockIdentifier": "createbedrock:glass_fluid_pipe",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:goggles",
+			"bedrockIdentifier": "createbedrock:goggles",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:hand_crank",
+			"bedrockIdentifier": "createbedrock:hand_crank",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:hand_crank",
+			"bedrockIdentifier": "createbedrock:hand_crank",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:handheld_worldshaper",
+			"bedrockIdentifier": "createbedrock:handheld_worldshaper",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:harvester",
+			"bedrockIdentifier": "createbedrock:harvester",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:haunted_bell",
+			"bedrockIdentifier": "createbedrock:haunted_bell",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:honeyed_apple",
+			"bedrockIdentifier": "createbedrock:honeyed_apple",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:hose_pulley",
+			"bedrockIdentifier": "createbedrock:hose_pulley",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:hose_pulley",
+			"bedrockIdentifier": "createbedrock:hose_pulley",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:industrial_iron_block",
+			"bedrockIdentifier": "createbedrock:industrial_iron_block",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:item_drain",
+			"bedrockIdentifier": "createbedrock:item_drain",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:item_drain",
+			"bedrockIdentifier": "createbedrock:item_drain",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:item_hatch",
+			"bedrockIdentifier": "createbedrock:item_hatch",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:item_hatch",
+			"bedrockIdentifier": "createbedrock:item_hatch",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:item_vault",
+			"bedrockIdentifier": "createbedrock:item_vault",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:item_vault",
+			"bedrockIdentifier": "createbedrock:item_vault",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:large_bogey",
+			"bedrockIdentifier": "createbedrock:large_bogey",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:large_cogwheel",
+			"bedrockIdentifier": "createbedrock:large_cogwheel",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:large_water_wheel",
+			"bedrockIdentifier": "createbedrock:large_water_wheel",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:large_water_wheel",
+			"bedrockIdentifier": "createbedrock:large_water_wheel",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:lectern_controller",
+			"bedrockIdentifier": "createbedrock:lectern_controller",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:lectern_controller",
+			"bedrockIdentifier": "createbedrock:lectern_controller",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:linear_chassis",
+			"bedrockIdentifier": "createbedrock:linear_chassis",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:linked_controller",
+			"bedrockIdentifier": "createbedrock:linked_controller",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:lit_blaze_burner",
+			"bedrockIdentifier": "createbedrock:lit_blaze_burner",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_arm",
+			"bedrockIdentifier": "createbedrock:mechanical_arm",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_arm",
+			"bedrockIdentifier": "createbedrock:mechanical_arm",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_bearing",
+			"bedrockIdentifier": "createbedrock:mechanical_bearing",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_bearing",
+			"bedrockIdentifier": "createbedrock:mechanical_bearing",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_crafter",
+			"bedrockIdentifier": "createbedrock:mechanical_crafter",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_crafter",
+			"bedrockIdentifier": "createbedrock:mechanical_crafter",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_drill",
+			"bedrockIdentifier": "createbedrock:mechanical_drill",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_harvester",
+			"bedrockIdentifier": "createbedrock:mechanical_harvester",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_mixer",
+			"bedrockIdentifier": "createbedrock:mechanical_mixer",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_mixer",
+			"bedrockIdentifier": "createbedrock:mechanical_mixer",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_piston",
+			"bedrockIdentifier": "createbedrock:mechanical_piston",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_piston",
+			"bedrockIdentifier": "createbedrock:mechanical_piston",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_piston_head",
+			"bedrockIdentifier": "createbedrock:mechanical_piston_head",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_plough",
+			"bedrockIdentifier": "createbedrock:mechanical_plough",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_press",
+			"bedrockIdentifier": "createbedrock:mechanical_press",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_press",
+			"bedrockIdentifier": "createbedrock:mechanical_press",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_pump",
+			"bedrockIdentifier": "createbedrock:mechanical_pump",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_pump",
+			"bedrockIdentifier": "createbedrock:mechanical_pump",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_roller",
+			"bedrockIdentifier": "createbedrock:mechanical_roller",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_roller",
+			"bedrockIdentifier": "createbedrock:mechanical_roller",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mechanical_saw",
+			"bedrockIdentifier": "createbedrock:mechanical_saw",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:metal_bracket",
+			"bedrockIdentifier": "createbedrock:metal_bracket",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:metal_girder",
+			"bedrockIdentifier": "createbedrock:metal_girder",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:metal_girder_encased_shaft",
+			"bedrockIdentifier": "createbedrock:metal_girder_encased_shaft",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:millstone",
+			"bedrockIdentifier": "createbedrock:millstone",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:millstone",
+			"bedrockIdentifier": "createbedrock:millstone",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:minecart_anchor",
+			"bedrockIdentifier": "createbedrock:minecart_anchor",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:minecart_contraption",
+			"bedrockIdentifier": "createbedrock:minecart_contraption",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:minecart_coupling",
+			"bedrockIdentifier": "createbedrock:minecart_coupling",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:motor",
+			"bedrockIdentifier": "createbedrock:motor",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:mysterious_cuckoo_clock",
+			"bedrockIdentifier": "createbedrock:mysterious_cuckoo_clock",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:netherite_backtank",
+			"bedrockIdentifier": "createbedrock:netherite_backtank",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:netherite_backtank",
+			"bedrockIdentifier": "createbedrock:netherite_backtank",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:netherite_backtank_placeable",
+			"bedrockIdentifier": "createbedrock:netherite_backtank_placeable",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:netherite_diving_boots",
+			"bedrockIdentifier": "createbedrock:netherite_diving_boots",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:netherite_diving_helmet",
+			"bedrockIdentifier": "createbedrock:netherite_diving_helmet",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:nixie_tube",
+			"bedrockIdentifier": "createbedrock:nixie_tube",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:nixie_tube",
+			"bedrockIdentifier": "createbedrock:nixie_tube",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:nozzle",
+			"bedrockIdentifier": "createbedrock:nozzle",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:nozzle",
+			"bedrockIdentifier": "createbedrock:nozzle",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:package",
+			"bedrockIdentifier": "createbedrock:package",
+			"kind": "entity",
+			"source": "src/main/java/com/simibubi/create/AllEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:package_filter",
+			"bedrockIdentifier": "createbedrock:package_filter",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:package_frogport",
+			"bedrockIdentifier": "createbedrock:package_frogport",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:package_frogport",
+			"bedrockIdentifier": "createbedrock:package_frogport",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:package_postbox",
+			"bedrockIdentifier": "createbedrock:package_postbox",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:packager",
+			"bedrockIdentifier": "createbedrock:packager",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:packager",
+			"bedrockIdentifier": "createbedrock:packager",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:packager_link",
+			"bedrockIdentifier": "createbedrock:packager_link",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:peculiar_bell",
+			"bedrockIdentifier": "createbedrock:peculiar_bell",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:peculiar_bell",
+			"bedrockIdentifier": "createbedrock:peculiar_bell",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:piston_extension_pole",
+			"bedrockIdentifier": "createbedrock:piston_extension_pole",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:placard",
+			"bedrockIdentifier": "createbedrock:placard",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:placard",
+			"bedrockIdentifier": "createbedrock:placard",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:portable_fluid_interface",
+			"bedrockIdentifier": "createbedrock:portable_fluid_interface",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:portable_fluid_interface",
+			"bedrockIdentifier": "createbedrock:portable_fluid_interface",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:portable_storage_interface",
+			"bedrockIdentifier": "createbedrock:portable_storage_interface",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:portable_storage_interface",
+			"bedrockIdentifier": "createbedrock:portable_storage_interface",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:potato_cannon",
+			"bedrockIdentifier": "createbedrock:potato_cannon",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:potato_projectile",
+			"bedrockIdentifier": "createbedrock:potato_projectile",
+			"kind": "entity",
+			"source": "src/main/java/com/simibubi/create/AllEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:powered_latch",
+			"bedrockIdentifier": "createbedrock:powered_latch",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:powered_shaft",
+			"bedrockIdentifier": "createbedrock:powered_shaft",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:powered_shaft",
+			"bedrockIdentifier": "createbedrock:powered_shaft",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:powered_toggle_latch",
+			"bedrockIdentifier": "createbedrock:powered_toggle_latch",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:pulley_magnet",
+			"bedrockIdentifier": "createbedrock:pulley_magnet",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:pulse_extender",
+			"bedrockIdentifier": "createbedrock:pulse_extender",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:pulse_extender",
+			"bedrockIdentifier": "createbedrock:pulse_extender",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:pulse_repeater",
+			"bedrockIdentifier": "createbedrock:pulse_repeater",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:pulse_repeater",
+			"bedrockIdentifier": "createbedrock:pulse_repeater",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:pulse_timer",
+			"bedrockIdentifier": "createbedrock:pulse_timer",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:pulse_timer",
+			"bedrockIdentifier": "createbedrock:pulse_timer",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:radial_chassis",
+			"bedrockIdentifier": "createbedrock:radial_chassis",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:railway_casing",
+			"bedrockIdentifier": "createbedrock:railway_casing",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:raw_zinc_block",
+			"bedrockIdentifier": "createbedrock:raw_zinc_block",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:red_sand_paper",
+			"bedrockIdentifier": "createbedrock:red_sand_paper",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:redstone_contact",
+			"bedrockIdentifier": "createbedrock:redstone_contact",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:redstone_link",
+			"bedrockIdentifier": "createbedrock:redstone_link",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:redstone_link",
+			"bedrockIdentifier": "createbedrock:redstone_link",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:redstone_requester",
+			"bedrockIdentifier": "createbedrock:redstone_requester",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:redstone_requester",
+			"bedrockIdentifier": "createbedrock:redstone_requester",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:refined_radiance",
+			"bedrockIdentifier": "createbedrock:refined_radiance",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:refined_radiance_casing",
+			"bedrockIdentifier": "createbedrock:refined_radiance_casing",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:repackager",
+			"bedrockIdentifier": "createbedrock:repackager",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:repackager",
+			"bedrockIdentifier": "createbedrock:repackager",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:rope",
+			"bedrockIdentifier": "createbedrock:rope",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:rope_pulley",
+			"bedrockIdentifier": "createbedrock:rope_pulley",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:rope_pulley",
+			"bedrockIdentifier": "createbedrock:rope_pulley",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:rose_quartz_block",
+			"bedrockIdentifier": "createbedrock:rose_quartz_block",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:rose_quartz_lamp",
+			"bedrockIdentifier": "createbedrock:rose_quartz_lamp",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:rose_quartz_tiles",
+			"bedrockIdentifier": "createbedrock:rose_quartz_tiles",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:rotation_speed_controller",
+			"bedrockIdentifier": "createbedrock:rotation_speed_controller",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:rotation_speed_controller",
+			"bedrockIdentifier": "createbedrock:rotation_speed_controller",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:sail_frame",
+			"bedrockIdentifier": "createbedrock:sail_frame",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:sand_paper",
+			"bedrockIdentifier": "createbedrock:sand_paper",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:saw",
+			"bedrockIdentifier": "createbedrock:saw",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:schedule",
+			"bedrockIdentifier": "createbedrock:schedule",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:schematic",
+			"bedrockIdentifier": "createbedrock:schematic",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:schematic_and_quill",
+			"bedrockIdentifier": "createbedrock:schematic_and_quill",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:schematic_table",
+			"bedrockIdentifier": "createbedrock:schematic_table",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:schematic_table",
+			"bedrockIdentifier": "createbedrock:schematic_table",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:schematicannon",
+			"bedrockIdentifier": "createbedrock:schematicannon",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:schematicannon",
+			"bedrockIdentifier": "createbedrock:schematicannon",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:seat",
+			"bedrockIdentifier": "createbedrock:seat",
+			"kind": "entity",
+			"source": "src/main/java/com/simibubi/create/AllEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:secondary_linear_chassis",
+			"bedrockIdentifier": "createbedrock:secondary_linear_chassis",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:sequenced_gearshift",
+			"bedrockIdentifier": "createbedrock:sequenced_gearshift",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:sequenced_gearshift",
+			"bedrockIdentifier": "createbedrock:sequenced_gearshift",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:shadow_steel",
+			"bedrockIdentifier": "createbedrock:shadow_steel",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:shadow_steel_casing",
+			"bedrockIdentifier": "createbedrock:shadow_steel_casing",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:shaft",
+			"bedrockIdentifier": "createbedrock:shaft",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:shopping_list",
+			"bedrockIdentifier": "createbedrock:shopping_list",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:simple_kinetic",
+			"bedrockIdentifier": "createbedrock:simple_kinetic",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:sliding_door",
+			"bedrockIdentifier": "createbedrock:sliding_door",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:small_bogey",
+			"bedrockIdentifier": "createbedrock:small_bogey",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:small_rose_quartz_tiles",
+			"bedrockIdentifier": "createbedrock:small_rose_quartz_tiles",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:smart_chute",
+			"bedrockIdentifier": "createbedrock:smart_chute",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:smart_chute",
+			"bedrockIdentifier": "createbedrock:smart_chute",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:smart_fluid_pipe",
+			"bedrockIdentifier": "createbedrock:smart_fluid_pipe",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:smart_fluid_pipe",
+			"bedrockIdentifier": "createbedrock:smart_fluid_pipe",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:speedometer",
+			"bedrockIdentifier": "createbedrock:speedometer",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:speedometer",
+			"bedrockIdentifier": "createbedrock:speedometer",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:spout",
+			"bedrockIdentifier": "createbedrock:spout",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:spout",
+			"bedrockIdentifier": "createbedrock:spout",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:stationary_contraption",
+			"bedrockIdentifier": "createbedrock:stationary_contraption",
+			"kind": "entity",
+			"source": "src/main/java/com/simibubi/create/AllEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:steam_engine",
+			"bedrockIdentifier": "createbedrock:steam_engine",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:steam_engine",
+			"bedrockIdentifier": "createbedrock:steam_engine",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:steam_whistle",
+			"bedrockIdentifier": "createbedrock:steam_whistle",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:steam_whistle",
+			"bedrockIdentifier": "createbedrock:steam_whistle",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:steam_whistle_extension",
+			"bedrockIdentifier": "createbedrock:steam_whistle_extension",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:sticker",
+			"bedrockIdentifier": "createbedrock:sticker",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:sticker",
+			"bedrockIdentifier": "createbedrock:sticker",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:sticky_mechanical_piston",
+			"bedrockIdentifier": "createbedrock:sticky_mechanical_piston",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:stock_link",
+			"bedrockIdentifier": "createbedrock:stock_link",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:stock_ticker",
+			"bedrockIdentifier": "createbedrock:stock_ticker",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:stock_ticker",
+			"bedrockIdentifier": "createbedrock:stock_ticker",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:stockpile_switch",
+			"bedrockIdentifier": "createbedrock:stockpile_switch",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:stockpile_switch",
+			"bedrockIdentifier": "createbedrock:stockpile_switch",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:stressometer",
+			"bedrockIdentifier": "createbedrock:stressometer",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:stressometer",
+			"bedrockIdentifier": "createbedrock:stressometer",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:super_glue",
+			"bedrockIdentifier": "createbedrock:super_glue",
+			"kind": "entity",
+			"source": "src/main/java/com/simibubi/create/AllEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:super_glue",
+			"bedrockIdentifier": "createbedrock:super_glue",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:sweet_roll",
+			"bedrockIdentifier": "createbedrock:sweet_roll",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:table_cloth",
+			"bedrockIdentifier": "createbedrock:table_cloth",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:toolbox",
+			"bedrockIdentifier": "createbedrock:toolbox",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:track",
+			"bedrockIdentifier": "createbedrock:track",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:track",
+			"bedrockIdentifier": "createbedrock:track",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:track_observer",
+			"bedrockIdentifier": "createbedrock:track_observer",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:track_observer",
+			"bedrockIdentifier": "createbedrock:track_observer",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:track_signal",
+			"bedrockIdentifier": "createbedrock:track_signal",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:track_signal",
+			"bedrockIdentifier": "createbedrock:track_signal",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:track_station",
+			"bedrockIdentifier": "createbedrock:track_station",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:track_station",
+			"bedrockIdentifier": "createbedrock:track_station",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:train_door",
+			"bedrockIdentifier": "createbedrock:train_door",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:train_trapdoor",
+			"bedrockIdentifier": "createbedrock:train_trapdoor",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:tree_fertilizer",
+			"bedrockIdentifier": "createbedrock:tree_fertilizer",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:turntable",
+			"bedrockIdentifier": "createbedrock:turntable",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:turntable",
+			"bedrockIdentifier": "createbedrock:turntable",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:valve_handle",
+			"bedrockIdentifier": "createbedrock:valve_handle",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:vertical_gearbox",
+			"bedrockIdentifier": "createbedrock:vertical_gearbox",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:wand_of_symmetry",
+			"bedrockIdentifier": "createbedrock:wand_of_symmetry",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:water_wheel",
+			"bedrockIdentifier": "createbedrock:water_wheel",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:water_wheel",
+			"bedrockIdentifier": "createbedrock:water_wheel",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:water_wheel_structure",
+			"bedrockIdentifier": "createbedrock:water_wheel_structure",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:weathered_iron_block",
+			"bedrockIdentifier": "createbedrock:weathered_iron_block",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:weighted_ejector",
+			"bedrockIdentifier": "createbedrock:weighted_ejector",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:weighted_ejector",
+			"bedrockIdentifier": "createbedrock:weighted_ejector",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:white_sail",
+			"bedrockIdentifier": "createbedrock:white_sail",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:windmill_bearing",
+			"bedrockIdentifier": "createbedrock:windmill_bearing",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:windmill_bearing",
+			"bedrockIdentifier": "createbedrock:windmill_bearing",
+			"kind": "block_entity",
+			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:wooden_bracket",
+			"bedrockIdentifier": "createbedrock:wooden_bracket",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:wrench",
+			"bedrockIdentifier": "createbedrock:wrench",
+			"kind": "item",
+			"source": "src/main/java/com/simibubi/create/AllItems.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:zinc_block",
+			"bedrockIdentifier": "createbedrock:zinc_block",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		},
+		{
+			"javaIdentifier": "create:zinc_ore",
+			"bedrockIdentifier": "createbedrock:zinc_ore",
+			"kind": "block",
+			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
+			"status": "specification_pending"
+		}
+	],
+	"manualReview": [
+		"Dynamic Java registrations and generated variants are not statically enumerable; add their explicit mappings before declaring the migration matrix complete.",
+		"Recipes, tags, packets, Ponder scenes, GameTests, compatibility integrations, and assets are tracked in follow-up matrix domains."
+	]
+}

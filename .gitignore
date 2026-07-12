@@ -45,3 +45,8 @@ local.properties
 
 .DS_Store
 /libs/
+
+# Bedrock Add-On local deployment and package output
+/bedrock/build/
+/bedrock/dist/
+/bedrock/.deploy/

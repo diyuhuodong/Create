@@ -1,0 +1,912 @@
+[
+	{
+		"id": "create:milling/allium",
+		"input": {
+			"typeId": "minecraft:allium",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:magenta_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:purple_dye",
+				"count": 2,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:pink_dye",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/andesite",
+		"input": {
+			"typeId": "minecraft:andesite",
+			"count": 1
+		},
+		"processingTicks": 200,
+		"outputs": [
+			{
+				"typeId": "minecraft:cobblestone",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/azure_bluet",
+		"input": {
+			"typeId": "minecraft:azure_bluet",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:light_gray_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:white_dye",
+				"count": 2,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/beetroot",
+		"input": {
+			"typeId": "minecraft:beetroot",
+			"count": 1
+		},
+		"processingTicks": 70,
+		"outputs": [
+			{
+				"typeId": "minecraft:red_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:beetroot_seeds",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/blue_orchid",
+		"input": {
+			"typeId": "minecraft:blue_orchid",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:light_blue_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:light_gray_dye",
+				"count": 1,
+				"chance": 0.05
+			}
+		]
+	},
+	{
+		"id": "create:milling/bone",
+		"input": {
+			"typeId": "minecraft:bone",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:bone_meal",
+				"count": 3,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:white_dye",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:bone_meal",
+				"count": 3,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:milling/bone_meal",
+		"input": {
+			"typeId": "minecraft:bone_meal",
+			"count": 1
+		},
+		"processingTicks": 70,
+		"outputs": [
+			{
+				"typeId": "minecraft:white_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:light_gray_dye",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/cactus",
+		"input": {
+			"typeId": "minecraft:cactus",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:green_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:green_dye",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/calcite",
+		"input": {
+			"typeId": "minecraft:calcite",
+			"count": 1
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "minecraft:bone_meal",
+				"count": 1,
+				"chance": 0.75
+			}
+		]
+	},
+	{
+		"id": "create:milling/charcoal",
+		"input": {
+			"typeId": "minecraft:charcoal",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:black_dye",
+				"count": 1,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:gray_dye",
+				"count": 2,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/clay",
+		"input": {
+			"typeId": "minecraft:clay",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:clay_ball",
+				"count": 4,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/coal",
+		"input": {
+			"typeId": "minecraft:coal",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:black_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:gray_dye",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/cobblestone",
+		"input": {
+			"typeId": "minecraft:cobblestone",
+			"count": 1
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "minecraft:gravel",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/cocoa_beans",
+		"input": {
+			"typeId": "minecraft:cocoa_beans",
+			"count": 1
+		},
+		"processingTicks": 70,
+		"outputs": [
+			{
+				"typeId": "minecraft:brown_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:brown_dye",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/cornflower",
+		"input": {
+			"typeId": "minecraft:cornflower",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:blue_dye",
+				"count": 2,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/dandelion",
+		"input": {
+			"typeId": "minecraft:dandelion",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:yellow_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:yellow_dye",
+				"count": 1,
+				"chance": 0.05
+			}
+		]
+	},
+	{
+		"id": "create:milling/dripstone_block",
+		"input": {
+			"typeId": "minecraft:dripstone_block",
+			"count": 1
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "minecraft:clay_ball",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/fern",
+		"input": {
+			"typeId": "minecraft:fern",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:green_dye",
+				"count": 1,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:wheat_seeds",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/granite",
+		"input": {
+			"typeId": "minecraft:granite",
+			"count": 1
+		},
+		"processingTicks": 200,
+		"outputs": [
+			{
+				"typeId": "minecraft:red_sand",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/gravel",
+		"input": {
+			"typeId": "minecraft:gravel",
+			"count": 1
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "minecraft:flint",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/ink_sac",
+		"input": {
+			"typeId": "minecraft:ink_sac",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:black_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:gray_dye",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/lapis_lazuli",
+		"input": {
+			"typeId": "minecraft:lapis_lazuli",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:blue_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:blue_dye",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/large_fern",
+		"input": {
+			"typeId": "minecraft:large_fern",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:green_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:green_dye",
+				"count": 1,
+				"chance": 0.5
+			},
+			{
+				"typeId": "minecraft:wheat_seeds",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/lilac",
+		"input": {
+			"typeId": "minecraft:lilac",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:magenta_dye",
+				"count": 3,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:magenta_dye",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:purple_dye",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:milling/lily_of_the_valley",
+		"input": {
+			"typeId": "minecraft:lily_of_the_valley",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:white_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:lime_dye",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:white_dye",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/orange_tulip",
+		"input": {
+			"typeId": "minecraft:orange_tulip",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:orange_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:lime_dye",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/oxeye_daisy",
+		"input": {
+			"typeId": "minecraft:oxeye_daisy",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:light_gray_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:white_dye",
+				"count": 1,
+				"chance": 0.2
+			},
+			{
+				"typeId": "minecraft:yellow_dye",
+				"count": 1,
+				"chance": 0.05
+			}
+		]
+	},
+	{
+		"id": "create:milling/peony",
+		"input": {
+			"typeId": "minecraft:peony",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:pink_dye",
+				"count": 3,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:magenta_dye",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:pink_dye",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:milling/pink_petals",
+		"input": {
+			"typeId": "minecraft:pink_petals",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:pink_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:lime_dye",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/pink_tulip",
+		"input": {
+			"typeId": "minecraft:pink_tulip",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:pink_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:lime_dye",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/pitcher_plant",
+		"input": {
+			"typeId": "minecraft:pitcher_plant",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:cyan_dye",
+				"count": 4,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:purple_dye",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/poppy",
+		"input": {
+			"typeId": "minecraft:poppy",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:red_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:green_dye",
+				"count": 1,
+				"chance": 0.05
+			}
+		]
+	},
+	{
+		"id": "create:milling/red_tulip",
+		"input": {
+			"typeId": "minecraft:red_tulip",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:red_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:lime_dye",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/rose_bush",
+		"input": {
+			"typeId": "minecraft:rose_bush",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:red_dye",
+				"count": 3,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:green_dye",
+				"count": 2,
+				"chance": 0.05
+			},
+			{
+				"typeId": "minecraft:red_dye",
+				"count": 2,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:milling/saddle",
+		"input": {
+			"typeId": "minecraft:saddle",
+			"count": 1
+		},
+		"processingTicks": 200,
+		"outputs": [
+			{
+				"typeId": "minecraft:leather",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:leather",
+				"count": 2,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:milling/sandstone",
+		"input": {
+			"typeId": "minecraft:sandstone",
+			"count": 1
+		},
+		"processingTicks": 150,
+		"outputs": [
+			{
+				"typeId": "minecraft:sand",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/sea_pickle",
+		"input": {
+			"typeId": "minecraft:sea_pickle",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:lime_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:green_dye",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/short_grass",
+		"input": {
+			"typeId": "minecraft:short_grass",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:wheat_seeds",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:milling/sugar_cane",
+		"input": {
+			"typeId": "minecraft:sugar_cane",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:sugar",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:sugar",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/sunflower",
+		"input": {
+			"typeId": "minecraft:sunflower",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:yellow_dye",
+				"count": 3,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:orange_dye",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:yellow_dye",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:milling/tall_grass",
+		"input": {
+			"typeId": "minecraft:tall_grass",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:wheat_seeds",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:milling/terracotta",
+		"input": {
+			"typeId": "minecraft:terracotta",
+			"count": 1
+		},
+		"processingTicks": 200,
+		"outputs": [
+			{
+				"typeId": "minecraft:red_sand",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/torchflower",
+		"input": {
+			"typeId": "minecraft:torchflower",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:orange_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:green_dye",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/wheat",
+		"input": {
+			"typeId": "minecraft:wheat",
+			"count": 1
+		},
+		"processingTicks": 150,
+		"outputs": [
+			{
+				"typeId": "createbedrock:wheat_flour",
+				"count": 1,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:wheat_flour",
+				"count": 2,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:wheat_seeds",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:milling/white_tulip",
+		"input": {
+			"typeId": "minecraft:white_tulip",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:white_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:lime_dye",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/wither_rose",
+		"input": {
+			"typeId": "minecraft:wither_rose",
+			"count": 1
+		},
+		"processingTicks": 50,
+		"outputs": [
+			{
+				"typeId": "minecraft:black_dye",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:black_dye",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	}
+]
