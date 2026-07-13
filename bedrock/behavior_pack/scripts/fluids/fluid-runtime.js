@@ -1,7 +1,8 @@
-import { system, world } from "@minecraft/server";
+import { ItemStack, system, world } from "@minecraft/server";
 
 import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-property-storage.js";
+import { planFluidBucketInteraction, settleFluidBucketInteraction } from "./fluid-container.js";
 import { fluidTankId, FluidNetworkState } from "./fluid-network-state.js";
 import { configureFluidDevice, fluidDeviceId, fluidDeviceLocation, offsetFluidLocation } from "./fluid-topology.js";
 
@@ -87,6 +88,37 @@ function removeDevice(block) {
 	return state.hasLink(id) ? state.removeLink(id) : false;
 }
 
+function interactWithTankBucket({ dimensionId, location, plan, player, slot }) {
+	if (player.selectedSlotIndex !== slot)
+		return { ok: false, reason: "held_slot_changed" };
+	const dimension = world.getDimension(dimensionId);
+	const block = dimension.getBlock(location);
+	if (block?.typeId !== FLUID_TANK_BLOCK)
+		return { ok: false, reason: "tank_removed" };
+	const tankId = tankIdentifier(block);
+	if (!state.hasTank(tankId))
+		return { ok: false, reason: "tank_unavailable" };
+	const inventory = player.getComponent("minecraft:inventory")?.container;
+	if (!inventory)
+		return { ok: false, reason: "inventory_unavailable" };
+	return settleFluidBucketInteraction({
+		extractFluid(options) {
+			return state.extract(tankId, options);
+		},
+		getHeldItem() {
+			const stack = inventory.getItem(slot);
+			return stack && { amount: stack.amount, typeId: stack.typeId };
+		},
+		insertFluid(fluid) {
+			return state.insert(tankId, fluid);
+		},
+		plan,
+		setHeldItem(item) {
+			inventory.setItem(slot, new ItemStack(item.typeId, item.amount));
+		}
+	});
+}
+
 function syncPumpStates(kineticWorld) {
 	for (const pump of state.links().filter(link => link.kind === "pump")) {
 		const location = fluidDeviceLocation("pump", pump.id);
@@ -153,6 +185,39 @@ export function registerFluids(getKineticWorld) {
 			}
 		} catch (error) {
 			console.warn(`[Create Bedrock] Could not validate fluid block removal: ${error}`);
+		}
+	});
+
+	world.beforeEvents.playerInteractWithBlock.subscribe(event => {
+		if (!event.isFirstEvent || event.block.typeId !== FLUID_TANK_BLOCK)
+			return;
+		try {
+			const tankId = tankIdentifier(event.block);
+			if (!state.hasTank(tankId))
+				return;
+			const inspection = state.inspectTank(tankId);
+			const plan = planFluidBucketInteraction({
+				capacity: inspection.capacity,
+				contents: inspection.contents,
+				item: event.itemStack && { amount: event.itemStack.amount, typeId: event.itemStack.typeId }
+			});
+			if (!plan)
+				return;
+			const slot = event.player.selectedSlotIndex;
+			event.cancel = true;
+			const dimensionId = event.block.dimension.id;
+			const location = { ...event.block.location };
+			system.run(() => {
+				try {
+					const result = interactWithTankBucket({ dimensionId, location, plan, player: event.player, slot });
+					if (!result.ok && result.reason === "rollback_failed")
+						console.warn(`[Create Bedrock] Fluid bucket rollback failed at ${dimensionId}:${location.x}:${location.y}:${location.z}`);
+				} catch (error) {
+					console.warn(`[Create Bedrock] Fluid bucket interaction failed: ${error}`);
+				}
+			});
+		} catch (error) {
+			console.warn(`[Create Bedrock] Could not plan fluid bucket interaction: ${error}`);
 		}
 	});
 

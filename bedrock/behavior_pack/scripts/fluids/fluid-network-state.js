@@ -58,6 +58,10 @@ export class FluidNetworkState {
 		return this.#tanks.has(id);
 	}
 
+	inspectTank(id) {
+		return this.#requireTank(id).tank.inspect();
+	}
+
 	links() {
 		return this.#network.snapshot().links;
 	}
