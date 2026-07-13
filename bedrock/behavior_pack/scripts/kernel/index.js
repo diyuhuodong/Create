@@ -1,14 +1,28 @@
 import { system } from "@minecraft/server";
 
-import { TaskQueue } from "./task-queue.js";
+import { BudgetScheduler } from "./budget-scheduler.js";
 
 const TASK_BUDGET_PER_TICK = 32;
-const taskQueue = new TaskQueue();
+const DEFAULT_TASK_GROUP = "default";
+const scheduler = new BudgetScheduler({
+	onError(name, error) {
+		console.warn(`[Create Bedrock] Kernel task in ${name} failed: ${error}`);
+	}
+});
+scheduler.registerGroup(DEFAULT_TASK_GROUP, TASK_BUDGET_PER_TICK);
 const tickHandlers = [];
 let started = false;
 
-export function enqueueKernelTask(task) {
-	taskQueue.enqueue(task);
+export function enqueueKernelTask(task, group = DEFAULT_TASK_GROUP) {
+	scheduler.enqueue(group, task);
+}
+
+export function registerKernelTaskGroup(name, budget) {
+	scheduler.registerGroup(name, budget);
+}
+
+export function getKernelDiagnostics() {
+	return scheduler.diagnostics();
 }
 
 export function registerTickHandler(handler) {
@@ -24,9 +38,14 @@ export function startKernel() {
 
 	started = true;
 	system.runInterval(() => {
-		taskQueue.drain(TASK_BUDGET_PER_TICK);
-		for (const handler of tickHandlers)
-			handler();
+		scheduler.tick();
+		for (const handler of tickHandlers) {
+			try {
+				handler();
+			} catch (error) {
+				console.warn(`[Create Bedrock] Kernel tick handler failed: ${error}`);
+			}
+		}
 	}, 1);
 	console.warn("[Create Bedrock] Kernel started");
 }
