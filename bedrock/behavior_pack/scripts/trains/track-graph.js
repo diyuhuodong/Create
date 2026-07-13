@@ -2,6 +2,14 @@ function edgeId(leftId, rightId) {
 	return [leftId, rightId].sort().join("<->");
 }
 
+function distance(left, right) {
+	return Math.hypot(right.x - left.x, right.y - left.y, right.z - left.z);
+}
+
+function validatePoint(point) {
+	return point && [point.x, point.y, point.z].every(Number.isFinite);
+}
+
 export class TrackGraph {
 	#nodes = new Map();
 	#edges = new Map();
@@ -15,17 +23,27 @@ export class TrackGraph {
 		this.#nodes.set(id, { available: true, id, location: { ...location } });
 	}
 
-	connect(leftId, rightId, length) {
+	connect(leftId, rightId, length, points) {
 		if (!this.#nodes.has(leftId) || !this.#nodes.has(rightId))
 			throw new Error("Track connections require registered nodes");
-		if (leftId === rightId || !Number.isFinite(length) || length <= 0)
+		if (leftId === rightId)
+			throw new RangeError("Track connections require a positive length between different nodes");
+
+		let geometry;
+		if (points !== undefined) {
+			if (!Array.isArray(points) || points.length < 2 || points.some(point => !validatePoint(point)))
+				throw new TypeError("Track geometry requires at least two finite points");
+			geometry = points.map(point => ({ ...point }));
+			length = geometry.slice(1).reduce((total, point, index) => total + distance(geometry[index], point), 0);
+		}
+		if (!Number.isFinite(length) || length <= 0)
 			throw new RangeError("Track connections require a positive length between different nodes");
 
 		const id = edgeId(leftId, rightId);
 		if (this.#edges.has(id))
 			throw new Error(`Track edge ${id} already exists`);
 
-		this.#edges.set(id, { id, leftId, rightId, length, reservedBy: undefined });
+		this.#edges.set(id, { id, leftId, rightId, length, points: geometry, reservedBy: undefined });
 		return id;
 	}
 
@@ -144,7 +162,35 @@ export class TrackGraph {
 
 	getEdge(id) {
 		const edge = this.#edges.get(id);
-		return edge && { ...edge };
+		return edge && {
+			...edge,
+			points: edge.points?.map(point => ({ ...point }))
+		};
+	}
+
+	sampleEdge(id, fromNodeId, progress) {
+		const edge = this.#edges.get(id);
+		if (!edge || (fromNodeId !== edge.leftId && fromNodeId !== edge.rightId))
+			throw new Error(`Track edge ${id} is not connected to ${fromNodeId}`);
+		if (!Number.isFinite(progress) || progress < 0 || progress > 1)
+			throw new RangeError("Track sampling progress must be between zero and one");
+
+		const normalizedProgress = fromNodeId === edge.leftId ? progress : 1 - progress;
+		const points = edge.points ?? [this.#nodes.get(edge.leftId).location, this.#nodes.get(edge.rightId).location];
+		let remaining = normalizedProgress * edge.length;
+		for (let index = 1; index < points.length; index++) {
+			const segmentLength = distance(points[index - 1], points[index]);
+			if (remaining <= segmentLength || index === points.length - 1) {
+				const ratio = segmentLength === 0 ? 0 : Math.min(1, remaining / segmentLength);
+				return {
+					x: points[index - 1].x + (points[index].x - points[index - 1].x) * ratio,
+					y: points[index - 1].y + (points[index].y - points[index - 1].y) * ratio,
+					z: points[index - 1].z + (points[index].z - points[index - 1].z) * ratio
+				};
+			}
+			remaining -= segmentLength;
+		}
+		return { ...points.at(-1) };
 	}
 
 	getNode(id) {
@@ -175,7 +221,8 @@ export class TrackGraph {
 				id: edge.id,
 				leftId: edge.leftId,
 				rightId: edge.rightId,
-				length: edge.length
+				length: edge.length,
+				points: edge.points?.map(point => ({ ...point }))
 			}))
 		};
 	}
@@ -188,7 +235,7 @@ export class TrackGraph {
 		for (const node of snapshot.nodes)
 			this.addNode(node);
 		for (const edge of snapshot.edges)
-			this.connect(edge.leftId, edge.rightId, edge.length);
+			this.connect(edge.leftId, edge.rightId, edge.length, edge.points);
 	}
 
 	#edgesFor(nodeId) {

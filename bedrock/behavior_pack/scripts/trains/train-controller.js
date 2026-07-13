@@ -3,7 +3,7 @@ export class TrainController {
 	#trains = new Map();
 
 	constructor(trackGraph) {
-		for (const method of ["findRoute", "getEdge", "isEdgeAvailable", "releaseEdge", "releaseReservations", "tryReserve"]) {
+		for (const method of ["findRoute", "getEdge", "getNode", "isEdgeAvailable", "releaseEdge", "releaseReservations", "sampleEdge", "tryReserve"]) {
 			if (typeof trackGraph?.[method] !== "function")
 				throw new TypeError(`TrainController track graph requires ${method}()`);
 		}
@@ -176,6 +176,23 @@ export class TrainController {
 				remaining -= edge.length;
 			}
 			throw new Error(`Unable to resolve carriage ${index} for ${id}`);
+		});
+	}
+
+	getCarriagePlacements(id) {
+		return this.getCarriages(id).map(carriage => {
+			if (carriage.nodeId) {
+				const node = this.#graph.getNode(carriage.nodeId);
+				if (!node)
+					throw new Error(`Unknown track node ${carriage.nodeId}`);
+				return { ...carriage, location: node.location };
+			}
+
+			const edgeId = [carriage.fromNodeId, carriage.toNodeId].sort().join("<->");
+			return {
+				...carriage,
+				location: this.#graph.sampleEdge(edgeId, carriage.fromNodeId, carriage.progress)
+			};
 		});
 	}
 

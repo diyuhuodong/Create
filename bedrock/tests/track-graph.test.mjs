@@ -68,6 +68,27 @@ test("TrackGraph serializes and restores its topology", () => {
 	assert.equal(restored.findRoute("a", "d").length, 11);
 });
 
+test("TrackGraph samples persisted geometry by arc length in either direction", () => {
+	const graph = new TrackGraph();
+	graph.addNode({ id: "a", location: { x: 0, y: 0, z: 0 } });
+	graph.addNode({ id: "b", location: { x: 1, y: 0, z: 1 } });
+	graph.connect("a", "b", undefined, [
+		{ x: 0, y: 0, z: 0 },
+		{ x: 1, y: 0, z: 0 },
+		{ x: 1, y: 0, z: 1 }
+	]);
+
+	assert.equal(graph.getEdge("a<->b").length, 2);
+	assert.deepEqual(graph.sampleEdge("a<->b", "a", 0.5), { x: 1, y: 0, z: 0 });
+	assert.deepEqual(graph.sampleEdge("a<->b", "b", 0.5), { x: 1, y: 0, z: 0 });
+	assert.deepEqual(graph.sampleEdge("a<->b", "a", 0.25), { x: 0.5, y: 0, z: 0 });
+	assert.deepEqual(graph.sampleEdge("a<->b", "b", 0.25), { x: 1, y: 0, z: 0.5 });
+
+	const restored = new TrackGraph();
+	restored.restore(graph.snapshot());
+	assert.deepEqual(restored.sampleEdge("a<->b", "a", 0.5), { x: 1, y: 0, z: 0 });
+});
+
 test("TrackGraph rejects removal of a node on a reserved route", () => {
 	const graph = createGraph();
 	const route = graph.findRoute("a", "d");

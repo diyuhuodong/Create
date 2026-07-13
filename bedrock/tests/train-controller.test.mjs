@@ -131,6 +131,23 @@ test("TrainController keeps carriage positions ordered along the reserved route"
 	assert.equal(restored.controller.getCarriages("train_one").length, 3);
 });
 
+test("TrainController places carriages by arc length along track geometry", () => {
+	const graph = new TrackGraph();
+	graph.addNode({ id: "a", location: { x: 0, y: 64, z: 0 } });
+	graph.addNode({ id: "b", location: { x: 1, y: 64, z: 1 } });
+	graph.connect("a", "b", undefined, [
+		{ x: 0, y: 64, z: 0 },
+		{ x: 1, y: 64, z: 0 },
+		{ x: 1, y: 64, z: 1 }
+	]);
+	const controller = new TrainController(graph);
+	controller.registerTrain({ id: "train_one", nodeId: "a" });
+	controller.dispatch("train_one", "b");
+	controller.tick("train_one", 1);
+
+	assert.deepEqual(controller.getCarriagePlacements("train_one")[0].location, { x: 1, y: 64, z: 0 });
+});
+
 test("TrainController keeps an edge reserved until the last carriage clears it", () => {
 	const { controller, graph } = createController({ registerTrain: false });
 	controller.registerTrain({ carriageCount: 2, carriageSpacing: 2, id: "train_one", nodeId: "a" });

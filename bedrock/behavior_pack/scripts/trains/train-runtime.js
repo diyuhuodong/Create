@@ -14,6 +14,7 @@ const PERSISTENCE_KEY = "createbedrock:trains_v1";
 const PERSISTENCE_SCHEMA_VERSION = 1;
 const TRACK_CONNECTION_OFFSETS = [
 	[1, 0, 0], [-1, 0, 0], [0, 0, 1], [0, 0, -1],
+	[1, 0, 1], [1, 0, -1], [-1, 0, 1], [-1, 0, -1],
 	[1, 1, 0], [1, -1, 0], [-1, 1, 0], [-1, -1, 0],
 	[0, 1, 1], [0, -1, 1], [0, 1, -1], [0, -1, -1]
 ];
@@ -59,7 +60,22 @@ function markerLocation(location) {
 	return { x: location.x + 0.5, y: location.y + 1, z: location.z + 0.5 };
 }
 
+function curvePoints(from, to) {
+	const control = { x: to.x, y: from.y, z: from.z };
+	return Array.from({ length: 9 }, (_, index) => {
+		const progress = index / 8;
+		const inverse = 1 - progress;
+		return {
+			x: inverse * inverse * from.x + 2 * inverse * progress * control.x + progress * progress * to.x,
+			y: inverse * inverse * from.y + 2 * inverse * progress * control.y + progress * progress * to.y,
+			z: inverse * inverse * from.z + 2 * inverse * progress * control.z + progress * progress * to.z
+		};
+	});
+}
+
 function locationForCarriage(dimensionId, carriage) {
+	if (carriage.location)
+		return carriage.location;
 	if (!carriage.fromNodeId || !carriage.toNodeId)
 		return nodeLocation(dimensionId, carriage.nodeId);
 	const from = nodeLocation(dimensionId, carriage.fromNodeId);
@@ -88,7 +104,7 @@ function spawnCarriageMarker(dimensionId, trainId, carriageIndex, location) {
 }
 
 function spawnCarriageMarkers(dimensionId, trainId, controller) {
-	return controller.getCarriages(trainId).map(carriage => spawnCarriageMarker(
+	return controller.getCarriagePlacements(trainId).map(carriage => spawnCarriageMarker(
 		dimensionId,
 		trainId,
 		carriage.index,
@@ -146,8 +162,10 @@ function addTrack(block) {
 	for (const [x, y, z] of TRACK_CONNECTION_OFFSETS) {
 		const adjacent = { x: block.location.x + x, y: block.location.y + y, z: block.location.z + z };
 		const adjacentId = nodeId(adjacent);
-		if (graph.getNode(adjacentId))
-			graph.connect(id, adjacentId, Math.hypot(x, y, z));
+		if (graph.getNode(adjacentId)) {
+			const points = y === 0 && x !== 0 && z !== 0 ? curvePoints(block.location, adjacent) : undefined;
+			graph.connect(id, adjacentId, Math.hypot(x, y, z), points);
+		}
 	}
 	persist();
 }
@@ -235,7 +253,7 @@ function tickTrains() {
 	for (const [id, train] of trains) {
 		const controller = controllerFor(train.dimensionId);
 		controller.tick(id, 0.1);
-		const carriages = controller.getCarriages(id);
+		const carriages = controller.getCarriagePlacements(id);
 		train.entityIds = carriages.map(carriage => {
 			let entity = world.getEntity(train.entityIds?.[carriage.index]);
 			if (!entity?.isValid) {
