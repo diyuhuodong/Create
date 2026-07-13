@@ -19,6 +19,8 @@ const TEXTURES = [
 	"clutch_off.png",
 	"clutch_on.png",
 	"copper_casing.png",
+	"depot_side.png",
+	"depot_top.png",
 	"encased_chain_drive.png",
 	"funnel/andesite_funnel_frame.png",
 	"crushing_wheel_plates.png",

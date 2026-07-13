@@ -35,6 +35,12 @@
     "createbedrock_funnel_frame": {
       "textures": "textures/create_java/block/funnel/andesite_funnel_frame"
     },
+    "createbedrock_depot_side": {
+      "textures": "textures/create_java/block/depot_side"
+    },
+    "createbedrock_depot_top": {
+      "textures": "textures/create_java/block/depot_top"
+    },
     "createbedrock_large_cogwheel": {
       "textures": "textures/create_java/block/large_cogwheel"
     },

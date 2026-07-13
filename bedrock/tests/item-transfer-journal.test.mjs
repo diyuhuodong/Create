@@ -71,3 +71,27 @@ test("ItemTransferJournal cancels a stale intent without removing source items",
 	assert.equal(result.reason, "source_changed");
 	assert.deepEqual(source.snapshot().slots[0], { count: 3, typeId: "minecraft:gold_ingot" });
 });
+
+test("ItemTransferJournal retains a durable intent when a source adapter reports uncertain state", () => {
+	const source = {
+		id: "source",
+		extract() {
+			const error = new Error("container could not be verified");
+			error.transactionState = "uncertain";
+			throw error;
+		},
+		reserve() {
+			return {
+				item: { count: 1, typeId: "minecraft:iron_ingot" },
+				portId: "source",
+				revision: 0,
+				slots: [{ count: 1, slot: 0 }]
+			};
+		}
+	};
+	const destination = { id: "destination", insert() {} };
+	const journal = new ItemTransferJournal();
+	journal.begin({ destination, id: "transfer:uncertain", source });
+	assert.equal(journal.settle("transfer:uncertain", ports(source, destination)).reason, "source_uncertain");
+	assert.equal(journal.snapshot()[0].state, "intent");
+});

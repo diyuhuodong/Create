@@ -1,0 +1,58 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:depot"
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 6
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1
+      },
+      "minecraft:geometry": "geometry.createbedrock.depot",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.depot"
+        },
+        "material_instances": {
+          "andesite_casing": {
+            "texture": "createbedrock_andesite_casing",
+            "render_method": "opaque"
+          },
+          "depot_side": {
+            "texture": "createbedrock_depot_side",
+            "render_method": "opaque"
+          },
+          "depot_top": {
+            "texture": "createbedrock_depot_top",
+            "render_method": "opaque"
+          },
+          "*": {
+            "texture": "createbedrock_depot_side",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:material_instances": {
+        "andesite_casing": {
+          "texture": "createbedrock_andesite_casing",
+          "render_method": "opaque"
+        },
+        "depot_side": {
+          "texture": "createbedrock_depot_side",
+          "render_method": "opaque"
+        },
+        "depot_top": {
+          "texture": "createbedrock_depot_top",
+          "render_method": "opaque"
+        },
+        "*": {
+          "texture": "createbedrock_depot_side",
+          "render_method": "opaque"
+        }
+      }
+    }
+  }
+}

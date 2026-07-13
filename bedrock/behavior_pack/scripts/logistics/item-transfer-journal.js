@@ -80,6 +80,8 @@ export class ItemTransferJournal {
 			record.state = "escrowed";
 			return { ok: true, state: "escrowed" };
 		} catch (error) {
+			if (error?.transactionState === "uncertain")
+				return { ok: false, reason: "source_uncertain", state: "intent", error: String(error) };
 			this.#records.delete(id);
 			return { ok: false, reason: "source_changed", error: String(error) };
 		}
