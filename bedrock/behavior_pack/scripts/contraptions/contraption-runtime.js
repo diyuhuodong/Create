@@ -147,12 +147,20 @@ export function registerContraptions(getKineticWorld) {
 
 	registerTickHandler(() => {
 		for (const active of activeBearings.values()) {
+			const controller = controllerFor(active.dimensionId);
+			if (!controller.ensureEntity(active.id)) {
+				if (!active.recoveryFailed)
+					console.warn(`[Create Bedrock] Contraption ${active.id} is frozen because its entity could not be restored`);
+				active.recoveryFailed = true;
+				continue;
+			}
+			active.recoveryFailed = false;
 			const speed = getKineticWorld().speedAt(active.dimensionId, active.bearingLocation);
 			if (speed === 0)
 				continue;
 
 			active.rotation = (active.rotation + speed) % 360;
-			controllerFor(active.dimensionId).setRotation(active.id, active.rotation);
+			controller.setRotation(active.id, active.rotation);
 			rotationDirty = true;
 		}
 

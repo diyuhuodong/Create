@@ -98,6 +98,10 @@ export class BedrockContraptionWorldPort {
 		}
 	}
 
+	isContraptionValid(entityId) {
+		return world.getEntity(entityId)?.isValid === true;
+	}
+
 	setContraptionRotation(entityId, rotation) {
 		const entity = world.getEntity(entityId);
 		if (entity?.isValid) {

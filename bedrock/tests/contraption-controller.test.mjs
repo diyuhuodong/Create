@@ -37,6 +37,9 @@ function createWorld({ failPlaceAt, failSpawn = false } = {}) {
 		removeContraption(entityId) {
 			entities.delete(entityId);
 		},
+		isContraptionValid(entityId) {
+			return entities.has(entityId);
+		},
 		setContraptionRotation(entityId, rotation) {
 			rotations.set(entityId, rotation);
 		},
@@ -146,4 +149,18 @@ test("ContraptionController refuses a corrupted persisted snapshot", () => {
 
 	const restored = new ContraptionController(createWorld());
 	assert.throws(() => restored.restore([record]), /checksum mismatch/);
+});
+
+test("ContraptionController rebuilds a missing entity from its authoritative snapshot", () => {
+	const world = createWorld();
+	const controller = new ContraptionController(world);
+	const locations = [{ x: 0, y: 64, z: 0 }, { x: 1, y: 64, z: 0 }];
+	controller.assemble({ id: "bearing-1", anchor: locations[0], locations });
+	controller.setRotation("bearing-1", 45);
+	world.entities.clear();
+
+	assert.equal(controller.ensureEntity("bearing-1"), true);
+	assert.deepEqual([...world.entities], ["entity-1"]);
+	assert.equal(world.rotations.get("entity-1"), 45);
+	assert.equal(controller.getActive("bearing-1").snapshot.schemaVersion, 2);
 });

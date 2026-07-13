@@ -5,7 +5,7 @@ export class ContraptionController {
 	#world;
 
 	constructor(worldPort) {
-		for (const method of ["readBlock", "removeBlock", "placeBlock", "spawnContraption", "removeContraption", "setContraptionRotation", "canPlace"]) {
+		for (const method of ["readBlock", "removeBlock", "placeBlock", "spawnContraption", "removeContraption", "isContraptionValid", "setContraptionRotation", "canPlace"]) {
 			if (typeof worldPort?.[method] !== "function")
 				throw new TypeError(`Contraption world port requires ${method}()`);
 		}
@@ -76,6 +76,26 @@ export class ContraptionController {
 
 	getActive(id) {
 		return this.#active.get(id);
+	}
+
+	ensureEntity(id) {
+		const active = this.#active.get(id);
+		if (!active)
+			throw new Error(`Unknown contraption ${id}`);
+		if (this.#world.isContraptionValid(active.entityId))
+			return true;
+
+		try {
+			active.entityId = this.#world.spawnContraption({
+				id,
+				origin: active.origin,
+				snapshot: active.snapshot
+			});
+			this.#world.setContraptionRotation(active.entityId, active.rotation);
+			return true;
+		} catch {
+			return false;
+		}
 	}
 
 	setRotation(id, rotation) {
