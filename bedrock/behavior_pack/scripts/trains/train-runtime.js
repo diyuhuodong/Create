@@ -8,6 +8,7 @@ const TRACK_BLOCK = "createbedrock:track";
 const STATION_BLOCK = "createbedrock:track_station";
 const TRAIN_ENTITY = "createbedrock:train";
 const TRAIN_ID_PROPERTY = "createbedrock:train_id";
+const TRAIN_CARRIAGE_INDEX_PROPERTY = "createbedrock:train_carriage_index";
 const PERSISTENCE_KEY = "createbedrock:trains_v1";
 const TRACK_CONNECTION_OFFSETS = [
 	[1, 0, 0], [-1, 0, 0], [0, 0, 1], [0, 0, -1],
@@ -55,22 +56,23 @@ function markerLocation(location) {
 	return { x: location.x + 0.5, y: location.y + 1, z: location.z + 0.5 };
 }
 
-function locationForTrain(dimensionId, state) {
-	if (!state.fromNodeId || !state.toNodeId)
-		return nodeLocation(dimensionId, state.nodeId);
-	const from = nodeLocation(dimensionId, state.fromNodeId);
-	const to = nodeLocation(dimensionId, state.toNodeId);
+function locationForCarriage(dimensionId, carriage) {
+	if (!carriage.fromNodeId || !carriage.toNodeId)
+		return nodeLocation(dimensionId, carriage.nodeId);
+	const from = nodeLocation(dimensionId, carriage.fromNodeId);
+	const to = nodeLocation(dimensionId, carriage.toNodeId);
 	return {
-		x: from.x + (to.x - from.x) * state.progress,
-		y: from.y + (to.y - from.y) * state.progress,
-		z: from.z + (to.z - from.z) * state.progress
+		x: from.x + (to.x - from.x) * carriage.progress,
+		y: from.y + (to.y - from.y) * carriage.progress,
+		z: from.z + (to.z - from.z) * carriage.progress
 	};
 }
 
-function spawnMarker(dimensionId, trainId, location) {
+function spawnCarriageMarker(dimensionId, trainId, carriageIndex, location) {
 	const dimension = world.getDimension(dimensionId);
 	const existing = dimension.getEntities({ type: TRAIN_ENTITY })
-		.find(entity => entity.getDynamicProperty(TRAIN_ID_PROPERTY) === trainId);
+		.find(entity => entity.getDynamicProperty(TRAIN_ID_PROPERTY) === trainId
+			&& entity.getDynamicProperty(TRAIN_CARRIAGE_INDEX_PROPERTY) === carriageIndex);
 	if (existing?.isValid) {
 		existing.teleport(markerLocation(location));
 		return existing.id;
@@ -78,7 +80,17 @@ function spawnMarker(dimensionId, trainId, location) {
 
 	const entity = dimension.spawnEntity(TRAIN_ENTITY, markerLocation(location));
 	entity.setDynamicProperty(TRAIN_ID_PROPERTY, trainId);
+	entity.setDynamicProperty(TRAIN_CARRIAGE_INDEX_PROPERTY, carriageIndex);
 	return entity.id;
+}
+
+function spawnCarriageMarkers(dimensionId, trainId, controller) {
+	return controller.getCarriages(trainId).map(carriage => spawnCarriageMarker(
+		dimensionId,
+		trainId,
+		carriage.index,
+		locationForCarriage(dimensionId, carriage)
+	));
 }
 
 function persist() {
@@ -104,10 +116,9 @@ function restore() {
 			const controller = controllerFor(dimension.dimensionId);
 			controller.restore(dimension.trains);
 			for (const train of dimension.trains) {
-				const state = controller.getTrain(train.id);
 				trains.set(train.id, {
 					dimensionId: dimension.dimensionId,
-					entityId: spawnMarker(dimension.dimensionId, train.id, locationForTrain(dimension.dimensionId, state))
+					entityIds: spawnCarriageMarkers(dimension.dimensionId, train.id, controller)
 				});
 			}
 		}
@@ -136,10 +147,10 @@ function addTrack(block) {
 function createTrain(dimensionId, nodeIdValue) {
 	const id = `train:${nextTrainId++}`;
 	const controller = controllerFor(dimensionId);
-	controller.registerTrain({ id, nodeId: nodeIdValue });
+	controller.registerTrain({ carriageCount: 2, carriageSpacing: 2, id, nodeId: nodeIdValue });
 	trains.set(id, {
 		dimensionId,
-		entityId: spawnMarker(dimensionId, id, nodeLocation(dimensionId, nodeIdValue))
+		entityIds: spawnCarriageMarkers(dimensionId, id, controller)
 	});
 	return id;
 }
@@ -195,15 +206,18 @@ function selectStationLoop(player, dimensionId, stationNodeId) {
 function tickTrains() {
 	for (const [id, train] of trains) {
 		const controller = controllerFor(train.dimensionId);
-		const wasMoving = controller.getTrain(id).edgeId !== undefined;
-		const state = controller.tick(id, 0.1);
-		let entity = world.getEntity(train.entityId);
-		if (!entity?.isValid) {
-			train.entityId = spawnMarker(train.dimensionId, id, locationForTrain(train.dimensionId, state));
-			entity = world.getEntity(train.entityId);
-		}
-		if ((wasMoving || state.edgeId !== undefined) && entity?.isValid)
-			entity.teleport(markerLocation(locationForTrain(train.dimensionId, state)));
+		controller.tick(id, 0.1);
+		const carriages = controller.getCarriages(id);
+		train.entityIds = carriages.map(carriage => {
+			let entity = world.getEntity(train.entityIds?.[carriage.index]);
+			if (!entity?.isValid) {
+				const entityId = spawnCarriageMarker(train.dimensionId, id, carriage.index, locationForCarriage(train.dimensionId, carriage));
+				entity = world.getEntity(entityId);
+				return entityId;
+			}
+			entity.teleport(markerLocation(locationForCarriage(train.dimensionId, carriage)));
+			return entity.id;
+		});
 	}
 
 	ticksSincePersist++;

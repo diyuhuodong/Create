@@ -10,10 +10,21 @@ export class TrainController {
 		this.#graph = trackGraph;
 	}
 
-	registerTrain({ id, nodeId }) {
+	registerTrain({ id, nodeId, carriageCount = 1, carriageSpacing = 2 }) {
 		if (!id || this.#trains.has(id))
 			throw new Error("Train ids must be unique");
-		this.#trains.set(id, { id, nodeId, route: undefined, schedule: undefined, edgeIndex: 0, distanceOnEdge: 0 });
+		if (!Number.isInteger(carriageCount) || carriageCount < 1 || !Number.isFinite(carriageSpacing) || carriageSpacing <= 0)
+			throw new RangeError("Trains require at least one carriage and positive carriage spacing");
+		this.#trains.set(id, {
+			carriageCount,
+			carriageSpacing,
+			id,
+			nodeId,
+			route: undefined,
+			schedule: undefined,
+			edgeIndex: 0,
+			distanceOnEdge: 0
+		});
 	}
 
 	dispatch(id, destinationId) {
@@ -130,8 +141,42 @@ export class TrainController {
 		};
 	}
 
-		snapshot() {
+	getCarriages(id) {
+		const train = this.#requireTrain(id);
+		if (!train.route) {
+			return Array.from({ length: train.carriageCount }, (_, index) => ({
+				index,
+				nodeId: train.nodeId
+			}));
+		}
+
+		let leadDistance = train.distanceOnEdge;
+		for (let index = 0; index < train.edgeIndex; index++)
+			leadDistance += this.#graph.getEdge(train.route.edgeIds[index]).length;
+
+		return Array.from({ length: train.carriageCount }, (_, index) => {
+			let remaining = Math.max(0, leadDistance - index * train.carriageSpacing);
+			for (let edgeIndex = 0; edgeIndex < train.route.edgeIds.length; edgeIndex++) {
+				const edge = this.#graph.getEdge(train.route.edgeIds[edgeIndex]);
+				if (remaining <= edge.length || edgeIndex === train.route.edgeIds.length - 1) {
+					return {
+						edgeLength: edge.length,
+						fromNodeId: train.route.nodeIds[edgeIndex],
+						index,
+						progress: Math.min(1, remaining / edge.length),
+						toNodeId: train.route.nodeIds[edgeIndex + 1]
+					};
+				}
+				remaining -= edge.length;
+			}
+			throw new Error(`Unable to resolve carriage ${index} for ${id}`);
+		});
+	}
+
+	snapshot() {
 		return [...this.#trains.values()].map(train => ({
+			carriageCount: train.carriageCount,
+			carriageSpacing: train.carriageSpacing,
 			id: train.id,
 			nodeId: train.nodeId,
 			route: train.route && {
@@ -164,6 +209,8 @@ export class TrainController {
 			if (schedule && (!Array.isArray(schedule.stopIds) || schedule.stopIds.length === 0 || schedule.stopIds.some(stopId => !this.#graph.getNode(stopId))))
 				throw new TypeError(`Invalid train schedule for ${record.id}`);
 			this.#trains.set(record.id, {
+				carriageCount: Number.isInteger(record.carriageCount) && record.carriageCount > 0 ? record.carriageCount : 1,
+				carriageSpacing: Number.isFinite(record.carriageSpacing) && record.carriageSpacing > 0 ? record.carriageSpacing : 2,
 				id: record.id,
 				nodeId: record.nodeId,
 				route: record.route && {

@@ -114,3 +114,19 @@ test("TrainController persists a looping station schedule with dwell time", () =
 	restored.restore(controller.snapshot());
 	assert.deepEqual(restored.getTrain("train-1").schedule.stopIds, ["b", "a"]);
 });
+
+test("TrainController keeps carriage positions ordered along the reserved route", () => {
+	const { controller } = createController({ registerTrain: false });
+	controller.registerTrain({ carriageCount: 3, carriageSpacing: 2, id: "train_one", nodeId: "a" });
+	controller.dispatch("train_one", "c");
+	controller.tick("train_one", 5);
+
+	assert.deepEqual(controller.getCarriages("train_one"), [
+		{ edgeLength: 4, fromNodeId: "b", index: 0, progress: 0.25, toNodeId: "c" },
+		{ edgeLength: 4, fromNodeId: "a", index: 1, progress: 0.75, toNodeId: "b" },
+		{ edgeLength: 4, fromNodeId: "a", index: 2, progress: 0.25, toNodeId: "b" }
+	]);
+	const restored = createController({ registerTrain: false });
+	restored.controller.restore(controller.snapshot());
+	assert.equal(restored.controller.getCarriages("train_one").length, 3);
+});
