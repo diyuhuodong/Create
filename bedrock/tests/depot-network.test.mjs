@@ -142,6 +142,16 @@ test("DepotNetwork funnels filter items and honor their lock state", () => {
 	assert.deepEqual(network.extract(source), { count: 1, typeId: "minecraft:dirt" });
 });
 
+test("DepotNetwork funnels without a filter transfer the first available item", () => {
+	const network = createNetwork(memoryStorage(), "createbedrock:funnel_unfiltered");
+	const source = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } });
+	const destination = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 1, y: 64, z: 0 } });
+	network.insert(source, { count: 1, typeId: "minecraft:copper_ingot" });
+	network.createFunnel({ destinationId: destination, id: "funnel:unfiltered", sourceId: source });
+	advance(network, () => network.diagnostics().transfers === 0 && !network.diagnostics().waitingForCommit && depotSlots(network, destination)?.[0]?.typeId === "minecraft:copper_ingot");
+	assert.deepEqual(network.extract(destination), { count: 1, typeId: "minecraft:copper_ingot" });
+});
+
 test("DepotNetwork chutes transfer items downward through the same recovery journal", () => {
 	const network = createNetwork(memoryStorage(), "createbedrock:chute_transfer");
 	const source = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 65, z: 0 } });

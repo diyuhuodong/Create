@@ -20,3 +20,8 @@ test("Item filter selection honors priority and redstone lock state", () => {
 	assert.equal(selectItemFilter([low, high], stack), high);
 	assert.equal(selectItemFilter([low, high], stack, { locked: true }), undefined);
 });
+
+test("An empty ItemFilter behaves as an unfiltered port", () => {
+	const filter = new ItemFilter();
+	assert.equal(filter.accepts({ count: 1, typeId: "minecraft:iron_ingot" }), true);
+});

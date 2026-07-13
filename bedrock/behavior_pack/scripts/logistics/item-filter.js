@@ -39,6 +39,8 @@ export class ItemFilter {
 	}
 
 	accepts(stack) {
+		if (this.#typeIds.size === 0)
+			return true;
 		const matches = this.#typeIds.has(cloneItemStack(stack).typeId);
 		return this.#mode === "allow" ? matches : !matches;
 	}

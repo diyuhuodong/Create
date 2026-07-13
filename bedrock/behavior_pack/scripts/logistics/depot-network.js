@@ -99,7 +99,7 @@ export class DepotNetwork {
 		if (typeof id !== "string" || id.length === 0)
 			throw new TypeError("Funnels require an identifier");
 		if (this.#funnels.has(id))
-			throw new Error(`Funnel ${id} already exists`);
+			return id;
 		if (typeof locked !== "boolean")
 			throw new TypeError("Funnel lock state must be boolean");
 		this.#requireDepot(sourceId);
@@ -120,7 +120,7 @@ export class DepotNetwork {
 		if (typeof id !== "string" || id.length === 0)
 			throw new TypeError("Chutes require an identifier");
 		if (this.#chutes.has(id))
-			throw new Error(`Chute ${id} already exists`);
+			return id;
 		this.#requireDepot(sourceId);
 		this.#requireDepot(destinationId);
 		this.#chutes.set(id, { destinationId, id, nextTransfer: 0, sourceId });
@@ -141,6 +141,14 @@ export class DepotNetwork {
 		if ([...this.#chutes.values()].some(chute => chute.sourceId === id || chute.destinationId === id))
 			return false;
 		return depot.port.snapshot().slots.every(stack => stack === undefined);
+	}
+
+	canRemoveChute(id) {
+		return !this.#journal.snapshot().some(record => record.id.startsWith(`chute:${id}:`));
+	}
+
+	canRemoveFunnel(id) {
+		return !this.#journal.snapshot().some(record => record.id.startsWith(`funnel:${id}:`));
 	}
 
 	createDepot({ dimensionId, location, maxStackSize = 64, size = 1 }) {
@@ -199,7 +207,7 @@ export class DepotNetwork {
 	}
 
 	removeFunnel(id) {
-		if (this.#journal.snapshot().some(record => record.id.startsWith(`funnel:${id}:`)))
+		if (!this.canRemoveFunnel(id))
 			throw new Error(`Funnel ${id} has an active transfer`);
 		if (!this.#funnels.delete(id))
 			return false;
@@ -217,7 +225,7 @@ export class DepotNetwork {
 	}
 
 	removeChute(id) {
-		if (this.#journal.snapshot().some(record => record.id.startsWith(`chute:${id}:`)))
+		if (!this.canRemoveChute(id))
 			throw new Error(`Chute ${id} has an active transfer`);
 		if (!this.#chutes.delete(id))
 			return false;
