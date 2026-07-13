@@ -8,8 +8,11 @@ import { ExternalEscrowTransferRuntime } from "./external-escrow-transfer.js";
 
 const EXTERNAL_ESCROW_TASK_BUDGET = 4;
 const EXTERNAL_ESCROW_TASK_GROUP = "external-escrow-logistics";
+const EXTERNAL_ESCROW_SWEEP_INTERVAL = 200;
 const endpoints = new Map();
 const escrows = new BedrockEscrowRegistry();
+let restored = false;
+let sweepTicks = 0;
 const transfers = new ExternalEscrowTransferRuntime({
 	createEscrow(options) {
 		return escrows.create(options);
@@ -58,12 +61,29 @@ export function registerExternalContainerEndpoint(endpoint) {
 
 export function registerExternalEscrowTransfers() {
 	registerKernelTaskGroup(EXTERNAL_ESCROW_TASK_GROUP, EXTERNAL_ESCROW_TASK_BUDGET);
-	registerTickHandler(() => transfers.tick(), EXTERNAL_ESCROW_TASK_GROUP);
+	registerTickHandler(() => {
+		const transferred = transfers.tick();
+		if (!restored || ++sweepTicks < EXTERNAL_ESCROW_SWEEP_INTERVAL)
+			return transferred;
+		sweepTicks = 0;
+		try {
+			const sweep = escrows.sweepEmptyOrphans(transfers.activeEscrowIds());
+			if (sweep.retained.length > 0)
+				console.warn(`[Create Bedrock] Retained ${sweep.retained.length} non-empty or invalid orphan escrow entities for recovery`);
+			return transferred || sweep.removed > 0;
+		} catch (error) {
+			console.warn(`[Create Bedrock] Could not sweep orphan escrow entities: ${error}`);
+			return transferred;
+		}
+	}, EXTERNAL_ESCROW_TASK_GROUP);
 	system.run(() => {
 		try {
-			const restored = transfers.restore();
-			if (restored.records > 0)
-				console.warn(`[Create Bedrock] Restored ${restored.records} external escrow transfers`);
+			const recovery = transfers.restore();
+			if (recovery.records > 0)
+				console.warn(`[Create Bedrock] Restored ${recovery.records} external escrow transfers`);
+			// Do not sweep before the journal has been read: an entity whose root
+			// record is still loading must not be mistaken for an orphan.
+			restored = true;
 		} catch (error) {
 			console.warn(`[Create Bedrock] Could not restore external escrow transfers: ${error}`);
 		}

@@ -60,7 +60,7 @@ function advance(runtime, predicate, maximumTicks = 100) {
 	throw new Error("External escrow runtime did not reach the expected state");
 }
 
-function createRuntime({ escrows = new Map(), ports, storage, keyPrefix = "createbedrock:external_escrow_test" }) {
+function createRuntime({ destroyEscrow = id => escrows.delete(id), escrows = new Map(), ports, storage, keyPrefix = "createbedrock:external_escrow_test" }) {
 	return new ExternalEscrowTransferRuntime({
 		createEscrow({ id }) {
 			const escrow = { container: new FakeContainer(1), id: `escrow:${id}` };
@@ -70,9 +70,7 @@ function createRuntime({ escrows = new Map(), ports, storage, keyPrefix = "creat
 		decodeStack(stack) {
 			return { count: stack.amount, typeId: stack.typeId };
 		},
-		destroyEscrow(id) {
-			escrows.delete(id);
-		},
+		destroyEscrow,
 		keyPrefix,
 		resolveEscrow: id => escrows.get(id),
 		resolvePort: id => ports.get(id),
@@ -98,6 +96,35 @@ test("ExternalEscrowTransferRuntime moves one complete source slot through priva
 	assert.equal(source.container.getItem(0), undefined);
 	assert.deepEqual(destination.container.getItem(0), { amount: 3, typeId: "minecraft:iron_ingot" });
 	assert.equal(escrows.size, 0);
+});
+
+test("ExternalEscrowTransferRuntime protects retired escrow until native cleanup succeeds", () => {
+	const storage = memoryStorage();
+	const escrows = new Map();
+	const source = port("source", new FakeContainer(1, [{ amount: 1, typeId: "minecraft:iron_ingot" }]));
+	const destination = port("destination", new FakeContainer(1));
+	const ports = new Map([[source.id, source], [destination.id, destination]]);
+	let destroyAttempts = 0;
+	const runtime = createRuntime({
+		destroyEscrow(id) {
+			destroyAttempts++;
+			if (destroyAttempts === 1)
+				throw new Error("escrow entity is temporarily unavailable");
+			escrows.delete(id);
+		},
+		escrows,
+		ports,
+		storage
+	});
+
+	runtime.begin({ destination, id: "retire", source });
+	advance(runtime, () => runtime.snapshot().length === 0 && !runtime.diagnostics().waitingForCommit);
+	assert.deepEqual([...runtime.activeEscrowIds()], ["escrow:retire"]);
+	assert.equal(escrows.has("escrow:retire"), true);
+
+	runtime.tick();
+	assert.deepEqual([...runtime.activeEscrowIds()], []);
+	assert.equal(escrows.has("escrow:retire"), false);
 });
 
 test("ExternalEscrowTransferRuntime resumes a persisted escrow item after restart", () => {

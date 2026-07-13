@@ -86,7 +86,6 @@ export class ExternalEscrowTransferRuntime {
 			keyPrefix,
 			onCommit: () => {
 				this.#waitingForCommit = false;
-				this.#retireCommittedEscrows();
 			},
 			onError: error => this.#report(error),
 			partitionFor: record => record.partition,
@@ -131,6 +130,13 @@ export class ExternalEscrowTransferRuntime {
 		return { ok: true, record: clone(record) };
 	}
 
+	activeEscrowIds() {
+		return new Set([
+			...[...this.#records.values()].map(record => record.escrowId),
+			...this.#retireEscrowIds
+		]);
+	}
+
 	diagnostics() {
 		return {
 			cooldownTicks: this.#cooldownTicks,
@@ -170,6 +176,11 @@ export class ExternalEscrowTransferRuntime {
 
 	tick() {
 		const wrote = this.#store.tick();
+		// An escrow is eligible for native removal only after the root record that
+		// forgets it has committed. Retrying here also handles a transient entity
+		// invalidation without making an otherwise-complete transfer permanent.
+		if (!this.#waitingForCommit)
+			this.#retireCommittedEscrows();
 		if (wrote || this.#waitingForCommit || this.#frozen)
 			return wrote;
 		if (this.#cooldownTicks > 0) {

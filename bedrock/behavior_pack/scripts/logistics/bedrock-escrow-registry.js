@@ -3,6 +3,7 @@ import { world } from "@minecraft/server";
 export const BEDROCK_ESCROW_ENTITY = "createbedrock:logistics_escrow";
 const INVENTORY_COMPONENT = "minecraft:inventory";
 const TRANSACTION_PROPERTY = "createbedrock:transaction_id";
+const DIMENSION_IDS = ["minecraft:overworld", "minecraft:nether", "minecraft:the_end"];
 
 function escrowFromEntity(entity, id) {
 	if (!entity || entity.typeId !== BEDROCK_ESCROW_ENTITY)
@@ -62,5 +63,36 @@ export class BedrockEscrowRegistry {
 		if (typeof id !== "string" || id.length === 0)
 			return undefined;
 		return escrowFromEntity(this.#world.getEntity(id), transactionId);
+	}
+
+	sweepEmptyOrphans(activeEscrowIds) {
+		if (!(activeEscrowIds instanceof Set))
+			throw new TypeError("Bedrock escrow sweeps require a set of active entity identifiers");
+		const retained = [];
+		let removed = 0;
+		for (const dimensionId of DIMENSION_IDS) {
+			let entities;
+			try {
+				entities = this.#world.getDimension(dimensionId).getEntities({ type: BEDROCK_ESCROW_ENTITY });
+			} catch {
+				continue;
+			}
+			for (const entity of entities) {
+				try {
+					if (activeEscrowIds.has(entity.id))
+						continue;
+					const escrow = escrowFromEntity(entity);
+					if (!escrow || escrow.container.getItem(0) !== undefined) {
+						retained.push(entity.id);
+						continue;
+					}
+					entity.remove();
+					removed++;
+				} catch {
+					retained.push(entity.id);
+				}
+			}
+		}
+		return { removed, retained };
 	}
 }
