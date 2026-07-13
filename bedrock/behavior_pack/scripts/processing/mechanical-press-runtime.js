@@ -3,6 +3,7 @@ import { ItemStack, system, world } from "@minecraft/server";
 import { registerTickHandler } from "../kernel/index.js";
 import { PRESSING_RECIPES } from "./generated/pressing-recipes.js";
 import { MechanicalPressMachine } from "./mechanical-press-machine.js";
+import { registerMovingBlockDataAdapter } from "../contraptions/moving-block-data.js";
 
 const PRESS_BLOCK = "createbedrock:mechanical_press";
 const PERSISTENCE_KEY = "createbedrock:mechanical_presses_v1";
@@ -39,6 +40,29 @@ function ensurePress(block) {
 		presses.set(key, press);
 	}
 	return press;
+}
+
+function capturePress(dimensionId, location) {
+	return presses.get(keyFor(dimensionId, location))?.machine.snapshot();
+}
+
+function detachPress(dimensionId, location) {
+	const key = keyFor(dimensionId, location);
+	const state = capturePress(dimensionId, location);
+	presses.delete(key);
+	persist();
+	return state;
+}
+
+function restorePress(dimensionId, location, state) {
+	const machine = new MechanicalPressMachine(ACTIVE_PRESSING_RECIPES);
+	machine.restore(state);
+	presses.set(keyFor(dimensionId, location), {
+		dimensionId,
+		location: { ...location },
+		machine
+	});
+	persist();
 }
 
 function restore() {
@@ -86,6 +110,11 @@ function tryInsertFromPlayer(player, press) {
 }
 
 export function registerMechanicalPresses(getKineticWorld) {
+	registerMovingBlockDataAdapter(PRESS_BLOCK, {
+		capture: capturePress,
+		detach: detachPress,
+		restore: restorePress
+	});
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
 		if (event.block.typeId === PRESS_BLOCK) {
 			ensurePress(event.block);

@@ -12,7 +12,8 @@ const MAX_PROTOTYPE_BLOCKS = 64;
 const MOVABLE_BLOCK_TYPES = new Set([
 	"createbedrock:shaft",
 	"createbedrock:cogwheel",
-	"createbedrock:millstone"
+	"createbedrock:millstone",
+	"createbedrock:mechanical_press"
 ]);
 const activeBearings = new Map();
 const controllers = new Map();
