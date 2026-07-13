@@ -28,6 +28,10 @@ export const KINETIC_BLOCKS = {
 		kind: "clutch",
 		axis: "y"
 	},
+	"createbedrock:encased_chain_drive": {
+		kind: "chain_drive",
+		axis: "y"
+	},
 	"createbedrock:millstone": {
 		kind: "consumer",
 		axis: "y",
@@ -89,6 +93,10 @@ function connectionRatio(left, right, x, y, z) {
 	const directionAxis = axisOfOffset(x, y, z);
 	if (!directionAxis)
 		return undefined;
+	if (left.configuration.kind === "chain_drive" && right.configuration.kind === "chain_drive") {
+		const chainAxis = axis => ({ x: "z", y: "z", z: "y" })[axis];
+		return left.axis === right.axis && directionAxis === chainAxis(left.axis) ? 1 : undefined;
+	}
 	const cogwheels = new Set(["small_cogwheel", "large_cogwheel"]);
 	if (cogwheels.has(left.configuration.kind) && cogwheels.has(right.configuration.kind)) {
 		if (left.axis !== right.axis || directionAxis === left.axis)

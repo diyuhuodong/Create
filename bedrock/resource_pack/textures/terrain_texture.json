@@ -20,6 +20,9 @@
     "createbedrock_clutch_on": {
       "textures": "textures/create_java/block/clutch_on"
     },
+    "createbedrock_encased_chain_drive": {
+      "textures": "textures/create_java/block/encased_chain_drive"
+    },
     "createbedrock_large_cogwheel": {
       "textures": "textures/create_java/block/large_cogwheel"
     },

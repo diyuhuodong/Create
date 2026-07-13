@@ -146,6 +146,21 @@ test("KineticWorld lets an enabled clutch pass power and a disabled clutch isola
 	assert.equal(world.snapshot().nodes.find(node => node.typeId === "createbedrock:clutch").enabled, true);
 });
 
+test("KineticWorld transmits across a perpendicular encased chain-drive run", () => {
+	const world = new KineticWorld();
+	const crank = block("createbedrock:hand_crank", 0, 64, 0);
+	world.trackPlacedBlock(crank);
+	world.trackPlacedBlock(block("createbedrock:shaft", 0, 65, 0));
+	world.trackPlacedBlock(block("createbedrock:encased_chain_drive", 0, 66, 0));
+	world.trackPlacedBlock(block("createbedrock:encased_chain_drive", 0, 66, 1));
+	const output = block("createbedrock:shaft", 0, 67, 1);
+	world.trackPlacedBlock(output);
+	world.activateHandCrank(crank);
+	world.tick();
+
+	assert.equal(world.speedAt("minecraft:overworld", output.location), 16);
+});
+
 test("KineticWorld transmits speed across persisted shaft belt links", () => {
 	const world = new KineticWorld();
 	const crank = block("createbedrock:hand_crank", 0, 64, 0);
