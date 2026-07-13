@@ -3,6 +3,7 @@ import { ItemStack, system, world } from "@minecraft/server";
 import { registerTickHandler } from "../kernel/index.js";
 import { MILLING_RECIPES } from "./generated/milling-recipes.js";
 import { MillstoneMachine } from "./millstone-machine.js";
+import { registerMovingBlockDataAdapter } from "../contraptions/moving-block-data.js";
 
 const PERSISTENCE_KEY = "createbedrock:millstones_v1";
 const REGISTERED_CREATE_ITEMS = new Set(["createbedrock:wheat_flour"]);
@@ -59,6 +60,29 @@ function ensureMill(block) {
 	return mill;
 }
 
+function captureMillstone(dimensionId, location) {
+	return mills.get(keyFor(dimensionId, location))?.machine.snapshot();
+}
+
+function detachMillstone(dimensionId, location) {
+	const key = keyFor(dimensionId, location);
+	const state = captureMillstone(dimensionId, location);
+	mills.delete(key);
+	persist();
+	return state;
+}
+
+function restoreMillstone(dimensionId, location, state) {
+	const machine = new MillstoneMachine(ACTIVE_MILLING_RECIPES);
+	machine.restore(state);
+	mills.set(keyFor(dimensionId, location), {
+		dimensionId,
+		location: { ...location },
+		machine
+	});
+	persist();
+}
+
 function tryInsertFromPlayer(player, mill) {
 	const inventory = player.getComponent("minecraft:inventory")?.container;
 	if (!inventory)
@@ -87,6 +111,11 @@ function tryInsertFromPlayer(player, mill) {
 }
 
 export function registerMillstones(getKineticWorld) {
+	registerMovingBlockDataAdapter("createbedrock:millstone", {
+		capture: captureMillstone,
+		detach: detachMillstone,
+		restore: restoreMillstone
+	});
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
 		if (event.block.typeId === "createbedrock:millstone") {
 			ensureMill(event.block);

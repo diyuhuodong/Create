@@ -11,7 +11,8 @@ const PERSISTENCE_KEY = "createbedrock:contraptions_v1";
 const MAX_PROTOTYPE_BLOCKS = 64;
 const MOVABLE_BLOCK_TYPES = new Set([
 	"createbedrock:shaft",
-	"createbedrock:cogwheel"
+	"createbedrock:cogwheel",
+	"createbedrock:millstone"
 ]);
 const activeBearings = new Map();
 const controllers = new Map();

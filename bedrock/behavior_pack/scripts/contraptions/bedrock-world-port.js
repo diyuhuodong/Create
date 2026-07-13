@@ -1,10 +1,13 @@
 import { BlockPermutation, world } from "@minecraft/server";
 
+import { captureMovingBlockData, detachMovingBlockData, restoreMovingBlockData } from "./moving-block-data.js";
+
 const CONTRAPTION_ENTITY = "createbedrock:contraption";
 const CONTRAPTION_PART_ENTITY = "createbedrock:contraption_part";
 const CONTRAPTION_PART_TYPES = {
 	"createbedrock:shaft": "createbedrock:contraption_part_shaft",
-	"createbedrock:cogwheel": "createbedrock:contraption_part_cogwheel"
+	"createbedrock:cogwheel": "createbedrock:contraption_part_cogwheel",
+	"createbedrock:millstone": "createbedrock:contraption_part_millstone"
 };
 const ALL_CONTRAPTION_PART_TYPES = [CONTRAPTION_PART_ENTITY, ...new Set(Object.values(CONTRAPTION_PART_TYPES))];
 const CONTRAPTION_ID_PROPERTY = "createbedrock:contraption_id";
@@ -33,6 +36,7 @@ export class BedrockContraptionWorldPort {
 			return undefined;
 
 		return {
+			data: captureMovingBlockData(block.typeId, this.#dimensionId, location),
 			typeId: block.typeId,
 			states: block.permutation.getAllStates()
 		};
@@ -40,6 +44,7 @@ export class BedrockContraptionWorldPort {
 
 	removeBlock(location) {
 		const block = this.#requireBlock(location);
+		detachMovingBlockData(block.typeId, this.#dimensionId, location);
 		block.setType("minecraft:air");
 		if (this.#kineticWorld?.trackBrokenBlock(this.#dimensionId, location))
 			this.#onKineticMutation?.();
@@ -48,6 +53,7 @@ export class BedrockContraptionWorldPort {
 	placeBlock(blockData) {
 		const block = this.#requireBlock(blockData.location);
 		block.setPermutation(BlockPermutation.resolve(blockData.typeId, blockData.states));
+		restoreMovingBlockData(blockData.typeId, this.#dimensionId, blockData.location, blockData.data);
 		if (this.#kineticWorld?.trackPlacedBlock(block))
 			this.#onKineticMutation?.();
 	}
