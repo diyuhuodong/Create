@@ -282,6 +282,20 @@ test("KineticWorld re-resolves only dirty dimensions while retaining other netwo
 	assert.equal(world.speedAt("minecraft:nether", netherShaft.location), 0);
 });
 
+test("KineticWorld can resolve dirty dimensions through budgeted atomic steps", () => {
+	const world = new KineticWorld();
+	const overworldCrank = block("createbedrock:hand_crank", 0, 64, 0);
+	const netherCrank = { ...block("createbedrock:hand_crank", 0, 64, 0), dimension: { id: "minecraft:nether" } };
+	world.trackPlacedBlock(overworldCrank);
+	world.trackPlacedBlock(netherCrank);
+
+	assert.deepEqual(new Set(world.advanceTick()), new Set(["minecraft:overworld", "minecraft:nether"]));
+	assert.equal(world.resolveDirtyDimension("minecraft:overworld"), true);
+	assert.equal(world.speedAt("minecraft:overworld", { x: 0, y: 64, z: 0 }), 0);
+	assert.equal(world.resolveDirtyDimension("minecraft:nether"), true);
+	assert.equal(world.resolveDirtyDimension("minecraft:nether"), false);
+});
+
 test("KineticWorld captures and restores only belt links internal to a moving assembly", () => {
 	const world = new KineticWorld();
 	for (const x of [0, 4, 8])

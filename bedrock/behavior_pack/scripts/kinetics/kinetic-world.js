@@ -354,6 +354,11 @@ export class KineticWorld {
 	}
 
 	tick() {
+		for (const dimensionId of this.advanceTick())
+			this.resolveDirtyDimension(dimensionId);
+	}
+
+	advanceTick() {
 		for (const node of this.#nodes.values()) {
 			if (node.turnTicksRemaining <= 0)
 				continue;
@@ -363,11 +368,15 @@ export class KineticWorld {
 				this.#markDirty(node.dimensionId);
 		}
 
-		if (this.#dirtyDimensions.size === 0)
-			return;
-		for (const dimensionId of this.#dirtyDimensions)
-			this.#resolvedByDimension.set(dimensionId, this.#resolve(dimensionId));
-		this.#dirtyDimensions.clear();
+		return [...this.#dirtyDimensions];
+	}
+
+	resolveDirtyDimension(dimensionId) {
+		if (typeof dimensionId !== "string" || !this.#dirtyDimensions.has(dimensionId))
+			return false;
+		this.#resolvedByDimension.set(dimensionId, this.#resolve(dimensionId));
+		this.#dirtyDimensions.delete(dimensionId);
+		return true;
 	}
 
 	get latestResolved() {

@@ -1,6 +1,6 @@
 import { system, world } from "@minecraft/server";
 
-import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
+import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { KineticWorld } from "./kinetic-world.js";
 
@@ -11,6 +11,7 @@ const BELT_CONNECTOR = "createbedrock:belt_connector";
 const CLUTCH_BLOCK = "createbedrock:clutch";
 const WATER_WHEEL_BLOCK = "createbedrock:water_wheel";
 const WATER_WHEEL_CHECK_INTERVAL = 20;
+const KINETIC_DIMENSION_TASK_BUDGET = 2;
 const pendingBeltEndpoints = new Map();
 let waterWheelTicks = 0;
 
@@ -66,7 +67,7 @@ function refreshWaterWheels() {
 }
 
 export function registerKinetics() {
-	registerKernelTaskGroup("kinetics", 1);
+	registerKernelTaskGroup("kinetics", KINETIC_DIMENSION_TASK_BUDGET);
 	system.run(restore);
 
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
@@ -127,8 +128,9 @@ export function registerKinetics() {
 			waterWheelTicks = 0;
 			refreshWaterWheels();
 		}
-		kineticWorld.tick();
-	}, "kinetics");
+		for (const dimensionId of kineticWorld.advanceTick())
+			enqueueUniqueKernelTask(`kinetics:${dimensionId}`, () => kineticWorld.resolveDirtyDimension(dimensionId), "kinetics");
+	});
 }
 
 export function getKineticWorldForTesting() {
