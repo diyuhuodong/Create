@@ -11,16 +11,20 @@ const repositoryRoot = resolve(bedrockRoot, "..");
 const TEXTURES = [
 	"axis.png",
 	"axis_top.png",
+	"andesite_casing.png",
 	"bearing_top.png",
+	"brass_casing.png",
 	"cogwheel.png",
 	"cogwheel_axis.png",
 	"clutch_off.png",
 	"clutch_on.png",
+	"copper_casing.png",
 	"encased_chain_drive.png",
 	"funnel/andesite_funnel_frame.png",
 	"crushing_wheel_plates.png",
 	"gearbox.png",
 	"gearbox_top.png",
+	"industrial_iron_block.png",
 	"large_cogwheel.png",
 	"mechanical_press_bottom.png",
 	"mechanical_press_side.png",
@@ -28,7 +32,8 @@ const TEXTURES = [
 	"mechanical_bearing_side.png",
 	"millstone.png",
 	"standard_track.png",
-	"station.png"
+	"station.png",
+	"zinc_block.png"
 ];
 const ITEM_TEXTURES = ["belt_connector.png"];
 

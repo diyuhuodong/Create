@@ -12,15 +12,22 @@ function collisionLocation(location) {
 	};
 }
 
-export function findTrainCollision(carriages, readBlock) {
+export function findTrainCollision(carriages, readBlock, { ignoredEntityIds = new Set(), readEntities } = {}) {
 	if (!Array.isArray(carriages) || typeof readBlock !== "function")
 		throw new TypeError("Train collision checks require carriages and readBlock()");
+	if (!(ignoredEntityIds instanceof Set) || readEntities !== undefined && typeof readEntities !== "function")
+		throw new TypeError("Train entity collision checks require an entity reader and ignored-id set");
 
 	for (const carriage of carriages) {
 		const location = collisionLocation(carriage.location);
 		const block = readBlock(location);
 		if (block?.typeId && block.typeId !== AIR_BLOCK)
 			return { location, reason: "world_blocked" };
+		for (const entity of readEntities?.(carriage.location) ?? []) {
+			if (!entity?.id || ignoredEntityIds.has(entity.id))
+				continue;
+			return { entityId: entity.id, location, reason: "entity_blocked" };
+		}
 	}
 	return undefined;
 }

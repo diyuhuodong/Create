@@ -1,4 +1,4 @@
-import { MAX_CONTRAPTION_BLOCKS } from "./movable-blocks.js";
+import { isMovableBlockType, MAX_CONTRAPTION_BLOCKS } from "./movable-blocks.js";
 
 const NEIGHBOR_OFFSETS = [
 	[1, 0, 0],
@@ -43,6 +43,8 @@ function normalizedBlock(block) {
 	validateLocation(block?.relative, "Contraption block relative location");
 	if (typeof block?.typeId !== "string" || block.typeId.length === 0)
 		throw new TypeError("Contraption blocks require a typeId");
+	if (!isMovableBlockType(block.typeId))
+		throw new RangeError(`Unsupported contraption block type: ${block.typeId}`);
 	const normalized = {
 		relative: { ...block.relative },
 		typeId: block.typeId
@@ -146,6 +148,8 @@ export function createContraptionSnapshot({ anchor, attachments, blocks, maxBloc
 		validateLocation(block.location, "Contraption block location");
 		if (typeof block.typeId !== "string" || block.typeId.length === 0)
 			throw new TypeError("Contraption blocks require a typeId");
+		if (!isMovableBlockType(block.typeId))
+			throw new RangeError(`Unsupported contraption block type: ${block.typeId}`);
 
 		const key = locationKey(block.location);
 		if (sourceBlocks.has(key))

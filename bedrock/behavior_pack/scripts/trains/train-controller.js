@@ -55,7 +55,8 @@ export class TrainController {
 
 		train.route = {
 			...route,
-			reservedEdgeIds: new Set(route.edgeIds)
+			reservedEdgeIds: new Set(route.edgeIds),
+			settlingDistance: 0
 		};
 		train.edgeIndex = 0;
 		train.distanceOnEdge = 0;
@@ -120,6 +121,15 @@ export class TrainController {
 		let remaining = distance;
 		let movedDistance = 0;
 		while (remaining > 0 && train.route) {
+			if (train.edgeIndex === train.route.edgeIds.length) {
+				const moved = Math.min(this.#tailDistance(train) - train.route.settlingDistance, remaining);
+				train.route.settlingDistance += moved;
+				remaining -= moved;
+				movedDistance += moved;
+				if (train.route.settlingDistance >= this.#tailDistance(train))
+					this.#completeRoute(train);
+				break;
+			}
 			const edgeId = train.route.edgeIds[train.edgeIndex];
 			if (!this.#graph.isEdgeAvailable(edgeId))
 				break;
@@ -138,11 +148,9 @@ export class TrainController {
 			train.distanceOnEdge = 0;
 
 			if (train.edgeIndex === train.route.edgeIds.length) {
-				this.#graph.releaseReservations(id);
-				train.route = undefined;
 				train.direction = 0;
-				if (train.schedule)
-					train.schedule.dwellRemaining = train.schedule.dwellTicks;
+				if (this.#tailDistance(train) === 0)
+					this.#completeRoute(train);
 			} else
 				train.direction = this.#routeDirection(train);
 		}
@@ -214,6 +222,8 @@ export class TrainController {
 		}
 		if (!train.route)
 			return state;
+		if (train.edgeIndex === train.route.edgeIds.length)
+			return { ...state, settling: true };
 
 		const edgeId = train.route.edgeIds[train.edgeIndex];
 		const edge = this.#graph.getEdge(edgeId);
@@ -229,6 +239,20 @@ export class TrainController {
 
 	getCarriages(id) {
 		const train = this.#requireTrain(id);
+		return this.#carriagesFor(train);
+	}
+
+	getProjectedCarriagePlacements(id, distance = this.#requireTrain(id).targetSpeed) {
+		if (!Number.isFinite(distance) || distance < 0)
+			throw new RangeError("Projected train movement distance must be non-negative");
+		return this.#carriagePlacementsFor(this.#projectTrain(this.#requireTrain(id), distance));
+	}
+
+	getCarriagePlacements(id) {
+		return this.#carriagePlacementsFor(this.#requireTrain(id));
+	}
+
+	#carriagesFor(train) {
 		if (!train.route) {
 			return Array.from({ length: train.carriageCount }, (_, index) => ({
 				index,
@@ -239,6 +263,7 @@ export class TrainController {
 		let leadDistance = train.distanceOnEdge;
 		for (let index = 0; index < train.edgeIndex; index++)
 			leadDistance += this.#graph.getEdge(train.route.edgeIds[index]).length;
+		leadDistance += train.route.settlingDistance;
 
 		return Array.from({ length: train.carriageCount }, (_, index) => {
 			let remaining = Math.max(0, leadDistance - index * train.carriageSpacing);
@@ -255,16 +280,16 @@ export class TrainController {
 				}
 				remaining -= edge.length;
 			}
-			throw new Error(`Unable to resolve carriage ${index} for ${id}`);
+			throw new Error(`Unable to resolve carriage ${index} for ${train.id}`);
 		});
 	}
 
-	getCarriagePlacements(id) {
-		return this.getCarriages(id).map(carriage => {
+	#carriagePlacementsFor(train) {
+		return this.#carriagesFor(train).map(carriage => {
 			if (carriage.nodeId) {
 				const node = this.#graph.getNode(carriage.nodeId);
 				if (!node)
-					throw new Error(`Unknown track node ${carriage.nodeId}`);
+					throw new Error(`Unknown track node ${carriage.nodeId} for ${train.id}`);
 				return { ...carriage, location: node.location };
 			}
 
@@ -288,7 +313,8 @@ export class TrainController {
 				nodeIds: [...train.route.nodeIds],
 				edgeIds: [...train.route.edgeIds],
 				length: train.route.length,
-				reservedEdgeIds: [...train.route.reservedEdgeIds]
+				reservedEdgeIds: [...train.route.reservedEdgeIds],
+				settlingDistance: train.route.settlingDistance
 			},
 			schedule: train.schedule && {
 				dwellRemaining: train.schedule.dwellRemaining,
@@ -335,6 +361,50 @@ export class TrainController {
 		return train;
 	}
 
+	#projectTrain(train, distance) {
+		const projected = {
+			...train,
+			route: train.route && {
+				...train.route,
+				edgeIds: [...train.route.edgeIds],
+				nodeIds: [...train.route.nodeIds],
+				reservedEdgeIds: new Set(train.route.reservedEdgeIds)
+			}
+		};
+		if (projected.stopped || projected.blockedReason || !projected.route || distance === 0)
+			return projected;
+
+		let remaining = distance;
+		while (remaining > 0 && projected.route) {
+			if (projected.edgeIndex === projected.route.edgeIds.length) {
+				const moved = Math.min(this.#tailDistance(projected) - projected.route.settlingDistance, remaining);
+				projected.route.settlingDistance += moved;
+				remaining -= moved;
+				if (projected.route.settlingDistance >= this.#tailDistance(projected)) {
+					projected.route = undefined;
+					projected.direction = 0;
+				}
+				break;
+			}
+			const edgeId = projected.route.edgeIds[projected.edgeIndex];
+			if (!this.#graph.isEdgeAvailable(edgeId))
+				break;
+			const edge = this.#graph.getEdge(edgeId);
+			const moved = Math.min(edge.length - projected.distanceOnEdge, remaining);
+			projected.distanceOnEdge += moved;
+			remaining -= moved;
+			if (projected.distanceOnEdge < edge.length)
+				break;
+
+			projected.nodeId = projected.route.nodeIds[projected.edgeIndex + 1];
+			projected.edgeIndex++;
+			projected.distanceOnEdge = 0;
+			if (projected.edgeIndex === projected.route.edgeIds.length)
+				projected.direction = 0;
+		}
+		return projected;
+	}
+
 	#normalizeRestoredTrain(record, ids) {
 		if (!record || typeof record.id !== "string" || record.id.length === 0 || ids.has(record.id))
 			throw new TypeError("Invalid train controller record");
@@ -348,10 +418,12 @@ export class TrainController {
 		if (!Number.isInteger(edgeIndex) || edgeIndex < 0 || !Number.isFinite(distanceOnEdge) || distanceOnEdge < 0)
 			throw new TypeError(`Invalid train position for ${record.id}`);
 		if (route) {
-			if (edgeIndex >= route.edgeIds.length || record.nodeId !== route.nodeIds[edgeIndex])
+			if (edgeIndex > route.edgeIds.length || record.nodeId !== route.nodeIds[edgeIndex])
 				throw new TypeError(`Invalid train route position for ${record.id}`);
-			if (distanceOnEdge >= this.#graph.getEdge(route.edgeIds[edgeIndex]).length)
+			if (edgeIndex < route.edgeIds.length && distanceOnEdge >= this.#graph.getEdge(route.edgeIds[edgeIndex]).length)
 				throw new TypeError(`Invalid train distance for ${record.id}`);
+			if (edgeIndex === route.edgeIds.length && distanceOnEdge !== 0)
+				throw new TypeError(`Invalid completed train distance for ${record.id}`);
 		}
 
 		const schedule = this.#normalizeRestoredSchedule(record.id, record.schedule);
@@ -370,6 +442,10 @@ export class TrainController {
 			stopped: !!record.stopped,
 			targetSpeed: Number.isFinite(record.targetSpeed) && record.targetSpeed > 0 ? record.targetSpeed : 0.1
 		};
+		if (route && route.settlingDistance > this.#tailDistance(restored))
+			throw new TypeError(`Invalid train settling distance for ${record.id}`);
+		if (route && edgeIndex < route.edgeIds.length && route.settlingDistance !== 0)
+			throw new TypeError(`Invalid active train settling distance for ${record.id}`);
 		restored.direction = this.#routeDirection(restored);
 		if (!restored.route || restored.stopped || restored.blockedReason)
 			restored.speed = 0;
@@ -397,11 +473,15 @@ export class TrainController {
 		if (!Array.isArray(reservedEdgeIds) || reservedEdgeIds.length === 0 || new Set(reservedEdgeIds).size !== reservedEdgeIds.length
 			|| reservedEdgeIds.some(edgeId => !edgeIds.includes(edgeId)))
 			throw new TypeError(`Invalid route reservation for ${record.id}`);
+		const settlingDistance = record.route.settlingDistance ?? 0;
+		if (!Number.isFinite(settlingDistance) || settlingDistance < 0)
+			throw new TypeError(`Invalid train settling distance for ${record.id}`);
 		return {
 			nodeIds: [...nodeIds],
 			edgeIds: [...edgeIds],
 			length: edgeIds.reduce((total, edgeId) => total + this.#graph.getEdge(edgeId).length, 0),
-			reservedEdgeIds: new Set(reservedEdgeIds)
+			reservedEdgeIds: new Set(reservedEdgeIds),
+			settlingDistance
 		};
 	}
 
@@ -445,7 +525,8 @@ export class TrainController {
 			return false;
 		train.route = {
 			...route,
-			reservedEdgeIds: new Set(route.edgeIds)
+			reservedEdgeIds: new Set(route.edgeIds),
+			settlingDistance: 0
 		};
 		train.edgeIndex = 0;
 		train.distanceOnEdge = 0;
@@ -454,7 +535,7 @@ export class TrainController {
 	}
 
 	#routeDirection(train) {
-		if (!train.route)
+		if (!train.route || train.edgeIndex >= train.route.edgeIds.length)
 			return 0;
 		const edge = this.#graph.getEdge(train.route.edgeIds[train.edgeIndex]);
 		return edge.leftId === train.route.nodeIds[train.edgeIndex] ? 1 : -1;
@@ -464,6 +545,7 @@ export class TrainController {
 		let leadDistance = train.distanceOnEdge;
 		for (let index = 0; index < train.edgeIndex; index++)
 			leadDistance += this.#graph.getEdge(train.route.edgeIds[index]).length;
+		leadDistance += train.route.settlingDistance;
 		const tailDistance = leadDistance - (train.carriageCount - 1) * train.carriageSpacing;
 		if (tailDistance < 0)
 			return;
@@ -476,5 +558,17 @@ export class TrainController {
 			if (train.route.reservedEdgeIds.delete(edgeId))
 				this.#graph.releaseEdge(train.id, edgeId);
 		}
+	}
+
+	#tailDistance(train) {
+		return (train.carriageCount - 1) * train.carriageSpacing;
+	}
+
+	#completeRoute(train) {
+		this.#graph.releaseReservations(train.id);
+		train.route = undefined;
+		train.direction = 0;
+		if (train.schedule)
+			train.schedule.dwellRemaining = train.schedule.dwellTicks;
 	}
 }

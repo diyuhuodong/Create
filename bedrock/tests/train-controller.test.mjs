@@ -139,6 +139,21 @@ test("TrainController exposes continuous position within a reserved edge", () =>
 	});
 });
 
+test("TrainController projects carriage positions without advancing authoritative state", () => {
+	const { controller } = createController();
+	controller.dispatch("train_one", "b");
+	assert.deepEqual(controller.getProjectedCarriagePlacements("train_one", 1), [{
+		edgeLength: 4,
+		fromNodeId: "a",
+		index: 0,
+		progress: 0.25,
+		toNodeId: "b",
+		location: { x: 0, y: 0, z: 0 }
+	}]);
+	assert.equal(controller.getTrain("train_one").distanceOnEdge, 0);
+	assert.throws(() => controller.getProjectedCarriagePlacements("train_one", -1), /non-negative/);
+});
+
 test("TrainController clears its active edge only after reaching the destination", () => {
 	const { controller } = createController();
 	controller.dispatch("train_one", "b");
@@ -222,6 +237,46 @@ test("TrainController keeps an edge reserved until the last carriage clears it",
 	assert.equal(graph.tryReserve("train_two", ["a<->b"]), false);
 	controller.tick("train_one", 2);
 	assert.equal(graph.tryReserve("train_two", ["a<->b"]), true);
+});
+
+test("TrainController keeps the destination edge reserved while the trailing carriage settles", () => {
+	const { controller, graph } = createController({ registerTrain: false });
+	controller.registerTrain({ carriageCount: 2, carriageSpacing: 2, id: "train_one", nodeId: "a" });
+	controller.dispatch("train_one", "c");
+	controller.tick("train_one", 8);
+	assert.deepEqual(controller.getTrain("train_one"), {
+		id: "train_one",
+		nodeId: "c",
+		edgeIndex: 2,
+		distanceOnEdge: 0,
+		destinationId: "c",
+		settling: true
+	});
+	assert.equal(graph.tryReserve("train_two", ["b<->c"]), false);
+	assert.deepEqual(controller.getCarriages("train_one")[1], {
+		edgeLength: 4,
+		fromNodeId: "b",
+		index: 1,
+		progress: 0.5,
+		toNodeId: "c"
+	});
+	controller.tick("train_one", 2);
+	assert.equal(controller.getTrain("train_one").destinationId, undefined);
+	assert.equal(graph.tryReserve("train_two", ["b<->c"]), true);
+});
+
+test("TrainController restores a settling formation without releasing its final edge", () => {
+	const source = createController({ registerTrain: false });
+	source.controller.registerTrain({ carriageCount: 2, carriageSpacing: 2, id: "train_one", nodeId: "a" });
+	source.controller.dispatch("train_one", "c");
+	source.controller.tick("train_one", 8);
+
+	const restored = createController({ registerTrain: false });
+	restored.controller.restore(source.controller.snapshot());
+	assert.equal(restored.controller.getTrain("train_one").settling, true);
+	assert.equal(restored.graph.tryReserve("train_two", ["b<->c"]), false);
+	restored.controller.tick("train_one", 2);
+	assert.equal(restored.graph.tryReserve("train_two", ["b<->c"]), true);
 });
 
 test("TrainController restores only the route edges still occupied by its formation", () => {

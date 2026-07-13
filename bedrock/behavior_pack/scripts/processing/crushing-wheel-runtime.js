@@ -1,12 +1,14 @@
 import { ItemStack, system, world } from "@minecraft/server";
 
 import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
+import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { CRUSHING_RECIPES } from "./generated/crushing-recipes.js";
 import { CrushingWheelMachine } from "./crushing-wheel-machine.js";
 import { registerMovingBlockDataAdapter } from "../contraptions/moving-block-data.js";
 
 const CRUSHING_WHEEL_BLOCK = "createbedrock:crushing_wheel";
 const PERSISTENCE_KEY = "createbedrock:crushing_wheels_v1";
+const PERSISTENCE_SCHEMA_VERSION = 1;
 const CRUSHING_WHEEL_TASK_GROUP = "crushing_wheels";
 const CRUSHING_WHEEL_TASK_BUDGET = 4;
 const wheels = new Map();
@@ -16,11 +18,11 @@ function keyFor(dimensionId, location) {
 }
 
 function persist() {
-	world.setDynamicProperty(PERSISTENCE_KEY, JSON.stringify([...wheels.values()].map(wheel => ({
+	world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, [...wheels.values()].map(wheel => ({
 		dimensionId: wheel.dimensionId,
 		location: wheel.location,
 		processor: wheel.machine.snapshot()
-	}))));
+}))));
 }
 
 function ensureWheel(block) {
@@ -65,16 +67,26 @@ function restore() {
 	if (typeof serialized !== "string")
 		return;
 	try {
-		for (const entry of JSON.parse(serialized)) {
-			if (!entry?.dimensionId || !entry?.location)
-				continue;
-			const machine = new CrushingWheelMachine(CRUSHING_RECIPES);
-			machine.restore(entry.processor);
-			wheels.set(keyFor(entry.dimensionId, entry.location), {
-				dimensionId: entry.dimensionId,
-				location: entry.location,
-				machine
-			});
+		const records = deserializeVersionedState(serialized, {
+			schemaVersion: PERSISTENCE_SCHEMA_VERSION,
+			upgrades: { 0: legacy => legacy }
+		});
+		if (!Array.isArray(records))
+			throw new TypeError("Crushing wheel records must be an array");
+		for (const entry of records) {
+			try {
+				if (!entry?.dimensionId || !entry?.location)
+					throw new TypeError("missing record location");
+				const machine = new CrushingWheelMachine(CRUSHING_RECIPES);
+				machine.restore(entry.processor);
+				wheels.set(keyFor(entry.dimensionId, entry.location), {
+					dimensionId: entry.dimensionId,
+					location: entry.location,
+					machine
+				});
+			} catch (error) {
+				console.warn(`[Create Bedrock] Ignored invalid crushing wheel ${entry?.dimensionId ?? "unknown"}: ${error}`);
+			}
 		}
 	} catch (error) {
 		console.warn(`[Create Bedrock] Ignored invalid crushing wheel state: ${error}`);

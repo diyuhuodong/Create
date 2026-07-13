@@ -6,6 +6,31 @@ const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(toolDirectory, "..");
 const repositoryRoot = resolve(bedrockRoot, "..");
 
+// These entries have an executable Stage-2 prototype.  They deliberately stay
+// below Realm acceptance until the Windows, Realm, and PS checklist succeeds.
+const IMPLEMENTATION_IN_PROGRESS = new Set([
+	"andesite_casing",
+	"brass_casing",
+	"belt_connector",
+	"clutch",
+	"cogwheel",
+	"copper_casing",
+	"crushing_wheel",
+	"encased_chain_drive",
+	"gearbox",
+	"hand_crank",
+	"industrial_iron_block",
+	"large_cogwheel",
+	"mechanical_bearing",
+	"mechanical_press",
+	"millstone",
+	"shaft",
+	"track",
+	"track_station",
+	"water_wheel",
+	"zinc_block"
+]);
+
 const catalogs = [
 	{
 		kind: "block",
@@ -33,12 +58,13 @@ const entries = [];
 for (const catalog of catalogs) {
 	const content = await readFile(resolve(repositoryRoot, catalog.source), "utf8");
 	for (const match of content.matchAll(catalog.pattern)) {
+		const identifier = match[1];
 		entries.push({
-			javaIdentifier: `create:${match[1]}`,
+			javaIdentifier: `create:${identifier}`,
 			bedrockIdentifier: `createbedrock:${match[1]}`,
 			kind: catalog.kind,
 			source: catalog.source,
-			status: "specification_pending"
+			status: IMPLEMENTATION_IN_PROGRESS.has(identifier) ? "implementation_in_progress" : "specification_pending"
 		});
 	}
 }

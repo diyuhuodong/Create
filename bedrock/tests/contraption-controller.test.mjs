@@ -100,6 +100,18 @@ test("ContraptionController restores removed blocks when entity creation fails",
 	assert.equal(world.blocks.get("1:64:0").data.progress, 7);
 });
 
+test("ContraptionController rejects a concurrent second assembly without touching the active snapshot", () => {
+	const world = createWorld();
+	const controller = new ContraptionController(world);
+	const locations = [{ x: 0, y: 64, z: 0 }, { x: 1, y: 64, z: 0 }];
+	controller.assemble({ id: "bearing-1", anchor: locations[0], locations });
+
+	assert.throws(() => controller.assemble({ id: "bearing-1", anchor: locations[0], locations }), /ids must be unique/);
+	assert.equal(world.blocks.size, 0);
+	assert.deepEqual([...world.entities], ["entity-1"]);
+	assert.equal(controller.getActive("bearing-1").snapshot.blocks.length, 2);
+});
+
 test("ContraptionController leaves a contraption assembled when its destination is blocked", () => {
 	const world = createWorld();
 	const controller = new ContraptionController(world);

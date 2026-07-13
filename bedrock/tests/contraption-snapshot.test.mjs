@@ -7,6 +7,7 @@ import {
 	normalizeContraptionSnapshot,
 	rotateSnapshotY
 } from "../behavior_pack/scripts/contraptions/contraption-snapshot.js";
+import { MOVABLE_BLOCK_TYPES } from "../behavior_pack/scripts/contraptions/movable-blocks.js";
 
 test("Contraption snapshots preserve connected blocks and persistent data", () => {
 	const snapshot = createContraptionSnapshot({
@@ -35,6 +36,18 @@ test("Contraption snapshots reject disconnected assemblies", () => {
 	}), /face-connected/);
 });
 
+test("Contraption snapshots reject blocks that have no moving-part adapter", () => {
+	assert.throws(() => createContraptionSnapshot({
+		anchor: { x: 0, y: 0, z: 0 },
+		blocks: [{ location: { x: 0, y: 0, z: 0 }, typeId: "minecraft:chest" }]
+	}), /Unsupported contraption block type/);
+	assert.throws(() => normalizeContraptionSnapshot({
+		schemaVersion: 1,
+		anchor: { x: 0, y: 0, z: 0 },
+		blocks: [{ relative: { x: 0, y: 0, z: 0 }, typeId: "minecraft:chest" }]
+	}), /Unsupported contraption block type/);
+});
+
 test("Contraption snapshots enforce the shared sixteen-block prototype cap", () => {
 	const blocks = Array.from({ length: 17 }, (_, x) => ({
 		location: { x, y: 0, z: 0 },
@@ -54,6 +67,18 @@ test("Contraption snapshots enforce the shared sixteen-block prototype cap", () 
 		anchor: { x: 0, y: 0, z: 0 },
 		blocks: blocks.map(block => ({ relative: { ...block.location }, typeId: block.typeId }))
 	}), /16 block prototype limit/);
+});
+
+test("Contraption snapshots accept one connected copy of every stage-2 movable type", () => {
+	const snapshot = createContraptionSnapshot({
+		anchor: { x: 0, y: 64, z: 0 },
+		blocks: [...MOVABLE_BLOCK_TYPES].map((typeId, x) => ({
+			location: { x, y: 64, z: 0 },
+			typeId
+		}))
+	});
+	assert.equal(snapshot.blocks.length, 16);
+	assert.deepEqual(new Set(snapshot.blocks.map(block => block.typeId)), MOVABLE_BLOCK_TYPES);
 });
 
 test("Contraption snapshots rotate around their anchor in quarter turns", () => {

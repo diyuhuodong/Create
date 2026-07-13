@@ -17,6 +17,7 @@ let waterWheelTicks = 0;
 
 function persist() {
 	world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, kineticWorld.snapshot()));
+	kineticWorld.consumePersistenceDirty();
 }
 
 export function persistKineticWorld() {
@@ -61,7 +62,8 @@ function refreshWaterWheel(wheel) {
 			break;
 		}
 	}
-	kineticWorld.setGeneratedSpeed(wheel.dimensionId, wheel.location, hasWater ? 8 : 0);
+	if (kineticWorld.setGeneratedSpeed(wheel.dimensionId, wheel.location, hasWater ? 8 : 0))
+		persist();
 }
 
 export function registerKinetics() {
@@ -116,8 +118,10 @@ export function registerKinetics() {
 			return;
 		}
 
-		if (kineticWorld.activateHandCrank(event.block))
+		if (kineticWorld.activateHandCrank(event.block)) {
+			persist();
 			console.warn(`[Create Bedrock] Hand crank activated at ${event.block.location.x}, ${event.block.location.y}, ${event.block.location.z}`);
+		}
 	});
 
 	registerTickHandler(() => {
@@ -131,6 +135,8 @@ export function registerKinetics() {
 		}
 		for (const dimensionId of kineticWorld.advanceTick())
 			enqueueUniqueKernelTask(`kinetics:${dimensionId}`, () => kineticWorld.resolveDirtyDimension(dimensionId), "kinetics");
+		if (kineticWorld.consumePersistenceDirty())
+			persist();
 	});
 }
 

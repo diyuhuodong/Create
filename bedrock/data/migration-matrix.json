@@ -50,7 +50,7 @@
 			"bedrockIdentifier": "createbedrock:andesite_casing",
 			"kind": "block",
 			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:andesite_door",
@@ -176,7 +176,7 @@
 			"bedrockIdentifier": "createbedrock:belt_connector",
 			"kind": "item",
 			"source": "src/main/java/com/simibubi/create/AllItems.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:blaze_burner",
@@ -239,7 +239,7 @@
 			"bedrockIdentifier": "createbedrock:brass_casing",
 			"kind": "block",
 			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:brass_door",
@@ -477,21 +477,21 @@
 			"bedrockIdentifier": "createbedrock:clutch",
 			"kind": "block",
 			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:clutch",
 			"bedrockIdentifier": "createbedrock:clutch",
 			"kind": "block_entity",
 			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:cogwheel",
 			"bedrockIdentifier": "createbedrock:cogwheel",
 			"kind": "block",
 			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:content_observer",
@@ -568,7 +568,7 @@
 			"bedrockIdentifier": "createbedrock:copper_casing",
 			"kind": "block",
 			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:copper_diving_boots",
@@ -722,14 +722,14 @@
 			"bedrockIdentifier": "createbedrock:crushing_wheel",
 			"kind": "block",
 			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:crushing_wheel",
 			"bedrockIdentifier": "createbedrock:crushing_wheel",
 			"kind": "block_entity",
 			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:crushing_wheel_controller",
@@ -890,7 +890,7 @@
 			"bedrockIdentifier": "createbedrock:encased_chain_drive",
 			"kind": "block",
 			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:encased_cogwheel",
@@ -1128,14 +1128,14 @@
 			"bedrockIdentifier": "createbedrock:gearbox",
 			"kind": "block",
 			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:gearbox",
 			"bedrockIdentifier": "createbedrock:gearbox",
 			"kind": "block_entity",
 			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:gearshift",
@@ -1177,14 +1177,14 @@
 			"bedrockIdentifier": "createbedrock:hand_crank",
 			"kind": "block",
 			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:hand_crank",
 			"bedrockIdentifier": "createbedrock:hand_crank",
 			"kind": "block_entity",
 			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:handheld_worldshaper",
@@ -1233,7 +1233,7 @@
 			"bedrockIdentifier": "createbedrock:industrial_iron_block",
 			"kind": "block",
 			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:item_drain",
@@ -1289,7 +1289,7 @@
 			"bedrockIdentifier": "createbedrock:large_cogwheel",
 			"kind": "block",
 			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:large_water_wheel",
@@ -1359,14 +1359,14 @@
 			"bedrockIdentifier": "createbedrock:mechanical_bearing",
 			"kind": "block",
 			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:mechanical_bearing",
 			"bedrockIdentifier": "createbedrock:mechanical_bearing",
 			"kind": "block_entity",
 			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:mechanical_crafter",
@@ -1443,14 +1443,14 @@
 			"bedrockIdentifier": "createbedrock:mechanical_press",
 			"kind": "block",
 			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:mechanical_press",
 			"bedrockIdentifier": "createbedrock:mechanical_press",
 			"kind": "block_entity",
 			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:mechanical_pump",
@@ -1513,14 +1513,14 @@
 			"bedrockIdentifier": "createbedrock:millstone",
 			"kind": "block",
 			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:millstone",
 			"bedrockIdentifier": "createbedrock:millstone",
 			"kind": "block_entity",
 			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:minecart_anchor",
@@ -2094,7 +2094,7 @@
 			"bedrockIdentifier": "createbedrock:shaft",
 			"kind": "block",
 			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:shopping_list",
@@ -2339,14 +2339,14 @@
 			"bedrockIdentifier": "createbedrock:track",
 			"kind": "block",
 			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:track",
 			"bedrockIdentifier": "createbedrock:track",
 			"kind": "block_entity",
 			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:track_observer",
@@ -2381,14 +2381,14 @@
 			"bedrockIdentifier": "createbedrock:track_station",
 			"kind": "block",
 			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:track_station",
 			"bedrockIdentifier": "createbedrock:track_station",
 			"kind": "block_entity",
 			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:train_door",
@@ -2451,14 +2451,14 @@
 			"bedrockIdentifier": "createbedrock:water_wheel",
 			"kind": "block",
 			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:water_wheel",
 			"bedrockIdentifier": "createbedrock:water_wheel",
 			"kind": "block_entity",
 			"source": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:water_wheel_structure",
@@ -2528,7 +2528,7 @@
 			"bedrockIdentifier": "createbedrock:zinc_block",
 			"kind": "block",
 			"source": "src/main/java/com/simibubi/create/AllBlocks.java",
-			"status": "specification_pending"
+			"status": "implementation_in_progress"
 		},
 		{
 			"javaIdentifier": "create:zinc_ore",

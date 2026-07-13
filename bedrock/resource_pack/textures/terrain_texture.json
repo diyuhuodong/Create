@@ -8,6 +8,12 @@
     "createbedrock_axis_top": {
       "textures": "textures/create_java/block/axis_top"
     },
+    "createbedrock_andesite_casing": {
+      "textures": "textures/create_java/block/andesite_casing"
+    },
+    "createbedrock_brass_casing": {
+      "textures": "textures/create_java/block/brass_casing"
+    },
     "createbedrock_cogwheel": {
       "textures": "textures/create_java/block/cogwheel"
     },
@@ -19,6 +25,9 @@
     },
     "createbedrock_clutch_on": {
       "textures": "textures/create_java/block/clutch_on"
+    },
+    "createbedrock_copper_casing": {
+      "textures": "textures/create_java/block/copper_casing"
     },
     "createbedrock_encased_chain_drive": {
       "textures": "textures/create_java/block/encased_chain_drive"
@@ -37,6 +46,9 @@
     },
     "createbedrock_gearbox_top": {
       "textures": "textures/create_java/block/gearbox_top"
+    },
+    "createbedrock_industrial_iron_block": {
+      "textures": "textures/create_java/block/industrial_iron_block"
     },
     "createbedrock_millstone": {
       "textures": "textures/create_java/block/millstone"
@@ -58,6 +70,9 @@
     },
     "createbedrock_station": {
       "textures": "textures/create_java/block/station"
+    },
+    "createbedrock_zinc_block": {
+      "textures": "textures/create_java/block/zinc_block"
     }
   }
 }

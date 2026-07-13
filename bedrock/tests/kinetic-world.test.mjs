@@ -41,6 +41,43 @@ test("KineticWorld tracks placement, hand-crank activation, and overload", () =>
 	assert.equal(network.nodeStates.at(-1).speed, 16);
 });
 
+test("KineticWorld recovers a stalled consumer line after its excess load is removed", () => {
+	const world = new KineticWorld();
+	const crank = block("createbedrock:hand_crank", 0, 64, 0);
+	world.trackPlacedBlock(crank);
+	for (let y = 65; y <= 69; y++)
+		world.trackPlacedBlock(block("createbedrock:millstone", 0, y, 0));
+	world.activateHandCrank(crank, 3);
+	world.tick();
+	assert.equal(world.latestResolved[0].overloaded, true);
+	assert.equal(world.speedAt("minecraft:overworld", { x: 0, y: 65, z: 0 }), 0);
+
+	world.trackBrokenBlock("minecraft:overworld", { x: 0, y: 69, z: 0 });
+	world.tick();
+	assert.equal(world.latestResolved[0].overloaded, false);
+	assert.equal(world.speedAt("minecraft:overworld", { x: 0, y: 65, z: 0 }), 16);
+});
+
+test("KineticWorld safely stalls conflicting continuous and hand-crank sources", () => {
+	const world = new KineticWorld();
+	const wheel = block("createbedrock:water_wheel", 0, 64, 0);
+	const crank = block("createbedrock:hand_crank", 0, 65, 0);
+	const shaft = block("createbedrock:shaft", 0, 66, 0);
+	world.trackPlacedBlock(wheel);
+	world.trackPlacedBlock(crank);
+	world.trackPlacedBlock(shaft);
+	world.setGeneratedSpeed("minecraft:overworld", wheel.location, 8);
+	world.activateHandCrank(crank, 3);
+	world.tick();
+	assert.equal(world.latestResolved[0].hasConflict, true);
+	assert.equal(world.speedAt("minecraft:overworld", shaft.location), 0);
+
+	world.setGeneratedSpeed("minecraft:overworld", wheel.location, 0);
+	world.tick();
+	assert.equal(world.latestResolved[0].hasConflict, false);
+	assert.equal(world.speedAt("minecraft:overworld", shaft.location), 16);
+});
+
 test("KineticWorld propagates and persists generated source speed", () => {
 	const world = new KineticWorld();
 	const wheel = block("createbedrock:water_wheel", 0, 64, 0);
@@ -58,6 +95,48 @@ test("KineticWorld propagates and persists generated source speed", () => {
 	assert.equal(restored.setGeneratedSpeed("minecraft:overworld", wheel.location, 0), true);
 	restored.tick();
 	assert.equal(restored.speedAt("minecraft:overworld", shaft.location), 0);
+});
+
+test("KineticWorld resumes an active hand crank after a restart", () => {
+	const source = new KineticWorld();
+	const crank = block("createbedrock:hand_crank", 0, 64, 0);
+	const shaft = block("createbedrock:shaft", 0, 65, 0);
+	source.trackPlacedBlock(crank);
+	source.trackPlacedBlock(shaft);
+	source.activateHandCrank(crank, 3);
+	source.tick();
+	assert.equal(source.speedAt("minecraft:overworld", shaft.location), 16);
+
+	const restored = new KineticWorld();
+	restored.restore(source.snapshot());
+	restored.tick();
+	assert.equal(restored.speedAt("minecraft:overworld", shaft.location), 16);
+	restored.tick();
+	assert.equal(restored.speedAt("minecraft:overworld", shaft.location), 0);
+});
+
+test("KineticWorld rejects invalid hand-crank durations without corrupting source state", () => {
+	const world = new KineticWorld();
+	const crank = block("createbedrock:hand_crank", 0, 64, 0);
+	world.trackPlacedBlock(crank);
+	assert.throws(() => world.activateHandCrank(crank, 0), /positive integer/);
+	assert.throws(() => world.activateHandCrank(crank, Number.NaN), /positive integer/);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", crank.location), 0);
+});
+
+test("KineticWorld marks each hand-crank state transition for persistence", () => {
+	const world = new KineticWorld();
+	const crank = block("createbedrock:hand_crank", 0, 64, 0);
+	world.trackPlacedBlock(crank);
+	assert.equal(world.consumePersistenceDirty(), true);
+	assert.equal(world.consumePersistenceDirty(), false);
+	world.activateHandCrank(crank, 2);
+	assert.equal(world.consumePersistenceDirty(), true);
+	world.advanceTick();
+	assert.equal(world.consumePersistenceDirty(), true);
+	world.advanceTick();
+	assert.equal(world.consumePersistenceDirty(), true);
 });
 
 test("KineticWorld removes a broken block from the next resolution", () => {

@@ -1,0 +1,16 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": { "identifier": "createbedrock:brass_casing" },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:item_visual": {
+        "geometry": { "identifier": "minecraft:geometry.full_block" },
+        "material_instances": { "*": { "texture": "createbedrock_brass_casing", "render_method": "opaque" } }
+      },
+      "minecraft:material_instances": { "*": { "texture": "createbedrock_brass_casing", "render_method": "opaque" } }
+    }
+  }
+}

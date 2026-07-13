@@ -11,7 +11,12 @@ export const CONTRAPTION_PART_TYPES = Object.freeze({
 	"createbedrock:water_wheel": "createbedrock:contraption_part_water_wheel",
 	"createbedrock:millstone": "createbedrock:contraption_part_millstone",
 	"createbedrock:mechanical_press": "createbedrock:contraption_part_mechanical_press",
-	"createbedrock:crushing_wheel": "createbedrock:contraption_part_crushing_wheel"
+	"createbedrock:crushing_wheel": "createbedrock:contraption_part_crushing_wheel",
+	"createbedrock:andesite_casing": "createbedrock:contraption_part_andesite_casing",
+	"createbedrock:brass_casing": "createbedrock:contraption_part_brass_casing",
+	"createbedrock:copper_casing": "createbedrock:contraption_part_copper_casing",
+	"createbedrock:industrial_iron_block": "createbedrock:contraption_part_industrial_iron_block",
+	"createbedrock:zinc_block": "createbedrock:contraption_part_zinc_block"
 });
 
 export const ALL_CONTRAPTION_PART_TYPES = [LEGACY_CONTRAPTION_PART, ...new Set(Object.values(CONTRAPTION_PART_TYPES))];

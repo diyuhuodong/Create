@@ -3,10 +3,11 @@ import { system, world } from "@minecraft/server";
 import { collectConnectedBlocks } from "./assembly-collector.js";
 import { BedrockContraptionWorldPort } from "./bedrock-world-port.js";
 import { ContraptionController } from "./contraption-controller.js";
-import { isMovableBlockType, MAX_CONTRAPTION_BLOCKS } from "./movable-blocks.js";
+import { isMovableBlockType, MAX_CONTRAPTION_BLOCKS, STATELESS_MOVABLE_BLOCK_TYPES } from "./movable-blocks.js";
 import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { persistKineticWorld } from "../kinetics/kinetic-runtime.js";
+import { registerStatelessMovingBlockDataAdapter } from "./moving-block-data.js";
 
 const BEARING_BLOCK = "createbedrock:mechanical_bearing";
 const CONTRAPTION_TASK_BUDGET = 4;
@@ -169,6 +170,8 @@ function processBearing(bearingKey) {
 
 export function registerContraptions(getKineticWorld) {
 	kineticWorld = getKineticWorld();
+	for (const typeId of STATELESS_MOVABLE_BLOCK_TYPES)
+		registerStatelessMovingBlockDataAdapter(typeId);
 	registerKernelTaskGroup("contraptions", CONTRAPTION_TASK_BUDGET);
 	world.afterEvents.playerInteractWithBlock.subscribe(event => {
 		if (event.block.typeId !== BEARING_BLOCK)

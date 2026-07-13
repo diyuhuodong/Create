@@ -154,6 +154,7 @@ export class KineticWorld {
 	#connections = new Map();
 	#beltLinks = new Map();
 	#dirtyDimensions = new Set();
+	#persistenceDirty = false;
 	#resolvedByDimension = new Map();
 
 	trackPlacedBlock(block) {
@@ -176,6 +177,7 @@ export class KineticWorld {
 		});
 		this.#refreshConnectionsAt(block.dimension.id, block.location);
 		this.#markDirty(block.dimension.id);
+		this.#persistenceDirty = true;
 		return true;
 	}
 
@@ -191,8 +193,10 @@ export class KineticWorld {
 			this.#beltLinks.delete(linkId);
 			removedLinks = true;
 		}
-		if (deleted || removedLinks)
+		if (deleted || removedLinks) {
 			this.#markDirty(dimensionId);
+			this.#persistenceDirty = true;
+		}
 		return deleted || removedLinks;
 	}
 
@@ -203,6 +207,9 @@ export class KineticWorld {
 				dimensionId: node.dimensionId,
 				...(node.configuration.kind === "clutch" ? { enabled: node.enabled } : {}),
 				...(node.configuration.kind === "generated_source" ? { generatedSpeed: node.generatedSpeed } : {}),
+				...(node.configuration.kind === "source" && node.turnTicksRemaining > 0
+					? { turnTicksRemaining: node.turnTicksRemaining }
+					: {}),
 				location: node.location,
 				typeId: node.typeId
 			}))
@@ -243,7 +250,11 @@ export class KineticWorld {
 				id,
 				generatedSpeed: configuration.kind === "generated_source" && Number.isFinite(entry.generatedSpeed) ? entry.generatedSpeed : 0,
 				location: { ...location },
-				turnTicksRemaining: 0,
+				turnTicksRemaining: configuration.kind === "source"
+					&& Number.isInteger(entry.turnTicksRemaining)
+					&& entry.turnTicksRemaining > 0
+					? entry.turnTicksRemaining
+					: 0,
 				typeId: entry.typeId
 			});
 		}
@@ -258,6 +269,7 @@ export class KineticWorld {
 		this.#rebuildConnections();
 		for (const node of this.#nodes.values())
 			this.#markDirty(node.dimensionId);
+		this.#persistenceDirty = false;
 	}
 
 	getGeneratedSourceNodes(typeId) {
@@ -276,6 +288,7 @@ export class KineticWorld {
 			return false;
 		node.generatedSpeed = speed;
 		this.#markDirty(dimensionId);
+		this.#persistenceDirty = true;
 		return true;
 	}
 
@@ -304,6 +317,7 @@ export class KineticWorld {
 			rightId
 		});
 		this.#markDirty(dimensionId);
+		this.#persistenceDirty = true;
 		return { ok: true };
 	}
 
@@ -344,13 +358,22 @@ export class KineticWorld {
 	}
 
 	activateHandCrank(block, duration = 20) {
+		if (!Number.isInteger(duration) || duration <= 0)
+			throw new RangeError("Hand-crank duration must be a positive integer tick count");
 		const node = this.#nodes.get(block.dimension.id, block.location);
 		if (!node || node.typeId !== "createbedrock:hand_crank")
 			return false;
 
 		node.turnTicksRemaining = Math.max(node.turnTicksRemaining, duration);
 		this.#markDirty(block.dimension.id);
+		this.#persistenceDirty = true;
 		return true;
+	}
+
+	consumePersistenceDirty() {
+		const dirty = this.#persistenceDirty;
+		this.#persistenceDirty = false;
+		return dirty;
 	}
 
 	tick() {
@@ -359,14 +382,18 @@ export class KineticWorld {
 	}
 
 	advanceTick() {
+		let advancedSource = false;
 		for (const node of this.#nodes.values()) {
 			if (node.turnTicksRemaining <= 0)
 				continue;
 
 			node.turnTicksRemaining--;
+			advancedSource = true;
 			if (node.turnTicksRemaining === 0)
 				this.#markDirty(node.dimensionId);
 		}
+		if (advancedSource)
+			this.#persistenceDirty = true;
 
 		return [...this.#dirtyDimensions];
 	}

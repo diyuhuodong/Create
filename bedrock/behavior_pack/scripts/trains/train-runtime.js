@@ -294,7 +294,7 @@ function toggleStationStop(player, dimensionId, stationNodeId) {
 	}
 }
 
-function updateTrainCollision(dimensionId, id, controller, carriages) {
+function updateTrainCollision(dimensionId, id, controller, carriages, ignoredEntityIds) {
 	const dimension = world.getDimension(dimensionId);
 	const collision = findTrainCollision(carriages, location => {
 		try {
@@ -302,20 +302,32 @@ function updateTrainCollision(dimensionId, id, controller, carriages) {
 		} catch {
 			return { typeId: "createbedrock:unavailable_collision_space" };
 		}
+	}, {
+		ignoredEntityIds,
+		readEntities(location) {
+			const options = { location: markerLocation(location), maxDistance: 0.75 };
+			try {
+				return [...dimension.getEntities(options), ...dimension.getPlayers(options)];
+			} catch {
+				return [{ id: "unavailable_collision_entity" }];
+			}
+		}
 	});
 	const motion = controller.getMotionState(id);
 	if (collision) {
-		const reason = `${collision.reason}:${collision.location.x}:${collision.location.y}:${collision.location.z}`;
+		const suffix = collision.entityId ?? `${collision.location.x}:${collision.location.y}:${collision.location.z}`;
+		const reason = `${collision.reason}:${suffix}`;
 		if (controller.setBlocked(id, reason)) {
 			console.warn(`[Create Bedrock] Train ${id} frozen: ${reason}`);
 			persist();
 		}
-		return;
+		return true;
 	}
-	if (motion.blockedReason?.startsWith("world_blocked:") && controller.setBlocked(id)) {
+	if ((motion.blockedReason?.startsWith("world_blocked:") || motion.blockedReason?.startsWith("entity_blocked:")) && controller.setBlocked(id)) {
 		console.warn(`[Create Bedrock] Train ${id} collision cleared`);
 		persist();
 	}
+	return false;
 }
 
 function processTrain(id) {
@@ -324,9 +336,16 @@ function processTrain(id) {
 		return;
 
 	const controller = controllerFor(train.dimensionId);
-	controller.tick(id);
+	// A zero-distance pass advances station schedules without moving.  The
+	// following projection then checks the exact formation before committing
+	// the tick, so collision state never advances into an occupied space.
+	controller.tick(id, 0);
+	const planned = controller.getProjectedCarriagePlacements(id);
+	const routeState = controller.getTrain(id);
+	if ((routeState.edgeId || routeState.settling)
+		&& !updateTrainCollision(train.dimensionId, id, controller, planned, new Set(train.entityIds)))
+		controller.tick(id);
 	const carriages = controller.getCarriagePlacements(id);
-	updateTrainCollision(train.dimensionId, id, controller, carriages);
 	train.entityIds = carriages.map(carriage => {
 		let entity = world.getEntity(train.entityIds?.[carriage.index]);
 		if (!entity?.isValid) {

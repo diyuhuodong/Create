@@ -6,6 +6,22 @@ export function registerMovingBlockDataAdapter(typeId, adapter) {
 	adapters.set(typeId, adapter);
 }
 
+export function registerStatelessMovingBlockDataAdapter(typeId) {
+	registerMovingBlockDataAdapter(typeId, {
+		capture() {
+			return undefined;
+		},
+		detach() {
+			return undefined;
+		},
+		restore() {}
+	});
+}
+
+export function hasMovingBlockDataAdapter(typeId) {
+	return adapters.has(typeId);
+}
+
 export function captureMovingBlockData(typeId, dimensionId, location) {
 	return adapters.get(typeId)?.capture(dimensionId, location);
 }

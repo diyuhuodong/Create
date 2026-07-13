@@ -1,11 +1,13 @@
 import { ItemStack, system, world } from "@minecraft/server";
 
 import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
+import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { MILLING_RECIPES } from "./generated/milling-recipes.js";
 import { MillstoneMachine } from "./millstone-machine.js";
 import { registerMovingBlockDataAdapter } from "../contraptions/moving-block-data.js";
 
 const PERSISTENCE_KEY = "createbedrock:millstones_v1";
+const PERSISTENCE_SCHEMA_VERSION = 1;
 const MILLSTONE_TASK_GROUP = "millstones";
 const MILLSTONE_TASK_BUDGET = 4;
 const REGISTERED_CREATE_ITEMS = new Set(["createbedrock:wheat_flour"]);
@@ -23,7 +25,7 @@ function persist() {
 		location: mill.location,
 		processor: mill.machine.snapshot()
 	}));
-	world.setDynamicProperty(PERSISTENCE_KEY, JSON.stringify(snapshot));
+	world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, snapshot));
 }
 
 function restore() {
@@ -32,16 +34,26 @@ function restore() {
 		return;
 
 	try {
-		for (const entry of JSON.parse(serialized)) {
-			if (!entry?.dimensionId || !entry?.location)
-				continue;
-			const machine = new MillstoneMachine(ACTIVE_MILLING_RECIPES);
-			machine.restore(entry.processor);
-			mills.set(keyFor(entry.dimensionId, entry.location), {
-				dimensionId: entry.dimensionId,
-				location: entry.location,
-				machine
-			});
+		const records = deserializeVersionedState(serialized, {
+			schemaVersion: PERSISTENCE_SCHEMA_VERSION,
+			upgrades: { 0: legacy => legacy }
+		});
+		if (!Array.isArray(records))
+			throw new TypeError("Millstone records must be an array");
+		for (const entry of records) {
+			try {
+				if (!entry?.dimensionId || !entry?.location)
+					throw new TypeError("missing record location");
+				const machine = new MillstoneMachine(ACTIVE_MILLING_RECIPES);
+				machine.restore(entry.processor);
+				mills.set(keyFor(entry.dimensionId, entry.location), {
+					dimensionId: entry.dimensionId,
+					location: entry.location,
+					machine
+				});
+			} catch (error) {
+				console.warn(`[Create Bedrock] Ignored invalid millstone ${entry?.dimensionId ?? "unknown"}: ${error}`);
+			}
 		}
 	} catch (error) {
 		console.warn(`[Create Bedrock] Ignored invalid millstone state: ${error}`);

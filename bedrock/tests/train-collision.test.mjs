@@ -19,3 +19,19 @@ test("findTrainCollision ignores air and rejects invalid inputs", () => {
 	assert.equal(findTrainCollision([{ location: { x: 0, y: 64, z: 0 } }], () => ({ typeId: "minecraft:air" })), undefined);
 	assert.throws(() => findTrainCollision([], undefined), /readBlock/);
 });
+
+test("findTrainCollision freezes for occupants while ignoring its own carriage markers", () => {
+	const carriages = [{ location: { x: 0, y: 64, z: 0 } }];
+	assert.deepEqual(findTrainCollision(carriages, () => ({ typeId: "minecraft:air" }), {
+		ignoredEntityIds: new Set(["train-marker"]),
+		readEntities: () => [{ id: "train-marker" }, { id: "player-1" }]
+	}), {
+		entityId: "player-1",
+		location: { x: 0, y: 65, z: 0 },
+		reason: "entity_blocked"
+	});
+	assert.equal(findTrainCollision(carriages, () => ({ typeId: "minecraft:air" }), {
+		ignoredEntityIds: new Set(["train-marker"]),
+		readEntities: () => [{ id: "train-marker" }]
+	}), undefined);
+});

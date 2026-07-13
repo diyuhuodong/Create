@@ -1,0 +1,16 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": { "identifier": "createbedrock:zinc_block" },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:item_visual": {
+        "geometry": { "identifier": "minecraft:geometry.full_block" },
+        "material_instances": { "*": { "texture": "createbedrock_zinc_block", "render_method": "opaque" } }
+      },
+      "minecraft:material_instances": { "*": { "texture": "createbedrock_zinc_block", "render_method": "opaque" } }
+    }
+  }
+}

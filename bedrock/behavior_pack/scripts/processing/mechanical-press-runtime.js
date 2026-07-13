@@ -1,12 +1,14 @@
 import { ItemStack, system, world } from "@minecraft/server";
 
 import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
+import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { PRESSING_RECIPES } from "./generated/pressing-recipes.js";
 import { MechanicalPressMachine } from "./mechanical-press-machine.js";
 import { registerMovingBlockDataAdapter } from "../contraptions/moving-block-data.js";
 
 const PRESS_BLOCK = "createbedrock:mechanical_press";
 const PERSISTENCE_KEY = "createbedrock:mechanical_presses_v1";
+const PERSISTENCE_SCHEMA_VERSION = 1;
 const MECHANICAL_PRESS_TASK_GROUP = "mechanical_presses";
 const MECHANICAL_PRESS_TASK_BUDGET = 4;
 const REGISTERED_CREATE_ITEMS = new Set([
@@ -23,11 +25,11 @@ function keyFor(dimensionId, location) {
 }
 
 function persist() {
-	world.setDynamicProperty(PERSISTENCE_KEY, JSON.stringify([...presses.values()].map(press => ({
+	world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, [...presses.values()].map(press => ({
 		dimensionId: press.dimensionId,
 		location: press.location,
 		processor: press.machine.snapshot()
-	}))));
+}))));
 }
 
 function ensurePress(block) {
@@ -72,16 +74,26 @@ function restore() {
 	if (typeof serialized !== "string")
 		return;
 	try {
-		for (const entry of JSON.parse(serialized)) {
-			if (!entry?.dimensionId || !entry?.location)
-				continue;
-			const machine = new MechanicalPressMachine(ACTIVE_PRESSING_RECIPES);
-			machine.restore(entry.processor);
-			presses.set(keyFor(entry.dimensionId, entry.location), {
-				dimensionId: entry.dimensionId,
-				location: entry.location,
-				machine
-			});
+		const records = deserializeVersionedState(serialized, {
+			schemaVersion: PERSISTENCE_SCHEMA_VERSION,
+			upgrades: { 0: legacy => legacy }
+		});
+		if (!Array.isArray(records))
+			throw new TypeError("Mechanical press records must be an array");
+		for (const entry of records) {
+			try {
+				if (!entry?.dimensionId || !entry?.location)
+					throw new TypeError("missing record location");
+				const machine = new MechanicalPressMachine(ACTIVE_PRESSING_RECIPES);
+				machine.restore(entry.processor);
+				presses.set(keyFor(entry.dimensionId, entry.location), {
+					dimensionId: entry.dimensionId,
+					location: entry.location,
+					machine
+				});
+			} catch (error) {
+				console.warn(`[Create Bedrock] Ignored invalid mechanical press ${entry?.dimensionId ?? "unknown"}: ${error}`);
+			}
 		}
 	} catch (error) {
 		console.warn(`[Create Bedrock] Ignored invalid mechanical press state: ${error}`);
