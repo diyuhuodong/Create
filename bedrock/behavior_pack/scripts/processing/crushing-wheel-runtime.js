@@ -1,6 +1,7 @@
 import { ItemStack, system, world } from "@minecraft/server";
 
 import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
+import { DeferredPersistence } from "../kernel/deferred-persistence.js";
 import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { CRUSHING_RECIPES } from "./generated/crushing-recipes.js";
 import { CrushingWheelMachine } from "./crushing-wheel-machine.js";
@@ -12,17 +13,26 @@ const PERSISTENCE_SCHEMA_VERSION = 1;
 const CRUSHING_WHEEL_TASK_GROUP = "crushing_wheels";
 const CRUSHING_WHEEL_TASK_BUDGET = 4;
 const wheels = new Map();
+const persistence = new DeferredPersistence({
+	name: "crushing_wheels",
+	write() {
+		world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, [...wheels.values()].map(wheel => ({
+			dimensionId: wheel.dimensionId,
+			location: wheel.location,
+			processor: wheel.machine.snapshot()
+		}))));
+	},
+	onError(error) {
+		console.warn(`[Create Bedrock] Could not persist crushing wheel state: ${error}`);
+	}
+});
 
 function keyFor(dimensionId, location) {
 	return `${dimensionId}:${location.x}:${location.y}:${location.z}`;
 }
 
 function persist() {
-	world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, [...wheels.values()].map(wheel => ({
-		dimensionId: wheel.dimensionId,
-		location: wheel.location,
-		processor: wheel.machine.snapshot()
-}))));
+	persistence.request();
 }
 
 function ensureWheel(block) {
@@ -121,6 +131,8 @@ function processWheel(key, getKineticWorld) {
 	if (!wheel)
 		return;
 	const update = wheel.machine.tick(getKineticWorld().speedAt(wheel.dimensionId, wheel.location));
+	if (update)
+		persist();
 	if (!update?.completed)
 		return;
 	const dimension = world.getDimension(wheel.dimensionId);
@@ -157,6 +169,7 @@ export function registerCrushingWheels(getKineticWorld) {
 	registerTickHandler(() => {
 		for (const key of wheels.keys())
 			enqueueUniqueKernelTask(`crushing_wheel:${key}`, () => processWheel(key, getKineticWorld), CRUSHING_WHEEL_TASK_GROUP);
+		persistence.tick();
 	});
 	system.run(restore);
 }

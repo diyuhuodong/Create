@@ -24,7 +24,7 @@ npm run pack
 npm test
 ```
 
-`npm run matrix` updates `data/migration-matrix.json` from the Java registration entry points. The generator records statically declared identifiers; dynamic registrations remain manual-review items until they are explicitly mapped.
+`npm run matrix` updates schema-v2 `data/migration-matrix.json` from the Java registration entry points. Each generated entry includes a planned phase, functional domain, resource state and acceptance id; these are reviewable scope classifications, not evidence that the feature is implemented. Dynamic registrations remain manual-review items until they are explicitly mapped.
 
 `npm run recipes:pressing` imports the non-compat pressing recipes that can be represented with available Bedrock items. The import report identifies recipes still blocked on missing items or compatibility mappings.
 

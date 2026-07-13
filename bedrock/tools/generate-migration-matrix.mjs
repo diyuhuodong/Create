@@ -2,34 +2,12 @@ import { readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { classifyRegistration } from "./migration-classification.mjs";
+import { MATRIX_SCHEMA_VERSION } from "./migration-matrix-schema.mjs";
+
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(toolDirectory, "..");
 const repositoryRoot = resolve(bedrockRoot, "..");
-
-// These entries have an executable Stage-2 prototype.  They deliberately stay
-// below Realm acceptance until the Windows, Realm, and PS checklist succeeds.
-const IMPLEMENTATION_IN_PROGRESS = new Set([
-	"andesite_casing",
-	"brass_casing",
-	"belt_connector",
-	"clutch",
-	"cogwheel",
-	"copper_casing",
-	"crushing_wheel",
-	"encased_chain_drive",
-	"gearbox",
-	"hand_crank",
-	"industrial_iron_block",
-	"large_cogwheel",
-	"mechanical_bearing",
-	"mechanical_press",
-	"millstone",
-	"shaft",
-	"track",
-	"track_station",
-	"water_wheel",
-	"zinc_block"
-]);
 
 const catalogs = [
 	{
@@ -60,11 +38,11 @@ for (const catalog of catalogs) {
 	for (const match of content.matchAll(catalog.pattern)) {
 		const identifier = match[1];
 		entries.push({
+			...classifyRegistration(identifier, catalog.kind),
 			javaIdentifier: `create:${identifier}`,
 			bedrockIdentifier: `createbedrock:${match[1]}`,
 			kind: catalog.kind,
-			source: catalog.source,
-			status: IMPLEMENTATION_IN_PROGRESS.has(identifier) ? "implementation_in_progress" : "specification_pending"
+			source: catalog.source
 		});
 	}
 }
@@ -72,13 +50,15 @@ for (const catalog of catalogs) {
 entries.sort((left, right) => left.javaIdentifier.localeCompare(right.javaIdentifier) || left.kind.localeCompare(right.kind));
 
 const matrix = {
-	schemaVersion: 1,
+	schemaVersion: MATRIX_SCHEMA_VERSION,
+	classificationRulesVersion: 1,
 	generatedFrom: "Create 6.0.11 / Minecraft Java 1.21.1 registration entry points",
 	generatedAt: "deterministic",
 	entries,
 	manualReview: [
 		"Dynamic Java registrations and generated variants are not statically enumerable; add their explicit mappings before declaring the migration matrix complete.",
-		"Recipes, tags, packets, Ponder scenes, GameTests, compatibility integrations, and assets are tracked in follow-up matrix domains."
+		"Recipes, tags, packets, Ponder scenes, GameTests, compatibility integrations, and assets are tracked in follow-up matrix domains.",
+		"Generated phase and domain assignments are reviewable rules, not proof of implementation or platform acceptance."
 	]
 };
 

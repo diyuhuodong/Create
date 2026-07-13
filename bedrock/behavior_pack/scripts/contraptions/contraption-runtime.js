@@ -5,6 +5,7 @@ import { BedrockContraptionWorldPort } from "./bedrock-world-port.js";
 import { ContraptionController } from "./contraption-controller.js";
 import { isMovableBlockType, MAX_CONTRAPTION_BLOCKS, STATELESS_MOVABLE_BLOCK_TYPES } from "./movable-blocks.js";
 import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
+import { DeferredPersistence } from "../kernel/deferred-persistence.js";
 import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { persistKineticWorld } from "../kinetics/kinetic-runtime.js";
 import { registerStatelessMovingBlockDataAdapter } from "./moving-block-data.js";
@@ -16,8 +17,27 @@ const PERSISTENCE_SCHEMA_VERSION = 1;
 const activeBearings = new Map();
 const controllers = new Map();
 let kineticWorld;
-let ticksSincePersist = 0;
-let rotationDirty = false;
+const persistence = new DeferredPersistence({
+	name: "contraptions",
+	write() {
+		const records = [];
+		for (const [bearingKey, active] of activeBearings) {
+			records.push({
+				bearingKey,
+				bearingLocation: active.bearingLocation,
+				dimensionId: active.dimensionId,
+				id: active.id,
+				origin: active.origin,
+				rotation: active.rotation,
+				snapshot: active.snapshot
+			});
+		}
+		world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, records));
+	},
+	onError(error) {
+		console.warn(`[Create Bedrock] Could not persist contraption state: ${error}`);
+	}
+});
 
 function keyFor(dimensionId, location) {
 	return `${dimensionId}:${location.x}:${location.y}:${location.z}`;
@@ -36,19 +56,7 @@ function controllerFor(dimensionId) {
 }
 
 function persist() {
-	const records = [];
-	for (const [bearingKey, active] of activeBearings) {
-		records.push({
-			bearingKey,
-			bearingLocation: active.bearingLocation,
-			dimensionId: active.dimensionId,
-			id: active.id,
-			origin: active.origin,
-			rotation: active.rotation,
-			snapshot: active.snapshot
-		});
-	}
-	world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, records));
+	persistence.request();
 }
 
 function restore() {
@@ -165,7 +173,7 @@ function processBearing(bearingKey) {
 	}
 	active.frozenReason = undefined;
 	active.rotation = rotation;
-	rotationDirty = true;
+	persist();
 }
 
 export function registerContraptions(getKineticWorld) {
@@ -188,12 +196,7 @@ export function registerContraptions(getKineticWorld) {
 		for (const bearingKey of activeBearings.keys())
 			enqueueUniqueKernelTask(`contraption:${bearingKey}`, () => processBearing(bearingKey), "contraptions");
 
-		ticksSincePersist++;
-		if (rotationDirty && ticksSincePersist >= 20) {
-			ticksSincePersist = 0;
-			rotationDirty = false;
-			persist();
-		}
+		persistence.tick();
 	});
 
 	system.run(restore);
@@ -206,6 +209,7 @@ export function getContraptionDiagnostics() {
 	return {
 		active: activeBearings.size,
 		frozen: Object.keys(frozenReasons).length,
-		frozenReasons
+		frozenReasons,
+		persistence: persistence.diagnostics()
 	};
 }

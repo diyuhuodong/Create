@@ -1,6 +1,7 @@
 import { system, world } from "@minecraft/server";
 
 import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
+import { DeferredPersistence } from "../kernel/deferred-persistence.js";
 import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { TrackGraph } from "./track-graph.js";
 import { findTrainCollision } from "./train-collision.js";
@@ -26,8 +27,21 @@ const controllers = new Map();
 const trains = new Map();
 const selections = new Map();
 let nextTrainId = 1;
-let ticksSincePersist = 0;
 let ticksSinceAvailabilityCheck = 0;
+const persistence = new DeferredPersistence({
+	name: "trains",
+	write() {
+		const dimensions = [...graphs.keys()].map(dimensionId => ({
+			dimensionId,
+			graph: graphFor(dimensionId).snapshot(),
+			trains: controllerFor(dimensionId).snapshot()
+		}));
+		world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, { dimensions, nextTrainId }));
+	},
+	onError(error) {
+		console.warn(`[Create Bedrock] Could not persist train state: ${error}`);
+	}
+});
 
 function nodeId(location) {
 	return `${location.x}:${location.y}:${location.z}`;
@@ -115,12 +129,7 @@ function spawnCarriageMarkers(dimensionId, trainId, controller) {
 }
 
 function persist() {
-	const dimensions = [...graphs.keys()].map(dimensionId => ({
-		dimensionId,
-		graph: graphFor(dimensionId).snapshot(),
-		trains: controllerFor(dimensionId).snapshot()
-	}));
-	world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, { dimensions, nextTrainId }));
+	persistence.request();
 }
 
 function restore() {
@@ -367,11 +376,9 @@ function tickTrains() {
 	for (const id of trains.keys())
 		enqueueUniqueKernelTask(`train:${id}`, () => processTrain(id), "trains");
 
-	ticksSincePersist++;
-	if (ticksSincePersist >= 20) {
-		ticksSincePersist = 0;
+	if (trains.size > 0)
 		persist();
-	}
+	persistence.tick();
 }
 
 export function registerTrains() {
@@ -453,6 +460,7 @@ export function getTrainDiagnostics() {
 		loadedChunks,
 		markers: [...trains.values()].reduce((total, train) => total + train.entityIds.length, 0),
 		nodes,
+		persistence: persistence.diagnostics(),
 		trains: trains.size
 	};
 }

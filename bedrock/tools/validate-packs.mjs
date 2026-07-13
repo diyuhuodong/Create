@@ -3,6 +3,8 @@ import { dirname, extname, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
+import { validateMigrationMatrix } from "./migration-matrix-schema.mjs";
+
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(toolDirectory, "..");
 
@@ -47,6 +49,8 @@ const behaviorManifest = await readJson(resolve(bedrockRoot, "behavior_pack", "m
 const resourceManifest = await readJson(resolve(bedrockRoot, "resource_pack", "manifest.json"));
 const terrainAtlas = await readJson(resolve(bedrockRoot, "resource_pack", "textures", "terrain_texture.json"));
 const itemAtlas = await readJson(resolve(bedrockRoot, "resource_pack", "textures", "item_texture.json"));
+const migrationMatrix = await readJson(resolve(bedrockRoot, "data", "migration-matrix.json"));
+validateMigrationMatrix(migrationMatrix);
 const allUuids = [
 	behaviorManifest.header.uuid,
 	resourceManifest.header.uuid,

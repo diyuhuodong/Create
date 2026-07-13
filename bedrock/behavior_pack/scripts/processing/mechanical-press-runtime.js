@@ -1,6 +1,7 @@
 import { ItemStack, system, world } from "@minecraft/server";
 
 import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
+import { DeferredPersistence } from "../kernel/deferred-persistence.js";
 import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { PRESSING_RECIPES } from "./generated/pressing-recipes.js";
 import { MechanicalPressMachine } from "./mechanical-press-machine.js";
@@ -19,17 +20,26 @@ const REGISTERED_CREATE_ITEMS = new Set([
 const ACTIVE_PRESSING_RECIPES = PRESSING_RECIPES.filter(recipe => recipe.outputs.every(output =>
 	!output.typeId.startsWith("createbedrock:") || REGISTERED_CREATE_ITEMS.has(output.typeId)));
 const presses = new Map();
+const persistence = new DeferredPersistence({
+	name: "mechanical_presses",
+	write() {
+		world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, [...presses.values()].map(press => ({
+			dimensionId: press.dimensionId,
+			location: press.location,
+			processor: press.machine.snapshot()
+		}))));
+	},
+	onError(error) {
+		console.warn(`[Create Bedrock] Could not persist mechanical press state: ${error}`);
+	}
+});
 
 function keyFor(dimensionId, location) {
 	return `${dimensionId}:${location.x}:${location.y}:${location.z}`;
 }
 
 function persist() {
-	world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, [...presses.values()].map(press => ({
-		dimensionId: press.dimensionId,
-		location: press.location,
-		processor: press.machine.snapshot()
-}))));
+	persistence.request();
 }
 
 function ensurePress(block) {
@@ -128,6 +138,8 @@ function processPress(key, getKineticWorld) {
 	if (!press)
 		return;
 	const update = press.machine.tick(getKineticWorld().speedAt(press.dimensionId, press.location));
+	if (update)
+		persist();
 	if (!update?.completed)
 		return;
 	const dimension = world.getDimension(press.dimensionId);
@@ -164,6 +176,7 @@ export function registerMechanicalPresses(getKineticWorld) {
 	registerTickHandler(() => {
 		for (const key of presses.keys())
 			enqueueUniqueKernelTask(`mechanical_press:${key}`, () => processPress(key, getKineticWorld), MECHANICAL_PRESS_TASK_GROUP);
+		persistence.tick();
 	});
 	system.run(restore);
 }

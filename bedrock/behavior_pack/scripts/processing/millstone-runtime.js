@@ -1,6 +1,7 @@
 import { ItemStack, system, world } from "@minecraft/server";
 
 import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
+import { DeferredPersistence } from "../kernel/deferred-persistence.js";
 import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { MILLING_RECIPES } from "./generated/milling-recipes.js";
 import { MillstoneMachine } from "./millstone-machine.js";
@@ -14,18 +15,27 @@ const REGISTERED_CREATE_ITEMS = new Set(["createbedrock:wheat_flour"]);
 const ACTIVE_MILLING_RECIPES = MILLING_RECIPES.filter(recipe => recipe.outputs.every(output =>
 	!output.typeId.startsWith("createbedrock:") || REGISTERED_CREATE_ITEMS.has(output.typeId)));
 const mills = new Map();
+const persistence = new DeferredPersistence({
+	name: "millstones",
+	write() {
+		const snapshot = [...mills.values()].map(mill => ({
+			dimensionId: mill.dimensionId,
+			location: mill.location,
+			processor: mill.machine.snapshot()
+		}));
+		world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, snapshot));
+	},
+	onError(error) {
+		console.warn(`[Create Bedrock] Could not persist millstone state: ${error}`);
+	}
+});
 
 function keyFor(dimensionId, location) {
 	return `${dimensionId}:${location.x}:${location.y}:${location.z}`;
 }
 
 function persist() {
-	const snapshot = [...mills.values()].map(mill => ({
-		dimensionId: mill.dimensionId,
-		location: mill.location,
-		processor: mill.machine.snapshot()
-	}));
-	world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, snapshot));
+	persistence.request();
 }
 
 function restore() {
@@ -130,6 +140,8 @@ function processMill(key, getKineticWorld) {
 		return;
 	const speed = getKineticWorld().speedAt(mill.dimensionId, mill.location);
 	const update = mill.machine.tick(speed);
+	if (update)
+		persist();
 	if (!update?.completed)
 		return;
 
@@ -173,6 +185,7 @@ export function registerMillstones(getKineticWorld) {
 	registerTickHandler(() => {
 		for (const key of mills.keys())
 			enqueueUniqueKernelTask(`millstone:${key}`, () => processMill(key, getKineticWorld), MILLSTONE_TASK_GROUP);
+		persistence.tick();
 	});
 
 	system.run(restore);
