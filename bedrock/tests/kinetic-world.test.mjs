@@ -231,8 +231,26 @@ test("KineticWorld diagnostics report indexed nodes per dimension", () => {
 
 	assert.deepEqual(world.diagnostics(), {
 		beltLinks: 0,
+		connections: 0,
 		nodes: 2,
 		nodesByDimension: { "minecraft:overworld": 1, "minecraft:nether": 1 },
 		resolvedNetworks: 0
 	});
+});
+
+test("KineticWorld refreshes cached connections when a placed node changes axis", () => {
+	const world = new KineticWorld();
+	const crank = facedBlock("createbedrock:hand_crank", 0, 64, 0, 4);
+	const shaft = facedBlock("createbedrock:shaft", 1, 64, 0, 5);
+	world.trackPlacedBlock(crank);
+	world.trackPlacedBlock(shaft);
+	world.activateHandCrank(crank);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", shaft.location), 16);
+	assert.equal(world.diagnostics().connections, 1);
+
+	world.trackPlacedBlock(facedBlock("createbedrock:shaft", 1, 64, 0, 2));
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", shaft.location), 0);
+	assert.equal(world.diagnostics().connections, 0);
 });

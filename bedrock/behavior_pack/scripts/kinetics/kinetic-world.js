@@ -151,6 +151,7 @@ function isValidBeltPath(left, right) {
 
 export class KineticWorld {
 	#nodes = new WorldIndex();
+	#connections = new Map();
 	#beltLinks = new Map();
 	#dirty = false;
 	#lastResolved = [];
@@ -173,6 +174,7 @@ export class KineticWorld {
 			turnTicksRemaining: previous?.turnTicksRemaining ?? 0,
 			typeId: block.typeId
 		});
+		this.#refreshConnectionsAt(block.dimension.id, block.location);
 		this.#dirty = true;
 		return true;
 	}
@@ -180,6 +182,8 @@ export class KineticWorld {
 	trackBrokenBlock(dimensionId, location) {
 		const id = worldLocationKey(dimensionId, location);
 		const deleted = this.#nodes.delete(dimensionId, location);
+		if (deleted)
+			this.#removeConnectionsFor(id);
 		let removedLinks = false;
 		for (const [linkId, link] of this.#beltLinks) {
 			if (link.leftId !== id && link.rightId !== id)
@@ -218,6 +222,7 @@ export class KineticWorld {
 			throw new TypeError("Kinetic world snapshots must provide node and belt-link arrays");
 
 		this.#nodes.clear();
+		this.#connections.clear();
 		this.#beltLinks.clear();
 		for (const entry of nodes) {
 			const configuration = KINETIC_BLOCKS[entry?.typeId];
@@ -247,6 +252,7 @@ export class KineticWorld {
 				continue;
 			this.connectBelt(left.dimensionId, left.location, right.location);
 		}
+		this.#rebuildConnections();
 
 		this.#dirty = true;
 	}
@@ -365,22 +371,8 @@ export class KineticWorld {
 			});
 		}
 
-		for (const node of this.#nodes.values()) {
-			for (const [x, y, z] of NEIGHBOR_OFFSETS) {
-				const adjacentLocation = {
-					x: node.location.x + x,
-					y: node.location.y + y,
-					z: node.location.z + z
-				};
-				const adjacent = this.#nodes.get(node.dimensionId, adjacentLocation);
-				if (!adjacent || node.id >= adjacent.id)
-					continue;
-
-				const ratio = connectionRatio(node, adjacent, x, y, z);
-				if (ratio !== undefined)
-					connect(node.id, adjacent.id, ratio);
-			}
-		}
+		for (const connection of this.#connections.values())
+			connect(connection.leftId, connection.rightId, connection.ratio);
 
 		for (const link of this.#beltLinks.values()) {
 			if (this.#nodes.has(link.left.dimensionId, link.left.location) && this.#nodes.has(link.right.dimensionId, link.right.location))
@@ -393,9 +385,49 @@ export class KineticWorld {
 	diagnostics() {
 		return {
 			beltLinks: this.#beltLinks.size,
+			connections: this.#connections.size,
 			nodes: this.#nodes.size,
 			nodesByDimension: this.#nodes.countsByDimension(),
 			resolvedNetworks: this.#lastResolved.length
 		};
+	}
+
+	#removeConnectionsFor(nodeId) {
+		for (const [id, connection] of this.#connections)
+			if (connection.leftId === nodeId || connection.rightId === nodeId)
+				this.#connections.delete(id);
+	}
+
+	#refreshConnectionsAt(dimensionId, location) {
+		const node = this.#nodes.get(dimensionId, location);
+		if (!node)
+			return;
+		this.#removeConnectionsFor(node.id);
+		for (const [x, y, z] of NEIGHBOR_OFFSETS) {
+			const adjacent = this.#nodes.get(dimensionId, {
+				x: location.x + x,
+				y: location.y + y,
+				z: location.z + z
+			});
+			if (!adjacent)
+				continue;
+			const left = node.id < adjacent.id ? node : adjacent;
+			const right = left === node ? adjacent : node;
+			const ratio = connectionRatio(
+				left,
+				right,
+				right.location.x - left.location.x,
+				right.location.y - left.location.y,
+				right.location.z - left.location.z
+			);
+			if (ratio !== undefined)
+				this.#connections.set(linkKey(left.id, right.id), { leftId: left.id, ratio, rightId: right.id });
+		}
+	}
+
+	#rebuildConnections() {
+		this.#connections.clear();
+		for (const node of this.#nodes.values())
+			this.#refreshConnectionsAt(node.dimensionId, node.location);
 	}
 }
