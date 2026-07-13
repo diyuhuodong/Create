@@ -1,0 +1,119 @@
+import { ItemStack, system, world } from "@minecraft/server";
+
+import { registerTickHandler } from "../kernel/index.js";
+import { PRESSING_RECIPES } from "./generated/pressing-recipes.js";
+import { MechanicalPressMachine } from "./mechanical-press-machine.js";
+
+const PRESS_BLOCK = "createbedrock:mechanical_press";
+const PERSISTENCE_KEY = "createbedrock:mechanical_presses_v1";
+const REGISTERED_CREATE_ITEMS = new Set([
+	"createbedrock:copper_sheet",
+	"createbedrock:golden_sheet",
+	"createbedrock:iron_sheet"
+]);
+const ACTIVE_PRESSING_RECIPES = PRESSING_RECIPES.filter(recipe => recipe.outputs.every(output =>
+	!output.typeId.startsWith("createbedrock:") || REGISTERED_CREATE_ITEMS.has(output.typeId)));
+const presses = new Map();
+
+function keyFor(dimensionId, location) {
+	return `${dimensionId}:${location.x}:${location.y}:${location.z}`;
+}
+
+function persist() {
+	world.setDynamicProperty(PERSISTENCE_KEY, JSON.stringify([...presses.values()].map(press => ({
+		dimensionId: press.dimensionId,
+		location: press.location,
+		processor: press.machine.snapshot()
+	}))));
+}
+
+function ensurePress(block) {
+	const key = keyFor(block.dimension.id, block.location);
+	let press = presses.get(key);
+	if (!press) {
+		press = {
+			dimensionId: block.dimension.id,
+			location: { ...block.location },
+			machine: new MechanicalPressMachine(ACTIVE_PRESSING_RECIPES)
+		};
+		presses.set(key, press);
+	}
+	return press;
+}
+
+function restore() {
+	const serialized = world.getDynamicProperty(PERSISTENCE_KEY);
+	if (typeof serialized !== "string")
+		return;
+	try {
+		for (const entry of JSON.parse(serialized)) {
+			if (!entry?.dimensionId || !entry?.location)
+				continue;
+			const machine = new MechanicalPressMachine(ACTIVE_PRESSING_RECIPES);
+			machine.restore(entry.processor);
+			presses.set(keyFor(entry.dimensionId, entry.location), {
+				dimensionId: entry.dimensionId,
+				location: entry.location,
+				machine
+			});
+		}
+	} catch (error) {
+		console.warn(`[Create Bedrock] Ignored invalid mechanical press state: ${error}`);
+	}
+}
+
+function tryInsertFromPlayer(player, press) {
+	const inventory = player.getComponent("minecraft:inventory")?.container;
+	if (!inventory)
+		return false;
+	for (let slot = 0; slot < inventory.size; slot++) {
+		const stack = inventory.getItem(slot);
+		if (!stack)
+			continue;
+		const started = press.machine.tryInsert({ typeId: stack.typeId, count: stack.amount });
+		if (!started)
+			continue;
+		if (stack.amount === started.consumed.count)
+			inventory.setItem(slot);
+		else {
+			const remaining = stack.clone();
+			remaining.amount -= started.consumed.count;
+			inventory.setItem(slot, remaining);
+		}
+		return true;
+	}
+	return false;
+}
+
+export function registerMechanicalPresses(getKineticWorld) {
+	world.afterEvents.playerPlaceBlock.subscribe(event => {
+		if (event.block.typeId === PRESS_BLOCK) {
+			ensurePress(event.block);
+			persist();
+		}
+	});
+	world.afterEvents.playerBreakBlock.subscribe(event => {
+		if (presses.delete(keyFor(event.dimension.id, event.block.location)))
+			persist();
+	});
+	world.afterEvents.playerInteractWithBlock.subscribe(event => {
+		if (event.block.typeId === PRESS_BLOCK && tryInsertFromPlayer(event.player, ensurePress(event.block)))
+			persist();
+	});
+	registerTickHandler(() => {
+		for (const press of presses.values()) {
+			const update = press.machine.tick(getKineticWorld().speedAt(press.dimensionId, press.location));
+			if (!update?.completed)
+				continue;
+			const dimension = world.getDimension(press.dimensionId);
+			for (const output of update.outputs)
+				dimension.spawnItem(new ItemStack(output.typeId, output.count), {
+					x: press.location.x + 0.5,
+					y: press.location.y + 1,
+					z: press.location.z + 0.5
+				});
+			persist();
+		}
+	});
+	system.run(restore);
+}

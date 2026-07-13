@@ -17,11 +17,23 @@
     "createbedrock_gearbox": {
       "textures": "textures/create_java/block/gearbox"
     },
+    "createbedrock_gearbox_top": {
+      "textures": "textures/create_java/block/gearbox_top"
+    },
     "createbedrock_millstone": {
       "textures": "textures/create_java/block/millstone"
     },
     "createbedrock_mechanical_bearing": {
       "textures": "textures/create_java/block/mechanical_bearing_side"
+    },
+    "createbedrock_mechanical_press_bottom": {
+      "textures": "textures/create_java/block/mechanical_press_bottom"
+    },
+    "createbedrock_mechanical_press_side": {
+      "textures": "textures/create_java/block/mechanical_press_side"
+    },
+    "createbedrock_mechanical_press_top": {
+      "textures": "textures/create_java/block/mechanical_press_top"
     },
     "createbedrock_track": {
       "textures": "textures/create_java/block/standard_track"

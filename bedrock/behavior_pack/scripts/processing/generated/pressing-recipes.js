@@ -1,0 +1,168 @@
+// Generated from src/generated/resources/data/create/recipe/pressing.
+export const PRESSING_RECIPES = [
+	{
+		"id": "create:pressing/cardboard:createbedrock:pulp",
+		"input": {
+			"typeId": "createbedrock:pulp",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "createbedrock:cardboard",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:pressing/copper_ingot:minecraft:copper_ingot",
+		"input": {
+			"typeId": "minecraft:copper_ingot",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "createbedrock:copper_sheet",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:pressing/gold_ingot:minecraft:gold_ingot",
+		"input": {
+			"typeId": "minecraft:gold_ingot",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "createbedrock:golden_sheet",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:pressing/iron_ingot:minecraft:iron_ingot",
+		"input": {
+			"typeId": "minecraft:iron_ingot",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "createbedrock:iron_sheet",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:pressing/path_from_grass:minecraft:grass_block",
+		"input": {
+			"typeId": "minecraft:grass_block",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:dirt_path",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:pressing/path:minecraft:coarse_dirt",
+		"input": {
+			"typeId": "minecraft:coarse_dirt",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:dirt_path",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:pressing/path:minecraft:dirt",
+		"input": {
+			"typeId": "minecraft:dirt",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:dirt_path",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:pressing/path:minecraft:mycelium",
+		"input": {
+			"typeId": "minecraft:mycelium",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:dirt_path",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:pressing/path:minecraft:podzol",
+		"input": {
+			"typeId": "minecraft:podzol",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:dirt_path",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:pressing/path:minecraft:rooted_dirt",
+		"input": {
+			"typeId": "minecraft:rooted_dirt",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:dirt_path",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:pressing/sugar_cane:minecraft:sugar_cane",
+		"input": {
+			"typeId": "minecraft:sugar_cane",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:paper",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	}
+];

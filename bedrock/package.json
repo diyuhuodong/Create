@@ -13,6 +13,7 @@
     "matrix": "node tools/generate-migration-matrix.mjs",
     "pack": "node tools/pack.mjs",
     "recipes:milling": "node tools/convert-milling-recipes.mjs",
+    "recipes:pressing": "node tools/convert-pressing-recipes.mjs",
     "test": "node tools/run-tests.mjs",
     "validate": "node tools/validate-packs.mjs"
   }
