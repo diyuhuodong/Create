@@ -6,11 +6,14 @@ import { isMovableBlockType } from "../behavior_pack/scripts/contraptions/movabl
 
 test("Contraption part registry covers the currently movable kinetic blocks", () => {
 	for (const typeId of [
+		"createbedrock:hand_crank",
 		"createbedrock:shaft",
 		"createbedrock:cogwheel",
 		"createbedrock:large_cogwheel",
 		"createbedrock:gearbox",
 		"createbedrock:clutch",
+		"createbedrock:encased_chain_drive",
+		"createbedrock:water_wheel",
 		"createbedrock:millstone",
 		"createbedrock:mechanical_press",
 		"createbedrock:crushing_wheel"
@@ -18,6 +21,6 @@ test("Contraption part registry covers the currently movable kinetic blocks", ()
 		assert.equal(isMovableBlockType(typeId), true);
 		assert.match(partTypeFor(typeId), /^createbedrock:contraption_part_/);
 	}
-	assert.equal(isMovableBlockType("createbedrock:hand_crank"), false);
-	assert.equal(partTypeFor("createbedrock:hand_crank"), undefined);
+	assert.equal(isMovableBlockType("createbedrock:track"), false);
+	assert.equal(partTypeFor("createbedrock:track"), undefined);
 });

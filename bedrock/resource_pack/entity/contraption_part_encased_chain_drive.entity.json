@@ -1,0 +1,12 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "createbedrock:contraption_part_encased_chain_drive",
+      "materials": { "default": "entity_alphatest" },
+      "textures": { "default": "textures/create_java/block/encased_chain_drive" },
+      "geometry": { "default": "geometry.createbedrock.contraption_marker" },
+      "render_controllers": ["controller.render.createbedrock.contraption"]
+    }
+  }
+}
