@@ -57,7 +57,7 @@ test("DepotNetwork restarts from an escrow checkpoint without duplicating depot 
 	advance(first, () => first.snapshot().some(record => record.kind === "transfer" && record.state === "escrowed") && !first.diagnostics().waitingForCommit);
 
 	const restored = createNetwork(storage, "createbedrock:depot_restart");
-	assert.deepEqual(restored.restore(), { belts: 0, depots: 2, transfers: 1, transports: 0, warnings: [] });
+	assert.deepEqual(restored.restore(), { belts: 0, depots: 2, funnels: 0, transfers: 1, transports: 0, warnings: [] });
 	assert.deepEqual(restored.extract(destination), { count: 4, typeId: "minecraft:dirt" });
 	advance(restored, () => restored.diagnostics().transfers === 0 && !restored.diagnostics().waitingForCommit);
 	assert.deepEqual(restored.extract(source), undefined);
@@ -107,7 +107,7 @@ test("DepotNetwork restores an in-flight belt record and keeps it when the targe
 	advance(first, () => first.diagnostics().transports === 1 && !first.diagnostics().waitingForCommit);
 
 	const restored = createNetwork(storage, "createbedrock:belt_restart");
-	assert.deepEqual(restored.restore(), { belts: 1, depots: 2, transfers: 0, transports: 1, warnings: [] });
+	assert.deepEqual(restored.restore(), { belts: 1, depots: 2, funnels: 0, transfers: 0, transports: 1, warnings: [] });
 	assert.throws(() => restored.removeBelt("belt:restart"), /active transport/);
 	assert.deepEqual(restored.extract(destination), { count: 1, typeId: "minecraft:dirt" });
 	advance(restored, () => restored.diagnostics().transports === 0 && !restored.diagnostics().waitingForCommit);
@@ -125,4 +125,19 @@ test("DepotNetwork returns a transport to its source when the belt reverses", ()
 	advance(network, () => network.diagnostics().transports === 0 && !network.diagnostics().waitingForCommit);
 	assert.deepEqual(network.extract(source), { count: 1, typeId: "minecraft:andesite" });
 	assert.deepEqual(network.extract(destination), undefined);
+});
+
+test("DepotNetwork funnels filter items and honor their lock state", () => {
+	const network = createNetwork(memoryStorage(), "createbedrock:funnel_transfer");
+	const source = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 }, size: 2 });
+	const destination = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 1, y: 64, z: 0 } });
+	network.insert(source, { count: 1, typeId: "minecraft:dirt" });
+	network.insert(source, { count: 2, typeId: "minecraft:iron_ingot" });
+	network.createFunnel({ destinationId: destination, filter: { typeIds: ["minecraft:iron_ingot"] }, id: "funnel:0", locked: true, sourceId: source });
+	advance(network, () => !network.diagnostics().waitingForCommit, 20);
+	assert.deepEqual(depotSlots(network, destination), [undefined]);
+	network.setFunnelLocked("funnel:0", false);
+	advance(network, () => network.diagnostics().transfers === 0 && !network.diagnostics().waitingForCommit && depotSlots(network, destination)?.[0]?.typeId === "minecraft:iron_ingot");
+	assert.deepEqual(network.extract(destination), { count: 2, typeId: "minecraft:iron_ingot" });
+	assert.deepEqual(network.extract(source), { count: 1, typeId: "minecraft:dirt" });
 });

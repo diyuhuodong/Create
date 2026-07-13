@@ -26,6 +26,10 @@ export function createDepotBelt(options) {
 	return network.createBelt(options);
 }
 
+export function createDepotFunnel(options) {
+	return network.createFunnel(options);
+}
+
 export function getDepotDiagnostics() {
 	return network.diagnostics();
 }
@@ -36,6 +40,10 @@ export function getDepotId(block) {
 
 export function setDepotBeltSpeed(id, speed) {
 	return network.setBeltSpeed(id, speed);
+}
+
+export function setDepotFunnelLocked(id, locked) {
+	return network.setFunnelLocked(id, locked);
 }
 
 export function registerDepots() {
