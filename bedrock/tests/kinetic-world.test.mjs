@@ -11,6 +11,13 @@ function block(typeId, x, y, z) {
 	};
 }
 
+function facedBlock(typeId, x, y, z, facingDirection) {
+	return {
+		...block(typeId, x, y, z),
+		permutation: { getAllStates: () => ({ "minecraft:facing_direction": facingDirection }) }
+	};
+}
+
 test("KineticWorld tracks placement, hand-crank activation, and overload", () => {
 	const world = new KineticWorld();
 	const crank = block("createbedrock:hand_crank", 0, 64, 0);
@@ -70,4 +77,16 @@ test("KineticWorld only connects shafts along their rotation axis and meshes sid
 	assert.equal(world.speedAt("minecraft:overworld", { x: 1, y: 64, z: 0 }), 0);
 	assert.equal(world.speedAt("minecraft:overworld", { x: 0, y: 65, z: 0 }), 16);
 	assert.equal(world.speedAt("minecraft:overworld", { x: -1, y: 65, z: 0 }), -16);
+});
+
+test("KineticWorld derives its rotation axis from Bedrock placement direction", () => {
+	const world = new KineticWorld();
+	const crank = facedBlock("createbedrock:hand_crank", 0, 64, 0, 4);
+	world.trackPlacedBlock(crank);
+	world.trackPlacedBlock(facedBlock("createbedrock:shaft", 1, 64, 0, 5));
+	world.activateHandCrank(crank);
+	world.tick();
+
+	assert.equal(world.speedAt("minecraft:overworld", { x: 1, y: 64, z: 0 }), 16);
+	assert.equal(world.snapshot()[0].axis, "x");
 });

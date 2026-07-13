@@ -52,7 +52,9 @@ function axisOfOffset(x, y, z) {
 
 function axisFor(block, configuration) {
 	const states = block.permutation?.getAllStates?.() ?? {};
-	const axis = states["createbedrock:axis"] ?? configuration.axis;
+	const facing = states["minecraft:facing_direction"];
+	const facingAxis = ({ 0: "y", 1: "y", 2: "z", 3: "z", 4: "x", 5: "x", north: "z", south: "z", east: "x", west: "x", up: "y", down: "y" })[facing];
+	const axis = facingAxis ?? states["createbedrock:axis"] ?? configuration.axis;
 	return ["x", "y", "z"].includes(axis) ? axis : configuration.axis;
 }
 

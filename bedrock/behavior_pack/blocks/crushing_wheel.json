@@ -2,7 +2,8 @@
   "format_version": "1.21.80",
   "minecraft:block": {
     "description": {
-      "identifier": "createbedrock:crushing_wheel"
+      "identifier": "createbedrock:crushing_wheel",
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
     },
     "components": {
       "minecraft:destructible_by_explosion": {

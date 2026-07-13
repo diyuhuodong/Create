@@ -2,7 +2,12 @@
   "format_version": "1.21.80",
   "minecraft:block": {
     "description": {
-      "identifier": "createbedrock:cogwheel"
+      "identifier": "createbedrock:cogwheel",
+      "traits": {
+        "minecraft:placement_direction": {
+          "enabled_states": ["minecraft:facing_direction"]
+        }
+      }
     },
     "components": {
       "minecraft:destructible_by_explosion": {
@@ -53,6 +58,16 @@
           "render_method": "opaque"
         }
       }
-    }
+    },
+    "permutations": [
+      {
+        "condition": "query.block_state('minecraft:facing_direction') == 2 || query.block_state('minecraft:facing_direction') == 3",
+        "components": { "minecraft:transformation": { "rotation": [90, 0, 0] } }
+      },
+      {
+        "condition": "query.block_state('minecraft:facing_direction') == 4 || query.block_state('minecraft:facing_direction') == 5",
+        "components": { "minecraft:transformation": { "rotation": [0, 0, 90] } }
+      }
+    ]
   }
 }
