@@ -1,29 +1,14 @@
-import { MachineProcessor } from "./machine-processor.js";
+import { ProcessingMachine } from "./processing-machine.js";
 
-export class MechanicalPressMachine {
-	#processor;
-
-	constructor(recipes) {
-		this.#processor = new MachineProcessor(recipes);
+export class MechanicalPressMachine extends ProcessingMachine {
+	constructor(recipes, options) {
+		super(recipes, options);
 	}
 
-	tryInsert(input) {
-		return this.#processor.start(input);
-	}
-
-	tick(speed, random) {
-		return this.#processor.tick({
+	tick(speed) {
+		return super.tick({
 			powered: speed !== 0,
-			workUnits: Math.max(1, Math.floor(Math.abs(speed) / 16)),
-			random
+			workUnits: Math.max(1, Math.floor(Math.abs(speed) / 16))
 		});
-	}
-
-	snapshot() {
-		return this.#processor.snapshot();
-	}
-
-	restore(snapshot) {
-		this.#processor.restore(snapshot);
 	}
 }

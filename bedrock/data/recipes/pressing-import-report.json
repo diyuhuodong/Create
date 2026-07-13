@@ -1,41 +1,248 @@
 {
-	"imported": 11,
-	"skipped": [
-		"aether_dirt_path",
-		"aether_dirt_path_from_grass",
-		"brass_ingot",
-		"compat/atmospheric/crustose_path",
-		"compat/betterendforge/amber_moss_path",
-		"compat/betterendforge/cave_moss_path",
-		"compat/betterendforge/chorus_nylium_path",
-		"compat/betterendforge/crystal_moss_path",
-		"compat/betterendforge/end_moss_path",
-		"compat/betterendforge/end_mycelium_path",
-		"compat/betterendforge/jungle_moss_path",
-		"compat/betterendforge/pink_moss_path",
-		"compat/betterendforge/shadow_grass_path",
-		"compat/biomeswevegone/lush_dirt_path",
-		"compat/biomeswevegone/lush_grass_path",
-		"compat/biomeswevegone/sandy_dirt_path",
-		"compat/environmental/dirt_path",
-		"compat/environmental/mycelium_path",
-		"compat/environmental/podzol_path",
-		"compat/immersiveengineering/plate_aluminum",
-		"compat/immersiveengineering/plate_constantan",
-		"compat/immersiveengineering/plate_electrum",
-		"compat/immersiveengineering/plate_lead",
-		"compat/immersiveengineering/plate_nickel",
-		"compat/immersiveengineering/plate_silver",
-		"compat/immersiveengineering/plate_steel",
-		"compat/immersiveengineering/plate_uranium",
-		"compat/infernalexp/crimson_nylium_path",
-		"compat/infernalexp/soul_soil_path",
-		"compat/infernalexp/warped_nylium_path",
-		"compat/vampirism/cursed_earth_path",
-		"cursed_earth_path_from_grass",
-		"peat_dirt_path",
-		"peat_dirt_path_from_grass",
-		"silt_dirt_path",
-		"silt_dirt_path_from_grass"
+	"processor": "pressing",
+	"schemaVersion": 1,
+	"summary": {
+		"manual_specification": 8,
+		"migrated": 6,
+		"unsupported_dependency": 29
+	},
+	"records": [
+		{
+			"source": "aether_dirt_path",
+			"status": "manual_specification",
+			"reason": "unmapped_ingredient"
+		},
+		{
+			"source": "aether_dirt_path_from_grass",
+			"status": "manual_specification",
+			"reason": "unmapped_ingredient"
+		},
+		{
+			"source": "brass_ingot",
+			"status": "manual_specification",
+			"reason": "unmapped_ingredient"
+		},
+		{
+			"source": "cardboard",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "compat/atmospheric/crustose_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/betterendforge/amber_moss_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/betterendforge/cave_moss_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/betterendforge/chorus_nylium_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/betterendforge/crystal_moss_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/betterendforge/end_moss_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/betterendforge/end_mycelium_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/betterendforge/jungle_moss_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/betterendforge/pink_moss_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/betterendforge/shadow_grass_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/lush_dirt_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/lush_grass_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/sandy_dirt_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/dirt_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/mycelium_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/podzol_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/immersiveengineering/plate_aluminum",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/immersiveengineering/plate_constantan",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/immersiveengineering/plate_electrum",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/immersiveengineering/plate_lead",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/immersiveengineering/plate_nickel",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/immersiveengineering/plate_silver",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/immersiveengineering/plate_steel",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/immersiveengineering/plate_uranium",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/infernalexp/crimson_nylium_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/infernalexp/soul_soil_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/infernalexp/warped_nylium_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/vampirism/cursed_earth_path",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "copper_ingot",
+			"status": "migrated",
+			"recipeId": "create:pressing/copper_ingot:minecraft:copper_ingot",
+			"recipeIds": [
+				"create:pressing/copper_ingot:minecraft:copper_ingot"
+			]
+		},
+		{
+			"source": "cursed_earth_path_from_grass",
+			"status": "manual_specification",
+			"reason": "unmapped_ingredient"
+		},
+		{
+			"source": "gold_ingot",
+			"status": "migrated",
+			"recipeId": "create:pressing/gold_ingot:minecraft:gold_ingot",
+			"recipeIds": [
+				"create:pressing/gold_ingot:minecraft:gold_ingot"
+			]
+		},
+		{
+			"source": "iron_ingot",
+			"status": "migrated",
+			"recipeId": "create:pressing/iron_ingot:minecraft:iron_ingot",
+			"recipeIds": [
+				"create:pressing/iron_ingot:minecraft:iron_ingot"
+			]
+		},
+		{
+			"source": "path",
+			"status": "migrated",
+			"recipeId": "create:pressing/path:minecraft:dirt",
+			"recipeIds": [
+				"create:pressing/path:minecraft:dirt",
+				"create:pressing/path:minecraft:coarse_dirt",
+				"create:pressing/path:minecraft:rooted_dirt",
+				"create:pressing/path:minecraft:mycelium",
+				"create:pressing/path:minecraft:podzol"
+			]
+		},
+		{
+			"source": "path_from_grass",
+			"status": "migrated",
+			"recipeId": "create:pressing/path_from_grass:minecraft:grass_block",
+			"recipeIds": [
+				"create:pressing/path_from_grass:minecraft:grass_block"
+			]
+		},
+		{
+			"source": "peat_dirt_path",
+			"status": "manual_specification",
+			"reason": "unmapped_ingredient"
+		},
+		{
+			"source": "peat_dirt_path_from_grass",
+			"status": "manual_specification",
+			"reason": "unmapped_ingredient"
+		},
+		{
+			"source": "silt_dirt_path",
+			"status": "manual_specification",
+			"reason": "unmapped_ingredient"
+		},
+		{
+			"source": "silt_dirt_path_from_grass",
+			"status": "manual_specification",
+			"reason": "unmapped_ingredient"
+		},
+		{
+			"source": "sugar_cane",
+			"status": "migrated",
+			"recipeId": "create:pressing/sugar_cane:minecraft:sugar_cane",
+			"recipeIds": [
+				"create:pressing/sugar_cane:minecraft:sugar_cane"
+			]
+		}
 	]
 }

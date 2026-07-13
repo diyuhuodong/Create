@@ -49,6 +49,19 @@ test("migration classification preserves Stage-2 prototypes and assigns Stage-3 
 	assert.equal(classifyRegistration("andesite_funnel", "block").phase, 3);
 });
 
+test("migration classification records S3-4 processor behavior independently of unfinished visuals", () => {
+	assert.deepEqual(classifyRegistration("millstone", "block"), {
+		acceptanceId: "PROCESSING-MILLSTONE-BLOCK",
+		behaviorPath: "behavior_pack/scripts/processing/millstone-runtime.js",
+		blockingReason: null,
+		domain: "processing",
+		persistenceSchema: 2,
+		phase: 3,
+		resourceStatus: "partial",
+		status: "static_verified"
+	});
+});
+
 test("migration classification assigns later dynamic, train, and equipment work to their planned phases", () => {
 	assert.deepEqual(classifyRegistration("mechanical_piston", "block").phase, 4);
 	assert.deepEqual(classifyRegistration("track_signal", "block").phase, 5);

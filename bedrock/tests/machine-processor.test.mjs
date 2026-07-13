@@ -15,7 +15,7 @@ const recipes = [{
 
 test("MachineProcessor consumes once, pauses without power, and emits deterministic outputs", () => {
 	const processor = new MachineProcessor(recipes);
-	assert.deepEqual(processor.start({ typeId: "minecraft:wheat", count: 1 }), {
+	assert.deepEqual(processor.start({ typeId: "minecraft:wheat", count: 1 }, { random: () => 0.5 }), {
 		consumed: { typeId: "minecraft:wheat", count: 1 },
 		recipeId: "create:milling/wheat"
 	});
@@ -27,7 +27,7 @@ test("MachineProcessor consumes once, pauses without power, and emits determinis
 		recipeId: "create:milling/wheat"
 	});
 	processor.tick({ powered: true });
-	assert.deepEqual(processor.tick({ powered: true, random: () => 0.5 }), {
+	assert.deepEqual(processor.tick({ powered: true }), {
 		completed: true,
 		outputs: [{ typeId: "createbedrock:wheat_flour", count: 1, chance: 1 }],
 		recipeId: "create:milling/wheat"

@@ -39,6 +39,15 @@ const BEHAVIOR_PATHS = new Map([
 	["water_wheel", "behavior_pack/scripts/kinetics/kinetic-runtime.js"]
 ]);
 
+// S3-4 replaces the Stage-2 processor prototypes with durable input/output
+// ports and a source-recipe conversion report. Their resource state remains
+// partial because the visual conversion work is deliberately tracked in S3-7.
+const STAGE_THREE_PROCESSORS = new Map([
+	["crushing_wheel", { domain: "processing" }],
+	["mechanical_press", { domain: "processing" }],
+	["millstone", { domain: "processing" }]
+]);
+
 const RULES = [
 	{ domain: "contraptions", phase: 4, pattern: /(cart_assembler|contraption|deployer|drill|elevator|gantry|harvester|mechanical_arm|mechanical_piston|minecart|pulley|rope|seat|sticker)/ },
 	{ domain: "schematics", phase: 4, pattern: /(blueprint|clipboard|schematic|wand)/ },
@@ -58,7 +67,10 @@ function acceptanceId(identifier, domain, kind) {
 
 export function classifyRegistration(identifier, kind) {
 	const prototype = STAGE_TWO_PROTOTYPES.get(identifier);
-	const classification = prototype
+	const processor = STAGE_THREE_PROCESSORS.get(identifier);
+	const classification = processor
+		? { ...processor, phase: 3, status: "static_verified" }
+		: prototype
 		? { ...prototype, phase: 2, status: "implementation_in_progress" }
 		: RULES.find(rule => rule.pattern.test(identifier)) ?? { domain: "content", phase: 3 };
 
@@ -67,9 +79,9 @@ export function classifyRegistration(identifier, kind) {
 		behaviorPath: BEHAVIOR_PATHS.get(identifier) ?? null,
 		blockingReason: null,
 		domain: classification.domain,
-		persistenceSchema: prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null,
+		persistenceSchema: processor ? 2 : prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null,
 		phase: classification.phase,
-		resourceStatus: prototype ? "partial" : "pending",
+		resourceStatus: prototype || processor ? "partial" : "pending",
 		status: classification.status ?? "specification_pending"
 	};
 }

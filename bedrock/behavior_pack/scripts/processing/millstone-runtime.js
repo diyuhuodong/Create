@@ -5,6 +5,7 @@ import { DeferredPersistence } from "../kernel/deferred-persistence.js";
 import { deserializeVersionedState } from "../kernel/versioned-state.js";
 import { MILLING_RECIPES } from "./generated/milling-recipes.js";
 import { MillstoneMachine } from "./millstone-machine.js";
+import { supportedProcessingRecipes } from "./processing-item-support.js";
 import { registerMovingBlockDataAdapter } from "../contraptions/moving-block-data.js";
 import { createShardedMachineState } from "./sharded-machine-state.js";
 
@@ -12,9 +13,7 @@ const LEGACY_PERSISTENCE_KEY = "createbedrock:millstones_v1";
 const PERSISTENCE_SCHEMA_VERSION = 1;
 const MILLSTONE_TASK_GROUP = "millstones";
 const MILLSTONE_TASK_BUDGET = 4;
-const REGISTERED_CREATE_ITEMS = new Set(["createbedrock:wheat_flour"]);
-const ACTIVE_MILLING_RECIPES = MILLING_RECIPES.filter(recipe => recipe.outputs.every(output =>
-	!output.typeId.startsWith("createbedrock:") || REGISTERED_CREATE_ITEMS.has(output.typeId)));
+const ACTIVE_MILLING_RECIPES = supportedProcessingRecipes(MILLING_RECIPES);
 const mills = new Map();
 const shardedState = createShardedMachineState({
 	keyPrefix: "createbedrock:millstone_state_v2",
@@ -43,6 +42,10 @@ const persistence = new DeferredPersistence({
 
 function keyFor(dimensionId, location) {
 	return `${dimensionId}:${location.x}:${location.y}:${location.z}`;
+}
+
+function createMillstoneMachine(dimensionId, location) {
+	return new MillstoneMachine(ACTIVE_MILLING_RECIPES, { id: `millstone:${keyFor(dimensionId, location)}` });
 }
 
 function persist() {
@@ -86,7 +89,7 @@ function restoreRecords(records) {
 		try {
 			if (!entry?.dimensionId || !entry?.location)
 				throw new TypeError("missing record location");
-			const machine = new MillstoneMachine(ACTIVE_MILLING_RECIPES);
+			const machine = createMillstoneMachine(entry.dimensionId, entry.location);
 			machine.restore(entry.processor);
 			mills.set(keyFor(entry.dimensionId, entry.location), {
 				dimensionId: entry.dimensionId,
@@ -106,7 +109,7 @@ function ensureMill(block) {
 		mill = {
 			dimensionId: block.dimension.id,
 			location: { ...block.location },
-			machine: new MillstoneMachine(ACTIVE_MILLING_RECIPES)
+			machine: createMillstoneMachine(block.dimension.id, block.location)
 		};
 		mills.set(key, mill);
 	}
@@ -126,7 +129,7 @@ function detachMillstone(dimensionId, location) {
 }
 
 function restoreMillstone(dimensionId, location, state) {
-	const machine = new MillstoneMachine(ACTIVE_MILLING_RECIPES);
+	const machine = createMillstoneMachine(dimensionId, location);
 	machine.restore(state);
 	mills.set(keyFor(dimensionId, location), {
 		dimensionId,
@@ -138,29 +141,47 @@ function restoreMillstone(dimensionId, location, state) {
 
 function tryInsertFromPlayer(player, mill) {
 	const inventory = player.getComponent("minecraft:inventory")?.container;
-	if (!inventory)
+	const slot = player.selectedSlotIndex;
+	if (!inventory || !Number.isInteger(slot) || slot < 0 || slot >= inventory.size)
 		return false;
-
-	for (let slot = 0; slot < inventory.size; slot++) {
-		const stack = inventory.getItem(slot);
-		if (!stack)
-			continue;
-
-		const started = mill.machine.tryInsert({ typeId: stack.typeId, count: stack.amount });
-		if (!started)
-			continue;
-
-		if (stack.amount === started.consumed.count)
-			inventory.setItem(slot);
-		else {
-			const remaining = stack.clone();
-			remaining.amount -= started.consumed.count;
-			inventory.setItem(slot, remaining);
-		}
-		return true;
+	const stack = inventory.getItem(slot);
+	if (!stack)
+		return false;
+	const inserted = mill.machine.insertInput({ typeId: stack.typeId, count: stack.amount });
+	if (!inserted.accepted)
+		return false;
+	if (stack.amount === inserted.accepted.count)
+		inventory.setItem(slot);
+	else {
+		const remaining = stack.clone();
+		remaining.amount -= inserted.accepted.count;
+		inventory.setItem(slot, remaining);
 	}
+	return true;
+}
 
-	return false;
+function tryExtractToPlayer(player, mill) {
+	const inventory = player.getComponent("minecraft:inventory")?.container;
+	const slot = player.selectedSlotIndex;
+	if (!inventory || !Number.isInteger(slot) || slot < 0 || slot >= inventory.size || inventory.getItem(slot) !== undefined)
+		return false;
+	const output = mill.machine.peekOutput();
+	const input = output ? undefined : mill.machine.peekInput();
+	const next = output ?? input;
+	if (!next)
+		return false;
+	let physical;
+	try {
+		physical = new ItemStack(next.typeId, next.count);
+	} catch (error) {
+		console.warn(`[Create Bedrock] Could not recreate millstone inventory item: ${error}`);
+		return false;
+	}
+	const extracted = output ? mill.machine.extractOutput() : mill.machine.extractInput();
+	if (!extracted || extracted.typeId !== next.typeId || extracted.count !== next.count)
+		throw new Error("Millstone inventory changed while extracting an item");
+	inventory.setItem(slot, physical);
+	return true;
 }
 
 function processMill(key, getKineticWorld) {
@@ -171,17 +192,6 @@ function processMill(key, getKineticWorld) {
 	const update = mill.machine.tick(speed);
 	if (update)
 		persist();
-	if (!update?.completed)
-		return;
-
-	const dimension = world.getDimension(mill.dimensionId);
-	for (const output of update.outputs)
-		dimension.spawnItem(new ItemStack(output.typeId, output.count), {
-			x: mill.location.x + 0.5,
-			y: mill.location.y + 1,
-			z: mill.location.z + 0.5
-		});
-	persist();
 }
 
 export function registerMillstones(getKineticWorld) {
@@ -202,12 +212,24 @@ export function registerMillstones(getKineticWorld) {
 		if (mills.delete(keyFor(event.dimension.id, event.block.location)))
 			persist();
 	});
+	world.beforeEvents.playerBreakBlock.subscribe(event => {
+		if (event.block.typeId !== "createbedrock:millstone")
+			return;
+		if (!mills.get(keyFor(event.block.dimension.id, event.block.location))?.machine.hasContents())
+			return;
+		event.cancel = true;
+		event.player.sendMessage("Cannot remove a millstone while it stores or processes items.");
+	});
 
 	world.afterEvents.playerInteractWithBlock.subscribe(event => {
 		if (event.block.typeId !== "createbedrock:millstone")
 			return;
 
-		if (tryInsertFromPlayer(event.player, ensureMill(event.block)))
+		const mill = ensureMill(event.block);
+		const changed = event.itemStack
+			? tryInsertFromPlayer(event.player, mill)
+			: tryExtractToPlayer(event.player, mill);
+		if (changed)
 			persist();
 	});
 

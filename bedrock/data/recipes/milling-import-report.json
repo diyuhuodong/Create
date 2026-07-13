@@ -1,205 +1,1241 @@
 {
-	"imported": 46,
-	"skipped": [
-		"compat/ae2/certus_quartz.json",
-		"compat/ae2/ender_pearl.json",
-		"compat/ae2/fluix_crystal.json",
-		"compat/ae2/sky_stone_block.json",
-		"compat/atmospheric/arid_sandstone.json",
-		"compat/atmospheric/barrel_cactus.json",
-		"compat/atmospheric/firethorn.json",
-		"compat/atmospheric/forsythia.json",
-		"compat/atmospheric/gilia.json",
-		"compat/atmospheric/hot_monkey_brush.json",
-		"compat/atmospheric/red_arid_sandstone.json",
-		"compat/atmospheric/scalding_monkey_brush.json",
-		"compat/atmospheric/tall_yucca_flower.json",
-		"compat/atmospheric/warm_monkey_brush.json",
-		"compat/atmospheric/water_hyacinth.json",
-		"compat/atmospheric/yucca_flower.json",
-		"compat/autumnity/autumn_crocus.json",
-		"compat/biomesoplenty/black_sandstone.json",
-		"compat/biomesoplenty/blue_hydrangea.json",
-		"compat/biomesoplenty/burning_blossom.json",
-		"compat/biomesoplenty/cattail.json",
-		"compat/biomesoplenty/endbloom.json",
-		"compat/biomesoplenty/glowflower.json",
-		"compat/biomesoplenty/goldenrod.json",
-		"compat/biomesoplenty/icy_iris.json",
-		"compat/biomesoplenty/lavender.json",
-		"compat/biomesoplenty/orange_cosmos.json",
-		"compat/biomesoplenty/orange_sandstone.json",
-		"compat/biomesoplenty/pink_daffodil.json",
-		"compat/biomesoplenty/pink_hibiscus.json",
-		"compat/biomesoplenty/rose.json",
-		"compat/biomesoplenty/tall_lavender.json",
-		"compat/biomesoplenty/tall_white_lavender.json",
-		"compat/biomesoplenty/tiny_cactus.json",
-		"compat/biomesoplenty/violet.json",
-		"compat/biomesoplenty/waterlily.json",
-		"compat/biomesoplenty/white_lavender.json",
-		"compat/biomesoplenty/white_petals.json",
-		"compat/biomesoplenty/white_sandstone.json",
-		"compat/biomesoplenty/wildflower.json",
-		"compat/biomesoplenty/wilted_lily.json",
-		"compat/biomeswevegone/allium_flower_bush.json",
-		"compat/biomeswevegone/alpine_bellflower.json",
-		"compat/biomeswevegone/amaranth.json",
-		"compat/biomeswevegone/angelica.json",
-		"compat/biomeswevegone/begonia.json",
-		"compat/biomeswevegone/bistort.json",
-		"compat/biomeswevegone/black_rose.json",
-		"compat/biomeswevegone/black_sandstone.json",
-		"compat/biomeswevegone/blue_rose_bush.json",
-		"compat/biomeswevegone/blue_sage.json",
-		"compat/biomeswevegone/blue_sandstone.json",
-		"compat/biomeswevegone/california_poppy.json",
-		"compat/biomeswevegone/crocus.json",
-		"compat/biomeswevegone/cyan_amaranth.json",
-		"compat/biomeswevegone/cyan_rose.json",
-		"compat/biomeswevegone/cyan_tulip.json",
-		"compat/biomeswevegone/daffodil.json",
-		"compat/biomeswevegone/delphinium.json",
-		"compat/biomeswevegone/fairy_slipper.json",
-		"compat/biomeswevegone/firecracker_flower_bush.json",
-		"compat/biomeswevegone/foxglove.json",
-		"compat/biomeswevegone/golden_spined_cactus.json",
-		"compat/biomeswevegone/green_tulip.json",
-		"compat/biomeswevegone/guzmania.json",
-		"compat/biomeswevegone/horseweed.json",
-		"compat/biomeswevegone/hydrangea_bush.json",
-		"compat/biomeswevegone/incan_lily.json",
-		"compat/biomeswevegone/iris.json",
-		"compat/biomeswevegone/japanese_orchid.json",
-		"compat/biomeswevegone/kovan_flower.json",
-		"compat/biomeswevegone/lazarus_bellflower.json",
-		"compat/biomeswevegone/lollipop_flower.json",
-		"compat/biomeswevegone/magenta_amaranth.json",
-		"compat/biomeswevegone/magenta_tulip.json",
-		"compat/biomeswevegone/mini_cactus.json",
-		"compat/biomeswevegone/orange_amaranth.json",
-		"compat/biomeswevegone/orange_daisy.json",
-		"compat/biomeswevegone/osiria_rose.json",
-		"compat/biomeswevegone/peach_leather_flower.json",
-		"compat/biomeswevegone/pink_allium.json",
-		"compat/biomeswevegone/pink_allium_flower_bush.json",
-		"compat/biomeswevegone/pink_anemone.json",
-		"compat/biomeswevegone/pink_daffodil.json",
-		"compat/biomeswevegone/pink_sandstone.json",
-		"compat/biomeswevegone/prickly_pear_cactus.json",
-		"compat/biomeswevegone/protea_flower.json",
-		"compat/biomeswevegone/purple_amaranth.json",
-		"compat/biomeswevegone/purple_sage.json",
-		"compat/biomeswevegone/purple_sandstone.json",
-		"compat/biomeswevegone/purple_tulip.json",
-		"compat/biomeswevegone/richea.json",
-		"compat/biomeswevegone/rose.json",
-		"compat/biomeswevegone/silver_vase_flower.json",
-		"compat/biomeswevegone/snowdrops.json",
-		"compat/biomeswevegone/tall_allium.json",
-		"compat/biomeswevegone/tall_pink_allium.json",
-		"compat/biomeswevegone/tall_white_allium.json",
-		"compat/biomeswevegone/violet_leather_flower.json",
-		"compat/biomeswevegone/white_allium.json",
-		"compat/biomeswevegone/white_allium_flower_bush.json",
-		"compat/biomeswevegone/white_anemone.json",
-		"compat/biomeswevegone/white_puffball_cap.json",
-		"compat/biomeswevegone/white_sage.json",
-		"compat/biomeswevegone/white_sandstone.json",
-		"compat/biomeswevegone/windswept_sandstone.json",
-		"compat/biomeswevegone/winter_cyclamen.json",
-		"compat/biomeswevegone/winter_rose.json",
-		"compat/biomeswevegone/winter_scilla.json",
-		"compat/biomeswevegone/winter_succulent.json",
-		"compat/biomeswevegone/yellow_daffodil.json",
-		"compat/biomeswevegone/yellow_tulip.json",
-		"compat/botania/black_petal.json",
-		"compat/botania/blue_petal.json",
-		"compat/botania/brown_petal.json",
-		"compat/botania/cyan_petal.json",
-		"compat/botania/gray_petal.json",
-		"compat/botania/green_petal.json",
-		"compat/botania/light_blue_petal.json",
-		"compat/botania/light_gray_petal.json",
-		"compat/botania/lime_petal.json",
-		"compat/botania/magenta_petal.json",
-		"compat/botania/orange_petal.json",
-		"compat/botania/pink_petal.json",
-		"compat/botania/purple_petal.json",
-		"compat/botania/red_petal.json",
-		"compat/botania/white_petal.json",
-		"compat/botania/yellow_petal.json",
-		"compat/buzzier_bees/buttercup.json",
-		"compat/buzzier_bees/pink_clover.json",
-		"compat/buzzier_bees/white_clover.json",
-		"compat/druidcraft/lavender.json",
-		"compat/environmental/bird_of_paradise.json",
-		"compat/environmental/blue_delphinium.json",
-		"compat/environmental/bluebell.json",
-		"compat/environmental/cartwheel.json",
-		"compat/environmental/dianthus.json",
-		"compat/environmental/magenta_hibiscus.json",
-		"compat/environmental/orange_hibiscus.json",
-		"compat/environmental/pink_delphinium.json",
-		"compat/environmental/pink_hibiscus.json",
-		"compat/environmental/purple_delphinium.json",
-		"compat/environmental/purple_hibiscus.json",
-		"compat/environmental/red_hibiscus.json",
-		"compat/environmental/red_lotus_flower.json",
-		"compat/environmental/tasselflower.json",
-		"compat/environmental/violet.json",
-		"compat/environmental/white_delphinium.json",
-		"compat/environmental/white_lotus_flower.json",
-		"compat/environmental/yellow_hibiscus.json",
-		"compat/regions_unexplored/alpha_dandelion.json",
-		"compat/regions_unexplored/alpha_rose.json",
-		"compat/regions_unexplored/aster.json",
-		"compat/regions_unexplored/black_snowbelle.json",
-		"compat/regions_unexplored/bleeding_heart.json",
-		"compat/regions_unexplored/blue_lupine.json",
-		"compat/regions_unexplored/blue_snowbelle.json",
-		"compat/regions_unexplored/brown_snowbelle.json",
-		"compat/regions_unexplored/cactus_flower.json",
-		"compat/regions_unexplored/cyan_snowbelle.json",
-		"compat/regions_unexplored/daisy.json",
-		"compat/regions_unexplored/day_lily.json",
-		"compat/regions_unexplored/dorcel.json",
-		"compat/regions_unexplored/felicia_daisy.json",
-		"compat/regions_unexplored/fireweed.json",
-		"compat/regions_unexplored/glistering_bloom.json",
-		"compat/regions_unexplored/gray_snowbelle.json",
-		"compat/regions_unexplored/green_snowbelle.json",
-		"compat/regions_unexplored/hibiscus.json",
-		"compat/regions_unexplored/hyssop.json",
-		"compat/regions_unexplored/light_blue_snowbelle.json",
-		"compat/regions_unexplored/light_gray_snowbelle.json",
-		"compat/regions_unexplored/lime_snowbelle.json",
-		"compat/regions_unexplored/magenta_snowbelle.json",
-		"compat/regions_unexplored/mallow.json",
-		"compat/regions_unexplored/orange_coneflower.json",
-		"compat/regions_unexplored/orange_snowbelle.json",
-		"compat/regions_unexplored/pink_lupine.json",
-		"compat/regions_unexplored/pink_snowbelle.json",
-		"compat/regions_unexplored/poppy_bush.json",
-		"compat/regions_unexplored/purple_coneflower.json",
-		"compat/regions_unexplored/purple_lupine.json",
-		"compat/regions_unexplored/purple_snowbelle.json",
-		"compat/regions_unexplored/red_lupine.json",
-		"compat/regions_unexplored/red_snowbelle.json",
-		"compat/regions_unexplored/salmon_poppy_bush.json",
-		"compat/regions_unexplored/tassel.json",
-		"compat/regions_unexplored/tsubaki.json",
-		"compat/regions_unexplored/waratah.json",
-		"compat/regions_unexplored/white_snowbelle.json",
-		"compat/regions_unexplored/white_trillium.json",
-		"compat/regions_unexplored/wilting_trillium.json",
-		"compat/regions_unexplored/yellow_lupine.json",
-		"compat/regions_unexplored/yellow_snowbelle.json",
-		"compat/supplementaries/flax.json",
-		"compat/tconstruct/nercotic_bone.json",
-		"compat/upgrade_aquatic/flowering_rush.json",
-		"compat/upgrade_aquatic/pink_searocket.json",
-		"compat/upgrade_aquatic/white_searocket.json",
-		"wool.json"
+	"processor": "milling",
+	"schemaVersion": 1,
+	"summary": {
+		"manual_specification": 1,
+		"migrated": 46,
+		"unsupported_dependency": 199
+	},
+	"records": [
+		{
+			"source": "allium",
+			"status": "migrated",
+			"recipeId": "create:milling/allium"
+		},
+		{
+			"source": "andesite",
+			"status": "migrated",
+			"recipeId": "create:milling/andesite"
+		},
+		{
+			"source": "azure_bluet",
+			"status": "migrated",
+			"recipeId": "create:milling/azure_bluet"
+		},
+		{
+			"source": "beetroot",
+			"status": "migrated",
+			"recipeId": "create:milling/beetroot"
+		},
+		{
+			"source": "blue_orchid",
+			"status": "migrated",
+			"recipeId": "create:milling/blue_orchid"
+		},
+		{
+			"source": "bone",
+			"status": "migrated",
+			"recipeId": "create:milling/bone"
+		},
+		{
+			"source": "bone_meal",
+			"status": "migrated",
+			"recipeId": "create:milling/bone_meal"
+		},
+		{
+			"source": "cactus",
+			"status": "migrated",
+			"recipeId": "create:milling/cactus"
+		},
+		{
+			"source": "calcite",
+			"status": "migrated",
+			"recipeId": "create:milling/calcite"
+		},
+		{
+			"source": "charcoal",
+			"status": "migrated",
+			"recipeId": "create:milling/charcoal"
+		},
+		{
+			"source": "clay",
+			"status": "migrated",
+			"recipeId": "create:milling/clay"
+		},
+		{
+			"source": "coal",
+			"status": "migrated",
+			"recipeId": "create:milling/coal"
+		},
+		{
+			"source": "cobblestone",
+			"status": "migrated",
+			"recipeId": "create:milling/cobblestone"
+		},
+		{
+			"source": "cocoa_beans",
+			"status": "migrated",
+			"recipeId": "create:milling/cocoa_beans"
+		},
+		{
+			"source": "compat/ae2/certus_quartz",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/ae2/ender_pearl",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/ae2/fluix_crystal",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/ae2/sky_stone_block",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/atmospheric/arid_sandstone",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/atmospheric/barrel_cactus",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/atmospheric/firethorn",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/atmospheric/forsythia",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/atmospheric/gilia",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/atmospheric/hot_monkey_brush",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/atmospheric/red_arid_sandstone",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/atmospheric/scalding_monkey_brush",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/atmospheric/tall_yucca_flower",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/atmospheric/warm_monkey_brush",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/atmospheric/water_hyacinth",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/atmospheric/yucca_flower",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/autumnity/autumn_crocus",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/black_sandstone",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/blue_hydrangea",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/burning_blossom",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/cattail",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/endbloom",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/glowflower",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/goldenrod",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/icy_iris",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/lavender",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/orange_cosmos",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/orange_sandstone",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/pink_daffodil",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/pink_hibiscus",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/rose",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/tall_lavender",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/tall_white_lavender",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/tiny_cactus",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/violet",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/waterlily",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/white_lavender",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/white_petals",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/white_sandstone",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/wildflower",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/wilted_lily",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/allium_flower_bush",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/alpine_bellflower",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/amaranth",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/angelica",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/begonia",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/bistort",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/black_rose",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/black_sandstone",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/blue_rose_bush",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/blue_sage",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/blue_sandstone",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/california_poppy",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/crocus",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/cyan_amaranth",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/cyan_rose",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/cyan_tulip",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/daffodil",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/delphinium",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/fairy_slipper",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/firecracker_flower_bush",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/foxglove",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/golden_spined_cactus",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/green_tulip",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/guzmania",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/horseweed",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/hydrangea_bush",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/incan_lily",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/iris",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/japanese_orchid",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/kovan_flower",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/lazarus_bellflower",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/lollipop_flower",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/magenta_amaranth",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/magenta_tulip",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/mini_cactus",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/orange_amaranth",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/orange_daisy",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/osiria_rose",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/peach_leather_flower",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/pink_allium",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/pink_allium_flower_bush",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/pink_anemone",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/pink_daffodil",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/pink_sandstone",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/prickly_pear_cactus",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/protea_flower",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/purple_amaranth",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/purple_sage",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/purple_sandstone",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/purple_tulip",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/richea",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/rose",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/silver_vase_flower",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/snowdrops",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/tall_allium",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/tall_pink_allium",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/tall_white_allium",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/violet_leather_flower",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/white_allium",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/white_allium_flower_bush",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/white_anemone",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/white_puffball_cap",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/white_sage",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/white_sandstone",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/windswept_sandstone",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/winter_cyclamen",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/winter_rose",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/winter_scilla",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/winter_succulent",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/yellow_daffodil",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/yellow_tulip",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/botania/black_petal",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/botania/blue_petal",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/botania/brown_petal",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/botania/cyan_petal",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/botania/gray_petal",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/botania/green_petal",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/botania/light_blue_petal",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/botania/light_gray_petal",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/botania/lime_petal",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/botania/magenta_petal",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/botania/orange_petal",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/botania/pink_petal",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/botania/purple_petal",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/botania/red_petal",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/botania/white_petal",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/botania/yellow_petal",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/buzzier_bees/buttercup",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/buzzier_bees/pink_clover",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/buzzier_bees/white_clover",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/druidcraft/lavender",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/bird_of_paradise",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/blue_delphinium",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/bluebell",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/cartwheel",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/dianthus",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/magenta_hibiscus",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/orange_hibiscus",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/pink_delphinium",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/pink_hibiscus",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/purple_delphinium",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/purple_hibiscus",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/red_hibiscus",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/red_lotus_flower",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/tasselflower",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/violet",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/white_delphinium",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/white_lotus_flower",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/environmental/yellow_hibiscus",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/alpha_dandelion",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/alpha_rose",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/aster",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/black_snowbelle",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/bleeding_heart",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/blue_lupine",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/blue_snowbelle",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/brown_snowbelle",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/cactus_flower",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/cyan_snowbelle",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/daisy",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/day_lily",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/dorcel",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/felicia_daisy",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/fireweed",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/glistering_bloom",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/gray_snowbelle",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/green_snowbelle",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/hibiscus",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/hyssop",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/light_blue_snowbelle",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/light_gray_snowbelle",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/lime_snowbelle",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/magenta_snowbelle",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/mallow",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/orange_coneflower",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/orange_snowbelle",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/pink_lupine",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/pink_snowbelle",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/poppy_bush",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/purple_coneflower",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/purple_lupine",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/purple_snowbelle",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/red_lupine",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/red_snowbelle",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/salmon_poppy_bush",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/tassel",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/tsubaki",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/waratah",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/white_snowbelle",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/white_trillium",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/wilting_trillium",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/yellow_lupine",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/regions_unexplored/yellow_snowbelle",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/supplementaries/flax",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/tconstruct/nercotic_bone",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/upgrade_aquatic/flowering_rush",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/upgrade_aquatic/pink_searocket",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/upgrade_aquatic/white_searocket",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "cornflower",
+			"status": "migrated",
+			"recipeId": "create:milling/cornflower"
+		},
+		{
+			"source": "dandelion",
+			"status": "migrated",
+			"recipeId": "create:milling/dandelion"
+		},
+		{
+			"source": "dripstone_block",
+			"status": "migrated",
+			"recipeId": "create:milling/dripstone_block"
+		},
+		{
+			"source": "fern",
+			"status": "migrated",
+			"recipeId": "create:milling/fern"
+		},
+		{
+			"source": "granite",
+			"status": "migrated",
+			"recipeId": "create:milling/granite"
+		},
+		{
+			"source": "gravel",
+			"status": "migrated",
+			"recipeId": "create:milling/gravel"
+		},
+		{
+			"source": "ink_sac",
+			"status": "migrated",
+			"recipeId": "create:milling/ink_sac"
+		},
+		{
+			"source": "lapis_lazuli",
+			"status": "migrated",
+			"recipeId": "create:milling/lapis_lazuli"
+		},
+		{
+			"source": "large_fern",
+			"status": "migrated",
+			"recipeId": "create:milling/large_fern"
+		},
+		{
+			"source": "lilac",
+			"status": "migrated",
+			"recipeId": "create:milling/lilac"
+		},
+		{
+			"source": "lily_of_the_valley",
+			"status": "migrated",
+			"recipeId": "create:milling/lily_of_the_valley"
+		},
+		{
+			"source": "orange_tulip",
+			"status": "migrated",
+			"recipeId": "create:milling/orange_tulip"
+		},
+		{
+			"source": "oxeye_daisy",
+			"status": "migrated",
+			"recipeId": "create:milling/oxeye_daisy"
+		},
+		{
+			"source": "peony",
+			"status": "migrated",
+			"recipeId": "create:milling/peony"
+		},
+		{
+			"source": "pink_petals",
+			"status": "migrated",
+			"recipeId": "create:milling/pink_petals"
+		},
+		{
+			"source": "pink_tulip",
+			"status": "migrated",
+			"recipeId": "create:milling/pink_tulip"
+		},
+		{
+			"source": "pitcher_plant",
+			"status": "migrated",
+			"recipeId": "create:milling/pitcher_plant"
+		},
+		{
+			"source": "poppy",
+			"status": "migrated",
+			"recipeId": "create:milling/poppy"
+		},
+		{
+			"source": "red_tulip",
+			"status": "migrated",
+			"recipeId": "create:milling/red_tulip"
+		},
+		{
+			"source": "rose_bush",
+			"status": "migrated",
+			"recipeId": "create:milling/rose_bush"
+		},
+		{
+			"source": "saddle",
+			"status": "migrated",
+			"recipeId": "create:milling/saddle"
+		},
+		{
+			"source": "sandstone",
+			"status": "migrated",
+			"recipeId": "create:milling/sandstone"
+		},
+		{
+			"source": "sea_pickle",
+			"status": "migrated",
+			"recipeId": "create:milling/sea_pickle"
+		},
+		{
+			"source": "short_grass",
+			"status": "migrated",
+			"recipeId": "create:milling/short_grass"
+		},
+		{
+			"source": "sugar_cane",
+			"status": "migrated",
+			"recipeId": "create:milling/sugar_cane"
+		},
+		{
+			"source": "sunflower",
+			"status": "migrated",
+			"recipeId": "create:milling/sunflower"
+		},
+		{
+			"source": "tall_grass",
+			"status": "migrated",
+			"recipeId": "create:milling/tall_grass"
+		},
+		{
+			"source": "terracotta",
+			"status": "migrated",
+			"recipeId": "create:milling/terracotta"
+		},
+		{
+			"source": "torchflower",
+			"status": "migrated",
+			"recipeId": "create:milling/torchflower"
+		},
+		{
+			"source": "wheat",
+			"status": "migrated",
+			"recipeId": "create:milling/wheat"
+		},
+		{
+			"source": "white_tulip",
+			"status": "migrated",
+			"recipeId": "create:milling/white_tulip"
+		},
+		{
+			"source": "wither_rose",
+			"status": "migrated",
+			"recipeId": "create:milling/wither_rose"
+		},
+		{
+			"source": "wool",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		}
 	]
 }

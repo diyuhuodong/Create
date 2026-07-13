@@ -13,10 +13,10 @@ test("CrushingWheelMachine pauses without kinetic speed and preserves bonus outp
 			{ typeId: "minecraft:amethyst_shard", count: 1, chance: 0.5 }
 		]
 	}]);
-	assert.equal(wheel.tryInsert({ typeId: "minecraft:amethyst_block", count: 1 }).recipeId, "create:crushing/amethyst");
+	assert.equal(wheel.tryInsert({ typeId: "minecraft:amethyst_block", count: 1 }, { random: () => 0.4 }).recipeId, "create:crushing/amethyst");
 	assert.equal(wheel.tick(0), undefined);
 	assert.equal(wheel.tick(16).completed, false);
-	assert.deepEqual(wheel.tick(16, () => 0.4).outputs, [
+	assert.deepEqual(wheel.tick(16).outputs, [
 		{ typeId: "minecraft:amethyst_shard", count: 3, chance: 1 },
 		{ typeId: "minecraft:amethyst_shard", count: 1, chance: 0.5 }
 	]);

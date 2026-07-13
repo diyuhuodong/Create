@@ -1,21 +1,6 @@
 // Generated from src/generated/resources/data/create/recipe/pressing.
 export const PRESSING_RECIPES = [
 	{
-		"id": "create:pressing/cardboard:createbedrock:pulp",
-		"input": {
-			"typeId": "createbedrock:pulp",
-			"count": 1
-		},
-		"processingTicks": 100,
-		"outputs": [
-			{
-				"typeId": "createbedrock:cardboard",
-				"count": 1,
-				"chance": 1
-			}
-		]
-	},
-	{
 		"id": "create:pressing/copper_ingot:minecraft:copper_ingot",
 		"input": {
 			"typeId": "minecraft:copper_ingot",

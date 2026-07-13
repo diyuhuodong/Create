@@ -1,204 +1,1066 @@
 {
-	"imported": 12,
-	"skipped": [
-		"aluminum_ore",
-		"asurine",
-		"asurine_recycling",
-		"coal_ore",
-		"compat/aether/ambrosium_ore",
-		"compat/aether/zanite_ore",
-		"compat/biomesoplenty/rose_quartz",
-		"compat/biomeswevegone/red_rock",
-		"compat/druidcraft/amber_ore",
-		"compat/druidcraft/fiery_glass_ore",
-		"compat/druidcraft/moonstone_ore",
-		"compat/elementaryores/ore_coal_end",
-		"compat/elementaryores/ore_coal_nether",
-		"compat/elementaryores/ore_copper_end",
-		"compat/elementaryores/ore_copper_nether",
-		"compat/elementaryores/ore_diamond_end",
-		"compat/elementaryores/ore_diamond_nether",
-		"compat/elementaryores/ore_emerald_end",
-		"compat/elementaryores/ore_emerald_nether",
-		"compat/elementaryores/ore_ender_end",
-		"compat/elementaryores/ore_ghast_nether",
-		"compat/elementaryores/ore_iron_nether",
-		"compat/elementaryores/ore_lapis_end",
-		"compat/elementaryores/ore_lapis_nether",
-		"compat/elementaryores/ore_redstone_end",
-		"compat/exnihilosequentia/andesite",
-		"compat/exnihilosequentia/crushed_diorite",
-		"compat/exnihilosequentia/crushed_netherrack",
-		"compat/exnihilosequentia/diorite",
-		"compat/exnihilosequentia/dust",
-		"compat/exnihilosequentia/end_stone",
-		"compat/exnihilosequentia/granite",
-		"compat/exnihilosequentia/netherrack",
-		"compat/galosphere/allurite",
-		"compat/galosphere/amethyst",
-		"compat/galosphere/lumiere",
-		"compat/immersiveengineering/coal_coke",
-		"compat/immersiveengineering/coke_block",
-		"compat/immersiveengineering/slag",
-		"compat/neapolitan/ice",
-		"compat/quark/moss_block",
-		"compat/silentgems/alexandrite_ore",
-		"compat/silentgems/ammolite_ore",
-		"compat/silentgems/aquamarine_ore",
-		"compat/silentgems/black_diamond_ore",
-		"compat/silentgems/carnelian_ore",
-		"compat/silentgems/citrine_ore",
-		"compat/silentgems/deepslate_alexandrite_ore",
-		"compat/silentgems/deepslate_ammolite_ore",
-		"compat/silentgems/deepslate_aquamarine_ore",
-		"compat/silentgems/deepslate_black_diamond_ore",
-		"compat/silentgems/deepslate_carnelian_ore",
-		"compat/silentgems/deepslate_citrine_ore",
-		"compat/silentgems/deepslate_garnet_ore",
-		"compat/silentgems/deepslate_heliodor_ore",
-		"compat/silentgems/deepslate_iolite_ore",
-		"compat/silentgems/deepslate_kyanite_ore",
-		"compat/silentgems/deepslate_moldavite_ore",
-		"compat/silentgems/deepslate_opal_ore",
-		"compat/silentgems/deepslate_pearl_ore",
-		"compat/silentgems/deepslate_peridot_ore",
-		"compat/silentgems/deepslate_rose_quartz_ore",
-		"compat/silentgems/deepslate_ruby_ore",
-		"compat/silentgems/deepslate_sapphire_ore",
-		"compat/silentgems/deepslate_tanzanite_ore",
-		"compat/silentgems/deepslate_topaz_ore",
-		"compat/silentgems/deepslate_turquoise_ore",
-		"compat/silentgems/deepslate_white_diamond_ore",
-		"compat/silentgems/end_alexandrite_ore",
-		"compat/silentgems/end_ammolite_ore",
-		"compat/silentgems/end_aquamarine_ore",
-		"compat/silentgems/end_black_diamond_ore",
-		"compat/silentgems/end_carnelian_ore",
-		"compat/silentgems/end_citrine_ore",
-		"compat/silentgems/end_garnet_ore",
-		"compat/silentgems/end_heliodor_ore",
-		"compat/silentgems/end_iolite_ore",
-		"compat/silentgems/end_kyanite_ore",
-		"compat/silentgems/end_moldavite_ore",
-		"compat/silentgems/end_opal_ore",
-		"compat/silentgems/end_pearl_ore",
-		"compat/silentgems/end_peridot_ore",
-		"compat/silentgems/end_rose_quartz_ore",
-		"compat/silentgems/end_ruby_ore",
-		"compat/silentgems/end_sapphire_ore",
-		"compat/silentgems/end_tanzanite_ore",
-		"compat/silentgems/end_topaz_ore",
-		"compat/silentgems/end_turquoise_ore",
-		"compat/silentgems/end_white_diamond_ore",
-		"compat/silentgems/garnet_ore",
-		"compat/silentgems/heliodor_ore",
-		"compat/silentgems/iolite_ore",
-		"compat/silentgems/kyanite_ore",
-		"compat/silentgems/moldavite_ore",
-		"compat/silentgems/nether_alexandrite_ore",
-		"compat/silentgems/nether_ammolite_ore",
-		"compat/silentgems/nether_aquamarine_ore",
-		"compat/silentgems/nether_black_diamond_ore",
-		"compat/silentgems/nether_carnelian_ore",
-		"compat/silentgems/nether_citrine_ore",
-		"compat/silentgems/nether_garnet_ore",
-		"compat/silentgems/nether_heliodor_ore",
-		"compat/silentgems/nether_iolite_ore",
-		"compat/silentgems/nether_kyanite_ore",
-		"compat/silentgems/nether_moldavite_ore",
-		"compat/silentgems/nether_opal_ore",
-		"compat/silentgems/nether_pearl_ore",
-		"compat/silentgems/nether_peridot_ore",
-		"compat/silentgems/nether_rose_quartz_ore",
-		"compat/silentgems/nether_ruby_ore",
-		"compat/silentgems/nether_sapphire_ore",
-		"compat/silentgems/nether_tanzanite_ore",
-		"compat/silentgems/nether_topaz_ore",
-		"compat/silentgems/nether_turquoise_ore",
-		"compat/silentgems/nether_white_diamond_ore",
-		"compat/silentgems/opal_ore",
-		"compat/silentgems/pearl_ore",
-		"compat/silentgems/peridot_ore",
-		"compat/silentgems/rose_quartz_ore",
-		"compat/silentgems/ruby_ore",
-		"compat/silentgems/sapphire_ore",
-		"compat/silentgems/tanzanite_ore",
-		"compat/silentgems/topaz_ore",
-		"compat/silentgems/turquoise_ore",
-		"compat/silentgems/white_diamond_ore",
-		"compat/simplefarming/barley",
-		"compat/simplefarming/oat",
-		"compat/simplefarming/rice",
-		"compat/simplefarming/rye",
-		"compat/thermal/apatite_ore",
-		"compat/thermal/cinnabar_ore",
-		"compat/thermal/niter_ore",
-		"compat/thermal/sulfur_ore",
-		"copper_ore",
-		"crimsite",
-		"crimsite_recycling",
-		"deepslate_coal_ore",
-		"deepslate_copper_ore",
-		"deepslate_diamond_ore",
-		"deepslate_emerald_ore",
-		"deepslate_gold_ore",
-		"deepslate_iron_ore",
-		"deepslate_lapis_ore",
-		"deepslate_redstone_ore",
-		"deepslate_zinc_ore",
-		"diamond_ore",
-		"diorite_recycling",
-		"emerald_ore",
-		"gilded_blackstone",
-		"gold_ore",
-		"iron_ore",
-		"lapis_ore",
-		"lead_ore",
-		"nether_gold_ore",
-		"nether_quartz_ore",
-		"netherrack",
-		"nickel_ore",
-		"obsidian",
-		"ochrum",
-		"ochrum_recycling",
-		"osmium_ore",
-		"platinum_ore",
-		"quicksilver_ore",
-		"raw_aluminum",
-		"raw_aluminum_block",
-		"raw_copper",
-		"raw_copper_block",
-		"raw_gold",
-		"raw_gold_block",
-		"raw_iron",
-		"raw_iron_block",
-		"raw_lead",
-		"raw_lead_block",
-		"raw_nickel",
-		"raw_nickel_block",
-		"raw_osmium",
-		"raw_osmium_block",
-		"raw_platinum",
-		"raw_platinum_block",
-		"raw_quicksilver",
-		"raw_quicksilver_block",
-		"raw_silver",
-		"raw_silver_block",
-		"raw_tin",
-		"raw_tin_block",
-		"raw_uranium",
-		"raw_uranium_block",
-		"raw_zinc",
-		"raw_zinc_block",
-		"redstone_ore",
-		"silver_ore",
-		"tin_ore",
-		"tuff",
-		"tuff_recycling",
-		"uranium_ore",
-		"veridium",
-		"veridium_recycling",
-		"wool",
-		"zinc_ore"
+	"processor": "crushing",
+	"schemaVersion": 1,
+	"summary": {
+		"manual_specification": 42,
+		"migrated": 12,
+		"unsupported_dependency": 157
+	},
+	"records": [
+		{
+			"source": "aluminum_ore",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "amethyst_block",
+			"status": "migrated",
+			"recipeId": "create:crushing/amethyst_block"
+		},
+		{
+			"source": "amethyst_cluster",
+			"status": "migrated",
+			"recipeId": "create:crushing/amethyst_cluster"
+		},
+		{
+			"source": "asurine",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "asurine_recycling",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "blaze_rod",
+			"status": "migrated",
+			"recipeId": "create:crushing/blaze_rod"
+		},
+		{
+			"source": "coal_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "compat/aether/ambrosium_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/aether/zanite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomesoplenty/rose_quartz",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/biomeswevegone/red_rock",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/druidcraft/amber_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/druidcraft/fiery_glass_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/druidcraft/moonstone_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/elementaryores/ore_coal_end",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/elementaryores/ore_coal_nether",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/elementaryores/ore_copper_end",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/elementaryores/ore_copper_nether",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/elementaryores/ore_diamond_end",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/elementaryores/ore_diamond_nether",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/elementaryores/ore_emerald_end",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/elementaryores/ore_emerald_nether",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/elementaryores/ore_ender_end",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/elementaryores/ore_ghast_nether",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/elementaryores/ore_iron_nether",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/elementaryores/ore_lapis_end",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/elementaryores/ore_lapis_nether",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/elementaryores/ore_redstone_end",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/exnihilosequentia/andesite",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/exnihilosequentia/crushed_diorite",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/exnihilosequentia/crushed_netherrack",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/exnihilosequentia/diorite",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/exnihilosequentia/dust",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/exnihilosequentia/end_stone",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/exnihilosequentia/granite",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/exnihilosequentia/netherrack",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/galosphere/allurite",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/galosphere/amethyst",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/galosphere/lumiere",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/immersiveengineering/coal_coke",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/immersiveengineering/coke_block",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/immersiveengineering/slag",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/neapolitan/ice",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/quark/moss_block",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/alexandrite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/ammolite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/aquamarine_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/black_diamond_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/carnelian_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/citrine_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_alexandrite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_ammolite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_aquamarine_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_black_diamond_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_carnelian_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_citrine_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_garnet_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_heliodor_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_iolite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_kyanite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_moldavite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_opal_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_pearl_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_peridot_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_rose_quartz_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_ruby_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_sapphire_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_tanzanite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_topaz_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_turquoise_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/deepslate_white_diamond_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_alexandrite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_ammolite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_aquamarine_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_black_diamond_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_carnelian_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_citrine_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_garnet_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_heliodor_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_iolite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_kyanite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_moldavite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_opal_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_pearl_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_peridot_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_rose_quartz_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_ruby_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_sapphire_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_tanzanite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_topaz_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_turquoise_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/end_white_diamond_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/garnet_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/heliodor_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/iolite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/kyanite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/moldavite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_alexandrite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_ammolite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_aquamarine_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_black_diamond_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_carnelian_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_citrine_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_garnet_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_heliodor_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_iolite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_kyanite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_moldavite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_opal_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_pearl_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_peridot_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_rose_quartz_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_ruby_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_sapphire_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_tanzanite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_topaz_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_turquoise_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/nether_white_diamond_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/opal_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/pearl_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/peridot_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/rose_quartz_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/ruby_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/sapphire_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/tanzanite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/topaz_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/turquoise_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/silentgems/white_diamond_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/simplefarming/barley",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/simplefarming/oat",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/simplefarming/rice",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/simplefarming/rye",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/thermal/apatite_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/thermal/cinnabar_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/thermal/niter_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "compat/thermal/sulfur_ore",
+			"status": "unsupported_dependency",
+			"reason": "compatibility_recipe"
+		},
+		{
+			"source": "copper_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "crimsite",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "crimsite_recycling",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "deepslate_coal_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "deepslate_copper_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "deepslate_diamond_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "deepslate_emerald_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "deepslate_gold_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "deepslate_iron_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "deepslate_lapis_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "deepslate_redstone_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "deepslate_zinc_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "diamond_horse_armor",
+			"status": "migrated",
+			"recipeId": "create:crushing/diamond_horse_armor"
+		},
+		{
+			"source": "diamond_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "diorite",
+			"status": "migrated",
+			"recipeId": "create:crushing/diorite"
+		},
+		{
+			"source": "diorite_recycling",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "emerald_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "gilded_blackstone",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "glowstone",
+			"status": "migrated",
+			"recipeId": "create:crushing/glowstone"
+		},
+		{
+			"source": "gold_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "golden_horse_armor",
+			"status": "migrated",
+			"recipeId": "create:crushing/golden_horse_armor"
+		},
+		{
+			"source": "gravel",
+			"status": "migrated",
+			"recipeId": "create:crushing/gravel"
+		},
+		{
+			"source": "iron_horse_armor",
+			"status": "migrated",
+			"recipeId": "create:crushing/iron_horse_armor"
+		},
+		{
+			"source": "iron_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "lapis_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "lead_ore",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "leather_horse_armor",
+			"status": "migrated",
+			"recipeId": "create:crushing/leather_horse_armor"
+		},
+		{
+			"source": "nether_gold_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "nether_quartz_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "nether_wart_block",
+			"status": "migrated",
+			"recipeId": "create:crushing/nether_wart_block"
+		},
+		{
+			"source": "netherrack",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "nickel_ore",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "obsidian",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "ochrum",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "ochrum_recycling",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "osmium_ore",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "platinum_ore",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "prismarine_crystals",
+			"status": "migrated",
+			"recipeId": "create:crushing/prismarine_crystals"
+		},
+		{
+			"source": "quicksilver_ore",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_aluminum",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_aluminum_block",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_copper",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_copper_block",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_gold",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_gold_block",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_iron",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_iron_block",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_lead",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_lead_block",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_nickel",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_nickel_block",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_osmium",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_osmium_block",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_platinum",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_platinum_block",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_quicksilver",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_quicksilver_block",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_silver",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_silver_block",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_tin",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_tin_block",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_uranium",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_uranium_block",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_zinc",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "raw_zinc_block",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "redstone_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "silver_ore",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "tin_ore",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "tuff",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "tuff_recycling",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "uranium_ore",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "veridium",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		},
+		{
+			"source": "veridium_recycling",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "wool",
+			"status": "manual_specification",
+			"reason": "unsupported_recipe_shape"
+		},
+		{
+			"source": "zinc_ore",
+			"status": "unsupported_dependency",
+			"reason": "unavailable_item"
+		}
 	]
 }
