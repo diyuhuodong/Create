@@ -14,6 +14,7 @@ const TEXTURES = [
 	"bearing_top.png",
 	"cogwheel.png",
 	"cogwheel_axis.png",
+	"crushing_wheel_plates.png",
 	"gearbox.png",
 	"gearbox_top.png",
 	"mechanical_press_bottom.png",

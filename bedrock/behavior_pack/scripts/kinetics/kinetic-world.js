@@ -23,6 +23,10 @@ export const KINETIC_BLOCKS = {
 	"createbedrock:mechanical_press": {
 		kind: "consumer",
 		stressImpact: 8
+	},
+	"createbedrock:crushing_wheel": {
+		kind: "consumer",
+		stressImpact: 8
 	}
 };
 

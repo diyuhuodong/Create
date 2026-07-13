@@ -14,6 +14,9 @@
     "createbedrock_cogwheel_axis": {
       "textures": "textures/create_java/block/cogwheel_axis"
     },
+    "createbedrock_crushing_wheel": {
+      "textures": "textures/create_java/block/crushing_wheel_plates"
+    },
     "createbedrock_gearbox": {
       "textures": "textures/create_java/block/gearbox"
     },

@@ -6,7 +6,7 @@ This directory contains the Bedrock Add-On reimplementation of Create. It is iso
 
 Phase 0 establishes a reproducible Behavior Pack (BP), Resource Pack (RP), validation tooling, and a source-derived migration matrix. It does not yet claim runtime feature parity.
 
-The first runtime slices are `hand_crank -> shaft/cogwheel -> millstone` and `hand_crank -> mechanical_press`. Mechanical-bearing and basic track/train prototypes are also present. `npm run build` stages selected Java block textures and converts the direct-element models for the crank base, shaft, cogwheel, millstone, press, and bearing into generated Bedrock geometry. The contraption and train marker entities also have client geometry and render controllers. These generated/imported resources are not duplicated in source control. Parent composition, OBJ tracks, animated components, and the remaining model catalog still need explicit conversion before visual parity is claimed.
+The first runtime slices are `hand_crank -> shaft/cogwheel -> millstone`, `hand_crank -> mechanical_press`, and `hand_crank -> crushing_wheel`. Mechanical-bearing and basic track/train prototypes are also present. `npm run build` stages selected Java block textures and converts the direct-element models for the crank base, shaft, cogwheel, millstone, press, and bearing into generated Bedrock geometry. The contraption and train marker entities also have client geometry and render controllers. These generated/imported resources are not duplicated in source control. The crushing wheel and tracks use Java OBJ models, which require a separate converter; the current wheel uses its imported plate texture on temporary block geometry. Parent composition, animated components, and the remaining model catalog still need explicit conversion before visual parity is claimed.
 
 ## Commands
 
@@ -14,6 +14,7 @@ Run commands from this directory with Node.js 22 or newer:
 
 ```bash
 npm run matrix
+npm run recipes:crushing
 npm run recipes:pressing
 npm run validate
 npm run build
@@ -24,6 +25,8 @@ npm test
 `npm run matrix` updates `data/migration-matrix.json` from the Java registration entry points. The generator records statically declared identifiers; dynamic registrations remain manual-review items until they are explicitly mapped.
 
 `npm run recipes:pressing` imports the non-compat pressing recipes that can be represented with available Bedrock items. The import report identifies recipes still blocked on missing items or compatibility mappings.
+
+`npm run recipes:crushing` imports crushing recipes with native Bedrock inputs and outputs. The report tracks recipes blocked on Create-specific materials or compatibility content.
 
 `npm run deploy:win` copies built packs to the Windows Bedrock development directory specified by `BEDROCK_DEV_ROOT`. `npm run pack` creates a `.mcaddon` archive after a successful build.
 

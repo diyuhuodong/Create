@@ -1,0 +1,283 @@
+// Generated from src/generated/resources/data/create/recipe/crushing.
+export const CRUSHING_RECIPES = [
+	{
+		"id": "create:crushing/amethyst_block",
+		"input": {
+			"typeId": "minecraft:amethyst_block",
+			"count": 1
+		},
+		"processingTicks": 150,
+		"outputs": [
+			{
+				"typeId": "minecraft:amethyst_shard",
+				"count": 3,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:amethyst_shard",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/amethyst_cluster",
+		"input": {
+			"typeId": "minecraft:amethyst_cluster",
+			"count": 1
+		},
+		"processingTicks": 150,
+		"outputs": [
+			{
+				"typeId": "minecraft:amethyst_shard",
+				"count": 7,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:amethyst_shard",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/blaze_rod",
+		"input": {
+			"typeId": "minecraft:blaze_rod",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:blaze_powder",
+				"count": 3,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:blaze_powder",
+				"count": 3,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/diamond_horse_armor",
+		"input": {
+			"typeId": "minecraft:diamond_horse_armor",
+			"count": 1
+		},
+		"processingTicks": 200,
+		"outputs": [
+			{
+				"typeId": "minecraft:diamond",
+				"count": 1,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:leather",
+				"count": 2,
+				"chance": 0.5
+			},
+			{
+				"typeId": "minecraft:diamond",
+				"count": 3,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:string",
+				"count": 2,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/diorite",
+		"input": {
+			"typeId": "minecraft:diorite",
+			"count": 1
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:quartz",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/glowstone",
+		"input": {
+			"typeId": "minecraft:glowstone",
+			"count": 1
+		},
+		"processingTicks": 150,
+		"outputs": [
+			{
+				"typeId": "minecraft:glowstone_dust",
+				"count": 3,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:glowstone_dust",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/golden_horse_armor",
+		"input": {
+			"typeId": "minecraft:golden_horse_armor",
+			"count": 1
+		},
+		"processingTicks": 200,
+		"outputs": [
+			{
+				"typeId": "minecraft:gold_ingot",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:leather",
+				"count": 2,
+				"chance": 0.5
+			},
+			{
+				"typeId": "minecraft:gold_ingot",
+				"count": 2,
+				"chance": 0.5
+			},
+			{
+				"typeId": "minecraft:string",
+				"count": 2,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 8,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/gravel",
+		"input": {
+			"typeId": "minecraft:gravel",
+			"count": 1
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "minecraft:sand",
+				"count": 1,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:flint",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:clay_ball",
+				"count": 1,
+				"chance": 0.05
+			}
+		]
+	},
+	{
+		"id": "create:crushing/iron_horse_armor",
+		"input": {
+			"typeId": "minecraft:iron_horse_armor",
+			"count": 1
+		},
+		"processingTicks": 200,
+		"outputs": [
+			{
+				"typeId": "minecraft:iron_ingot",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:leather",
+				"count": 1,
+				"chance": 0.5
+			},
+			{
+				"typeId": "minecraft:iron_ingot",
+				"count": 1,
+				"chance": 0.5
+			},
+			{
+				"typeId": "minecraft:string",
+				"count": 2,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 4,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/leather_horse_armor",
+		"input": {
+			"typeId": "minecraft:leather_horse_armor",
+			"count": 1
+		},
+		"processingTicks": 200,
+		"outputs": [
+			{
+				"typeId": "minecraft:leather",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:leather",
+				"count": 2,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/nether_wart_block",
+		"input": {
+			"typeId": "minecraft:nether_wart_block",
+			"count": 1
+		},
+		"processingTicks": 150,
+		"outputs": [
+			{
+				"typeId": "minecraft:nether_wart",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/prismarine_crystals",
+		"input": {
+			"typeId": "minecraft:prismarine_crystals",
+			"count": 1
+		},
+		"processingTicks": 150,
+		"outputs": [
+			{
+				"typeId": "minecraft:quartz",
+				"count": 1,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:quartz",
+				"count": 2,
+				"chance": 0.5
+			},
+			{
+				"typeId": "minecraft:glowstone_dust",
+				"count": 2,
+				"chance": 0.1
+			}
+		]
+	}
+];
