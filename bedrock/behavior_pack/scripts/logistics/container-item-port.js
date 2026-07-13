@@ -56,6 +56,10 @@ export class ContainerItemPort {
 		return this.#id;
 	}
 
+	get transactionStorage() {
+		return "external";
+	}
+
 	extract(reservation, { receiptId } = {}) {
 		const entry = assertReservation(reservation, this.#id);
 		if (receiptId !== undefined) {

@@ -68,6 +68,10 @@ export class ItemPort {
 		return this.#id;
 	}
 
+	get transactionStorage() {
+		return "managed";
+	}
+
 	insert(stack, { receiptId } = {}) {
 		const requested = normalizeStack(stack);
 		if (receiptId !== undefined) {
@@ -211,7 +215,10 @@ export class ItemPort {
 				throw new TypeError("Item port insertion receipts are invalid");
 			insertionReceipts.set(receiptId, { ...receipt });
 		}
-		this.#slots = snapshot.slots.map(stack => stack && cloneItemStack(stack));
+		// JSON persistence represents sparse/undefined array entries as null.
+		// Normalize both forms so a restored managed port retains the same empty
+		// slot semantics as an in-memory port.
+		this.#slots = snapshot.slots.map(stack => stack === undefined || stack === null ? undefined : cloneItemStack(stack));
 		this.#revision = snapshot.revision;
 		this.#extractionReceipts = extractionReceipts;
 		this.#insertionReceipts = insertionReceipts;

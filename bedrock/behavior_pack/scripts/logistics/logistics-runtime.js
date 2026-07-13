@@ -21,6 +21,8 @@ const transfers = new DurableItemTransferRuntime({
 function validatePort(port) {
 	if (!port || typeof port.id !== "string" || typeof port.reserve !== "function" || typeof port.extract !== "function" || typeof port.insert !== "function")
 		throw new TypeError("Logistics ports require id, reserve, extract, and insert operations");
+	if (port.transactionStorage !== "managed" || typeof port.snapshot !== "function" || typeof port.restore !== "function")
+		throw new TypeError("Registered logistics ports must use managed transaction storage");
 }
 
 export function beginItemTransfer(options) {

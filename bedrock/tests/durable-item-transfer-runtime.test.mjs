@@ -66,7 +66,6 @@ test("DurableItemTransferRuntime restores a durable intent before its source is 
 	assert.deepEqual(source.snapshot().slots, [{ count: 4, typeId: "minecraft:gold_ingot" }]);
 
 	const restoredSource = new ItemPort({ id: "source", size: 1 });
-	restoredSource.restore(source.snapshot());
 	const restoredRuntime = new DurableItemTransferRuntime({
 		keyPrefix: "createbedrock:item_transfer_intent_restart",
 		resolvePort: id => ({ destination: new ItemPort({ id: "destination", size: 1 }), source: restoredSource })[id],
@@ -74,6 +73,7 @@ test("DurableItemTransferRuntime restores a durable intent before its source is 
 		writesPerTick: 1
 	});
 	assert.deepEqual(restoredRuntime.restore(), { records: 1, warnings: [] });
+	assert.deepEqual(restoredSource.snapshot().slots, [{ count: 4, typeId: "minecraft:gold_ingot" }]);
 	advance(restoredRuntime, () => restoredRuntime.snapshot()[0]?.state === "escrowed");
 	assert.deepEqual(restoredSource.snapshot().slots, [{ count: 1, typeId: "minecraft:gold_ingot" }]);
 });
@@ -105,7 +105,6 @@ test("DurableItemTransferRuntime restores a committed escrow and delivers it onc
 	advance(firstRuntime, () => firstRuntime.snapshot()[0]?.state === "escrowed" && !firstRuntime.diagnostics().waitingForCommit);
 
 	const restoredSource = new ItemPort({ id: "source", size: 1 });
-	restoredSource.restore(source.snapshot());
 	const destination = new ItemPort({ id: "destination", size: 1 });
 	const restoredRuntime = new DurableItemTransferRuntime({
 		keyPrefix: "createbedrock:item_transfer_restart",
@@ -118,4 +117,55 @@ test("DurableItemTransferRuntime restores a committed escrow and delivers it onc
 	advance(restoredRuntime, () => restoredRuntime.snapshot().length === 0);
 	assert.deepEqual(restoredSource.snapshot().slots, [undefined]);
 	assert.deepEqual(destination.snapshot().slots, [{ count: 2, typeId: "minecraft:copper_ingot" }]);
+});
+
+test("DurableItemTransferRuntime restores managed port state after a committed transfer", () => {
+	const storage = memoryStorage();
+	const source = new ItemPort({ id: "source", size: 1, slots: [{ count: 3, typeId: "minecraft:andesite" }] });
+	const destination = new ItemPort({ id: "destination", size: 1 });
+	const firstRuntime = new DurableItemTransferRuntime({
+		keyPrefix: "createbedrock:item_transfer_committed_port_state",
+		resolvePort: id => ({ destination, source })[id],
+		storage,
+		writesPerTick: 1
+	});
+	firstRuntime.begin({ destination, id: "committed-port-state", maxCount: 2, source });
+	advance(firstRuntime, () => firstRuntime.snapshot().length === 0 && !firstRuntime.diagnostics().waitingForCommit);
+
+	const restoredSource = new ItemPort({ id: "source", size: 1 });
+	const restoredDestination = new ItemPort({ id: "destination", size: 1 });
+	const restoredRuntime = new DurableItemTransferRuntime({
+		keyPrefix: "createbedrock:item_transfer_committed_port_state",
+		resolvePort: id => ({ destination: restoredDestination, source: restoredSource })[id],
+		storage,
+		writesPerTick: 1
+	});
+	assert.deepEqual(restoredRuntime.restore(), { records: 0, warnings: [] });
+	assert.deepEqual(restoredSource.snapshot().slots, [{ count: 1, typeId: "minecraft:andesite" }]);
+	assert.deepEqual(restoredDestination.snapshot().slots, [{ count: 2, typeId: "minecraft:andesite" }]);
+});
+
+test("DurableItemTransferRuntime freezes a recovered transfer when its managed source is unavailable", () => {
+	const storage = memoryStorage();
+	const source = new ItemPort({ id: "source", size: 1, slots: [{ count: 2, typeId: "minecraft:zinc_ingot" }] });
+	const firstRuntime = new DurableItemTransferRuntime({
+		keyPrefix: "createbedrock:item_transfer_missing_source",
+		resolvePort: id => id === source.id ? source : undefined,
+		storage,
+		writesPerTick: 1
+	});
+	firstRuntime.begin({ destination: { id: "destination" }, id: "missing-source", maxCount: 2, source });
+	advance(firstRuntime, () => !firstRuntime.diagnostics().waitingForCommit);
+
+	const unavailableRuntime = new DurableItemTransferRuntime({
+		keyPrefix: "createbedrock:item_transfer_missing_source",
+		resolvePort: () => undefined,
+		storage,
+		writesPerTick: 1
+	});
+	assert.deepEqual(unavailableRuntime.restore(), { records: 1, warnings: [] });
+	assert.equal(unavailableRuntime.diagnostics().blockedPorts, 1);
+	for (let tick = 0; tick < 5; tick++)
+		unavailableRuntime.tick();
+	assert.equal(unavailableRuntime.snapshot()[0]?.state, "intent");
 });
