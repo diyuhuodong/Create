@@ -37,7 +37,11 @@ test("Contraption snapshots rotate around their anchor in quarter turns", () => 
 		anchor: { x: 0, y: 0, z: 0 },
 		blocks: [
 			{ location: { x: 0, y: 0, z: 0 }, typeId: "createbedrock:shaft" },
-			{ location: { x: 1, y: 0, z: 0 }, typeId: "createbedrock:shaft" }
+			{
+				location: { x: 1, y: 0, z: 0 },
+				typeId: "createbedrock:shaft",
+				states: { "minecraft:facing_direction": 2 }
+			}
 		]
 	});
 
@@ -46,4 +50,5 @@ test("Contraption snapshots rotate around their anchor in quarter turns", () => 
 		{ x: 5, y: 5, z: 5 },
 		{ x: 5, y: 5, z: 6 }
 	]);
+	assert.equal(rotated.blocks.find(block => block.relative.z === 1).states["minecraft:facing_direction"], 5);
 });

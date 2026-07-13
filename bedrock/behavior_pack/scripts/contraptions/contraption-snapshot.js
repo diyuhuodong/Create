@@ -33,6 +33,25 @@ function rotateY(location, quarterTurns) {
 	}
 }
 
+function rotateFacingDirection(value, quarterTurns) {
+	const numeric = { 2: 5, 5: 3, 3: 4, 4: 2 };
+	const named = { north: "east", east: "south", south: "west", west: "north" };
+	let rotated = value;
+	for (let index = 0; index < (quarterTurns % 4 + 4) % 4; index++)
+		rotated = numeric[rotated] ?? named[rotated] ?? rotated;
+	return rotated;
+}
+
+function rotateStatesY(states, quarterTurns) {
+	const rotated = clone(states);
+	if (!rotated)
+		return rotated;
+	for (const key of ["minecraft:facing_direction", "minecraft:cardinal_direction"])
+		if (key in rotated)
+			rotated[key] = rotateFacingDirection(rotated[key], quarterTurns);
+	return rotated;
+}
+
 export function createContraptionSnapshot({ anchor, blocks, maxBlocks = 256 }) {
 	validateLocation(anchor, "Contraption anchor");
 	if (!Array.isArray(blocks) || blocks.length === 0)
@@ -99,7 +118,7 @@ export function rotateSnapshotY(snapshot, quarterTurns) {
 		blocks: snapshot.blocks.map(block => ({
 			...block,
 			relative: rotateY(block.relative, quarterTurns),
-			states: clone(block.states),
+			states: rotateStatesY(block.states, quarterTurns),
 			data: clone(block.data)
 		}))
 	};
