@@ -25,7 +25,12 @@ test("TrainController reserves a route, moves edge by edge, and releases it at d
 		nodeId: "b",
 		edgeIndex: 1,
 		distanceOnEdge: 0,
-		destinationId: "c"
+		destinationId: "c",
+		edgeId: "b<->c",
+		fromNodeId: "b",
+		toNodeId: "c",
+		edgeLength: 4,
+		progress: 0
 	});
 	assert.equal(graph.tryReserve("train_two", ["a<->b"]), true);
 	assert.deepEqual(controller.tick("train_one", 4), {
@@ -55,7 +60,29 @@ test("TrainController restores a moving train and reclaims its route", () => {
 		nodeId: "a",
 		edgeIndex: 0,
 		distanceOnEdge: 2,
-		destinationId: "c"
+		destinationId: "c",
+		edgeId: "a<->b",
+		fromNodeId: "a",
+		toNodeId: "b",
+		edgeLength: 4,
+		progress: 0.5
 	});
 	assert.equal(restored.graph.tryReserve("train_two", ["a<->b"]), false);
+});
+
+test("TrainController exposes continuous position within a reserved edge", () => {
+	const { controller } = createController();
+	controller.dispatch("train_one", "b");
+	assert.deepEqual(controller.tick("train_one", 1), {
+		id: "train_one",
+		nodeId: "a",
+		edgeIndex: 0,
+		distanceOnEdge: 1,
+		destinationId: "b",
+		edgeId: "a<->b",
+		fromNodeId: "a",
+		toNodeId: "b",
+		edgeLength: 4,
+		progress: 0.25
+	});
 });

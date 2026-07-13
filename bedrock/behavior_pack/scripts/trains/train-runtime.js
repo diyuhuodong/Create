@@ -45,21 +45,32 @@ function nodeLocation(dimensionId, id) {
 	return node.location;
 }
 
-function spawnMarker(dimensionId, trainId, nodeIdValue) {
-	const location = nodeLocation(dimensionId, nodeIdValue);
+function markerLocation(location) {
+	return { x: location.x + 0.5, y: location.y + 1, z: location.z + 0.5 };
+}
+
+function locationForTrain(dimensionId, state) {
+	if (!state.fromNodeId || !state.toNodeId)
+		return nodeLocation(dimensionId, state.nodeId);
+	const from = nodeLocation(dimensionId, state.fromNodeId);
+	const to = nodeLocation(dimensionId, state.toNodeId);
+	return {
+		x: from.x + (to.x - from.x) * state.progress,
+		y: from.y + (to.y - from.y) * state.progress,
+		z: from.z + (to.z - from.z) * state.progress
+	};
+}
+
+function spawnMarker(dimensionId, trainId, location) {
 	const dimension = world.getDimension(dimensionId);
 	const existing = dimension.getEntities({ type: TRAIN_ENTITY })
 		.find(entity => entity.getDynamicProperty(TRAIN_ID_PROPERTY) === trainId);
 	if (existing?.isValid) {
-		existing.teleport({ x: location.x + 0.5, y: location.y + 1, z: location.z + 0.5 });
+		existing.teleport(markerLocation(location));
 		return existing.id;
 	}
 
-	const entity = dimension.spawnEntity(TRAIN_ENTITY, {
-		x: location.x + 0.5,
-		y: location.y + 1,
-		z: location.z + 0.5
-	});
+	const entity = dimension.spawnEntity(TRAIN_ENTITY, markerLocation(location));
 	entity.setDynamicProperty(TRAIN_ID_PROPERTY, trainId);
 	return entity.id;
 }
@@ -87,10 +98,10 @@ function restore() {
 			const controller = controllerFor(dimension.dimensionId);
 			controller.restore(dimension.trains);
 			for (const train of dimension.trains) {
+				const state = controller.getTrain(train.id);
 				trains.set(train.id, {
 					dimensionId: dimension.dimensionId,
-					entityId: spawnMarker(dimension.dimensionId, train.id, train.nodeId),
-					lastNodeId: train.nodeId
+					entityId: spawnMarker(dimension.dimensionId, train.id, locationForTrain(dimension.dimensionId, state))
 				});
 			}
 		}
@@ -122,8 +133,7 @@ function createTrain(dimensionId, nodeIdValue) {
 	controller.registerTrain({ id, nodeId: nodeIdValue });
 	trains.set(id, {
 		dimensionId,
-		entityId: spawnMarker(dimensionId, id, nodeIdValue),
-		lastNodeId: nodeIdValue
+		entityId: spawnMarker(dimensionId, id, nodeLocation(dimensionId, nodeIdValue))
 	});
 	return id;
 }
@@ -151,16 +161,9 @@ function tickTrains() {
 	for (const [id, train] of trains) {
 		const controller = controllerFor(train.dimensionId);
 		const state = controller.tick(id, 0.1);
-		if (state.nodeId === train.lastNodeId)
-			continue;
-
-		train.lastNodeId = state.nodeId;
 		const entity = world.getEntity(train.entityId);
-		if (entity?.isValid) {
-			const location = nodeLocation(train.dimensionId, state.nodeId);
-			entity.teleport({ x: location.x + 0.5, y: location.y + 1, z: location.z + 0.5 });
-		}
-		persist();
+		if (entity?.isValid)
+			entity.teleport(markerLocation(locationForTrain(train.dimensionId, state)));
 	}
 
 	ticksSincePersist++;

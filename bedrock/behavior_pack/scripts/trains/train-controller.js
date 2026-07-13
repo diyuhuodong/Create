@@ -67,12 +67,25 @@ export class TrainController {
 
 	getTrain(id) {
 		const train = this.#requireTrain(id);
-		return {
+		const state = {
 			id: train.id,
 			nodeId: train.nodeId,
 			edgeIndex: train.edgeIndex,
 			distanceOnEdge: train.distanceOnEdge,
 			destinationId: train.route?.nodeIds.at(-1)
+		};
+		if (!train.route)
+			return state;
+
+		const edgeId = train.route.edgeIds[train.edgeIndex];
+		const edge = this.#graph.getEdge(edgeId);
+		return {
+			...state,
+			edgeId,
+			fromNodeId: train.route.nodeIds[train.edgeIndex],
+			toNodeId: train.route.nodeIds[train.edgeIndex + 1],
+			edgeLength: edge.length,
+			progress: train.distanceOnEdge / edge.length
 		};
 	}
 

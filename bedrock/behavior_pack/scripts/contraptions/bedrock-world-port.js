@@ -1,7 +1,9 @@
 import { BlockPermutation, world } from "@minecraft/server";
 
 const CONTRAPTION_ENTITY = "createbedrock:contraption";
+const CONTRAPTION_PART_ENTITY = "createbedrock:contraption_part";
 const CONTRAPTION_ID_PROPERTY = "createbedrock:contraption_id";
+const CONTRAPTION_PART_RELATIVE_PROPERTY = "createbedrock:contraption_part_relative";
 
 export class BedrockContraptionWorldPort {
 	#dimensionId;
@@ -38,29 +40,79 @@ export class BedrockContraptionWorldPort {
 		return !!block && block.typeId === "minecraft:air";
 	}
 
-	spawnContraption({ id, origin }) {
-		const existing = this.#dimension().getEntities({ type: CONTRAPTION_ENTITY })
+	spawnContraption({ id, origin, snapshot }) {
+		let marker = this.#dimension().getEntities({ type: CONTRAPTION_ENTITY })
 			.find(entity => entity.getDynamicProperty(CONTRAPTION_ID_PROPERTY) === id);
-		if (existing?.isValid) {
-			existing.teleport(origin);
-			return existing.id;
+		if (marker?.isValid) {
+			marker.teleport(origin);
+		} else {
+			marker = this.#dimension().spawnEntity(CONTRAPTION_ENTITY, origin);
+			marker.setDynamicProperty(CONTRAPTION_ID_PROPERTY, id);
 		}
 
-		const entity = this.#dimension().spawnEntity(CONTRAPTION_ENTITY, origin);
-		entity.setDynamicProperty(CONTRAPTION_ID_PROPERTY, id);
-		return entity.id;
+		this.#removeParts(id);
+		for (const block of snapshot.blocks) {
+			const part = this.#dimension().spawnEntity(CONTRAPTION_PART_ENTITY, this.#partLocation(origin, block.relative, 0));
+			part.setDynamicProperty(CONTRAPTION_ID_PROPERTY, id);
+			part.setDynamicProperty(CONTRAPTION_PART_RELATIVE_PROPERTY, JSON.stringify(block.relative));
+		}
+		return marker.id;
 	}
 
 	removeContraption(entityId) {
 		const entity = world.getEntity(entityId);
-		if (entity?.isValid)
+		if (entity?.isValid) {
+			this.#removeParts(entity.getDynamicProperty(CONTRAPTION_ID_PROPERTY));
 			entity.remove();
+		}
 	}
 
 	setContraptionRotation(entityId, rotation) {
 		const entity = world.getEntity(entityId);
-		if (entity?.isValid)
+		if (entity?.isValid) {
 			entity.setRotation({ x: 0, y: rotation });
+			const id = entity.getDynamicProperty(CONTRAPTION_ID_PROPERTY);
+			for (const part of this.#parts(id)) {
+				const relative = this.#readRelative(part);
+				if (!relative)
+					continue;
+				part.teleport(this.#partLocation(entity.location, relative, rotation));
+				part.setRotation({ x: 0, y: rotation });
+			}
+		}
+	}
+
+	#parts(id) {
+		return this.#dimension().getEntities({ type: CONTRAPTION_PART_ENTITY })
+			.filter(entity => entity.getDynamicProperty(CONTRAPTION_ID_PROPERTY) === id);
+	}
+
+	#removeParts(id) {
+		for (const part of this.#parts(id))
+			part.remove();
+	}
+
+	#readRelative(entity) {
+		const value = entity.getDynamicProperty(CONTRAPTION_PART_RELATIVE_PROPERTY);
+		if (typeof value !== "string")
+			return undefined;
+		try {
+			const relative = JSON.parse(value);
+			return Number.isFinite(relative?.x) && Number.isFinite(relative?.y) && Number.isFinite(relative?.z)
+				? relative
+				: undefined;
+		} catch {
+			return undefined;
+		}
+	}
+
+	#partLocation(origin, relative, rotation) {
+		const radians = rotation * Math.PI / 180;
+		return {
+			x: origin.x + relative.x * Math.cos(radians) - relative.z * Math.sin(radians) + 0.5,
+			y: origin.y + relative.y + 0.5,
+			z: origin.z + relative.x * Math.sin(radians) + relative.z * Math.cos(radians) + 0.5
+		};
 	}
 
 	#dimension() {
