@@ -1,0 +1,33 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:large_cogwheel",
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.large_cogwheel",
+      "minecraft:item_visual": {
+        "geometry": { "identifier": "geometry.createbedrock.large_cogwheel" },
+        "material_instances": {
+          "cogwheel_axis": { "texture": "createbedrock_cogwheel_axis", "render_method": "opaque" },
+          "axis_top": { "texture": "createbedrock_axis_top", "render_method": "opaque" },
+          "large_cogwheel": { "texture": "createbedrock_large_cogwheel", "render_method": "opaque" },
+          "*": { "texture": "createbedrock_large_cogwheel", "render_method": "opaque" }
+        }
+      },
+      "minecraft:material_instances": {
+        "cogwheel_axis": { "texture": "createbedrock_cogwheel_axis", "render_method": "opaque" },
+        "axis_top": { "texture": "createbedrock_axis_top", "render_method": "opaque" },
+        "large_cogwheel": { "texture": "createbedrock_large_cogwheel", "render_method": "opaque" },
+        "*": { "texture": "createbedrock_large_cogwheel", "render_method": "opaque" }
+      }
+    },
+    "permutations": [
+      { "condition": "query.block_state('minecraft:facing_direction') == 2 || query.block_state('minecraft:facing_direction') == 3", "components": { "minecraft:transformation": { "rotation": [90, 0, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 4 || query.block_state('minecraft:facing_direction') == 5", "components": { "minecraft:transformation": { "rotation": [0, 0, 90] } } }
+    ]
+  }
+}

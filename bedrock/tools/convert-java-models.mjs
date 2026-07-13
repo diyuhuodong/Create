@@ -10,6 +10,7 @@ const MODELS = [
 	{ name: "hand_crank", source: "hand_crank/block.json" },
 	{ name: "shaft", source: "shaft.json" },
 	{ name: "cogwheel", source: "cogwheel.json" },
+	{ name: "large_cogwheel", source: "large_cogwheel.json" },
 	{ name: "millstone", source: "millstone/block.json" },
 	{ name: "mechanical_press", source: "mechanical_press/block.json" },
 	{

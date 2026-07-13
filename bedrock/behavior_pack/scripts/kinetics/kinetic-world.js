@@ -12,7 +12,11 @@ export const KINETIC_BLOCKS = {
 		axis: "y"
 	},
 	"createbedrock:cogwheel": {
-		kind: "cogwheel",
+		kind: "small_cogwheel",
+		axis: "y"
+	},
+	"createbedrock:large_cogwheel": {
+		kind: "large_cogwheel",
 		axis: "y"
 	},
 	"createbedrock:millstone": {
@@ -62,8 +66,14 @@ function connectionRatio(left, right, x, y, z) {
 	const directionAxis = axisOfOffset(x, y, z);
 	if (!directionAxis)
 		return undefined;
-	if (left.configuration.kind === "cogwheel" && right.configuration.kind === "cogwheel")
-		return left.axis === right.axis && directionAxis !== left.axis ? -1 : undefined;
+	const cogwheels = new Set(["small_cogwheel", "large_cogwheel"]);
+	if (cogwheels.has(left.configuration.kind) && cogwheels.has(right.configuration.kind)) {
+		if (left.axis !== right.axis || directionAxis === left.axis)
+			return undefined;
+		if (left.configuration.kind === right.configuration.kind)
+			return -1;
+		return left.configuration.kind === "large_cogwheel" ? -2 : -0.5;
+	}
 	return directionAxis === left.axis && directionAxis === right.axis ? 1 : undefined;
 }
 

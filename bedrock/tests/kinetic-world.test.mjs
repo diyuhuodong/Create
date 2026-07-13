@@ -90,3 +90,16 @@ test("KineticWorld derives its rotation axis from Bedrock placement direction", 
 	assert.equal(world.speedAt("minecraft:overworld", { x: 1, y: 64, z: 0 }), 16);
 	assert.equal(world.snapshot()[0].axis, "x");
 });
+
+test("KineticWorld applies the large-to-small cogwheel ratio", () => {
+	const world = new KineticWorld();
+	const crank = block("createbedrock:hand_crank", 0, 64, 0);
+	world.trackPlacedBlock(crank);
+	world.trackPlacedBlock(block("createbedrock:shaft", 0, 65, 0));
+	world.trackPlacedBlock(block("createbedrock:large_cogwheel", 0, 66, 0));
+	world.trackPlacedBlock(block("createbedrock:cogwheel", 1, 66, 0));
+	world.activateHandCrank(crank);
+	world.tick();
+
+	assert.equal(world.speedAt("minecraft:overworld", { x: 1, y: 66, z: 0 }), -32);
+});
