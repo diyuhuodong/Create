@@ -1,0 +1,18 @@
+const LEGACY_CONTRAPTION_PART = "createbedrock:contraption_part";
+
+export const CONTRAPTION_PART_TYPES = Object.freeze({
+	"createbedrock:shaft": "createbedrock:contraption_part_shaft",
+	"createbedrock:cogwheel": "createbedrock:contraption_part_cogwheel",
+	"createbedrock:large_cogwheel": "createbedrock:contraption_part_large_cogwheel",
+	"createbedrock:gearbox": "createbedrock:contraption_part_gearbox",
+	"createbedrock:clutch": "createbedrock:contraption_part_clutch",
+	"createbedrock:millstone": "createbedrock:contraption_part_millstone",
+	"createbedrock:mechanical_press": "createbedrock:contraption_part_mechanical_press",
+	"createbedrock:crushing_wheel": "createbedrock:contraption_part_crushing_wheel"
+});
+
+export const ALL_CONTRAPTION_PART_TYPES = [LEGACY_CONTRAPTION_PART, ...new Set(Object.values(CONTRAPTION_PART_TYPES))];
+
+export function partTypeFor(blockTypeId) {
+	return CONTRAPTION_PART_TYPES[blockTypeId];
+}

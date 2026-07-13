@@ -3,19 +3,13 @@ import { system, world } from "@minecraft/server";
 import { collectConnectedBlocks } from "./assembly-collector.js";
 import { BedrockContraptionWorldPort } from "./bedrock-world-port.js";
 import { ContraptionController } from "./contraption-controller.js";
+import { isMovableBlockType } from "./movable-blocks.js";
 import { registerTickHandler } from "../kernel/index.js";
 import { persistKineticWorld } from "../kinetics/kinetic-runtime.js";
 
 const BEARING_BLOCK = "createbedrock:mechanical_bearing";
 const PERSISTENCE_KEY = "createbedrock:contraptions_v1";
 const MAX_PROTOTYPE_BLOCKS = 64;
-const MOVABLE_BLOCK_TYPES = new Set([
-	"createbedrock:shaft",
-	"createbedrock:cogwheel",
-	"createbedrock:millstone",
-	"createbedrock:mechanical_press",
-	"createbedrock:crushing_wheel"
-]);
 const activeBearings = new Map();
 const controllers = new Map();
 let kineticWorld;
@@ -90,9 +84,7 @@ function collectAboveBearing(block) {
 				return undefined;
 			return { typeId: source.typeId, states: source.permutation.getAllStates() };
 		},
-		canCollect(blockData) {
-			return MOVABLE_BLOCK_TYPES.has(blockData.typeId);
-		}
+		canCollect: blockData => isMovableBlockType(blockData.typeId)
 	});
 }
 
