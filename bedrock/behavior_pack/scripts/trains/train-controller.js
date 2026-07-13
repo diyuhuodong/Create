@@ -18,6 +18,7 @@ export class TrainController {
 		if (!Number.isFinite(speed) || speed <= 0)
 			throw new RangeError("Trains require a positive cruising speed");
 		this.#trains.set(id, {
+			blockedReason: undefined,
 			carriageCount,
 			carriageSpacing,
 			direction: 0,
@@ -100,7 +101,7 @@ export class TrainController {
 		if (!Number.isFinite(distance) || distance < 0)
 			throw new RangeError("Train movement distance must be non-negative");
 
-		if (train.stopped) {
+		if (train.stopped || train.blockedReason) {
 			train.speed = 0;
 			return this.getTrain(id);
 		}
@@ -163,9 +164,22 @@ export class TrainController {
 		return true;
 	}
 
+	setBlocked(id, reason = undefined) {
+		if (reason !== undefined && (typeof reason !== "string" || reason.length === 0))
+			throw new TypeError("Train blocking reasons must be non-empty strings");
+		const train = this.#requireTrain(id);
+		if (train.blockedReason === reason)
+			return false;
+		train.blockedReason = reason;
+		if (reason)
+			train.speed = 0;
+		return true;
+	}
+
 	getMotionState(id) {
 		const train = this.#requireTrain(id);
 		return {
+			blockedReason: train.blockedReason,
 			direction: train.direction,
 			speed: train.speed,
 			stopped: train.stopped,
@@ -256,6 +270,7 @@ export class TrainController {
 
 	snapshot() {
 		return [...this.#trains.values()].map(train => ({
+			blockedReason: train.blockedReason,
 			carriageCount: train.carriageCount,
 			carriageSpacing: train.carriageSpacing,
 			direction: train.direction,
@@ -296,6 +311,7 @@ export class TrainController {
 			if (schedule && (!Array.isArray(schedule.stopIds) || schedule.stopIds.length === 0 || schedule.stopIds.some(stopId => !this.#graph.getNode(stopId))))
 				throw new TypeError(`Invalid train schedule for ${record.id}`);
 			const restored = {
+				blockedReason: typeof record.blockedReason === "string" && record.blockedReason.length > 0 ? record.blockedReason : undefined,
 				carriageCount: Number.isInteger(record.carriageCount) && record.carriageCount > 0 ? record.carriageCount : 1,
 				carriageSpacing: Number.isFinite(record.carriageSpacing) && record.carriageSpacing > 0 ? record.carriageSpacing : 2,
 				direction: 0,
@@ -320,7 +336,7 @@ export class TrainController {
 				targetSpeed: Number.isFinite(record.targetSpeed) && record.targetSpeed > 0 ? record.targetSpeed : 0.1
 			};
 			restored.direction = this.#routeDirection(restored);
-			if (!restored.route || restored.stopped)
+			if (!restored.route || restored.stopped || restored.blockedReason)
 				restored.speed = 0;
 			this.#trains.set(record.id, restored);
 		}

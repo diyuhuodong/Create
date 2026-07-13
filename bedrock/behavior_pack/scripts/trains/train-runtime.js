@@ -3,6 +3,7 @@ import { system, world } from "@minecraft/server";
 import { registerTickHandler } from "../kernel/index.js";
 import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { TrackGraph } from "./track-graph.js";
+import { findTrainCollision } from "./train-collision.js";
 import { TrainController } from "./train-controller.js";
 
 const TRACK_BLOCK = "createbedrock:track";
@@ -264,9 +265,37 @@ function toggleStationStop(player, dimensionId, stationNodeId) {
 	}
 
 	const motion = controller.getMotionState(trainId);
+	if (motion.blockedReason) {
+		player.sendMessage(`Train is frozen: ${motion.blockedReason}. Clear the obstruction first.`);
+		return;
+	}
 	if (controller.setStopped(trainId, !motion.stopped)) {
 		persist();
 		player.sendMessage(motion.stopped ? "Train released." : "Train stopped.");
+	}
+}
+
+function updateTrainCollision(dimensionId, id, controller, carriages) {
+	const dimension = world.getDimension(dimensionId);
+	const collision = findTrainCollision(carriages, location => {
+		try {
+			return dimension.getBlock(location);
+		} catch {
+			return { typeId: "createbedrock:unavailable_collision_space" };
+		}
+	});
+	const motion = controller.getMotionState(id);
+	if (collision) {
+		const reason = `${collision.reason}:${collision.location.x}:${collision.location.y}:${collision.location.z}`;
+		if (controller.setBlocked(id, reason)) {
+			console.warn(`[Create Bedrock] Train ${id} frozen: ${reason}`);
+			persist();
+		}
+		return;
+	}
+	if (motion.blockedReason?.startsWith("world_blocked:") && controller.setBlocked(id)) {
+		console.warn(`[Create Bedrock] Train ${id} collision cleared`);
+		persist();
 	}
 }
 
@@ -280,6 +309,7 @@ function tickTrains() {
 		const controller = controllerFor(train.dimensionId);
 		controller.tick(id);
 		const carriages = controller.getCarriagePlacements(id);
+		updateTrainCollision(train.dimensionId, id, controller, carriages);
 		train.entityIds = carriages.map(carriage => {
 			let entity = world.getEntity(train.entityIds?.[carriage.index]);
 			if (!entity?.isValid) {

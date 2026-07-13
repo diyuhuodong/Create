@@ -221,6 +221,7 @@ test("TrainController persists speed, direction, and manual stop state", () => {
 	controller.registerTrain({ id: "train_one", nodeId: "c", speed: 0.5 });
 	controller.dispatch("train_one", "a");
 	assert.deepEqual(controller.getMotionState("train_one"), {
+		blockedReason: undefined,
 		direction: -1,
 		speed: 0,
 		stopped: false,
@@ -234,6 +235,7 @@ test("TrainController persists speed, direction, and manual stop state", () => {
 	const restored = createController({ registerTrain: false }).controller;
 	restored.restore(snapshot);
 	assert.deepEqual(restored.getMotionState("train_one"), {
+		blockedReason: undefined,
 		direction: -1,
 		speed: 0,
 		stopped: true,
@@ -256,9 +258,26 @@ test("TrainController applies motion defaults when restoring an older record", (
 	const restored = createController({ registerTrain: false }).controller;
 	restored.restore([record]);
 	assert.deepEqual(restored.getMotionState("train_one"), {
+		blockedReason: undefined,
 		direction: 1,
 		speed: 0,
 		stopped: false,
 		targetSpeed: 0.1
 	});
+});
+
+test("TrainController freezes collision-blocked trains and persists the reason", () => {
+	const { controller } = createController();
+	controller.dispatch("train_one", "b");
+	assert.equal(controller.setBlocked("train_one", "world_blocked:1:65:0"), true);
+	controller.tick("train_one", 1);
+	assert.equal(controller.getTrain("train_one").distanceOnEdge, 0);
+	assert.equal(controller.getMotionState("train_one").blockedReason, "world_blocked:1:65:0");
+
+	const restored = createController({ registerTrain: false }).controller;
+	restored.restore(controller.snapshot());
+	assert.equal(restored.getMotionState("train_one").blockedReason, "world_blocked:1:65:0");
+	assert.equal(restored.setBlocked("train_one"), true);
+	restored.tick("train_one", 1);
+	assert.equal(restored.getTrain("train_one").distanceOnEdge, 1);
 });
