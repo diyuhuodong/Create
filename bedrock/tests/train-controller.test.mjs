@@ -130,3 +130,26 @@ test("TrainController keeps carriage positions ordered along the reserved route"
 	restored.controller.restore(controller.snapshot());
 	assert.equal(restored.controller.getCarriages("train_one").length, 3);
 });
+
+test("TrainController keeps an edge reserved until the last carriage clears it", () => {
+	const { controller, graph } = createController({ registerTrain: false });
+	controller.registerTrain({ carriageCount: 2, carriageSpacing: 2, id: "train_one", nodeId: "a" });
+	controller.dispatch("train_one", "c");
+
+	controller.tick("train_one", 4);
+	assert.equal(graph.tryReserve("train_two", ["a<->b"]), false);
+	controller.tick("train_one", 2);
+	assert.equal(graph.tryReserve("train_two", ["a<->b"]), true);
+});
+
+test("TrainController restores only the route edges still occupied by its formation", () => {
+	const source = createController({ registerTrain: false });
+	source.controller.registerTrain({ carriageCount: 2, carriageSpacing: 2, id: "train_one", nodeId: "a" });
+	source.controller.dispatch("train_one", "c");
+	source.controller.tick("train_one", 6);
+
+	const restored = createController({ registerTrain: false });
+	restored.controller.restore(source.controller.snapshot());
+	assert.equal(restored.graph.tryReserve("train_two", ["a<->b"]), true);
+	assert.equal(restored.graph.tryReserve("train_two", ["b<->c"]), false);
+});

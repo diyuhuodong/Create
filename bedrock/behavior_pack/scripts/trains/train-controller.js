@@ -36,7 +36,10 @@ export class TrainController {
 		if (!route || !this.#graph.tryReserve(id, route.edgeIds))
 			return false;
 
-		train.route = route;
+		train.route = {
+			...route,
+			reservedEdgeIds: new Set(route.edgeIds)
+		};
 		train.edgeIndex = 0;
 		train.distanceOnEdge = 0;
 		return true;
@@ -94,7 +97,6 @@ export class TrainController {
 				break;
 
 			train.nodeId = train.route.nodeIds[train.edgeIndex + 1];
-			this.#graph.releaseEdge(id, edgeId);
 			train.edgeIndex++;
 			train.distanceOnEdge = 0;
 
@@ -105,6 +107,8 @@ export class TrainController {
 					train.schedule.dwellRemaining = train.schedule.dwellTicks;
 			}
 		}
+		if (train.route)
+			this.#releaseClearedEdges(train);
 
 		return this.getTrain(id);
 	}
@@ -182,7 +186,8 @@ export class TrainController {
 			route: train.route && {
 				nodeIds: [...train.route.nodeIds],
 				edgeIds: [...train.route.edgeIds],
-				length: train.route.length
+				length: train.route.length,
+				reservedEdgeIds: [...train.route.reservedEdgeIds]
 			},
 			schedule: train.schedule && {
 				dwellRemaining: train.schedule.dwellRemaining,
@@ -202,7 +207,8 @@ export class TrainController {
 		for (const record of records) {
 			if (!record?.id || this.#trains.has(record.id) || !record.nodeId)
 				throw new TypeError("Invalid train controller record");
-			if (record.route && !this.#graph.tryReserve(record.id, record.route.edgeIds))
+			const reservedEdgeIds = record.route?.reservedEdgeIds ?? record.route?.edgeIds;
+			if (record.route && !this.#graph.tryReserve(record.id, reservedEdgeIds))
 				throw new Error(`Unable to restore reserved route for ${record.id}`);
 
 			const schedule = record.schedule;
@@ -216,7 +222,8 @@ export class TrainController {
 				route: record.route && {
 					nodeIds: [...record.route.nodeIds],
 					edgeIds: [...record.route.edgeIds],
-					length: record.route.length
+					length: record.route.length,
+					reservedEdgeIds: new Set(reservedEdgeIds)
 				},
 				schedule: schedule && {
 					dwellRemaining: Math.max(0, schedule.dwellRemaining ?? 0),
@@ -256,9 +263,30 @@ export class TrainController {
 		const route = this.#graph.findRoute(train.nodeId, destinationId);
 		if (!route || !this.#graph.tryReserve(train.id, route.edgeIds))
 			return false;
-		train.route = route;
+		train.route = {
+			...route,
+			reservedEdgeIds: new Set(route.edgeIds)
+		};
 		train.edgeIndex = 0;
 		train.distanceOnEdge = 0;
 		return true;
+	}
+
+	#releaseClearedEdges(train) {
+		let leadDistance = train.distanceOnEdge;
+		for (let index = 0; index < train.edgeIndex; index++)
+			leadDistance += this.#graph.getEdge(train.route.edgeIds[index]).length;
+		const tailDistance = leadDistance - (train.carriageCount - 1) * train.carriageSpacing;
+		if (tailDistance < 0)
+			return;
+
+		let edgeEnd = 0;
+		for (const edgeId of train.route.edgeIds) {
+			edgeEnd += this.#graph.getEdge(edgeId).length;
+			if (edgeEnd > tailDistance)
+				break;
+			if (train.route.reservedEdgeIds.delete(edgeId))
+				this.#graph.releaseEdge(train.id, edgeId);
+		}
 	}
 }
