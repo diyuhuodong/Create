@@ -25,7 +25,8 @@ const TEXTURES = [
 	"mechanical_press_top.png",
 	"mechanical_bearing_side.png",
 	"millstone.png",
-	"standard_track.png"
+	"standard_track.png",
+	"station.png"
 ];
 const ITEM_TEXTURES = ["belt_connector.png"];
 

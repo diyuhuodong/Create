@@ -13,12 +13,12 @@ export class TrainController {
 	registerTrain({ id, nodeId }) {
 		if (!id || this.#trains.has(id))
 			throw new Error("Train ids must be unique");
-		this.#trains.set(id, { id, nodeId, route: undefined, edgeIndex: 0, distanceOnEdge: 0 });
+		this.#trains.set(id, { id, nodeId, route: undefined, schedule: undefined, edgeIndex: 0, distanceOnEdge: 0 });
 	}
 
 	dispatch(id, destinationId) {
 		const train = this.#requireTrain(id);
-		if (train.route)
+		if (train.route || train.schedule)
 			return false;
 
 		const route = this.#graph.findRoute(train.nodeId, destinationId);
@@ -31,12 +31,43 @@ export class TrainController {
 		return true;
 	}
 
+	setSchedule(id, { stopIds, dwellTicks = 20 }) {
+		const train = this.#requireTrain(id);
+		if (train.route || !Array.isArray(stopIds) || stopIds.length === 0 || !Number.isInteger(dwellTicks) || dwellTicks < 0)
+			return false;
+		if (stopIds.some(stopId => !this.#graph.getNode(stopId)))
+			return false;
+
+		train.schedule = {
+			dwellRemaining: 0,
+			dwellTicks,
+			nextStopIndex: 0,
+			stopIds: [...stopIds]
+		};
+		this.#advanceSchedule(train);
+		return true;
+	}
+
+	clearSchedule(id) {
+		const train = this.#requireTrain(id);
+		if (train.route)
+			return false;
+		const hadSchedule = !!train.schedule;
+		train.schedule = undefined;
+		return hadSchedule;
+	}
+
 	tick(id, distance) {
 		if (!Number.isFinite(distance) || distance < 0)
 			throw new RangeError("Train movement distance must be non-negative");
 
 		const train = this.#requireTrain(id);
-		if (!train.route || distance === 0)
+		if (!train.route) {
+			this.#advanceSchedule(train);
+			if (!train.route || distance === 0)
+				return this.getTrain(id);
+		}
+		if (distance === 0)
 			return this.getTrain(id);
 
 		let remaining = distance;
@@ -59,6 +90,8 @@ export class TrainController {
 			if (train.edgeIndex === train.route.edgeIds.length) {
 				this.#graph.releaseReservations(id);
 				train.route = undefined;
+				if (train.schedule)
+					train.schedule.dwellRemaining = train.schedule.dwellTicks;
 			}
 		}
 
@@ -74,6 +107,14 @@ export class TrainController {
 			distanceOnEdge: train.distanceOnEdge,
 			destinationId: train.route?.nodeIds.at(-1)
 		};
+		if (train.schedule) {
+			state.schedule = {
+				dwellRemaining: train.schedule.dwellRemaining,
+				dwellTicks: train.schedule.dwellTicks,
+				nextStopIndex: train.schedule.nextStopIndex,
+				stopIds: [...train.schedule.stopIds]
+			};
+		}
 		if (!train.route)
 			return state;
 
@@ -89,7 +130,7 @@ export class TrainController {
 		};
 	}
 
-	snapshot() {
+		snapshot() {
 		return [...this.#trains.values()].map(train => ({
 			id: train.id,
 			nodeId: train.nodeId,
@@ -97,6 +138,12 @@ export class TrainController {
 				nodeIds: [...train.route.nodeIds],
 				edgeIds: [...train.route.edgeIds],
 				length: train.route.length
+			},
+			schedule: train.schedule && {
+				dwellRemaining: train.schedule.dwellRemaining,
+				dwellTicks: train.schedule.dwellTicks,
+				nextStopIndex: train.schedule.nextStopIndex,
+				stopIds: [...train.schedule.stopIds]
 			},
 			edgeIndex: train.edgeIndex,
 			distanceOnEdge: train.distanceOnEdge
@@ -113,6 +160,9 @@ export class TrainController {
 			if (record.route && !this.#graph.tryReserve(record.id, record.route.edgeIds))
 				throw new Error(`Unable to restore reserved route for ${record.id}`);
 
+			const schedule = record.schedule;
+			if (schedule && (!Array.isArray(schedule.stopIds) || schedule.stopIds.length === 0 || schedule.stopIds.some(stopId => !this.#graph.getNode(stopId))))
+				throw new TypeError(`Invalid train schedule for ${record.id}`);
 			this.#trains.set(record.id, {
 				id: record.id,
 				nodeId: record.nodeId,
@@ -120,6 +170,12 @@ export class TrainController {
 					nodeIds: [...record.route.nodeIds],
 					edgeIds: [...record.route.edgeIds],
 					length: record.route.length
+				},
+				schedule: schedule && {
+					dwellRemaining: Math.max(0, schedule.dwellRemaining ?? 0),
+					dwellTicks: Math.max(0, schedule.dwellTicks ?? 20),
+					nextStopIndex: Math.max(0, schedule.nextStopIndex ?? 0) % schedule.stopIds.length,
+					stopIds: [...schedule.stopIds]
 				},
 				edgeIndex: record.edgeIndex ?? 0,
 				distanceOnEdge: record.distanceOnEdge ?? 0
@@ -132,5 +188,30 @@ export class TrainController {
 		if (!train)
 			throw new Error(`Unknown train ${id}`);
 		return train;
+	}
+
+	#advanceSchedule(train) {
+		const schedule = train.schedule;
+		if (!schedule || train.route)
+			return false;
+		if (schedule.dwellRemaining > 0) {
+			schedule.dwellRemaining--;
+			return false;
+		}
+
+		const destinationId = schedule.stopIds[schedule.nextStopIndex];
+		schedule.nextStopIndex = (schedule.nextStopIndex + 1) % schedule.stopIds.length;
+		if (destinationId === train.nodeId) {
+			schedule.dwellRemaining = schedule.dwellTicks;
+			return false;
+		}
+
+		const route = this.#graph.findRoute(train.nodeId, destinationId);
+		if (!route || !this.#graph.tryReserve(train.id, route.edgeIds))
+			return false;
+		train.route = route;
+		train.edgeIndex = 0;
+		train.distanceOnEdge = 0;
+		return true;
 	}
 }

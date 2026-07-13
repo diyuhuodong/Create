@@ -93,3 +93,24 @@ test("TrainController clears its active edge only after reaching the destination
 	assert.ok(controller.tick("train_one", 3.9).edgeId);
 	assert.equal(controller.tick("train_one", 0.1).edgeId, undefined);
 });
+
+test("TrainController persists a looping station schedule with dwell time", () => {
+	const graph = new TrackGraph();
+	graph.addNode({ id: "a", location: { x: 0, y: 64, z: 0 } });
+	graph.addNode({ id: "b", location: { x: 1, y: 64, z: 0 } });
+	graph.connect("a", "b", 1);
+	const controller = new TrainController(graph);
+	controller.registerTrain({ id: "train-1", nodeId: "a" });
+
+	assert.equal(controller.setSchedule("train-1", { dwellTicks: 1, stopIds: ["b", "a"] }), true);
+	controller.tick("train-1", 1);
+	assert.equal(controller.getTrain("train-1").nodeId, "b");
+	assert.equal(controller.getTrain("train-1").schedule.dwellRemaining, 1);
+	controller.tick("train-1", 0.1);
+	controller.tick("train-1", 0.1);
+	assert.equal(controller.getTrain("train-1").destinationId, "a");
+
+	const restored = new TrainController(graph);
+	restored.restore(controller.snapshot());
+	assert.deepEqual(restored.getTrain("train-1").schedule.stopIds, ["b", "a"]);
+});

@@ -11,6 +11,7 @@ tile.createbedrock:mechanical_bearing.name=机械轴承
 tile.createbedrock:mechanical_press.name=机械压机
 tile.createbedrock:crushing_wheel.name=粉碎轮
 tile.createbedrock:track.name=轨道
+tile.createbedrock:track_station.name=轨道站台
 item.createbedrock:wheat_flour.name=小麦粉
 item.createbedrock:iron_sheet.name=铁板
 item.createbedrock:copper_sheet.name=铜板

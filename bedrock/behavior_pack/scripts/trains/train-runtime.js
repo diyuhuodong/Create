@@ -5,6 +5,7 @@ import { TrackGraph } from "./track-graph.js";
 import { TrainController } from "./train-controller.js";
 
 const TRACK_BLOCK = "createbedrock:track";
+const STATION_BLOCK = "createbedrock:track_station";
 const TRAIN_ENTITY = "createbedrock:train";
 const TRAIN_ID_PROPERTY = "createbedrock:train_id";
 const PERSISTENCE_KEY = "createbedrock:trains_v1";
@@ -13,6 +14,7 @@ const TRACK_CONNECTION_OFFSETS = [
 	[1, 1, 0], [1, -1, 0], [-1, 1, 0], [-1, -1, 0],
 	[0, 1, 1], [0, -1, 1], [0, 1, -1], [0, -1, -1]
 ];
+const STATION_TRACK_OFFSETS = [[1, 0, 0], [-1, 0, 0], [0, 0, 1], [0, 0, -1]];
 const graphs = new Map();
 const controllers = new Map();
 const trains = new Map();
@@ -161,6 +163,35 @@ function selectRoute(player, dimensionId, destinationId) {
 		persist();
 }
 
+function trackNodeForStation(block) {
+	const graph = graphFor(block.dimension.id);
+	for (const [x, y, z] of STATION_TRACK_OFFSETS) {
+		const candidate = nodeId({ x: block.location.x + x, y: block.location.y + y, z: block.location.z + z });
+		if (graph.getNode(candidate))
+			return candidate;
+	}
+	return undefined;
+}
+
+function selectStationLoop(player, dimensionId, stationNodeId) {
+	const selection = selections.get(player.id);
+	if (!selection) {
+		selections.set(player.id, { dimensionId, nodeId: stationNodeId, station: true });
+		return;
+	}
+	selections.delete(player.id);
+	if (!selection.station || selection.dimensionId !== dimensionId || selection.nodeId === stationNodeId)
+		return;
+
+	const controller = controllerFor(dimensionId);
+	let trainId = [...trains.entries()]
+		.find(([id, train]) => train.dimensionId === dimensionId && controller.getTrain(id).nodeId === selection.nodeId && !controller.getTrain(id).destinationId)?.[0];
+	if (!trainId)
+		trainId = createTrain(dimensionId, selection.nodeId);
+	if (controller.setSchedule(trainId, { dwellTicks: 20, stopIds: [stationNodeId, selection.nodeId] }))
+		persist();
+}
+
 function tickTrains() {
 	for (const [id, train] of trains) {
 		const controller = controllerFor(train.dimensionId);
@@ -213,6 +244,11 @@ export function registerTrains() {
 	world.afterEvents.playerInteractWithBlock.subscribe(event => {
 		if (event.block.typeId === TRACK_BLOCK)
 			selectRoute(event.player, event.block.dimension.id, nodeId(event.block.location));
+		if (event.block.typeId === STATION_BLOCK) {
+			const stationNodeId = trackNodeForStation(event.block);
+			if (stationNodeId)
+				selectStationLoop(event.player, event.block.dimension.id, stationNodeId);
+		}
 	});
 
 	registerTickHandler(tickTrains);

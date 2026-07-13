@@ -49,6 +49,9 @@
     },
     "createbedrock_track": {
       "textures": "textures/create_java/block/standard_track"
+    },
+    "createbedrock_station": {
+      "textures": "textures/create_java/block/station"
     }
   }
 }
