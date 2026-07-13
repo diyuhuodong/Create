@@ -1,16 +1,18 @@
 import { system, world } from "@minecraft/server";
 
 import { registerTickHandler } from "../kernel/index.js";
+import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { KineticWorld } from "./kinetic-world.js";
 
 const kineticWorld = new KineticWorld();
 const PERSISTENCE_KEY = "createbedrock:kinetic_world_v1";
+const PERSISTENCE_SCHEMA_VERSION = 1;
 const BELT_CONNECTOR = "createbedrock:belt_connector";
 const CLUTCH_BLOCK = "createbedrock:clutch";
 const pendingBeltEndpoints = new Map();
 
 function persist() {
-	world.setDynamicProperty(PERSISTENCE_KEY, JSON.stringify(kineticWorld.snapshot()));
+	world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, kineticWorld.snapshot()));
 }
 
 export function persistKineticWorld() {
@@ -23,7 +25,12 @@ function restore() {
 		return;
 
 	try {
-		kineticWorld.restore(JSON.parse(value));
+		kineticWorld.restore(deserializeVersionedState(value, {
+			schemaVersion: PERSISTENCE_SCHEMA_VERSION,
+			upgrades: {
+				0: legacy => legacy
+			}
+		}));
 		console.warn("[Create Bedrock] Restored kinetic world state");
 	} catch (error) {
 		console.warn(`[Create Bedrock] Ignored invalid kinetic world state: ${error}`);

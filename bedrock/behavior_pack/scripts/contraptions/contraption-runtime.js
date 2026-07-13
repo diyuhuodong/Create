@@ -5,10 +5,12 @@ import { BedrockContraptionWorldPort } from "./bedrock-world-port.js";
 import { ContraptionController } from "./contraption-controller.js";
 import { isMovableBlockType } from "./movable-blocks.js";
 import { registerTickHandler } from "../kernel/index.js";
+import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { persistKineticWorld } from "../kinetics/kinetic-runtime.js";
 
 const BEARING_BLOCK = "createbedrock:mechanical_bearing";
 const PERSISTENCE_KEY = "createbedrock:contraptions_v1";
+const PERSISTENCE_SCHEMA_VERSION = 1;
 const MAX_PROTOTYPE_BLOCKS = 64;
 const activeBearings = new Map();
 const controllers = new Map();
@@ -45,7 +47,7 @@ function persist() {
 			snapshot: active.snapshot
 		});
 	}
-	world.setDynamicProperty(PERSISTENCE_KEY, JSON.stringify(records));
+	world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, records));
 }
 
 function restore() {
@@ -54,7 +56,12 @@ function restore() {
 		return;
 
 	try {
-		for (const record of JSON.parse(serialized)) {
+		for (const record of deserializeVersionedState(serialized, {
+			schemaVersion: PERSISTENCE_SCHEMA_VERSION,
+			upgrades: {
+				0: legacy => legacy
+			}
+		})) {
 			if (!record?.bearingKey || !record?.dimensionId || !record?.id || !record?.origin || !record?.snapshot)
 				continue;
 			if (!record.bearingLocation)

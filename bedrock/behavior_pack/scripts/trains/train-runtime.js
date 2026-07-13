@@ -1,6 +1,7 @@
 import { system, world } from "@minecraft/server";
 
 import { registerTickHandler } from "../kernel/index.js";
+import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { TrackGraph } from "./track-graph.js";
 import { TrainController } from "./train-controller.js";
 
@@ -10,6 +11,7 @@ const TRAIN_ENTITY = "createbedrock:train";
 const TRAIN_ID_PROPERTY = "createbedrock:train_id";
 const TRAIN_CARRIAGE_INDEX_PROPERTY = "createbedrock:train_carriage_index";
 const PERSISTENCE_KEY = "createbedrock:trains_v1";
+const PERSISTENCE_SCHEMA_VERSION = 1;
 const TRACK_CONNECTION_OFFSETS = [
 	[1, 0, 0], [-1, 0, 0], [0, 0, 1], [0, 0, -1],
 	[1, 1, 0], [1, -1, 0], [-1, 1, 0], [-1, -1, 0],
@@ -99,7 +101,7 @@ function persist() {
 		graph: graphFor(dimensionId).snapshot(),
 		trains: controllerFor(dimensionId).snapshot()
 	}));
-	world.setDynamicProperty(PERSISTENCE_KEY, JSON.stringify({ dimensions, nextTrainId }));
+	world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, { dimensions, nextTrainId }));
 }
 
 function restore() {
@@ -108,7 +110,12 @@ function restore() {
 		return;
 
 	try {
-		const snapshot = JSON.parse(serialized);
+		const snapshot = deserializeVersionedState(serialized, {
+			schemaVersion: PERSISTENCE_SCHEMA_VERSION,
+			upgrades: {
+				0: legacy => legacy
+			}
+		});
 		nextTrainId = snapshot.nextTrainId ?? 1;
 		for (const dimension of snapshot.dimensions ?? []) {
 			const graph = graphFor(dimension.dimensionId);
