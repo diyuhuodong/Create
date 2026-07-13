@@ -46,6 +46,7 @@ for (const directory of ["behavior_pack", "resource_pack"]) {
 const behaviorManifest = await readJson(resolve(bedrockRoot, "behavior_pack", "manifest.json"));
 const resourceManifest = await readJson(resolve(bedrockRoot, "resource_pack", "manifest.json"));
 const terrainAtlas = await readJson(resolve(bedrockRoot, "resource_pack", "textures", "terrain_texture.json"));
+const itemAtlas = await readJson(resolve(bedrockRoot, "resource_pack", "textures", "item_texture.json"));
 const allUuids = [
 	behaviorManifest.header.uuid,
 	resourceManifest.header.uuid,
@@ -65,6 +66,7 @@ if (!behaviorManifest.modules.some(module => module.type === "script" && module.
 	throw new Error("Behavior pack must define scripts/main.js as its script entry point.");
 
 const terrainTextures = new Set(Object.keys(terrainAtlas.texture_data ?? {}));
+const itemTextures = new Set(Object.keys(itemAtlas.texture_data ?? {}));
 for (const blockFile of await jsonFiles(resolve(bedrockRoot, "behavior_pack", "blocks"))) {
 	const block = await readJson(blockFile);
 	const components = block["minecraft:block"]?.components ?? {};
@@ -79,6 +81,13 @@ for (const blockFile of await jsonFiles(resolve(bedrockRoot, "behavior_pack", "b
 				throw new Error(`Block texture ${texture} in ${blockFile} is missing from terrain_texture.json.`);
 		}
 	}
+}
+
+for (const itemFile of await jsonFiles(resolve(bedrockRoot, "behavior_pack", "items"))) {
+	const item = await readJson(itemFile);
+	const icon = item["minecraft:item"]?.components?.["minecraft:icon"];
+	if (typeof icon === "string" && icon.startsWith("createbedrock_") && !itemTextures.has(icon))
+		throw new Error(`Item texture ${icon} in ${itemFile} is missing from item_texture.json.`);
 }
 
 for (const script of await filesWithExtension(resolve(bedrockRoot, "behavior_pack", "scripts"), ".js")) {

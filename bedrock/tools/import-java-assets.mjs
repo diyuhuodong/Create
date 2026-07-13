@@ -25,19 +25,27 @@ const TEXTURES = [
 	"millstone.png",
 	"standard_track.png"
 ];
+const ITEM_TEXTURES = ["belt_connector.png"];
 
 export async function importJavaAssets(resourcePackRoot) {
 	const sourceDirectory = resolve(repositoryRoot, "src/main/resources/assets/create/textures/block");
 	const targetDirectory = resolve(resourcePackRoot, "textures/create_java/block");
+	const itemSourceDirectory = resolve(repositoryRoot, "src/main/resources/assets/create/textures/item");
+	const itemTargetDirectory = resolve(resourcePackRoot, "textures/create_java/item");
 	await mkdir(targetDirectory, { recursive: true });
+	await mkdir(itemTargetDirectory, { recursive: true });
 
 	for (const texture of TEXTURES)
 		await cp(resolve(sourceDirectory, texture), resolve(targetDirectory, texture));
+	for (const texture of ITEM_TEXTURES)
+		await cp(resolve(itemSourceDirectory, texture), resolve(itemTargetDirectory, texture));
 
 	await writeFile(resolve(resourcePackRoot, "create-java-asset-provenance.json"), `${JSON.stringify({
-		source: "src/main/resources/assets/create/textures/block",
-		files: TEXTURES,
+		sources: {
+			block: { directory: "src/main/resources/assets/create/textures/block", files: TEXTURES },
+			item: { directory: "src/main/resources/assets/create/textures/item", files: ITEM_TEXTURES }
+		},
 		note: "Build-time copies only. Java models require explicit Bedrock geometry conversion."
 	}, null, 2)}\n`);
-	return TEXTURES.length;
+	return TEXTURES.length + ITEM_TEXTURES.length;
 }

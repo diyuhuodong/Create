@@ -46,6 +46,11 @@ export const KINETIC_BLOCKS = {
 	}
 };
 
+// Mirrors Create's default `kinetics.maxBeltLength` server configuration.  A
+// future Bedrock settings UI can make this configurable without changing the
+// persisted link format.
+export const MAX_BELT_LENGTH = 20;
+
 const NEIGHBOR_OFFSETS = [
 	[1, 0, 0],
 	[-1, 0, 0],
@@ -87,8 +92,42 @@ function keyFor(dimensionId, location) {
 	return `${dimensionId}:${location.x}:${location.y}:${location.z}`;
 }
 
+function linkKey(leftId, rightId) {
+	return [leftId, rightId].sort().join("|");
+}
+
+function isBeltPulley(node) {
+	return node?.configuration.kind === "transmission";
+}
+
+function isValidBeltPath(left, right) {
+	if (!isBeltPulley(left) || !isBeltPulley(right) || left.axis !== right.axis)
+		return false;
+
+	const delta = {
+		x: right.location.x - left.location.x,
+		y: right.location.y - left.location.y,
+		z: right.location.z - left.location.z
+	};
+	const distance = Math.hypot(delta.x, delta.y, delta.z);
+	if (distance === 0 || distance > MAX_BELT_LENGTH || delta[left.axis] !== 0)
+		return false;
+
+	const x = Math.abs(delta.x);
+	const y = Math.abs(delta.y);
+	const z = Math.abs(delta.z);
+	const equalPairs = Number(x === y) + Number(y === z) + Number(z === x);
+	if (equalPairs !== 1)
+		return false;
+
+	// Vertical shafts only support a straight horizontal belt.  Horizontal
+	// shafts may additionally form the 45-degree slopes supported by Create.
+	return left.axis !== "y" || delta.x === 0 || delta.z === 0;
+}
+
 export class KineticWorld {
 	#nodes = new Map();
+	#beltLinks = new Map();
 	#dirty = false;
 	#lastResolved = [];
 
@@ -112,13 +151,21 @@ export class KineticWorld {
 	}
 
 	trackBrokenBlock(dimensionId, location) {
-		const deleted = this.#nodes.delete(keyFor(dimensionId, location));
-		this.#dirty ||= deleted;
-		return deleted;
+		const id = keyFor(dimensionId, location);
+		const deleted = this.#nodes.delete(id);
+		let removedLinks = false;
+		for (const [linkId, link] of this.#beltLinks) {
+			if (link.leftId !== id && link.rightId !== id)
+				continue;
+			this.#beltLinks.delete(linkId);
+			removedLinks = true;
+		}
+		this.#dirty ||= deleted || removedLinks;
+		return deleted || removedLinks;
 	}
 
 	snapshot() {
-		return [...this.#nodes.values()]
+		const nodes = [...this.#nodes.values()]
 			.map(node => ({
 				axis: node.axis,
 				dimensionId: node.dimensionId,
@@ -126,14 +173,24 @@ export class KineticWorld {
 				typeId: node.typeId
 			}))
 			.sort((left, right) => keyFor(left.dimensionId, left.location).localeCompare(keyFor(right.dimensionId, right.location)));
+		const beltLinks = [...this.#beltLinks.values()]
+			.map(link => ({
+				left: { dimensionId: link.left.dimensionId, location: link.left.location },
+				right: { dimensionId: link.right.dimensionId, location: link.right.location }
+			}))
+			.sort((left, right) => keyFor(left.left.dimensionId, left.left.location).localeCompare(keyFor(right.left.dimensionId, right.left.location)));
+		return { beltLinks, nodes, schemaVersion: 2 };
 	}
 
 	restore(snapshot) {
-		if (!Array.isArray(snapshot))
-			throw new TypeError("Kinetic world snapshots must be arrays");
+		const nodes = Array.isArray(snapshot) ? snapshot : snapshot?.nodes;
+		const beltLinks = Array.isArray(snapshot) ? [] : snapshot?.beltLinks ?? [];
+		if (!Array.isArray(nodes) || !Array.isArray(beltLinks))
+			throw new TypeError("Kinetic world snapshots must provide node and belt-link arrays");
 
 		this.#nodes.clear();
-		for (const entry of snapshot) {
+		this.#beltLinks.clear();
+		for (const entry of nodes) {
 			const configuration = KINETIC_BLOCKS[entry?.typeId];
 			const location = entry?.location;
 			if (!configuration || !entry?.dimensionId || !Number.isInteger(location?.x) || !Number.isInteger(location?.y) || !Number.isInteger(location?.z))
@@ -152,7 +209,43 @@ export class KineticWorld {
 			});
 		}
 
+		for (const link of beltLinks) {
+			const left = link?.left;
+			const right = link?.right;
+			if (!left?.dimensionId || left.dimensionId !== right?.dimensionId || !left.location || !right.location)
+				continue;
+			this.connectBelt(left.dimensionId, left.location, right.location);
+		}
+
 		this.#dirty = true;
+	}
+
+	isBeltPulley(dimensionId, location) {
+		return isBeltPulley(this.#nodes.get(keyFor(dimensionId, location)));
+	}
+
+	connectBelt(dimensionId, leftLocation, rightLocation) {
+		const leftId = keyFor(dimensionId, leftLocation);
+		const rightId = keyFor(dimensionId, rightLocation);
+		const left = this.#nodes.get(leftId);
+		const right = this.#nodes.get(rightId);
+		if (!left || !right)
+			return { ok: false, reason: "missing_pulley" };
+		if (!isValidBeltPath(left, right))
+			return { ok: false, reason: "invalid_path" };
+
+		const id = linkKey(leftId, rightId);
+		if (this.#beltLinks.has(id))
+			return { ok: false, reason: "already_connected" };
+
+		this.#beltLinks.set(id, {
+			left: { dimensionId, location: { ...left.location } },
+			leftId,
+			right: { dimensionId, location: { ...right.location } },
+			rightId
+		});
+		this.#dirty = true;
+		return { ok: true };
 	}
 
 	activateHandCrank(block, duration = 20) {
@@ -198,6 +291,14 @@ export class KineticWorld {
 
 	#resolve() {
 		const network = new KineticNetwork();
+		const connectedPairs = new Set();
+		const connect = (leftId, rightId, ratio) => {
+			const id = linkKey(leftId, rightId);
+			if (connectedPairs.has(id))
+				return;
+			connectedPairs.add(id);
+			network.connect(leftId, rightId, ratio);
+		};
 		for (const node of this.#nodes.values()) {
 			const isTurning = node.turnTicksRemaining > 0;
 			network.addNode({
@@ -221,8 +322,13 @@ export class KineticWorld {
 
 				const ratio = connectionRatio(node, adjacent, x, y, z);
 				if (ratio !== undefined)
-					network.connect(node.id, adjacent.id, ratio);
+					connect(node.id, adjacent.id, ratio);
 			}
+		}
+
+		for (const link of this.#beltLinks.values()) {
+			if (this.#nodes.has(link.leftId) && this.#nodes.has(link.rightId))
+				connect(link.leftId, link.rightId, 1);
 		}
 
 		return network.resolve();

@@ -58,10 +58,14 @@ test("KineticWorld restores valid persisted nodes and ignores malformed entries"
 		{ dimensionId: "minecraft:overworld", location: { x: 3, y: 64, z: 0 }, typeId: "createbedrock:unknown" }
 	]);
 
-	assert.deepEqual(world.snapshot(), [
-		{ axis: "y", dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 }, typeId: "createbedrock:hand_crank" },
-		{ axis: "y", dimensionId: "minecraft:overworld", location: { x: 0, y: 65, z: 0 }, typeId: "createbedrock:shaft" }
-	]);
+	assert.deepEqual(world.snapshot(), {
+		beltLinks: [],
+		nodes: [
+			{ axis: "y", dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 }, typeId: "createbedrock:hand_crank" },
+			{ axis: "y", dimensionId: "minecraft:overworld", location: { x: 0, y: 65, z: 0 }, typeId: "createbedrock:shaft" }
+		],
+		schemaVersion: 2
+	});
 });
 
 test("KineticWorld only connects shafts along their rotation axis and meshes side-by-side cogwheels", () => {
@@ -88,7 +92,7 @@ test("KineticWorld derives its rotation axis from Bedrock placement direction", 
 	world.tick();
 
 	assert.equal(world.speedAt("minecraft:overworld", { x: 1, y: 64, z: 0 }), 16);
-	assert.equal(world.snapshot()[0].axis, "x");
+	assert.equal(world.snapshot().nodes[0].axis, "x");
 });
 
 test("KineticWorld applies the large-to-small cogwheel ratio", () => {
@@ -114,4 +118,45 @@ test("KineticWorld uses a gearbox to redirect power across rotation axes", () =>
 	world.tick();
 
 	assert.equal(world.speedAt("minecraft:overworld", { x: 1, y: 65, z: 0 }), 16);
+});
+
+test("KineticWorld transmits speed across persisted shaft belt links", () => {
+	const world = new KineticWorld();
+	const crank = block("createbedrock:hand_crank", 0, 64, 0);
+	const firstShaft = block("createbedrock:shaft", 0, 65, 0);
+	const secondShaft = block("createbedrock:shaft", 8, 65, 0);
+	world.trackPlacedBlock(crank);
+	world.trackPlacedBlock(firstShaft);
+	world.trackPlacedBlock(secondShaft);
+	assert.deepEqual(world.connectBelt("minecraft:overworld", firstShaft.location, secondShaft.location), { ok: true });
+	world.activateHandCrank(crank);
+	world.tick();
+
+	assert.equal(world.speedAt("minecraft:overworld", secondShaft.location), 16);
+	const snapshot = world.snapshot();
+	assert.equal(snapshot.beltLinks.length, 1);
+
+	const restored = new KineticWorld();
+	restored.restore(snapshot);
+	restored.activateHandCrank(crank);
+	restored.tick();
+	assert.equal(restored.speedAt("minecraft:overworld", secondShaft.location), 16);
+});
+
+test("KineticWorld rejects invalid belt geometry and removes links when a pulley breaks", () => {
+	const world = new KineticWorld();
+	const firstShaft = block("createbedrock:shaft", 0, 64, 0);
+	const tooFar = block("createbedrock:shaft", 21, 64, 0);
+	const diagonalVertical = block("createbedrock:shaft", 4, 64, 4);
+	const valid = block("createbedrock:shaft", 8, 64, 0);
+	world.trackPlacedBlock(firstShaft);
+	world.trackPlacedBlock(tooFar);
+	world.trackPlacedBlock(diagonalVertical);
+	world.trackPlacedBlock(valid);
+
+	assert.deepEqual(world.connectBelt("minecraft:overworld", firstShaft.location, tooFar.location), { ok: false, reason: "invalid_path" });
+	assert.deepEqual(world.connectBelt("minecraft:overworld", firstShaft.location, diagonalVertical.location), { ok: false, reason: "invalid_path" });
+	assert.deepEqual(world.connectBelt("minecraft:overworld", firstShaft.location, valid.location), { ok: true });
+	assert.equal(world.trackBrokenBlock("minecraft:overworld", valid.location), true);
+	assert.equal(world.snapshot().beltLinks.length, 0);
 });

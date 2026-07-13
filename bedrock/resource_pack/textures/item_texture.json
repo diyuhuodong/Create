@@ -1,0 +1,9 @@
+{
+  "resource_pack_name": "createbedrock",
+  "texture_name": "atlas.items",
+  "texture_data": {
+    "createbedrock_belt_connector": {
+      "textures": "textures/create_java/item/belt_connector"
+    }
+  }
+}
