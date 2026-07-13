@@ -220,3 +220,19 @@ test("KineticWorld rejects invalid belt geometry and removes links when a pulley
 	assert.equal(world.trackBrokenBlock("minecraft:overworld", valid.location), true);
 	assert.equal(world.snapshot().beltLinks.length, 0);
 });
+
+test("KineticWorld diagnostics report indexed nodes per dimension", () => {
+	const world = new KineticWorld();
+	world.trackPlacedBlock(block("createbedrock:shaft", 0, 64, 0));
+	world.trackPlacedBlock({
+		...block("createbedrock:cogwheel", 0, 64, 0),
+		dimension: { id: "minecraft:nether" }
+	});
+
+	assert.deepEqual(world.diagnostics(), {
+		beltLinks: 0,
+		nodes: 2,
+		nodesByDimension: { "minecraft:overworld": 1, "minecraft:nether": 1 },
+		resolvedNetworks: 0
+	});
+});

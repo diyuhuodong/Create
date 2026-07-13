@@ -1,4 +1,5 @@
 import { KineticNetwork } from "./kinetic-network.js";
+import { WorldIndex, worldLocationKey } from "../kernel/world-index.js";
 
 export const KINETIC_BLOCKS = {
 	"createbedrock:hand_crank": {
@@ -115,10 +116,6 @@ function connectionRatio(left, right, x, y, z) {
 	return supportsAxis(left) && supportsAxis(right) ? 1 : undefined;
 }
 
-function keyFor(dimensionId, location) {
-	return `${dimensionId}:${location.x}:${location.y}:${location.z}`;
-}
-
 function linkKey(leftId, rightId) {
 	return [leftId, rightId].sort().join("|");
 }
@@ -153,7 +150,7 @@ function isValidBeltPath(left, right) {
 }
 
 export class KineticWorld {
-	#nodes = new Map();
+	#nodes = new WorldIndex();
 	#beltLinks = new Map();
 	#dirty = false;
 	#lastResolved = [];
@@ -163,9 +160,9 @@ export class KineticWorld {
 		if (!configuration)
 			return false;
 
-		const id = keyFor(block.dimension.id, block.location);
-		const previous = this.#nodes.get(id);
-		this.#nodes.set(id, {
+		const id = worldLocationKey(block.dimension.id, block.location);
+		const previous = this.#nodes.get(block.dimension.id, block.location);
+		this.#nodes.set(block.dimension.id, block.location, {
 			axis: axisFor(block, configuration),
 			configuration,
 			dimensionId: block.dimension.id,
@@ -181,8 +178,8 @@ export class KineticWorld {
 	}
 
 	trackBrokenBlock(dimensionId, location) {
-		const id = keyFor(dimensionId, location);
-		const deleted = this.#nodes.delete(id);
+		const id = worldLocationKey(dimensionId, location);
+		const deleted = this.#nodes.delete(dimensionId, location);
 		let removedLinks = false;
 		for (const [linkId, link] of this.#beltLinks) {
 			if (link.leftId !== id && link.rightId !== id)
@@ -204,13 +201,13 @@ export class KineticWorld {
 				location: node.location,
 				typeId: node.typeId
 			}))
-			.sort((left, right) => keyFor(left.dimensionId, left.location).localeCompare(keyFor(right.dimensionId, right.location)));
+			.sort((left, right) => worldLocationKey(left.dimensionId, left.location).localeCompare(worldLocationKey(right.dimensionId, right.location)));
 		const beltLinks = [...this.#beltLinks.values()]
 			.map(link => ({
 				left: { dimensionId: link.left.dimensionId, location: link.left.location },
 				right: { dimensionId: link.right.dimensionId, location: link.right.location }
 			}))
-			.sort((left, right) => keyFor(left.left.dimensionId, left.left.location).localeCompare(keyFor(right.left.dimensionId, right.left.location)));
+			.sort((left, right) => worldLocationKey(left.left.dimensionId, left.left.location).localeCompare(worldLocationKey(right.left.dimensionId, right.left.location)));
 		return { beltLinks, nodes, schemaVersion: 2 };
 	}
 
@@ -229,8 +226,8 @@ export class KineticWorld {
 				continue;
 			const axis = ["x", "y", "z"].includes(entry.axis) ? entry.axis : configuration.axis;
 
-			const id = keyFor(entry.dimensionId, location);
-			this.#nodes.set(id, {
+			const id = worldLocationKey(entry.dimensionId, location);
+			this.#nodes.set(entry.dimensionId, location, {
 				axis,
 				configuration,
 				dimensionId: entry.dimensionId,
@@ -263,7 +260,7 @@ export class KineticWorld {
 	setGeneratedSpeed(dimensionId, location, speed) {
 		if (!Number.isFinite(speed))
 			throw new TypeError("Generated kinetic speeds must be finite");
-		const node = this.#nodes.get(keyFor(dimensionId, location));
+		const node = this.#nodes.get(dimensionId, location);
 		if (!node || node.configuration.kind !== "generated_source")
 			return false;
 		if (node.generatedSpeed === speed)
@@ -274,14 +271,14 @@ export class KineticWorld {
 	}
 
 	isBeltPulley(dimensionId, location) {
-		return isBeltPulley(this.#nodes.get(keyFor(dimensionId, location)));
+		return isBeltPulley(this.#nodes.get(dimensionId, location));
 	}
 
 	connectBelt(dimensionId, leftLocation, rightLocation) {
-		const leftId = keyFor(dimensionId, leftLocation);
-		const rightId = keyFor(dimensionId, rightLocation);
-		const left = this.#nodes.get(leftId);
-		const right = this.#nodes.get(rightId);
+		const leftId = worldLocationKey(dimensionId, leftLocation);
+		const rightId = worldLocationKey(dimensionId, rightLocation);
+		const left = this.#nodes.get(dimensionId, leftLocation);
+		const right = this.#nodes.get(dimensionId, rightLocation);
 		if (!left || !right)
 			return { ok: false, reason: "missing_pulley" };
 		if (!isValidBeltPath(left, right))
@@ -302,7 +299,7 @@ export class KineticWorld {
 	}
 
 	activateHandCrank(block, duration = 20) {
-		const node = this.#nodes.get(keyFor(block.dimension.id, block.location));
+		const node = this.#nodes.get(block.dimension.id, block.location);
 		if (!node || node.typeId !== "createbedrock:hand_crank")
 			return false;
 
@@ -333,7 +330,7 @@ export class KineticWorld {
 	}
 
 	speedAt(dimensionId, location) {
-		const id = keyFor(dimensionId, location);
+		const id = worldLocationKey(dimensionId, location);
 		for (const network of this.#lastResolved) {
 			const node = network.nodeStates.find(state => state.id === id);
 			if (node)
@@ -370,12 +367,12 @@ export class KineticWorld {
 
 		for (const node of this.#nodes.values()) {
 			for (const [x, y, z] of NEIGHBOR_OFFSETS) {
-				const adjacentId = keyFor(node.dimensionId, {
+				const adjacentLocation = {
 					x: node.location.x + x,
 					y: node.location.y + y,
 					z: node.location.z + z
-				});
-				const adjacent = this.#nodes.get(adjacentId);
+				};
+				const adjacent = this.#nodes.get(node.dimensionId, adjacentLocation);
 				if (!adjacent || node.id >= adjacent.id)
 					continue;
 
@@ -386,10 +383,19 @@ export class KineticWorld {
 		}
 
 		for (const link of this.#beltLinks.values()) {
-			if (this.#nodes.has(link.leftId) && this.#nodes.has(link.rightId))
+			if (this.#nodes.has(link.left.dimensionId, link.left.location) && this.#nodes.has(link.right.dimensionId, link.right.location))
 				connect(link.leftId, link.rightId, 1);
 		}
 
 		return network.resolve();
+	}
+
+	diagnostics() {
+		return {
+			beltLinks: this.#beltLinks.size,
+			nodes: this.#nodes.size,
+			nodesByDimension: this.#nodes.countsByDimension(),
+			resolvedNetworks: this.#lastResolved.length
+		};
 	}
 }
