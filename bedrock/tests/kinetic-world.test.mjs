@@ -232,6 +232,7 @@ test("KineticWorld diagnostics report indexed nodes per dimension", () => {
 	assert.deepEqual(world.diagnostics(), {
 		beltLinks: 0,
 		connections: 0,
+		dirtyDimensions: 2,
 		nodes: 2,
 		nodesByDimension: { "minecraft:overworld": 1, "minecraft:nether": 1 },
 		resolvedNetworks: 0
@@ -253,4 +254,30 @@ test("KineticWorld refreshes cached connections when a placed node changes axis"
 	world.tick();
 	assert.equal(world.speedAt("minecraft:overworld", shaft.location), 0);
 	assert.equal(world.diagnostics().connections, 0);
+});
+
+test("KineticWorld re-resolves only dirty dimensions while retaining other network states", () => {
+	const world = new KineticWorld();
+	const crank = block("createbedrock:hand_crank", 0, 64, 0);
+	const overworldShaft = block("createbedrock:shaft", 0, 65, 0);
+	const wheel = {
+		...block("createbedrock:water_wheel", 0, 64, 0),
+		dimension: { id: "minecraft:nether" }
+	};
+	const netherShaft = {
+		...block("createbedrock:shaft", 0, 65, 0),
+		dimension: { id: "minecraft:nether" }
+	};
+	for (const placed of [crank, overworldShaft, wheel, netherShaft])
+		world.trackPlacedBlock(placed);
+	world.activateHandCrank(crank);
+	world.setGeneratedSpeed("minecraft:nether", wheel.location, 8);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", overworldShaft.location), 16);
+	assert.equal(world.speedAt("minecraft:nether", netherShaft.location), 8);
+
+	world.setGeneratedSpeed("minecraft:nether", wheel.location, 0);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", overworldShaft.location), 16);
+	assert.equal(world.speedAt("minecraft:nether", netherShaft.location), 0);
 });

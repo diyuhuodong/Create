@@ -153,8 +153,8 @@ export class KineticWorld {
 	#nodes = new WorldIndex();
 	#connections = new Map();
 	#beltLinks = new Map();
-	#dirty = false;
-	#lastResolved = [];
+	#dirtyDimensions = new Set();
+	#resolvedByDimension = new Map();
 
 	trackPlacedBlock(block) {
 		const configuration = KINETIC_BLOCKS[block.typeId];
@@ -175,7 +175,7 @@ export class KineticWorld {
 			typeId: block.typeId
 		});
 		this.#refreshConnectionsAt(block.dimension.id, block.location);
-		this.#dirty = true;
+		this.#markDirty(block.dimension.id);
 		return true;
 	}
 
@@ -191,7 +191,8 @@ export class KineticWorld {
 			this.#beltLinks.delete(linkId);
 			removedLinks = true;
 		}
-		this.#dirty ||= deleted || removedLinks;
+		if (deleted || removedLinks)
+			this.#markDirty(dimensionId);
 		return deleted || removedLinks;
 	}
 
@@ -224,6 +225,8 @@ export class KineticWorld {
 		this.#nodes.clear();
 		this.#connections.clear();
 		this.#beltLinks.clear();
+		this.#dirtyDimensions.clear();
+		this.#resolvedByDimension.clear();
 		for (const entry of nodes) {
 			const configuration = KINETIC_BLOCKS[entry?.typeId];
 			const location = entry?.location;
@@ -253,8 +256,8 @@ export class KineticWorld {
 			this.connectBelt(left.dimensionId, left.location, right.location);
 		}
 		this.#rebuildConnections();
-
-		this.#dirty = true;
+		for (const node of this.#nodes.values())
+			this.#markDirty(node.dimensionId);
 	}
 
 	getGeneratedSourceNodes(typeId) {
@@ -272,7 +275,7 @@ export class KineticWorld {
 		if (node.generatedSpeed === speed)
 			return false;
 		node.generatedSpeed = speed;
-		this.#dirty = true;
+		this.#markDirty(dimensionId);
 		return true;
 	}
 
@@ -300,7 +303,7 @@ export class KineticWorld {
 			right: { dimensionId, location: { ...right.location } },
 			rightId
 		});
-		this.#dirty = true;
+		this.#markDirty(dimensionId);
 		return { ok: true };
 	}
 
@@ -310,7 +313,7 @@ export class KineticWorld {
 			return false;
 
 		node.turnTicksRemaining = Math.max(node.turnTicksRemaining, duration);
-		this.#dirty = true;
+		this.#markDirty(block.dimension.id);
 		return true;
 	}
 
@@ -321,23 +324,23 @@ export class KineticWorld {
 
 			node.turnTicksRemaining--;
 			if (node.turnTicksRemaining === 0)
-				this.#dirty = true;
+				this.#markDirty(node.dimensionId);
 		}
 
-		if (!this.#dirty)
+		if (this.#dirtyDimensions.size === 0)
 			return;
-
-		this.#dirty = false;
-		this.#lastResolved = this.#resolve();
+		for (const dimensionId of this.#dirtyDimensions)
+			this.#resolvedByDimension.set(dimensionId, this.#resolve(dimensionId));
+		this.#dirtyDimensions.clear();
 	}
 
 	get latestResolved() {
-		return this.#lastResolved;
+		return [...this.#resolvedByDimension.values()].flat();
 	}
 
 	speedAt(dimensionId, location) {
 		const id = worldLocationKey(dimensionId, location);
-		for (const network of this.#lastResolved) {
+		for (const network of this.#resolvedByDimension.get(dimensionId) ?? []) {
 			const node = network.nodeStates.find(state => state.id === id);
 			if (node)
 				return node.speed;
@@ -345,8 +348,10 @@ export class KineticWorld {
 		return 0;
 	}
 
-	#resolve() {
+	#resolve(dimensionId) {
 		const network = new KineticNetwork();
+		const nodes = this.#nodes.entriesInDimension(dimensionId).map(entry => entry.value);
+		const nodeIds = new Set(nodes.map(node => node.id));
 		const connectedPairs = new Set();
 		const connect = (leftId, rightId, ratio) => {
 			const id = linkKey(leftId, rightId);
@@ -355,7 +360,7 @@ export class KineticWorld {
 			connectedPairs.add(id);
 			network.connect(leftId, rightId, ratio);
 		};
-		for (const node of this.#nodes.values()) {
+		for (const node of nodes) {
 			const isTurning = node.turnTicksRemaining > 0;
 			const sourceSpeed = node.configuration.kind === "generated_source"
 				? node.generatedSpeed
@@ -372,10 +377,13 @@ export class KineticWorld {
 		}
 
 		for (const connection of this.#connections.values())
-			connect(connection.leftId, connection.rightId, connection.ratio);
+			if (nodeIds.has(connection.leftId) && nodeIds.has(connection.rightId))
+				connect(connection.leftId, connection.rightId, connection.ratio);
 
 		for (const link of this.#beltLinks.values()) {
-			if (this.#nodes.has(link.left.dimensionId, link.left.location) && this.#nodes.has(link.right.dimensionId, link.right.location))
+			if (link.left.dimensionId === dimensionId
+				&& this.#nodes.has(link.left.dimensionId, link.left.location)
+				&& this.#nodes.has(link.right.dimensionId, link.right.location))
 				connect(link.leftId, link.rightId, 1);
 		}
 
@@ -386,9 +394,10 @@ export class KineticWorld {
 		return {
 			beltLinks: this.#beltLinks.size,
 			connections: this.#connections.size,
+			dirtyDimensions: this.#dirtyDimensions.size,
 			nodes: this.#nodes.size,
 			nodesByDimension: this.#nodes.countsByDimension(),
-			resolvedNetworks: this.#lastResolved.length
+			resolvedNetworks: this.latestResolved.length
 		};
 	}
 
@@ -429,5 +438,9 @@ export class KineticWorld {
 		this.#connections.clear();
 		for (const node of this.#nodes.values())
 			this.#refreshConnectionsAt(node.dimensionId, node.location);
+	}
+
+	#markDirty(dimensionId) {
+		this.#dirtyDimensions.add(dimensionId);
 	}
 }
