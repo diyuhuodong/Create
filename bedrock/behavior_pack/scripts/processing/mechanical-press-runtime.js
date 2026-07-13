@@ -1,12 +1,14 @@
 import { ItemStack, system, world } from "@minecraft/server";
 
-import { registerTickHandler } from "../kernel/index.js";
+import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { PRESSING_RECIPES } from "./generated/pressing-recipes.js";
 import { MechanicalPressMachine } from "./mechanical-press-machine.js";
 import { registerMovingBlockDataAdapter } from "../contraptions/moving-block-data.js";
 
 const PRESS_BLOCK = "createbedrock:mechanical_press";
 const PERSISTENCE_KEY = "createbedrock:mechanical_presses_v1";
+const MECHANICAL_PRESS_TASK_GROUP = "mechanical_presses";
+const MECHANICAL_PRESS_TASK_BUDGET = 4;
 const REGISTERED_CREATE_ITEMS = new Set([
 	"createbedrock:copper_sheet",
 	"createbedrock:golden_sheet",
@@ -109,7 +111,25 @@ function tryInsertFromPlayer(player, press) {
 	return false;
 }
 
+function processPress(key, getKineticWorld) {
+	const press = presses.get(key);
+	if (!press)
+		return;
+	const update = press.machine.tick(getKineticWorld().speedAt(press.dimensionId, press.location));
+	if (!update?.completed)
+		return;
+	const dimension = world.getDimension(press.dimensionId);
+	for (const output of update.outputs)
+		dimension.spawnItem(new ItemStack(output.typeId, output.count), {
+			x: press.location.x + 0.5,
+			y: press.location.y + 1,
+			z: press.location.z + 0.5
+		});
+	persist();
+}
+
 export function registerMechanicalPresses(getKineticWorld) {
+	registerKernelTaskGroup(MECHANICAL_PRESS_TASK_GROUP, MECHANICAL_PRESS_TASK_BUDGET);
 	registerMovingBlockDataAdapter(PRESS_BLOCK, {
 		capture: capturePress,
 		detach: detachPress,
@@ -130,19 +150,8 @@ export function registerMechanicalPresses(getKineticWorld) {
 			persist();
 	});
 	registerTickHandler(() => {
-		for (const press of presses.values()) {
-			const update = press.machine.tick(getKineticWorld().speedAt(press.dimensionId, press.location));
-			if (!update?.completed)
-				continue;
-			const dimension = world.getDimension(press.dimensionId);
-			for (const output of update.outputs)
-				dimension.spawnItem(new ItemStack(output.typeId, output.count), {
-					x: press.location.x + 0.5,
-					y: press.location.y + 1,
-					z: press.location.z + 0.5
-				});
-			persist();
-		}
+		for (const key of presses.keys())
+			enqueueUniqueKernelTask(`mechanical_press:${key}`, () => processPress(key, getKineticWorld), MECHANICAL_PRESS_TASK_GROUP);
 	});
 	system.run(restore);
 }

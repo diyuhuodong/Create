@@ -1,12 +1,14 @@
 import { ItemStack, system, world } from "@minecraft/server";
 
-import { registerTickHandler } from "../kernel/index.js";
+import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { CRUSHING_RECIPES } from "./generated/crushing-recipes.js";
 import { CrushingWheelMachine } from "./crushing-wheel-machine.js";
 import { registerMovingBlockDataAdapter } from "../contraptions/moving-block-data.js";
 
 const CRUSHING_WHEEL_BLOCK = "createbedrock:crushing_wheel";
 const PERSISTENCE_KEY = "createbedrock:crushing_wheels_v1";
+const CRUSHING_WHEEL_TASK_GROUP = "crushing_wheels";
+const CRUSHING_WHEEL_TASK_BUDGET = 4;
 const wheels = new Map();
 
 function keyFor(dimensionId, location) {
@@ -102,7 +104,25 @@ function tryInsertFromPlayer(player, wheel) {
 	return false;
 }
 
+function processWheel(key, getKineticWorld) {
+	const wheel = wheels.get(key);
+	if (!wheel)
+		return;
+	const update = wheel.machine.tick(getKineticWorld().speedAt(wheel.dimensionId, wheel.location));
+	if (!update?.completed)
+		return;
+	const dimension = world.getDimension(wheel.dimensionId);
+	for (const output of update.outputs)
+		dimension.spawnItem(new ItemStack(output.typeId, output.count), {
+			x: wheel.location.x + 0.5,
+			y: wheel.location.y + 1,
+			z: wheel.location.z + 0.5
+		});
+	persist();
+}
+
 export function registerCrushingWheels(getKineticWorld) {
+	registerKernelTaskGroup(CRUSHING_WHEEL_TASK_GROUP, CRUSHING_WHEEL_TASK_BUDGET);
 	registerMovingBlockDataAdapter(CRUSHING_WHEEL_BLOCK, {
 		capture: captureWheel,
 		detach: detachWheel,
@@ -123,19 +143,8 @@ export function registerCrushingWheels(getKineticWorld) {
 			persist();
 	});
 	registerTickHandler(() => {
-		for (const wheel of wheels.values()) {
-			const update = wheel.machine.tick(getKineticWorld().speedAt(wheel.dimensionId, wheel.location));
-			if (!update?.completed)
-				continue;
-			const dimension = world.getDimension(wheel.dimensionId);
-			for (const output of update.outputs)
-				dimension.spawnItem(new ItemStack(output.typeId, output.count), {
-					x: wheel.location.x + 0.5,
-					y: wheel.location.y + 1,
-					z: wheel.location.z + 0.5
-				});
-			persist();
-		}
+		for (const key of wheels.keys())
+			enqueueUniqueKernelTask(`crushing_wheel:${key}`, () => processWheel(key, getKineticWorld), CRUSHING_WHEEL_TASK_GROUP);
 	});
 	system.run(restore);
 }

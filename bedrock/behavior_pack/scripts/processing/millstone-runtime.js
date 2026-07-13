@@ -1,11 +1,13 @@
 import { ItemStack, system, world } from "@minecraft/server";
 
-import { registerTickHandler } from "../kernel/index.js";
+import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { MILLING_RECIPES } from "./generated/milling-recipes.js";
 import { MillstoneMachine } from "./millstone-machine.js";
 import { registerMovingBlockDataAdapter } from "../contraptions/moving-block-data.js";
 
 const PERSISTENCE_KEY = "createbedrock:millstones_v1";
+const MILLSTONE_TASK_GROUP = "millstones";
+const MILLSTONE_TASK_BUDGET = 4;
 const REGISTERED_CREATE_ITEMS = new Set(["createbedrock:wheat_flour"]);
 const ACTIVE_MILLING_RECIPES = MILLING_RECIPES.filter(recipe => recipe.outputs.every(output =>
 	!output.typeId.startsWith("createbedrock:") || REGISTERED_CREATE_ITEMS.has(output.typeId)));
@@ -110,7 +112,27 @@ function tryInsertFromPlayer(player, mill) {
 	return false;
 }
 
+function processMill(key, getKineticWorld) {
+	const mill = mills.get(key);
+	if (!mill)
+		return;
+	const speed = getKineticWorld().speedAt(mill.dimensionId, mill.location);
+	const update = mill.machine.tick(speed);
+	if (!update?.completed)
+		return;
+
+	const dimension = world.getDimension(mill.dimensionId);
+	for (const output of update.outputs)
+		dimension.spawnItem(new ItemStack(output.typeId, output.count), {
+			x: mill.location.x + 0.5,
+			y: mill.location.y + 1,
+			z: mill.location.z + 0.5
+		});
+	persist();
+}
+
 export function registerMillstones(getKineticWorld) {
+	registerKernelTaskGroup(MILLSTONE_TASK_GROUP, MILLSTONE_TASK_BUDGET);
 	registerMovingBlockDataAdapter("createbedrock:millstone", {
 		capture: captureMillstone,
 		detach: detachMillstone,
@@ -137,21 +159,8 @@ export function registerMillstones(getKineticWorld) {
 	});
 
 	registerTickHandler(() => {
-		for (const mill of mills.values()) {
-			const speed = getKineticWorld().speedAt(mill.dimensionId, mill.location);
-			const update = mill.machine.tick(speed);
-			if (!update?.completed)
-				continue;
-
-			const dimension = world.getDimension(mill.dimensionId);
-			for (const output of update.outputs)
-				dimension.spawnItem(new ItemStack(output.typeId, output.count), {
-					x: mill.location.x + 0.5,
-					y: mill.location.y + 1,
-					z: mill.location.z + 0.5
-				});
-			persist();
-		}
+		for (const key of mills.keys())
+			enqueueUniqueKernelTask(`millstone:${key}`, () => processMill(key, getKineticWorld), MILLSTONE_TASK_GROUP);
 	});
 
 	system.run(restore);
