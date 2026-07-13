@@ -92,3 +92,22 @@ test("FluidNetwork rejects snapshots with orphaned escrow records", () => {
 		}]
 	}), /unowned transfer/);
 });
+
+test("FluidNetwork settles existing escrow after a pump stops without launching another transfer", () => {
+	const source = tankPort({ contents: { amount: 500, typeId: "minecraft:water" }, id: "tank:source" });
+	const destination = tankPort({ capacity: 200, contents: { amount: 200, typeId: "minecraft:water" }, id: "tank:destination" });
+	const network = createNetwork(source.port, destination.port);
+	network.createPump({ destinationId: destination.port.id, id: "pump:escrow", maxAmountPerTick: 300, sourceId: source.port.id });
+	assert.equal(network.tick().outcomes[0].reason, "destination_full");
+	network.setPumpRunning("pump:escrow", false);
+	destination.tank.extract(destination.tank.reserve());
+	network.markPortDirty(destination.port.id);
+	assert.equal(network.tick().outcomes[0].reason, "destination_full");
+	destination.tank.extract(destination.tank.reserve());
+	network.markPortDirty(destination.port.id);
+	assert.deepEqual(network.tick().outcomes, [{ id: "pump:escrow", ok: true, state: "committed" }]);
+	assert.deepEqual(source.tank.inspect().contents, { amount: 200, typeId: "minecraft:water" });
+	assert.deepEqual(destination.tank.inspect().contents, { amount: 100, typeId: "minecraft:water" });
+	assert.equal(network.diagnostics().activeTransfers, 0);
+	assert.equal(network.tick().processed, 0);
+});

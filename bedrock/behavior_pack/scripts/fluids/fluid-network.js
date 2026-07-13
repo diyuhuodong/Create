@@ -167,7 +167,7 @@ export class FluidNetwork {
 			this.#dirtyLinks.delete(id);
 			this.#roundRobinAfter = id;
 			const link = this.#links.get(id);
-			if (!link || !link.enabled)
+			if (!link || (!link.enabled && !link.activeTransferId))
 				continue;
 			processed++;
 			outcomes.push({ id, ...this.#settleLink(link) });
@@ -245,7 +245,7 @@ export class FluidNetwork {
 		const settled = this.#journal.settle(link.activeTransferId, id => this.#ports.get(id));
 		if (settled.ok || settled.reason === "source_changed" || settled.reason === "unknown_transfer") {
 			link.activeTransferId = undefined;
-			if (settled.ok)
+			if (settled.ok && link.enabled)
 				this.markLinkDirty(link.id);
 		}
 		return settled;
