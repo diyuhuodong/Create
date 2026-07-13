@@ -166,10 +166,12 @@ function tickTrains() {
 		const controller = controllerFor(train.dimensionId);
 		const wasMoving = controller.getTrain(id).edgeId !== undefined;
 		const state = controller.tick(id, 0.1);
-		if (!wasMoving && state.edgeId === undefined)
-			continue;
-		const entity = world.getEntity(train.entityId);
-		if (entity?.isValid)
+		let entity = world.getEntity(train.entityId);
+		if (!entity?.isValid) {
+			train.entityId = spawnMarker(train.dimensionId, id, locationForTrain(train.dimensionId, state));
+			entity = world.getEntity(train.entityId);
+		}
+		if ((wasMoving || state.edgeId !== undefined) && entity?.isValid)
 			entity.teleport(markerLocation(locationForTrain(train.dimensionId, state)));
 	}
 

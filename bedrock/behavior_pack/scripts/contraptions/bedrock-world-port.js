@@ -60,6 +60,7 @@ export class BedrockContraptionWorldPort {
 	spawnContraption({ id, origin, snapshot }) {
 		let marker = this.#dimension().getEntities({ type: CONTRAPTION_ENTITY })
 			.find(entity => entity.getDynamicProperty(CONTRAPTION_ID_PROPERTY) === id);
+		const createdMarker = !marker?.isValid;
 		if (marker?.isValid) {
 			marker.teleport(origin);
 		} else {
@@ -68,13 +69,23 @@ export class BedrockContraptionWorldPort {
 		}
 
 		this.#removeParts(id);
-		for (const block of snapshot.blocks) {
-			const partType = CONTRAPTION_PART_TYPES[block.typeId];
-			if (!partType)
-				throw new Error(`Unsupported contraption part type: ${block.typeId}`);
-			const part = this.#dimension().spawnEntity(partType, this.#partLocation(origin, block.relative, 0));
-			part.setDynamicProperty(CONTRAPTION_ID_PROPERTY, id);
-			part.setDynamicProperty(CONTRAPTION_PART_RELATIVE_PROPERTY, JSON.stringify(block.relative));
+		const createdParts = [];
+		try {
+			for (const block of snapshot.blocks) {
+				const partType = CONTRAPTION_PART_TYPES[block.typeId];
+				if (!partType)
+					throw new Error(`Unsupported contraption part type: ${block.typeId}`);
+				const part = this.#dimension().spawnEntity(partType, this.#partLocation(origin, block.relative, 0));
+				part.setDynamicProperty(CONTRAPTION_ID_PROPERTY, id);
+				part.setDynamicProperty(CONTRAPTION_PART_RELATIVE_PROPERTY, JSON.stringify(block.relative));
+				createdParts.push(part);
+			}
+		} catch (error) {
+			for (const part of createdParts)
+				part.remove();
+			if (createdMarker)
+				marker.remove();
+			throw error;
 		}
 		return marker.id;
 	}
