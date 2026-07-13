@@ -1,6 +1,6 @@
 import { system, world } from "@minecraft/server";
 
-import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
+import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { TrackGraph } from "./track-graph.js";
 import { findTrainCollision } from "./train-collision.js";
@@ -11,6 +11,7 @@ const STATION_BLOCK = "createbedrock:track_station";
 const TRAIN_ENTITY = "createbedrock:train";
 const TRAIN_ID_PROPERTY = "createbedrock:train_id";
 const TRAIN_CARRIAGE_INDEX_PROPERTY = "createbedrock:train_carriage_index";
+const TRAIN_TASK_BUDGET = 4;
 const PERSISTENCE_KEY = "createbedrock:trains_v1";
 const PERSISTENCE_SCHEMA_VERSION = 1;
 const TRACK_CONNECTION_OFFSETS = [
@@ -317,28 +318,35 @@ function updateTrainCollision(dimensionId, id, controller, carriages) {
 	}
 }
 
+function processTrain(id) {
+	const train = trains.get(id);
+	if (!train)
+		return;
+
+	const controller = controllerFor(train.dimensionId);
+	controller.tick(id);
+	const carriages = controller.getCarriagePlacements(id);
+	updateTrainCollision(train.dimensionId, id, controller, carriages);
+	train.entityIds = carriages.map(carriage => {
+		let entity = world.getEntity(train.entityIds?.[carriage.index]);
+		if (!entity?.isValid) {
+			const entityId = spawnCarriageMarker(train.dimensionId, id, carriage.index, locationForCarriage(train.dimensionId, carriage));
+			entity = world.getEntity(entityId);
+			return entityId;
+		}
+		entity.teleport(markerLocation(locationForCarriage(train.dimensionId, carriage)));
+		return entity.id;
+	});
+}
+
 function tickTrains() {
 	ticksSinceAvailabilityCheck++;
 	if (ticksSinceAvailabilityCheck >= 20) {
 		ticksSinceAvailabilityCheck = 0;
 		refreshTrackAvailability();
 	}
-	for (const [id, train] of trains) {
-		const controller = controllerFor(train.dimensionId);
-		controller.tick(id);
-		const carriages = controller.getCarriagePlacements(id);
-		updateTrainCollision(train.dimensionId, id, controller, carriages);
-		train.entityIds = carriages.map(carriage => {
-			let entity = world.getEntity(train.entityIds?.[carriage.index]);
-			if (!entity?.isValid) {
-				const entityId = spawnCarriageMarker(train.dimensionId, id, carriage.index, locationForCarriage(train.dimensionId, carriage));
-				entity = world.getEntity(entityId);
-				return entityId;
-			}
-			entity.teleport(markerLocation(locationForCarriage(train.dimensionId, carriage)));
-			return entity.id;
-		});
-	}
+	for (const id of trains.keys())
+		enqueueUniqueKernelTask(`train:${id}`, () => processTrain(id), "trains");
 
 	ticksSincePersist++;
 	if (ticksSincePersist >= 20) {
@@ -348,7 +356,7 @@ function tickTrains() {
 }
 
 export function registerTrains() {
-	registerKernelTaskGroup("trains", 1);
+	registerKernelTaskGroup("trains", TRAIN_TASK_BUDGET);
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
 		if (event.block.typeId === TRACK_BLOCK)
 			addTrack(event.block);
@@ -392,7 +400,7 @@ export function registerTrains() {
 		}
 	});
 
-	registerTickHandler(tickTrains, "trains");
+	registerTickHandler(tickTrains);
 	system.run(restore);
 }
 
