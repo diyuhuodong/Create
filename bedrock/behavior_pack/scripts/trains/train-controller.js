@@ -3,7 +3,7 @@ export class TrainController {
 	#trains = new Map();
 
 	constructor(trackGraph) {
-		for (const method of ["findRoute", "getEdge", "releaseEdge", "releaseReservations", "tryReserve"]) {
+		for (const method of ["findRoute", "getEdge", "isEdgeAvailable", "releaseEdge", "releaseReservations", "tryReserve"]) {
 			if (typeof trackGraph?.[method] !== "function")
 				throw new TypeError(`TrainController track graph requires ${method}()`);
 		}
@@ -87,6 +87,8 @@ export class TrainController {
 		let remaining = distance;
 		while (remaining > 0 && train.route) {
 			const edgeId = train.route.edgeIds[train.edgeIndex];
+			if (!this.#graph.isEdgeAvailable(edgeId))
+				break;
 			const edge = this.#graph.getEdge(edgeId);
 			const available = edge.length - train.distanceOnEdge;
 			const moved = Math.min(available, remaining);

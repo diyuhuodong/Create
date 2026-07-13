@@ -153,3 +153,16 @@ test("TrainController restores only the route edges still occupied by its format
 	assert.equal(restored.graph.tryReserve("train_two", ["a<->b"]), true);
 	assert.equal(restored.graph.tryReserve("train_two", ["b<->c"]), false);
 });
+
+test("TrainController waits without changing progress while its active edge is unavailable", () => {
+	const { controller, graph } = createController();
+	controller.dispatch("train_one", "c");
+	controller.tick("train_one", 1);
+	graph.setNodeAvailable("b", false);
+
+	const waiting = controller.tick("train_one", 2);
+	assert.equal(waiting.distanceOnEdge, 1);
+	assert.equal(waiting.progress, 0.25);
+	graph.setNodeAvailable("b", true);
+	assert.equal(controller.tick("train_one", 2).distanceOnEdge, 3);
+});

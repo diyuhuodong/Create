@@ -12,7 +12,7 @@ export class TrackGraph {
 		if (this.#nodes.has(id))
 			throw new Error(`Track node ${id} already exists`);
 
-		this.#nodes.set(id, { id, location: { ...location } });
+		this.#nodes.set(id, { available: true, id, location: { ...location } });
 	}
 
 	connect(leftId, rightId, length) {
@@ -50,6 +50,8 @@ export class TrackGraph {
 	findRoute(startId, destinationId) {
 		if (!this.#nodes.has(startId) || !this.#nodes.has(destinationId))
 			throw new Error("Routes require registered start and destination nodes");
+		if (!this.#nodes.get(startId).available || !this.#nodes.get(destinationId).available)
+			return undefined;
 
 		const distances = new Map([[startId, 0]]);
 		const previous = new Map();
@@ -71,6 +73,8 @@ export class TrackGraph {
 					continue;
 
 				const adjacentId = edge.leftId === currentId ? edge.rightId : edge.leftId;
+				if (!this.#nodes.get(adjacentId).available)
+					continue;
 				if (!pending.has(adjacentId))
 					continue;
 
@@ -145,7 +149,23 @@ export class TrackGraph {
 
 	getNode(id) {
 		const node = this.#nodes.get(id);
-		return node && { id: node.id, location: { ...node.location } };
+		return node && { available: node.available, id: node.id, location: { ...node.location } };
+	}
+
+	setNodeAvailable(id, available) {
+		const node = this.#nodes.get(id);
+		if (!node)
+			return false;
+		const normalized = !!available;
+		if (node.available === normalized)
+			return false;
+		node.available = normalized;
+		return true;
+	}
+
+	isEdgeAvailable(id) {
+		const edge = this.#edges.get(id);
+		return !!edge && this.#nodes.get(edge.leftId).available && this.#nodes.get(edge.rightId).available;
 	}
 
 	snapshot() {

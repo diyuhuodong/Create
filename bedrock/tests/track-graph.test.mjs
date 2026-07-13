@@ -43,6 +43,21 @@ test("TrackGraph routes around reserved edges when an alternative exists", () =>
 	});
 });
 
+test("TrackGraph routes around unavailable nodes without persisting temporary availability", () => {
+	const graph = createGraph();
+	assert.equal(graph.setNodeAvailable("b", false), true);
+	assert.deepEqual(graph.findRoute("a", "d"), {
+		nodeIds: ["a", "c", "d"],
+		edgeIds: ["a<->c", "c<->d"],
+		length: 11
+	});
+
+	const restored = new TrackGraph();
+	restored.restore(graph.snapshot());
+	assert.equal(restored.getNode("b").available, true);
+	assert.equal(restored.findRoute("a", "d").length, 4);
+});
+
 test("TrackGraph serializes and restores its topology", () => {
 	const source = createGraph();
 	const snapshot = source.snapshot();

@@ -24,6 +24,7 @@ const trains = new Map();
 const selections = new Map();
 let nextTrainId = 1;
 let ticksSincePersist = 0;
+let ticksSinceAvailabilityCheck = 0;
 
 function nodeId(location) {
 	return `${location.x}:${location.y}:${location.z}`;
@@ -151,6 +152,21 @@ function addTrack(block) {
 	persist();
 }
 
+function refreshTrackAvailability() {
+	for (const [dimensionId, graph] of graphs) {
+		const dimension = world.getDimension(dimensionId);
+		for (const node of graph.snapshot().nodes) {
+			let available = false;
+			try {
+				available = dimension.getBlock(node.location)?.typeId === TRACK_BLOCK;
+			} catch {
+				available = false;
+			}
+			graph.setNodeAvailable(node.id, available);
+		}
+	}
+}
+
 function createTrain(dimensionId, nodeIdValue) {
 	const id = `train:${nextTrainId++}`;
 	const controller = controllerFor(dimensionId);
@@ -211,6 +227,11 @@ function selectStationLoop(player, dimensionId, stationNodeId) {
 }
 
 function tickTrains() {
+	ticksSinceAvailabilityCheck++;
+	if (ticksSinceAvailabilityCheck >= 20) {
+		ticksSinceAvailabilityCheck = 0;
+		refreshTrackAvailability();
+	}
 	for (const [id, train] of trains) {
 		const controller = controllerFor(train.dimensionId);
 		controller.tick(id, 0.1);
