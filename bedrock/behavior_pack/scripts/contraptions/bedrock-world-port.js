@@ -8,7 +8,8 @@ const CONTRAPTION_PART_TYPES = {
 	"createbedrock:shaft": "createbedrock:contraption_part_shaft",
 	"createbedrock:cogwheel": "createbedrock:contraption_part_cogwheel",
 	"createbedrock:millstone": "createbedrock:contraption_part_millstone",
-	"createbedrock:mechanical_press": "createbedrock:contraption_part_mechanical_press"
+	"createbedrock:mechanical_press": "createbedrock:contraption_part_mechanical_press",
+	"createbedrock:crushing_wheel": "createbedrock:contraption_part_crushing_wheel"
 };
 const ALL_CONTRAPTION_PART_TYPES = [CONTRAPTION_PART_ENTITY, ...new Set(Object.values(CONTRAPTION_PART_TYPES))];
 const CONTRAPTION_ID_PROPERTY = "createbedrock:contraption_id";

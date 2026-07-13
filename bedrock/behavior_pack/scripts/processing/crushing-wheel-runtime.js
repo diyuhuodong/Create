@@ -3,6 +3,7 @@ import { ItemStack, system, world } from "@minecraft/server";
 import { registerTickHandler } from "../kernel/index.js";
 import { CRUSHING_RECIPES } from "./generated/crushing-recipes.js";
 import { CrushingWheelMachine } from "./crushing-wheel-machine.js";
+import { registerMovingBlockDataAdapter } from "../contraptions/moving-block-data.js";
 
 const CRUSHING_WHEEL_BLOCK = "createbedrock:crushing_wheel";
 const PERSISTENCE_KEY = "createbedrock:crushing_wheels_v1";
@@ -32,6 +33,29 @@ function ensureWheel(block) {
 		wheels.set(key, wheel);
 	}
 	return wheel;
+}
+
+function captureWheel(dimensionId, location) {
+	return wheels.get(keyFor(dimensionId, location))?.machine.snapshot();
+}
+
+function detachWheel(dimensionId, location) {
+	const key = keyFor(dimensionId, location);
+	const state = captureWheel(dimensionId, location);
+	wheels.delete(key);
+	persist();
+	return state;
+}
+
+function restoreWheel(dimensionId, location, state) {
+	const machine = new CrushingWheelMachine(CRUSHING_RECIPES);
+	machine.restore(state);
+	wheels.set(keyFor(dimensionId, location), {
+		dimensionId,
+		location: { ...location },
+		machine
+	});
+	persist();
 }
 
 function restore() {
@@ -79,6 +103,11 @@ function tryInsertFromPlayer(player, wheel) {
 }
 
 export function registerCrushingWheels(getKineticWorld) {
+	registerMovingBlockDataAdapter(CRUSHING_WHEEL_BLOCK, {
+		capture: captureWheel,
+		detach: detachWheel,
+		restore: restoreWheel
+	});
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
 		if (event.block.typeId === CRUSHING_WHEEL_BLOCK) {
 			ensureWheel(event.block);

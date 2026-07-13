@@ -13,7 +13,8 @@ const MOVABLE_BLOCK_TYPES = new Set([
 	"createbedrock:shaft",
 	"createbedrock:cogwheel",
 	"createbedrock:millstone",
-	"createbedrock:mechanical_press"
+	"createbedrock:mechanical_press",
+	"createbedrock:crushing_wheel"
 ]);
 const activeBearings = new Map();
 const controllers = new Map();
