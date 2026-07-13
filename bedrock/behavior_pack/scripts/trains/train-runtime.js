@@ -211,8 +211,11 @@ function selectRoute(player, dimensionId, destinationId) {
 		.find(([id, train]) => train.dimensionId === dimensionId && controller.getTrain(id).nodeId === selection.nodeId && !controller.getTrain(id).destinationId)?.[0];
 	if (!trainId)
 		trainId = createTrain(dimensionId, selection.nodeId);
-	if (controller.dispatch(trainId, destinationId))
+	const result = controller.dispatchWithReason(trainId, destinationId);
+	if (result.ok)
 		persist();
+	else
+		player.sendMessage(`Train dispatch unavailable: ${result.reason}.`);
 }
 
 function trackNodeForStation(block) {
@@ -240,8 +243,31 @@ function selectStationLoop(player, dimensionId, stationNodeId) {
 		.find(([id, train]) => train.dimensionId === dimensionId && controller.getTrain(id).nodeId === selection.nodeId && !controller.getTrain(id).destinationId)?.[0];
 	if (!trainId)
 		trainId = createTrain(dimensionId, selection.nodeId);
-	if (controller.setSchedule(trainId, { dwellTicks: 20, stopIds: [stationNodeId, selection.nodeId] }))
+	const result = controller.setScheduleWithReason(trainId, { dwellTicks: 20, stopIds: [stationNodeId, selection.nodeId] });
+	if (result.ok) {
 		persist();
+		if (result.state === "waiting")
+			player.sendMessage("Train loop armed and waiting for a usable route.");
+	} else
+		player.sendMessage(`Train loop unavailable: ${result.reason}.`);
+}
+
+function toggleStationStop(player, dimensionId, stationNodeId) {
+	const controller = controllerFor(dimensionId);
+	const trainId = [...trains.entries()]
+		.filter(([id, train]) => train.dimensionId === dimensionId && controller.getTrain(id).nodeId === stationNodeId)
+		.map(([id]) => id)
+		.sort()[0];
+	if (!trainId) {
+		player.sendMessage("No train is available at this station.");
+		return;
+	}
+
+	const motion = controller.getMotionState(trainId);
+	if (controller.setStopped(trainId, !motion.stopped)) {
+		persist();
+		player.sendMessage(motion.stopped ? "Train released." : "Train stopped.");
+	}
 }
 
 function tickTrains() {
@@ -306,7 +332,13 @@ export function registerTrains() {
 			selectRoute(event.player, event.block.dimension.id, nodeId(event.block.location));
 		if (event.block.typeId === STATION_BLOCK) {
 			const stationNodeId = trackNodeForStation(event.block);
-			if (stationNodeId)
+			if (!stationNodeId) {
+				event.player.sendMessage("Station requires an adjacent track.");
+				return;
+			}
+			if (event.player.isSneaking)
+				toggleStationStop(event.player, event.block.dimension.id, stationNodeId);
+			else
 				selectStationLoop(event.player, event.block.dimension.id, stationNodeId);
 		}
 	});

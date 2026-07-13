@@ -48,6 +48,25 @@ test("TrainController refuses to dispatch an already moving train", () => {
 	assert.equal(controller.dispatch("train_one", "b"), false);
 });
 
+test("TrainController reports why a dispatch cannot start", () => {
+	const { controller, graph } = createController();
+	assert.deepEqual(controller.dispatchWithReason("train_one", "missing"), {
+		ok: false,
+		reason: "unknown_destination"
+	});
+	graph.setNodeAvailable("b", false);
+	assert.deepEqual(controller.dispatchWithReason("train_one", "b"), {
+		ok: false,
+		reason: "route_unavailable"
+	});
+	graph.setNodeAvailable("b", true);
+	assert.equal(controller.dispatch("train_one", "b"), true);
+	assert.deepEqual(controller.dispatchWithReason("train_one", "c"), {
+		ok: false,
+		reason: "already_moving"
+	});
+});
+
 test("TrainController restores a moving train and reclaims its route", () => {
 	const source = createController();
 	source.controller.dispatch("train_one", "c");
@@ -113,6 +132,19 @@ test("TrainController persists a looping station schedule with dwell time", () =
 	const restored = new TrainController(graph);
 	restored.restore(controller.snapshot());
 	assert.deepEqual(restored.getTrain("train-1").schedule.stopIds, ["b", "a"]);
+});
+
+test("TrainController arms an unavailable station loop in a waiting state", () => {
+	const { controller, graph } = createController();
+	graph.setNodeAvailable("b", false);
+	assert.deepEqual(controller.setScheduleWithReason("train_one", {
+		dwellTicks: 1,
+		stopIds: ["b", "a"]
+	}), { ok: true, state: "waiting" });
+	assert.deepEqual(controller.setScheduleWithReason("train_one", {
+		stopIds: ["missing"]
+	}), { ok: false, reason: "unknown_station" });
+	assert.deepEqual(controller.getTrain("train_one").schedule.stopIds, ["b", "a"]);
 });
 
 test("TrainController keeps carriage positions ordered along the reserved route", () => {

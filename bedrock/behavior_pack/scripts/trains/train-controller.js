@@ -34,13 +34,23 @@ export class TrainController {
 	}
 
 	dispatch(id, destinationId) {
+		return this.dispatchWithReason(id, destinationId).ok;
+	}
+
+	dispatchWithReason(id, destinationId) {
 		const train = this.#requireTrain(id);
-		if (train.route || train.schedule)
-			return false;
+		if (train.route)
+			return { ok: false, reason: "already_moving" };
+		if (train.schedule)
+			return { ok: false, reason: "scheduled" };
+		if (!this.#graph.getNode(destinationId))
+			return { ok: false, reason: "unknown_destination" };
 
 		const route = this.#graph.findRoute(train.nodeId, destinationId);
-		if (!route || !this.#graph.tryReserve(id, route.edgeIds))
-			return false;
+		if (!route)
+			return { ok: false, reason: "route_unavailable" };
+		if (!this.#graph.tryReserve(id, route.edgeIds))
+			return { ok: false, reason: "route_reserved" };
 
 		train.route = {
 			...route,
@@ -49,15 +59,21 @@ export class TrainController {
 		train.edgeIndex = 0;
 		train.distanceOnEdge = 0;
 		train.direction = this.#routeDirection(train);
-		return true;
+		return { ok: true, route };
 	}
 
 	setSchedule(id, { stopIds, dwellTicks = 20 }) {
+		return this.setScheduleWithReason(id, { stopIds, dwellTicks }).ok;
+	}
+
+	setScheduleWithReason(id, { stopIds, dwellTicks = 20 }) {
 		const train = this.#requireTrain(id);
-		if (train.route || !Array.isArray(stopIds) || stopIds.length === 0 || !Number.isInteger(dwellTicks) || dwellTicks < 0)
-			return false;
+		if (train.route)
+			return { ok: false, reason: "already_moving" };
+		if (!Array.isArray(stopIds) || stopIds.length === 0 || !Number.isInteger(dwellTicks) || dwellTicks < 0)
+			return { ok: false, reason: "invalid_schedule" };
 		if (stopIds.some(stopId => !this.#graph.getNode(stopId)))
-			return false;
+			return { ok: false, reason: "unknown_station" };
 
 		train.schedule = {
 			dwellRemaining: 0,
@@ -66,7 +82,7 @@ export class TrainController {
 			stopIds: [...stopIds]
 		};
 		this.#advanceSchedule(train);
-		return true;
+		return { ok: true, state: train.route ? "moving" : "waiting" };
 	}
 
 	clearSchedule(id) {
