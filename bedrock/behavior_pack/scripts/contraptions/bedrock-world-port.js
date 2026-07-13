@@ -2,6 +2,11 @@ import { BlockPermutation, world } from "@minecraft/server";
 
 const CONTRAPTION_ENTITY = "createbedrock:contraption";
 const CONTRAPTION_PART_ENTITY = "createbedrock:contraption_part";
+const CONTRAPTION_PART_TYPES = {
+	"createbedrock:shaft": "createbedrock:contraption_part_shaft",
+	"createbedrock:cogwheel": "createbedrock:contraption_part_cogwheel"
+};
+const ALL_CONTRAPTION_PART_TYPES = [CONTRAPTION_PART_ENTITY, ...new Set(Object.values(CONTRAPTION_PART_TYPES))];
 const CONTRAPTION_ID_PROPERTY = "createbedrock:contraption_id";
 const CONTRAPTION_PART_RELATIVE_PROPERTY = "createbedrock:contraption_part_relative";
 
@@ -64,7 +69,10 @@ export class BedrockContraptionWorldPort {
 
 		this.#removeParts(id);
 		for (const block of snapshot.blocks) {
-			const part = this.#dimension().spawnEntity(CONTRAPTION_PART_ENTITY, this.#partLocation(origin, block.relative, 0));
+			const partType = CONTRAPTION_PART_TYPES[block.typeId];
+			if (!partType)
+				throw new Error(`Unsupported contraption part type: ${block.typeId}`);
+			const part = this.#dimension().spawnEntity(partType, this.#partLocation(origin, block.relative, 0));
 			part.setDynamicProperty(CONTRAPTION_ID_PROPERTY, id);
 			part.setDynamicProperty(CONTRAPTION_PART_RELATIVE_PROPERTY, JSON.stringify(block.relative));
 		}
@@ -95,7 +103,7 @@ export class BedrockContraptionWorldPort {
 	}
 
 	#parts(id) {
-		return this.#dimension().getEntities({ type: CONTRAPTION_PART_ENTITY })
+		return ALL_CONTRAPTION_PART_TYPES.flatMap(type => this.#dimension().getEntities({ type }))
 			.filter(entity => entity.getDynamicProperty(CONTRAPTION_ID_PROPERTY) === id);
 	}
 
