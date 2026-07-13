@@ -68,6 +68,19 @@ test("TrackGraph serializes and restores its topology", () => {
 	assert.equal(restored.findRoute("a", "d").length, 11);
 });
 
+test("TrackGraph retains its current topology when a persisted replacement is invalid", () => {
+	const graph = createGraph();
+	const invalid = graph.snapshot();
+	invalid.edges[0].leftId = "missing";
+
+	assert.throws(() => graph.restore(invalid), /registered nodes/);
+	assert.deepEqual(graph.findRoute("a", "d"), {
+		nodeIds: ["a", "b", "d"],
+		edgeIds: ["a<->b", "b<->d"],
+		length: 4
+	});
+});
+
 test("TrackGraph samples persisted geometry by arc length in either direction", () => {
 	const graph = new TrackGraph();
 	graph.addNode({ id: "a", location: { x: 0, y: 0, z: 0 } });

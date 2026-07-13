@@ -136,15 +136,29 @@ function restore() {
 		});
 		nextTrainId = snapshot.nextTrainId ?? 1;
 		for (const dimension of snapshot.dimensions ?? []) {
-			const graph = graphFor(dimension.dimensionId);
-			graph.restore(dimension.graph);
-			const controller = controllerFor(dimension.dimensionId);
-			controller.restore(dimension.trains);
-			for (const train of dimension.trains) {
-				trains.set(train.id, {
-					dimensionId: dimension.dimensionId,
-					entityIds: spawnCarriageMarkers(dimension.dimensionId, train.id, controller)
-				});
+			try {
+				if (typeof dimension?.dimensionId !== "string" || !dimension.graph || !Array.isArray(dimension.trains))
+					throw new TypeError("missing dimension train state");
+				const graph = graphFor(dimension.dimensionId);
+				graph.restore(dimension.graph);
+				const controller = controllerFor(dimension.dimensionId);
+				for (const train of dimension.trains) {
+					let restored = false;
+					try {
+						controller.restore([train]);
+						restored = true;
+						trains.set(train.id, {
+							dimensionId: dimension.dimensionId,
+							entityIds: spawnCarriageMarkers(dimension.dimensionId, train.id, controller)
+						});
+					} catch (error) {
+						if (restored)
+							controller.removeTrain(train.id);
+						console.warn(`[Create Bedrock] Ignored invalid train ${train?.id ?? "unknown"}: ${error}`);
+					}
+				}
+			} catch (error) {
+				console.warn(`[Create Bedrock] Ignored invalid train dimension ${dimension?.dimensionId ?? "unknown"}: ${error}`);
 			}
 		}
 	} catch (error) {

@@ -230,12 +230,16 @@ export class TrackGraph {
 	restore(snapshot) {
 		if (!Array.isArray(snapshot?.nodes) || !Array.isArray(snapshot?.edges))
 			throw new TypeError("Invalid track graph snapshot");
-		this.#nodes.clear();
-		this.#edges.clear();
+
+		// Rebuild before replacing the live graph so a malformed persisted edge
+		// cannot leave a dimension with only part of its track topology.
+		const restored = new TrackGraph();
 		for (const node of snapshot.nodes)
-			this.addNode(node);
+			restored.addNode(node);
 		for (const edge of snapshot.edges)
-			this.connect(edge.leftId, edge.rightId, edge.length, edge.points);
+			restored.connect(edge.leftId, edge.rightId, edge.length, edge.points);
+		this.#nodes = restored.#nodes;
+		this.#edges = restored.#edges;
 	}
 
 	#edgesFor(nodeId) {

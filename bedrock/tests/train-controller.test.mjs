@@ -89,6 +89,39 @@ test("TrainController restores a moving train and reclaims its route", () => {
 	assert.equal(restored.graph.tryReserve("train_two", ["a<->b"]), false);
 });
 
+test("TrainController restores a batch atomically when a later record is malformed", () => {
+	const source = createController();
+	source.controller.dispatch("train_one", "b");
+	const [valid] = source.controller.snapshot();
+	const invalid = { ...valid, id: "train_two", nodeId: "missing" };
+	const restored = createController({ registerTrain: false });
+
+	assert.throws(() => restored.controller.restore([valid, invalid]), /Invalid train node/);
+	assert.throws(() => restored.controller.getTrain("train_one"), /Unknown train/);
+	assert.equal(restored.graph.tryReserve("other_train", ["a<->b"]), true);
+});
+
+test("TrainController releases restored reservations when a batch conflicts", () => {
+	const source = createController();
+	source.controller.dispatch("train_one", "b");
+	const [valid] = source.controller.snapshot();
+	const conflicting = { ...valid, id: "train_two" };
+	const restored = createController({ registerTrain: false });
+
+	assert.throws(() => restored.controller.restore([valid, conflicting]), /Unable to restore reserved route/);
+	assert.throws(() => restored.controller.getTrain("train_one"), /Unknown train/);
+	assert.equal(restored.graph.tryReserve("other_train", ["a<->b"]), true);
+});
+
+test("TrainController removal releases a restored train's reservations", () => {
+	const { controller, graph } = createController();
+	controller.dispatch("train_one", "b");
+
+	assert.equal(controller.removeTrain("train_one"), true);
+	assert.throws(() => controller.getTrain("train_one"), /Unknown train/);
+	assert.equal(graph.tryReserve("other_train", ["a<->b"]), true);
+});
+
 test("TrainController exposes continuous position within a reserved edge", () => {
 	const { controller } = createController();
 	controller.dispatch("train_one", "b");

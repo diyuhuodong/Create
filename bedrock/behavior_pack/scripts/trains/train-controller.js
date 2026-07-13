@@ -176,6 +176,14 @@ export class TrainController {
 		return true;
 	}
 
+	removeTrain(id) {
+		const train = this.#requireTrain(id);
+		if (train.route)
+			this.#graph.releaseReservations(id);
+		this.#trains.delete(id);
+		return true;
+	}
+
 	getMotionState(id) {
 		const train = this.#requireTrain(id);
 		return {
@@ -300,46 +308,24 @@ export class TrainController {
 		if (!Array.isArray(records))
 			throw new TypeError("Train controller records must be an array");
 
-		for (const record of records) {
-			if (!record?.id || this.#trains.has(record.id) || !record.nodeId)
-				throw new TypeError("Invalid train controller record");
-			const reservedEdgeIds = record.route?.reservedEdgeIds ?? record.route?.edgeIds;
-			if (record.route && !this.#graph.tryReserve(record.id, reservedEdgeIds))
-				throw new Error(`Unable to restore reserved route for ${record.id}`);
-
-			const schedule = record.schedule;
-			if (schedule && (!Array.isArray(schedule.stopIds) || schedule.stopIds.length === 0 || schedule.stopIds.some(stopId => !this.#graph.getNode(stopId))))
-				throw new TypeError(`Invalid train schedule for ${record.id}`);
-			const restored = {
-				blockedReason: typeof record.blockedReason === "string" && record.blockedReason.length > 0 ? record.blockedReason : undefined,
-				carriageCount: Number.isInteger(record.carriageCount) && record.carriageCount > 0 ? record.carriageCount : 1,
-				carriageSpacing: Number.isFinite(record.carriageSpacing) && record.carriageSpacing > 0 ? record.carriageSpacing : 2,
-				direction: 0,
-				id: record.id,
-				nodeId: record.nodeId,
-				route: record.route && {
-					nodeIds: [...record.route.nodeIds],
-					edgeIds: [...record.route.edgeIds],
-					length: record.route.length,
-					reservedEdgeIds: new Set(reservedEdgeIds)
-				},
-				schedule: schedule && {
-					dwellRemaining: Math.max(0, schedule.dwellRemaining ?? 0),
-					dwellTicks: Math.max(0, schedule.dwellTicks ?? 20),
-					nextStopIndex: Math.max(0, schedule.nextStopIndex ?? 0) % schedule.stopIds.length,
-					stopIds: [...schedule.stopIds]
-				},
-				edgeIndex: record.edgeIndex ?? 0,
-				distanceOnEdge: record.distanceOnEdge ?? 0,
-				speed: Number.isFinite(record.speed) && record.speed >= 0 ? record.speed : 0,
-				stopped: !!record.stopped,
-				targetSpeed: Number.isFinite(record.targetSpeed) && record.targetSpeed > 0 ? record.targetSpeed : 0.1
-			};
-			restored.direction = this.#routeDirection(restored);
-			if (!restored.route || restored.stopped || restored.blockedReason)
-				restored.speed = 0;
-			this.#trains.set(record.id, restored);
+		const ids = new Set(this.#trains.keys());
+		const restored = records.map(record => this.#normalizeRestoredTrain(record, ids));
+		const reserved = [];
+		try {
+			for (const train of restored) {
+				if (!train.route)
+					continue;
+				if (!this.#graph.tryReserve(train.id, [...train.route.reservedEdgeIds]))
+					throw new Error(`Unable to restore reserved route for ${train.id}`);
+				reserved.push(train.id);
+			}
+		} catch (error) {
+			for (const id of reserved)
+				this.#graph.releaseReservations(id);
+			throw error;
 		}
+		for (const train of restored)
+			this.#trains.set(train.id, train);
 	}
 
 	#requireTrain(id) {
@@ -347,6 +333,95 @@ export class TrainController {
 		if (!train)
 			throw new Error(`Unknown train ${id}`);
 		return train;
+	}
+
+	#normalizeRestoredTrain(record, ids) {
+		if (!record || typeof record.id !== "string" || record.id.length === 0 || ids.has(record.id))
+			throw new TypeError("Invalid train controller record");
+		if (typeof record.nodeId !== "string" || !this.#graph.getNode(record.nodeId))
+			throw new TypeError(`Invalid train node for ${record.id}`);
+		ids.add(record.id);
+
+		const route = this.#normalizeRestoredRoute(record);
+		const edgeIndex = record.edgeIndex ?? 0;
+		const distanceOnEdge = record.distanceOnEdge ?? 0;
+		if (!Number.isInteger(edgeIndex) || edgeIndex < 0 || !Number.isFinite(distanceOnEdge) || distanceOnEdge < 0)
+			throw new TypeError(`Invalid train position for ${record.id}`);
+		if (route) {
+			if (edgeIndex >= route.edgeIds.length || record.nodeId !== route.nodeIds[edgeIndex])
+				throw new TypeError(`Invalid train route position for ${record.id}`);
+			if (distanceOnEdge >= this.#graph.getEdge(route.edgeIds[edgeIndex]).length)
+				throw new TypeError(`Invalid train distance for ${record.id}`);
+		}
+
+		const schedule = this.#normalizeRestoredSchedule(record.id, record.schedule);
+		const restored = {
+			blockedReason: typeof record.blockedReason === "string" && record.blockedReason.length > 0 ? record.blockedReason : undefined,
+			carriageCount: Number.isInteger(record.carriageCount) && record.carriageCount > 0 ? record.carriageCount : 1,
+			carriageSpacing: Number.isFinite(record.carriageSpacing) && record.carriageSpacing > 0 ? record.carriageSpacing : 2,
+			direction: 0,
+			id: record.id,
+			nodeId: record.nodeId,
+			route,
+			schedule,
+			edgeIndex,
+			distanceOnEdge,
+			speed: Number.isFinite(record.speed) && record.speed >= 0 ? record.speed : 0,
+			stopped: !!record.stopped,
+			targetSpeed: Number.isFinite(record.targetSpeed) && record.targetSpeed > 0 ? record.targetSpeed : 0.1
+		};
+		restored.direction = this.#routeDirection(restored);
+		if (!restored.route || restored.stopped || restored.blockedReason)
+			restored.speed = 0;
+		return restored;
+	}
+
+	#normalizeRestoredRoute(record) {
+		if (!record.route)
+			return undefined;
+		const { edgeIds, nodeIds } = record.route;
+		if (!Array.isArray(edgeIds) || edgeIds.length === 0 || !Array.isArray(nodeIds) || nodeIds.length !== edgeIds.length + 1)
+			throw new TypeError(`Invalid train route for ${record.id}`);
+
+		for (let index = 0; index < edgeIds.length; index++) {
+			const edge = this.#graph.getEdge(edgeIds[index]);
+			if (!edge || !this.#graph.getNode(nodeIds[index]) || !this.#graph.getNode(nodeIds[index + 1]))
+				throw new TypeError(`Unknown track topology in route for ${record.id}`);
+			const matchesForward = edge.leftId === nodeIds[index] && edge.rightId === nodeIds[index + 1];
+			const matchesReverse = edge.rightId === nodeIds[index] && edge.leftId === nodeIds[index + 1];
+			if (!matchesForward && !matchesReverse)
+				throw new TypeError(`Disconnected route edge for ${record.id}`);
+		}
+
+		const reservedEdgeIds = record.route.reservedEdgeIds ?? edgeIds;
+		if (!Array.isArray(reservedEdgeIds) || reservedEdgeIds.length === 0 || new Set(reservedEdgeIds).size !== reservedEdgeIds.length
+			|| reservedEdgeIds.some(edgeId => !edgeIds.includes(edgeId)))
+			throw new TypeError(`Invalid route reservation for ${record.id}`);
+		return {
+			nodeIds: [...nodeIds],
+			edgeIds: [...edgeIds],
+			length: edgeIds.reduce((total, edgeId) => total + this.#graph.getEdge(edgeId).length, 0),
+			reservedEdgeIds: new Set(reservedEdgeIds)
+		};
+	}
+
+	#normalizeRestoredSchedule(id, schedule) {
+		if (!schedule)
+			return undefined;
+		if (!Array.isArray(schedule.stopIds) || schedule.stopIds.length === 0 || schedule.stopIds.some(stopId => !this.#graph.getNode(stopId)))
+			throw new TypeError(`Invalid train schedule for ${id}`);
+		const dwellRemaining = schedule.dwellRemaining ?? 0;
+		const dwellTicks = schedule.dwellTicks ?? 20;
+		const nextStopIndex = schedule.nextStopIndex ?? 0;
+		if (!Number.isInteger(dwellRemaining) || dwellRemaining < 0 || !Number.isInteger(dwellTicks) || dwellTicks < 0
+			|| !Number.isInteger(nextStopIndex) || nextStopIndex < 0)
+			throw new TypeError(`Invalid train schedule timing for ${id}`);
+		return {
+			dwellRemaining,
+			dwellTicks,
+			nextStopIndex: nextStopIndex % schedule.stopIds.length,
+			stopIds: [...schedule.stopIds]
+		};
 	}
 
 	#advanceSchedule(train) {
