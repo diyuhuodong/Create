@@ -7,13 +7,14 @@ function locationKey(location) {
 	return `${location.x}:${location.y}:${location.z}`;
 }
 
-function createWorld({ failSpawn = false } = {}) {
+function createWorld({ failPlaceAt, failSpawn = false } = {}) {
 	const blocks = new Map([
 		["0:64:0", { typeId: "createbedrock:shaft", states: { axis: "x" } }],
 		["1:64:0", { typeId: "createbedrock:millstone", data: { progress: 7 } }]
 	]);
 	const entities = new Set();
 	const rotations = new Map();
+	let placements = 0;
 	return {
 		blocks,
 		entities,
@@ -22,6 +23,9 @@ function createWorld({ failSpawn = false } = {}) {
 			return !blocks.has(locationKey(location));
 		},
 		placeBlock(block) {
+			placements++;
+			if (placements === failPlaceAt)
+				throw new Error("place failed");
 			blocks.set(locationKey(block.location), { ...block });
 		},
 		readBlock(location) {
@@ -77,6 +81,18 @@ test("ContraptionController leaves a contraption assembled when its destination 
 	world.blocks.set("4:70:4", { typeId: "minecraft:stone" });
 
 	assert.equal(controller.disassemble("bearing-1", { x: 4, y: 70, z: 4 }), false);
+	assert.ok(controller.getActive("bearing-1"));
+	assert.deepEqual([...world.entities], ["entity-1"]);
+});
+
+test("ContraptionController rolls back partially written blocks when disassembly fails", () => {
+	const world = createWorld({ failPlaceAt: 2 });
+	const controller = new ContraptionController(world);
+	const locations = [{ x: 0, y: 64, z: 0 }, { x: 1, y: 64, z: 0 }];
+	controller.assemble({ id: "bearing-1", anchor: locations[0], locations });
+
+	assert.throws(() => controller.disassemble("bearing-1", { x: 4, y: 70, z: 4 }), /place failed/);
+	assert.equal(world.blocks.size, 0);
 	assert.ok(controller.getActive("bearing-1"));
 	assert.deepEqual([...world.entities], ["entity-1"]);
 });

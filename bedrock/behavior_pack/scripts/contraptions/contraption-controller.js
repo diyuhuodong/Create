@@ -53,11 +53,25 @@ export class ContraptionController {
 		if (blocks.some(block => !this.#world.canPlace(block.location)))
 			return false;
 
-		for (const block of blocks)
-			this.#world.placeBlock(block);
-		this.#world.removeContraption(active.entityId);
-		this.#active.delete(id);
-		return true;
+		const placed = [];
+		try {
+			for (const block of blocks) {
+				this.#world.placeBlock(block);
+				placed.push(block);
+			}
+			this.#world.removeContraption(active.entityId);
+			this.#active.delete(id);
+			return true;
+		} catch (error) {
+			for (const block of placed.reverse()) {
+				try {
+					this.#world.removeBlock(block.location);
+				} catch (rollbackError) {
+					console.warn(`[Create Bedrock] Contraption rollback failed at ${block.location.x}:${block.location.y}:${block.location.z}: ${rollbackError}`);
+				}
+			}
+			throw error;
+		}
 	}
 
 	getActive(id) {
