@@ -71,7 +71,7 @@ test("TrackGraph serializes and restores its topology", () => {
 test("TrackGraph retains its current topology when a persisted replacement is invalid", () => {
 	const graph = createGraph();
 	const invalid = graph.snapshot();
-	invalid.edges[0].leftId = "missing";
+	invalid.chunks[0].edges[0].leftId = "missing";
 
 	assert.throws(() => graph.restore(invalid), /registered nodes/);
 	assert.deepEqual(graph.findRoute("a", "d"), {
@@ -79,6 +79,35 @@ test("TrackGraph retains its current topology when a persisted replacement is in
 		edgeIds: ["a<->b", "b<->d"],
 		length: 4
 	});
+});
+
+test("TrackGraph partitions persisted topology and excludes unavailable chunks from routes", () => {
+	const graph = new TrackGraph();
+	graph.addNode({ id: "a", location: { x: 15, y: 64, z: 0 } });
+	graph.addNode({ id: "b", location: { x: 16, y: 64, z: 0 } });
+	graph.connect("a", "b", 1);
+
+	const snapshot = graph.snapshot();
+	assert.equal(snapshot.chunks.length, 2);
+	assert.equal(graph.setChunkAvailable({ x: 16, z: 0 }, false), 1);
+	assert.equal(graph.findRoute("a", "b"), undefined);
+	assert.deepEqual(graph.getChunkDiagnostics(), { chunks: 2, loadedChunks: 1 });
+
+	const restored = new TrackGraph();
+	restored.restore(snapshot);
+	assert.equal(restored.findRoute("a", "b").length, 1);
+});
+
+test("TrackGraph restores legacy flat snapshots", () => {
+	const source = createGraph();
+	const partitioned = source.snapshot();
+	const legacy = {
+		nodes: partitioned.chunks.flatMap(chunk => chunk.nodes),
+		edges: partitioned.chunks.flatMap(chunk => chunk.edges)
+	};
+	const restored = new TrackGraph();
+	restored.restore(legacy);
+	assert.equal(restored.findRoute("a", "d").length, 4);
 });
 
 test("TrackGraph samples persisted geometry by arc length in either direction", () => {

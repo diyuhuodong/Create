@@ -2,6 +2,10 @@ function edgeId(leftId, rightId) {
 	return [leftId, rightId].sort().join("<->");
 }
 
+function chunkId(location) {
+	return `${Math.floor(location.x / 16)}:${Math.floor(location.z / 16)}`;
+}
+
 function distance(left, right) {
 	return Math.hypot(right.x - left.x, right.y - left.y, right.z - left.z);
 }
@@ -11,6 +15,7 @@ function validatePoint(point) {
 }
 
 export class TrackGraph {
+	#chunks = new Map();
 	#nodes = new Map();
 	#edges = new Map();
 
@@ -20,7 +25,15 @@ export class TrackGraph {
 		if (this.#nodes.has(id))
 			throw new Error(`Track node ${id} already exists`);
 
-		this.#nodes.set(id, { available: true, id, location: { ...location } });
+		const node = { chunkAvailable: true, id, location: { ...location }, trackAvailable: true };
+		this.#nodes.set(id, node);
+		const chunk = chunkId(location);
+		let nodes = this.#chunks.get(chunk);
+		if (!nodes) {
+			nodes = new Set();
+			this.#chunks.set(chunk, nodes);
+		}
+		nodes.add(id);
 	}
 
 	connect(leftId, rightId, length, points) {
@@ -55,7 +68,13 @@ export class TrackGraph {
 				throw new Error(`Cannot remove track node ${id} while ${edge.id} is reserved`);
 			this.#edges.delete(edge.id);
 		}
+		const node = this.#nodes.get(id);
 		this.#nodes.delete(id);
+		const chunk = chunkId(node.location);
+		const nodes = this.#chunks.get(chunk);
+		nodes?.delete(id);
+		if (nodes?.size === 0)
+			this.#chunks.delete(chunk);
 		return true;
 	}
 
@@ -68,7 +87,7 @@ export class TrackGraph {
 	findRoute(startId, destinationId) {
 		if (!this.#nodes.has(startId) || !this.#nodes.has(destinationId))
 			throw new Error("Routes require registered start and destination nodes");
-		if (!this.#nodes.get(startId).available || !this.#nodes.get(destinationId).available)
+		if (!this.#isNodeAvailable(this.#nodes.get(startId)) || !this.#isNodeAvailable(this.#nodes.get(destinationId)))
 			return undefined;
 
 		const distances = new Map([[startId, 0]]);
@@ -91,7 +110,7 @@ export class TrackGraph {
 					continue;
 
 				const adjacentId = edge.leftId === currentId ? edge.rightId : edge.leftId;
-				if (!this.#nodes.get(adjacentId).available)
+				if (!this.#isNodeAvailable(this.#nodes.get(adjacentId)))
 					continue;
 				if (!pending.has(adjacentId))
 					continue;
@@ -195,7 +214,23 @@ export class TrackGraph {
 
 	getNode(id) {
 		const node = this.#nodes.get(id);
-		return node && { available: node.available, id: node.id, location: { ...node.location } };
+		return node && { available: this.#isNodeAvailable(node), id: node.id, location: { ...node.location } };
+	}
+
+	getNodes() {
+		return [...this.#nodes.values()].map(node => ({
+			available: this.#isNodeAvailable(node),
+			id: node.id,
+			location: { ...node.location }
+		}));
+	}
+
+	getChunkDiagnostics() {
+		return {
+			chunks: this.#chunks.size,
+			loadedChunks: [...this.#chunks.entries()]
+				.filter(([, nodeIds]) => [...nodeIds].some(id => this.#nodes.get(id).chunkAvailable)).length
+		};
 	}
 
 	setNodeAvailable(id, available) {
@@ -203,43 +238,84 @@ export class TrackGraph {
 		if (!node)
 			return false;
 		const normalized = !!available;
-		if (node.available === normalized)
+		if (node.trackAvailable === normalized)
 			return false;
-		node.available = normalized;
+		node.trackAvailable = normalized;
 		return true;
+	}
+
+	setChunkAvailable(location, available) {
+		if (!Number.isFinite(location?.x) || !Number.isFinite(location?.z))
+			throw new TypeError("Track chunk availability requires a finite location");
+		const nodes = this.#chunks.get(chunkId(location));
+		if (!nodes)
+			return 0;
+		const normalized = !!available;
+		let changed = 0;
+		for (const id of nodes) {
+			const node = this.#nodes.get(id);
+			if (node.chunkAvailable !== normalized) {
+				node.chunkAvailable = normalized;
+				changed++;
+			}
+		}
+		return changed;
 	}
 
 	isEdgeAvailable(id) {
 		const edge = this.#edges.get(id);
-		return !!edge && this.#nodes.get(edge.leftId).available && this.#nodes.get(edge.rightId).available;
+		return !!edge && this.#isNodeAvailable(this.#nodes.get(edge.leftId)) && this.#isNodeAvailable(this.#nodes.get(edge.rightId));
 	}
 
 	snapshot() {
-		return {
-			nodes: [...this.#nodes.values()].map(node => ({ id: node.id, location: { ...node.location } })),
-			edges: [...this.#edges.values()].map(edge => ({
+		const chunks = new Map([...this.#chunks.keys()].map(id => [id, { edges: [], id, nodes: [] }]));
+		for (const node of this.#nodes.values())
+			chunks.get(chunkId(node.location)).nodes.push({ id: node.id, location: { ...node.location } });
+		for (const edge of this.#edges.values()) {
+			const owner = chunks.get(chunkId(this.#nodes.get(edge.leftId).location));
+			owner.edges.push({
 				id: edge.id,
 				leftId: edge.leftId,
 				rightId: edge.rightId,
 				length: edge.length,
 				points: edge.points?.map(point => ({ ...point }))
-			}))
+			});
+		}
+		return {
+			chunks: [...chunks.values()]
 		};
 	}
 
 	restore(snapshot) {
-		if (!Array.isArray(snapshot?.nodes) || !Array.isArray(snapshot?.edges))
+		const chunks = snapshot?.chunks;
+		const legacy = Array.isArray(snapshot?.nodes) && Array.isArray(snapshot?.edges)
+			? [{ edges: snapshot.edges, id: "legacy", nodes: snapshot.nodes }]
+			: chunks;
+		if (!Array.isArray(legacy))
 			throw new TypeError("Invalid track graph snapshot");
 
 		// Rebuild before replacing the live graph so a malformed persisted edge
 		// cannot leave a dimension with only part of its track topology.
 		const restored = new TrackGraph();
-		for (const node of snapshot.nodes)
-			restored.addNode(node);
-		for (const edge of snapshot.edges)
+		const chunkIds = new Set();
+		const edges = [];
+		for (const chunk of legacy) {
+			if (typeof chunk?.id !== "string" || chunkIds.has(chunk.id) || !Array.isArray(chunk.nodes) || !Array.isArray(chunk.edges))
+				throw new TypeError("Invalid track graph chunk");
+			chunkIds.add(chunk.id);
+			for (const node of chunk.nodes)
+				restored.addNode(node);
+			edges.push(...chunk.edges);
+		}
+		for (const edge of edges)
 			restored.connect(edge.leftId, edge.rightId, edge.length, edge.points);
+		this.#chunks = restored.#chunks;
 		this.#nodes = restored.#nodes;
 		this.#edges = restored.#edges;
+	}
+
+	#isNodeAvailable(node) {
+		return !!node?.trackAvailable && !!node.chunkAvailable;
 	}
 
 	#edgesFor(nodeId) {

@@ -188,7 +188,7 @@ function addTrack(block) {
 function refreshTrackAvailability() {
 	for (const [dimensionId, graph] of graphs) {
 		const dimension = world.getDimension(dimensionId);
-		for (const node of graph.snapshot().nodes) {
+		for (const node of graph.getNodes()) {
 			let available = false;
 			try {
 				available = dimension.getBlock(node.location)?.typeId === TRACK_BLOCK;
@@ -403,8 +403,10 @@ export function getTrainDiagnostics() {
 	let nodes = 0;
 	for (const graph of graphs.values()) {
 		const snapshot = graph.snapshot();
-		edges += snapshot.edges.length;
-		nodes += snapshot.nodes.length;
+		for (const chunk of snapshot.chunks) {
+			edges += chunk.edges.length;
+			nodes += chunk.nodes.length;
+		}
 	}
 	return {
 		blocked: Object.keys(blockedReasons).length,
