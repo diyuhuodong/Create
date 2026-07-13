@@ -4,11 +4,12 @@ import { collectConnectedBlocks } from "./assembly-collector.js";
 import { BedrockContraptionWorldPort } from "./bedrock-world-port.js";
 import { ContraptionController } from "./contraption-controller.js";
 import { isMovableBlockType, MAX_CONTRAPTION_BLOCKS } from "./movable-blocks.js";
-import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
+import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { persistKineticWorld } from "../kinetics/kinetic-runtime.js";
 
 const BEARING_BLOCK = "createbedrock:mechanical_bearing";
+const CONTRAPTION_TASK_BUDGET = 4;
 const PERSISTENCE_KEY = "createbedrock:contraptions_v1";
 const PERSISTENCE_SCHEMA_VERSION = 1;
 const activeBearings = new Map();
@@ -135,9 +136,40 @@ function toggleBearing(block) {
 	persist();
 }
 
+function processBearing(bearingKey) {
+	const active = activeBearings.get(bearingKey);
+	if (!active)
+		return;
+	const controller = controllerFor(active.dimensionId);
+	if (!controller.ensureEntity(active.id)) {
+		const reason = controller.getActive(active.id).recoveryError ?? "entity_recovery_failed";
+		if (active.frozenReason !== reason)
+			console.warn(`[Create Bedrock] Contraption ${active.id} is frozen: ${reason}`);
+		active.recoveryFailed = true;
+		active.frozenReason = reason;
+		return;
+	}
+	active.recoveryFailed = false;
+	const speed = kineticWorld.speedAt(active.dimensionId, active.bearingLocation);
+	if (speed === 0)
+		return;
+
+	const rotation = (active.rotation + speed) % 360;
+	if (!controller.setRotation(active.id, rotation)) {
+		const reason = controller.getActive(active.id).blockedReason ?? "world_blocked";
+		if (active.frozenReason !== reason)
+			console.warn(`[Create Bedrock] Contraption ${active.id} is frozen: ${reason}`);
+		active.frozenReason = reason;
+		return;
+	}
+	active.frozenReason = undefined;
+	active.rotation = rotation;
+	rotationDirty = true;
+}
+
 export function registerContraptions(getKineticWorld) {
 	kineticWorld = getKineticWorld();
-	registerKernelTaskGroup("contraptions", 1);
+	registerKernelTaskGroup("contraptions", CONTRAPTION_TASK_BUDGET);
 	world.afterEvents.playerInteractWithBlock.subscribe(event => {
 		if (event.block.typeId !== BEARING_BLOCK)
 			return;
@@ -150,33 +182,8 @@ export function registerContraptions(getKineticWorld) {
 	});
 
 	registerTickHandler(() => {
-		for (const active of activeBearings.values()) {
-			const controller = controllerFor(active.dimensionId);
-			if (!controller.ensureEntity(active.id)) {
-				const reason = controller.getActive(active.id).recoveryError ?? "entity_recovery_failed";
-				if (active.frozenReason !== reason)
-					console.warn(`[Create Bedrock] Contraption ${active.id} is frozen: ${reason}`);
-				active.recoveryFailed = true;
-				active.frozenReason = reason;
-				continue;
-			}
-			active.recoveryFailed = false;
-			const speed = getKineticWorld().speedAt(active.dimensionId, active.bearingLocation);
-			if (speed === 0)
-				continue;
-
-			const rotation = (active.rotation + speed) % 360;
-			if (!controller.setRotation(active.id, rotation)) {
-				const reason = controller.getActive(active.id).blockedReason ?? "world_blocked";
-				if (active.frozenReason !== reason)
-					console.warn(`[Create Bedrock] Contraption ${active.id} is frozen: ${reason}`);
-				active.frozenReason = reason;
-				continue;
-			}
-			active.frozenReason = undefined;
-			active.rotation = rotation;
-			rotationDirty = true;
-		}
+		for (const bearingKey of activeBearings.keys())
+			enqueueUniqueKernelTask(`contraption:${bearingKey}`, () => processBearing(bearingKey), "contraptions");
 
 		ticksSincePersist++;
 		if (rotationDirty && ticksSincePersist >= 20) {
@@ -184,7 +191,7 @@ export function registerContraptions(getKineticWorld) {
 			rotationDirty = false;
 			persist();
 		}
-	}, "contraptions");
+	});
 
 	system.run(restore);
 }
