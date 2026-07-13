@@ -7,7 +7,7 @@ function locationKey(location) {
 	return `${location.x}:${location.y}:${location.z}`;
 }
 
-function createWorld({ assemblyAttachments, failPlaceAt, failSpawn = false, rotationCollision } = {}) {
+function createWorld({ assemblyAttachments, failPlaceAt, failSpawn = false, failSpawnAt, rotationCollision } = {}) {
 	const blocks = new Map([
 		["0:64:0", { typeId: "createbedrock:shaft", states: { axis: "x" } }],
 		["1:64:0", { typeId: "createbedrock:millstone", data: { progress: 7 } }]
@@ -16,6 +16,7 @@ function createWorld({ assemblyAttachments, failPlaceAt, failSpawn = false, rota
 	const rotations = new Map();
 	const restoredAttachments = [];
 	let placements = 0;
+	let spawnAttempts = 0;
 	let shouldFailSpawn = failSpawn;
 	let nextRotationCollision = rotationCollision;
 	return {
@@ -63,12 +64,14 @@ function createWorld({ assemblyAttachments, failPlaceAt, failSpawn = false, rota
 			rotations.set(entityId, rotation);
 		},
 		spawnContraption() {
-			if (shouldFailSpawn) {
+			spawnAttempts++;
+			if (shouldFailSpawn || spawnAttempts === failSpawnAt) {
 				shouldFailSpawn = false;
 				throw new Error("spawn failed");
 			}
-			entities.add("entity-1");
-			return "entity-1";
+			const entityId = `entity-${spawnAttempts}`;
+			entities.add(entityId);
+			return entityId;
 		}
 	};
 }
@@ -134,6 +137,36 @@ test("ContraptionController restores assembled contraptions after a restart", ()
 	assert.deepEqual([...restoredWorld.entities], ["entity-1"]);
 });
 
+test("ContraptionController validates a restore batch before spawning any entities", () => {
+	const sourceWorld = createWorld();
+	const source = new ContraptionController(sourceWorld);
+	const locations = [{ x: 0, y: 64, z: 0 }, { x: 1, y: 64, z: 0 }];
+	source.assemble({ id: "bearing-1", anchor: locations[0], locations });
+	const [valid] = source.snapshot();
+	const invalid = { ...valid, id: "bearing-2", rotation: Number.NaN };
+	const restoredWorld = createWorld();
+	const restored = new ContraptionController(restoredWorld);
+
+	assert.throws(() => restored.restore([valid, invalid]), /Invalid contraption rotation/);
+	assert.equal(restoredWorld.entities.size, 0);
+	assert.equal(restored.getActive("bearing-1"), undefined);
+});
+
+test("ContraptionController rolls back earlier entities when a restore spawn fails", () => {
+	const sourceWorld = createWorld();
+	const source = new ContraptionController(sourceWorld);
+	const locations = [{ x: 0, y: 64, z: 0 }, { x: 1, y: 64, z: 0 }];
+	source.assemble({ id: "bearing-1", anchor: locations[0], locations });
+	const [first] = source.snapshot();
+	const second = { ...first, id: "bearing-2" };
+	const restoredWorld = createWorld({ failSpawnAt: 2 });
+	const restored = new ContraptionController(restoredWorld);
+
+	assert.throws(() => restored.restore([first, second]), /spawn failed/);
+	assert.equal(restoredWorld.entities.size, 0);
+	assert.equal(restored.getActive("bearing-1"), undefined);
+});
+
 test("ContraptionController persists and restores its rotation state", () => {
 	const sourceWorld = createWorld();
 	const source = new ContraptionController(sourceWorld);
@@ -195,9 +228,10 @@ test("ContraptionController rebuilds a missing entity from its authoritative sna
 	world.entities.clear();
 
 	assert.equal(controller.ensureEntity("bearing-1"), true);
-	assert.deepEqual([...world.entities], ["entity-1"]);
-	assert.equal(world.rotations.get("entity-1"), 45);
-	assert.equal(controller.getActive("bearing-1").snapshot.schemaVersion, 2);
+	const active = controller.getActive("bearing-1");
+	assert.deepEqual([...world.entities], [active.entityId]);
+	assert.equal(world.rotations.get(active.entityId), 45);
+	assert.equal(active.snapshot.schemaVersion, 2);
 });
 
 test("ContraptionController records an entity recovery failure reason", () => {

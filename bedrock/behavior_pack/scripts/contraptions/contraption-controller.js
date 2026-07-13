@@ -135,26 +135,54 @@ export class ContraptionController {
 		if (!Array.isArray(records))
 			throw new TypeError("Contraption controller records must be an array");
 
-		for (const record of records) {
-			if (!record?.id || this.#active.has(record.id) || !record.snapshot || !record.origin)
-				throw new TypeError("Invalid contraption controller record");
-			const snapshot = normalizeContraptionSnapshot(record.snapshot);
-			const rotation = record.rotation ?? 0;
-			if (!Number.isFinite(rotation))
-				throw new TypeError(`Invalid contraption rotation for ${record.id}`);
-
-			const entityId = this.#world.spawnContraption({
-				id: record.id,
-				origin: record.origin,
-				snapshot
-			});
-			this.#active.set(record.id, {
-				entityId,
-				origin: { ...record.origin },
-				rotation,
-				snapshot
-			});
-			this.#world.setContraptionRotation(entityId, rotation);
+		const ids = new Set(this.#active.keys());
+		const pending = records.map(record => this.#normalizeRestoreRecord(record, ids));
+		const restored = [];
+		try {
+			for (const record of pending) {
+				const entityId = this.#world.spawnContraption({
+					id: record.id,
+					origin: record.origin,
+					snapshot: record.snapshot
+				});
+				const active = { entityId, origin: record.origin, rotation: record.rotation, snapshot: record.snapshot };
+				this.#active.set(record.id, active);
+				try {
+					this.#world.setContraptionRotation(entityId, record.rotation);
+				} catch (error) {
+					this.#active.delete(record.id);
+					this.#world.removeContraption(entityId);
+					throw error;
+				}
+				restored.push({ entityId, id: record.id });
+			}
+		} catch (error) {
+			for (const record of restored.reverse()) {
+				this.#active.delete(record.id);
+				try {
+					this.#world.removeContraption(record.entityId);
+				} catch (rollbackError) {
+					console.warn(`[Create Bedrock] Contraption restore rollback failed for ${record.id}: ${rollbackError}`);
+				}
+			}
+			throw error;
 		}
+	}
+
+	#normalizeRestoreRecord(record, ids) {
+		if (!record?.id || ids.has(record.id) || !record.snapshot || !record.origin)
+			throw new TypeError("Invalid contraption controller record");
+		if (![record.origin.x, record.origin.y, record.origin.z].every(Number.isInteger))
+			throw new TypeError(`Invalid contraption origin for ${record.id}`);
+		const rotation = record.rotation ?? 0;
+		if (!Number.isFinite(rotation))
+			throw new TypeError(`Invalid contraption rotation for ${record.id}`);
+		ids.add(record.id);
+		return {
+			id: record.id,
+			origin: { ...record.origin },
+			rotation,
+			snapshot: normalizeContraptionSnapshot(record.snapshot)
+		};
 	}
 }
