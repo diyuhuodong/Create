@@ -86,3 +86,10 @@ test("TrainController exposes continuous position within a reserved edge", () =>
 		progress: 0.25
 	});
 });
+
+test("TrainController clears its active edge only after reaching the destination", () => {
+	const { controller } = createController();
+	controller.dispatch("train_one", "b");
+	assert.ok(controller.tick("train_one", 3.9).edgeId);
+	assert.equal(controller.tick("train_one", 0.1).edgeId, undefined);
+});

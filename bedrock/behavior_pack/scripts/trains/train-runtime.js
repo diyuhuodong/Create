@@ -164,7 +164,10 @@ function selectRoute(player, dimensionId, destinationId) {
 function tickTrains() {
 	for (const [id, train] of trains) {
 		const controller = controllerFor(train.dimensionId);
+		const wasMoving = controller.getTrain(id).edgeId !== undefined;
 		const state = controller.tick(id, 0.1);
+		if (!wasMoving && state.edgeId === undefined)
+			continue;
 		const entity = world.getEntity(train.entityId);
 		if (entity?.isValid)
 			entity.teleport(markerLocation(locationForTrain(train.dimensionId, state)));
