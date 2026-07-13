@@ -8,7 +8,11 @@ const TRACK_BLOCK = "createbedrock:track";
 const TRAIN_ENTITY = "createbedrock:train";
 const TRAIN_ID_PROPERTY = "createbedrock:train_id";
 const PERSISTENCE_KEY = "createbedrock:trains_v1";
-const HORIZONTAL_OFFSETS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+const TRACK_CONNECTION_OFFSETS = [
+	[1, 0, 0], [-1, 0, 0], [0, 0, 1], [0, 0, -1],
+	[1, 1, 0], [1, -1, 0], [-1, 1, 0], [-1, -1, 0],
+	[0, 1, 1], [0, -1, 1], [0, 1, -1], [0, -1, -1]
+];
 const graphs = new Map();
 const controllers = new Map();
 const trains = new Map();
@@ -118,11 +122,11 @@ function addTrack(block) {
 		return;
 
 	graph.addNode({ id, location: { ...block.location } });
-	for (const [x, z] of HORIZONTAL_OFFSETS) {
-		const adjacent = { x: block.location.x + x, y: block.location.y, z: block.location.z + z };
+	for (const [x, y, z] of TRACK_CONNECTION_OFFSETS) {
+		const adjacent = { x: block.location.x + x, y: block.location.y + y, z: block.location.z + z };
 		const adjacentId = nodeId(adjacent);
 		if (graph.getNode(adjacentId))
-			graph.connect(id, adjacentId, 1);
+			graph.connect(id, adjacentId, Math.hypot(x, y, z));
 	}
 	persist();
 }
