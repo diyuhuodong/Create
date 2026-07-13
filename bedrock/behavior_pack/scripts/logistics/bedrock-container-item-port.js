@@ -9,6 +9,11 @@ function assertPlainStack(stack) {
 	return stack;
 }
 
+export function decodeBedrockContainerStack(stack) {
+	const plain = assertPlainStack(stack);
+	return { count: plain.amount, typeId: plain.typeId };
+}
+
 const codec = {
 	create(stack) {
 		const normalized = cloneItemStack(stack);
@@ -17,8 +22,7 @@ const codec = {
 		return new ItemStack(normalized.typeId, normalized.count);
 	},
 	decode(stack) {
-		const plain = assertPlainStack(stack);
-		return { count: plain.amount, typeId: plain.typeId };
+		return decodeBedrockContainerStack(stack);
 	},
 	maxAmount(stack, requested) {
 		return stack?.maxAmount ?? new ItemStack(requested.typeId, 1).maxAmount;
@@ -32,4 +36,20 @@ const codec = {
 
 export function createBedrockContainerItemPort({ container, id }) {
 	return new ContainerItemPort({ codec, container, id });
+}
+
+export function createBedrockContainerEscrowEndpoint({ container, dimension, id, location, slot = 0 }) {
+	if (!dimension || typeof dimension.spawnEntity !== "function")
+		throw new TypeError("Bedrock escrow endpoints require a writable dimension");
+	if (!location || !Number.isFinite(location.x) || !Number.isFinite(location.y) || !Number.isFinite(location.z))
+		throw new TypeError("Bedrock escrow endpoints require a finite anchor location");
+	if (!Number.isInteger(slot) || slot < 0)
+		throw new RangeError("Bedrock escrow endpoint slots must be non-negative integers");
+	return {
+		container,
+		dimension,
+		id,
+		location: { x: location.x, y: location.y, z: location.z },
+		slot
+	};
 }

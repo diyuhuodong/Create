@@ -1,0 +1,43 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "createbedrock:logistics_escrow",
+      "is_experimental": false,
+      "is_spawnable": false,
+      "is_summonable": false
+    },
+    "components": {
+      "minecraft:collision_box": {
+        "width": 0.01,
+        "height": 0.01
+      },
+      "minecraft:fire_immune": {},
+      "minecraft:health": {
+        "value": 1024,
+        "max": 1024
+      },
+      "minecraft:inventory": {
+        "can_be_siphoned_from": false,
+        "container_type": "inventory",
+        "inventory_size": 1,
+        "private": true,
+        "restrict_to_owner": false
+      },
+      "minecraft:persistent": {},
+      "minecraft:physics": {
+        "has_collision": false,
+        "has_gravity": false
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:type_family": {
+        "family": [
+          "createbedrock_logistics_escrow"
+        ]
+      }
+    }
+  }
+}
