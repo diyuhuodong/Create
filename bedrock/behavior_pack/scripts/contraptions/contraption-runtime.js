@@ -4,12 +4,18 @@ import { collectConnectedBlocks } from "./assembly-collector.js";
 import { BedrockContraptionWorldPort } from "./bedrock-world-port.js";
 import { ContraptionController } from "./contraption-controller.js";
 import { registerTickHandler } from "../kernel/index.js";
+import { persistKineticWorld } from "../kinetics/kinetic-runtime.js";
 
 const BEARING_BLOCK = "createbedrock:mechanical_bearing";
 const PERSISTENCE_KEY = "createbedrock:contraptions_v1";
-const MAX_PROTOTYPE_BLOCKS = 16;
+const MAX_PROTOTYPE_BLOCKS = 64;
+const MOVABLE_BLOCK_TYPES = new Set([
+	"createbedrock:shaft",
+	"createbedrock:cogwheel"
+]);
 const activeBearings = new Map();
 const controllers = new Map();
+let kineticWorld;
 let ticksSincePersist = 0;
 let rotationDirty = false;
 
@@ -20,7 +26,10 @@ function keyFor(dimensionId, location) {
 function controllerFor(dimensionId) {
 	let controller = controllers.get(dimensionId);
 	if (!controller) {
-		controller = new ContraptionController(new BedrockContraptionWorldPort(dimensionId));
+		controller = new ContraptionController(new BedrockContraptionWorldPort(dimensionId, {
+			kineticWorld,
+			onKineticMutation: persistKineticWorld
+		}));
 		controllers.set(dimensionId, controller);
 	}
 	return controller;
@@ -79,7 +88,7 @@ function collectAboveBearing(block) {
 			return { typeId: source.typeId, states: source.permutation.getAllStates() };
 		},
 		canCollect(blockData) {
-			return blockData.typeId !== BEARING_BLOCK;
+			return MOVABLE_BLOCK_TYPES.has(blockData.typeId);
 		}
 	});
 }
@@ -89,7 +98,9 @@ function toggleBearing(block) {
 	const active = activeBearings.get(bearingKey);
 	const controller = controllerFor(block.dimension.id);
 	if (active) {
-		if (controller.disassemble(active.id, active.origin)) {
+		const quarterTurns = Math.round(active.rotation / 90);
+		controller.setRotation(active.id, quarterTurns * 90);
+		if (controller.disassemble(active.id, active.origin, quarterTurns)) {
 			activeBearings.delete(bearingKey);
 			persist();
 		}
@@ -120,6 +131,7 @@ function toggleBearing(block) {
 }
 
 export function registerContraptions(getKineticWorld) {
+	kineticWorld = getKineticWorld();
 	world.afterEvents.playerInteractWithBlock.subscribe(event => {
 		if (event.block.typeId !== BEARING_BLOCK)
 			return;

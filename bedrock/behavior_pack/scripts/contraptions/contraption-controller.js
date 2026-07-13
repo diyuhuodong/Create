@@ -1,4 +1,4 @@
-import { createContraptionSnapshot, materializeSnapshot } from "./contraption-snapshot.js";
+import { createContraptionSnapshot, materializeSnapshot, rotateSnapshotY } from "./contraption-snapshot.js";
 
 export class ContraptionController {
 	#active = new Map();
@@ -42,12 +42,14 @@ export class ContraptionController {
 		}
 	}
 
-	disassemble(id, origin) {
+	disassemble(id, origin, quarterTurns = 0) {
 		const active = this.#active.get(id);
 		if (!active)
 			throw new Error(`Unknown contraption ${id}`);
+		if (!Number.isInteger(quarterTurns))
+			throw new TypeError("Contraption restoration rotation must be expressed in quarter turns");
 
-		const blocks = materializeSnapshot(active.snapshot, origin);
+		const blocks = materializeSnapshot(rotateSnapshotY(active.snapshot, quarterTurns), origin);
 		if (blocks.some(block => !this.#world.canPlace(block.location)))
 			return false;
 

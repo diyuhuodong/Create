@@ -108,3 +108,14 @@ test("ContraptionController persists and restores its rotation state", () => {
 	assert.equal(restored.getActive("bearing-1").rotation, 120);
 	assert.equal(restoredWorld.rotations.get("entity-1"), 120);
 });
+
+test("ContraptionController restores block positions at the selected quarter turn", () => {
+	const world = createWorld();
+	const controller = new ContraptionController(world);
+	const locations = [{ x: 0, y: 64, z: 0 }, { x: 1, y: 64, z: 0 }];
+	controller.assemble({ id: "bearing-1", anchor: locations[0], locations });
+
+	assert.equal(controller.disassemble("bearing-1", { x: 4, y: 70, z: 4 }, 1), true);
+	assert.ok(world.blocks.has("4:70:4"));
+	assert.ok(world.blocks.has("4:70:5"));
+});

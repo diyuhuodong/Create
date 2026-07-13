@@ -7,11 +7,19 @@ const CONTRAPTION_PART_RELATIVE_PROPERTY = "createbedrock:contraption_part_relat
 
 export class BedrockContraptionWorldPort {
 	#dimensionId;
+	#kineticWorld;
+	#onKineticMutation;
 
-	constructor(dimensionId) {
+	constructor(dimensionId, { kineticWorld, onKineticMutation } = {}) {
 		if (typeof dimensionId !== "string" || dimensionId.length === 0)
 			throw new TypeError("Contraption world ports require a dimension id");
+		if (kineticWorld && (typeof kineticWorld.trackBrokenBlock !== "function" || typeof kineticWorld.trackPlacedBlock !== "function"))
+			throw new TypeError("Kinetic contraption ports require KineticWorld tracking methods");
+		if (onKineticMutation && typeof onKineticMutation !== "function")
+			throw new TypeError("Kinetic contraption mutation callback must be a function");
 		this.#dimensionId = dimensionId;
+		this.#kineticWorld = kineticWorld;
+		this.#onKineticMutation = onKineticMutation;
 	}
 
 	readBlock(location) {
@@ -28,11 +36,15 @@ export class BedrockContraptionWorldPort {
 	removeBlock(location) {
 		const block = this.#requireBlock(location);
 		block.setType("minecraft:air");
+		if (this.#kineticWorld?.trackBrokenBlock(this.#dimensionId, location))
+			this.#onKineticMutation?.();
 	}
 
 	placeBlock(blockData) {
 		const block = this.#requireBlock(blockData.location);
 		block.setPermutation(BlockPermutation.resolve(blockData.typeId, blockData.states));
+		if (this.#kineticWorld?.trackPlacedBlock(block))
+			this.#onKineticMutation?.();
 	}
 
 	canPlace(location) {

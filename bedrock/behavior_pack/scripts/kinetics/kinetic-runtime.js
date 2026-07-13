@@ -10,6 +10,10 @@ function persist() {
 	world.setDynamicProperty(PERSISTENCE_KEY, JSON.stringify(kineticWorld.snapshot()));
 }
 
+export function persistKineticWorld() {
+	persist();
+}
+
 function restore() {
 	const value = world.getDynamicProperty(PERSISTENCE_KEY);
 	if (typeof value !== "string")
