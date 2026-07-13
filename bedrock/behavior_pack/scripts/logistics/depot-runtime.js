@@ -22,12 +22,20 @@ export function beginDepotTransfer(options) {
 	return network.beginTransfer(options);
 }
 
+export function createDepotBelt(options) {
+	return network.createBelt(options);
+}
+
 export function getDepotDiagnostics() {
 	return network.diagnostics();
 }
 
 export function getDepotId(block) {
 	return identifierFor(block);
+}
+
+export function setDepotBeltSpeed(id, speed) {
+	return network.setBeltSpeed(id, speed);
 }
 
 export function registerDepots() {
