@@ -5,7 +5,7 @@ export class ContraptionController {
 	#world;
 
 	constructor(worldPort) {
-		for (const method of ["readBlock", "removeBlock", "placeBlock", "captureAssemblyData", "restoreAssemblyData", "spawnContraption", "removeContraption", "isContraptionValid", "setContraptionRotation", "canPlace"]) {
+		for (const method of ["readBlock", "removeBlock", "placeBlock", "captureAssemblyData", "restoreAssemblyData", "spawnContraption", "removeContraption", "isContraptionValid", "setContraptionRotation", "canPlace", "findRotationCollision"]) {
 			if (typeof worldPort?.[method] !== "function")
 				throw new TypeError(`Contraption world port requires ${method}()`);
 		}
@@ -111,8 +111,15 @@ export class ContraptionController {
 		if (!active)
 			throw new Error(`Unknown contraption ${id}`);
 
+		const collision = this.#world.findRotationCollision(active.snapshot, active.origin, active.rotation, rotation);
+		if (collision) {
+			active.blockedReason = `${collision.reason ?? "world_blocked"}:${collision.location.x}:${collision.location.y}:${collision.location.z}`;
+			return false;
+		}
 		active.rotation = rotation;
+		active.blockedReason = undefined;
 		this.#world.setContraptionRotation(active.entityId, rotation);
+		return true;
 	}
 
 	snapshot() {
@@ -132,13 +139,15 @@ export class ContraptionController {
 			if (!record?.id || this.#active.has(record.id) || !record.snapshot || !record.origin)
 				throw new TypeError("Invalid contraption controller record");
 			const snapshot = normalizeContraptionSnapshot(record.snapshot);
+			const rotation = record.rotation ?? 0;
+			if (!Number.isFinite(rotation))
+				throw new TypeError(`Invalid contraption rotation for ${record.id}`);
 
 			const entityId = this.#world.spawnContraption({
 				id: record.id,
 				origin: record.origin,
 				snapshot
 			});
-			const rotation = record.rotation ?? 0;
 			this.#active.set(record.id, {
 				entityId,
 				origin: { ...record.origin },

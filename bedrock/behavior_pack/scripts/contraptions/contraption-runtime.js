@@ -154,20 +154,27 @@ export function registerContraptions(getKineticWorld) {
 			const controller = controllerFor(active.dimensionId);
 			if (!controller.ensureEntity(active.id)) {
 				const reason = controller.getActive(active.id).recoveryError ?? "entity_recovery_failed";
-				if (active.recoveryReason !== reason)
+				if (active.frozenReason !== reason)
 					console.warn(`[Create Bedrock] Contraption ${active.id} is frozen: ${reason}`);
 				active.recoveryFailed = true;
-				active.recoveryReason = reason;
+				active.frozenReason = reason;
 				continue;
 			}
 			active.recoveryFailed = false;
-			active.recoveryReason = undefined;
 			const speed = getKineticWorld().speedAt(active.dimensionId, active.bearingLocation);
 			if (speed === 0)
 				continue;
 
-			active.rotation = (active.rotation + speed) % 360;
-			controller.setRotation(active.id, active.rotation);
+			const rotation = (active.rotation + speed) % 360;
+			if (!controller.setRotation(active.id, rotation)) {
+				const reason = controller.getActive(active.id).blockedReason ?? "world_blocked";
+				if (active.frozenReason !== reason)
+					console.warn(`[Create Bedrock] Contraption ${active.id} is frozen: ${reason}`);
+				active.frozenReason = reason;
+				continue;
+			}
+			active.frozenReason = undefined;
+			active.rotation = rotation;
 			rotationDirty = true;
 		}
 
@@ -184,8 +191,8 @@ export function registerContraptions(getKineticWorld) {
 
 export function getContraptionDiagnostics() {
 	const frozenReasons = Object.fromEntries([...activeBearings.values()]
-		.filter(active => active.recoveryFailed)
-		.map(active => [active.id, active.recoveryReason]));
+		.filter(active => active.frozenReason)
+		.map(active => [active.id, active.frozenReason]));
 	return {
 		active: activeBearings.size,
 		frozen: Object.keys(frozenReasons).length,

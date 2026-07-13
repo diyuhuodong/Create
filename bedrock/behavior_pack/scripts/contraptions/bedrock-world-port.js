@@ -2,6 +2,7 @@ import { BlockPermutation, world } from "@minecraft/server";
 
 import { captureMovingBlockData, detachMovingBlockData, restoreMovingBlockData } from "./moving-block-data.js";
 import { ALL_CONTRAPTION_PART_TYPES, partTypeFor } from "./contraption-parts.js";
+import { findContraptionCollision } from "./contraption-collision.js";
 
 const CONTRAPTION_ENTITY = "createbedrock:contraption";
 const CONTRAPTION_ID_PROPERTY = "createbedrock:contraption_id";
@@ -55,6 +56,22 @@ export class BedrockContraptionWorldPort {
 	canPlace(location) {
 		const block = this.#dimension().getBlock(location);
 		return !!block && block.typeId === "minecraft:air";
+	}
+
+	findRotationCollision(snapshot, origin, startRotation, endRotation) {
+		return findContraptionCollision({
+			snapshot,
+			origin,
+			startRotation,
+			endRotation,
+			readBlock: location => {
+				try {
+					return this.#dimension().getBlock(location) ?? { typeId: "createbedrock:unavailable_collision_space" };
+				} catch {
+					return { typeId: "createbedrock:unavailable_collision_space" };
+				}
+			}
+		});
 	}
 
 	captureAssemblyData(locations, anchor) {
