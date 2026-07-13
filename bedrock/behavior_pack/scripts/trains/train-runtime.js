@@ -1,6 +1,6 @@
 import { system, world } from "@minecraft/server";
 
-import { registerTickHandler } from "../kernel/index.js";
+import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { TrackGraph } from "./track-graph.js";
 import { findTrainCollision } from "./train-collision.js";
@@ -330,6 +330,7 @@ function tickTrains() {
 }
 
 export function registerTrains() {
+	registerKernelTaskGroup("trains", 1);
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
 		if (event.block.typeId === TRACK_BLOCK)
 			addTrack(event.block);
@@ -373,6 +374,31 @@ export function registerTrains() {
 		}
 	});
 
-	registerTickHandler(tickTrains);
+	registerTickHandler(tickTrains, "trains");
 	system.run(restore);
+}
+
+export function getTrainDiagnostics() {
+	const blockedReasons = {};
+	for (const [id, train] of trains) {
+		const reason = controllerFor(train.dimensionId).getMotionState(id).blockedReason;
+		if (reason)
+			blockedReasons[id] = reason;
+	}
+	let edges = 0;
+	let nodes = 0;
+	for (const graph of graphs.values()) {
+		const snapshot = graph.snapshot();
+		edges += snapshot.edges.length;
+		nodes += snapshot.nodes.length;
+	}
+	return {
+		blocked: Object.keys(blockedReasons).length,
+		blockedReasons,
+		dimensions: graphs.size,
+		edges,
+		markers: [...trains.values()].reduce((total, train) => total + train.entityIds.length, 0),
+		nodes,
+		trains: trains.size
+	};
 }

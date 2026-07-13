@@ -27,6 +27,10 @@ export class BudgetScheduler {
 		group.tasks.push(task);
 	}
 
+	hasGroup(name) {
+		return this.#groups.has(name);
+	}
+
 	tick() {
 		const groups = {};
 		for (const [name, group] of this.#groups) {

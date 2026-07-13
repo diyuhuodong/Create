@@ -16,11 +16,15 @@ function createWorld({ assemblyAttachments, failPlaceAt, failSpawn = false } = {
 	const rotations = new Map();
 	const restoredAttachments = [];
 	let placements = 0;
+	let shouldFailSpawn = failSpawn;
 	return {
 		blocks,
 		entities,
 		rotations,
 		restoredAttachments,
+		failNextSpawn() {
+			shouldFailSpawn = true;
+		},
 		canPlace(location) {
 			return !blocks.has(locationKey(location));
 		},
@@ -52,8 +56,10 @@ function createWorld({ assemblyAttachments, failPlaceAt, failSpawn = false } = {
 			rotations.set(entityId, rotation);
 		},
 		spawnContraption() {
-			if (failSpawn)
+			if (shouldFailSpawn) {
+				shouldFailSpawn = false;
 				throw new Error("spawn failed");
+			}
 			entities.add("entity-1");
 			return "entity-1";
 		}
@@ -171,6 +177,20 @@ test("ContraptionController rebuilds a missing entity from its authoritative sna
 	assert.deepEqual([...world.entities], ["entity-1"]);
 	assert.equal(world.rotations.get("entity-1"), 45);
 	assert.equal(controller.getActive("bearing-1").snapshot.schemaVersion, 2);
+});
+
+test("ContraptionController records an entity recovery failure reason", () => {
+	const world = createWorld();
+	const controller = new ContraptionController(world);
+	const locations = [{ x: 0, y: 64, z: 0 }, { x: 1, y: 64, z: 0 }];
+	controller.assemble({ id: "bearing-1", anchor: locations[0], locations });
+	world.entities.clear();
+	world.failNextSpawn();
+
+	assert.equal(controller.ensureEntity("bearing-1"), false);
+	assert.match(controller.getActive("bearing-1").recoveryError, /spawn failed/);
+	assert.equal(controller.ensureEntity("bearing-1"), true);
+	assert.equal(controller.getActive("bearing-1").recoveryError, undefined);
 });
 
 test("ContraptionController rotates and restores assembly attachments on disassembly", () => {

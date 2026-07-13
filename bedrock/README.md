@@ -32,6 +32,8 @@ npm test
 
 `npm run deploy:win` copies built packs to the Windows Bedrock development directory specified by `BEDROCK_DEV_ROOT`. `npm run pack` creates a `.mcaddon` archive after a successful build.
 
+With cheats enabled, a Game Director can run `/scriptevent createbedrock:diagnostics summary` to write compact scheduler, kinetic, contraption, train, and dynamic-property diagnostics to the Content Log. The command source also receives the summary when the Script API provides one.
+
 Build output includes `resource_pack/create-java-asset-provenance.json`, which lists the imported texture sources. Keep this import list explicit: do not bulk-copy `src/main/resources/assets/` into the repository or package.
 
 For the Windows smoke test, activate both packs in a new world and use `/give @s createbedrock:hand_crank`, `/give @s createbedrock:shaft`, `/give @s createbedrock:cogwheel`, and `/give @s createbedrock:millstone`. Place adjacent blocks, then interact with the hand crank and inspect the Content Log for the activation message. For the belt prototype, use `/give @s createbedrock:belt_connector`; use it on two valid shafts in the same dimension to persist a kinetic link. To set a train loop, interact with two track stations in sequence; sneak-interact with a station to toggle a train at its linked track between stopped and released. A non-air block in a carriage's one-block clearance space freezes the train; remove it to release the collision freeze automatically.

@@ -1,6 +1,6 @@
 import { system, world } from "@minecraft/server";
 
-import { registerTickHandler } from "../kernel/index.js";
+import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { KineticWorld } from "./kinetic-world.js";
 
@@ -66,6 +66,7 @@ function refreshWaterWheels() {
 }
 
 export function registerKinetics() {
+	registerKernelTaskGroup("kinetics", 1);
 	system.run(restore);
 
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
@@ -127,9 +128,13 @@ export function registerKinetics() {
 			refreshWaterWheels();
 		}
 		kineticWorld.tick();
-	});
+	}, "kinetics");
 }
 
 export function getKineticWorldForTesting() {
 	return kineticWorld;
+}
+
+export function getKineticDiagnostics() {
+	return kineticWorld.diagnostics();
 }

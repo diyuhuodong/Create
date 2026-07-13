@@ -1,6 +1,7 @@
 import { system } from "@minecraft/server";
 
 import { BudgetScheduler } from "./budget-scheduler.js";
+import { DiagnosticsRegistry } from "./diagnostics-registry.js";
 
 const TASK_BUDGET_PER_TICK = 32;
 const DEFAULT_TASK_GROUP = "default";
@@ -10,6 +11,7 @@ const scheduler = new BudgetScheduler({
 	}
 });
 scheduler.registerGroup(DEFAULT_TASK_GROUP, TASK_BUDGET_PER_TICK);
+const diagnostics = new DiagnosticsRegistry();
 const tickHandlers = [];
 let started = false;
 
@@ -22,14 +24,23 @@ export function registerKernelTaskGroup(name, budget) {
 }
 
 export function getKernelDiagnostics() {
-	return scheduler.diagnostics();
+	return {
+		scheduler: scheduler.diagnostics(),
+		...diagnostics.collect()
+	};
 }
 
-export function registerTickHandler(handler) {
+export function registerKernelDiagnosticProvider(name, provider) {
+	diagnostics.register(name, provider);
+}
+
+export function registerTickHandler(handler, group = DEFAULT_TASK_GROUP) {
 	if (typeof handler !== "function")
 		throw new TypeError("Kernel tick handlers must be functions");
+	if (!scheduler.hasGroup(group))
+		throw new Error(`Unknown kernel task group ${group}`);
 
-	tickHandlers.push(handler);
+	tickHandlers.push({ group, handler });
 }
 
 export function startKernel() {
@@ -38,14 +49,9 @@ export function startKernel() {
 
 	started = true;
 	system.runInterval(() => {
+		for (const { group, handler } of tickHandlers)
+			scheduler.enqueue(group, handler);
 		scheduler.tick();
-		for (const handler of tickHandlers) {
-			try {
-				handler();
-			} catch (error) {
-				console.warn(`[Create Bedrock] Kernel tick handler failed: ${error}`);
-			}
-		}
 	}, 1);
 	console.warn("[Create Bedrock] Kernel started");
 }

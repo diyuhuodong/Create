@@ -96,8 +96,10 @@ export class ContraptionController {
 				snapshot: active.snapshot
 			});
 			this.#world.setContraptionRotation(active.entityId, active.rotation);
+			active.recoveryError = undefined;
 			return true;
-		} catch {
+		} catch (error) {
+			active.recoveryError = String(error);
 			return false;
 		}
 	}

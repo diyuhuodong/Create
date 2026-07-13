@@ -4,7 +4,7 @@ import { collectConnectedBlocks } from "./assembly-collector.js";
 import { BedrockContraptionWorldPort } from "./bedrock-world-port.js";
 import { ContraptionController } from "./contraption-controller.js";
 import { isMovableBlockType, MAX_CONTRAPTION_BLOCKS } from "./movable-blocks.js";
-import { registerTickHandler } from "../kernel/index.js";
+import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { persistKineticWorld } from "../kinetics/kinetic-runtime.js";
 
@@ -137,6 +137,7 @@ function toggleBearing(block) {
 
 export function registerContraptions(getKineticWorld) {
 	kineticWorld = getKineticWorld();
+	registerKernelTaskGroup("contraptions", 1);
 	world.afterEvents.playerInteractWithBlock.subscribe(event => {
 		if (event.block.typeId !== BEARING_BLOCK)
 			return;
@@ -152,12 +153,15 @@ export function registerContraptions(getKineticWorld) {
 		for (const active of activeBearings.values()) {
 			const controller = controllerFor(active.dimensionId);
 			if (!controller.ensureEntity(active.id)) {
-				if (!active.recoveryFailed)
-					console.warn(`[Create Bedrock] Contraption ${active.id} is frozen because its entity could not be restored`);
+				const reason = controller.getActive(active.id).recoveryError ?? "entity_recovery_failed";
+				if (active.recoveryReason !== reason)
+					console.warn(`[Create Bedrock] Contraption ${active.id} is frozen: ${reason}`);
 				active.recoveryFailed = true;
+				active.recoveryReason = reason;
 				continue;
 			}
 			active.recoveryFailed = false;
+			active.recoveryReason = undefined;
 			const speed = getKineticWorld().speedAt(active.dimensionId, active.bearingLocation);
 			if (speed === 0)
 				continue;
@@ -173,7 +177,18 @@ export function registerContraptions(getKineticWorld) {
 			rotationDirty = false;
 			persist();
 		}
-	});
+	}, "contraptions");
 
 	system.run(restore);
+}
+
+export function getContraptionDiagnostics() {
+	const frozenReasons = Object.fromEntries([...activeBearings.values()]
+		.filter(active => active.recoveryFailed)
+		.map(active => [active.id, active.recoveryReason]));
+	return {
+		active: activeBearings.size,
+		frozen: Object.keys(frozenReasons).length,
+		frozenReasons
+	};
 }

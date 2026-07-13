@@ -41,6 +41,8 @@ test("BudgetScheduler rejects invalid groups and tasks", () => {
 	const scheduler = new BudgetScheduler();
 	assert.throws(() => scheduler.registerGroup("bad", 0), RangeError);
 	scheduler.registerGroup("valid", 1);
+	assert.equal(scheduler.hasGroup("valid"), true);
+	assert.equal(scheduler.hasGroup("missing"), false);
 	assert.throws(() => scheduler.registerGroup("valid", 1), /already exists/);
 	assert.throws(() => scheduler.enqueue("missing", () => {}), /Unknown/);
 	assert.throws(() => scheduler.enqueue("valid", "bad"), TypeError);
