@@ -15,8 +15,8 @@ test("KineticWorld tracks placement, hand-crank activation, and overload", () =>
 	const world = new KineticWorld();
 	const crank = block("createbedrock:hand_crank", 0, 64, 0);
 	world.trackPlacedBlock(crank);
-	world.trackPlacedBlock(block("createbedrock:shaft", 1, 64, 0));
-	world.trackPlacedBlock(block("createbedrock:millstone", 2, 64, 0));
+	world.trackPlacedBlock(block("createbedrock:shaft", 0, 65, 0));
+	world.trackPlacedBlock(block("createbedrock:millstone", 0, 66, 0));
 
 	assert.equal(world.activateHandCrank(crank), true);
 	world.tick();
@@ -30,7 +30,7 @@ test("KineticWorld tracks placement, hand-crank activation, and overload", () =>
 test("KineticWorld removes a broken block from the next resolution", () => {
 	const world = new KineticWorld();
 	const crank = block("createbedrock:hand_crank", 0, 64, 0);
-	const shaft = block("createbedrock:shaft", 1, 64, 0);
+	const shaft = block("createbedrock:shaft", 0, 65, 0);
 	world.trackPlacedBlock(crank);
 	world.trackPlacedBlock(shaft);
 	world.activateHandCrank(crank);
@@ -45,14 +45,29 @@ test("KineticWorld removes a broken block from the next resolution", () => {
 test("KineticWorld restores valid persisted nodes and ignores malformed entries", () => {
 	const world = new KineticWorld();
 	world.restore([
-		{ dimensionId: "minecraft:overworld", location: { x: 2, y: 64, z: 0 }, typeId: "createbedrock:shaft" },
-		{ dimensionId: "minecraft:overworld", location: { x: 1, y: 64, z: 0 }, typeId: "createbedrock:hand_crank" },
+		{ dimensionId: "minecraft:overworld", location: { x: 0, y: 65, z: 0 }, typeId: "createbedrock:shaft" },
+		{ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 }, typeId: "createbedrock:hand_crank" },
 		{ dimensionId: "minecraft:overworld", location: { x: "bad", y: 64, z: 0 }, typeId: "createbedrock:shaft" },
 		{ dimensionId: "minecraft:overworld", location: { x: 3, y: 64, z: 0 }, typeId: "createbedrock:unknown" }
 	]);
 
 	assert.deepEqual(world.snapshot(), [
-		{ dimensionId: "minecraft:overworld", location: { x: 1, y: 64, z: 0 }, typeId: "createbedrock:hand_crank" },
-		{ dimensionId: "minecraft:overworld", location: { x: 2, y: 64, z: 0 }, typeId: "createbedrock:shaft" }
+		{ axis: "y", dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 }, typeId: "createbedrock:hand_crank" },
+		{ axis: "y", dimensionId: "minecraft:overworld", location: { x: 0, y: 65, z: 0 }, typeId: "createbedrock:shaft" }
 	]);
+});
+
+test("KineticWorld only connects shafts along their rotation axis and meshes side-by-side cogwheels", () => {
+	const world = new KineticWorld();
+	const crank = block("createbedrock:hand_crank", 0, 64, 0);
+	world.trackPlacedBlock(crank);
+	world.trackPlacedBlock(block("createbedrock:shaft", 1, 64, 0));
+	world.trackPlacedBlock(block("createbedrock:cogwheel", 0, 65, 0));
+	world.trackPlacedBlock(block("createbedrock:cogwheel", -1, 65, 0));
+	world.activateHandCrank(crank);
+	world.tick();
+
+	assert.equal(world.speedAt("minecraft:overworld", { x: 1, y: 64, z: 0 }), 0);
+	assert.equal(world.speedAt("minecraft:overworld", { x: 0, y: 65, z: 0 }), 16);
+	assert.equal(world.speedAt("minecraft:overworld", { x: -1, y: 65, z: 0 }), -16);
 });

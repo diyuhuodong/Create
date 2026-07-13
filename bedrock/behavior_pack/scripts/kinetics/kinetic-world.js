@@ -3,29 +3,36 @@ import { KineticNetwork } from "./kinetic-network.js";
 export const KINETIC_BLOCKS = {
 	"createbedrock:hand_crank": {
 		kind: "source",
+		axis: "y",
 		stressCapacity: 32,
 		turnSpeed: 16
 	},
 	"createbedrock:shaft": {
-		kind: "transmission"
+		kind: "transmission",
+		axis: "y"
 	},
 	"createbedrock:cogwheel": {
-		kind: "cogwheel"
+		kind: "cogwheel",
+		axis: "y"
 	},
 	"createbedrock:millstone": {
 		kind: "consumer",
+		axis: "y",
 		stressImpact: 8
 	},
 	"createbedrock:mechanical_bearing": {
 		kind: "consumer",
+		axis: "y",
 		stressImpact: 8
 	},
 	"createbedrock:mechanical_press": {
 		kind: "consumer",
+		axis: "y",
 		stressImpact: 8
 	},
 	"createbedrock:crushing_wheel": {
 		kind: "consumer",
+		axis: "y",
 		stressImpact: 8
 	}
 };
@@ -38,6 +45,25 @@ const NEIGHBOR_OFFSETS = [
 	[0, 0, 1],
 	[0, 0, -1]
 ];
+
+function axisOfOffset(x, y, z) {
+	return x !== 0 ? "x" : y !== 0 ? "y" : z !== 0 ? "z" : undefined;
+}
+
+function axisFor(block, configuration) {
+	const states = block.permutation?.getAllStates?.() ?? {};
+	const axis = states["createbedrock:axis"] ?? configuration.axis;
+	return ["x", "y", "z"].includes(axis) ? axis : configuration.axis;
+}
+
+function connectionRatio(left, right, x, y, z) {
+	const directionAxis = axisOfOffset(x, y, z);
+	if (!directionAxis)
+		return undefined;
+	if (left.configuration.kind === "cogwheel" && right.configuration.kind === "cogwheel")
+		return left.axis === right.axis && directionAxis !== left.axis ? -1 : undefined;
+	return directionAxis === left.axis && directionAxis === right.axis ? 1 : undefined;
+}
 
 function keyFor(dimensionId, location) {
 	return `${dimensionId}:${location.x}:${location.y}:${location.z}`;
@@ -55,6 +81,7 @@ export class KineticWorld {
 
 		const id = keyFor(block.dimension.id, block.location);
 		this.#nodes.set(id, {
+			axis: axisFor(block, configuration),
 			configuration,
 			dimensionId: block.dimension.id,
 			id,
@@ -75,6 +102,7 @@ export class KineticWorld {
 	snapshot() {
 		return [...this.#nodes.values()]
 			.map(node => ({
+				axis: node.axis,
 				dimensionId: node.dimensionId,
 				location: node.location,
 				typeId: node.typeId
@@ -92,9 +120,11 @@ export class KineticWorld {
 			const location = entry?.location;
 			if (!configuration || !entry?.dimensionId || !Number.isInteger(location?.x) || !Number.isInteger(location?.y) || !Number.isInteger(location?.z))
 				continue;
+			const axis = ["x", "y", "z"].includes(entry.axis) ? entry.axis : configuration.axis;
 
 			const id = keyFor(entry.dimensionId, location);
 			this.#nodes.set(id, {
+				axis,
 				configuration,
 				dimensionId: entry.dimensionId,
 				id,
@@ -171,10 +201,9 @@ export class KineticWorld {
 				if (!adjacent || node.id >= adjacent.id)
 					continue;
 
-				const ratio = node.configuration.kind === "cogwheel" && adjacent.configuration.kind === "cogwheel"
-					? -1
-					: 1;
-				network.connect(node.id, adjacent.id, ratio);
+				const ratio = connectionRatio(node, adjacent, x, y, z);
+				if (ratio !== undefined)
+					network.connect(node.id, adjacent.id, ratio);
 			}
 		}
 
