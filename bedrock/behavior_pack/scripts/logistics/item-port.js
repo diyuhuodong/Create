@@ -115,6 +115,13 @@ export class ItemPort {
 		return this.#insertResult(requested, acceptedCount);
 	}
 
+	compactReceipts() {
+		const removed = this.#extractionReceipts.size + this.#insertionReceipts.size;
+		this.#extractionReceipts.clear();
+		this.#insertionReceipts.clear();
+		return removed;
+	}
+
 	extract(reservation, { receiptId } = {}) {
 		if (!reservation || reservation.portId !== this.#id)
 			throw new Error("Item reservation belongs to another port");
@@ -194,6 +201,18 @@ export class ItemPort {
 		};
 	}
 
+	inspect() {
+		return {
+			id: this.#id,
+			revision: this.#revision,
+			slots: this.#slots.map(stack => stack && cloneItemStack(stack))
+		};
+	}
+
+	rollback(stack, options = {}) {
+		return this.insert(stack, options);
+	}
+
 	restore(snapshot) {
 		if (!snapshot || snapshot.id !== this.#id || snapshot.maxStackSize !== this.#maxStackSize || !Number.isInteger(snapshot.revision) || snapshot.revision < 0 || !Array.isArray(snapshot.slots) || snapshot.slots.length !== this.#slots.length)
 			throw new TypeError("Item port snapshot is incompatible with this port");
@@ -226,12 +245,12 @@ export class ItemPort {
 
 	snapshot() {
 		return {
-			extractionReceipts: [...this.#extractionReceipts.entries()].map(([receiptId, receipt]) => [receiptId, {
+			extractionReceipts: [...this.#extractionReceipts.entries()].sort(([left], [right]) => left.localeCompare(right)).map(([receiptId, receipt]) => [receiptId, {
 				reservationFingerprint: receipt.reservationFingerprint,
 				stack: cloneItemStack(receipt.stack)
 			}]),
 			id: this.#id,
-			insertionReceipts: [...this.#insertionReceipts.entries()].map(([receiptId, receipt]) => [receiptId, { ...receipt }]),
+			insertionReceipts: [...this.#insertionReceipts.entries()].sort(([left], [right]) => left.localeCompare(right)).map(([receiptId, receipt]) => [receiptId, { ...receipt }]),
 			maxStackSize: this.#maxStackSize,
 			revision: this.#revision,
 			slots: this.#slots.map(stack => stack && cloneItemStack(stack))

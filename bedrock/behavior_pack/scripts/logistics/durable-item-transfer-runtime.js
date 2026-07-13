@@ -42,6 +42,8 @@ export class DurableItemTransferRuntime {
 			keyPrefix,
 			onCommit: () => {
 				this.#waitingForCommit = false;
+				if (this.#compactManagedReceipts() > 0)
+					this.#queueReceiptCompaction();
 			},
 			onError: error => this.#report(error),
 			partitionFor: record => record.partition,
@@ -101,6 +103,8 @@ export class DurableItemTransferRuntime {
 		this.#journal.restore(transfers);
 		for (const warning of restored.warnings)
 			this.#report(new Error(`Ignored corrupt item-transfer shard ${warning.partition}: ${warning.error}`));
+		if (!this.#frozen && this.#compactManagedReceipts() > 0)
+			this.#queueReceiptCompaction();
 		return { records: transfers.length, warnings: restored.warnings };
 	}
 
@@ -141,7 +145,13 @@ export class DurableItemTransferRuntime {
 	}
 
 	#managedPort(id) {
-		const port = this.#resolvePort(id);
+		let port;
+		try {
+			port = this.#resolvePort(id);
+		} catch (error) {
+			this.#blockPort(id, new Error(`Cannot resolve item port ${id}: ${error}`));
+			return undefined;
+		}
 		if (!port)
 			return undefined;
 		if (!isManagedPort(port)) {
@@ -158,6 +168,35 @@ export class DurableItemTransferRuntime {
 		} catch (error) {
 			this.#frozen = true;
 			this.#report(error);
+		}
+	}
+
+	#compactManagedReceipts() {
+		let removed = 0;
+		for (const id of [...this.#trackedPortIds].sort()) {
+			const port = this.#managedPort(id);
+			if (!port || typeof port.compactReceipts !== "function")
+				continue;
+			try {
+				const count = port.compactReceipts();
+				if (!Number.isInteger(count) || count < 0)
+					throw new TypeError("managed item-port receipt compaction must return a non-negative integer");
+				removed += count;
+			} catch (error) {
+				this.#report(new Error(`Cannot compact managed item-port receipts for ${id}: ${error}`));
+			}
+		}
+		return removed;
+	}
+
+	#queueReceiptCompaction() {
+		try {
+			this.#store.request(this.#records());
+			this.#waitingForCommit = true;
+		} catch (error) {
+			// Receipt compaction controls persistent growth but cannot invalidate a
+			// root that already made the item ownership transition durable.
+			this.#report(new Error(`Cannot persist managed item-port receipt compaction: ${error}`));
 		}
 	}
 

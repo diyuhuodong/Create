@@ -185,6 +185,10 @@ export class ContainerItemPort {
 		return undefined;
 	}
 
+	rollback(stack, options = {}) {
+		return this.insert(stack, options);
+	}
+
 	restore(snapshot) {
 		if (!snapshot || snapshot.id !== this.#id || !Number.isInteger(snapshot.revision) || snapshot.revision < 0 || !Array.isArray(snapshot.extractionReceipts) || !Array.isArray(snapshot.insertionReceipts))
 			throw new TypeError("Container item port snapshot is incompatible");

@@ -4,7 +4,7 @@ This directory contains the Bedrock Add-On reimplementation of Create. It is iso
 
 ## Current Phase
 
-Stage 2 has a static implementation for the kinetic, 16-block contraption, and minimum-train risk prototypes. It does not claim Windows, Realm, PS, or full Create feature parity until the recorded acceptance checklist passes.
+Stage 3 implementation is in progress. Its S3-0 migration matrix baseline, S3-1 sharded persistence, and S3-2 `ItemPort` transaction kernel are statically complete: managed inventory transfers checkpoint intent and escrow ownership, preserve custom stack metadata, and compact committed idempotency receipts. S3-2 has not been validated in Windows Bedrock, Realm, or PS, and it does not claim full Create feature parity. The kinetic, 16-block contraption, and minimum-train slices below remain risk prototypes from Stage 2.
 
 The stage-2 mechanical-bearing prototype accepts 16 explicitly adapted types: eleven kinetic or processing blocks plus andesite, brass, and copper casings, industrial iron blocks, and zinc blocks. Every accepted type has a visual contraption part; the five structural blocks also register an explicit stateless capture/detach/restore adapter. The prototype enforces the 16-block limit at collection, snapshot, restore, and runtime assembly boundaries.
 

@@ -24,6 +24,22 @@ test("ItemPort reserves and extracts one compatible item type without merging cu
 	assert.equal(itemStackFingerprint({ count: 1, metadata: { quality: "a" }, typeId: "minecraft:iron_ingot" }), itemStackFingerprint(reservation.item));
 });
 
+test("ItemPort exposes snapshots through inspect and keeps incompatible metadata in separate stacks", () => {
+	const port = new ItemPort({
+		id: "destination",
+		size: 2,
+		slots: [{ count: 62, metadata: { quality: "a" }, typeId: "minecraft:iron_ingot" }]
+	});
+	assert.deepEqual(port.insert({ count: 2, metadata: { quality: "b" }, typeId: "minecraft:iron_ingot" }), {
+		accepted: { count: 2, metadata: { quality: "b" }, typeId: "minecraft:iron_ingot" },
+		remainder: undefined
+	});
+	assert.deepEqual(port.inspect().slots, [
+		{ count: 62, metadata: { quality: "a" }, typeId: "minecraft:iron_ingot" },
+		{ count: 2, metadata: { quality: "b" }, typeId: "minecraft:iron_ingot" }
+	]);
+});
+
 test("ItemTransferJournal delivers escrowed items exactly once across retries", () => {
 	const source = new ItemPort({ id: "source", size: 1, slots: [{ count: 10, typeId: "minecraft:cobblestone" }] });
 	const destination = new ItemPort({ id: "destination", size: 1, maxStackSize: 64 });
@@ -50,6 +66,16 @@ test("ItemTransferJournal retains escrow when full and completes after a restart
 	assert.deepEqual(restored.settle("transfer:2", ports(source, destination)), { ok: true, state: "committed" });
 	assert.deepEqual(destination.snapshot().slots, [{ count: 1, typeId: "minecraft:iron_ingot" }]);
 	assert.deepEqual(source.snapshot().slots, [{ count: 3, typeId: "minecraft:iron_ingot" }]);
+});
+
+test("ItemTransferJournal rolls back escrow through the source port contract", () => {
+	const source = new ItemPort({ id: "source", size: 1, slots: [{ count: 5, typeId: "minecraft:iron_ingot" }] });
+	const destination = new ItemPort({ id: "destination", maxStackSize: 1, size: 1, slots: [{ count: 1, typeId: "minecraft:dirt" }] });
+	const journal = new ItemTransferJournal();
+	journal.begin({ destination, id: "transfer:rollback", maxCount: 3, source });
+	assert.equal(journal.settle("transfer:rollback", ports(source, destination)).reason, "destination_full");
+	assert.deepEqual(journal.rollback("transfer:rollback", ports(source, destination)), { ok: true, state: "rolled_back" });
+	assert.deepEqual(source.inspect().slots, [{ count: 5, typeId: "minecraft:iron_ingot" }]);
 });
 
 test("ItemPort snapshots retain extraction and insertion receipts for restart-safe retries", () => {

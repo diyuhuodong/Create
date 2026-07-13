@@ -131,6 +131,8 @@ test("DurableItemTransferRuntime restores managed port state after a committed t
 	});
 	firstRuntime.begin({ destination, id: "committed-port-state", maxCount: 2, source });
 	advance(firstRuntime, () => firstRuntime.snapshot().length === 0 && !firstRuntime.diagnostics().waitingForCommit);
+	assert.deepEqual(source.snapshot().extractionReceipts, []);
+	assert.deepEqual(destination.snapshot().insertionReceipts, []);
 
 	const restoredSource = new ItemPort({ id: "source", size: 1 });
 	const restoredDestination = new ItemPort({ id: "destination", size: 1 });
@@ -143,6 +145,58 @@ test("DurableItemTransferRuntime restores managed port state after a committed t
 	assert.deepEqual(restoredRuntime.restore(), { records: 0, warnings: [] });
 	assert.deepEqual(restoredSource.snapshot().slots, [{ count: 1, typeId: "minecraft:andesite" }]);
 	assert.deepEqual(restoredDestination.snapshot().slots, [{ count: 2, typeId: "minecraft:andesite" }]);
+});
+
+test("DurableItemTransferRuntime keeps concurrent sources and distinct metadata separate", () => {
+	const sourceA = new ItemPort({ id: "source:a", size: 1, slots: [{ count: 2, metadata: { quality: "a" }, typeId: "minecraft:iron_ingot" }] });
+	const sourceB = new ItemPort({ id: "source:b", size: 1, slots: [{ count: 2, metadata: { quality: "b" }, typeId: "minecraft:iron_ingot" }] });
+	const destination = new ItemPort({ id: "destination", size: 2 });
+	const runtime = new DurableItemTransferRuntime({
+		keyPrefix: "createbedrock:item_transfer_concurrent_sources",
+		resolvePort: id => ({ destination, "source:a": sourceA, "source:b": sourceB })[id],
+		storage: memoryStorage(),
+		writesPerTick: 1
+	});
+
+	assert.equal(runtime.begin({ destination, id: "a", maxCount: 2, source: sourceA }).ok, true);
+	assert.equal(runtime.begin({ destination, id: "b", maxCount: 2, source: sourceB }).ok, true);
+	advance(runtime, () => runtime.snapshot().length === 0 && !runtime.diagnostics().waitingForCommit);
+	assert.deepEqual(destination.inspect().slots, [
+		{ count: 2, metadata: { quality: "a" }, typeId: "minecraft:iron_ingot" },
+		{ count: 2, metadata: { quality: "b" }, typeId: "minecraft:iron_ingot" }
+	]);
+	assert.deepEqual(sourceA.inspect().slots, [undefined]);
+	assert.deepEqual(sourceB.inspect().slots, [undefined]);
+});
+
+test("DurableItemTransferRuntime retains escrow when destination code rejects delivery", () => {
+	const storage = memoryStorage();
+	const source = new ItemPort({ id: "source", size: 1, slots: [{ count: 1, typeId: "minecraft:brass_ingot" }] });
+	const destination = {
+		id: "destination",
+		insert() {
+			throw new Error("simulated destination exception");
+		},
+		restore() {},
+		snapshot() {
+			return { id: "destination" };
+		},
+		transactionStorage: "managed"
+	};
+	const runtime = new DurableItemTransferRuntime({
+		keyPrefix: "createbedrock:item_transfer_rejected_destination",
+		resolvePort: id => ({ destination, source })[id],
+		retryIntervalTicks: 1,
+		storage,
+		writesPerTick: 1
+	});
+
+	runtime.begin({ destination, id: "rejected", maxCount: 1, source });
+	advance(runtime, () => runtime.snapshot()[0]?.state === "escrowed" && !runtime.diagnostics().waitingForCommit);
+	runtime.tick();
+	assert.equal(runtime.snapshot()[0]?.state, "escrowed");
+	assert.equal(runtime.diagnostics().frozen, false);
+	assert.deepEqual(source.inspect().slots, [undefined]);
 });
 
 test("DurableItemTransferRuntime freezes a recovered transfer when its managed source is unavailable", () => {

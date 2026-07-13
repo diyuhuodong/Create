@@ -128,9 +128,16 @@ export class ItemTransferJournal {
 			return { ok: true, state: "cancelled" };
 		}
 		const source = resolvePort(record.sourceId);
-		if (!source)
+		if (!source || (typeof source.rollback !== "function" && typeof source.insert !== "function"))
 			return { ok: false, reason: "source_missing" };
-		const result = source.insert(record.item, { receiptId: `${id}:rollback` });
+		let result;
+		try {
+			result = typeof source.rollback === "function"
+				? source.rollback(record.item, { receiptId: `${id}:rollback` })
+				: source.insert(record.item, { receiptId: `${id}:rollback` });
+		} catch (error) {
+			return { ok: false, reason: "source_rejected", state: "escrowed", error: String(error) };
+		}
 		if (result.remainder) {
 			record.item = result.remainder;
 			return { ok: false, reason: "source_full", state: "escrowed" };
