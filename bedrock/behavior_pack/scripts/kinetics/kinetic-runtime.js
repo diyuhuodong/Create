@@ -41,29 +41,27 @@ function restore() {
 	}
 }
 
-function refreshWaterWheels() {
-	for (const wheel of kineticWorld.getGeneratedSourceNodes(WATER_WHEEL_BLOCK)) {
-		const dimension = world.getDimension(wheel.dimensionId);
-		let hasWater = false;
-		for (const offset of [
-			{ x: 1, y: 0, z: 0 }, { x: -1, y: 0, z: 0 },
-			{ x: 0, y: 1, z: 0 }, { x: 0, y: -1, z: 0 },
-			{ x: 0, y: 0, z: 1 }, { x: 0, y: 0, z: -1 }
-		]) {
-			if ((wheel.axis === "x" && offset.x !== 0) || (wheel.axis === "y" && offset.y !== 0) || (wheel.axis === "z" && offset.z !== 0))
-				continue;
-			const neighbor = dimension.getBlock({
-				x: wheel.location.x + offset.x,
-				y: wheel.location.y + offset.y,
-				z: wheel.location.z + offset.z
-			});
-			if (neighbor?.typeId === "minecraft:water") {
-				hasWater = true;
-				break;
-			}
+function refreshWaterWheel(wheel) {
+	const dimension = world.getDimension(wheel.dimensionId);
+	let hasWater = false;
+	for (const offset of [
+		{ x: 1, y: 0, z: 0 }, { x: -1, y: 0, z: 0 },
+		{ x: 0, y: 1, z: 0 }, { x: 0, y: -1, z: 0 },
+		{ x: 0, y: 0, z: 1 }, { x: 0, y: 0, z: -1 }
+	]) {
+		if ((wheel.axis === "x" && offset.x !== 0) || (wheel.axis === "y" && offset.y !== 0) || (wheel.axis === "z" && offset.z !== 0))
+			continue;
+		const neighbor = dimension.getBlock({
+			x: wheel.location.x + offset.x,
+			y: wheel.location.y + offset.y,
+			z: wheel.location.z + offset.z
+		});
+		if (neighbor?.typeId === "minecraft:water") {
+			hasWater = true;
+			break;
 		}
-		kineticWorld.setGeneratedSpeed(wheel.dimensionId, wheel.location, hasWater ? 8 : 0);
 	}
+	kineticWorld.setGeneratedSpeed(wheel.dimensionId, wheel.location, hasWater ? 8 : 0);
 }
 
 export function registerKinetics() {
@@ -126,7 +124,10 @@ export function registerKinetics() {
 		waterWheelTicks++;
 		if (waterWheelTicks >= WATER_WHEEL_CHECK_INTERVAL) {
 			waterWheelTicks = 0;
-			refreshWaterWheels();
+			for (const wheel of kineticWorld.getGeneratedSourceNodes(WATER_WHEEL_BLOCK)) {
+				const key = `water-wheel:${wheel.dimensionId}:${wheel.location.x}:${wheel.location.y}:${wheel.location.z}`;
+				enqueueUniqueKernelTask(key, () => refreshWaterWheel(wheel), "kinetics");
+			}
 		}
 		for (const dimensionId of kineticWorld.advanceTick())
 			enqueueUniqueKernelTask(`kinetics:${dimensionId}`, () => kineticWorld.resolveDirtyDimension(dimensionId), "kinetics");
