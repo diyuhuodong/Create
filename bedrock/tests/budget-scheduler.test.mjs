@@ -19,8 +19,8 @@ test("BudgetScheduler applies an independent task budget to every group", () => 
 	});
 	assert.deepEqual(completed, ["k1", "t1", "t2"]);
 	assert.deepEqual(scheduler.diagnostics(), {
-		kinetics: { budget: 1, completed: 1, failed: 0, pending: 1 },
-		trains: { budget: 2, completed: 2, failed: 0, pending: 1 }
+		kinetics: { budget: 1, completed: 1, failed: 0, merged: 0, pending: 1 },
+		trains: { budget: 2, completed: 2, failed: 0, merged: 0, pending: 1 }
 	});
 });
 
@@ -46,4 +46,29 @@ test("BudgetScheduler rejects invalid groups and tasks", () => {
 	assert.throws(() => scheduler.registerGroup("valid", 1), /already exists/);
 	assert.throws(() => scheduler.enqueue("missing", () => {}), /Unknown/);
 	assert.throws(() => scheduler.enqueue("valid", "bad"), TypeError);
+	assert.throws(() => scheduler.enqueueUnique("valid", "", () => {}), TypeError);
+	assert.throws(() => scheduler.enqueueUnique("valid", "task", "bad"), TypeError);
+});
+
+test("BudgetScheduler coalesces keyed work while retaining FIFO execution", () => {
+	const scheduler = new BudgetScheduler();
+	scheduler.registerGroup("work", 2);
+	const order = [];
+	assert.equal(scheduler.enqueueUnique("work", "train:a", () => order.push("a")), true);
+	assert.equal(scheduler.enqueueUnique("work", "train:a", () => order.push("duplicate")), false);
+	scheduler.enqueue("work", () => order.push("plain"));
+	assert.equal(scheduler.enqueueUnique("work", "train:b", () => order.push("b")), true);
+
+	assert.deepEqual(scheduler.tick().work, { completed: 2, failed: 0, pending: 1 });
+	assert.deepEqual(order, ["a", "plain"]);
+	assert.equal(scheduler.enqueueUnique("work", "train:a", () => order.push("a-again")), true);
+	assert.deepEqual(scheduler.diagnostics().work, {
+		budget: 2,
+		completed: 2,
+		failed: 0,
+		merged: 1,
+		pending: 2
+	});
+	assert.deepEqual(scheduler.tick().work, { completed: 2, failed: 0, pending: 0 });
+	assert.deepEqual(order, ["a", "plain", "b", "a-again"]);
 });

@@ -19,6 +19,10 @@ export function enqueueKernelTask(task, group = DEFAULT_TASK_GROUP) {
 	scheduler.enqueue(group, task);
 }
 
+export function enqueueUniqueKernelTask(key, task, group = DEFAULT_TASK_GROUP) {
+	return scheduler.enqueueUnique(group, key, task);
+}
+
 export function registerKernelTaskGroup(name, budget) {
 	scheduler.registerGroup(name, budget);
 }
