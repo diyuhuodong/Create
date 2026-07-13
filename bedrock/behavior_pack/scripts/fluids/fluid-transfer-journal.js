@@ -64,6 +64,12 @@ export class FluidTransferJournal {
 		return { ok: true, record: clone(record) };
 	}
 
+	hasSource(sourceId) {
+		if (typeof sourceId !== "string" || sourceId.length === 0)
+			throw new TypeError("Fluid transfer source identifiers must be non-empty strings");
+		return [...this.#records.values()].some(record => record.sourceId === sourceId);
+	}
+
 	extract(id, resolvePort) {
 		const record = this.#records.get(id);
 		if (!record)
@@ -158,6 +164,11 @@ export class FluidTransferJournal {
 				return extracted;
 		}
 		return this.deliver(id, resolvePort);
+	}
+
+	stateOf(id) {
+		const record = this.#records.get(id);
+		return record?.state;
 	}
 
 	snapshot() {

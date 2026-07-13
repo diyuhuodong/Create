@@ -50,6 +50,27 @@ test("FluidNetworkState persists sectioned tanks and links without creating flui
 	assert.equal(state.canRemoveTank(destination), false);
 });
 
+test("FluidNetworkState commits a durable intent before extracting its source tank", () => {
+	const storage = memoryStorage();
+	const state = createState(storage, "createbedrock:fluid_state_intent");
+	const source = state.createTank({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } });
+	const destination = state.createTank({ dimensionId: "minecraft:overworld", location: { x: 1, y: 64, z: 0 } });
+	state.insert(source, { amount: 500, typeId: "minecraft:water" });
+	state.createPipe({ destinationId: destination, id: "pipe:intent", maxAmountPerTick: 250, sourceId: source });
+	advance(state, () => state.snapshot().find(record => record.kind === "transfer")?.transfer.state === "intent" && state.diagnostics().waitingForCommit);
+	assert.deepEqual(fill(state, source), { amount: 500, typeId: "minecraft:water" });
+	assert.deepEqual(state.snapshot().find(record => record.kind === "transfer")?.transfer.state, "intent");
+
+	advance(state, () => !state.diagnostics().waitingForCommit);
+	assert.deepEqual(fill(state, source), { amount: 500, typeId: "minecraft:water" });
+	const restored = createState(storage, "createbedrock:fluid_state_intent");
+	assert.deepEqual(restored.restore(), { frozen: false, links: 1, tanks: 2, transfers: 1, warnings: [] });
+	assert.deepEqual(fill(restored, source), { amount: 500, typeId: "minecraft:water" });
+	state.tick();
+	assert.deepEqual(fill(state, source), { amount: 250, typeId: "minecraft:water" });
+	assert.equal(state.snapshot().find(record => record.kind === "transfer")?.transfer.state, "escrowed");
+});
+
 test("FluidNetworkState resumes a persisted partial escrow after restart", () => {
 	const storage = memoryStorage();
 	const first = createState(storage, "createbedrock:fluid_state_restart");
@@ -58,7 +79,7 @@ test("FluidNetworkState resumes a persisted partial escrow after restart", () =>
 	first.insert(source, { amount: 500, typeId: "minecraft:water" });
 	first.insert(destination, { amount: 200, typeId: "minecraft:water" });
 	first.createPump({ destinationId: destination, id: "pump:restart", maxAmountPerTick: 300, sourceId: source });
-	advance(first, () => first.diagnostics().activeTransfers === 1 && !first.diagnostics().waitingForCommit);
+	advance(first, () => first.snapshot().find(record => record.kind === "transfer")?.transfer.state === "escrowed" && !first.diagnostics().waitingForCommit);
 	assert.deepEqual(fill(first, source), { amount: 200, typeId: "minecraft:water" });
 
 	const restored = createState(storage, "createbedrock:fluid_state_restart");

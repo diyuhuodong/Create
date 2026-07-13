@@ -25,9 +25,16 @@ test("FluidNetwork moves bounded virtual-fluid amounts only after a pipe valve o
 	assert.equal(network.tick().processed, 0);
 	assert.equal(destination.tank.inspect().contents, undefined);
 	network.setPipeOpen("pipe:0", true);
-	assert.deepEqual(network.tick().outcomes, [{ id: "pipe:0", ok: true, state: "committed" }]);
+	assert.deepEqual(network.tick().outcomes, [{ id: "pipe:0", ok: true, state: "intent" }]);
+	assert.deepEqual(source.tank.inspect().contents, { amount: 700, typeId: "minecraft:water" });
+	assert.equal(destination.tank.inspect().contents, undefined);
+	assert.deepEqual(network.tick().outcomes, [{ id: "pipe:0", ok: true, state: "escrowed" }]);
 	assert.deepEqual(source.tank.inspect().contents, { amount: 450, typeId: "minecraft:water" });
+	assert.equal(destination.tank.inspect().contents, undefined);
+	assert.deepEqual(network.tick().outcomes, [{ id: "pipe:0", ok: true, state: "committed" }]);
 	assert.deepEqual(destination.tank.inspect().contents, { amount: 250, typeId: "minecraft:water" });
+	assert.deepEqual(network.tick().outcomes, [{ id: "pipe:0", ok: true, state: "intent" }]);
+	assert.deepEqual(network.tick().outcomes, [{ id: "pipe:0", ok: true, state: "escrowed" }]);
 	assert.deepEqual(network.tick().outcomes, [{ id: "pipe:0", ok: true, state: "committed" }]);
 	assert.deepEqual(source.tank.inspect().contents, { amount: 200, typeId: "minecraft:water" });
 	assert.deepEqual(destination.tank.inspect().contents, { amount: 500, typeId: "minecraft:water" });
@@ -38,6 +45,8 @@ test("FluidNetwork retains a pump escrow while full and resumes it exactly once 
 	const destination = tankPort({ capacity: 200, contents: { amount: 200, typeId: "minecraft:water" }, id: "tank:destination" });
 	const first = createNetwork(source.port, destination.port);
 	first.createPump({ destinationId: destination.port.id, id: "pump:0", maxAmountPerTick: 300, sourceId: source.port.id });
+	assert.deepEqual(first.tick().outcomes, [{ id: "pump:0", ok: true, state: "intent" }]);
+	assert.deepEqual(first.tick().outcomes, [{ id: "pump:0", ok: true, state: "escrowed" }]);
 	assert.deepEqual(first.tick().outcomes, [{ id: "pump:0", ok: false, reason: "destination_full", state: "escrowed" }]);
 	assert.deepEqual(source.tank.inspect().contents, { amount: 200, typeId: "minecraft:water" });
 
@@ -65,14 +74,21 @@ test("FluidNetwork pump state and transfer budget are deterministic", () => {
 	const network = createNetwork(source.port, firstDestination.port, secondDestination.port);
 	network.createPump({ destinationId: firstDestination.port.id, id: "pump:stopped", maxAmountPerTick: 100, running: false, sourceId: source.port.id });
 	network.createPipe({ destinationId: secondDestination.port.id, id: "pipe:second", maxAmountPerTick: 100, sourceId: source.port.id });
-	assert.deepEqual(network.tick({ budget: 1 }).outcomes, [{ id: "pipe:second", ok: true, state: "committed" }]);
-	assert.equal(firstDestination.tank.inspect().contents, undefined);
-	assert.deepEqual(secondDestination.tank.inspect().contents, { amount: 100, typeId: "minecraft:water" });
+	assert.deepEqual(network.tick({ budget: 1 }).outcomes, [{ id: "pipe:second", ok: true, state: "intent" }]);
+	assert.deepEqual(source.tank.inspect().contents, { amount: 200, typeId: "minecraft:water" });
 	network.setPumpRunning("pump:stopped", true);
+	assert.deepEqual(network.tick({ budget: 1 }).outcomes, [{ id: "pump:stopped", ok: false, reason: "source_busy" }]);
+	assert.deepEqual(network.tick({ budget: 1 }).outcomes, [{ id: "pipe:second", ok: true, state: "escrowed" }]);
+	assert.deepEqual(source.tank.inspect().contents, { amount: 100, typeId: "minecraft:water" });
+	assert.equal(firstDestination.tank.inspect().contents, undefined);
+	assert.equal(secondDestination.tank.inspect().contents, undefined);
+	assert.deepEqual(network.tick({ budget: 1 }).outcomes, [{ id: "pipe:second", ok: true, state: "committed" }]);
+	assert.deepEqual(secondDestination.tank.inspect().contents, { amount: 100, typeId: "minecraft:water" });
+	assert.deepEqual(network.tick({ budget: 1 }).outcomes, [{ id: "pump:stopped", ok: true, state: "intent" }]);
+	assert.deepEqual(network.tick({ budget: 1 }).outcomes, [{ id: "pipe:second", ok: false, reason: "source_busy" }]);
+	assert.deepEqual(network.tick({ budget: 1 }).outcomes, [{ id: "pump:stopped", ok: true, state: "escrowed" }]);
 	assert.deepEqual(network.tick({ budget: 1 }).outcomes, [{ id: "pump:stopped", ok: true, state: "committed" }]);
 	assert.deepEqual(firstDestination.tank.inspect().contents, { amount: 100, typeId: "minecraft:water" });
-	assert.deepEqual(network.tick({ budget: 1 }).outcomes, [{ id: "pipe:second", ok: false, reason: "source_empty" }]);
-	assert.deepEqual(secondDestination.tank.inspect().contents, { amount: 100, typeId: "minecraft:water" });
 });
 
 test("FluidNetwork rejects snapshots with orphaned escrow records", () => {
@@ -98,6 +114,8 @@ test("FluidNetwork settles existing escrow after a pump stops without launching 
 	const destination = tankPort({ capacity: 200, contents: { amount: 200, typeId: "minecraft:water" }, id: "tank:destination" });
 	const network = createNetwork(source.port, destination.port);
 	network.createPump({ destinationId: destination.port.id, id: "pump:escrow", maxAmountPerTick: 300, sourceId: source.port.id });
+	assert.equal(network.tick().outcomes[0].state, "intent");
+	assert.equal(network.tick().outcomes[0].state, "escrowed");
 	assert.equal(network.tick().outcomes[0].reason, "destination_full");
 	network.setPumpRunning("pump:escrow", false);
 	destination.tank.extract(destination.tank.reserve());

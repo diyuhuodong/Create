@@ -236,6 +236,8 @@ export class FluidNetwork {
 
 	#settleLink(link) {
 		if (!link.activeTransferId) {
+			if (this.#journal.hasSource(link.sourceId))
+				return { ok: false, reason: "source_busy" };
 			const id = `fluid-link:${link.id}:${link.nextTransfer++}`;
 			const began = this.#journal.begin({
 				destination: this.#requirePort(link.destinationId),
@@ -246,13 +248,21 @@ export class FluidNetwork {
 			if (!began.ok)
 				return began;
 			link.activeTransferId = id;
+			this.markLinkDirty(link.id);
+			return { ok: true, state: "intent" };
 		}
 
-		const settled = this.#journal.settle(link.activeTransferId, id => this.#ports.get(id));
-		if (settled.ok || settled.reason === "source_changed" || settled.reason === "unknown_transfer") {
+		const transferState = this.#journal.stateOf(link.activeTransferId);
+		const settled = transferState === "intent"
+			? this.#journal.extract(link.activeTransferId, id => this.#ports.get(id))
+			: this.#journal.deliver(link.activeTransferId, id => this.#ports.get(id));
+		const completed = settled.ok && settled.state === "committed";
+		const abandoned = settled.reason === "source_changed" || settled.reason === "unknown_transfer";
+		if (completed || abandoned) {
 			link.activeTransferId = undefined;
-			if (settled.ok && link.enabled)
-				this.markLinkDirty(link.id);
+			this.markPortDirty(link.sourceId);
+		} else if (settled.ok && settled.state === "escrowed") {
+			this.markLinkDirty(link.id);
 		}
 		return settled;
 	}

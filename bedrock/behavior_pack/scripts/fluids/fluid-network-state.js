@@ -246,7 +246,7 @@ export class FluidNetworkState {
 
 	tick() {
 		const wrote = this.#store.tick();
-		if (this.#persistencePending() || this.#frozen)
+		if (wrote || this.#persistencePending() || this.#frozen)
 			return wrote;
 		const result = this.#network.tick();
 		if (result.processed > 0)
