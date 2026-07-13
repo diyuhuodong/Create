@@ -4,9 +4,16 @@ function clone(value) {
 	return JSON.parse(JSON.stringify(value));
 }
 
+function assertPartition(partition) {
+	if (typeof partition !== "string" || partition.length === 0)
+		throw new TypeError("Item transfer records require a persistent partition");
+	return partition;
+}
+
 function validateRecord(record) {
 	if (!record || typeof record.id !== "string" || typeof record.sourceId !== "string" || typeof record.destinationId !== "string")
 		throw new TypeError("Item transfer records require identifiers");
+	assertPartition(record.partition);
 	if (record.state !== "intent" && record.state !== "escrowed")
 		throw new TypeError("Item transfer records require an intent or escrow state");
 	if (record.state === "intent" && !record.reservation)
@@ -18,10 +25,24 @@ function validateRecord(record) {
 	}
 }
 
+export function transferPartition(id, partitionCount = 64) {
+	if (typeof id !== "string" || id.length === 0)
+		throw new TypeError("Item transfer partitions require an identifier");
+	if (!Number.isInteger(partitionCount) || partitionCount < 1)
+		throw new RangeError("Item transfer partition counts must be positive integers");
+
+	let hash = 0x811c9dc5;
+	for (let index = 0; index < id.length; index++) {
+		hash ^= id.charCodeAt(index);
+		hash = Math.imul(hash, 0x01000193);
+	}
+	return `transaction:${(hash >>> 0) % partitionCount}`;
+}
+
 export class ItemTransferJournal {
 	#records = new Map();
 
-	begin({ destination, id, maxCount, predicate, source }) {
+	begin({ destination, id, maxCount, partition = transferPartition(id), predicate, source }) {
 		if (typeof id !== "string" || id.length === 0)
 			throw new TypeError("Item transfers require an identifier");
 		if (this.#records.has(id))
@@ -34,12 +55,58 @@ export class ItemTransferJournal {
 		const record = {
 			destinationId: destination.id,
 			id,
+			partition: assertPartition(partition),
 			reservation,
 			sourceId: source.id,
 			state: "intent"
 		};
 		this.#records.set(id, record);
 		return { ok: true, record: clone(record) };
+	}
+
+	extract(id, resolvePort) {
+		const record = this.#records.get(id);
+		if (!record)
+			return { ok: false, reason: "unknown_transfer" };
+		if (record.state === "escrowed")
+			return { ok: true, state: "escrowed" };
+
+		const source = resolvePort(record.sourceId);
+		if (!source)
+			return { ok: false, reason: "source_missing", state: "intent" };
+		try {
+			record.item = source.extract(record.reservation, { receiptId: `${id}:extract` });
+			record.deliveryAttempt = 0;
+			record.state = "escrowed";
+			return { ok: true, state: "escrowed" };
+		} catch (error) {
+			this.#records.delete(id);
+			return { ok: false, reason: "source_changed", error: String(error) };
+		}
+	}
+
+	deliver(id, resolvePort) {
+		const record = this.#records.get(id);
+		if (!record)
+			return { ok: false, reason: "unknown_transfer" };
+		if (record.state !== "escrowed")
+			return { ok: false, reason: "not_escrowed", state: "intent" };
+
+		const destination = resolvePort(record.destinationId);
+		if (!destination)
+			return { ok: false, reason: "destination_missing", state: "escrowed" };
+		try {
+			const result = destination.insert(record.item, { receiptId: `${id}:deliver:${record.deliveryAttempt}` });
+			if (result.remainder) {
+				record.item = result.remainder;
+				record.deliveryAttempt++;
+				return { ok: false, reason: "destination_full", state: "escrowed" };
+			}
+			this.#records.delete(id);
+			return { ok: true, state: "committed" };
+		} catch (error) {
+			return { ok: false, reason: "destination_rejected", state: "escrowed", error: String(error) };
+		}
 	}
 
 	rollback(id, resolvePort) {
@@ -67,10 +134,14 @@ export class ItemTransferJournal {
 			throw new TypeError("Item transfer journals restore arrays");
 		const restored = new Map();
 		for (const record of records) {
-			validateRecord(record);
-			if (restored.has(record.id))
-				throw new Error(`Item transfer journal contains duplicate ${record.id}`);
-			restored.set(record.id, clone(record));
+			const normalized = {
+				...record,
+				partition: record?.partition ?? transferPartition(record?.id)
+			};
+			validateRecord(normalized);
+			if (restored.has(normalized.id))
+				throw new Error(`Item transfer journal contains duplicate ${normalized.id}`);
+			restored.set(normalized.id, clone(normalized));
 		}
 		this.#records = restored;
 	}
@@ -80,30 +151,11 @@ export class ItemTransferJournal {
 		if (!record)
 			return { ok: false, reason: "unknown_transfer" };
 		if (record.state === "intent") {
-			const source = resolvePort(record.sourceId);
-			if (!source)
-				return { ok: false, reason: "source_missing" };
-			try {
-				record.item = source.extract(record.reservation, { receiptId: `${id}:extract` });
-				record.deliveryAttempt = 0;
-				record.state = "escrowed";
-			} catch (error) {
-				this.#records.delete(id);
-				return { ok: false, reason: "source_changed", error: String(error) };
-			}
+			const extracted = this.extract(id, resolvePort);
+			if (!extracted.ok)
+				return extracted;
 		}
-
-		const destination = resolvePort(record.destinationId);
-		if (!destination)
-			return { ok: false, reason: "destination_missing", state: "escrowed" };
-		const result = destination.insert(record.item, { receiptId: `${id}:deliver:${record.deliveryAttempt}` });
-		if (result.remainder) {
-			record.item = result.remainder;
-			record.deliveryAttempt++;
-			return { ok: false, reason: "destination_full", state: "escrowed" };
-		}
-		this.#records.delete(id);
-		return { ok: true, state: "committed" };
+		return this.deliver(id, resolvePort);
 	}
 
 	snapshot() {
