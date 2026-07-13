@@ -57,6 +57,20 @@ export class BedrockContraptionWorldPort {
 		return !!block && block.typeId === "minecraft:air";
 	}
 
+	captureAssemblyData(locations, anchor) {
+		if (!this.#kineticWorld?.captureInternalBeltLinks)
+			return undefined;
+		const kineticBeltLinks = this.#kineticWorld.captureInternalBeltLinks(this.#dimensionId, locations, anchor);
+		return kineticBeltLinks.length > 0 ? { kineticBeltLinks } : undefined;
+	}
+
+	restoreAssemblyData(attachments, origin) {
+		if (!this.#kineticWorld?.restoreInternalBeltLinks || !attachments?.kineticBeltLinks)
+			return;
+		if (this.#kineticWorld.restoreInternalBeltLinks(this.#dimensionId, origin, attachments.kineticBeltLinks) > 0)
+			this.#onKineticMutation?.();
+	}
+
 	spawnContraption({ id, origin, snapshot }) {
 		let marker = this.#dimension().getEntities({ type: CONTRAPTION_ENTITY })
 			.find(entity => entity.getDynamicProperty(CONTRAPTION_ID_PROPERTY) === id);

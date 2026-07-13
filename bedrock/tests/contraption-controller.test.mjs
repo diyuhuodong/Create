@@ -7,20 +7,28 @@ function locationKey(location) {
 	return `${location.x}:${location.y}:${location.z}`;
 }
 
-function createWorld({ failPlaceAt, failSpawn = false } = {}) {
+function createWorld({ assemblyAttachments, failPlaceAt, failSpawn = false } = {}) {
 	const blocks = new Map([
 		["0:64:0", { typeId: "createbedrock:shaft", states: { axis: "x" } }],
 		["1:64:0", { typeId: "createbedrock:millstone", data: { progress: 7 } }]
 	]);
 	const entities = new Set();
 	const rotations = new Map();
+	const restoredAttachments = [];
 	let placements = 0;
 	return {
 		blocks,
 		entities,
 		rotations,
+		restoredAttachments,
 		canPlace(location) {
 			return !blocks.has(locationKey(location));
+		},
+		captureAssemblyData() {
+			return assemblyAttachments;
+		},
+		restoreAssemblyData(attachments, origin) {
+			restoredAttachments.push({ attachments, origin: { ...origin } });
 		},
 		placeBlock(block) {
 			placements++;
@@ -163,4 +171,23 @@ test("ContraptionController rebuilds a missing entity from its authoritative sna
 	assert.deepEqual([...world.entities], ["entity-1"]);
 	assert.equal(world.rotations.get("entity-1"), 45);
 	assert.equal(controller.getActive("bearing-1").snapshot.schemaVersion, 2);
+});
+
+test("ContraptionController rotates and restores assembly attachments on disassembly", () => {
+	const world = createWorld({
+		assemblyAttachments: {
+			kineticBeltLinks: [{ left: { x: 0, y: 0, z: 0 }, right: { x: 1, y: 0, z: 0 } }]
+		}
+	});
+	const controller = new ContraptionController(world);
+	const locations = [{ x: 0, y: 64, z: 0 }, { x: 1, y: 64, z: 0 }];
+	controller.assemble({ id: "bearing-1", anchor: locations[0], locations });
+	assert.equal(controller.disassemble("bearing-1", { x: 10, y: 70, z: 10 }, 1), true);
+
+	assert.deepEqual(world.restoredAttachments, [{
+		attachments: {
+			kineticBeltLinks: [{ left: { x: 0, y: 0, z: 0 }, right: { x: 0, y: 0, z: 1 } }]
+		},
+		origin: { x: 10, y: 70, z: 10 }
+	}]);
 });

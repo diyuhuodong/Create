@@ -58,7 +58,11 @@ function normalizedPayload(snapshot) {
 		throw new TypeError("Contraption snapshots require at least one block");
 	const blocks = snapshot.blocks.map(normalizedBlock)
 		.sort((left, right) => locationKey(left.relative).localeCompare(locationKey(right.relative)));
-	return { anchor: { ...snapshot.anchor }, blocks };
+	return {
+		anchor: { ...snapshot.anchor },
+		blocks,
+		...(snapshot.attachments === undefined ? {} : { attachments: clone(snapshot.attachments) })
+	};
 }
 
 function sealSnapshot(payload) {
@@ -113,7 +117,18 @@ function rotateStatesY(states, quarterTurns) {
 	return rotated;
 }
 
-export function createContraptionSnapshot({ anchor, blocks, maxBlocks = 256 }) {
+function rotateAttachmentsY(attachments, quarterTurns) {
+	const rotated = clone(attachments);
+	if (!Array.isArray(rotated?.kineticBeltLinks))
+		return rotated;
+	rotated.kineticBeltLinks = rotated.kineticBeltLinks.map(link => ({
+		left: rotateY(link.left, quarterTurns),
+		right: rotateY(link.right, quarterTurns)
+	}));
+	return rotated;
+}
+
+export function createContraptionSnapshot({ anchor, attachments, blocks, maxBlocks = 256 }) {
 	validateLocation(anchor, "Contraption anchor");
 	if (!Array.isArray(blocks) || blocks.length === 0)
 		throw new TypeError("Contraptions require at least one block");
@@ -154,6 +169,7 @@ export function createContraptionSnapshot({ anchor, blocks, maxBlocks = 256 }) {
 
 	return sealSnapshot({
 		anchor: { ...anchor },
+		...(attachments === undefined ? {} : { attachments: clone(attachments) }),
 		blocks: [...sourceBlocks.values()]
 			.map(block => ({
 				typeId: block.typeId,
@@ -173,7 +189,8 @@ export function rotateSnapshotY(snapshot, quarterTurns) {
 	const normalized = normalizeContraptionSnapshot(snapshot);
 	return sealSnapshot({
 		anchor: normalized.anchor,
-		blocks: snapshot.blocks.map(block => ({
+		...(normalized.attachments === undefined ? {} : { attachments: rotateAttachmentsY(normalized.attachments, quarterTurns) }),
+		blocks: normalized.blocks.map(block => ({
 			...block,
 			relative: rotateY(block.relative, quarterTurns),
 			states: rotateStatesY(block.states, quarterTurns),

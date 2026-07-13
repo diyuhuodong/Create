@@ -281,3 +281,27 @@ test("KineticWorld re-resolves only dirty dimensions while retaining other netwo
 	assert.equal(world.speedAt("minecraft:overworld", overworldShaft.location), 16);
 	assert.equal(world.speedAt("minecraft:nether", netherShaft.location), 0);
 });
+
+test("KineticWorld captures and restores only belt links internal to a moving assembly", () => {
+	const world = new KineticWorld();
+	for (const x of [0, 4, 8])
+		world.trackPlacedBlock(block("createbedrock:shaft", x, 64, 0));
+	world.connectBelt("minecraft:overworld", { x: 0, y: 64, z: 0 }, { x: 4, y: 64, z: 0 });
+	world.connectBelt("minecraft:overworld", { x: 4, y: 64, z: 0 }, { x: 8, y: 64, z: 0 });
+
+	const captured = world.captureInternalBeltLinks("minecraft:overworld", [
+		{ x: 0, y: 64, z: 0 },
+		{ x: 4, y: 64, z: 0 }
+	], { x: 0, y: 64, z: 0 });
+	assert.deepEqual(captured, [{
+		left: { x: 0, y: 0, z: 0 },
+		right: { x: 4, y: 0, z: 0 }
+	}]);
+
+	world.trackBrokenBlock("minecraft:overworld", { x: 0, y: 64, z: 0 });
+	world.trackBrokenBlock("minecraft:overworld", { x: 4, y: 64, z: 0 });
+	world.trackPlacedBlock(block("createbedrock:shaft", 10, 70, 10));
+	world.trackPlacedBlock(block("createbedrock:shaft", 14, 70, 10));
+	assert.equal(world.restoreInternalBeltLinks("minecraft:overworld", { x: 10, y: 70, z: 10 }, captured), 1);
+	assert.equal(world.snapshot().beltLinks.length, 1);
+});

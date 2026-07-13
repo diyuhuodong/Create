@@ -307,6 +307,42 @@ export class KineticWorld {
 		return { ok: true };
 	}
 
+	captureInternalBeltLinks(dimensionId, locations, anchor) {
+		const included = new Set(locations.map(location => worldLocationKey(dimensionId, location)));
+		return [...this.#beltLinks.values()]
+			.filter(link => link.left.dimensionId === dimensionId && included.has(link.leftId) && included.has(link.rightId))
+			.map(link => ({
+				left: {
+					x: link.left.location.x - anchor.x,
+					y: link.left.location.y - anchor.y,
+					z: link.left.location.z - anchor.z
+				},
+				right: {
+					x: link.right.location.x - anchor.x,
+					y: link.right.location.y - anchor.y,
+					z: link.right.location.z - anchor.z
+				}
+			}));
+	}
+
+	restoreInternalBeltLinks(dimensionId, origin, records) {
+		if (!Array.isArray(records))
+			return 0;
+		let restored = 0;
+		for (const record of records) {
+			const materialize = relative => ({
+				x: origin.x + relative.x,
+				y: origin.y + relative.y,
+				z: origin.z + relative.z
+			});
+			if (![record?.left, record?.right].every(relative => Number.isInteger(relative?.x) && Number.isInteger(relative?.y) && Number.isInteger(relative?.z)))
+				continue;
+			if (this.connectBelt(dimensionId, materialize(record.left), materialize(record.right)).ok)
+				restored++;
+		}
+		return restored;
+	}
+
 	activateHandCrank(block, duration = 20) {
 		const node = this.#nodes.get(block.dimension.id, block.location);
 		if (!node || node.typeId !== "createbedrock:hand_crank")

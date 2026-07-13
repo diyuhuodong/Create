@@ -5,7 +5,7 @@ export class ContraptionController {
 	#world;
 
 	constructor(worldPort) {
-		for (const method of ["readBlock", "removeBlock", "placeBlock", "spawnContraption", "removeContraption", "isContraptionValid", "setContraptionRotation", "canPlace"]) {
+		for (const method of ["readBlock", "removeBlock", "placeBlock", "captureAssemblyData", "restoreAssemblyData", "spawnContraption", "removeContraption", "isContraptionValid", "setContraptionRotation", "canPlace"]) {
 			if (typeof worldPort?.[method] !== "function")
 				throw new TypeError(`Contraption world port requires ${method}()`);
 		}
@@ -24,7 +24,8 @@ export class ContraptionController {
 				throw new Error(`Cannot assemble missing block at ${location.x}:${location.y}:${location.z}`);
 			return { ...block, location: { ...location } };
 		});
-		const snapshot = createContraptionSnapshot({ anchor, blocks, maxBlocks });
+		const attachments = this.#world.captureAssemblyData(locations, anchor);
+		const snapshot = createContraptionSnapshot({ anchor, attachments, blocks, maxBlocks });
 		const removed = [];
 
 		try {
@@ -38,6 +39,7 @@ export class ContraptionController {
 		} catch (error) {
 			for (const block of removed)
 				this.#world.placeBlock(block);
+			this.#world.restoreAssemblyData(snapshot.attachments, anchor);
 			throw error;
 		}
 	}
@@ -49,7 +51,8 @@ export class ContraptionController {
 		if (!Number.isInteger(quarterTurns))
 			throw new TypeError("Contraption restoration rotation must be expressed in quarter turns");
 
-		const blocks = materializeSnapshot(rotateSnapshotY(active.snapshot, quarterTurns), origin);
+		const rotatedSnapshot = rotateSnapshotY(active.snapshot, quarterTurns);
+		const blocks = materializeSnapshot(rotatedSnapshot, origin);
 		if (blocks.some(block => !this.#world.canPlace(block.location)))
 			return false;
 
@@ -59,6 +62,7 @@ export class ContraptionController {
 				this.#world.placeBlock(block);
 				placed.push(block);
 			}
+			this.#world.restoreAssemblyData(rotatedSnapshot.attachments, origin);
 			this.#world.removeContraption(active.entityId);
 			this.#active.delete(id);
 			return true;

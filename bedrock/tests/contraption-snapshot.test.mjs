@@ -73,3 +73,25 @@ test("Contraption snapshots upgrade schema v1 and reject a changed schema v2 pay
 		blocks: [{ ...upgraded.blocks[0], typeId: "createbedrock:cogwheel" }]
 	}), /checksum mismatch/);
 });
+
+test("Contraption snapshots checksum and rotate kinetic belt attachments", () => {
+	const snapshot = createContraptionSnapshot({
+		anchor: { x: 0, y: 0, z: 0 },
+		attachments: {
+			kineticBeltLinks: [{ left: { x: 0, y: 0, z: 0 }, right: { x: 2, y: 0, z: 0 } }]
+		},
+		blocks: [
+			{ location: { x: 0, y: 0, z: 0 }, typeId: "createbedrock:shaft" },
+			{ location: { x: 1, y: 0, z: 0 }, typeId: "createbedrock:shaft" }
+		]
+	});
+	const rotated = rotateSnapshotY(snapshot, 1);
+	assert.deepEqual(rotated.attachments.kineticBeltLinks, [{
+		left: { x: 0, y: 0, z: 0 },
+		right: { x: 0, y: 0, z: 2 }
+	}]);
+	assert.throws(() => normalizeContraptionSnapshot({
+		...rotated,
+		attachments: { kineticBeltLinks: [] }
+	}), /checksum mismatch/);
+});
