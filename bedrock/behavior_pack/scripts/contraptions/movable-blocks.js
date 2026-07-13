@@ -1,3 +1,5 @@
+export const MAX_CONTRAPTION_BLOCKS = 16;
+
 export const MOVABLE_BLOCK_TYPES = new Set([
 	"createbedrock:hand_crank",
 	"createbedrock:shaft",

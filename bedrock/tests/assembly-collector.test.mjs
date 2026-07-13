@@ -22,4 +22,9 @@ test("collectConnectedBlocks enforces a bounded prototype size", () => {
 		maxBlocks: 1,
 		readBlock: worldWith({ x: 0, y: 0, z: 0 }, { x: 1, y: 0, z: 0 })
 	}), /exceeds/);
+	assert.throws(() => collectConnectedBlocks({
+		start: { x: 0, y: 0, z: 0 },
+		maxBlocks: 17,
+		readBlock: worldWith({ x: 0, y: 0, z: 0 })
+	}), /between one and 16/);
 });

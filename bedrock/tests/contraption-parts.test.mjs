@@ -2,9 +2,10 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { partTypeFor } from "../behavior_pack/scripts/contraptions/contraption-parts.js";
-import { isMovableBlockType } from "../behavior_pack/scripts/contraptions/movable-blocks.js";
+import { isMovableBlockType, MAX_CONTRAPTION_BLOCKS } from "../behavior_pack/scripts/contraptions/movable-blocks.js";
 
 test("Contraption part registry covers the currently movable kinetic blocks", () => {
+	assert.equal(MAX_CONTRAPTION_BLOCKS, 16);
 	for (const typeId of [
 		"createbedrock:hand_crank",
 		"createbedrock:shaft",

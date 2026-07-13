@@ -35,6 +35,27 @@ test("Contraption snapshots reject disconnected assemblies", () => {
 	}), /face-connected/);
 });
 
+test("Contraption snapshots enforce the shared sixteen-block prototype cap", () => {
+	const blocks = Array.from({ length: 17 }, (_, x) => ({
+		location: { x, y: 0, z: 0 },
+		typeId: "createbedrock:shaft"
+	}));
+	assert.throws(() => createContraptionSnapshot({
+		anchor: { x: 0, y: 0, z: 0 },
+		blocks
+	}), /16 block prototype limit/);
+	assert.throws(() => createContraptionSnapshot({
+		anchor: { x: 0, y: 0, z: 0 },
+		blocks: [blocks[0]],
+		maxBlocks: 17
+	}), /between one and 16/);
+	assert.throws(() => normalizeContraptionSnapshot({
+		schemaVersion: 1,
+		anchor: { x: 0, y: 0, z: 0 },
+		blocks: blocks.map(block => ({ relative: { ...block.location }, typeId: block.typeId }))
+	}), /16 block prototype limit/);
+});
+
 test("Contraption snapshots rotate around their anchor in quarter turns", () => {
 	const snapshot = createContraptionSnapshot({
 		anchor: { x: 0, y: 0, z: 0 },

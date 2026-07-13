@@ -1,3 +1,5 @@
+import { MAX_CONTRAPTION_BLOCKS } from "./movable-blocks.js";
+
 const NEIGHBOR_OFFSETS = [
 	[1, 0, 0],
 	[-1, 0, 0],
@@ -56,6 +58,8 @@ function normalizedPayload(snapshot) {
 	validateLocation(snapshot?.anchor, "Contraption anchor");
 	if (!Array.isArray(snapshot.blocks) || snapshot.blocks.length === 0)
 		throw new TypeError("Contraption snapshots require at least one block");
+	if (snapshot.blocks.length > MAX_CONTRAPTION_BLOCKS)
+		throw new RangeError(`Contraption exceeds the ${MAX_CONTRAPTION_BLOCKS} block prototype limit`);
 	const blocks = snapshot.blocks.map(normalizedBlock)
 		.sort((left, right) => locationKey(left.relative).localeCompare(locationKey(right.relative)));
 	return {
@@ -128,10 +132,12 @@ function rotateAttachmentsY(attachments, quarterTurns) {
 	return rotated;
 }
 
-export function createContraptionSnapshot({ anchor, attachments, blocks, maxBlocks = 256 }) {
+export function createContraptionSnapshot({ anchor, attachments, blocks, maxBlocks = MAX_CONTRAPTION_BLOCKS }) {
 	validateLocation(anchor, "Contraption anchor");
 	if (!Array.isArray(blocks) || blocks.length === 0)
 		throw new TypeError("Contraptions require at least one block");
+	if (!Number.isInteger(maxBlocks) || maxBlocks < 1 || maxBlocks > MAX_CONTRAPTION_BLOCKS)
+		throw new RangeError(`Contraption snapshot limit must be between one and ${MAX_CONTRAPTION_BLOCKS}`);
 	if (blocks.length > maxBlocks)
 		throw new RangeError(`Contraption exceeds the ${maxBlocks} block prototype limit`);
 

@@ -3,7 +3,7 @@ import { system, world } from "@minecraft/server";
 import { collectConnectedBlocks } from "./assembly-collector.js";
 import { BedrockContraptionWorldPort } from "./bedrock-world-port.js";
 import { ContraptionController } from "./contraption-controller.js";
-import { isMovableBlockType } from "./movable-blocks.js";
+import { isMovableBlockType, MAX_CONTRAPTION_BLOCKS } from "./movable-blocks.js";
 import { registerTickHandler } from "../kernel/index.js";
 import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { persistKineticWorld } from "../kinetics/kinetic-runtime.js";
@@ -11,7 +11,6 @@ import { persistKineticWorld } from "../kinetics/kinetic-runtime.js";
 const BEARING_BLOCK = "createbedrock:mechanical_bearing";
 const PERSISTENCE_KEY = "createbedrock:contraptions_v1";
 const PERSISTENCE_SCHEMA_VERSION = 1;
-const MAX_PROTOTYPE_BLOCKS = 64;
 const activeBearings = new Map();
 const controllers = new Map();
 let kineticWorld;
@@ -62,17 +61,21 @@ function restore() {
 				0: legacy => legacy
 			}
 		})) {
-			if (!record?.bearingKey || !record?.dimensionId || !record?.id || !record?.origin || !record?.snapshot)
-				continue;
-			if (!record.bearingLocation)
-				continue;
-			controllerFor(record.dimensionId).restore([{
-				id: record.id,
-				origin: record.origin,
-				rotation: record.rotation ?? 0,
-				snapshot: record.snapshot
-			}]);
-			activeBearings.set(record.bearingKey, { ...record, rotation: record.rotation ?? 0 });
+			try {
+				if (!record?.bearingKey || !record?.dimensionId || !record?.id || !record?.origin || !record?.snapshot)
+					throw new TypeError("missing required record fields");
+				if (!record.bearingLocation)
+					throw new TypeError("missing bearing location");
+				controllerFor(record.dimensionId).restore([{
+					id: record.id,
+					origin: record.origin,
+					rotation: record.rotation ?? 0,
+					snapshot: record.snapshot
+				}]);
+				activeBearings.set(record.bearingKey, { ...record, rotation: record.rotation ?? 0 });
+			} catch (error) {
+				console.warn(`[Create Bedrock] Ignored invalid contraption ${record?.id ?? "unknown"}: ${error}`);
+			}
 		}
 	} catch (error) {
 		console.warn(`[Create Bedrock] Ignored invalid contraption state: ${error}`);
@@ -84,7 +87,7 @@ function collectAboveBearing(block) {
 	const start = { x: block.location.x, y: block.location.y + 1, z: block.location.z };
 	return collectConnectedBlocks({
 		start,
-		maxBlocks: MAX_PROTOTYPE_BLOCKS,
+		maxBlocks: MAX_CONTRAPTION_BLOCKS,
 		readBlock(location) {
 			const source = dimension.getBlock(location);
 			if (!source || source.typeId === "minecraft:air")
@@ -118,7 +121,7 @@ function toggleBearing(block) {
 		id,
 		anchor: origin,
 		locations: blocks.map(entry => entry.location),
-		maxBlocks: MAX_PROTOTYPE_BLOCKS
+		maxBlocks: MAX_CONTRAPTION_BLOCKS
 	});
 	activeBearings.set(bearingKey, {
 		bearingKey,

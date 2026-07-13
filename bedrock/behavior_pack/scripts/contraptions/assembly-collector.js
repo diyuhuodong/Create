@@ -1,3 +1,5 @@
+import { MAX_CONTRAPTION_BLOCKS } from "./movable-blocks.js";
+
 const NEIGHBOR_OFFSETS = [
 	[1, 0, 0],
 	[-1, 0, 0],
@@ -11,11 +13,11 @@ function keyFor(location) {
 	return `${location.x}:${location.y}:${location.z}`;
 }
 
-export function collectConnectedBlocks({ start, readBlock, maxBlocks = 16, canCollect = () => true }) {
+export function collectConnectedBlocks({ start, readBlock, maxBlocks = MAX_CONTRAPTION_BLOCKS, canCollect = () => true }) {
 	if (typeof readBlock !== "function")
 		throw new TypeError("Contraption collection requires readBlock()");
-	if (!Number.isInteger(maxBlocks) || maxBlocks < 1)
-		throw new RangeError("Contraption collection requires a positive block limit");
+	if (!Number.isInteger(maxBlocks) || maxBlocks < 1 || maxBlocks > MAX_CONTRAPTION_BLOCKS)
+		throw new RangeError(`Contraption collection limit must be between one and ${MAX_CONTRAPTION_BLOCKS}`);
 
 	const first = readBlock(start);
 	if (!first || !canCollect(first))
