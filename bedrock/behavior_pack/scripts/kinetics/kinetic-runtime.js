@@ -9,7 +9,10 @@ const PERSISTENCE_KEY = "createbedrock:kinetic_world_v1";
 const PERSISTENCE_SCHEMA_VERSION = 1;
 const BELT_CONNECTOR = "createbedrock:belt_connector";
 const CLUTCH_BLOCK = "createbedrock:clutch";
+const WATER_WHEEL_BLOCK = "createbedrock:water_wheel";
+const WATER_WHEEL_CHECK_INTERVAL = 20;
 const pendingBeltEndpoints = new Map();
+let waterWheelTicks = 0;
 
 function persist() {
 	world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, kineticWorld.snapshot()));
@@ -34,6 +37,31 @@ function restore() {
 		console.warn("[Create Bedrock] Restored kinetic world state");
 	} catch (error) {
 		console.warn(`[Create Bedrock] Ignored invalid kinetic world state: ${error}`);
+	}
+}
+
+function refreshWaterWheels() {
+	for (const wheel of kineticWorld.getGeneratedSourceNodes(WATER_WHEEL_BLOCK)) {
+		const dimension = world.getDimension(wheel.dimensionId);
+		let hasWater = false;
+		for (const offset of [
+			{ x: 1, y: 0, z: 0 }, { x: -1, y: 0, z: 0 },
+			{ x: 0, y: 1, z: 0 }, { x: 0, y: -1, z: 0 },
+			{ x: 0, y: 0, z: 1 }, { x: 0, y: 0, z: -1 }
+		]) {
+			if ((wheel.axis === "x" && offset.x !== 0) || (wheel.axis === "y" && offset.y !== 0) || (wheel.axis === "z" && offset.z !== 0))
+				continue;
+			const neighbor = dimension.getBlock({
+				x: wheel.location.x + offset.x,
+				y: wheel.location.y + offset.y,
+				z: wheel.location.z + offset.z
+			});
+			if (neighbor?.typeId === "minecraft:water") {
+				hasWater = true;
+				break;
+			}
+		}
+		kineticWorld.setGeneratedSpeed(wheel.dimensionId, wheel.location, hasWater ? 8 : 0);
 	}
 }
 
@@ -92,7 +120,14 @@ export function registerKinetics() {
 			console.warn(`[Create Bedrock] Hand crank activated at ${event.block.location.x}, ${event.block.location.y}, ${event.block.location.z}`);
 	});
 
-	registerTickHandler(() => kineticWorld.tick());
+	registerTickHandler(() => {
+		waterWheelTicks++;
+		if (waterWheelTicks >= WATER_WHEEL_CHECK_INTERVAL) {
+			waterWheelTicks = 0;
+			refreshWaterWheels();
+		}
+		kineticWorld.tick();
+	});
 }
 
 export function getKineticWorldForTesting() {

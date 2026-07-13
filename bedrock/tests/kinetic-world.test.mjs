@@ -41,6 +41,25 @@ test("KineticWorld tracks placement, hand-crank activation, and overload", () =>
 	assert.equal(network.nodeStates.at(-1).speed, 16);
 });
 
+test("KineticWorld propagates and persists generated source speed", () => {
+	const world = new KineticWorld();
+	const wheel = block("createbedrock:water_wheel", 0, 64, 0);
+	const shaft = block("createbedrock:shaft", 0, 65, 0);
+	world.trackPlacedBlock(wheel);
+	world.trackPlacedBlock(shaft);
+	assert.equal(world.setGeneratedSpeed("minecraft:overworld", wheel.location, 8), true);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", shaft.location), 8);
+
+	const restored = new KineticWorld();
+	restored.restore(world.snapshot());
+	restored.tick();
+	assert.equal(restored.speedAt("minecraft:overworld", shaft.location), 8);
+	assert.equal(restored.setGeneratedSpeed("minecraft:overworld", wheel.location, 0), true);
+	restored.tick();
+	assert.equal(restored.speedAt("minecraft:overworld", shaft.location), 0);
+});
+
 test("KineticWorld removes a broken block from the next resolution", () => {
 	const world = new KineticWorld();
 	const crank = block("createbedrock:hand_crank", 0, 64, 0);

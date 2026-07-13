@@ -17,6 +17,7 @@ const TEXTURES = [
 	"clutch_off.png",
 	"clutch_on.png",
 	"encased_chain_drive.png",
+	"funnel/andesite_funnel_frame.png",
 	"crushing_wheel_plates.png",
 	"gearbox.png",
 	"gearbox_top.png",
@@ -40,7 +41,7 @@ export async function importJavaAssets(resourcePackRoot) {
 	await mkdir(itemTargetDirectory, { recursive: true });
 
 	for (const texture of TEXTURES)
-		await cp(resolve(sourceDirectory, texture), resolve(targetDirectory, texture));
+		await mkdir(dirname(resolve(targetDirectory, texture)), { recursive: true }).then(() => cp(resolve(sourceDirectory, texture), resolve(targetDirectory, texture)));
 	for (const texture of ITEM_TEXTURES)
 		await cp(resolve(itemSourceDirectory, texture), resolve(itemTargetDirectory, texture));
 

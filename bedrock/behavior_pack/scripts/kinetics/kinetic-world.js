@@ -7,6 +7,12 @@ export const KINETIC_BLOCKS = {
 		stressCapacity: 32,
 		turnSpeed: 16
 	},
+	"createbedrock:water_wheel": {
+		kind: "generated_source",
+		axis: "y",
+		generatedSpeed: 8,
+		stressCapacity: 64
+	},
 	"createbedrock:shaft": {
 		kind: "transmission",
 		axis: "y"
@@ -166,6 +172,7 @@ export class KineticWorld {
 			enabled: enabledFor(block, configuration),
 			id,
 			location: { ...block.location },
+			generatedSpeed: previous?.generatedSpeed ?? 0,
 			turnTicksRemaining: previous?.turnTicksRemaining ?? 0,
 			typeId: block.typeId
 		});
@@ -193,6 +200,7 @@ export class KineticWorld {
 				axis: node.axis,
 				dimensionId: node.dimensionId,
 				...(node.configuration.kind === "clutch" ? { enabled: node.enabled } : {}),
+				...(node.configuration.kind === "generated_source" ? { generatedSpeed: node.generatedSpeed } : {}),
 				location: node.location,
 				typeId: node.typeId
 			}))
@@ -228,6 +236,7 @@ export class KineticWorld {
 				dimensionId: entry.dimensionId,
 				enabled: configuration.kind !== "clutch" || entry.enabled !== false,
 				id,
+				generatedSpeed: configuration.kind === "generated_source" && Number.isFinite(entry.generatedSpeed) ? entry.generatedSpeed : 0,
 				location: { ...location },
 				turnTicksRemaining: 0,
 				typeId: entry.typeId
@@ -243,6 +252,25 @@ export class KineticWorld {
 		}
 
 		this.#dirty = true;
+	}
+
+	getGeneratedSourceNodes(typeId) {
+		return [...this.#nodes.values()]
+			.filter(node => node.typeId === typeId && node.configuration.kind === "generated_source")
+			.map(node => ({ axis: node.axis, dimensionId: node.dimensionId, location: { ...node.location } }));
+	}
+
+	setGeneratedSpeed(dimensionId, location, speed) {
+		if (!Number.isFinite(speed))
+			throw new TypeError("Generated kinetic speeds must be finite");
+		const node = this.#nodes.get(keyFor(dimensionId, location));
+		if (!node || node.configuration.kind !== "generated_source")
+			return false;
+		if (node.generatedSpeed === speed)
+			return false;
+		node.generatedSpeed = speed;
+		this.#dirty = true;
+		return true;
 	}
 
 	isBeltPulley(dimensionId, location) {
@@ -326,10 +354,16 @@ export class KineticWorld {
 		};
 		for (const node of this.#nodes.values()) {
 			const isTurning = node.turnTicksRemaining > 0;
+			const sourceSpeed = node.configuration.kind === "generated_source"
+				? node.generatedSpeed
+				: isTurning ? node.configuration.turnSpeed ?? 0 : 0;
+			const stressCapacity = node.configuration.kind === "generated_source"
+				? Math.abs(sourceSpeed) > 0 ? node.configuration.stressCapacity ?? 0 : 0
+				: isTurning ? node.configuration.stressCapacity ?? 0 : 0;
 			network.addNode({
 				id: node.id,
-				sourceSpeed: isTurning ? node.configuration.turnSpeed ?? 0 : 0,
-				stressCapacity: isTurning ? node.configuration.stressCapacity ?? 0 : 0,
+				sourceSpeed,
+				stressCapacity,
 				stressImpact: node.configuration.stressImpact ?? 0
 			});
 		}

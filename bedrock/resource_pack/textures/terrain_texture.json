@@ -23,6 +23,9 @@
     "createbedrock_encased_chain_drive": {
       "textures": "textures/create_java/block/encased_chain_drive"
     },
+    "createbedrock_funnel_frame": {
+      "textures": "textures/create_java/block/funnel/andesite_funnel_frame"
+    },
     "createbedrock_large_cogwheel": {
       "textures": "textures/create_java/block/large_cogwheel"
     },

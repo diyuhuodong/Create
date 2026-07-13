@@ -1,0 +1,31 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:water_wheel",
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.water_wheel",
+      "minecraft:item_visual": {
+        "geometry": { "identifier": "geometry.createbedrock.water_wheel" },
+        "material_instances": {
+          "gearbox": { "texture": "createbedrock_gearbox", "render_method": "opaque" },
+          "andesite_funnel_frame": { "texture": "createbedrock_funnel_frame", "render_method": "opaque" },
+          "*": { "texture": "createbedrock_gearbox", "render_method": "opaque" }
+        }
+      },
+      "minecraft:material_instances": {
+        "gearbox": { "texture": "createbedrock_gearbox", "render_method": "opaque" },
+        "andesite_funnel_frame": { "texture": "createbedrock_funnel_frame", "render_method": "opaque" },
+        "*": { "texture": "createbedrock_gearbox", "render_method": "opaque" }
+      }
+    },
+    "permutations": [
+      { "condition": "query.block_state('minecraft:facing_direction') == 2 || query.block_state('minecraft:facing_direction') == 3", "components": { "minecraft:transformation": { "rotation": [90, 0, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 4 || query.block_state('minecraft:facing_direction') == 5", "components": { "minecraft:transformation": { "rotation": [0, 0, 90] } } }
+    ]
+  }
+}

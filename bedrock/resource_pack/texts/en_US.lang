@@ -1,6 +1,7 @@
 pack.name=Create Bedrock
 pack.description=Create mechanics for Bedrock and Realms.
 tile.createbedrock:hand_crank.name=Hand Crank
+tile.createbedrock:water_wheel.name=Water Wheel
 tile.createbedrock:shaft.name=Shaft
 tile.createbedrock:cogwheel.name=Cogwheel
 tile.createbedrock:large_cogwheel.name=Large Cogwheel
