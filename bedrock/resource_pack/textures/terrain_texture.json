@@ -47,6 +47,21 @@
     "createbedrock_chute_hole": {
       "textures": "textures/create_java/block/chute_hole"
     },
+    "createbedrock_andesite_funnel": {
+      "textures": "textures/create_java/block/funnel/andesite_funnel"
+    },
+    "createbedrock_andesite_funnel_frame": {
+      "textures": "textures/create_java/block/funnel/andesite_funnel_frame"
+    },
+    "createbedrock_andesite_funnel_pull": {
+      "textures": "textures/create_java/block/funnel/andesite_funnel_pull"
+    },
+    "createbedrock_andesite_funnel_unpowered": {
+      "textures": "textures/create_java/block/funnel/andesite_funnel_unpowered"
+    },
+    "createbedrock_funnel_closed": {
+      "textures": "textures/create_java/block/funnel/funnel_closed"
+    },
     "createbedrock_large_cogwheel": {
       "textures": "textures/create_java/block/large_cogwheel"
     },

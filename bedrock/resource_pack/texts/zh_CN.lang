@@ -26,3 +26,4 @@ item.createbedrock:golden_sheet.name=金板
 item.createbedrock:belt_connector.name=传动带连接器
 tile.createbedrock:depot.name=置物台
 tile.createbedrock:chute.name=溜槽
+tile.createbedrock:andesite_funnel.name=安山漏斗

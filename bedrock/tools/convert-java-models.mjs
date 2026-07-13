@@ -17,6 +17,16 @@ const MODELS = [
 	{ name: "depot", source: "depot/block.json" },
 	{ name: "chute", source: "chute/block.json" },
 	{
+		name: "andesite_funnel",
+		source: "funnel/block_vertical_filterless.json",
+		textureOverrides: {
+			base: "create:block/funnel/andesite_funnel",
+			direction: "create:block/funnel/andesite_funnel_pull",
+			frame: "create:block/funnel/andesite_funnel_frame",
+			redstone: "create:block/funnel/andesite_funnel_unpowered"
+		}
+	},
+	{
 		name: "mechanical_bearing",
 		source: "bearing/block.json",
 		textureOverrides: {

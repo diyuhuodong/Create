@@ -26,3 +26,4 @@ item.createbedrock:golden_sheet.name=Golden Sheet
 item.createbedrock:belt_connector.name=Belt Connector
 tile.createbedrock:depot.name=Depot
 tile.createbedrock:chute.name=Chute
+tile.createbedrock:andesite_funnel.name=Andesite Funnel
