@@ -119,3 +119,15 @@ test("ContraptionController restores block positions at the selected quarter tur
 	assert.ok(world.blocks.has("4:70:4"));
 	assert.ok(world.blocks.has("4:70:5"));
 });
+
+test("ContraptionController refuses a corrupted persisted snapshot", () => {
+	const sourceWorld = createWorld();
+	const source = new ContraptionController(sourceWorld);
+	const locations = [{ x: 0, y: 64, z: 0 }, { x: 1, y: 64, z: 0 }];
+	source.assemble({ id: "bearing-1", anchor: locations[0], locations });
+	const [record] = source.snapshot();
+	record.snapshot.blocks[0].typeId = "createbedrock:cogwheel";
+
+	const restored = new ContraptionController(createWorld());
+	assert.throws(() => restored.restore([record]), /checksum mismatch/);
+});

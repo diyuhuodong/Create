@@ -1,4 +1,4 @@
-import { createContraptionSnapshot, materializeSnapshot, rotateSnapshotY } from "./contraption-snapshot.js";
+import { createContraptionSnapshot, materializeSnapshot, normalizeContraptionSnapshot, rotateSnapshotY } from "./contraption-snapshot.js";
 
 export class ContraptionController {
 	#active = new Map();
@@ -91,18 +91,19 @@ export class ContraptionController {
 		for (const record of records) {
 			if (!record?.id || this.#active.has(record.id) || !record.snapshot || !record.origin)
 				throw new TypeError("Invalid contraption controller record");
+			const snapshot = normalizeContraptionSnapshot(record.snapshot);
 
 			const entityId = this.#world.spawnContraption({
 				id: record.id,
 				origin: record.origin,
-				snapshot: record.snapshot
+				snapshot
 			});
 			const rotation = record.rotation ?? 0;
 			this.#active.set(record.id, {
 				entityId,
 				origin: { ...record.origin },
 				rotation,
-				snapshot: record.snapshot
+				snapshot
 			});
 			this.#world.setContraptionRotation(entityId, rotation);
 		}
