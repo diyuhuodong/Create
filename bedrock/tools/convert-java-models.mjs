@@ -15,6 +15,7 @@ const MODELS = [
 	{ name: "millstone", source: "millstone/block.json" },
 	{ name: "mechanical_press", source: "mechanical_press/block.json" },
 	{ name: "depot", source: "depot/block.json" },
+	{ name: "chute", source: "chute/block.json" },
 	{
 		name: "mechanical_bearing",
 		source: "bearing/block.json",

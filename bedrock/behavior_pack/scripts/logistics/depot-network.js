@@ -22,6 +22,7 @@ export function depotId(dimensionId, location) {
 
 export class DepotNetwork {
 	#belts = new Map();
+	#chutes = new Map();
 	#cooldownTicks = 0;
 	#depots = new Map();
 	#funnels = new Map();
@@ -56,6 +57,8 @@ export class DepotNetwork {
 					return `belt:${record.beltId}`;
 				if (record.kind === "funnel")
 					return `funnel:${record.id}`;
+				if (record.kind === "chute")
+					return `chute:${record.id}`;
 				throw new TypeError("Depot state contains an unknown record kind");
 			},
 			storage,
@@ -113,6 +116,18 @@ export class DepotNetwork {
 		return id;
 	}
 
+	createChute({ destinationId, id, sourceId }) {
+		if (typeof id !== "string" || id.length === 0)
+			throw new TypeError("Chutes require an identifier");
+		if (this.#chutes.has(id))
+			throw new Error(`Chute ${id} already exists`);
+		this.#requireDepot(sourceId);
+		this.#requireDepot(destinationId);
+		this.#chutes.set(id, { destinationId, id, nextTransfer: 0, sourceId });
+		this.#persist();
+		return id;
+	}
+
 	canRemoveDepot(id) {
 		const depot = this.#depots.get(id);
 		if (!depot)
@@ -122,6 +137,8 @@ export class DepotNetwork {
 		if ([...this.#belts.values()].some(belt => belt.sourceId === id || belt.destinationId === id))
 			return false;
 		if ([...this.#funnels.values()].some(funnel => funnel.sourceId === id || funnel.destinationId === id))
+			return false;
+		if ([...this.#chutes.values()].some(chute => chute.sourceId === id || chute.destinationId === id))
 			return false;
 		return depot.port.snapshot().slots.every(stack => stack === undefined);
 	}
@@ -144,6 +161,7 @@ export class DepotNetwork {
 	diagnostics() {
 		return {
 			belts: this.#belts.size,
+			chutes: this.#chutes.size,
 			cooldownTicks: this.#cooldownTicks,
 			depots: this.#depots.size,
 			funnels: this.#funnels.size,
@@ -198,11 +216,21 @@ export class DepotNetwork {
 		return true;
 	}
 
+	removeChute(id) {
+		if (this.#journal.snapshot().some(record => record.id.startsWith(`chute:${id}:`)))
+			throw new Error(`Chute ${id} has an active transfer`);
+		if (!this.#chutes.delete(id))
+			return false;
+		this.#persist();
+		return true;
+	}
+
 	restore() {
 		const restored = this.#store.read();
 		if (!restored)
-			return { belts: 0, depots: 0, funnels: 0, transfers: 0, transports: 0, warnings: [] };
+			return { belts: 0, chutes: 0, depots: 0, funnels: 0, transfers: 0, transports: 0, warnings: [] };
 		const belts = [];
+		const chutes = [];
 		const depots = new Map();
 		const funnels = [];
 		const transfers = [];
@@ -223,6 +251,10 @@ export class DepotNetwork {
 				}
 				if (record?.kind === "funnel") {
 					funnels.push(record);
+					continue;
+				}
+				if (record?.kind === "chute") {
+					chutes.push(record);
 					continue;
 				}
 				const depot = this.#depotFromRecord(record);
@@ -266,14 +298,26 @@ export class DepotNetwork {
 				this.#report(new Error(`Ignored invalid funnel record: ${error}`));
 			}
 		}
+		const restoredChutes = new Map();
+		for (const record of chutes) {
+			try {
+				const chute = this.#chuteFromRecord(record, depots);
+				if (restoredChutes.has(chute.id))
+					throw new Error(`duplicate chute ${chute.id}`);
+				restoredChutes.set(chute.id, chute);
+			} catch (error) {
+				this.#report(new Error(`Ignored invalid chute record: ${error}`));
+			}
+		}
 		this.#journal.restore(transfers);
 		this.#belts = restoredBelts;
+		this.#chutes = restoredChutes;
 		this.#depots = depots;
 		this.#funnels = restoredFunnels;
 		this.#transports = restoredTransports;
 		for (const warning of restored.warnings)
 			this.#report(new Error(`Ignored corrupt depot shard ${warning.partition}: ${warning.error}`));
-		return { belts: restoredBelts.size, depots: depots.size, funnels: restoredFunnels.size, transfers: transfers.length, transports: restoredTransports.size, warnings: restored.warnings };
+		return { belts: restoredBelts.size, chutes: restoredChutes.size, depots: depots.size, funnels: restoredFunnels.size, transfers: transfers.length, transports: restoredTransports.size, warnings: restored.warnings };
 	}
 
 	snapshot() {
@@ -290,7 +334,7 @@ export class DepotNetwork {
 		}
 		if (this.#tickTransfer())
 			return true;
-		return this.#tickBelt() || this.#tickFunnel() || wrote;
+		return this.#tickBelt() || this.#tickFunnel() || this.#tickChute() || wrote;
 	}
 
 	setBeltSpeed(id, speed) {
@@ -350,6 +394,19 @@ export class DepotNetwork {
 		});
 		port.restore(record.port);
 		return { dimensionId: record.dimensionId, location, port };
+	}
+
+	#chuteFromRecord(record, depots) {
+		if (record?.kind !== "chute" || typeof record.id !== "string" || record.id.length === 0 || typeof record.sourceId !== "string" || typeof record.destinationId !== "string" || !Number.isInteger(record.nextTransfer) || record.nextTransfer < 0)
+			throw new TypeError("Chute records require valid identifiers and state");
+		if (!depots.has(record.sourceId) || !depots.has(record.destinationId))
+			throw new Error("Chute endpoints must refer to restored depots");
+		return {
+			destinationId: record.destinationId,
+			id: record.id,
+			nextTransfer: record.nextTransfer,
+			sourceId: record.sourceId
+		};
 	}
 
 	#funnelFromRecord(record, depots) {
@@ -430,11 +487,14 @@ export class DepotNetwork {
 				sourceId: funnel.sourceId
 			}))
 			.sort((left, right) => left.id.localeCompare(right.id));
+		const chutes = [...this.#chutes.values()]
+			.map(chute => ({ ...chute, kind: "chute" }))
+			.sort((left, right) => left.id.localeCompare(right.id));
 		const transfers = this.#journal.snapshot().map(record => ({ ...record, kind: "transfer" }));
 		const transports = [...this.#transports.values()]
 			.map(transport => ({ ...transport, item: cloneItemStack(transport.item), kind: "transport" }))
 			.sort((left, right) => left.id.localeCompare(right.id));
-		return [...depots, ...belts, ...funnels, ...transfers, ...transports];
+		return [...depots, ...belts, ...funnels, ...chutes, ...transfers, ...transports];
 	}
 
 	#report(error) {
@@ -507,6 +567,22 @@ export class DepotNetwork {
 			if (!result.ok)
 				continue;
 			funnel.nextTransfer++;
+			this.#persist();
+			return true;
+		}
+		return false;
+	}
+
+	#tickChute() {
+		for (const chute of [...this.#chutes.values()].sort((left, right) => left.id.localeCompare(right.id))) {
+			const result = this.#journal.begin({
+				destination: this.#depots.get(chute.destinationId)?.port,
+				id: `chute:${chute.id}:${chute.nextTransfer}`,
+				source: this.#depots.get(chute.sourceId)?.port
+			});
+			if (!result.ok)
+				continue;
+			chute.nextTransfer++;
 			this.#persist();
 			return true;
 		}

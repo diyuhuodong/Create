@@ -41,6 +41,12 @@
     "createbedrock_depot_top": {
       "textures": "textures/create_java/block/depot_top"
     },
+    "createbedrock_chute": {
+      "textures": "textures/create_java/block/chute"
+    },
+    "createbedrock_chute_hole": {
+      "textures": "textures/create_java/block/chute_hole"
+    },
     "createbedrock_large_cogwheel": {
       "textures": "textures/create_java/block/large_cogwheel"
     },

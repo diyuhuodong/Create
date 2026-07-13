@@ -57,7 +57,7 @@ test("DepotNetwork restarts from an escrow checkpoint without duplicating depot 
 	advance(first, () => first.snapshot().some(record => record.kind === "transfer" && record.state === "escrowed") && !first.diagnostics().waitingForCommit);
 
 	const restored = createNetwork(storage, "createbedrock:depot_restart");
-	assert.deepEqual(restored.restore(), { belts: 0, depots: 2, funnels: 0, transfers: 1, transports: 0, warnings: [] });
+	assert.deepEqual(restored.restore(), { belts: 0, chutes: 0, depots: 2, funnels: 0, transfers: 1, transports: 0, warnings: [] });
 	assert.deepEqual(restored.extract(destination), { count: 4, typeId: "minecraft:dirt" });
 	advance(restored, () => restored.diagnostics().transfers === 0 && !restored.diagnostics().waitingForCommit);
 	assert.deepEqual(restored.extract(source), undefined);
@@ -107,7 +107,7 @@ test("DepotNetwork restores an in-flight belt record and keeps it when the targe
 	advance(first, () => first.diagnostics().transports === 1 && !first.diagnostics().waitingForCommit);
 
 	const restored = createNetwork(storage, "createbedrock:belt_restart");
-	assert.deepEqual(restored.restore(), { belts: 1, depots: 2, funnels: 0, transfers: 0, transports: 1, warnings: [] });
+	assert.deepEqual(restored.restore(), { belts: 1, chutes: 0, depots: 2, funnels: 0, transfers: 0, transports: 1, warnings: [] });
 	assert.throws(() => restored.removeBelt("belt:restart"), /active transport/);
 	assert.deepEqual(restored.extract(destination), { count: 1, typeId: "minecraft:dirt" });
 	advance(restored, () => restored.diagnostics().transports === 0 && !restored.diagnostics().waitingForCommit);
@@ -140,4 +140,15 @@ test("DepotNetwork funnels filter items and honor their lock state", () => {
 	advance(network, () => network.diagnostics().transfers === 0 && !network.diagnostics().waitingForCommit && depotSlots(network, destination)?.[0]?.typeId === "minecraft:iron_ingot");
 	assert.deepEqual(network.extract(destination), { count: 2, typeId: "minecraft:iron_ingot" });
 	assert.deepEqual(network.extract(source), { count: 1, typeId: "minecraft:dirt" });
+});
+
+test("DepotNetwork chutes transfer items downward through the same recovery journal", () => {
+	const network = createNetwork(memoryStorage(), "createbedrock:chute_transfer");
+	const source = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 65, z: 0 } });
+	const destination = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 63, z: 0 } });
+	network.insert(source, { count: 3, typeId: "minecraft:andesite" });
+	network.createChute({ destinationId: destination, id: "chute:0", sourceId: source });
+	advance(network, () => network.diagnostics().transfers === 0 && !network.diagnostics().waitingForCommit && depotSlots(network, destination)?.[0]?.count === 3);
+	assert.deepEqual(network.extract(source), undefined);
+	assert.deepEqual(network.extract(destination), { count: 3, typeId: "minecraft:andesite" });
 });

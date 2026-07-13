@@ -1,0 +1,50 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:chute"
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 6
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1
+      },
+      "minecraft:geometry": "geometry.createbedrock.chute",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.chute"
+        },
+        "material_instances": {
+          "chute": {
+            "texture": "createbedrock_chute",
+            "render_method": "opaque"
+          },
+          "chute_hole": {
+            "texture": "createbedrock_chute_hole",
+            "render_method": "opaque"
+          },
+          "*": {
+            "texture": "createbedrock_chute",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:material_instances": {
+        "chute": {
+          "texture": "createbedrock_chute",
+          "render_method": "opaque"
+        },
+        "chute_hole": {
+          "texture": "createbedrock_chute_hole",
+          "render_method": "opaque"
+        },
+        "*": {
+          "texture": "createbedrock_chute",
+          "render_method": "opaque"
+        }
+      }
+    }
+  }
+}

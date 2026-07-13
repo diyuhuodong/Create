@@ -30,6 +30,10 @@ export function createDepotFunnel(options) {
 	return network.createFunnel(options);
 }
 
+export function createDepotChute(options) {
+	return network.createChute(options);
+}
+
 export function getDepotDiagnostics() {
 	return network.diagnostics();
 }

@@ -19,6 +19,8 @@ const TEXTURES = [
 	"clutch_off.png",
 	"clutch_on.png",
 	"copper_casing.png",
+	"chute.png",
+	"chute_hole.png",
 	"depot_side.png",
 	"depot_top.png",
 	"encased_chain_drive.png",
