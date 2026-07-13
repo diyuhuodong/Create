@@ -1,11 +1,17 @@
-import { system, world } from "@minecraft/server";
+import { ItemStack, system, world } from "@minecraft/server";
 
 import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-property-storage.js";
+import { getKineticSpeedAt } from "../kinetics/kinetic-runtime.js";
+import { decodeBedrockContainerStack } from "./bedrock-container-item-port.js";
+import { BedrockEscrowRegistry } from "./bedrock-escrow-registry.js";
 import { depotId, DepotNetwork } from "./depot-network.js";
+import { registerEscrowProtection } from "./external-escrow-runtime.js";
 
 const DEPOT_BLOCK = "createbedrock:depot";
 const CHUTE_BLOCK = "createbedrock:chute";
+const BELT_CONNECTOR = "createbedrock:belt_connector";
+const MAX_DEPOT_BELT_LENGTH = 20;
 const FUNNEL_BLOCK = "createbedrock:andesite_funnel";
 const DEPOT_TASK_BUDGET = 8;
 const DEPOT_TASK_GROUP = "depot-logistics";
@@ -31,12 +37,25 @@ const FACING_OFFSETS = {
 	up: { x: 0, y: 1, z: 0 },
 	west: { x: -1, y: 0, z: 0 }
 };
+const KINETIC_NEIGHBOR_OFFSETS = [
+	{ x: 1, y: 0, z: 0 },
+	{ x: -1, y: 0, z: 0 },
+	{ x: 0, y: 1, z: 0 },
+	{ x: 0, y: -1, z: 0 },
+	{ x: 0, y: 0, z: 1 },
+	{ x: 0, y: 0, z: -1 }
+];
 const network = new DepotNetwork({
 	onError(error) {
 		console.warn(`[Create Bedrock] Depot logistics error: ${error}`);
 	},
 	storage: createWorldDynamicPropertyStorage(world)
 });
+const escrows = new BedrockEscrowRegistry();
+const pendingDepotBeltEndpoints = new Map();
+let nextPlayerTransaction = 0;
+
+registerEscrowProtection(() => network.activeEscrowIds());
 
 function identifierFor(block) {
 	return depotId(block.dimension.id, block.location);
@@ -44,6 +63,69 @@ function identifierFor(block) {
 
 function deviceId(kind, block) {
 	return `${kind}:${block.dimension.id}:${block.location.x}:${block.location.y}:${block.location.z}`;
+}
+
+function depotBeltId(left, right) {
+	return `depot-belt:${[identifierFor(left), identifierFor(right)].sort().join("|")}`;
+}
+
+function depotBeltPath(left, right) {
+	if (left.dimension.id !== right.dimension.id || left.location.y !== right.location.y)
+		return undefined;
+	const dx = right.location.x - left.location.x;
+	const dz = right.location.z - left.location.z;
+	if ((dx === 0 && dz === 0) || (dx !== 0 && dz !== 0))
+		return undefined;
+	const length = Math.abs(dx) + Math.abs(dz);
+	return length <= MAX_DEPOT_BELT_LENGTH ? length : undefined;
+}
+
+function kineticSpeedForDepot(dimensionId, location) {
+	let selected = 0;
+	for (const offset of KINETIC_NEIGHBOR_OFFSETS) {
+		const speed = getKineticSpeedAt(dimensionId, offsetLocation(location, offset));
+		if (Math.abs(speed) > Math.abs(selected))
+			selected = speed;
+	}
+	return selected;
+}
+
+function refreshDepotBeltSpeeds() {
+	let changed = false;
+	for (const belt of network.worldBelts()) {
+		const speed = kineticSpeedForDepot(belt.source.dimensionId, belt.source.location);
+		if (network.setBeltSpeed(belt.id, speed))
+			changed = true;
+	}
+	return changed;
+}
+
+function toggleDepotBelt(player, first, second) {
+	const length = depotBeltPath(first, second);
+	if (!length) {
+		player.sendMessage(`Depot belts must be horizontal, straight, and no longer than ${MAX_DEPOT_BELT_LENGTH} blocks.`);
+		return false;
+	}
+	const id = depotBeltId(first, second);
+	try {
+		if (network.hasBelt(id)) {
+			network.removeBelt(id);
+			player.sendMessage("Depot belt removed.");
+			return true;
+		}
+		network.createBelt({
+			destinationId: identifierFor(second),
+			id,
+			length,
+			sourceId: identifierFor(first),
+			speed: kineticSpeedForDepot(first.dimension.id, first.location)
+		});
+		player.sendMessage("Depot belt created. Power the source depot from an adjacent shaft.");
+		return true;
+	} catch (error) {
+		player.sendMessage(`Depot belt could not be changed: ${error}`);
+		return false;
+	}
 }
 
 function offsetLocation(location, offset) {
@@ -100,6 +182,120 @@ function configureAdjacentDevices(depot) {
 			configureFunnel(block);
 		if (block?.typeId === CHUTE_BLOCK)
 			configureChute(block);
+	}
+}
+
+function playerTransactionId(kind, block, player) {
+	nextPlayerTransaction++;
+	return `depot-${kind}:${block.dimension.id}:${block.location.x}:${block.location.y}:${block.location.z}:${player.id}:${world.getAbsoluteTime()}:${nextPlayerTransaction}`;
+}
+
+function resolvePlayerInventorySlot(endpoint) {
+	const player = world.getAllPlayers().find(candidate => candidate.id === endpoint.id || candidate.name === endpoint.name);
+	const container = player?.getComponent("minecraft:inventory")?.container;
+	if (!container || endpoint.slot >= container.size)
+		return undefined;
+	return { container, slot: endpoint.slot };
+}
+
+function beginPlayerDeposit(player, block) {
+	const inventory = player.getComponent("minecraft:inventory")?.container;
+	const slot = player.selectedSlotIndex;
+	if (!inventory || !Number.isInteger(slot) || slot < 0 || slot >= inventory.size)
+		return false;
+	const physical = inventory.getItem(slot);
+	if (!physical)
+		return false;
+	let item;
+	try {
+		item = decodeBedrockContainerStack(physical);
+	} catch (error) {
+		player.sendMessage(`This item cannot be stored in a depot yet: ${error}`);
+		return false;
+	}
+	const destinationId = identifierFor(block);
+	const id = playerTransactionId("deposit", block, player);
+	let escrow;
+	try {
+		escrow = escrows.create({ id, source: { dimension: block.dimension, location: block.location } });
+		const result = network.beginExternalDeposit({
+			depotId: destinationId,
+			escrowId: escrow.id,
+			id,
+			item,
+			source: { id: player.id, name: player.name, slot }
+		});
+		if (!result.ok) {
+			escrows.destroy(escrow.id);
+			if (result.reason === "destination_full")
+				player.sendMessage("The depot cannot accept this full stack.");
+			return false;
+		}
+		return true;
+	} catch (error) {
+		try {
+			if (escrow)
+				escrows.destroy(escrow.id);
+		} catch {
+			// Empty escrow entities are safe for the shared orphan sweeper to remove.
+		}
+		console.warn(`[Create Bedrock] Could not begin depot deposit: ${error}`);
+		return false;
+	}
+}
+
+function beginPlayerWithdrawal(player, block) {
+	const inventory = player.getComponent("minecraft:inventory")?.container;
+	const slot = player.selectedSlotIndex;
+	if (!inventory || !Number.isInteger(slot) || slot < 0 || slot >= inventory.size || inventory.getItem(slot) !== undefined)
+		return false;
+	const sourceId = identifierFor(block);
+	const candidate = network.previewExtraction(sourceId);
+	if (!candidate) {
+		player.sendMessage("The depot is empty or is finishing another transfer.");
+		return false;
+	}
+	if (candidate.metadata !== undefined) {
+		player.sendMessage("This depot item has data that cannot be recreated in a player inventory yet.");
+		return false;
+	}
+	let maxCount;
+	try {
+		const prototype = new ItemStack(candidate.typeId, 1);
+		if (!prototype.isStackable || !Number.isInteger(prototype.maxAmount) || prototype.maxAmount < 1)
+			throw new Error("item has no valid Bedrock stack limit");
+		maxCount = Math.min(candidate.count, prototype.maxAmount);
+	} catch (error) {
+		player.sendMessage(`This depot item cannot be recreated in a player inventory yet: ${error}`);
+		return false;
+	}
+	const id = playerTransactionId("withdraw", block, player);
+	let escrow;
+	try {
+		escrow = escrows.create({ id, source: { dimension: block.dimension, location: block.location } });
+		const result = network.beginExternalWithdrawal({
+			depotId: sourceId,
+			escrowId: escrow.id,
+			id,
+			maxCount,
+			target: { id: player.id, name: player.name, slot }
+		});
+		if (!result.ok) {
+			escrows.destroy(escrow.id);
+			if (result.reason === "depot_busy")
+				player.sendMessage("The depot is finishing another transfer.");
+			return false;
+		}
+		return true;
+	} catch (error) {
+		try {
+			if (escrow)
+				escrows.destroy(escrow.id);
+		} catch {
+			// Empty escrow entities are safe for the shared orphan sweeper to remove.
+		}
+		console.warn(`[Create Bedrock] Could not begin depot withdrawal: ${error}`);
+		return false;
 	}
 }
 
@@ -176,7 +372,67 @@ export function registerDepots() {
 		}
 	});
 
-	registerTickHandler(() => network.tick(), DEPOT_TASK_GROUP);
+	world.afterEvents.playerInteractWithBlock.subscribe(event => {
+		if (event.block.typeId !== DEPOT_BLOCK)
+			return;
+		if (event.itemStack?.typeId === BELT_CONNECTOR) {
+			const playerId = event.player.id;
+			const pending = pendingDepotBeltEndpoints.get(playerId);
+			if (!pending) {
+				pendingDepotBeltEndpoints.set(playerId, {
+					dimensionId: event.block.dimension.id,
+					location: { ...event.block.location }
+				});
+				event.player.sendMessage("Depot belt source selected. Select a second depot.");
+				return;
+			}
+			pendingDepotBeltEndpoints.delete(playerId);
+			if (pending.dimensionId !== event.block.dimension.id) {
+				event.player.sendMessage("Depot belts cannot cross dimensions.");
+				return;
+			}
+			const first = world.getDimension(pending.dimensionId).getBlock(pending.location);
+			if (first?.typeId !== DEPOT_BLOCK) {
+				event.player.sendMessage("The selected depot no longer exists.");
+				return;
+			}
+			toggleDepotBelt(event.player, first, event.block);
+			return;
+		}
+		const player = event.player;
+		const dimensionId = event.block.dimension.id;
+		const location = { ...event.block.location };
+		system.run(() => {
+			const block = world.getDimension(dimensionId).getBlock(location);
+			if (block?.typeId !== DEPOT_BLOCK)
+				return;
+			const inventory = player.getComponent("minecraft:inventory")?.container;
+			const slot = player.selectedSlotIndex;
+			if (!inventory || !Number.isInteger(slot) || slot < 0 || slot >= inventory.size)
+				return;
+			if (inventory.getItem(slot) === undefined)
+				beginPlayerWithdrawal(player, block);
+			else
+				beginPlayerDeposit(player, block);
+		});
+	});
+
+	registerTickHandler(() => refreshDepotBeltSpeeds() || network.tick() || network.tickExternalDeposits({
+		decodeStack: decodeBedrockContainerStack,
+		resolveEscrow(record) {
+			return escrows.resolve(record.escrowId, record.id);
+		},
+		resolveSource: resolvePlayerInventorySlot
+	}) || network.tickExternalWithdrawals({
+		createStack(item) {
+			return new ItemStack(item.typeId, item.count);
+		},
+		decodeStack: decodeBedrockContainerStack,
+		resolveEscrow(record) {
+			return escrows.resolve(record.escrowId, record.id);
+		},
+		resolveTarget: resolvePlayerInventorySlot
+	}), DEPOT_TASK_GROUP);
 	system.run(() => {
 		try {
 			const restored = network.restore();

@@ -11,6 +11,7 @@ const EXTERNAL_ESCROW_TASK_GROUP = "external-escrow-logistics";
 const EXTERNAL_ESCROW_SWEEP_INTERVAL = 200;
 const endpoints = new Map();
 const escrows = new BedrockEscrowRegistry();
+const escrowProtectionProviders = new Set();
 let restored = false;
 let sweepTicks = 0;
 const transfers = new ExternalEscrowTransferRuntime({
@@ -48,7 +49,14 @@ export function beginExternalEscrowTransfer(options) {
 }
 
 export function getExternalEscrowDiagnostics() {
-	return { endpoints: endpoints.size, transfers: transfers.diagnostics() };
+	return { endpoints: endpoints.size, protectionProviders: escrowProtectionProviders.size, transfers: transfers.diagnostics() };
+}
+
+export function registerEscrowProtection(provider) {
+	if (typeof provider !== "function")
+		throw new TypeError("Escrow protection providers must be functions");
+	escrowProtectionProviders.add(provider);
+	return () => escrowProtectionProviders.delete(provider);
 }
 
 export function registerExternalContainerEndpoint(endpoint) {
@@ -67,7 +75,19 @@ export function registerExternalEscrowTransfers() {
 			return transferred;
 		sweepTicks = 0;
 		try {
-			const sweep = escrows.sweepEmptyOrphans(transfers.activeEscrowIds());
+			const activeEscrowIds = transfers.activeEscrowIds();
+			for (const provider of escrowProtectionProviders) {
+				try {
+					const ids = provider();
+					if (!(ids instanceof Set))
+						throw new TypeError("provider did not return a set of escrow identifiers");
+					for (const id of ids)
+						activeEscrowIds.add(id);
+				} catch (error) {
+					console.warn(`[Create Bedrock] Could not read an escrow protection provider: ${error}`);
+				}
+			}
+			const sweep = escrows.sweepEmptyOrphans(activeEscrowIds);
 			if (sweep.retained.length > 0)
 				console.warn(`[Create Bedrock] Retained ${sweep.retained.length} non-empty or invalid orphan escrow entities for recovery`);
 			return transferred || sweep.removed > 0;

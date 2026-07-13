@@ -115,6 +115,22 @@ export class ItemPort {
 		return this.#insertResult(requested, acceptedCount);
 	}
 
+	previewInsert(stack) {
+		const requested = normalizeStack(stack);
+		let remaining = requested.count;
+		for (const existing of this.#slots) {
+			if (!existing || itemStackFingerprint(existing) !== itemStackFingerprint(requested))
+				continue;
+			remaining -= Math.min(this.#maxStackSize - existing.count, remaining);
+		}
+		for (const existing of this.#slots) {
+			if (existing || remaining === 0)
+				continue;
+			remaining -= Math.min(this.#maxStackSize, remaining);
+		}
+		return this.#insertResult(requested, requested.count - remaining);
+	}
+
 	compactReceipts() {
 		const removed = this.#extractionReceipts.size + this.#insertionReceipts.size;
 		this.#extractionReceipts.clear();

@@ -18,6 +18,39 @@ function memoryStorage() {
 	};
 }
 
+function clone(value) {
+	return value && JSON.parse(JSON.stringify(value));
+}
+
+class FakeContainer {
+	#slots;
+
+	constructor(size, slots = []) {
+		this.#slots = Array.from({ length: size }, (_, slot) => clone(slots[slot]));
+	}
+
+	get size() {
+		return this.#slots.length;
+	}
+
+	getItem(slot) {
+		return clone(this.#slots[slot]);
+	}
+
+	moveItem(fromSlot, toSlot, target) {
+		if (!this.#slots[fromSlot])
+			throw new Error("source slot is empty");
+		if (target.getItem(toSlot))
+			throw new Error("target slot is occupied");
+		target.setItem(toSlot, this.#slots[fromSlot]);
+		this.#slots[fromSlot] = undefined;
+	}
+
+	setItem(slot, item) {
+		this.#slots[slot] = clone(item);
+	}
+}
+
 function advance(network, predicate, maximumTicks = 150) {
 	for (let tick = 0; tick < maximumTicks; tick++) {
 		network.tick();
@@ -33,6 +66,57 @@ function createNetwork(storage, keyPrefix = "createbedrock:depot_test") {
 
 function depotSlots(network, id) {
 	return network.snapshot().find(record => record.kind === "depot" && record.port.id === id)?.port.slots;
+}
+
+function externalDepositCallbacks({ escrows, source }) {
+	return {
+		decodeStack(stack) {
+			return clone(stack);
+		},
+		resolveEscrow(record) {
+			return escrows.get(record.escrowId);
+		},
+		resolveSource() {
+			return { container: source, slot: 0 };
+		}
+	};
+}
+
+function externalWithdrawalCallbacks({ escrows, target }) {
+	return {
+		createStack(stack) {
+			return clone(stack);
+		},
+		decodeStack(stack) {
+			return clone(stack);
+		},
+		resolveEscrow(record) {
+			return escrows.get(record.escrowId);
+		},
+		resolveTarget() {
+			return { container: target, slot: 0 };
+		}
+	};
+}
+
+function advanceExternalDeposit(network, callbacks, predicate, maximumTicks = 200) {
+	for (let tick = 0; tick < maximumTicks; tick++) {
+		if (!network.tick())
+			network.tickExternalDeposits(callbacks);
+		if (predicate())
+			return;
+	}
+	throw new Error("External depot deposit did not reach the expected state");
+}
+
+function advanceExternalWithdrawal(network, callbacks, predicate, maximumTicks = 200) {
+	for (let tick = 0; tick < maximumTicks; tick++) {
+		if (!network.tick())
+			network.tickExternalWithdrawals(callbacks);
+		if (predicate())
+			return;
+	}
+	throw new Error("External depot withdrawal did not reach the expected state");
 }
 
 test("DepotNetwork moves an item through a single atomic persisted state domain", () => {
@@ -98,6 +182,113 @@ test("DepotNetwork retains escrow while the destination is full and protects act
 	assert.equal(network.canRemoveDepot(destination), true);
 });
 
+test("DepotNetwork commits a player deposit only after its physical escrow checkpoint", () => {
+	const storage = memoryStorage();
+	const source = new FakeContainer(1, [{ count: 3, typeId: "minecraft:iron_ingot" }]);
+	const escrows = new Map([["escrow:deposit", { container: new FakeContainer(1) }]]);
+	const callbacks = externalDepositCallbacks({ escrows, source });
+	const first = createNetwork(storage, "createbedrock:depot_external_deposit");
+	const destination = first.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } });
+	assert.equal(first.beginExternalDeposit({
+		depotId: destination,
+		escrowId: "escrow:deposit",
+		id: "deposit",
+		item: { count: 3, typeId: "minecraft:iron_ingot" },
+		source: { id: "player", slot: 0 }
+	}).ok, true);
+	advance(first, () => !first.diagnostics().waitingForCommit);
+	assert.deepEqual(source.getItem(0), { count: 3, typeId: "minecraft:iron_ingot" });
+	advanceExternalDeposit(first, callbacks, () => first.snapshot().some(record => record.kind === "external_deposit" && record.state === "escrowed") && !first.diagnostics().waitingForCommit);
+	assert.equal(source.getItem(0), undefined);
+	assert.deepEqual(escrows.get("escrow:deposit")?.container.getItem(0), { count: 3, typeId: "minecraft:iron_ingot" });
+
+	const restored = createNetwork(storage, "createbedrock:depot_external_deposit");
+	assert.equal(restored.restore().depots, 1);
+	advanceExternalDeposit(restored, callbacks, () => restored.diagnostics().externalDeposits === 0 && !restored.diagnostics().waitingForCommit);
+	assert.deepEqual(depotSlots(restored, destination), [{ count: 3, typeId: "minecraft:iron_ingot" }]);
+	assert.equal(escrows.get("escrow:deposit")?.container.getItem(0), undefined);
+});
+
+test("DepotNetwork rejects a full depot before moving a player stack", () => {
+	const source = new FakeContainer(1, [{ count: 1, typeId: "minecraft:gold_ingot" }]);
+	const escrows = new Map([["escrow:full", { container: new FakeContainer(1) }]]);
+	const callbacks = externalDepositCallbacks({ escrows, source });
+	const network = createNetwork(memoryStorage(), "createbedrock:depot_external_full");
+	const destination = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 }, maxStackSize: 1 });
+	network.insert(destination, { count: 1, typeId: "minecraft:dirt" });
+	assert.equal(network.beginExternalDeposit({
+		depotId: destination,
+		escrowId: "escrow:full",
+		id: "full",
+		item: { count: 1, typeId: "minecraft:gold_ingot" },
+		source: { id: "player", slot: 0 }
+	}).ok, false);
+	assert.equal(source.getItem(0)?.typeId, "minecraft:gold_ingot");
+	assert.equal(escrows.get("escrow:full")?.container.getItem(0), undefined);
+});
+
+test("DepotNetwork restores a player withdrawal after the native target move", () => {
+	const storage = memoryStorage();
+	const target = new FakeContainer(1);
+	const escrows = new Map([["escrow:withdraw", { container: new FakeContainer(1) }]]);
+	const callbacks = externalWithdrawalCallbacks({ escrows, target });
+	const first = createNetwork(storage, "createbedrock:depot_external_withdrawal");
+	const source = first.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } });
+	first.insert(source, { count: 3, typeId: "minecraft:iron_ingot" });
+	assert.equal(first.beginExternalWithdrawal({
+		depotId: source,
+		escrowId: "escrow:withdraw",
+		id: "withdraw",
+		maxCount: 3,
+		target: { id: "player", slot: 0 }
+	}).ok, true);
+	assert.equal(first.beginExternalWithdrawal({
+		depotId: source,
+		escrowId: "escrow:second",
+		id: "second",
+		maxCount: 1,
+		target: { id: "player", slot: 0 }
+	}).reason, "depot_busy");
+	advance(first, () => !first.diagnostics().waitingForCommit);
+	assert.deepEqual(depotSlots(first, source), [{ count: 3, typeId: "minecraft:iron_ingot" }]);
+	advanceExternalWithdrawal(first, callbacks, () => first.snapshot().some(record => record.kind === "external_withdrawal" && record.state === "escrowed") && !first.diagnostics().waitingForCommit);
+	assert.deepEqual(depotSlots(first, source), [undefined]);
+	assert.equal(first.canRemoveDepot(source), false);
+	// Move to the player but deliberately do not persist the delivered checkpoint.
+	// Recovery must recognize the target as the unique physical owner.
+	assert.equal(first.tickExternalWithdrawals(callbacks), true);
+	assert.deepEqual(target.getItem(0), { count: 3, typeId: "minecraft:iron_ingot" });
+	assert.equal(escrows.get("escrow:withdraw")?.container.getItem(0), undefined);
+
+	const restored = createNetwork(storage, "createbedrock:depot_external_withdrawal");
+	assert.equal(restored.restore().depots, 1);
+	advanceExternalWithdrawal(restored, callbacks, () => restored.diagnostics().externalWithdrawals === 0 && !restored.diagnostics().waitingForCommit);
+	assert.deepEqual(depotSlots(restored, source), [undefined]);
+	assert.deepEqual(target.getItem(0), { count: 3, typeId: "minecraft:iron_ingot" });
+});
+
+test("DepotNetwork holds a withdrawal in escrow until the player target slot is empty", () => {
+	const target = new FakeContainer(1, [{ count: 1, typeId: "minecraft:dirt" }]);
+	const escrows = new Map([["escrow:withdraw-full", { container: new FakeContainer(1) }]]);
+	const callbacks = externalWithdrawalCallbacks({ escrows, target });
+	const network = createNetwork(memoryStorage(), "createbedrock:depot_external_withdrawal_full");
+	const source = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } });
+	network.insert(source, { count: 1, typeId: "minecraft:gold_ingot" });
+	assert.equal(network.beginExternalWithdrawal({
+		depotId: source,
+		escrowId: "escrow:withdraw-full",
+		id: "withdraw-full",
+		maxCount: 1,
+		target: { id: "player", slot: 0 }
+	}).ok, true);
+	advanceExternalWithdrawal(network, callbacks, () => network.snapshot().some(record => record.kind === "external_withdrawal" && record.state === "escrowed") && escrows.get("escrow:withdraw-full")?.container.getItem(0)?.typeId === "minecraft:gold_ingot" && !network.diagnostics().waitingForCommit);
+	assert.deepEqual(escrows.get("escrow:withdraw-full")?.container.getItem(0), { count: 1, typeId: "minecraft:gold_ingot" });
+	assert.deepEqual(target.getItem(0), { count: 1, typeId: "minecraft:dirt" });
+	target.setItem(0, undefined);
+	advanceExternalWithdrawal(network, callbacks, () => network.diagnostics().externalWithdrawals === 0 && !network.diagnostics().waitingForCommit);
+	assert.deepEqual(target.getItem(0), { count: 1, typeId: "minecraft:gold_ingot" });
+});
+
 test("depotId is dimension-aware and only accepts block coordinates", () => {
 	assert.notEqual(depotId("minecraft:overworld", { x: 0, y: 64, z: 0 }), depotId("minecraft:the_nether", { x: 0, y: 64, z: 0 }));
 	assert.throws(() => depotId("minecraft:overworld", { x: 0.5, y: 64, z: 0 }), /integer/);
@@ -113,6 +304,21 @@ test("DepotNetwork carries one persistent transport record along a directed belt
 	assert.deepEqual(network.extract(source), undefined);
 	assert.deepEqual(network.extract(destination), { count: 2, typeId: "minecraft:zinc_ingot" });
 	assert.equal(network.removeBelt("belt:0"), true);
+});
+
+test("DepotNetwork exposes durable belt endpoints for the world connector", () => {
+	const network = createNetwork(memoryStorage(), "createbedrock:world_belt_endpoints");
+	const source = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } });
+	const destination = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 8, y: 64, z: 0 } });
+	network.createBelt({ destinationId: destination, id: "world-belt", length: 8, sourceId: source });
+	assert.equal(network.hasBelt("world-belt"), true);
+	assert.deepEqual(network.worldBelts(), [{
+		destination: { dimensionId: "minecraft:overworld", location: { x: 8, y: 64, z: 0 } },
+		id: "world-belt",
+		source: { dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } }
+	}]);
+	assert.equal(network.removeBelt("world-belt"), true);
+	assert.equal(network.hasBelt("world-belt"), false);
 });
 
 test("DepotNetwork restores an in-flight belt record and keeps it when the target is full", () => {

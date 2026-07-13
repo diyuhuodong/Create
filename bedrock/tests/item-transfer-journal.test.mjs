@@ -38,6 +38,10 @@ test("ItemPort exposes snapshots through inspect and keeps incompatible metadata
 		{ count: 62, metadata: { quality: "a" }, typeId: "minecraft:iron_ingot" },
 		{ count: 2, metadata: { quality: "b" }, typeId: "minecraft:iron_ingot" }
 	]);
+	assert.deepEqual(port.previewInsert({ count: 3, metadata: { quality: "a" }, typeId: "minecraft:iron_ingot" }), {
+		accepted: { count: 2, metadata: { quality: "a" }, typeId: "minecraft:iron_ingot" },
+		remainder: { count: 1, metadata: { quality: "a" }, typeId: "minecraft:iron_ingot" }
+	});
 });
 
 test("ItemTransferJournal delivers escrowed items exactly once across retries", () => {

@@ -222,6 +222,10 @@ export function getKineticWorldForTesting() {
 	return kineticWorld;
 }
 
+export function getKineticSpeedAt(dimensionId, location) {
+	return kineticWorld.speedAt(dimensionId, location);
+}
+
 export function getKineticDiagnostics() {
 	return {
 		...kineticWorld.diagnostics(),
