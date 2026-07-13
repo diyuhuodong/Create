@@ -4,6 +4,7 @@ tile.createbedrock:hand_crank.name=Hand Crank
 tile.createbedrock:shaft.name=Shaft
 tile.createbedrock:cogwheel.name=Cogwheel
 tile.createbedrock:large_cogwheel.name=Large Cogwheel
+tile.createbedrock:gearbox.name=Gearbox
 tile.createbedrock:millstone.name=Millstone
 tile.createbedrock:mechanical_bearing.name=Mechanical Bearing
 tile.createbedrock:mechanical_press.name=Mechanical Press

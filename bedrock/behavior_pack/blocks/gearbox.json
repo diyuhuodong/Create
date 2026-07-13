@@ -1,0 +1,23 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:gearbox",
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:item_visual": {
+        "geometry": { "identifier": "minecraft:geometry.full_block" },
+        "material_instances": {
+          "*": { "texture": "createbedrock_gearbox", "render_method": "opaque" }
+        }
+      },
+      "minecraft:material_instances": {
+        "*": { "texture": "createbedrock_gearbox", "render_method": "opaque" }
+      }
+    }
+  }
+}

@@ -4,6 +4,7 @@ tile.createbedrock:hand_crank.name=手摇曲柄
 tile.createbedrock:shaft.name=动力轴
 tile.createbedrock:cogwheel.name=齿轮
 tile.createbedrock:large_cogwheel.name=大齿轮
+tile.createbedrock:gearbox.name=齿轮箱
 tile.createbedrock:millstone.name=磨盘
 tile.createbedrock:mechanical_bearing.name=机械轴承
 tile.createbedrock:mechanical_press.name=机械压机

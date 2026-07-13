@@ -19,6 +19,11 @@ export const KINETIC_BLOCKS = {
 		kind: "large_cogwheel",
 		axis: "y"
 	},
+	"createbedrock:gearbox": {
+		kind: "gearbox",
+		axes: ["x", "y", "z"],
+		axis: "y"
+	},
 	"createbedrock:millstone": {
 		kind: "consumer",
 		axis: "y",
@@ -74,7 +79,8 @@ function connectionRatio(left, right, x, y, z) {
 			return -1;
 		return left.configuration.kind === "large_cogwheel" ? -2 : -0.5;
 	}
-	return directionAxis === left.axis && directionAxis === right.axis ? 1 : undefined;
+	const supportsAxis = node => node.configuration.axes?.includes(directionAxis) || node.axis === directionAxis;
+	return supportsAxis(left) && supportsAxis(right) ? 1 : undefined;
 }
 
 function keyFor(dimensionId, location) {

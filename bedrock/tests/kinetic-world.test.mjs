@@ -103,3 +103,15 @@ test("KineticWorld applies the large-to-small cogwheel ratio", () => {
 
 	assert.equal(world.speedAt("minecraft:overworld", { x: 1, y: 66, z: 0 }), -32);
 });
+
+test("KineticWorld uses a gearbox to redirect power across rotation axes", () => {
+	const world = new KineticWorld();
+	const crank = block("createbedrock:hand_crank", 0, 64, 0);
+	world.trackPlacedBlock(crank);
+	world.trackPlacedBlock(block("createbedrock:gearbox", 0, 65, 0));
+	world.trackPlacedBlock(facedBlock("createbedrock:shaft", 1, 65, 0, 4));
+	world.activateHandCrank(crank);
+	world.tick();
+
+	assert.equal(world.speedAt("minecraft:overworld", { x: 1, y: 65, z: 0 }), 16);
+});
