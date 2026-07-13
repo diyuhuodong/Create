@@ -2,25 +2,37 @@ import { ItemStack, system, world } from "@minecraft/server";
 
 import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { DeferredPersistence } from "../kernel/deferred-persistence.js";
-import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
+import { deserializeVersionedState } from "../kernel/versioned-state.js";
 import { CRUSHING_RECIPES } from "./generated/crushing-recipes.js";
 import { CrushingWheelMachine } from "./crushing-wheel-machine.js";
 import { registerMovingBlockDataAdapter } from "../contraptions/moving-block-data.js";
+import { createShardedMachineState } from "./sharded-machine-state.js";
 
 const CRUSHING_WHEEL_BLOCK = "createbedrock:crushing_wheel";
-const PERSISTENCE_KEY = "createbedrock:crushing_wheels_v1";
+const LEGACY_PERSISTENCE_KEY = "createbedrock:crushing_wheels_v1";
 const PERSISTENCE_SCHEMA_VERSION = 1;
 const CRUSHING_WHEEL_TASK_GROUP = "crushing_wheels";
 const CRUSHING_WHEEL_TASK_BUDGET = 4;
 const wheels = new Map();
+const shardedState = createShardedMachineState({
+	keyPrefix: "createbedrock:crushing_wheel_state_v2",
+	legacyKey: LEGACY_PERSISTENCE_KEY,
+	name: "crushing wheel",
+	world
+});
+
+function snapshot() {
+	return [...wheels.values()].map(wheel => ({
+		dimensionId: wheel.dimensionId,
+		location: wheel.location,
+		processor: wheel.machine.snapshot()
+	}));
+}
+
 const persistence = new DeferredPersistence({
 	name: "crushing_wheels",
 	write() {
-		world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, [...wheels.values()].map(wheel => ({
-			dimensionId: wheel.dimensionId,
-			location: wheel.location,
-			processor: wheel.machine.snapshot()
-		}))));
+		shardedState.request(snapshot());
 	},
 	onError(error) {
 		console.warn(`[Create Bedrock] Could not persist crushing wheel state: ${error}`);
@@ -73,7 +85,20 @@ function restoreWheel(dimensionId, location, state) {
 }
 
 function restore() {
-	const serialized = world.getDynamicProperty(PERSISTENCE_KEY);
+	try {
+		const restored = shardedState.read();
+		if (restored) {
+			restoreRecords(restored.records);
+			for (const warning of restored.warnings)
+				console.warn(`[Create Bedrock] Ignored invalid crushing wheel shard ${warning.partition}: ${warning.error}`);
+			console.warn("[Create Bedrock] Restored sharded crushing wheel state");
+			return;
+		}
+	} catch (error) {
+		console.warn(`[Create Bedrock] Could not restore sharded crushing wheel state: ${error}`);
+	}
+
+	const serialized = world.getDynamicProperty(LEGACY_PERSISTENCE_KEY);
 	if (typeof serialized !== "string")
 		return;
 	try {
@@ -81,25 +106,31 @@ function restore() {
 			schemaVersion: PERSISTENCE_SCHEMA_VERSION,
 			upgrades: { 0: legacy => legacy }
 		});
-		if (!Array.isArray(records))
-			throw new TypeError("Crushing wheel records must be an array");
-		for (const entry of records) {
-			try {
-				if (!entry?.dimensionId || !entry?.location)
-					throw new TypeError("missing record location");
-				const machine = new CrushingWheelMachine(CRUSHING_RECIPES);
-				machine.restore(entry.processor);
-				wheels.set(keyFor(entry.dimensionId, entry.location), {
-					dimensionId: entry.dimensionId,
-					location: entry.location,
-					machine
-				});
-			} catch (error) {
-				console.warn(`[Create Bedrock] Ignored invalid crushing wheel ${entry?.dimensionId ?? "unknown"}: ${error}`);
-			}
-		}
+		restoreRecords(records);
+		shardedState.markLegacyForMigration();
+		persist();
 	} catch (error) {
 		console.warn(`[Create Bedrock] Ignored invalid crushing wheel state: ${error}`);
+	}
+}
+
+function restoreRecords(records) {
+	if (!Array.isArray(records))
+		throw new TypeError("Crushing wheel records must be an array");
+	for (const entry of records) {
+		try {
+			if (!entry?.dimensionId || !entry?.location)
+				throw new TypeError("missing record location");
+			const machine = new CrushingWheelMachine(CRUSHING_RECIPES);
+			machine.restore(entry.processor);
+			wheels.set(keyFor(entry.dimensionId, entry.location), {
+				dimensionId: entry.dimensionId,
+				location: entry.location,
+				machine
+			});
+		} catch (error) {
+			console.warn(`[Create Bedrock] Ignored invalid crushing wheel ${entry?.dimensionId ?? "unknown"}: ${error}`);
+		}
 	}
 }
 
@@ -170,6 +201,7 @@ export function registerCrushingWheels(getKineticWorld) {
 		for (const key of wheels.keys())
 			enqueueUniqueKernelTask(`crushing_wheel:${key}`, () => processWheel(key, getKineticWorld), CRUSHING_WHEEL_TASK_GROUP);
 		persistence.tick();
+		shardedState.tick();
 	});
 	system.run(restore);
 }

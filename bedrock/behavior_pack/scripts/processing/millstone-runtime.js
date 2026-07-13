@@ -2,12 +2,13 @@ import { ItemStack, system, world } from "@minecraft/server";
 
 import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { DeferredPersistence } from "../kernel/deferred-persistence.js";
-import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
+import { deserializeVersionedState } from "../kernel/versioned-state.js";
 import { MILLING_RECIPES } from "./generated/milling-recipes.js";
 import { MillstoneMachine } from "./millstone-machine.js";
 import { registerMovingBlockDataAdapter } from "../contraptions/moving-block-data.js";
+import { createShardedMachineState } from "./sharded-machine-state.js";
 
-const PERSISTENCE_KEY = "createbedrock:millstones_v1";
+const LEGACY_PERSISTENCE_KEY = "createbedrock:millstones_v1";
 const PERSISTENCE_SCHEMA_VERSION = 1;
 const MILLSTONE_TASK_GROUP = "millstones";
 const MILLSTONE_TASK_BUDGET = 4;
@@ -15,15 +16,25 @@ const REGISTERED_CREATE_ITEMS = new Set(["createbedrock:wheat_flour"]);
 const ACTIVE_MILLING_RECIPES = MILLING_RECIPES.filter(recipe => recipe.outputs.every(output =>
 	!output.typeId.startsWith("createbedrock:") || REGISTERED_CREATE_ITEMS.has(output.typeId)));
 const mills = new Map();
+const shardedState = createShardedMachineState({
+	keyPrefix: "createbedrock:millstone_state_v2",
+	legacyKey: LEGACY_PERSISTENCE_KEY,
+	name: "millstone",
+	world
+});
+
+function snapshot() {
+	return [...mills.values()].map(mill => ({
+		dimensionId: mill.dimensionId,
+		location: mill.location,
+		processor: mill.machine.snapshot()
+	}));
+}
+
 const persistence = new DeferredPersistence({
 	name: "millstones",
 	write() {
-		const snapshot = [...mills.values()].map(mill => ({
-			dimensionId: mill.dimensionId,
-			location: mill.location,
-			processor: mill.machine.snapshot()
-		}));
-		world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, snapshot));
+		shardedState.request(snapshot());
 	},
 	onError(error) {
 		console.warn(`[Create Bedrock] Could not persist millstone state: ${error}`);
@@ -39,34 +50,52 @@ function persist() {
 }
 
 function restore() {
-	const serialized = world.getDynamicProperty(PERSISTENCE_KEY);
+	try {
+		const restored = shardedState.read();
+		if (restored) {
+			restoreRecords(restored.records);
+			for (const warning of restored.warnings)
+				console.warn(`[Create Bedrock] Ignored invalid millstone shard ${warning.partition}: ${warning.error}`);
+			console.warn("[Create Bedrock] Restored sharded millstone state");
+			return;
+		}
+	} catch (error) {
+		console.warn(`[Create Bedrock] Could not restore sharded millstone state: ${error}`);
+	}
+
+	const serialized = world.getDynamicProperty(LEGACY_PERSISTENCE_KEY);
 	if (typeof serialized !== "string")
 		return;
-
 	try {
 		const records = deserializeVersionedState(serialized, {
 			schemaVersion: PERSISTENCE_SCHEMA_VERSION,
 			upgrades: { 0: legacy => legacy }
 		});
-		if (!Array.isArray(records))
-			throw new TypeError("Millstone records must be an array");
-		for (const entry of records) {
-			try {
-				if (!entry?.dimensionId || !entry?.location)
-					throw new TypeError("missing record location");
-				const machine = new MillstoneMachine(ACTIVE_MILLING_RECIPES);
-				machine.restore(entry.processor);
-				mills.set(keyFor(entry.dimensionId, entry.location), {
-					dimensionId: entry.dimensionId,
-					location: entry.location,
-					machine
-				});
-			} catch (error) {
-				console.warn(`[Create Bedrock] Ignored invalid millstone ${entry?.dimensionId ?? "unknown"}: ${error}`);
-			}
-		}
+		restoreRecords(records);
+		shardedState.markLegacyForMigration();
+		persist();
 	} catch (error) {
 		console.warn(`[Create Bedrock] Ignored invalid millstone state: ${error}`);
+	}
+}
+
+function restoreRecords(records) {
+	if (!Array.isArray(records))
+		throw new TypeError("Millstone records must be an array");
+	for (const entry of records) {
+		try {
+			if (!entry?.dimensionId || !entry?.location)
+				throw new TypeError("missing record location");
+			const machine = new MillstoneMachine(ACTIVE_MILLING_RECIPES);
+			machine.restore(entry.processor);
+			mills.set(keyFor(entry.dimensionId, entry.location), {
+				dimensionId: entry.dimensionId,
+				location: entry.location,
+				machine
+			});
+		} catch (error) {
+			console.warn(`[Create Bedrock] Ignored invalid millstone ${entry?.dimensionId ?? "unknown"}: ${error}`);
+		}
 	}
 }
 
@@ -186,6 +215,7 @@ export function registerMillstones(getKineticWorld) {
 		for (const key of mills.keys())
 			enqueueUniqueKernelTask(`millstone:${key}`, () => processMill(key, getKineticWorld), MILLSTONE_TASK_GROUP);
 		persistence.tick();
+		shardedState.tick();
 	});
 
 	system.run(restore);

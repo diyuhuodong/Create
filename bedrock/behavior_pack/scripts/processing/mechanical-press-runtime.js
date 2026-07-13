@@ -2,13 +2,14 @@ import { ItemStack, system, world } from "@minecraft/server";
 
 import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { DeferredPersistence } from "../kernel/deferred-persistence.js";
-import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
+import { deserializeVersionedState } from "../kernel/versioned-state.js";
 import { PRESSING_RECIPES } from "./generated/pressing-recipes.js";
 import { MechanicalPressMachine } from "./mechanical-press-machine.js";
 import { registerMovingBlockDataAdapter } from "../contraptions/moving-block-data.js";
+import { createShardedMachineState } from "./sharded-machine-state.js";
 
 const PRESS_BLOCK = "createbedrock:mechanical_press";
-const PERSISTENCE_KEY = "createbedrock:mechanical_presses_v1";
+const LEGACY_PERSISTENCE_KEY = "createbedrock:mechanical_presses_v1";
 const PERSISTENCE_SCHEMA_VERSION = 1;
 const MECHANICAL_PRESS_TASK_GROUP = "mechanical_presses";
 const MECHANICAL_PRESS_TASK_BUDGET = 4;
@@ -20,14 +21,25 @@ const REGISTERED_CREATE_ITEMS = new Set([
 const ACTIVE_PRESSING_RECIPES = PRESSING_RECIPES.filter(recipe => recipe.outputs.every(output =>
 	!output.typeId.startsWith("createbedrock:") || REGISTERED_CREATE_ITEMS.has(output.typeId)));
 const presses = new Map();
+const shardedState = createShardedMachineState({
+	keyPrefix: "createbedrock:mechanical_press_state_v2",
+	legacyKey: LEGACY_PERSISTENCE_KEY,
+	name: "mechanical press",
+	world
+});
+
+function snapshot() {
+	return [...presses.values()].map(press => ({
+		dimensionId: press.dimensionId,
+		location: press.location,
+		processor: press.machine.snapshot()
+	}));
+}
+
 const persistence = new DeferredPersistence({
 	name: "mechanical_presses",
 	write() {
-		world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, [...presses.values()].map(press => ({
-			dimensionId: press.dimensionId,
-			location: press.location,
-			processor: press.machine.snapshot()
-		}))));
+		shardedState.request(snapshot());
 	},
 	onError(error) {
 		console.warn(`[Create Bedrock] Could not persist mechanical press state: ${error}`);
@@ -80,7 +92,20 @@ function restorePress(dimensionId, location, state) {
 }
 
 function restore() {
-	const serialized = world.getDynamicProperty(PERSISTENCE_KEY);
+	try {
+		const restored = shardedState.read();
+		if (restored) {
+			restoreRecords(restored.records);
+			for (const warning of restored.warnings)
+				console.warn(`[Create Bedrock] Ignored invalid mechanical press shard ${warning.partition}: ${warning.error}`);
+			console.warn("[Create Bedrock] Restored sharded mechanical press state");
+			return;
+		}
+	} catch (error) {
+		console.warn(`[Create Bedrock] Could not restore sharded mechanical press state: ${error}`);
+	}
+
+	const serialized = world.getDynamicProperty(LEGACY_PERSISTENCE_KEY);
 	if (typeof serialized !== "string")
 		return;
 	try {
@@ -88,25 +113,31 @@ function restore() {
 			schemaVersion: PERSISTENCE_SCHEMA_VERSION,
 			upgrades: { 0: legacy => legacy }
 		});
-		if (!Array.isArray(records))
-			throw new TypeError("Mechanical press records must be an array");
-		for (const entry of records) {
-			try {
-				if (!entry?.dimensionId || !entry?.location)
-					throw new TypeError("missing record location");
-				const machine = new MechanicalPressMachine(ACTIVE_PRESSING_RECIPES);
-				machine.restore(entry.processor);
-				presses.set(keyFor(entry.dimensionId, entry.location), {
-					dimensionId: entry.dimensionId,
-					location: entry.location,
-					machine
-				});
-			} catch (error) {
-				console.warn(`[Create Bedrock] Ignored invalid mechanical press ${entry?.dimensionId ?? "unknown"}: ${error}`);
-			}
-		}
+		restoreRecords(records);
+		shardedState.markLegacyForMigration();
+		persist();
 	} catch (error) {
 		console.warn(`[Create Bedrock] Ignored invalid mechanical press state: ${error}`);
+	}
+}
+
+function restoreRecords(records) {
+	if (!Array.isArray(records))
+		throw new TypeError("Mechanical press records must be an array");
+	for (const entry of records) {
+		try {
+			if (!entry?.dimensionId || !entry?.location)
+				throw new TypeError("missing record location");
+			const machine = new MechanicalPressMachine(ACTIVE_PRESSING_RECIPES);
+			machine.restore(entry.processor);
+			presses.set(keyFor(entry.dimensionId, entry.location), {
+				dimensionId: entry.dimensionId,
+				location: entry.location,
+				machine
+			});
+		} catch (error) {
+			console.warn(`[Create Bedrock] Ignored invalid mechanical press ${entry?.dimensionId ?? "unknown"}: ${error}`);
+		}
 	}
 }
 
@@ -177,6 +208,7 @@ export function registerMechanicalPresses(getKineticWorld) {
 		for (const key of presses.keys())
 			enqueueUniqueKernelTask(`mechanical_press:${key}`, () => processPress(key, getKineticWorld), MECHANICAL_PRESS_TASK_GROUP);
 		persistence.tick();
+		shardedState.tick();
 	});
 	system.run(restore);
 }
