@@ -46,6 +46,25 @@ test("DepotNetwork moves an item through a single atomic persisted state domain"
 	assert.deepEqual(network.extract(destination), { count: 3, typeId: "minecraft:iron_ingot" });
 });
 
+test("DepotNetwork restores a durable intent before changing its source depot", () => {
+	const storage = memoryStorage();
+	const first = createNetwork(storage, "createbedrock:depot_intent_restart");
+	const source = first.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } });
+	const destination = first.createDepot({ dimensionId: "minecraft:overworld", location: { x: 1, y: 64, z: 0 } });
+	first.insert(source, { count: 3, typeId: "minecraft:gold_ingot" });
+	assert.equal(first.beginTransfer({ destinationId: destination, id: "intent-restart", maxCount: 2, sourceId: source }).ok, true);
+	advance(first, () => !first.diagnostics().waitingForCommit);
+	assert.equal(first.snapshot().find(record => record.kind === "transfer")?.state, "intent");
+	assert.deepEqual(depotSlots(first, source), [{ count: 3, typeId: "minecraft:gold_ingot" }]);
+
+	const restored = createNetwork(storage, "createbedrock:depot_intent_restart");
+	assert.deepEqual(restored.restore(), { belts: 0, chutes: 0, depots: 2, funnels: 0, transfers: 1, transports: 0, warnings: [] });
+	assert.deepEqual(depotSlots(restored, source), [{ count: 3, typeId: "minecraft:gold_ingot" }]);
+	advance(restored, () => restored.diagnostics().transfers === 0 && !restored.diagnostics().waitingForCommit);
+	assert.deepEqual(restored.extract(source), { count: 1, typeId: "minecraft:gold_ingot" });
+	assert.deepEqual(restored.extract(destination), { count: 2, typeId: "minecraft:gold_ingot" });
+});
+
 test("DepotNetwork restarts from an escrow checkpoint without duplicating depot items", () => {
 	const storage = memoryStorage();
 	const first = createNetwork(storage, "createbedrock:depot_restart");

@@ -66,7 +66,10 @@ export class DurableItemTransferRuntime {
 
 	tick() {
 		const wrote = this.#store.tick();
-		if (this.#waitingForCommit)
+		// A root-pointer write makes the journal durable, but deliberately defer
+		// external inventory mutation to the next tick. This creates an observable
+		// recovery point containing the intent before any source stack is removed.
+		if (wrote || this.#waitingForCommit)
 			return wrote;
 		if (this.#cooldownTicks > 0) {
 			this.#cooldownTicks--;

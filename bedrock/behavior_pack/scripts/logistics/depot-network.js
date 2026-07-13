@@ -334,7 +334,10 @@ export class DepotNetwork {
 
 	tick() {
 		const wrote = this.#store.tick();
-		if (this.#waitingForCommit)
+		// Keep a complete intent checkpoint for one scheduler turn before changing
+		// a depot port. Depot state shares this store, so a restart can recover the
+		// pre-extraction inventory and the transfer plan together.
+		if (wrote || this.#waitingForCommit)
 			return wrote;
 		if (this.#cooldownTicks > 0) {
 			this.#cooldownTicks--;

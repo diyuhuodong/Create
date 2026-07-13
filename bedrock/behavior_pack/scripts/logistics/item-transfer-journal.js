@@ -49,6 +49,8 @@ export class ItemTransferJournal {
 			throw new Error(`Item transfer ${id} already exists`);
 		if (!source || !destination)
 			throw new TypeError("Item transfers require source and destination ports");
+		if (this.hasSource(source.id))
+			return { ok: false, reason: "source_busy" };
 		const reservation = source.reserve({ maxCount, predicate });
 		if (!reservation)
 			return { ok: false, reason: "source_empty" };
@@ -62,6 +64,12 @@ export class ItemTransferJournal {
 		};
 		this.#records.set(id, record);
 		return { ok: true, record: clone(record) };
+	}
+
+	hasSource(sourceId) {
+		if (typeof sourceId !== "string" || sourceId.length === 0)
+			throw new TypeError("Item transfer source identifiers must be non-empty strings");
+		return [...this.#records.values()].some(record => record.sourceId === sourceId);
 	}
 
 	extract(id, resolvePort) {
