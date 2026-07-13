@@ -183,3 +183,50 @@ test("TrainController waits without changing progress while its active edge is u
 	graph.setNodeAvailable("b", true);
 	assert.equal(controller.tick("train_one", 2).distanceOnEdge, 3);
 });
+
+test("TrainController persists speed, direction, and manual stop state", () => {
+	const { controller } = createController({ registerTrain: false });
+	controller.registerTrain({ id: "train_one", nodeId: "c", speed: 0.5 });
+	controller.dispatch("train_one", "a");
+	assert.deepEqual(controller.getMotionState("train_one"), {
+		direction: -1,
+		speed: 0,
+		stopped: false,
+		targetSpeed: 0.5
+	});
+	assert.equal(controller.setStopped("train_one", true), true);
+	controller.tick("train_one");
+	assert.equal(controller.getTrain("train_one").distanceOnEdge, 0);
+
+	const snapshot = controller.snapshot();
+	const restored = createController({ registerTrain: false }).controller;
+	restored.restore(snapshot);
+	assert.deepEqual(restored.getMotionState("train_one"), {
+		direction: -1,
+		speed: 0,
+		stopped: true,
+		targetSpeed: 0.5
+	});
+	assert.equal(restored.setStopped("train_one", false), true);
+	restored.tick("train_one");
+	assert.equal(restored.getTrain("train_one").distanceOnEdge, 0.5);
+});
+
+test("TrainController applies motion defaults when restoring an older record", () => {
+	const source = createController();
+	source.controller.dispatch("train_one", "b");
+	const [record] = source.controller.snapshot();
+	delete record.direction;
+	delete record.speed;
+	delete record.stopped;
+	delete record.targetSpeed;
+
+	const restored = createController({ registerTrain: false }).controller;
+	restored.restore([record]);
+	assert.deepEqual(restored.getMotionState("train_one"), {
+		direction: 1,
+		speed: 0,
+		stopped: false,
+		targetSpeed: 0.1
+	});
+});

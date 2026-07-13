@@ -10,20 +10,26 @@ export class TrainController {
 		this.#graph = trackGraph;
 	}
 
-	registerTrain({ id, nodeId, carriageCount = 1, carriageSpacing = 2 }) {
+	registerTrain({ id, nodeId, carriageCount = 1, carriageSpacing = 2, speed = 0.1 }) {
 		if (!id || this.#trains.has(id))
 			throw new Error("Train ids must be unique");
 		if (!Number.isInteger(carriageCount) || carriageCount < 1 || !Number.isFinite(carriageSpacing) || carriageSpacing <= 0)
 			throw new RangeError("Trains require at least one carriage and positive carriage spacing");
+		if (!Number.isFinite(speed) || speed <= 0)
+			throw new RangeError("Trains require a positive cruising speed");
 		this.#trains.set(id, {
 			carriageCount,
 			carriageSpacing,
+			direction: 0,
 			id,
 			nodeId,
 			route: undefined,
 			schedule: undefined,
 			edgeIndex: 0,
-			distanceOnEdge: 0
+			distanceOnEdge: 0,
+			speed: 0,
+			stopped: false,
+			targetSpeed: speed
 		});
 	}
 
@@ -42,6 +48,7 @@ export class TrainController {
 		};
 		train.edgeIndex = 0;
 		train.distanceOnEdge = 0;
+		train.direction = this.#routeDirection(train);
 		return true;
 	}
 
@@ -72,19 +79,29 @@ export class TrainController {
 	}
 
 	tick(id, distance) {
+		const train = this.#requireTrain(id);
+		distance ??= train.targetSpeed;
 		if (!Number.isFinite(distance) || distance < 0)
 			throw new RangeError("Train movement distance must be non-negative");
 
-		const train = this.#requireTrain(id);
+		if (train.stopped) {
+			train.speed = 0;
+			return this.getTrain(id);
+		}
 		if (!train.route) {
 			this.#advanceSchedule(train);
-			if (!train.route || distance === 0)
+			if (!train.route || distance === 0) {
+				train.speed = 0;
 				return this.getTrain(id);
+			}
 		}
-		if (distance === 0)
+		if (distance === 0) {
+			train.speed = 0;
 			return this.getTrain(id);
+		}
 
 		let remaining = distance;
+		let movedDistance = 0;
 		while (remaining > 0 && train.route) {
 			const edgeId = train.route.edgeIds[train.edgeIndex];
 			if (!this.#graph.isEdgeAvailable(edgeId))
@@ -94,6 +111,7 @@ export class TrainController {
 			const moved = Math.min(available, remaining);
 			train.distanceOnEdge += moved;
 			remaining -= moved;
+			movedDistance += moved;
 
 			if (train.distanceOnEdge < edge.length)
 				break;
@@ -105,14 +123,38 @@ export class TrainController {
 			if (train.edgeIndex === train.route.edgeIds.length) {
 				this.#graph.releaseReservations(id);
 				train.route = undefined;
+				train.direction = 0;
 				if (train.schedule)
 					train.schedule.dwellRemaining = train.schedule.dwellTicks;
-			}
+			} else
+				train.direction = this.#routeDirection(train);
 		}
 		if (train.route)
 			this.#releaseClearedEdges(train);
+		train.speed = train.route ? movedDistance : 0;
 
 		return this.getTrain(id);
+	}
+
+	setStopped(id, stopped) {
+		const train = this.#requireTrain(id);
+		const normalized = !!stopped;
+		if (train.stopped === normalized)
+			return false;
+		train.stopped = normalized;
+		if (normalized)
+			train.speed = 0;
+		return true;
+	}
+
+	getMotionState(id) {
+		const train = this.#requireTrain(id);
+		return {
+			direction: train.direction,
+			speed: train.speed,
+			stopped: train.stopped,
+			targetSpeed: train.targetSpeed
+		};
 	}
 
 	getTrain(id) {
@@ -200,6 +242,7 @@ export class TrainController {
 		return [...this.#trains.values()].map(train => ({
 			carriageCount: train.carriageCount,
 			carriageSpacing: train.carriageSpacing,
+			direction: train.direction,
 			id: train.id,
 			nodeId: train.nodeId,
 			route: train.route && {
@@ -215,7 +258,10 @@ export class TrainController {
 				stopIds: [...train.schedule.stopIds]
 			},
 			edgeIndex: train.edgeIndex,
-			distanceOnEdge: train.distanceOnEdge
+			distanceOnEdge: train.distanceOnEdge,
+			speed: train.speed,
+			stopped: train.stopped,
+			targetSpeed: train.targetSpeed
 		}));
 	}
 
@@ -233,9 +279,10 @@ export class TrainController {
 			const schedule = record.schedule;
 			if (schedule && (!Array.isArray(schedule.stopIds) || schedule.stopIds.length === 0 || schedule.stopIds.some(stopId => !this.#graph.getNode(stopId))))
 				throw new TypeError(`Invalid train schedule for ${record.id}`);
-			this.#trains.set(record.id, {
+			const restored = {
 				carriageCount: Number.isInteger(record.carriageCount) && record.carriageCount > 0 ? record.carriageCount : 1,
 				carriageSpacing: Number.isFinite(record.carriageSpacing) && record.carriageSpacing > 0 ? record.carriageSpacing : 2,
+				direction: 0,
 				id: record.id,
 				nodeId: record.nodeId,
 				route: record.route && {
@@ -251,8 +298,15 @@ export class TrainController {
 					stopIds: [...schedule.stopIds]
 				},
 				edgeIndex: record.edgeIndex ?? 0,
-				distanceOnEdge: record.distanceOnEdge ?? 0
-			});
+				distanceOnEdge: record.distanceOnEdge ?? 0,
+				speed: Number.isFinite(record.speed) && record.speed >= 0 ? record.speed : 0,
+				stopped: !!record.stopped,
+				targetSpeed: Number.isFinite(record.targetSpeed) && record.targetSpeed > 0 ? record.targetSpeed : 0.1
+			};
+			restored.direction = this.#routeDirection(restored);
+			if (!restored.route || restored.stopped)
+				restored.speed = 0;
+			this.#trains.set(record.id, restored);
 		}
 	}
 
@@ -288,7 +342,15 @@ export class TrainController {
 		};
 		train.edgeIndex = 0;
 		train.distanceOnEdge = 0;
+		train.direction = this.#routeDirection(train);
 		return true;
+	}
+
+	#routeDirection(train) {
+		if (!train.route)
+			return 0;
+		const edge = this.#graph.getEdge(train.route.edgeIds[train.edgeIndex]);
+		return edge.leftId === train.route.nodeIds[train.edgeIndex] ? 1 : -1;
 	}
 
 	#releaseClearedEdges(train) {

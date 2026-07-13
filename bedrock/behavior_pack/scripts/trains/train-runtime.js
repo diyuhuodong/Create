@@ -252,7 +252,7 @@ function tickTrains() {
 	}
 	for (const [id, train] of trains) {
 		const controller = controllerFor(train.dimensionId);
-		controller.tick(id, 0.1);
+		controller.tick(id);
 		const carriages = controller.getCarriagePlacements(id);
 		train.entityIds = carriages.map(carriage => {
 			let entity = world.getEntity(train.entityIds?.[carriage.index]);
