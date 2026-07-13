@@ -6,6 +6,7 @@ import { KineticWorld } from "./kinetic-world.js";
 const kineticWorld = new KineticWorld();
 const PERSISTENCE_KEY = "createbedrock:kinetic_world_v1";
 const BELT_CONNECTOR = "createbedrock:belt_connector";
+const CLUTCH_BLOCK = "createbedrock:clutch";
 const pendingBeltEndpoints = new Map();
 
 function persist() {
@@ -43,6 +44,16 @@ export function registerKinetics() {
 	});
 
 	world.afterEvents.playerInteractWithBlock.subscribe(event => {
+		if (event.block.typeId === CLUTCH_BLOCK) {
+			const states = event.block.permutation.getAllStates();
+			const enabled = states["createbedrock:enabled"] !== 0 && states["createbedrock:enabled"] !== false;
+			event.block.setPermutation(event.block.permutation.withState("createbedrock:enabled", enabled ? 0 : 1));
+			kineticWorld.trackPlacedBlock(event.block);
+			persist();
+			console.warn(`[Create Bedrock] Clutch ${enabled ? "disengaged" : "engaged"}`);
+			return;
+		}
+
 		if (event.itemStack?.typeId === BELT_CONNECTOR) {
 			const playerId = event.player.id;
 			const pending = pendingBeltEndpoints.get(playerId);

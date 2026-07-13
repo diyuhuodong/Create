@@ -18,6 +18,13 @@ function facedBlock(typeId, x, y, z, facingDirection) {
 	};
 }
 
+function stateBlock(typeId, x, y, z, states) {
+	return {
+		...block(typeId, x, y, z),
+		permutation: { getAllStates: () => states }
+	};
+}
+
 test("KineticWorld tracks placement, hand-crank activation, and overload", () => {
 	const world = new KineticWorld();
 	const crank = block("createbedrock:hand_crank", 0, 64, 0);
@@ -118,6 +125,25 @@ test("KineticWorld uses a gearbox to redirect power across rotation axes", () =>
 	world.tick();
 
 	assert.equal(world.speedAt("minecraft:overworld", { x: 1, y: 65, z: 0 }), 16);
+});
+
+test("KineticWorld lets an enabled clutch pass power and a disabled clutch isolate it", () => {
+	const world = new KineticWorld();
+	const crank = block("createbedrock:hand_crank", 0, 64, 0);
+	const disabledClutch = stateBlock("createbedrock:clutch", 0, 65, 0, { "createbedrock:enabled": 0 });
+	const enabledClutch = stateBlock("createbedrock:clutch", 0, 65, 0, { "createbedrock:enabled": 1 });
+	const shaft = block("createbedrock:shaft", 0, 66, 0);
+	world.trackPlacedBlock(crank);
+	world.trackPlacedBlock(disabledClutch);
+	world.trackPlacedBlock(shaft);
+	world.activateHandCrank(crank);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", shaft.location), 0);
+
+	world.trackPlacedBlock(enabledClutch);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", shaft.location), 16);
+	assert.equal(world.snapshot().nodes.find(node => node.typeId === "createbedrock:clutch").enabled, true);
 });
 
 test("KineticWorld transmits speed across persisted shaft belt links", () => {

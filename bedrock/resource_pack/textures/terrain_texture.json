@@ -14,6 +14,12 @@
     "createbedrock_cogwheel_axis": {
       "textures": "textures/create_java/block/cogwheel_axis"
     },
+    "createbedrock_clutch_off": {
+      "textures": "textures/create_java/block/clutch_off"
+    },
+    "createbedrock_clutch_on": {
+      "textures": "textures/create_java/block/clutch_on"
+    },
     "createbedrock_large_cogwheel": {
       "textures": "textures/create_java/block/large_cogwheel"
     },

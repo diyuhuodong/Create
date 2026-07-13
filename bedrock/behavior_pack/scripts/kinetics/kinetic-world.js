@@ -24,6 +24,10 @@ export const KINETIC_BLOCKS = {
 		axes: ["x", "y", "z"],
 		axis: "y"
 	},
+	"createbedrock:clutch": {
+		kind: "clutch",
+		axis: "y"
+	},
 	"createbedrock:millstone": {
 		kind: "consumer",
 		axis: "y",
@@ -72,7 +76,16 @@ function axisFor(block, configuration) {
 	return ["x", "y", "z"].includes(axis) ? axis : configuration.axis;
 }
 
+function enabledFor(block, configuration) {
+	if (configuration.kind !== "clutch")
+		return true;
+	const value = block.permutation?.getAllStates?.()["createbedrock:enabled"];
+	return value !== 0 && value !== false;
+}
+
 function connectionRatio(left, right, x, y, z) {
+	if (!left.enabled || !right.enabled)
+		return undefined;
 	const directionAxis = axisOfOffset(x, y, z);
 	if (!directionAxis)
 		return undefined;
@@ -137,13 +150,15 @@ export class KineticWorld {
 			return false;
 
 		const id = keyFor(block.dimension.id, block.location);
+		const previous = this.#nodes.get(id);
 		this.#nodes.set(id, {
 			axis: axisFor(block, configuration),
 			configuration,
 			dimensionId: block.dimension.id,
+			enabled: enabledFor(block, configuration),
 			id,
 			location: { ...block.location },
-			turnTicksRemaining: 0,
+			turnTicksRemaining: previous?.turnTicksRemaining ?? 0,
 			typeId: block.typeId
 		});
 		this.#dirty = true;
@@ -169,6 +184,7 @@ export class KineticWorld {
 			.map(node => ({
 				axis: node.axis,
 				dimensionId: node.dimensionId,
+				...(node.configuration.kind === "clutch" ? { enabled: node.enabled } : {}),
 				location: node.location,
 				typeId: node.typeId
 			}))
@@ -202,6 +218,7 @@ export class KineticWorld {
 				axis,
 				configuration,
 				dimensionId: entry.dimensionId,
+				enabled: configuration.kind !== "clutch" || entry.enabled !== false,
 				id,
 				location: { ...location },
 				turnTicksRemaining: 0,
