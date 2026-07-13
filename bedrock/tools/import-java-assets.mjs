@@ -29,6 +29,9 @@ const TEXTURES = [
 	"funnel/andesite_funnel_pull.png",
 	"funnel/andesite_funnel_unpowered.png",
 	"funnel/funnel_closed.png",
+	"fluid_tank.png",
+	"fluid_tank_inner.png",
+	"fluid_tank_top.png",
 	"crushing_wheel_plates.png",
 	"gearbox.png",
 	"gearbox_top.png",
@@ -39,6 +42,8 @@ const TEXTURES = [
 	"mechanical_press_top.png",
 	"mechanical_bearing_side.png",
 	"millstone.png",
+	"pipes.png",
+	"pump.png",
 	"standard_track.png",
 	"station.png",
 	"zinc_block.png"

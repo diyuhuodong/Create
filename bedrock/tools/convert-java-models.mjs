@@ -16,6 +16,9 @@ const MODELS = [
 	{ name: "mechanical_press", source: "mechanical_press/block.json" },
 	{ name: "depot", source: "depot/block.json" },
 	{ name: "chute", source: "chute/block.json" },
+	{ name: "fluid_tank", source: "fluid_tank/block_single.json" },
+	{ name: "fluid_pipe", source: "fluid_pipe/item.json" },
+	{ name: "mechanical_pump", source: "mechanical_pump/block.json" },
 	{
 		name: "andesite_funnel",
 		source: "funnel/block_vertical_filterless.json",

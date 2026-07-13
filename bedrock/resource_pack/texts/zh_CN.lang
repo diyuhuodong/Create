@@ -27,3 +27,6 @@ item.createbedrock:belt_connector.name=传动带连接器
 tile.createbedrock:depot.name=置物台
 tile.createbedrock:chute.name=溜槽
 tile.createbedrock:andesite_funnel.name=安山漏斗
+tile.createbedrock:fluid_tank.name=流体储罐
+tile.createbedrock:fluid_pipe.name=流体管道
+tile.createbedrock:mechanical_pump.name=机械泵

@@ -58,6 +58,11 @@ export const KINETIC_BLOCKS = {
 		kind: "consumer",
 		axis: "y",
 		stressImpact: 8
+	},
+	"createbedrock:mechanical_pump": {
+		kind: "consumer",
+		axis: "y",
+		stressImpact: 4
 	}
 };
 

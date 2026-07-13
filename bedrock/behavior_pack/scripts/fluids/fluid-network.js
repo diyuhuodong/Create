@@ -137,16 +137,22 @@ export class FluidNetwork {
 		const link = this.#requireKind(id, "pipe");
 		if (typeof open !== "boolean")
 			throw new TypeError("Pipe valve state must be boolean");
+		if (link.enabled === open)
+			return false;
 		link.enabled = open;
 		this.markLinkDirty(id);
+		return true;
 	}
 
 	setPumpRunning(id, running) {
 		const link = this.#requireKind(id, "pump");
 		if (typeof running !== "boolean")
 			throw new TypeError("Pump running state must be boolean");
+		if (link.enabled === running)
+			return false;
 		link.enabled = running;
 		this.markLinkDirty(id);
+		return true;
 	}
 
 	snapshot() {

@@ -41,6 +41,20 @@ test("KineticWorld tracks placement, hand-crank activation, and overload", () =>
 	assert.equal(network.nodeStates.at(-1).speed, 16);
 });
 
+test("KineticWorld exposes mechanical-pump speed as a static fluid consumer", () => {
+	const world = new KineticWorld();
+	const crank = block("createbedrock:hand_crank", 0, 64, 0);
+	const pump = block("createbedrock:mechanical_pump", 0, 65, 0);
+	world.trackPlacedBlock(crank);
+	world.trackPlacedBlock(pump);
+	world.activateHandCrank(crank, 2);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", pump.location), 16);
+	assert.equal(world.latestResolved[0].stressImpact, 4);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", pump.location), 0);
+});
+
 test("KineticWorld recovers a stalled consumer line after its excess load is removed", () => {
 	const world = new KineticWorld();
 	const crank = block("createbedrock:hand_crank", 0, 64, 0);

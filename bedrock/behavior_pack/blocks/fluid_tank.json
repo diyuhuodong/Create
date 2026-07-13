@@ -1,0 +1,58 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:fluid_tank"
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 6
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1.5
+      },
+      "minecraft:geometry": "geometry.createbedrock.fluid_tank",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.fluid_tank"
+        },
+        "material_instances": {
+          "fluid_tank": {
+            "texture": "createbedrock_fluid_tank",
+            "render_method": "opaque"
+          },
+          "fluid_tank_inner": {
+            "texture": "createbedrock_fluid_tank_inner",
+            "render_method": "opaque"
+          },
+          "fluid_tank_top": {
+            "texture": "createbedrock_fluid_tank_top",
+            "render_method": "opaque"
+          },
+          "*": {
+            "texture": "createbedrock_fluid_tank",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:material_instances": {
+        "fluid_tank": {
+          "texture": "createbedrock_fluid_tank",
+          "render_method": "opaque"
+        },
+        "fluid_tank_inner": {
+          "texture": "createbedrock_fluid_tank_inner",
+          "render_method": "opaque"
+        },
+        "fluid_tank_top": {
+          "texture": "createbedrock_fluid_tank_top",
+          "render_method": "opaque"
+        },
+        "*": {
+          "texture": "createbedrock_fluid_tank",
+          "render_method": "opaque"
+        }
+      }
+    }
+  }
+}

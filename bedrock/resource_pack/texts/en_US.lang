@@ -27,3 +27,6 @@ item.createbedrock:belt_connector.name=Belt Connector
 tile.createbedrock:depot.name=Depot
 tile.createbedrock:chute.name=Chute
 tile.createbedrock:andesite_funnel.name=Andesite Funnel
+tile.createbedrock:fluid_tank.name=Fluid Tank
+tile.createbedrock:fluid_pipe.name=Fluid Pipe
+tile.createbedrock:mechanical_pump.name=Mechanical Pump

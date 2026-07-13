@@ -6,6 +6,7 @@ import { getContraptionDiagnostics, registerContraptions } from "./contraptions/
 import { getKineticDiagnostics, getKineticWorldForTesting, registerKinetics } from "./kinetics/kinetic-runtime.js";
 import { getLogisticsDiagnostics, registerLogistics } from "./logistics/logistics-runtime.js";
 import { getDepotDiagnostics, registerDepots } from "./logistics/depot-runtime.js";
+import { getFluidDiagnostics, registerFluids } from "./fluids/fluid-runtime.js";
 import { registerMillstones } from "./processing/millstone-runtime.js";
 import { registerMechanicalPresses } from "./processing/mechanical-press-runtime.js";
 import { registerCrushingWheels } from "./processing/crushing-wheel-runtime.js";
@@ -22,6 +23,7 @@ function storageDiagnostics() {
 registerKinetics();
 registerLogistics();
 registerDepots();
+registerFluids(getKineticWorldForTesting);
 registerMillstones(getKineticWorldForTesting);
 registerMechanicalPresses(getKineticWorldForTesting);
 registerCrushingWheels(getKineticWorldForTesting);
@@ -30,6 +32,7 @@ registerTrains();
 registerKernelDiagnosticProvider("kinetics", getKineticDiagnostics);
 registerKernelDiagnosticProvider("logistics", getLogisticsDiagnostics);
 registerKernelDiagnosticProvider("depots", getDepotDiagnostics);
+registerKernelDiagnosticProvider("fluids", getFluidDiagnostics);
 registerKernelDiagnosticProvider("contraptions", getContraptionDiagnostics);
 registerKernelDiagnosticProvider("trains", getTrainDiagnostics);
 registerKernelDiagnosticProvider("storage", storageDiagnostics);

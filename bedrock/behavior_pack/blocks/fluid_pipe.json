@@ -1,0 +1,57 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:fluid_pipe",
+      "traits": {
+        "minecraft:placement_direction": {
+          "enabled_states": ["minecraft:facing_direction"]
+        }
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 6
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1
+      },
+      "minecraft:geometry": "geometry.createbedrock.fluid_pipe",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.fluid_pipe"
+        },
+        "material_instances": {
+          "pipes": {
+            "texture": "createbedrock_pipes",
+            "render_method": "opaque"
+          },
+          "*": {
+            "texture": "createbedrock_pipes",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:material_instances": {
+        "pipes": {
+          "texture": "createbedrock_pipes",
+          "render_method": "opaque"
+        },
+        "*": {
+          "texture": "createbedrock_pipes",
+          "render_method": "opaque"
+        }
+      }
+    },
+    "permutations": [
+      {
+        "condition": "query.block_state('minecraft:facing_direction') == 0 || query.block_state('minecraft:facing_direction') == 1",
+        "components": { "minecraft:transformation": { "rotation": [90, 0, 0] } }
+      },
+      {
+        "condition": "query.block_state('minecraft:facing_direction') == 4 || query.block_state('minecraft:facing_direction') == 5",
+        "components": { "minecraft:transformation": { "rotation": [0, 90, 0] } }
+      }
+    ]
+  }
+}

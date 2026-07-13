@@ -50,6 +50,18 @@ export class FluidNetworkState {
 		});
 	}
 
+	hasLink(id) {
+		return this.#network.snapshot().links.some(link => link.id === id);
+	}
+
+	hasTank(id) {
+		return this.#tanks.has(id);
+	}
+
+	links() {
+		return this.#network.snapshot().links;
+	}
+
 	canRemoveTank(id) {
 		const tank = this.#tanks.get(id);
 		if (!tank)
@@ -210,14 +222,18 @@ export class FluidNetworkState {
 
 	setPipeOpen(id, open) {
 		this.#assertActive();
-		this.#network.setPipeOpen(id, open);
-		this.#persist();
+		const changed = this.#network.setPipeOpen(id, open);
+		if (changed)
+			this.#persist();
+		return changed;
 	}
 
 	setPumpRunning(id, running) {
 		this.#assertActive();
-		this.#network.setPumpRunning(id, running);
-		this.#persist();
+		const changed = this.#network.setPumpRunning(id, running);
+		if (changed)
+			this.#persist();
+		return changed;
 	}
 
 	snapshot() {
