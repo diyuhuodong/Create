@@ -189,13 +189,17 @@ function refreshTrackAvailability() {
 	for (const [dimensionId, graph] of graphs) {
 		const dimension = world.getDimension(dimensionId);
 		for (const node of graph.getNodes()) {
-			let available = false;
 			try {
-				available = dimension.getBlock(node.location)?.typeId === TRACK_BLOCK;
+				const block = dimension.getBlock(node.location);
+				if (!block) {
+					graph.setChunkAvailable(node.location, false);
+					continue;
+				}
+				graph.setChunkAvailable(node.location, true);
+				graph.setNodeAvailable(node.id, block.typeId === TRACK_BLOCK);
 			} catch {
-				available = false;
+				graph.setChunkAvailable(node.location, false);
 			}
-			graph.setNodeAvailable(node.id, available);
 		}
 	}
 }
@@ -400,8 +404,13 @@ export function getTrainDiagnostics() {
 			blockedReasons[id] = reason;
 	}
 	let edges = 0;
+	let chunks = 0;
+	let loadedChunks = 0;
 	let nodes = 0;
 	for (const graph of graphs.values()) {
+		const diagnostics = graph.getChunkDiagnostics();
+		chunks += diagnostics.chunks;
+		loadedChunks += diagnostics.loadedChunks;
 		const snapshot = graph.snapshot();
 		for (const chunk of snapshot.chunks) {
 			edges += chunk.edges.length;
@@ -411,8 +420,10 @@ export function getTrainDiagnostics() {
 	return {
 		blocked: Object.keys(blockedReasons).length,
 		blockedReasons,
+		chunks,
 		dimensions: graphs.size,
 		edges,
+		loadedChunks,
 		markers: [...trains.values()].reduce((total, train) => total + train.entityIds.length, 0),
 		nodes,
 		trains: trains.size

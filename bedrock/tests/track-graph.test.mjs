@@ -98,6 +98,19 @@ test("TrackGraph partitions persisted topology and excludes unavailable chunks f
 	assert.equal(restored.findRoute("a", "b").length, 1);
 });
 
+test("TrackGraph keeps missing tracks unavailable after their chunk reloads", () => {
+	const graph = new TrackGraph();
+	graph.addNode({ id: "a", location: { x: 0, y: 64, z: 0 } });
+	graph.addNode({ id: "b", location: { x: 16, y: 64, z: 0 } });
+	graph.connect("a", "b", 1);
+
+	graph.setNodeAvailable("b", false);
+	graph.setChunkAvailable({ x: 16, z: 0 }, false);
+	graph.setChunkAvailable({ x: 16, z: 0 }, true);
+	assert.equal(graph.getNode("b").available, false);
+	assert.equal(graph.findRoute("a", "b"), undefined);
+});
+
 test("TrackGraph restores legacy flat snapshots", () => {
 	const source = createGraph();
 	const partitioned = source.snapshot();
