@@ -49,7 +49,9 @@ const BEHAVIOR_PATHS = new Map([
 	["brass_encased_cogwheel", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["brass_encased_large_cogwheel", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["brass_encased_shaft", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
+	["basin", "behavior_pack/scripts/processing/stage3-processing-runtime.js"],
 	["crushing_wheel", "behavior_pack/scripts/processing/crushing-wheel-runtime.js"],
+	["encased_fan", "behavior_pack/scripts/processing/stage3-processing-runtime.js"],
 	["creative_motor", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["encased_chain_drive", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["flywheel", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
@@ -60,12 +62,15 @@ const BEHAVIOR_PATHS = new Map([
 	["large_water_wheel", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["mechanical_bearing", "behavior_pack/scripts/contraptions/contraption-runtime.js"],
 	["mechanical_pump", "behavior_pack/scripts/fluids/fluid-runtime.js"],
+	["mechanical_mixer", "behavior_pack/scripts/processing/stage3-processing-runtime.js"],
 	["metal_girder_encased_shaft", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["mechanical_press", "behavior_pack/scripts/processing/mechanical-press-runtime.js"],
+	["mechanical_saw", "behavior_pack/scripts/processing/stage3-processing-runtime.js"],
 	["millstone", "behavior_pack/scripts/processing/millstone-runtime.js"],
 	["fluid_pipe", "behavior_pack/scripts/fluids/fluid-runtime.js"],
 	["fluid_tank", "behavior_pack/scripts/fluids/fluid-runtime.js"],
 	["shaft", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
+	["saw", "behavior_pack/scripts/processing/stage3-processing-runtime.js"],
 	["track", "behavior_pack/scripts/trains/train-runtime.js"],
 	["track_station", "behavior_pack/scripts/trains/train-runtime.js"],
 	["water_wheel", "behavior_pack/scripts/kinetics/kinetic-runtime.js"]
@@ -78,6 +83,17 @@ const STAGE_THREE_PROCESSORS = new Map([
 	["crushing_wheel", { domain: "processing" }],
 	["mechanical_press", { domain: "processing" }],
 	["millstone", { domain: "processing" }]
+]);
+
+// S3-11 extends fixed processing with a shared multi-input, durable machine
+// boundary. The source assets and recipe outcomes are now specified, while
+// platform execution remains an explicit S3-15 acceptance item.
+const STAGE_THREE_PROCESSING_FOUNDATION = new Map([
+	["basin", { domain: "processing" }],
+	["encased_fan", { domain: "processing" }],
+	["mechanical_mixer", { domain: "processing" }],
+	["mechanical_saw", { domain: "processing" }],
+	["saw", { domain: "processing" }]
 ]);
 
 // S3-5 makes the fixed, virtual-fluid vertical slice durable. Pipe visuals,
@@ -179,6 +195,7 @@ function acceptanceId(identifier, domain, kind) {
 export function classifyRegistration(identifier, kind) {
 	const prototype = STAGE_TWO_PROTOTYPES.get(identifier);
 	const processor = STAGE_THREE_PROCESSORS.get(identifier);
+	const processingFoundation = STAGE_THREE_PROCESSING_FOUNDATION.get(identifier);
 	const fluid = STAGE_THREE_FLUIDS.get(identifier);
 	const redstoneControl = STAGE_THREE_REDSTONE_CONTROLS.get(identifier);
 	const foundationContent = STAGE_THREE_FOUNDATION_CONTENT.get(identifier);
@@ -190,6 +207,8 @@ export function classifyRegistration(identifier, kind) {
 		? { ...staticSystem, phase: 3, status: "static_verified" }
 		: foundationContent
 		? { ...foundationContent, phase: 3, status: "implementation_in_progress" }
+		: processingFoundation
+		? { ...processingFoundation, phase: 3, status: "implementation_in_progress" }
 		: kineticFoundation
 		? { ...kineticFoundation, phase: 3, status: "implementation_in_progress" }
 		: logisticsFoundation
@@ -204,9 +223,9 @@ export function classifyRegistration(identifier, kind) {
 		behaviorPath: BEHAVIOR_PATHS.get(identifier) ?? null,
 		blockingReason: blockedByTargetVersion ? REDSTONE_OUTPUT_BLOCKER : null,
 		domain: classification.domain,
-		persistenceSchema: staticSystem || kineticFoundation || logisticsFoundation ? 2 : prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null,
+		persistenceSchema: staticSystem || processingFoundation || kineticFoundation || logisticsFoundation ? 2 : prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null,
 		phase: classification.phase,
-		resourceStatus: prototype || staticSystem || foundationContent || kineticFoundation || logisticsFoundation ? "partial" : "pending",
+		resourceStatus: prototype || staticSystem || foundationContent || processingFoundation || kineticFoundation || logisticsFoundation ? "partial" : "pending",
 		status: blockedByTargetVersion ? "blocked" : classification.status ?? "specification_pending"
 	};
 }

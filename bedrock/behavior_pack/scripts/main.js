@@ -12,6 +12,7 @@ import { getRedstoneDiagnostics, registerRedstone } from "./redstone/redstone-ru
 import { registerMillstones } from "./processing/millstone-runtime.js";
 import { registerMechanicalPresses } from "./processing/mechanical-press-runtime.js";
 import { registerCrushingWheels } from "./processing/crushing-wheel-runtime.js";
+import { getStage3ProcessingDiagnostics, registerStage3Processing } from "./processing/stage3-processing-runtime.js";
 import { getTrainDiagnostics, registerTrains } from "./trains/train-runtime.js";
 
 function storageDiagnostics() {
@@ -30,6 +31,7 @@ registerFluids(getKineticWorldForTesting);
 registerMillstones(getKineticWorldForTesting);
 registerMechanicalPresses(getKineticWorldForTesting);
 registerCrushingWheels(getKineticWorldForTesting);
+registerStage3Processing(getKineticWorldForTesting);
 registerRedstone();
 registerContraptions(getKineticWorldForTesting);
 registerTrains();
@@ -38,6 +40,7 @@ registerKernelDiagnosticProvider("logistics", getLogisticsDiagnostics);
 registerKernelDiagnosticProvider("externalEscrow", getExternalEscrowDiagnostics);
 registerKernelDiagnosticProvider("depots", getDepotDiagnostics);
 registerKernelDiagnosticProvider("fluids", getFluidDiagnostics);
+registerKernelDiagnosticProvider("processing", getStage3ProcessingDiagnostics);
 registerKernelDiagnosticProvider("redstone", getRedstoneDiagnostics);
 registerKernelDiagnosticProvider("contraptions", getContraptionDiagnostics);
 registerKernelDiagnosticProvider("trains", getTrainDiagnostics);

@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "deterministic",
+  "generatedFrom": "bedrock/data/stage3-work-queue.json and Java registration/model sources",
+  "entries": [
+    {
+      "acceptanceId": "PROCESSING-BASIN-BLOCK",
+      "bedrockIdentifier": "createbedrock:basin",
+      "behaviorBoundary": "A durable multi-input Basin exposes managed item ports and advances only when a kinetic Mechanical Mixer or Mechanical Press is immediately above it.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-11",
+      "recipeBoundary": "Basin mixing and compacting recipes are imported only when all item inputs and outputs are represented by managed item ports; heat, fluid, and unavailable-item recipes remain classified in basin-import-report.json.",
+      "resourceBoundary": "Placeable block with Java-model conversion, build-staged Java PNGs, creative access, explicit self-drop, EN/ZH translation, and terrain-atlas mapping. Facing visual animation remains platform acceptance work.",
+      "testPlan": "Focused batch-machine positive, failure, restart, and escrow tests plus recipe-report, source-contract, validation, build, and package tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java",
+        "src/main/resources/assets/create/models/block/basin/block.json"
+      ],
+      "javaIdentifier": "create:basin",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "PROCESSING-BASIN-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:basin",
+      "behaviorBoundary": "The Java block-entity state is represented by one world-persisted BatchProcessingMachine record with managed item ports, fixed random decisions, break protection, and shard recovery; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-11",
+      "recipeBoundary": "The shared runtime consumes only recipes classified as migrated in the generated S3-11 import reports; every fluid, compatibility, unregistered-item, or runtime-registry source remains explicitly recorded as blocked/manual.",
+      "resourceBoundary": "This Java block-entity registration shares the corresponding placeable block and has no duplicate Bedrock resource identifier.",
+      "testPlan": "Batch matching, failed controller selection, restart-safe chance output, output escrow, report coverage, and source-contract tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:basin",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "PROCESSING-ENCASED-FAN-BLOCK",
+      "bedrockIdentifier": "createbedrock:encased_fan",
+      "behaviorBoundary": "A kinetic Encased Fan runs fixed haunting/splashing batches when the flow side selected by its facing and rotation direction contains the corresponding catalyst block.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-11",
+      "recipeBoundary": "Encased Fan runs migrated haunting and splashing recipes against a fixed catalyst block. Blasting and smoking remain manual because their Java inputs come from a runtime recipe registry not exported in this repository.",
+      "resourceBoundary": "Placeable block with Java-model conversion, build-staged Java PNGs, creative access, explicit self-drop, EN/ZH translation, and terrain-atlas mapping. Facing visual animation remains platform acceptance work.",
+      "testPlan": "Focused batch-machine positive, failure, restart, and escrow tests plus recipe-report, source-contract, validation, build, and package tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java",
+        "src/main/resources/assets/create/models/block/encased_fan/block.json"
+      ],
+      "javaIdentifier": "create:encased_fan",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "PROCESSING-ENCASED-FAN-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:encased_fan",
+      "behaviorBoundary": "The Java block-entity state is represented by one world-persisted BatchProcessingMachine record with managed item ports, fixed random decisions, break protection, and shard recovery; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-11",
+      "recipeBoundary": "The shared runtime consumes only recipes classified as migrated in the generated S3-11 import reports; every fluid, compatibility, unregistered-item, or runtime-registry source remains explicitly recorded as blocked/manual.",
+      "resourceBoundary": "This Java block-entity registration shares the corresponding placeable block and has no duplicate Bedrock resource identifier.",
+      "testPlan": "Batch matching, failed controller selection, restart-safe chance output, output escrow, report coverage, and source-contract tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:encased_fan",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "PROCESSING-MECHANICAL-MIXER-BLOCK",
+      "bedrockIdentifier": "createbedrock:mechanical_mixer",
+      "behaviorBoundary": "A kinetic Mechanical Mixer acts as the Basin mixing controller and advances its lower Basin through the shared persistent runtime.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-11",
+      "recipeBoundary": "Basin mixing and compacting recipes are imported only when all item inputs and outputs are represented by managed item ports; heat, fluid, and unavailable-item recipes remain classified in basin-import-report.json.",
+      "resourceBoundary": "Placeable block with Java-model conversion, build-staged Java PNGs, creative access, explicit self-drop, EN/ZH translation, and terrain-atlas mapping. Facing visual animation remains platform acceptance work.",
+      "testPlan": "Focused batch-machine positive, failure, restart, and escrow tests plus recipe-report, source-contract, validation, build, and package tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java",
+        "src/main/resources/assets/create/models/block/mechanical_mixer/block.json"
+      ],
+      "javaIdentifier": "create:mechanical_mixer",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "PROCESSING-MECHANICAL-MIXER-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:mechanical_mixer",
+      "behaviorBoundary": "The Java block-entity state is represented by one world-persisted BatchProcessingMachine record with managed item ports, fixed random decisions, break protection, and shard recovery; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-11",
+      "recipeBoundary": "The shared runtime consumes only recipes classified as migrated in the generated S3-11 import reports; every fluid, compatibility, unregistered-item, or runtime-registry source remains explicitly recorded as blocked/manual.",
+      "resourceBoundary": "This Java block-entity registration shares the corresponding placeable block and has no duplicate Bedrock resource identifier.",
+      "testPlan": "Batch matching, failed controller selection, restart-safe chance output, output escrow, report coverage, and source-contract tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:mechanical_mixer",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "PROCESSING-MECHANICAL-SAW-BLOCK",
+      "bedrockIdentifier": "createbedrock:mechanical_saw",
+      "behaviorBoundary": "A kinetic Mechanical Saw runs fixed cutting batches through the shared durable item-port runtime.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-11",
+      "recipeBoundary": "Mechanical Saw runs the migrated static cutting recipes; compatibility recipes remain explicit unsupported dependencies in cutting-import-report.json.",
+      "resourceBoundary": "Placeable block with Java-model conversion, build-staged Java PNGs, creative access, explicit self-drop, EN/ZH translation, and terrain-atlas mapping. Facing visual animation remains platform acceptance work.",
+      "testPlan": "Focused batch-machine positive, failure, restart, and escrow tests plus recipe-report, source-contract, validation, build, and package tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java",
+        "src/main/resources/assets/create/models/block/mechanical_saw/horizontal.json"
+      ],
+      "javaIdentifier": "create:mechanical_saw",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "PROCESSING-SAW-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:saw",
+      "behaviorBoundary": "The Java block-entity state is represented by one world-persisted BatchProcessingMachine record with managed item ports, fixed random decisions, break protection, and shard recovery; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-11",
+      "recipeBoundary": "The shared runtime consumes only recipes classified as migrated in the generated S3-11 import reports; every fluid, compatibility, unregistered-item, or runtime-registry source remains explicitly recorded as blocked/manual.",
+      "resourceBoundary": "This Java block-entity registration shares the corresponding placeable block and has no duplicate Bedrock resource identifier.",
+      "testPlan": "Batch matching, failed controller selection, restart-safe chance output, output escrow, report coverage, and source-contract tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:saw",
+      "kind": "block_entity"
+    }
+  ]
+}

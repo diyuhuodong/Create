@@ -1,0 +1,122 @@
+{
+	"processor": "basin",
+	"schemaVersion": 1,
+	"summary": {
+		"manual_specification": 15,
+		"migrated": 2,
+		"unsupported_dependency": 4
+	},
+	"records": [
+		{
+			"reason": "unsupported_recipe_shape",
+			"source": "compacting/andesite_from_flint",
+			"status": "manual_specification"
+		},
+		{
+			"reason": "unsupported_recipe_shape",
+			"source": "compacting/blaze_cake",
+			"status": "manual_specification"
+		},
+		{
+			"reason": "unsupported_recipe_shape",
+			"source": "compacting/chocolate",
+			"status": "manual_specification"
+		},
+		{
+			"reason": "unsupported_recipe_shape",
+			"source": "compacting/diorite_from_flint",
+			"status": "manual_specification"
+		},
+		{
+			"reason": "unsupported_recipe_shape",
+			"source": "compacting/granite_from_flint",
+			"status": "manual_specification"
+		},
+		{
+			"reason": "unsupported_recipe_shape",
+			"source": "compacting/honey",
+			"status": "manual_specification"
+		},
+		{
+			"recipeId": "create:basin/compacting/ice:0",
+			"recipeIds": [
+				"create:basin/compacting/ice:0"
+			],
+			"source": "compacting/ice",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:basin/mixing/andesite_alloy:0",
+			"recipeIds": [
+				"create:basin/mixing/andesite_alloy:0"
+			],
+			"source": "mixing/andesite_alloy",
+			"status": "migrated"
+		},
+		{
+			"reason": "unsupported_recipe_shape",
+			"source": "mixing/andesite_alloy_from_zinc",
+			"status": "manual_specification"
+		},
+		{
+			"reason": "unavailable_item",
+			"source": "mixing/brass_ingot",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "unsupported_recipe_shape",
+			"source": "mixing/cardboard_pulp",
+			"status": "manual_specification"
+		},
+		{
+			"reason": "unsupported_recipe_shape",
+			"source": "mixing/chocolate",
+			"status": "manual_specification"
+		},
+		{
+			"reason": "unsupported_recipe_shape",
+			"source": "mixing/chocolate_melting",
+			"status": "manual_specification"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "mixing/compat/ae2/fluix_crystal",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "mixing/compat/regions_unexplored/peat_mud",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "mixing/compat/regions_unexplored/silt_mud",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "unsupported_recipe_shape",
+			"source": "mixing/dough_by_mixing",
+			"status": "manual_specification"
+		},
+		{
+			"reason": "unsupported_recipe_shape",
+			"source": "mixing/honey",
+			"status": "manual_specification"
+		},
+		{
+			"reason": "unsupported_recipe_shape",
+			"source": "mixing/lava_from_cobble",
+			"status": "manual_specification"
+		},
+		{
+			"reason": "unsupported_recipe_shape",
+			"source": "mixing/mud_by_mixing",
+			"status": "manual_specification"
+		},
+		{
+			"reason": "unsupported_recipe_shape",
+			"source": "mixing/tea",
+			"status": "manual_specification"
+		}
+	]
+}

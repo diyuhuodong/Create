@@ -153,6 +153,21 @@ export const KINETIC_BLOCKS = {
 		axis: "y",
 		stressImpact: 8
 	},
+	"createbedrock:encased_fan": {
+		kind: "consumer",
+		axis: "y",
+		stressImpact: 4
+	},
+	"createbedrock:mechanical_mixer": {
+		kind: "consumer",
+		axis: "y",
+		stressImpact: 8
+	},
+	"createbedrock:mechanical_saw": {
+		kind: "consumer",
+		axis: "y",
+		stressImpact: 8
+	},
 	"createbedrock:mechanical_pump": {
 		kind: "consumer",
 		axis: "y",

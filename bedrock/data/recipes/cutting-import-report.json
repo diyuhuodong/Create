@@ -1,0 +1,177 @@
+{
+	"processor": "cutting",
+	"schemaVersion": 1,
+	"summary": {
+		"manual_specification": 0,
+		"migrated": 2,
+		"unsupported_dependency": 30
+	},
+	"records": [
+		{
+			"recipeId": "create:cutting/cutting/andesite_alloy:0",
+			"recipeIds": [
+				"create:cutting/cutting/andesite_alloy:0"
+			],
+			"source": "cutting/andesite_alloy",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:cutting/cutting/bamboo_planks:0",
+			"recipeIds": [
+				"create:cutting/cutting/bamboo_planks:0"
+			],
+			"source": "cutting/bamboo_planks",
+			"status": "migrated"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/ars_elemental/stripped_yellow_archwood",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/ars_elemental/stripped_yellow_archwood_log",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/ars_nouveau/stripped_green_archwood_log",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/ars_nouveau/stripped_green_archwood_wood",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/ars_nouveau/stripped_purple_archwood_log",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/ars_nouveau/stripped_purple_archwood_wood",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/ars_nouveau/stripped_red_archwood_log",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/ars_nouveau/stripped_red_archwood_wood",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/atmospheric/crustose_log",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/atmospheric/crustose_wood",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/atmospheric/watchful_aspen_log",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/atmospheric/watchful_aspen_wood",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/autumnity/sappy_maple_log",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/autumnity/sappy_maple_wood",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/biomeswevegone/stripped_palo_verde_log",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/biomeswevegone/stripped_palo_verde_wood",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/endergetic/glowing_poise_stem",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/endergetic/glowing_poise_wood",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/immersiveengineering/wire_aluminum",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/immersiveengineering/wire_copper",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/immersiveengineering/wire_electrum",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/immersiveengineering/wire_lead",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/immersiveengineering/wire_steel",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/netherexp/cerebrage_claret_hyphae",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/netherexp/cerebrage_claret_stem",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/regions_unexplored/ashen_log",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/regions_unexplored/ashen_wood",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/regions_unexplored/brimwood_log_magma",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/regions_unexplored/silver_birch_log",
+			"status": "unsupported_dependency"
+		},
+		{
+			"reason": "compatibility_recipe",
+			"source": "cutting/compat/regions_unexplored/silver_birch_wood",
+			"status": "unsupported_dependency"
+		}
+	]
+}

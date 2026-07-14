@@ -14,6 +14,37 @@ export const JAVA_MODELS = [
 	{ name: "water_wheel", source: "water_wheel/block.json" },
 	{ name: "millstone", source: "millstone/block.json" },
 	{ name: "mechanical_press", source: "mechanical_press/block.json" },
+	{ name: "basin", source: "basin/block.json" },
+	{
+		name: "encased_fan",
+		source: "encased_fan/block.json",
+		textureOverrides: {
+			"3": "create:block/funnel/andesite_funnel_frame",
+			back: "create:block/gearbox",
+			fan_casing: "create:block/fan_casing",
+			fan_side: "create:block/fan_side"
+		}
+	},
+	{
+		name: "mechanical_mixer",
+		source: "mechanical_mixer/block.json",
+		textureOverrides: {
+			"2": "create:block/gearbox_top",
+			"4": "create:block/mixer_base_side",
+			"11": "create:block/mechanical_press_top"
+		}
+	},
+	{
+		name: "mechanical_saw",
+		source: "mechanical_saw/horizontal.json",
+		textureOverrides: {
+			andesite_casing_short: "create:block/andesite_casing_short",
+			encased_belt: "create:block/encased_chain_drive",
+			gearbox: "create:block/gearbox",
+			gearbox_top: "create:block/gearbox_top",
+			slit: "create:block/mechanical_saw_top_no_slot"
+		}
+	},
 	{ name: "depot", source: "depot/block.json" },
 	{ name: "belt", source: "belt/middle.json" },
 	{ name: "chute", source: "chute/block.json" },

@@ -1,0 +1,68 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:mechanical_mixer",
+      "menu_category": {
+        "category": "items",
+        "group": "itemGroup.name.misc"
+      },
+      "traits": {
+        "minecraft:placement_direction": {
+          "enabled_states": ["minecraft:facing_direction"]
+        }
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 6
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1
+      },
+      "minecraft:geometry": "geometry.createbedrock.mechanical_mixer",
+      "minecraft:loot": "loot_tables/blocks/mechanical_mixer.json",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.mechanical_mixer"
+        },
+        "material_instances": {
+          "gearbox_top": {
+            "texture": "createbedrock_gearbox_top",
+            "render_method": "opaque"
+          },
+          "mechanical_press_top": {
+            "texture": "createbedrock_mechanical_press_top",
+            "render_method": "opaque"
+          },
+          "mixer_base_side": {
+            "texture": "createbedrock_mixer_base_side",
+            "render_method": "opaque"
+          },
+          "*": {
+            "texture": "createbedrock_mixer_base_side",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:material_instances": {
+        "gearbox_top": {
+          "texture": "createbedrock_gearbox_top",
+          "render_method": "opaque"
+        },
+        "mechanical_press_top": {
+          "texture": "createbedrock_mechanical_press_top",
+          "render_method": "opaque"
+        },
+        "mixer_base_side": {
+          "texture": "createbedrock_mixer_base_side",
+          "render_method": "opaque"
+        },
+        "*": {
+          "texture": "createbedrock_mixer_base_side",
+          "render_method": "opaque"
+        }
+      }
+    }
+  }
+}

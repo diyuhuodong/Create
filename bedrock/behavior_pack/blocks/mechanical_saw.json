@@ -1,0 +1,84 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:mechanical_saw",
+      "menu_category": {
+        "category": "items",
+        "group": "itemGroup.name.misc"
+      },
+      "traits": {
+        "minecraft:placement_direction": {
+          "enabled_states": ["minecraft:facing_direction"]
+        }
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 6
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1
+      },
+      "minecraft:geometry": "geometry.createbedrock.mechanical_saw",
+      "minecraft:loot": "loot_tables/blocks/mechanical_saw.json",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.mechanical_saw"
+        },
+        "material_instances": {
+          "andesite_casing_short": {
+            "texture": "createbedrock_andesite_casing_short",
+            "render_method": "opaque"
+          },
+          "encased_chain_drive": {
+            "texture": "createbedrock_encased_chain_drive",
+            "render_method": "opaque"
+          },
+          "gearbox": {
+            "texture": "createbedrock_gearbox",
+            "render_method": "opaque"
+          },
+          "gearbox_top": {
+            "texture": "createbedrock_gearbox_top",
+            "render_method": "opaque"
+          },
+          "mechanical_saw_top_no_slot": {
+            "texture": "createbedrock_mechanical_saw_top_no_slot",
+            "render_method": "opaque"
+          },
+          "*": {
+            "texture": "createbedrock_mechanical_saw_top_no_slot",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:material_instances": {
+        "andesite_casing_short": {
+          "texture": "createbedrock_andesite_casing_short",
+          "render_method": "opaque"
+        },
+        "encased_chain_drive": {
+          "texture": "createbedrock_encased_chain_drive",
+          "render_method": "opaque"
+        },
+        "gearbox": {
+          "texture": "createbedrock_gearbox",
+          "render_method": "opaque"
+        },
+        "gearbox_top": {
+          "texture": "createbedrock_gearbox_top",
+          "render_method": "opaque"
+        },
+        "mechanical_saw_top_no_slot": {
+          "texture": "createbedrock_mechanical_saw_top_no_slot",
+          "render_method": "opaque"
+        },
+        "*": {
+          "texture": "createbedrock_mechanical_saw_top_no_slot",
+          "render_method": "opaque"
+        }
+      }
+    }
+  }
+}

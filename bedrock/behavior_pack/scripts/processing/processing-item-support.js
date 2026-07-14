@@ -1,8 +1,14 @@
 const REGISTERED_CREATE_ITEMS = new Set([
+	"createbedrock:andesite_alloy",
+	"createbedrock:andesite_alloy_block",
 	"createbedrock:copper_sheet",
 	"createbedrock:golden_sheet",
 	"createbedrock:iron_sheet",
-	"createbedrock:wheat_flour"
+	"createbedrock:raw_zinc",
+	"createbedrock:rose_quartz",
+	"createbedrock:shaft",
+	"createbedrock:wheat_flour",
+	"createbedrock:zinc_ingot"
 ]);
 
 export function isSupportedProcessingItem(typeId) {

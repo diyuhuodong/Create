@@ -11,6 +11,12 @@
     "createbedrock_andesite_casing": {
       "textures": "textures/create_java/block/andesite_casing"
     },
+    "createbedrock_andesite_casing_short": {
+      "textures": "textures/create_java/block/andesite_casing_short"
+    },
+    "createbedrock_basin": {
+      "textures": "textures/create_java/block/basin"
+    },
     "createbedrock_belt": {
       "textures": "textures/create_java/block/belt"
     },
@@ -74,6 +80,12 @@
     "createbedrock_fluid_tank_top": {
       "textures": "textures/create_java/block/fluid_tank_top"
     },
+    "createbedrock_fan_casing": {
+      "textures": "textures/create_java/block/fan_casing"
+    },
+    "createbedrock_fan_side": {
+      "textures": "textures/create_java/block/fan_side"
+    },
     "createbedrock_large_cogwheel": {
       "textures": "textures/create_java/block/large_cogwheel"
     },
@@ -109,6 +121,12 @@
     },
     "createbedrock_mechanical_press_top": {
       "textures": "textures/create_java/block/mechanical_press_top"
+    },
+    "createbedrock_mechanical_saw_top_no_slot": {
+      "textures": "textures/create_java/block/mechanical_saw_top_no_slot"
+    },
+    "createbedrock_mixer_base_side": {
+      "textures": "textures/create_java/block/mixer_base_side"
     },
     "createbedrock_track": {
       "textures": "textures/create_java/block/standard_track"

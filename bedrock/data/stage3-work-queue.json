@@ -3740,7 +3740,7 @@
       "javaIdentifier": "create:basin",
       "kind": "block",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -3759,7 +3759,7 @@
       "javaIdentifier": "create:basin",
       "kind": "block_entity",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -3814,7 +3814,7 @@
       "javaIdentifier": "create:encased_fan",
       "kind": "block",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -3833,7 +3833,7 @@
       "javaIdentifier": "create:encased_fan",
       "kind": "block_entity",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -3852,7 +3852,7 @@
       "javaIdentifier": "create:mechanical_mixer",
       "kind": "block",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -3871,7 +3871,7 @@
       "javaIdentifier": "create:mechanical_mixer",
       "kind": "block_entity",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -3926,7 +3926,7 @@
       "javaIdentifier": "create:mechanical_saw",
       "kind": "block",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -3981,7 +3981,7 @@
       "javaIdentifier": "create:saw",
       "kind": "block_entity",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."

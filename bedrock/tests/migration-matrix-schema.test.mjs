@@ -132,6 +132,20 @@ test("migration classification assigns S3-10 logistics resources to the durable 
 	assert.equal(classifyRegistration("attribute_filter", "item").behaviorPath, "behavior_pack/scripts/logistics/depot-runtime.js");
 });
 
+test("migration classification assigns S3-11 fixed processing resources to the durable batch-machine boundary", () => {
+	assert.deepEqual(classifyRegistration("basin", "block"), {
+		acceptanceId: "PROCESSING-BASIN-BLOCK",
+		behaviorPath: "behavior_pack/scripts/processing/stage3-processing-runtime.js",
+		blockingReason: null,
+		domain: "processing",
+		persistenceSchema: 2,
+		phase: 3,
+		resourceStatus: "partial",
+		status: "implementation_in_progress"
+	});
+	assert.equal(classifyRegistration("saw", "block_entity").behaviorPath, "behavior_pack/scripts/processing/stage3-processing-runtime.js");
+});
+
 test("migration classification assigns later dynamic, train, and equipment work to their planned phases", () => {
 	assert.deepEqual(classifyRegistration("mechanical_piston", "block").phase, 4);
 	assert.deepEqual(classifyRegistration("track_signal", "block").phase, 5);

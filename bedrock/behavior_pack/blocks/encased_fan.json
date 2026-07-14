@@ -1,0 +1,76 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:encased_fan",
+      "menu_category": {
+        "category": "items",
+        "group": "itemGroup.name.misc"
+      },
+      "traits": {
+        "minecraft:placement_direction": {
+          "enabled_states": ["minecraft:facing_direction"]
+        }
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 6
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1
+      },
+      "minecraft:geometry": "geometry.createbedrock.encased_fan",
+      "minecraft:loot": "loot_tables/blocks/encased_fan.json",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.encased_fan"
+        },
+        "material_instances": {
+          "andesite_funnel_frame": {
+            "texture": "createbedrock_andesite_funnel_frame",
+            "render_method": "opaque"
+          },
+          "fan_casing": {
+            "texture": "createbedrock_fan_casing",
+            "render_method": "opaque"
+          },
+          "fan_side": {
+            "texture": "createbedrock_fan_side",
+            "render_method": "opaque"
+          },
+          "gearbox": {
+            "texture": "createbedrock_gearbox",
+            "render_method": "opaque"
+          },
+          "*": {
+            "texture": "createbedrock_fan_side",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:material_instances": {
+        "andesite_funnel_frame": {
+          "texture": "createbedrock_andesite_funnel_frame",
+          "render_method": "opaque"
+        },
+        "fan_casing": {
+          "texture": "createbedrock_fan_casing",
+          "render_method": "opaque"
+        },
+        "fan_side": {
+          "texture": "createbedrock_fan_side",
+          "render_method": "opaque"
+        },
+        "gearbox": {
+          "texture": "createbedrock_gearbox",
+          "render_method": "opaque"
+        },
+        "*": {
+          "texture": "createbedrock_fan_side",
+          "render_method": "opaque"
+        }
+      }
+    }
+  }
+}
