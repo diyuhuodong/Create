@@ -6,6 +6,7 @@ import { DiagnosticsRegistry } from "./diagnostics-registry.js";
 const TASK_BUDGET_PER_TICK = 32;
 const DEFAULT_TASK_GROUP = "default";
 const scheduler = new BudgetScheduler({
+	maxTasksPerTick: 64,
 	onError(name, error) {
 		console.warn(`[Create Bedrock] Kernel task in ${name} failed: ${error}`);
 	}
@@ -29,6 +30,7 @@ export function registerKernelTaskGroup(name, budget) {
 
 export function getKernelDiagnostics() {
 	return {
+		performance: scheduler.performanceDiagnostics(),
 		scheduler: scheduler.diagnostics(),
 		...diagnostics.collect()
 	};

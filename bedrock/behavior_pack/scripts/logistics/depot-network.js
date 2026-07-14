@@ -297,6 +297,7 @@ export class DepotNetwork {
 			externalDeposits: this.#externalDeposits.size,
 			externalWithdrawals: this.#externalWithdrawals.size,
 			funnels: this.#funnels.size,
+			journal: this.#journal.diagnostics(),
 			transfers: this.#journal.snapshot().length,
 			transports: this.#transports.size,
 			waitingForCommit: this.#waitingForCommit,

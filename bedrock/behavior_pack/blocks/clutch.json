@@ -3,6 +3,10 @@
   "minecraft:block": {
     "description": {
       "identifier": "createbedrock:clutch",
+      "menu_category": {
+        "category": "items",
+        "group": "itemGroup.name.misc"
+      },
       "properties": { "createbedrock:enabled": [0, 1] },
       "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
     },

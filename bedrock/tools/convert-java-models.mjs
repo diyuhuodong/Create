@@ -6,7 +6,7 @@ const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(toolDirectory, "..");
 const repositoryRoot = resolve(bedrockRoot, "..");
 
-const MODELS = [
+export const JAVA_MODELS = [
 	{ name: "hand_crank", source: "hand_crank/block.json" },
 	{ name: "shaft", source: "shaft.json" },
 	{ name: "cogwheel", source: "cogwheel.json" },
@@ -126,7 +126,7 @@ export function convertJavaModel({ identifier, model, textureOverrides = {} }) {
 export async function convertJavaModels(resourcePackRoot) {
 	const outputDirectory = resolve(resourcePackRoot, "models/blocks");
 	await mkdir(outputDirectory, { recursive: true });
-	for (const entry of MODELS) {
+	for (const entry of JAVA_MODELS) {
 		const source = resolve(repositoryRoot, "src/main/resources/assets/create/models/block", entry.source);
 		const model = JSON.parse(await readFile(source, "utf8"));
 		const geometry = convertJavaModel({
@@ -136,5 +136,5 @@ export async function convertJavaModels(resourcePackRoot) {
 		});
 		await writeFile(resolve(outputDirectory, `${entry.name}.geo.json`), `${JSON.stringify(geometry, null, 2)}\n`);
 	}
-	return MODELS.length;
+	return JAVA_MODELS.length;
 }

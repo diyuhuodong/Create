@@ -1,16 +1,14 @@
 import { system } from "@minecraft/server";
 
 import { getKernelDiagnostics } from "./index.js";
+import { serializeDiagnosticsSummary } from "./diagnostics-summary.js";
 
 const DIAGNOSTICS_EVENT_ID = "createbedrock:diagnostics";
 const MAX_CHAT_DIAGNOSTICS_LENGTH = 1800;
 let registered = false;
 
 function formatDiagnostics(diagnostics) {
-	const serialized = JSON.stringify(diagnostics);
-	return serialized.length <= MAX_CHAT_DIAGNOSTICS_LENGTH
-		? serialized
-		: `${serialized.slice(0, MAX_CHAT_DIAGNOSTICS_LENGTH - 3)}...`;
+	return serializeDiagnosticsSummary(diagnostics, MAX_CHAT_DIAGNOSTICS_LENGTH);
 }
 
 export function registerDiagnosticsCommand() {

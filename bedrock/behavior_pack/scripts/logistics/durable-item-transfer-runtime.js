@@ -70,6 +70,7 @@ export class DurableItemTransferRuntime {
 			cooldownTicks: this.#cooldownTicks,
 			frozen: this.#frozen,
 			journalRecords: this.#journal.snapshot().length,
+			journal: this.#journal.diagnostics(),
 			trackedPorts: this.#trackedPortIds.size,
 			waitingForCommit: this.#waitingForCommit,
 			...this.#store.diagnostics()

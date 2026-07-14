@@ -41,6 +41,8 @@ export function transferPartition(id, partitionCount = 64) {
 
 export class ItemTransferJournal {
 	#records = new Map();
+	#rollbackAttempts = 0;
+	#rollbacks = 0;
 
 	begin({ destination, id, maxCount, partition = transferPartition(id), predicate, source }) {
 		if (typeof id !== "string" || id.length === 0)
@@ -123,8 +125,10 @@ export class ItemTransferJournal {
 		const record = this.#records.get(id);
 		if (!record)
 			return { ok: false, reason: "unknown_transfer" };
+		this.#rollbackAttempts++;
 		if (record.state === "intent") {
 			this.#records.delete(id);
+			this.#rollbacks++;
 			return { ok: true, state: "cancelled" };
 		}
 		const source = resolvePort(record.sourceId);
@@ -143,7 +147,16 @@ export class ItemTransferJournal {
 			return { ok: false, reason: "source_full", state: "escrowed" };
 		}
 		this.#records.delete(id);
+		this.#rollbacks++;
 		return { ok: true, state: "rolled_back" };
+	}
+
+	diagnostics() {
+		return {
+			activeRecords: this.#records.size,
+			rollbackAttempts: this.#rollbackAttempts,
+			rollbacks: this.#rollbacks
+		};
 	}
 
 	restore(records) {

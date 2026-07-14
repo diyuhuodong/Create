@@ -1,6 +1,6 @@
 # Create Bedrock 阶段 3 完整详细设计
 
-**状态：** 静态实现完成，未完成平台验收
+**状态：** S3-7 静态收敛已完成；阶段 3 全量功能与 Windows/Realm/PS 平台验收仍未完成
 
 **关联总规划：** `Create Bedrock / Realm 完整迁移规划与设计`
 
@@ -196,7 +196,7 @@ S3-6 选择第二条兼容路径：目标仍保持 `min_engine_version: 1.21.80`
 | S3-4 | 固定动力件与加工机扩展、配方转换 | 每个支持方块有行为和配方映射 |
 | S3-5 | `FluidTank`、管道、泵和世界流体适配 | 容量守恒、断网、重启测试通过 |
 | S3-6 | `RedstoneSignalBus` 和已获版本批准的设备 | 不依赖实验 API，或矩阵明确阻塞 |
-| S3-7 | 内容/RP 补全、诊断、性能收敛 | `validate`、`build`、矩阵检查全通过 |
+| S3-7 | 已实现静态纵切的内容/RP 收敛、诊断、性能上限 | `validate`、`build`、矩阵检查及内容契约全通过 |
 
 实现顺序必须是 S3-0 → S3-1 → S3-2；物流、加工、流体和红石可在事务内核稳定后并行推进。S3-0 已完成矩阵 schema v2 基线；S3-1 已将动力和三类固定加工机从单一大属性迁移到 `ShardedStateStore`，并通过静态恢复测试。该结论不覆盖阶段 4/5 的移动结构和列车，也不替代 Windows、Realm、PS 平台验收。
 
@@ -222,13 +222,21 @@ S3-4 实施更新：磨盘、机械压力机与粉碎轮已统一到 `Processing
 
 已接入的控制语义为：有功率时 Clutch 断开、Mechanical Pump 停止、Andesite Funnel 锁定；零功率时恢复对应的动力、流体或物流行为。每次状态变化都调用已有子系统接口，因而仍由其自身的持久化和事务边界保护。节点被破坏时只注销该坐标的控制登记。尚未实现的 Java 红石机器需要定制输出或其完整行为时，不会注册空壳方块，而是保留在矩阵的版本阻塞清单中；升级最低目标版本并完成 Windows、Realm、PS 验收后，才可用官方 producer/consumer 组件扩展为输出和事件驱动模型。
 
+### 6.3 S3-7 实施设计
+
+S3-7 为已实现的静态纵切建立资源契约，而不把尚未实现的 Java 注册项改写为完成。校验覆盖 15 条 `static_verified` 矩阵记录及其 8 个唯一方块：Andesite Funnel、Clutch、Crushing Wheel、Fluid Pipe、Fluid Tank、Mechanical Press、Mechanical Pump、Millstone。每个方块必须有 BP 定义、实际行为脚本、两种语言键、创造菜单入口、贴图图集引用和可解析的方块/物品几何；构建后还必须验证 Java 贴图已复制、几何已生成。`npm run validate` 验证源资源，`npm run build` 对生成的 BP/RP 再验证一次。
+
+Crushing Wheel 的 Java 来源是 NeoForge OBJ，当前转换器不能安全等价生成 Bedrock poly-mesh。因此它保留明确的 full-block 视觉降级记录，矩阵资源状态继续是 `partial`；这不是完成的 Create 模型，也不能在后续统计中被当作资源迁移完成。其余已转换几何仍直接取自列明的 Java JSON 模型和贴图。矩阵中仍为 `specification_pending` 的阶段 3 条目以及所有 `blocked` 红石输出项保持原状态。
+
+运行期诊断现在按公开摘要输出：调度器队列/失败数、持久化 generation、活跃分片数、索引页、字符字节量、未提交记录、网络节点/传输量和物品/流体 journal 的回滚计数。摘要会剔除库存、物品堆叠、槽位、坐标和事务 payload；日志过长时输出仍为有效 JSON 的压缩摘要。`BudgetScheduler` 同时保留每组预算并增加每 tick 64 个任务的全局上限，以轮转起始组避免后序队列长期饥饿；这只是静态防护，30 分钟 Realm 压力结论仍须实机测量。
+
 ## 7. 测试与验收
 
 | 层级 | 现在可执行 | 必测内容 |
 |---|---|---|
 | Node 单测 | 是 | 图、分片、schema 升级、事务、过滤器、容量守恒、配方快照 |
-| 静态包校验 | 是 | JSON、UUID、identifier、引用、资源、迁移矩阵、实验 API 扫描 |
-| 构建/打包 | 是 | 可重复构建、资源 provenance、`.mcaddon` 结构 |
+| 静态包校验 | 是 | JSON、UUID、identifier、引用、资源、迁移矩阵、实验 API 扫描、S3-7 内容契约 |
+| 构建/打包 | 是 | 可重复构建、资源 provenance、生成几何与贴图内容契约、`.mcaddon` 结构 |
 | Windows Bedrock | 否，待环境 | 包加载、Content Log、交互、原版容器、区块卸载、重启 |
 | Realm/PS | 否，待环境 | 双人并发、长时间运行、资源下载、手柄、重启恢复 |
 

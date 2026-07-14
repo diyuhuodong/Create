@@ -36,7 +36,10 @@ function validateGeneration(generation) {
 }
 
 export class ShardedStateStore {
+	#activeBytes = 0;
 	#activeGeneration;
+	#activeIndexPages = 0;
+	#activeShards = 0;
 	#commits = 0;
 	#dirty = false;
 	#failures = 0;
@@ -121,7 +124,10 @@ export class ShardedStateStore {
 		if (this.#plan.cursor === this.#plan.actions.length) {
 			const committed = this.#plan;
 			this.#plan = undefined;
+			this.#activeBytes = committed.activeBytes;
 			this.#activeGeneration = committed.generation;
+			this.#activeIndexPages = committed.indexPages;
+			this.#activeShards = committed.shards;
 			this.#commits++;
 			try {
 				this.#onCommit(committed.generation);
@@ -140,13 +146,20 @@ export class ShardedStateStore {
 		const root = this.#parseRoot(rootValue);
 		this.#activeGeneration = root.activeGeneration;
 		const metadata = root.generations[root.activeGeneration];
+		let activeBytes = rootValue.length;
 		const records = [];
 		const warnings = [];
 		for (let page = 0; page < metadata.indexPages; page++) {
-			const index = this.#parseIndex(this.#storage.get(this.#indexKey(root.activeGeneration, page)), root.activeGeneration, page);
+			const indexValue = this.#storage.get(this.#indexKey(root.activeGeneration, page));
+			if (typeof indexValue === "string")
+				activeBytes += indexValue.length;
+			const index = this.#parseIndex(indexValue, root.activeGeneration, page);
 			for (const descriptor of index.entries) {
 				try {
-					const shard = this.#parseShard(this.#storage.get(this.#shardKey(root.activeGeneration, descriptor.shard)), root.activeGeneration, descriptor);
+					const shardValue = this.#storage.get(this.#shardKey(root.activeGeneration, descriptor.shard));
+					if (typeof shardValue === "string")
+						activeBytes += shardValue.length;
+					const shard = this.#parseShard(shardValue, root.activeGeneration, descriptor);
 					records.push(...shard.records);
 				} catch (error) {
 					warnings.push({ partition: descriptor.partition, shard: descriptor.shard, error: String(error) });
@@ -154,12 +167,18 @@ export class ShardedStateStore {
 				}
 			}
 		}
+		this.#activeBytes = activeBytes;
+		this.#activeIndexPages = metadata.indexPages;
+		this.#activeShards = metadata.shards;
 		return { records, warnings };
 	}
 
 	diagnostics() {
 		return {
+			activeBytes: this.#activeBytes,
 			activeGeneration: this.#activeGeneration,
+			activeIndexPages: this.#activeIndexPages,
+			activeShards: this.#activeShards,
 			commits: this.#commits,
 			dirty: this.#dirty,
 			failures: this.#failures,
@@ -193,7 +212,10 @@ export class ShardedStateStore {
 		for (const index of indexes)
 			actions.push({ key: this.#indexKey(generation, index.page), type: "set", value: index.value });
 		actions.push({ key: this.#rootKey(), type: "set", value: nextRoot });
-		return { actions, cursor: 0, generation };
+		const activeBytes = nextRoot.length
+			+ shards.reduce((total, shard) => total + shard.value.length, 0)
+			+ indexes.reduce((total, index) => total + index.value.length, 0);
+		return { actions, activeBytes, cursor: 0, generation, indexPages: indexes.length, shards: shards.length };
 	}
 
 	#createShards(records, generation) {

@@ -1,10 +1,16 @@
 export class BudgetScheduler {
+	#cursor = 0;
 	#groups = new Map();
+	#lastTick = { deferred: 0, executed: 0 };
+	#maxTasksPerTick;
 	#onError;
 
-	constructor({ onError } = {}) {
+	constructor({ maxTasksPerTick = 64, onError } = {}) {
 		if (onError !== undefined && typeof onError !== "function")
 			throw new TypeError("Budget scheduler error handlers must be functions");
+		if (!Number.isInteger(maxTasksPerTick) || maxTasksPerTick < 1)
+			throw new RangeError("Budget scheduler requires a positive global task budget");
+		this.#maxTasksPerTick = maxTasksPerTick;
 		this.#onError = onError;
 	}
 
@@ -50,10 +56,17 @@ export class BudgetScheduler {
 
 	tick() {
 		const groups = {};
-		for (const [name, group] of this.#groups) {
+		const entries = [...this.#groups];
+		for (const [name, group] of entries)
+			groups[name] = { completed: 0, failed: 0, pending: group.tasks.length };
+		let remaining = this.#maxTasksPerTick;
+		let lastVisited = this.#cursor;
+		for (let offset = 0; offset < entries.length && remaining > 0; offset++) {
+			const index = (this.#cursor + offset) % entries.length;
+			const [name, group] = entries[index];
 			let completed = 0;
 			let failed = 0;
-			for (let used = 0; used < group.budget && group.tasks.length > 0; used++) {
+			for (let used = 0; used < group.budget && remaining > 0 && group.tasks.length > 0; used++, remaining--) {
 				const entry = group.tasks.shift();
 				if (entry.key)
 					group.queuedKeys.delete(entry.key);
@@ -68,7 +81,14 @@ export class BudgetScheduler {
 				}
 			}
 			groups[name] = { completed, failed, pending: group.tasks.length };
+			lastVisited = index;
 		}
+		if (entries.length > 0)
+			this.#cursor = (lastVisited + 1) % entries.length;
+		this.#lastTick = {
+			deferred: [...this.#groups.values()].reduce((total, group) => total + group.tasks.length, 0),
+			executed: this.#maxTasksPerTick - remaining
+		};
 		return groups;
 	}
 
@@ -80,5 +100,12 @@ export class BudgetScheduler {
 			merged: group.merged,
 			pending: group.tasks.length
 		}]));
+	}
+
+	performanceDiagnostics() {
+		return {
+			...this.#lastTick,
+			maxTasksPerTick: this.#maxTasksPerTick
+		};
 	}
 }

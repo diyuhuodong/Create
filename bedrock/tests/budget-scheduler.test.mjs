@@ -72,3 +72,25 @@ test("BudgetScheduler coalesces keyed work while retaining FIFO execution", () =
 	assert.deepEqual(scheduler.tick().work, { completed: 2, failed: 0, pending: 0 });
 	assert.deepEqual(order, ["a", "plain", "b", "a-again"]);
 });
+
+test("BudgetScheduler applies a rotating global cap without starving later groups", () => {
+	const scheduler = new BudgetScheduler({ maxTasksPerTick: 2 });
+	scheduler.registerGroup("alpha", 2);
+	scheduler.registerGroup("beta", 2);
+	const completed = [];
+	for (const value of ["a1", "a2"])
+		scheduler.enqueue("alpha", () => completed.push(value));
+	for (const value of ["b1", "b2"])
+		scheduler.enqueue("beta", () => completed.push(value));
+
+	assert.deepEqual(scheduler.tick(), {
+		alpha: { completed: 2, failed: 0, pending: 0 },
+		beta: { completed: 0, failed: 0, pending: 2 }
+	});
+	assert.deepEqual(scheduler.performanceDiagnostics(), { deferred: 2, executed: 2, maxTasksPerTick: 2 });
+	assert.deepEqual(scheduler.tick(), {
+		alpha: { completed: 0, failed: 0, pending: 0 },
+		beta: { completed: 2, failed: 0, pending: 0 }
+	});
+	assert.deepEqual(completed, ["a1", "a2", "b1", "b2"]);
+});

@@ -4,6 +4,7 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 import { validateMigrationMatrix } from "./migration-matrix-schema.mjs";
+import { validateStage3SourceContentContract } from "./stage3-content-contract.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(toolDirectory, "..");
@@ -100,4 +101,6 @@ for (const script of await filesWithExtension(resolve(bedrockRoot, "behavior_pac
 		throw new Error(`Invalid JavaScript in ${script}: ${result.stderr || result.stdout}`);
 }
 
-console.log("Bedrock manifests, JSON files, and JavaScript syntax are valid.");
+const contentContract = await validateStage3SourceContentContract();
+
+console.log(`Bedrock manifests, JSON files, JavaScript syntax, and ${contentContract.staticBlocks} Stage-3 content contracts are valid.`);

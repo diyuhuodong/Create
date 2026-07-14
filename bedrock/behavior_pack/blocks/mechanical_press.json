@@ -3,6 +3,10 @@
   "minecraft:block": {
     "description": {
       "identifier": "createbedrock:mechanical_press",
+      "menu_category": {
+        "category": "items",
+        "group": "itemGroup.name.misc"
+      },
       "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
     },
     "components": {

@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 
 import { importJavaAssets } from "./import-java-assets.mjs";
 import { convertJavaModels } from "./convert-java-models.mjs";
+import { validateStage3BuiltContentContract } from "./stage3-content-contract.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(toolDirectory, "..");
@@ -22,4 +23,5 @@ for (const pack of packs) {
 
 const importedTextureCount = await importJavaAssets(resolve(buildRoot, "resource_pack"));
 const convertedModelCount = await convertJavaModels(resolve(buildRoot, "resource_pack"));
-console.log(`Built Bedrock packs in ${buildRoot}; staged ${importedTextureCount} Java textures and converted ${convertedModelCount} Java models.`);
+const contentContract = await validateStage3BuiltContentContract({ buildRoot });
+console.log(`Built Bedrock packs in ${buildRoot}; staged ${importedTextureCount} Java textures, converted ${convertedModelCount} Java models, and verified ${contentContract.staticBlocks} Stage-3 content contracts.`);

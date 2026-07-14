@@ -44,6 +44,9 @@ test("ShardedStateStore commits small deterministic shards through a root-pointe
 	]);
 	drain(store);
 	assert.equal(store.diagnostics().activeGeneration, 0);
+	assert.equal(store.diagnostics().activeIndexPages, 1);
+	assert.equal(store.diagnostics().activeShards, 2);
+	assert.ok(store.diagnostics().activeBytes > 0);
 	assert.equal(store.diagnostics().commits, 1);
 	assert.deepEqual(store.read(), {
 		records: [

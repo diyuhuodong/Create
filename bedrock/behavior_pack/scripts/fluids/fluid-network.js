@@ -72,6 +72,7 @@ export class FluidNetwork {
 		return {
 			activeTransfers: this.#journal.snapshot().length,
 			dirtyLinks: this.#dirtyLinks.size,
+			journal: this.#journal.diagnostics(),
 			links: this.#links.size,
 			ports: this.#ports.size
 		};

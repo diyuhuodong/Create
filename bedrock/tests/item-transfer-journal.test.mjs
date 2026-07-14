@@ -79,6 +79,7 @@ test("ItemTransferJournal rolls back escrow through the source port contract", (
 	journal.begin({ destination, id: "transfer:rollback", maxCount: 3, source });
 	assert.equal(journal.settle("transfer:rollback", ports(source, destination)).reason, "destination_full");
 	assert.deepEqual(journal.rollback("transfer:rollback", ports(source, destination)), { ok: true, state: "rolled_back" });
+	assert.deepEqual(journal.diagnostics(), { activeRecords: 0, rollbackAttempts: 1, rollbacks: 1 });
 	assert.deepEqual(source.inspect().slots, [{ count: 5, typeId: "minecraft:iron_ingot" }]);
 });
 
