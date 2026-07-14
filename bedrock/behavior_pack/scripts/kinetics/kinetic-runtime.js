@@ -81,8 +81,28 @@ function persist() {
 	persistence.request();
 }
 
+function setClutchEnabled(block, enabled) {
+	if (block?.typeId !== CLUTCH_BLOCK || typeof enabled !== "boolean")
+		return false;
+	const current = block.permutation.getAllStates()["createbedrock:enabled"];
+	const worldChanged = (current !== 0 && current !== false) !== enabled;
+	if (worldChanged)
+		block.setPermutation(block.permutation.withState("createbedrock:enabled", enabled ? 1 : 0));
+	const networkChanged = kineticWorld.setClutchEnabled(block.dimension.id, block.location, enabled);
+	if (worldChanged || networkChanged)
+		persist();
+	return worldChanged || networkChanged;
+}
+
 export function persistKineticWorld() {
 	persist();
+}
+
+export function setKineticClutchRedstonePowered(dimensionId, location, powered) {
+	if (typeof dimensionId !== "string" || !location || typeof powered !== "boolean")
+		throw new TypeError("Redstone clutch updates require a dimension, location, and power state");
+	const block = world.getDimension(dimensionId).getBlock(location);
+	return setClutchEnabled(block, !powered);
 }
 
 function restore() {
@@ -158,12 +178,7 @@ export function registerKinetics() {
 
 	world.afterEvents.playerInteractWithBlock.subscribe(event => {
 		if (event.block.typeId === CLUTCH_BLOCK) {
-			const states = event.block.permutation.getAllStates();
-			const enabled = states["createbedrock:enabled"] !== 0 && states["createbedrock:enabled"] !== false;
-			event.block.setPermutation(event.block.permutation.withState("createbedrock:enabled", enabled ? 0 : 1));
-			kineticWorld.trackPlacedBlock(event.block);
-			persist();
-			console.warn(`[Create Bedrock] Clutch ${enabled ? "disengaged" : "engaged"}`);
+		event.player.sendMessage("This clutch is controlled by redstone power.");
 			return;
 		}
 

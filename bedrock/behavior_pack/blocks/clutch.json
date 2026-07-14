@@ -9,6 +9,9 @@
     "components": {
       "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:redstone_conductivity": {
+        "redstone_conductor": true
+      },
       "minecraft:geometry": "geometry.createbedrock.shaft",
       "minecraft:item_visual": {
         "geometry": { "identifier": "geometry.createbedrock.shaft" },

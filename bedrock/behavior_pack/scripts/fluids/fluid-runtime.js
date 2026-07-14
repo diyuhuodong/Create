@@ -23,6 +23,8 @@ const NEIGHBOR_OFFSETS = [
 	{ x: 0, y: 0, z: 1 },
 	{ x: 0, y: 0, z: -1 }
 ];
+let kineticWorldProvider;
+const redstoneLockedPumpIds = new Set();
 const worldFluidEscrows = new BedrockEscrowRegistry();
 const state = new FluidNetworkState({
 	externalPortFactory({ descriptor, id }) {
@@ -156,7 +158,10 @@ function configureDevice(block, kineticWorld) {
 			if (options.kind === "pipe")
 				state.createPipe(options);
 			else
-				state.createPump({ ...options, running: pumpRunning(block, kineticWorld) });
+				state.createPump({
+					...options,
+					running: pumpRunning(block, kineticWorld) && !redstoneLockedPumpIds.has(fluidDeviceId("pump", block.dimension.id, block.location))
+				});
 		},
 		destinationAt(location) {
 			return fluidTankAt(block.dimension, location)
@@ -248,7 +253,7 @@ function syncPumpStates(kineticWorld) {
 			const dimension = world.getDimension(location.dimensionId);
 			const block = dimension.getBlock(location.location);
 			if (block?.typeId === MECHANICAL_PUMP_BLOCK)
-				state.setPumpRunning(pump.id, pumpRunning(block, kineticWorld));
+				state.setPumpRunning(pump.id, pumpRunning(block, kineticWorld) && !redstoneLockedPumpIds.has(pumpMember ?? pump.id));
 		} catch (error) {
 			console.warn(`[Create Bedrock] Could not synchronize pump ${pump.id}: ${error}`);
 		}
@@ -260,7 +265,7 @@ export function extractFluidTank(block, options) {
 }
 
 export function getFluidDiagnostics() {
-	return state.diagnostics();
+	return { ...state.diagnostics(), redstoneLockedPumps: redstoneLockedPumpIds.size };
 }
 
 export function getFluidTankId(block) {
@@ -271,9 +276,27 @@ export function insertFluidTank(block, fluid, options) {
 	return state.insert(tankIdentifier(block), fluid, options);
 }
 
+export function setFluidPumpRedstonePowered(dimensionId, location, powered) {
+	if (typeof dimensionId !== "string" || !location || typeof powered !== "boolean")
+		throw new TypeError("Redstone pump updates require a dimension, location, and power state");
+	const physicalId = fluidDeviceId("pump", dimensionId, location);
+	if (powered)
+		redstoneLockedPumpIds.add(physicalId);
+	else
+		redstoneLockedPumpIds.delete(physicalId);
+	let changed = false;
+	for (const pump of state.links().filter(link => link.kind === "pump" && (link.id === physicalId || link.members?.includes(physicalId)))) {
+		const block = world.getDimension(dimensionId).getBlock(location);
+		const kineticWorld = kineticWorldProvider?.();
+		changed = state.setPumpRunning(pump.id, !powered && block?.typeId === MECHANICAL_PUMP_BLOCK && pumpRunning(block, kineticWorld)) || changed;
+	}
+	return changed;
+}
+
 export function registerFluids(getKineticWorld) {
 	if (typeof getKineticWorld !== "function")
 		throw new TypeError("Fluid runtime requires the kinetic-world provider");
+	kineticWorldProvider = getKineticWorld;
 	registerKernelTaskGroup(FLUID_TASK_GROUP, FLUID_TASK_BUDGET);
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
 		try {

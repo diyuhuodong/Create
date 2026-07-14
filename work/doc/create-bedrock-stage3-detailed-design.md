@@ -175,6 +175,8 @@ Create 专用流体使用虚拟流体记录，不把任意数量直接转换为�
 
 不得在正式包中启用实验开关来掩盖该问题。`RedstoneSignalBus` 的接口先保持与具体 Bedrock 组件解耦，避免未来升级时扩散重写。
 
+S3-6 选择第二条兼容路径：目标仍保持 `min_engine_version: 1.21.80`，使用稳定的 `Block.getRedstonePower()` 轮询已注册的固定设备，而不是声明实验 `minecraft:redstone_consumer`。每个设备只在放置时注册，按固定预算轮询；读取失败或区块不可用时采用“失效关闭”，随后读到真实零功率才重新启用。`minecraft:redstone_conductivity` 用于现有 Clutch、Mechanical Pump 和 Andesite Funnel 的输入感知。自定义红石**输出**仍不能等价实现：`minecraft:redstone_producer` 要求至少 block format 1.21.120，因此所有尚未实现的 Create 红石输出设备在迁移矩阵中以明确版本原因标为 `blocked`，不会伪装为完成。
+
 ## 5. 内容、配方与资源迁移
 
 第一版遵循“直接迁移，不重做设计”的决定。资源工具以明确清单从 `src/main/resources/assets/create` 读取输入，输出到 `bedrock/resource_pack` 并写入 provenance；禁止批量复制整个 Java assets 目录。直接元素模型继续使用现有转换器；父模型组合、OBJ、动画部件和无法映射的渲染效果建立逐项转换任务，不能用临时立方体声称视觉完成。
@@ -213,6 +215,12 @@ S3-4 实施更新：磨盘、机械压力机与粉碎轮已统一到 `Processing
 管网使用持久化端点与 link 图：每个 Tank、世界端点和 pipe/pump run 都具有稳定 ID、所在 section 分区与显式边；重建按位置字典序执行，连接/断开只标脏受影响 run。当前实现覆盖同轴直线 run，Pump 保持方向和动力开关，普通 pipe 提供双向连通；Tank 可连接多个 run。每个有向传输仍沿用 intent → escrow → delivery 状态机。多分支竞争同一来源时按稳定 round-robin 排序，未提交 escrow 始终优先于新传输。
 
 静态验收必须新增：世界源在每个持久化边界崩溃后的恢复、目标满载、escrow 实体暂不可用、外部修改导致冻结、两条分支竞争、pipe 中段拆除和跨 section 重启。Windows、Realm 和 PS 只在这些 Node 测试、包校验和构建全部通过后执行。
+
+### 6.2 S3-6 实施设计
+
+`RedstoneSignalBus` 只持久化固定控制点的 `id`、类型、维度和方块坐标；它不扫描世界，也不把红石功率当作存档事实。每 tick 按稳定字典序和有限预算读取 `Block.getRedstonePower()`，只有功率或可用状态变化才通知设备。订阅登记、删除和轮转游标通过独立的分片状态保存；恢复后先对全部控制点执行安全关闭，再开始轮询，避免服务器恢复时 Pump 或 Funnel 在未知红石状态下短暂运行。
+
+已接入的控制语义为：有功率时 Clutch 断开、Mechanical Pump 停止、Andesite Funnel 锁定；零功率时恢复对应的动力、流体或物流行为。每次状态变化都调用已有子系统接口，因而仍由其自身的持久化和事务边界保护。节点被破坏时只注销该坐标的控制登记。尚未实现的 Java 红石机器需要定制输出或其完整行为时，不会注册空壳方块，而是保留在矩阵的版本阻塞清单中；升级最低目标版本并完成 Windows、Realm、PS 验收后，才可用官方 producer/consumer 组件扩展为输出和事件驱动模型。
 
 ## 7. 测试与验收
 

@@ -75,6 +75,22 @@ test("migration classification records the durable S3-5 fluid vertical slice ind
 	});
 });
 
+test("migration classification records S3-6 input controls and blocks custom redstone outputs on the current target", () => {
+	assert.deepEqual(classifyRegistration("clutch", "block"), {
+		acceptanceId: "KINETICS-CLUTCH-BLOCK",
+		behaviorPath: "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+		blockingReason: null,
+		domain: "kinetics",
+		persistenceSchema: 2,
+		phase: 3,
+		resourceStatus: "partial",
+		status: "static_verified"
+	});
+	const blocked = classifyRegistration("analog_lever", "block");
+	assert.equal(blocked.status, "blocked");
+	assert.match(blocked.blockingReason, /minecraft:redstone_producer/);
+});
+
 test("migration classification assigns later dynamic, train, and equipment work to their planned phases", () => {
 	assert.deepEqual(classifyRegistration("mechanical_piston", "block").phase, 4);
 	assert.deepEqual(classifyRegistration("track_signal", "block").phase, 5);

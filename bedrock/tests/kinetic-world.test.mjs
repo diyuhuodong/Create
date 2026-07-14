@@ -256,6 +256,10 @@ test("KineticWorld lets an enabled clutch pass power and a disabled clutch isola
 	world.tick();
 	assert.equal(world.speedAt("minecraft:overworld", shaft.location), 16);
 	assert.equal(world.snapshot().nodes.find(node => node.typeId === "createbedrock:clutch").enabled, true);
+	assert.equal(world.setClutchEnabled("minecraft:overworld", disabledClutch.location, false), true);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", shaft.location), 0);
+	assert.equal(world.setClutchEnabled("minecraft:overworld", disabledClutch.location, false), false);
 });
 
 test("KineticWorld transmits across a perpendicular encased chain-drive run", () => {

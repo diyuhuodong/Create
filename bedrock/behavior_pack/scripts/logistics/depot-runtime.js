@@ -331,6 +331,35 @@ export function setDepotFunnelLocked(id, locked) {
 	return network.setFunnelLocked(id, locked);
 }
 
+export function setDepotFunnelRedstonePowered(dimensionId, location, powered) {
+	if (typeof dimensionId !== "string" || !location || typeof powered !== "boolean")
+		throw new TypeError("Redstone funnel updates require a dimension, location, and power state");
+	const id = `funnel:${dimensionId}:${location.x}:${location.y}:${location.z}`;
+	try {
+		return network.setFunnelLocked(id, powered);
+	} catch (error) {
+		if (String(error).includes("Unknown funnel"))
+			return false;
+		throw error;
+	}
+}
+
+export function getDepotFunnelRedstoneControls() {
+	return network.snapshot()
+		.filter(record => record.kind === "funnel")
+		.map(record => {
+			const parts = record.id.slice("funnel:".length).split(":");
+			if (parts.length < 4)
+				return undefined;
+			const coordinates = parts.slice(-3).map(Number);
+			const dimensionId = parts.slice(0, -3).join(":");
+			if (!dimensionId || coordinates.some(value => !Number.isInteger(value)))
+				return undefined;
+			return { dimensionId, location: { x: coordinates[0], y: coordinates[1], z: coordinates[2] } };
+		})
+		.filter(Boolean);
+}
+
 export function registerDepots() {
 	registerKernelTaskGroup(DEPOT_TASK_GROUP, DEPOT_TASK_BUDGET);
 	world.afterEvents.playerPlaceBlock.subscribe(event => {

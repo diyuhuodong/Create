@@ -297,6 +297,19 @@ export class KineticWorld {
 		return true;
 	}
 
+	setClutchEnabled(dimensionId, location, enabled) {
+		if (typeof enabled !== "boolean")
+			throw new TypeError("Clutch enabled state must be boolean");
+		const node = this.#nodes.get(dimensionId, location);
+		if (!node || node.configuration.kind !== "clutch" || node.enabled === enabled)
+			return false;
+		node.enabled = enabled;
+		this.#refreshConnectionsAt(dimensionId, location);
+		this.#markDirty(dimensionId);
+		this.#persistenceDirty = true;
+		return true;
+	}
+
 	isBeltPulley(dimensionId, location) {
 		return isBeltPulley(this.#nodes.get(dimensionId, location));
 	}

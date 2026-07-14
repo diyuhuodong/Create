@@ -22,6 +22,7 @@ const STAGE_TWO_PROTOTYPES = new Map([
 ]);
 
 const BEHAVIOR_PATHS = new Map([
+	["andesite_funnel", "behavior_pack/scripts/logistics/depot-runtime.js"],
 	["belt_connector", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["clutch", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["cogwheel", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
@@ -59,6 +60,15 @@ const STAGE_THREE_FLUIDS = new Map([
 	["mechanical_pump", { domain: "fluids" }]
 ]);
 
+// S3-6 uses stable Block.getRedstonePower polling to control the existing
+// fixed devices. It deliberately does not claim the missing custom-output
+// machines, which require a newer Bedrock producer component.
+const STAGE_THREE_REDSTONE_CONTROLS = new Map([
+	["andesite_funnel", { domain: "logistics" }],
+	["clutch", { domain: "kinetics" }]
+]);
+const REDSTONE_OUTPUT_BLOCKER = "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.";
+
 const RULES = [
 	{ domain: "contraptions", phase: 4, pattern: /(cart_assembler|contraption|deployer|drill|elevator|gantry|harvester|mechanical_arm|mechanical_piston|minecart|pulley|rope|seat|sticker)/ },
 	{ domain: "schematics", phase: 4, pattern: /(blueprint|clipboard|schematic|wand)/ },
@@ -80,21 +90,24 @@ export function classifyRegistration(identifier, kind) {
 	const prototype = STAGE_TWO_PROTOTYPES.get(identifier);
 	const processor = STAGE_THREE_PROCESSORS.get(identifier);
 	const fluid = STAGE_THREE_FLUIDS.get(identifier);
-	const staticSystem = processor ?? fluid;
+	const redstoneControl = STAGE_THREE_REDSTONE_CONTROLS.get(identifier);
+	const staticSystem = processor ?? fluid ?? redstoneControl;
+	const rule = RULES.find(candidate => candidate.pattern.test(identifier));
 	const classification = staticSystem
 		? { ...staticSystem, phase: 3, status: "static_verified" }
 		: prototype
 		? { ...prototype, phase: 2, status: "implementation_in_progress" }
-		: RULES.find(rule => rule.pattern.test(identifier)) ?? { domain: "content", phase: 3 };
+		: rule ?? { domain: "content", phase: 3 };
+	const blockedByTargetVersion = !staticSystem && !prototype && classification.domain === "redstone";
 
 	return {
 		acceptanceId: acceptanceId(identifier, classification.domain, kind),
 		behaviorPath: BEHAVIOR_PATHS.get(identifier) ?? null,
-		blockingReason: null,
+		blockingReason: blockedByTargetVersion ? REDSTONE_OUTPUT_BLOCKER : null,
 		domain: classification.domain,
 		persistenceSchema: staticSystem ? 2 : prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null,
 		phase: classification.phase,
 		resourceStatus: prototype || staticSystem ? "partial" : "pending",
-		status: classification.status ?? "specification_pending"
+		status: blockedByTargetVersion ? "blocked" : classification.status ?? "specification_pending"
 	};
 }
