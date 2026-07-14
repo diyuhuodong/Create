@@ -1,0 +1,18 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:windmill_bearing",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.mechanical_bearing",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.mechanical_bearing" }, "material_instances": { "*": { "texture": "createbedrock_mechanical_bearing", "render_method": "opaque" } } },
+      "minecraft:loot": "loot_tables/blocks/windmill_bearing.json",
+      "minecraft:material_instances": { "*": { "texture": "createbedrock_mechanical_bearing", "render_method": "opaque" } }
+    }
+  }
+}

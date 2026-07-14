@@ -15,7 +15,7 @@
 | 包 | 范围与交付物 | 前置条件 | 静态退出条件 |
 |---|---|---|---|
 | S3-8 | 规格锁定与基础材料。先为 201 项建立按依赖分组的工作清单；首批只实现不依赖未迁移机器的材料、装饰/结构方块与其获取路径。 | 无 | 每条首批记录有规格、资源、配方结论和测试归属。 |
-| S3-9 | 固定动力扩展：encased shaft/cogwheel、vertical gearbox、gearshift、chain conveyor、large water wheel 等。 | S3-8 的材料与配方依赖已落地。 | 网络传动比、方向、过载、破坏和重启均有测试；资源契约覆盖新增方块。 |
+| S3-9 | 固定动力扩展：机壳轴/齿轮、gearshift、可调链传动、creative motor、大水车、飞轮、金属桁架轴、链式输送机、蒸汽引擎/动力轴、顺序变速器、风车轴承。 | S3-8 的材料与配方依赖已落地。 | 27 条直接实现与 6 条共享运行时吸收；33 条规格锁定且无移交。网络传动比、方向、过载、快速控制更新、流体断供、在途物品保护、动态结构持久化和重启均有静态测试；资源契约覆盖新增方块。 |
 | S3-10 | 基础物流闭环：可放置/可见 belt、物品渲染、depot/chute/funnel 变体、filter、tunnel、item vault。 | S3-9 提供稳定动力输入。 | 端到端转移、过滤、满端、反向、断带、重启和并发不复制/吞没物品。 |
 | S3-11 | 固定加工扩展：basin、mechanical mixer、mechanical saw、encased fan；扩展源配方分类报告。 | S3-8 材料、S3-9 动力、S3-10 端口可用。 | 每个支持配方均为 migrated 或显式 blocked；机器状态和随机结果可重启恢复。 |
 | S3-12 | 流体扩展：glass/encased/smart pipe、valve、drain、spout、portable interface。 | S3-8 材料、现有 Tank/Pump 事务内核。 | 容量守恒、分支竞争、阀门、外部端点异常和重启恢复测试通过。 |
@@ -33,6 +33,7 @@
 2. 已完成：以“原版材料可表达、无移动机械依赖、无实验 API”为筛选条件，交付 `andesite_alloy_block`、`zinc_ore`、`deepslate_zinc_ore`、`raw_zinc_block`、`rose_quartz_block`、`weathered_iron_block` 与支撑物品的 BP、RP、语言、创造获取、掉落和基础配方。
 3. 已完成：资源契约从 8 个静态方块扩展到 14 个已交付内容方块。矿石自然生成、Silk Touch、Fortune、未转换 OBJ/动画和多方块外观仍为 partial。
 4. 已完成：110 条 S3-8B 内容记录已逐项固化 Java 配方/掉落/资产来源、行为边界、后续实现包和测试策略。后续按该规格由 S3-9 至 S3-14、S4、S6 实现；Windows、Realm、PS 实机验证仍保留到 S3-15。
+5. 已完成：S3-9 以 `stage3-kinetic-specifications.json` 锁定并实现全部 33 条动力记录：27 条直接实现、6 条共享运行时吸收。链式输送机复用持久化 DepotNetwork，蒸汽引擎驱动动力轴，顺序变速器持久化程序，风车轴承复用动态结构控制器；不存在以空壳方块替代的移交项。
 
 ## 风险控制
 

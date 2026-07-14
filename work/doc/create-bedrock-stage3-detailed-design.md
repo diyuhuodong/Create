@@ -241,6 +241,8 @@ Java 锌矿的 Silk Touch、Fortune 与自然生成尚未在 Bedrock 目标版�
 
 S3-8B 已为其余 110 条内容记录生成 `bedrock/data/stage3-content-specifications.json`。每条记录均绑定 Java 配方、loot、模型/贴图的可追溯源路径（不存在时明确记录）、Bedrock 行为类型、后续实现包及测试策略；校验器要求它们与 S3-8B 队列一一对应且所有引用的 Java 源文件存在。规格归属已明确分配到 S3-9、S3-10、S3-11、S3-13、S3-14、S4 或 S6，不能以生成 BP 空壳来假装实现。
 
+S3-9 使用 `bedrock/data/stage3-kinetic-specifications.json` 对 33 条固定动力记录实施同样的一一对应约束。传动、红石换向、模拟链倍率、固定动力源、链式物流、蒸汽/动力轴桥、顺序配置和风车构件均由本阶段交付；抽象 Java block-entity 注册由共享节点运行时吸收。资源视觉仍为 partial，但不再构成行为移交。详细的动力端口模型、持久化字段和本地验证命令见 `work/doc/create-bedrock-s3-9-design.md`。
+
 ## 7. 测试与验收
 
 | 层级 | 现在可执行 | 必测内容 |

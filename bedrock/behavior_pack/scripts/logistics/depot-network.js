@@ -265,6 +265,10 @@ export class DepotNetwork {
 		return depot.port.snapshot().slots.every(stack => stack === undefined);
 	}
 
+	canRemoveBelt(id) {
+		return ![...this.#transports.values()].some(transport => transport.beltId === id);
+	}
+
 	canRemoveChute(id) {
 		return !this.#journal.snapshot().some(record => record.id.startsWith(`chute:${id}:`));
 	}
@@ -352,7 +356,7 @@ export class DepotNetwork {
 	}
 
 	removeBelt(id) {
-		if (this.#transports.size > 0 && [...this.#transports.values()].some(transport => transport.beltId === id))
+		if (!this.canRemoveBelt(id))
 			throw new Error(`Belt ${id} has an active transport`);
 		if (!this.#belts.delete(id))
 			return false;

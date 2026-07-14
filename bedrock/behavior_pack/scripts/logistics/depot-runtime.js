@@ -2,7 +2,7 @@ import { ItemStack, system, world } from "@minecraft/server";
 
 import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-property-storage.js";
-import { getKineticSpeedAt } from "../kinetics/kinetic-runtime.js";
+import { getKineticSpeedAt, getKineticWorldForTesting } from "../kinetics/kinetic-runtime.js";
 import { decodeBedrockContainerStack } from "./bedrock-container-item-port.js";
 import { BedrockEscrowRegistry } from "./bedrock-escrow-registry.js";
 import { depotId, DepotNetwork } from "./depot-network.js";
@@ -10,6 +10,7 @@ import { registerEscrowProtection } from "./external-escrow-runtime.js";
 
 const DEPOT_BLOCK = "createbedrock:depot";
 const CHUTE_BLOCK = "createbedrock:chute";
+const CHAIN_CONVEYOR_BLOCK = "createbedrock:chain_conveyor";
 const BELT_CONNECTOR = "createbedrock:belt_connector";
 const MAX_DEPOT_BELT_LENGTH = 20;
 const FUNNEL_BLOCK = "createbedrock:andesite_funnel";
@@ -53,7 +54,9 @@ const network = new DepotNetwork({
 });
 const escrows = new BedrockEscrowRegistry();
 const pendingDepotBeltEndpoints = new Map();
+const chainConveyorLocations = new Map();
 let nextPlayerTransaction = 0;
+let chainConveyorRescanTicks = 0;
 
 registerEscrowProtection(() => network.activeEscrowIds());
 
@@ -93,9 +96,57 @@ function kineticSpeedForDepot(dimensionId, location) {
 function refreshDepotBeltSpeeds() {
 	let changed = false;
 	for (const belt of network.worldBelts()) {
-		const speed = kineticSpeedForDepot(belt.source.dimensionId, belt.source.location);
+		const conveyor = chainConveyorLocations.get(belt.id);
+		const speed = conveyor
+			? getKineticSpeedAt(conveyor.dimensionId, conveyor.location)
+			: kineticSpeedForDepot(belt.source.dimensionId, belt.source.location);
 		if (network.setBeltSpeed(belt.id, speed))
 			changed = true;
+	}
+	return changed;
+}
+
+function chainConveyorId(block) {
+	return `chain-conveyor:${block.dimension.id}:${block.location.x}:${block.location.y}:${block.location.z}`;
+}
+
+function chainDirection(block) {
+	const facing = block.permutation.getAllStates()["minecraft:facing_direction"];
+	const direction = FACING_OFFSETS[facing];
+	return direction?.y === 0 ? direction : { x: 1, y: 0, z: 0 };
+}
+
+function configureChainConveyor(block) {
+	if (block?.typeId !== CHAIN_CONVEYOR_BLOCK)
+		return false;
+	const direction = chainDirection(block);
+	const source = depotAt(block.dimension, offsetLocation(block.location, { x: -direction.x, y: 0, z: -direction.z }));
+	const destination = depotAt(block.dimension, offsetLocation(block.location, direction));
+	if (!source || !destination)
+		return false;
+	const id = chainConveyorId(block);
+	chainConveyorLocations.set(id, { dimensionId: block.dimension.id, location: { ...block.location } });
+	if (network.hasBelt(id))
+		return false;
+	network.createBelt({
+		destinationId: identifierFor(destination),
+		id,
+		length: 2,
+		sourceId: identifierFor(source),
+		speed: getKineticSpeedAt(block.dimension.id, block.location)
+	});
+	return true;
+}
+
+function rescanChainConveyors() {
+	let changed = false;
+	for (const node of getKineticWorldForTesting().getNodesByType(CHAIN_CONVEYOR_BLOCK)) {
+		try {
+			const block = world.getDimension(node.dimensionId).getBlock(node.location);
+			changed = configureChainConveyor(block) || changed;
+		} catch (error) {
+			console.warn(`[Create Bedrock] Could not restore chain conveyor: ${error}`);
+		}
 	}
 	return changed;
 }
@@ -182,6 +233,8 @@ function configureAdjacentDevices(depot) {
 			configureFunnel(block);
 		if (block?.typeId === CHUTE_BLOCK)
 			configureChute(block);
+		if (block?.typeId === CHAIN_CONVEYOR_BLOCK)
+			configureChainConveyor(block);
 	}
 }
 
@@ -374,6 +427,8 @@ export function registerDepots() {
 			configureFunnel(event.block);
 		if (event.block.typeId === CHUTE_BLOCK)
 			configureChute(event.block);
+		if (event.block.typeId === CHAIN_CONVEYOR_BLOCK)
+			configureChainConveyor(event.block);
 	});
 
 	world.beforeEvents.playerBreakBlock.subscribe(event => {
@@ -389,6 +444,10 @@ export function registerDepots() {
 			event.cancel = true;
 			event.player.sendMessage("Cannot remove a chute with an active transfer.");
 		}
+		if (event.block.typeId === CHAIN_CONVEYOR_BLOCK && !network.canRemoveBelt(chainConveyorId(event.block))) {
+			event.cancel = true;
+			event.player.sendMessage("Cannot remove a chain conveyor with an active transport.");
+		}
 	});
 
 	world.afterEvents.playerBreakBlock.subscribe(event => {
@@ -396,6 +455,10 @@ export function registerDepots() {
 			network.removeDepot(depotId(event.dimension.id, event.block.location));
 			network.removeFunnel(`funnel:${event.dimension.id}:${event.block.location.x}:${event.block.location.y}:${event.block.location.z}`);
 			network.removeChute(`chute:${event.dimension.id}:${event.block.location.x}:${event.block.location.y}:${event.block.location.z}`);
+			const chainId = `chain-conveyor:${event.dimension.id}:${event.block.location.x}:${event.block.location.y}:${event.block.location.z}`;
+			chainConveyorLocations.delete(chainId);
+			if (network.hasBelt(chainId))
+				network.removeBelt(chainId);
 		} catch (error) {
 			console.warn(`[Create Bedrock] Logistics endpoint removal deferred: ${error}`);
 		}
@@ -446,7 +509,10 @@ export function registerDepots() {
 		});
 	});
 
-	registerTickHandler(() => refreshDepotBeltSpeeds() || network.tick() || network.tickExternalDeposits({
+	registerTickHandler(() => {
+		chainConveyorRescanTicks++;
+		const rescanned = chainConveyorRescanTicks >= 20 && (chainConveyorRescanTicks = 0, rescanChainConveyors());
+		return rescanned || refreshDepotBeltSpeeds() || network.tick() || network.tickExternalDeposits({
 		decodeStack: decodeBedrockContainerStack,
 		resolveEscrow(record) {
 			return escrows.resolve(record.escrowId, record.id);
@@ -461,7 +527,8 @@ export function registerDepots() {
 			return escrows.resolve(record.escrowId, record.id);
 		},
 		resolveTarget: resolvePlayerInventorySlot
-	}), DEPOT_TASK_GROUP);
+	});
+	}, DEPOT_TASK_GROUP);
 	system.run(() => {
 		try {
 			const restored = network.restore();

@@ -416,3 +416,187 @@ test("KineticWorld captures and restores only belt links internal to a moving as
 	assert.equal(world.restoreInternalBeltLinks("minecraft:overworld", { x: 10, y: 70, z: 10 }, captured), 1);
 	assert.equal(world.snapshot().beltLinks.length, 1);
 });
+
+test("KineticWorld carries power through the encased shaft and cogwheel variants", () => {
+	const world = new KineticWorld();
+	const crank = block("createbedrock:hand_crank", 0, 64, 0);
+	world.trackPlacedBlock(crank);
+	world.trackPlacedBlock(block("createbedrock:andesite_encased_shaft", 0, 65, 0));
+	world.trackPlacedBlock(block("createbedrock:brass_encased_cogwheel", 0, 66, 0));
+	const output = block("createbedrock:andesite_encased_cogwheel", 1, 66, 0);
+	world.trackPlacedBlock(output);
+	world.activateHandCrank(crank);
+	world.tick();
+
+	assert.equal(world.speedAt("minecraft:overworld", output.location), -16);
+});
+
+test("KineticWorld reverses only the output side of a powered gearshift and persists it", () => {
+	const world = new KineticWorld();
+	const crank = block("createbedrock:hand_crank", 0, 64, 0);
+	const gearshift = block("createbedrock:gearshift", 0, 65, 0);
+	const output = block("createbedrock:shaft", 0, 66, 0);
+	world.trackPlacedBlock(crank);
+	world.trackPlacedBlock(gearshift);
+	world.trackPlacedBlock(output);
+	world.activateHandCrank(crank, 4);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", output.location), 16);
+
+	assert.equal(world.setGearshiftReversed("minecraft:overworld", gearshift.location, true), true);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", output.location), -16);
+
+	const restored = new KineticWorld();
+	restored.restore(world.snapshot());
+	restored.tick();
+	assert.equal(restored.speedAt("minecraft:overworld", output.location), -16);
+});
+
+test("KineticWorld respects gearshift and chain-gearshift states supplied at placement", () => {
+	const world = new KineticWorld();
+	const crank = block("createbedrock:hand_crank", 0, 64, 0);
+	const gearshift = stateBlock("createbedrock:gearshift", 0, 65, 0, { "createbedrock:powered": 1 });
+	const output = block("createbedrock:shaft", 0, 66, 0);
+	world.trackPlacedBlock(crank);
+	world.trackPlacedBlock(gearshift);
+	world.trackPlacedBlock(output);
+	world.activateHandCrank(crank, 2);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", output.location), -16);
+
+	const chainWorld = new KineticWorld();
+	const chainCrank = block("createbedrock:hand_crank", 0, 64, 0);
+	const chainGearshift = stateBlock("createbedrock:adjustable_chain_gearshift", 0, 66, 0, { "createbedrock:signal": 15 });
+	const chain = block("createbedrock:encased_chain_drive", 0, 66, 1);
+	const chainOutput = block("createbedrock:shaft", 0, 67, 1);
+	chainWorld.trackPlacedBlock(chainCrank);
+	chainWorld.trackPlacedBlock(block("createbedrock:shaft", 0, 65, 0));
+	chainWorld.trackPlacedBlock(chainGearshift);
+	chainWorld.trackPlacedBlock(chain);
+	chainWorld.trackPlacedBlock(chainOutput);
+	chainWorld.activateHandCrank(chainCrank, 2);
+	chainWorld.tick();
+	assert.equal(chainWorld.speedAt("minecraft:overworld", chainOutput.location), 32);
+});
+
+test("KineticWorld applies and persists adjustable chain-gearshift analog speed modifiers", () => {
+	const world = new KineticWorld();
+	const crank = block("createbedrock:hand_crank", 0, 64, 0);
+	const gearshift = block("createbedrock:adjustable_chain_gearshift", 0, 66, 0);
+	const chain = block("createbedrock:encased_chain_drive", 0, 66, 1);
+	const output = block("createbedrock:shaft", 0, 67, 1);
+	world.trackPlacedBlock(crank);
+	world.trackPlacedBlock(block("createbedrock:shaft", 0, 65, 0));
+	world.trackPlacedBlock(gearshift);
+	world.trackPlacedBlock(chain);
+	world.trackPlacedBlock(output);
+	world.activateHandCrank(crank, 4);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", output.location), 16);
+
+	assert.equal(world.setChainGearshiftSignal("minecraft:overworld", gearshift.location, 15), true);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", output.location), 32);
+
+	const restored = new KineticWorld();
+	restored.restore(world.snapshot());
+	restored.tick();
+	assert.equal(restored.speedAt("minecraft:overworld", output.location), 32);
+});
+
+test("KineticWorld coalesces rapid redstone control updates without duplicating nodes", () => {
+	const world = new KineticWorld();
+	const crank = block("createbedrock:hand_crank", 0, 64, 0);
+	const gearshift = block("createbedrock:gearshift", 0, 65, 0);
+	const output = block("createbedrock:shaft", 0, 66, 0);
+	for (const placed of [crank, gearshift, output])
+		world.trackPlacedBlock(placed);
+	world.activateHandCrank(crank, 2);
+	for (const reversed of [true, false, true, false, true])
+		world.setGearshiftReversed("minecraft:overworld", gearshift.location, reversed);
+	world.tick();
+
+	assert.equal(world.speedAt("minecraft:overworld", output.location), -16);
+	assert.equal(world.snapshot().nodes.length, 3);
+	assert.deepEqual(world.latestResolved[0].nodeIds, [
+		"minecraft:overworld:0:64:0",
+		"minecraft:overworld:0:65:0",
+		"minecraft:overworld:0:66:0"
+	]);
+});
+
+test("KineticWorld exposes configurable motors and large water wheels as durable sources", () => {
+	const world = new KineticWorld();
+	const motor = block("createbedrock:creative_motor", 0, 64, 0);
+	const motorOutput = block("createbedrock:flywheel", 0, 65, 0);
+	const largeWheel = block("createbedrock:large_water_wheel", 4, 64, 0);
+	const wheelOutput = block("createbedrock:metal_girder_encased_shaft", 4, 65, 0);
+	for (const placed of [motor, motorOutput, largeWheel, wheelOutput])
+		world.trackPlacedBlock(placed);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", motorOutput.location), 16);
+	assert.equal(world.setGeneratedSpeed("minecraft:overworld", motor.location, -128), true);
+	assert.throws(() => world.setGeneratedSpeed("minecraft:overworld", motor.location, 257), /between/);
+	assert.equal(world.setGeneratedSpeed("minecraft:overworld", largeWheel.location, 4), true);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", motorOutput.location), -128);
+	assert.equal(world.speedAt("minecraft:overworld", wheelOutput.location), 4);
+
+	const restored = new KineticWorld();
+	restored.restore(world.snapshot());
+	restored.tick();
+	assert.equal(restored.speedAt("minecraft:overworld", motorOutput.location), -128);
+	assert.equal(restored.speedAt("minecraft:overworld", wheelOutput.location), 4);
+});
+
+test("KineticWorld keeps a powered shaft durable while its external engine source is available", () => {
+	const world = new KineticWorld();
+	const poweredShaft = block("createbedrock:powered_shaft", 0, 64, 0);
+	const output = block("createbedrock:shaft", 0, 65, 0);
+	world.trackPlacedBlock(poweredShaft);
+	world.trackPlacedBlock(output);
+	assert.equal(world.setExternalSource("minecraft:overworld", poweredShaft.location, { capacity: 128, speed: 32 }), true);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", output.location), 32);
+
+	const restored = new KineticWorld();
+	restored.restore(world.snapshot());
+	restored.tick();
+	assert.equal(restored.speedAt("minecraft:overworld", output.location), 32);
+	assert.equal(restored.setExternalSource("minecraft:overworld", poweredShaft.location, { capacity: 0, speed: 0 }), true);
+	restored.tick();
+	assert.equal(restored.speedAt("minecraft:overworld", output.location), 0);
+});
+
+test("KineticWorld runs a bounded sequenced gearshift program only while redstone is powered", () => {
+	const world = new KineticWorld();
+	const crank = block("createbedrock:hand_crank", 0, 64, 0);
+	const gearshift = block("createbedrock:sequenced_gearshift", 0, 65, 0);
+	const output = block("createbedrock:shaft", 0, 66, 0);
+	for (const placed of [crank, gearshift, output])
+		world.trackPlacedBlock(placed);
+	world.configureSequencedGearshift("minecraft:overworld", gearshift.location, [
+		{ duration: 2, multiplier: 1 },
+		{ duration: 2, multiplier: -2 }
+	]);
+	world.activateHandCrank(crank, 8);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", output.location), 0);
+	world.setSequencedGearshiftPowered("minecraft:overworld", gearshift.location, true);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", output.location), 16);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", output.location), -32);
+	world.setSequencedGearshiftPowered("minecraft:overworld", gearshift.location, false);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", output.location), 0);
+	const restored = new KineticWorld();
+	restored.restore(world.snapshot());
+	restored.tick();
+	restored.setSequencedGearshiftPowered("minecraft:overworld", gearshift.location, true);
+	restored.tick();
+	assert.equal(restored.speedAt("minecraft:overworld", output.location), 16);
+
+	assert.throws(() => world.configureSequencedGearshift("minecraft:overworld", gearshift.location, []), /one to sixteen/);
+});

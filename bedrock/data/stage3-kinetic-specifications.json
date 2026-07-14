@@ -1,0 +1,469 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "deterministic",
+  "generatedFrom": "bedrock/data/stage3-work-queue.json and Java registration sources",
+  "entries": [
+    {
+      "acceptanceId": "KINETICS-ADJUSTABLE-CHAIN-GEARSHIFT-BLOCK",
+      "bedrockIdentifier": "createbedrock:adjustable_chain_gearshift",
+      "behaviorBoundary": "Implemented in KineticWorld with axis-aware propagation, durable source/control state, and the S3-9 block resource boundary.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:adjustable_chain_gearshift",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "KINETICS-ADJUSTABLE-CHAIN-GEARSHIFT-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:adjustable_chain_gearshift",
+      "behaviorBoundary": "Implemented in KineticWorld with axis-aware propagation, durable source/control state, and the S3-9 block resource boundary.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:adjustable_chain_gearshift",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "KINETICS-ANDESITE-ENCASED-COGWHEEL-BLOCK",
+      "bedrockIdentifier": "createbedrock:andesite_encased_cogwheel",
+      "behaviorBoundary": "Implemented in KineticWorld with axis-aware propagation, durable source/control state, and the S3-9 block resource boundary.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:andesite_encased_cogwheel",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "KINETICS-ANDESITE-ENCASED-LARGE-COGWHEEL-BLOCK",
+      "bedrockIdentifier": "createbedrock:andesite_encased_large_cogwheel",
+      "behaviorBoundary": "Implemented in KineticWorld with axis-aware propagation, durable source/control state, and the S3-9 block resource boundary.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:andesite_encased_large_cogwheel",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "KINETICS-ANDESITE-ENCASED-SHAFT-BLOCK",
+      "bedrockIdentifier": "createbedrock:andesite_encased_shaft",
+      "behaviorBoundary": "Implemented in KineticWorld with axis-aware propagation, durable source/control state, and the S3-9 block resource boundary.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:andesite_encased_shaft",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "KINETICS-BRASS-ENCASED-COGWHEEL-BLOCK",
+      "bedrockIdentifier": "createbedrock:brass_encased_cogwheel",
+      "behaviorBoundary": "Implemented in KineticWorld with axis-aware propagation, durable source/control state, and the S3-9 block resource boundary.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:brass_encased_cogwheel",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "KINETICS-BRASS-ENCASED-LARGE-COGWHEEL-BLOCK",
+      "bedrockIdentifier": "createbedrock:brass_encased_large_cogwheel",
+      "behaviorBoundary": "Implemented in KineticWorld with axis-aware propagation, durable source/control state, and the S3-9 block resource boundary.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:brass_encased_large_cogwheel",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "KINETICS-BRASS-ENCASED-SHAFT-BLOCK",
+      "bedrockIdentifier": "createbedrock:brass_encased_shaft",
+      "behaviorBoundary": "Implemented in KineticWorld with axis-aware propagation, durable source/control state, and the S3-9 block resource boundary.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:brass_encased_shaft",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "KINETICS-CHAIN-CONVEYOR-BLOCK",
+      "bedrockIdentifier": "createbedrock:chain_conveyor",
+      "behaviorBoundary": "Implemented as a kinetic DepotNetwork belt with durable transport, reversal, break protection, and restart rescanning.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:chain_conveyor",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "KINETICS-CHAIN-CONVEYOR-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:chain_conveyor",
+      "behaviorBoundary": "Implemented as a kinetic DepotNetwork belt with durable transport, reversal, break protection, and restart rescanning.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:chain_conveyor",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "KINETICS-CREATIVE-MOTOR-BLOCK",
+      "bedrockIdentifier": "createbedrock:creative_motor",
+      "behaviorBoundary": "Implemented in KineticWorld with axis-aware propagation, durable source/control state, and the S3-9 block resource boundary.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:creative_motor",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "KINETICS-ENCASED-COGWHEEL-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:encased_cogwheel",
+      "behaviorBoundary": "No independent Bedrock block-entity object is introduced; the state-free Java registration is represented by the concrete KineticWorld node implementations.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "No separate placeable identifier is emitted because this record is an abstract Java runtime or an orientation alias.",
+      "testPlan": "Concrete variant propagation and persistence tests cover the shared runtime behavior.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:encased_cogwheel",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "KINETICS-ENCASED-LARGE-COGWHEEL-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:encased_large_cogwheel",
+      "behaviorBoundary": "No independent Bedrock block-entity object is introduced; the state-free Java registration is represented by the concrete KineticWorld node implementations.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "No separate placeable identifier is emitted because this record is an abstract Java runtime or an orientation alias.",
+      "testPlan": "Concrete variant propagation and persistence tests cover the shared runtime behavior.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:encased_large_cogwheel",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "KINETICS-ENCASED-SHAFT-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:encased_shaft",
+      "behaviorBoundary": "No independent Bedrock block-entity object is introduced; the state-free Java registration is represented by the concrete KineticWorld node implementations.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "No separate placeable identifier is emitted because this record is an abstract Java runtime or an orientation alias.",
+      "testPlan": "Concrete variant propagation and persistence tests cover the shared runtime behavior.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:encased_shaft",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "KINETICS-FLYWHEEL-BLOCK",
+      "bedrockIdentifier": "createbedrock:flywheel",
+      "behaviorBoundary": "Implemented in KineticWorld with axis-aware propagation, durable source/control state, and the S3-9 block resource boundary.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:flywheel",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "KINETICS-FLYWHEEL-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:flywheel",
+      "behaviorBoundary": "Implemented in KineticWorld with axis-aware propagation, durable source/control state, and the S3-9 block resource boundary.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:flywheel",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "KINETICS-GEARSHIFT-BLOCK",
+      "bedrockIdentifier": "createbedrock:gearshift",
+      "behaviorBoundary": "Implemented in KineticWorld with axis-aware propagation, durable source/control state, and the S3-9 block resource boundary.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:gearshift",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "KINETICS-GEARSHIFT-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:gearshift",
+      "behaviorBoundary": "Implemented in KineticWorld with axis-aware propagation, durable source/control state, and the S3-9 block resource boundary.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:gearshift",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "KINETICS-LARGE-WATER-WHEEL-BLOCK",
+      "bedrockIdentifier": "createbedrock:large_water_wheel",
+      "behaviorBoundary": "Implemented in KineticWorld with axis-aware propagation, durable source/control state, and the S3-9 block resource boundary.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:large_water_wheel",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "KINETICS-LARGE-WATER-WHEEL-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:large_water_wheel",
+      "behaviorBoundary": "Implemented in KineticWorld with axis-aware propagation, durable source/control state, and the S3-9 block resource boundary.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:large_water_wheel",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "KINETICS-METAL-GIRDER-ENCASED-SHAFT-BLOCK",
+      "bedrockIdentifier": "createbedrock:metal_girder_encased_shaft",
+      "behaviorBoundary": "Implemented in KineticWorld with axis-aware propagation, durable source/control state, and the S3-9 block resource boundary.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:metal_girder_encased_shaft",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "KINETICS-MOTOR-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:motor",
+      "behaviorBoundary": "No independent Bedrock block-entity object is introduced; the state-free Java registration is represented by the concrete KineticWorld node implementations.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "No separate placeable identifier is emitted because this record is an abstract Java runtime or an orientation alias.",
+      "testPlan": "Concrete variant propagation and persistence tests cover the shared runtime behavior.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:motor",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "KINETICS-POWERED-SHAFT-BLOCK",
+      "bedrockIdentifier": "createbedrock:powered_shaft",
+      "behaviorBoundary": "Implemented as a durable fluid-tank-to-powered-shaft bridge with bounded water consumption and zero-output fail-safe.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:powered_shaft",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "KINETICS-POWERED-SHAFT-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:powered_shaft",
+      "behaviorBoundary": "Implemented as a durable fluid-tank-to-powered-shaft bridge with bounded water consumption and zero-output fail-safe.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:powered_shaft",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "KINETICS-SEQUENCED-GEARSHIFT-BLOCK",
+      "bedrockIdentifier": "createbedrock:sequenced_gearshift",
+      "behaviorBoundary": "Implemented in KineticWorld with persistent bounded instruction steps and redstone edge start/stop semantics.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:sequenced_gearshift",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "KINETICS-SEQUENCED-GEARSHIFT-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:sequenced_gearshift",
+      "behaviorBoundary": "Implemented in KineticWorld with persistent bounded instruction steps and redstone edge start/stop semantics.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:sequenced_gearshift",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "KINETICS-SIMPLE-KINETIC-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:simple_kinetic",
+      "behaviorBoundary": "No independent Bedrock block-entity object is introduced; the state-free Java registration is represented by the concrete KineticWorld node implementations.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "No separate placeable identifier is emitted because this record is an abstract Java runtime or an orientation alias.",
+      "testPlan": "Concrete variant propagation and persistence tests cover the shared runtime behavior.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:simple_kinetic",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "KINETICS-STEAM-ENGINE-BLOCK",
+      "bedrockIdentifier": "createbedrock:steam_engine",
+      "behaviorBoundary": "Implemented as a durable fluid-tank-to-powered-shaft bridge with bounded water consumption and zero-output fail-safe.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:steam_engine",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "KINETICS-STEAM-ENGINE-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:steam_engine",
+      "behaviorBoundary": "Implemented as a durable fluid-tank-to-powered-shaft bridge with bounded water consumption and zero-output fail-safe.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:steam_engine",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "KINETICS-VERTICAL-GEARBOX-ITEM",
+      "bedrockIdentifier": "createbedrock:vertical_gearbox",
+      "behaviorBoundary": "No independent Bedrock block-entity object is introduced; the state-free Java registration is represented by the concrete KineticWorld node implementations.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "No separate placeable identifier is emitted because this record is an abstract Java runtime or an orientation alias.",
+      "testPlan": "Concrete variant propagation and persistence tests cover the shared runtime behavior.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllItems.java"
+      ],
+      "javaIdentifier": "create:vertical_gearbox",
+      "kind": "item"
+    },
+    {
+      "acceptanceId": "KINETICS-WATER-WHEEL-STRUCTURE-BLOCK",
+      "bedrockIdentifier": "createbedrock:water_wheel_structure",
+      "behaviorBoundary": "Implemented as the automatically maintained eight-block large-water-wheel structural ring.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Internal generated structure block with EN/ZH diagnostics name; it is not exposed as a creative item.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:water_wheel_structure",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "KINETICS-WINDMILL-BEARING-BLOCK",
+      "bedrockIdentifier": "createbedrock:windmill_bearing",
+      "behaviorBoundary": "Implemented through the persistent contraption controller; assembled movable sail blocks generate bounded kinetic speed.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:windmill_bearing",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "KINETICS-WINDMILL-BEARING-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:windmill_bearing",
+      "behaviorBoundary": "Implemented through the persistent contraption controller; assembled movable sail blocks generate bounded kinetic speed.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-9",
+      "resourceBoundary": "Placeable block, creative entry, self-drop, EN/ZH name, and a deliberately partial Java-asset geometry mapping.",
+      "testPlan": "Focused propagation, failure, restart, control-update, and source-contract tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:windmill_bearing",
+      "kind": "block_entity"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:gearshift",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
+      "properties": { "createbedrock:powered": [0, 1] },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:redstone_conductivity": { "redstone_conductor": true },
+      "minecraft:geometry": "geometry.createbedrock.shaft",
+      "minecraft:item_visual": {
+        "geometry": { "identifier": "geometry.createbedrock.shaft" },
+        "material_instances": { "*": { "texture": "createbedrock_clutch_off", "render_method": "opaque" } }
+      },
+      "minecraft:loot": "loot_tables/blocks/gearshift.json",
+      "minecraft:material_instances": { "*": { "texture": "createbedrock_clutch_off", "render_method": "opaque" } }
+    },
+    "permutations": [
+      { "condition": "query.block_state('createbedrock:powered') == 1", "components": { "minecraft:material_instances": { "*": { "texture": "createbedrock_clutch_on", "render_method": "opaque" } } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 2 || query.block_state('minecraft:facing_direction') == 3", "components": { "minecraft:transformation": { "rotation": [90, 0, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 4 || query.block_state('minecraft:facing_direction') == 5", "components": { "minecraft:transformation": { "rotation": [0, 0, 90] } } }
+    ]
+  }
+}

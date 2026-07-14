@@ -7,14 +7,17 @@ import { registerEscrowProtection } from "../logistics/external-escrow-runtime.j
 import { createBedrockWorldFluidEscrows } from "./bedrock-world-fluid-escrow.js";
 import { planFluidBucketInteraction, settleFluidBucketInteraction } from "./fluid-container.js";
 import { fluidTankId, FluidNetworkState } from "./fluid-network-state.js";
-import { configureFluidRun, fluidDeviceId, fluidDeviceLocation, offsetFluidLocation } from "./fluid-topology.js";
+import { configureFluidRun, FLUID_FACING_OFFSETS, fluidDeviceId, fluidDeviceLocation, offsetFluidLocation } from "./fluid-topology.js";
 import { fluidFromVanillaSource, VanillaWorldFluidPort } from "./world-fluid-port.js";
+import { steamEngineOutput } from "../kinetics/steam-engine.js";
 
 const FLUID_PIPE_BLOCK = "createbedrock:fluid_pipe";
 const FLUID_TASK_BUDGET = 8;
 const FLUID_TASK_GROUP = "fluids";
 const FLUID_TANK_BLOCK = "createbedrock:fluid_tank";
 const MECHANICAL_PUMP_BLOCK = "createbedrock:mechanical_pump";
+const POWERED_SHAFT_BLOCK = "createbedrock:powered_shaft";
+const STEAM_ENGINE_BLOCK = "createbedrock:steam_engine";
 const NEIGHBOR_OFFSETS = [
 	{ x: 1, y: 0, z: 0 },
 	{ x: -1, y: 0, z: 0 },
@@ -260,12 +263,71 @@ function syncPumpStates(kineticWorld) {
 	}
 }
 
+function steamDirection(block) {
+	return FLUID_FACING_OFFSETS[block?.permutation?.getAllStates?.()["minecraft:facing_direction"]] ?? { x: 0, y: 1, z: 0 };
+}
+
+function findSteamEndpoint(block, direction, typeId) {
+	const direct = block.dimension.getBlock(offsetFluidLocation(block.location, direction));
+	if (direct?.typeId === typeId)
+		return direct;
+	for (const offset of NEIGHBOR_OFFSETS) {
+		const candidate = block.dimension.getBlock(offsetFluidLocation(block.location, offset));
+		if (candidate?.typeId === typeId)
+			return candidate;
+	}
+	return undefined;
+}
+
+function adjacentPoweredShafts(block) {
+	return NEIGHBOR_OFFSETS
+		.map(offset => block.dimension.getBlock(offsetFluidLocation(block.location, offset)))
+		.filter(candidate => candidate?.typeId === POWERED_SHAFT_BLOCK);
+}
+
+function syncSteamEngines(kineticWorld) {
+	if (!kineticWorld || typeof kineticWorld.getNodesByType !== "function" || typeof kineticWorld.setExternalSource !== "function")
+		return false;
+	let changed = false;
+	for (const node of kineticWorld.getNodesByType(STEAM_ENGINE_BLOCK)) {
+		try {
+			const dimension = world.getDimension(node.dimensionId);
+			const engine = dimension.getBlock(node.location);
+			if (engine?.typeId !== STEAM_ENGINE_BLOCK)
+				continue;
+			const direction = steamDirection(engine);
+			const tank = findSteamEndpoint(engine, { x: -direction.x, y: -direction.y, z: -direction.z }, FLUID_TANK_BLOCK);
+			const shaft = findSteamEndpoint(engine, direction, POWERED_SHAFT_BLOCK);
+			for (const candidate of adjacentPoweredShafts(engine))
+				if (candidate.location.x !== shaft?.location.x || candidate.location.y !== shaft?.location.y || candidate.location.z !== shaft?.location.z)
+					changed = kineticWorld.setExternalSource(node.dimensionId, candidate.location, { capacity: 0, speed: 0 }) || changed;
+			if (!shaft)
+				continue;
+			const inspection = tank && state.hasTank(tankIdentifier(tank)) ? state.inspectTank(tankIdentifier(tank)) : undefined;
+			const output = steamEngineOutput(inspection?.contents);
+			if (output.consume > 0 && tank)
+				state.extract(tankIdentifier(tank), {
+					maxAmount: output.consume,
+					predicate: fluid => fluid.typeId === "minecraft:water"
+				});
+			changed = kineticWorld.setExternalSource(node.dimensionId, shaft.location, output) || changed;
+		} catch (error) {
+			console.warn(`[Create Bedrock] Could not synchronize steam engine at ${node.dimensionId}:${node.location.x}:${node.location.y}:${node.location.z}: ${error}`);
+		}
+	}
+	return changed;
+}
+
 export function extractFluidTank(block, options) {
 	return state.extract(tankIdentifier(block), options);
 }
 
 export function getFluidDiagnostics() {
 	return { ...state.diagnostics(), redstoneLockedPumps: redstoneLockedPumpIds.size };
+}
+
+export function inspectFluidTank(block) {
+	return state.inspectTank(tankIdentifier(block));
 }
 
 export function getFluidTankId(block) {
@@ -375,7 +437,9 @@ export function registerFluids(getKineticWorld) {
 	});
 
 	registerTickHandler(() => {
-		syncPumpStates(getKineticWorld());
+		const kineticWorld = getKineticWorld();
+		syncPumpStates(kineticWorld);
+		syncSteamEngines(kineticWorld);
 		return state.tick();
 	}, FLUID_TASK_GROUP);
 	system.run(() => {

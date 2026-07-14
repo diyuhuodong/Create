@@ -104,6 +104,19 @@ test("migration classification records the S3-8 foundation material slice as par
 	});
 });
 
+test("migration classification records S3-9 kinetic foundations without overstating visual parity", () => {
+	assert.deepEqual(classifyRegistration("gearshift", "block"), {
+		acceptanceId: "KINETICS-GEARSHIFT-BLOCK",
+		behaviorPath: "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+		blockingReason: null,
+		domain: "kinetics",
+		persistenceSchema: 2,
+		phase: 3,
+		resourceStatus: "partial",
+		status: "implementation_in_progress"
+	});
+});
+
 test("migration classification assigns later dynamic, train, and equipment work to their planned phases", () => {
 	assert.deepEqual(classifyRegistration("mechanical_piston", "block").phase, 4);
 	assert.deepEqual(classifyRegistration("track_signal", "block").phase, 5);

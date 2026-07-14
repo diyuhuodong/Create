@@ -4,7 +4,13 @@ import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js
 import { ShardedStateStore } from "../kernel/sharded-state-store.js";
 import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-property-storage.js";
 import { setFluidPumpRedstonePowered } from "../fluids/fluid-runtime.js";
-import { getKineticWorldForTesting, setKineticClutchRedstonePowered } from "../kinetics/kinetic-runtime.js";
+import {
+	getKineticWorldForTesting,
+	setKineticChainGearshiftRedstonePower,
+	setKineticClutchRedstonePowered,
+	setKineticGearshiftRedstonePowered,
+	setKineticSequencedGearshiftRedstonePowered
+} from "../kinetics/kinetic-runtime.js";
 import { getDepotFunnelRedstoneControls, setDepotFunnelRedstonePowered } from "../logistics/depot-runtime.js";
 import { RedstoneSignalBus, redstoneControlId } from "./redstone-signal-bus.js";
 
@@ -12,7 +18,10 @@ const REDSTONE_TASK_BUDGET = 8;
 const REDSTONE_TASK_GROUP = "redstone";
 const CONTROLLED_BLOCKS = new Map([
 	["createbedrock:andesite_funnel", "funnel"],
+	["createbedrock:adjustable_chain_gearshift", "chain_gearshift"],
 	["createbedrock:clutch", "clutch"],
+	["createbedrock:gearshift", "gearshift"],
+	["createbedrock:sequenced_gearshift", "sequenced_gearshift"],
 	["createbedrock:mechanical_pump", "pump"]
 ]);
 
@@ -51,6 +60,12 @@ function applySignal({ available, device, power = 15 }) {
 	try {
 		if (device.type === "clutch")
 			return setKineticClutchRedstonePowered(device.dimensionId, device.location, powered);
+		if (device.type === "gearshift")
+			return setKineticGearshiftRedstonePowered(device.dimensionId, device.location, powered);
+		if (device.type === "sequenced_gearshift")
+			return setKineticSequencedGearshiftRedstonePowered(device.dimensionId, device.location, powered);
+		if (device.type === "chain_gearshift")
+			return setKineticChainGearshiftRedstonePower(device.dimensionId, device.location, available ? power : 15);
 		if (device.type === "pump")
 			return setFluidPumpRedstonePowered(device.dimensionId, device.location, powered);
 		if (device.type === "funnel")
@@ -132,7 +147,7 @@ function bootstrapPersistedControls() {
 	let registered = 0;
 	const kineticNodes = getKineticWorldForTesting().snapshot().nodes;
 	for (const node of kineticNodes) {
-		if (node.typeId !== "createbedrock:clutch" && node.typeId !== "createbedrock:mechanical_pump")
+		if (!CONTROLLED_BLOCKS.has(node.typeId))
 			continue;
 		try {
 			const block = world.getDimension(node.dimensionId).getBlock(node.location);

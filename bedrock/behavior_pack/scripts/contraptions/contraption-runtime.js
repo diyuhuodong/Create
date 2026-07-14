@@ -10,7 +10,8 @@ import { deserializeVersionedState, serializeVersionedState } from "../kernel/ve
 import { persistKineticWorld } from "../kinetics/kinetic-runtime.js";
 import { registerStatelessMovingBlockDataAdapter } from "./moving-block-data.js";
 
-const BEARING_BLOCK = "createbedrock:mechanical_bearing";
+const MECHANICAL_BEARING_BLOCK = "createbedrock:mechanical_bearing";
+const WINDMILL_BEARING_BLOCK = "createbedrock:windmill_bearing";
 const CONTRAPTION_TASK_BUDGET = 4;
 const PERSISTENCE_KEY = "createbedrock:contraptions_v1";
 const PERSISTENCE_SCHEMA_VERSION = 1;
@@ -27,6 +28,7 @@ const persistence = new DeferredPersistence({
 				bearingLocation: active.bearingLocation,
 				dimensionId: active.dimensionId,
 				id: active.id,
+				kind: active.kind,
 				origin: active.origin,
 				rotation: active.rotation,
 				snapshot: active.snapshot
@@ -82,7 +84,11 @@ function restore() {
 					rotation: record.rotation ?? 0,
 					snapshot: record.snapshot
 				}]);
-				activeBearings.set(record.bearingKey, { ...record, rotation: record.rotation ?? 0 });
+				activeBearings.set(record.bearingKey, {
+					...record,
+					kind: record.kind === "windmill" ? "windmill" : "mechanical",
+					rotation: record.rotation ?? 0
+				});
 			} catch (error) {
 				console.warn(`[Create Bedrock] Ignored invalid contraption ${record?.id ?? "unknown"}: ${error}`);
 			}
@@ -94,7 +100,26 @@ function restore() {
 
 function collectAboveBearing(block) {
 	const dimension = block.dimension;
-	const start = { x: block.location.x, y: block.location.y + 1, z: block.location.z };
+	const facing = block.permutation?.getAllStates?.()["minecraft:facing_direction"];
+	const direction = ({
+		0: { x: 0, y: -1, z: 0 },
+		1: { x: 0, y: 1, z: 0 },
+		2: { x: 0, y: 0, z: -1 },
+		3: { x: 0, y: 0, z: 1 },
+		4: { x: -1, y: 0, z: 0 },
+		5: { x: 1, y: 0, z: 0 },
+		down: { x: 0, y: -1, z: 0 },
+		east: { x: 1, y: 0, z: 0 },
+		north: { x: 0, y: 0, z: -1 },
+		south: { x: 0, y: 0, z: 1 },
+		up: { x: 0, y: 1, z: 0 },
+		west: { x: -1, y: 0, z: 0 }
+	})[facing] ?? { x: 0, y: 1, z: 0 };
+	const start = {
+		x: block.location.x + direction.x,
+		y: block.location.y + direction.y,
+		z: block.location.z + direction.z
+	};
 	return collectConnectedBlocks({
 		start,
 		maxBlocks: MAX_CONTRAPTION_BLOCKS,
@@ -108,7 +133,22 @@ function collectAboveBearing(block) {
 	});
 }
 
+function bearingKind(block) {
+	if (block?.typeId === MECHANICAL_BEARING_BLOCK)
+		return "mechanical";
+	if (block?.typeId === WINDMILL_BEARING_BLOCK)
+		return "windmill";
+	return undefined;
+}
+
+function windmillSpeed(sailCount) {
+	return Math.min(16, Math.max(1, Math.ceil(sailCount / 8)));
+}
+
 function toggleBearing(block) {
+	const kind = bearingKind(block);
+	if (!kind)
+		return;
 	const bearingKey = keyFor(block.dimension.id, block.location);
 	const active = activeBearings.get(bearingKey);
 	const controller = controllerFor(block.dimension.id);
@@ -117,6 +157,8 @@ function toggleBearing(block) {
 		controller.setRotation(active.id, quarterTurns * 90);
 		if (controller.disassemble(active.id, active.origin, quarterTurns)) {
 			activeBearings.delete(bearingKey);
+			if (active.kind === "windmill")
+				kineticWorld.setGeneratedSpeed(active.dimensionId, active.bearingLocation, 0);
 			persist();
 		}
 		return;
@@ -138,10 +180,13 @@ function toggleBearing(block) {
 		bearingLocation: { ...block.location },
 		dimensionId: block.dimension.id,
 		id,
+		kind,
 		origin,
 		rotation: 0,
 		snapshot: assembled.snapshot
 	});
+	if (kind === "windmill")
+		kineticWorld.setGeneratedSpeed(block.dimension.id, block.location, windmillSpeed(blocks.length));
 	persist();
 }
 
@@ -159,6 +204,10 @@ function processBearing(bearingKey) {
 		return;
 	}
 	active.recoveryFailed = false;
+	if (active.kind === "windmill") {
+		const sails = active.snapshot.blocks?.length ?? 0;
+		kineticWorld.setGeneratedSpeed(active.dimensionId, active.bearingLocation, windmillSpeed(sails));
+	}
 	const speed = kineticWorld.speedAt(active.dimensionId, active.bearingLocation);
 	if (speed === 0)
 		return;
@@ -182,7 +231,7 @@ export function registerContraptions(getKineticWorld) {
 		registerStatelessMovingBlockDataAdapter(typeId);
 	registerKernelTaskGroup("contraptions", CONTRAPTION_TASK_BUDGET);
 	world.afterEvents.playerInteractWithBlock.subscribe(event => {
-		if (event.block.typeId !== BEARING_BLOCK)
+		if (!bearingKind(event.block))
 			return;
 
 		try {

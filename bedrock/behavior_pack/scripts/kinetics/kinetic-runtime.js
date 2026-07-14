@@ -12,9 +12,19 @@ const LEGACY_PERSISTENCE_KEY = "createbedrock:kinetic_world_v1";
 const PERSISTENCE_SCHEMA_VERSION = 1;
 const BELT_CONNECTOR = "createbedrock:belt_connector";
 const CLUTCH_BLOCK = "createbedrock:clutch";
-const WATER_WHEEL_BLOCK = "createbedrock:water_wheel";
+const CREATIVE_MOTOR_BLOCK = "createbedrock:creative_motor";
+const GEARSHIFT_BLOCK = "createbedrock:gearshift";
+const CHAIN_GEARSHIFT_BLOCK = "createbedrock:adjustable_chain_gearshift";
+const SEQUENCED_GEARSHIFT_BLOCK = "createbedrock:sequenced_gearshift";
+const LARGE_WATER_WHEEL_BLOCK = "createbedrock:large_water_wheel";
+const WATER_WHEEL_STRUCTURE_BLOCK = "createbedrock:water_wheel_structure";
 const WATER_WHEEL_CHECK_INTERVAL = 20;
 const KINETIC_DIMENSION_TASK_BUDGET = 2;
+const SEQUENCED_GEARSHIFT_PRESETS = [
+	[{ duration: 20, multiplier: 1 }, { duration: 20, multiplier: -1 }],
+	[{ duration: 10, multiplier: 1 }, { duration: 10, multiplier: -1 }],
+	[{ duration: 20, multiplier: 2 }, { duration: 20, multiplier: -2 }]
+];
 const pendingBeltEndpoints = new Map();
 let waterWheelTicks = 0;
 let legacyStatePendingMigration = false;
@@ -94,6 +104,63 @@ function setClutchEnabled(block, enabled) {
 	return worldChanged || networkChanged;
 }
 
+function setBlockState(block, stateName, value) {
+	if (!block?.permutation?.getAllStates || typeof block.setPermutation !== "function")
+		return false;
+	const current = block.permutation.getAllStates()[stateName];
+	if (current === value)
+		return false;
+	try {
+		block.setPermutation(block.permutation.withState(stateName, value));
+		return true;
+	} catch {
+		return false;
+	}
+}
+
+function setGearshiftReversed(block, reversed) {
+	if (block?.typeId !== GEARSHIFT_BLOCK || typeof reversed !== "boolean")
+		return false;
+	const worldChanged = setBlockState(block, "createbedrock:powered", reversed ? 1 : 0);
+	const networkChanged = kineticWorld.setGearshiftReversed(block.dimension.id, block.location, reversed);
+	if (worldChanged || networkChanged)
+		persist();
+	return worldChanged || networkChanged;
+}
+
+function setChainGearshiftSignal(block, signal) {
+	if (block?.typeId !== CHAIN_GEARSHIFT_BLOCK || !Number.isInteger(signal) || signal < 0 || signal > 15)
+		return false;
+	const worldChanged = setBlockState(block, "createbedrock:signal", signal);
+	const networkChanged = kineticWorld.setChainGearshiftSignal(block.dimension.id, block.location, signal);
+	if (worldChanged || networkChanged)
+		persist();
+	return worldChanged || networkChanged;
+}
+
+function setSequencedGearshiftPowered(block, powered) {
+	if (block?.typeId !== SEQUENCED_GEARSHIFT_BLOCK || typeof powered !== "boolean")
+		return false;
+	const worldChanged = setBlockState(block, "createbedrock:powered", powered ? 1 : 0);
+	const networkChanged = kineticWorld.setSequencedGearshiftPowered(block.dimension.id, block.location, powered);
+	if (worldChanged || networkChanged)
+		persist();
+	return worldChanged || networkChanged;
+}
+
+function cycleSequencedGearshiftProgram(block) {
+	if (block?.typeId !== SEQUENCED_GEARSHIFT_BLOCK)
+		return false;
+	const node = kineticWorld.snapshot().nodes.find(candidate => candidate.dimensionId === block.dimension.id
+		&& candidate.location.x === block.location.x && candidate.location.y === block.location.y && candidate.location.z === block.location.z);
+	const current = JSON.stringify(node?.sequence?.program);
+	const index = SEQUENCED_GEARSHIFT_PRESETS.findIndex(program => JSON.stringify(program) === current);
+	const changed = kineticWorld.configureSequencedGearshift(block.dimension.id, block.location, SEQUENCED_GEARSHIFT_PRESETS[(index + 1) % SEQUENCED_GEARSHIFT_PRESETS.length]);
+	if (changed)
+		persist();
+	return changed;
+}
+
 export function persistKineticWorld() {
 	persist();
 }
@@ -103,6 +170,31 @@ export function setKineticClutchRedstonePowered(dimensionId, location, powered) 
 		throw new TypeError("Redstone clutch updates require a dimension, location, and power state");
 	const block = world.getDimension(dimensionId).getBlock(location);
 	return setClutchEnabled(block, !powered);
+}
+
+export function setKineticGearshiftRedstonePowered(dimensionId, location, powered) {
+	if (typeof dimensionId !== "string" || !location || typeof powered !== "boolean")
+		throw new TypeError("Redstone gearshift updates require a dimension, location, and power state");
+	return setGearshiftReversed(world.getDimension(dimensionId).getBlock(location), powered);
+}
+
+export function setKineticChainGearshiftRedstonePower(dimensionId, location, power) {
+	if (typeof dimensionId !== "string" || !location || !Number.isInteger(power) || power < 0 || power > 15)
+		throw new TypeError("Chain-gearshift updates require a dimension, location, and power from 0 to 15");
+	return setChainGearshiftSignal(world.getDimension(dimensionId).getBlock(location), power);
+}
+
+export function setKineticSequencedGearshiftRedstonePowered(dimensionId, location, powered) {
+	if (typeof dimensionId !== "string" || !location || typeof powered !== "boolean")
+		throw new TypeError("Sequenced-gearshift updates require a dimension, location, and power state");
+	return setSequencedGearshiftPowered(world.getDimension(dimensionId).getBlock(location), powered);
+}
+
+export function configureKineticSequencedGearshift(dimensionId, location, program) {
+	const changed = kineticWorld.configureSequencedGearshift(dimensionId, location, program);
+	if (changed)
+		persist();
+	return changed;
 }
 
 function restore() {
@@ -138,16 +230,83 @@ function restore() {
 	}
 }
 
-function refreshWaterWheel(wheel) {
-	const dimension = world.getDimension(wheel.dimensionId);
-	let hasWater = false;
+function waterOffsets(axis, radius) {
+	const offsets = [];
 	for (const offset of [
 		{ x: 1, y: 0, z: 0 }, { x: -1, y: 0, z: 0 },
 		{ x: 0, y: 1, z: 0 }, { x: 0, y: -1, z: 0 },
 		{ x: 0, y: 0, z: 1 }, { x: 0, y: 0, z: -1 }
 	]) {
-		if ((wheel.axis === "x" && offset.x !== 0) || (wheel.axis === "y" && offset.y !== 0) || (wheel.axis === "z" && offset.z !== 0))
+		if (offset[axis] !== 0)
 			continue;
+		if (radius === 1) {
+			offsets.push(offset);
+			continue;
+		}
+		const outer = { x: offset.x * radius, y: offset.y * radius, z: offset.z * radius };
+		offsets.push(outer);
+		for (const side of [
+			{ x: 1, y: 0, z: 0 }, { x: -1, y: 0, z: 0 },
+			{ x: 0, y: 1, z: 0 }, { x: 0, y: -1, z: 0 },
+			{ x: 0, y: 0, z: 1 }, { x: 0, y: 0, z: -1 }
+		]) {
+			if (side[axis] !== 0 || (side.x !== 0 && offset.x !== 0) || (side.y !== 0 && offset.y !== 0) || (side.z !== 0 && offset.z !== 0))
+				continue;
+			offsets.push({ x: outer.x + side.x, y: outer.y + side.y, z: outer.z + side.z });
+		}
+	}
+	return offsets;
+}
+
+function wheelStructureLocations(location, axis) {
+	const perpendicular = ["x", "y", "z"].filter(candidate => candidate !== axis);
+	const locations = [];
+	for (const first of [-1, 0, 1])
+		for (const second of [-1, 0, 1]) {
+			if (first === 0 && second === 0)
+				continue;
+			locations.push({
+				x: location.x + (perpendicular[0] === "x" ? first : perpendicular[1] === "x" ? second : 0),
+				y: location.y + (perpendicular[0] === "y" ? first : perpendicular[1] === "y" ? second : 0),
+				z: location.z + (perpendicular[0] === "z" ? first : perpendicular[1] === "z" ? second : 0)
+			});
+		}
+	return locations;
+}
+
+function placeLargeWaterWheelStructure(block) {
+	if (block?.typeId !== LARGE_WATER_WHEEL_BLOCK)
+		return false;
+	let changed = false;
+	const facing = block.permutation?.getAllStates?.()["minecraft:facing_direction"];
+	const axis = facing === 4 || facing === 5 ? "x" : facing === 2 || facing === 3 ? "z" : "y";
+	for (const location of wheelStructureLocations(block.location, axis)) {
+		const target = block.dimension.getBlock(location);
+		if (target?.typeId !== "minecraft:air")
+			continue;
+		target.setType(WATER_WHEEL_STRUCTURE_BLOCK);
+		changed = true;
+	}
+	return changed;
+}
+
+function removeLargeWaterWheelStructure(dimensionId, location, axis) {
+	const dimension = world.getDimension(dimensionId);
+	let changed = false;
+	for (const marker of wheelStructureLocations(location, axis)) {
+		const target = dimension.getBlock(marker);
+		if (target?.typeId !== WATER_WHEEL_STRUCTURE_BLOCK)
+			continue;
+		target.setType("minecraft:air");
+		changed = true;
+	}
+	return changed;
+}
+
+function refreshWaterWheel(wheel) {
+	const dimension = world.getDimension(wheel.dimensionId);
+	let hasWater = false;
+	for (const offset of waterOffsets(wheel.axis, wheel.waterRadius)) {
 		const neighbor = dimension.getBlock({
 			x: wheel.location.x + offset.x,
 			y: wheel.location.y + offset.y,
@@ -158,8 +317,23 @@ function refreshWaterWheel(wheel) {
 			break;
 		}
 	}
-	if (kineticWorld.setGeneratedSpeed(wheel.dimensionId, wheel.location, hasWater ? 8 : 0))
+	const speed = wheel.typeId === "createbedrock:large_water_wheel" ? 4 : 8;
+	if (wheel.typeId === LARGE_WATER_WHEEL_BLOCK)
+		placeLargeWaterWheelStructure(dimension.getBlock(wheel.location));
+	if (kineticWorld.setGeneratedSpeed(wheel.dimensionId, wheel.location, hasWater ? speed : 0))
 		persist();
+}
+
+function cycleCreativeMotor(block) {
+	if (block?.typeId !== CREATIVE_MOTOR_BLOCK)
+		return false;
+	const speeds = [16, 32, 64, 128, 256, -16, -32, -64, -128, -256];
+	const current = kineticWorld.generatedSpeedAt(block.dimension.id, block.location);
+	const next = speeds[(speeds.indexOf(current) + 1) % speeds.length];
+	const changed = kineticWorld.setGeneratedSpeed(block.dimension.id, block.location, next);
+	if (changed)
+		persist();
+	return changed;
 }
 
 export function registerKinetics() {
@@ -169,11 +343,26 @@ export function registerKinetics() {
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
 		if (kineticWorld.trackPlacedBlock(event.block))
 			persist();
+		try {
+			placeLargeWaterWheelStructure(event.block);
+		} catch (error) {
+			console.warn(`[Create Bedrock] Could not place large-water-wheel structure: ${error}`);
+		}
 	});
 
 	world.afterEvents.playerBreakBlock.subscribe(event => {
+		const wasLargeWaterWheel = event.block.typeId === LARGE_WATER_WHEEL_BLOCK;
+		const axis = kineticWorld.snapshot().nodes.find(node => node.dimensionId === event.dimension.id
+			&& node.location.x === event.block.location.x && node.location.y === event.block.location.y && node.location.z === event.block.location.z)?.axis ?? "y";
 		if (kineticWorld.trackBrokenBlock(event.dimension.id, event.block.location))
 			persist();
+		if (wasLargeWaterWheel) {
+			try {
+				removeLargeWaterWheelStructure(event.dimension.id, event.block.location, axis);
+			} catch (error) {
+				console.warn(`[Create Bedrock] Could not remove large-water-wheel structure: ${error}`);
+			}
+		}
 	});
 
 	world.afterEvents.playerInteractWithBlock.subscribe(event => {
@@ -213,13 +402,17 @@ export function registerKinetics() {
 			persist();
 			console.warn(`[Create Bedrock] Hand crank activated at ${event.block.location.x}, ${event.block.location.y}, ${event.block.location.z}`);
 		}
+		if (!event.itemStack && cycleCreativeMotor(event.block))
+			console.warn("[Create Bedrock] Creative motor speed changed");
+		if (!event.itemStack && cycleSequencedGearshiftProgram(event.block))
+			event.player.sendMessage("Sequenced gearshift program changed. Apply a redstone pulse to start it.");
 	});
 
 	registerTickHandler(() => {
 		waterWheelTicks++;
 		if (waterWheelTicks >= WATER_WHEEL_CHECK_INTERVAL) {
 			waterWheelTicks = 0;
-			for (const wheel of kineticWorld.getGeneratedSourceNodes(WATER_WHEEL_BLOCK)) {
+			for (const wheel of kineticWorld.getWaterDrivenSourceNodes()) {
 				const key = `water-wheel:${wheel.dimensionId}:${wheel.location.x}:${wheel.location.y}:${wheel.location.z}`;
 				enqueueUniqueKernelTask(key, () => refreshWaterWheel(wheel), "kinetics");
 			}

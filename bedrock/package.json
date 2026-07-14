@@ -9,6 +9,7 @@
   "scripts": {
     "build": "node tools/build.mjs",
     "content-specs": "node tools/generate-stage3-content-specifications.mjs",
+    "kinetics:specs": "node tools/generate-stage3-kinetic-specifications.mjs",
     "deploy:win": "node tools/deploy-win.mjs",
     "inventory": "node tools/generate-domain-inventory.mjs",
     "matrix": "node tools/generate-migration-matrix.mjs",
