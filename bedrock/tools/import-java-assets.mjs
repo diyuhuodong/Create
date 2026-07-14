@@ -11,6 +11,7 @@ const repositoryRoot = resolve(bedrockRoot, "..");
 const TEXTURES = [
 	"axis.png",
 	"axis_top.png",
+	"andesite_block.png",
 	"andesite_casing.png",
 	"funnel/andesite_funnel.png",
 	"bearing_top.png",
@@ -46,9 +47,15 @@ const TEXTURES = [
 	"pump.png",
 	"standard_track.png",
 	"station.png",
-	"zinc_block.png"
+	"zinc_block.png",
+	"zinc_ore.png",
+	"deepslate_zinc_ore.png",
+	"raw_zinc_block.png",
+	"weathered_iron_block.png",
+	"palettes/rose_quartz_side.png",
+	"palettes/rose_quartz_top.png"
 ];
-const ITEM_TEXTURES = ["belt_connector.png"];
+const ITEM_TEXTURES = ["belt_connector.png", "raw_zinc.png", "zinc_ingot.png", "andesite_alloy.png", "rose_quartz.png"];
 
 export async function importJavaAssets(resourcePackRoot) {
 	const sourceDirectory = resolve(repositoryRoot, "src/main/resources/assets/create/textures/block");

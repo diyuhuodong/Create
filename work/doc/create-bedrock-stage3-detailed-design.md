@@ -1,6 +1,6 @@
 # Create Bedrock 阶段 3 完整详细设计
 
-**状态：** S3-7 静态收敛已完成；阶段 3 全量功能与 Windows/Realm/PS 平台验收仍未完成
+**状态：** S3-7 静态收敛与 S3-8（基础材料和内容规格锁定）已完成；阶段 3 全量功能与 Windows/Realm/PS 平台验收仍未完成
 
 **关联总规划：** `Create Bedrock / Realm 完整迁移规划与设计`
 
@@ -197,6 +197,7 @@ S3-6 选择第二条兼容路径：目标仍保持 `min_engine_version: 1.21.80`
 | S3-5 | `FluidTank`、管道、泵和世界流体适配 | 容量守恒、断网、重启测试通过 |
 | S3-6 | `RedstoneSignalBus` 和已获版本批准的设备 | 不依赖实验 API，或矩阵明确阻塞 |
 | S3-7 | 已实现静态纵切的内容/RP 收敛、诊断、性能上限 | `validate`、`build`、矩阵检查及内容契约全通过 |
+| S3-8 | 阶段 3 工作队列、基础材料与获取路径 | 每条矩阵记录有唯一交付包；首批材料有资源、掉落、配方和契约测试 |
 
 实现顺序必须是 S3-0 → S3-1 → S3-2；物流、加工、流体和红石可在事务内核稳定后并行推进。S3-0 已完成矩阵 schema v2 基线；S3-1 已将动力和三类固定加工机从单一大属性迁移到 `ShardedStateStore`，并通过静态恢复测试。该结论不覆盖阶段 4/5 的移动结构和列车，也不替代 Windows、Realm、PS 平台验收。
 
@@ -230,6 +231,16 @@ Crushing Wheel 的 Java 来源是 NeoForge OBJ，当前转换器不能安全等�
 
 运行期诊断现在按公开摘要输出：调度器队列/失败数、持久化 generation、活跃分片数、索引页、字符字节量、未提交记录、网络节点/传输量和物品/流体 journal 的回滚计数。摘要会剔除库存、物品堆叠、槽位、坐标和事务 payload；日志过长时输出仍为有效 JSON 的压缩摘要。`BudgetScheduler` 同时保留每组预算并增加每 tick 64 个任务的全局上限，以轮转起始组避免后序队列长期饥饿；这只是静态防护，30 分钟 Realm 压力结论仍须实机测量。
 
+### 6.4 S3-8 实施设计
+
+`bedrock/data/stage3-work-queue.json` 从迁移矩阵确定性生成，并由 schema 校验每条 `phase: 3` 记录恰好出现一次。当前 245 条记录分配为：S3-7 已交付 15 条、S3-8A 基础材料 6 条、S3-8B 内容规格 110 条、S3-9 动力 33 条、S3-10 物流 26 条、S3-11 加工 8 条、S3-12 流体 18 条、S3-14 红石版本决策 29 条。每条队列记录保存依赖、配方、资源、掉落、测试和 blocker 结论，队列不会改变矩阵的完成状态。
+
+S3-8A 实现 `andesite_alloy_block`、`zinc_ore`、`deepslate_zinc_ore`、`raw_zinc_block`、`rose_quartz_block` 与 `weathered_iron_block`。六个方块都具有 BP/RP 定义、创造菜单、英文/中文名称、直接来自 Java 源的贴图、显式 loot table 与资源契约。新增 `andesite_alloy`、`raw_zinc`、`zinc_ingot`、`rose_quartz` 支撑物品；安山合金、粗锌与锌块均保留原 Java 基础合成/反向拆分路径，玫瑰石英保留石英加红石的合成与石匠台成块路径，石匠台以一个铁锭产出两个风化工业铁块。
+
+Java 锌矿的 Silk Touch、Fortune 与自然生成尚未在 Bedrock 目标版本实测或实现；当前矿石固定掉落一个 `raw_zinc`。因此六条矩阵记录仍为 `implementation_in_progress`，资源状态为 `partial`，不能被统计为静态等价完成。该首批内容无运行期状态，采用资源/掉落/配方正向静态契约；重启和并发测试只适用于后续有服务端状态的系统。
+
+S3-8B 已为其余 110 条内容记录生成 `bedrock/data/stage3-content-specifications.json`。每条记录均绑定 Java 配方、loot、模型/贴图的可追溯源路径（不存在时明确记录）、Bedrock 行为类型、后续实现包及测试策略；校验器要求它们与 S3-8B 队列一一对应且所有引用的 Java 源文件存在。规格归属已明确分配到 S3-9、S3-10、S3-11、S3-13、S3-14、S4 或 S6，不能以生成 BP 空壳来假装实现。
+
 ## 7. 测试与验收
 
 | 层级 | 现在可执行 | 必测内容 |
@@ -256,11 +267,7 @@ Crushing Wheel 的 Java 来源是 NeoForge OBJ，当前转换器不能安全等�
 
 ## 9. 下一步实施清单
 
-1. 修改矩阵生成器并添加 schema v2 校验，完成 S3-0 的 phase/domain 基线。
-2. 实现 `ShardedStateStore`，先迁移动力和固定加工机，再迁移物流和流体；保留旧 v1 读取路径。
-3. 建立 `ItemPort`、ItemStack 序列化、事务 journal 与恢复测试。
-4. 以 depot → funnel/chute → belt 的顺序交付第一条端到端物流链。
-5. 在红石实现前完成最低 Bedrock 版本决策，并记录到 manifest、矩阵和测试计划。
+后续执行顺序、依赖、验收条件和版本决策门槛见 [阶段 3 后续开发计划](create-bedrock-stage3-follow-up-plan.md)。S3-8 已锁定全量队列、交付可独立获得的基础内容，并将其余内容的实现责任下放到后续包；不得将当前工作误报为阶段 3 全量完成。
 
 ## 10. 外部依据
 

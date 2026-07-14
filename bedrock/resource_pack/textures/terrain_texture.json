@@ -115,6 +115,27 @@
     },
     "createbedrock_zinc_block": {
       "textures": "textures/create_java/block/zinc_block"
+    },
+    "createbedrock_zinc_ore": {
+      "textures": "textures/create_java/block/zinc_ore"
+    },
+    "createbedrock_deepslate_zinc_ore": {
+      "textures": "textures/create_java/block/deepslate_zinc_ore"
+    },
+    "createbedrock_raw_zinc_block": {
+      "textures": "textures/create_java/block/raw_zinc_block"
+    },
+    "createbedrock_weathered_iron_block": {
+      "textures": "textures/create_java/block/weathered_iron_block"
+    },
+    "createbedrock_andesite_alloy_block": {
+      "textures": "textures/create_java/block/andesite_block"
+    },
+    "createbedrock_rose_quartz_block_top": {
+      "textures": "textures/create_java/block/palettes/rose_quartz_top"
+    },
+    "createbedrock_rose_quartz_block_side": {
+      "textures": "textures/create_java/block/palettes/rose_quartz_side"
     }
   }
 }

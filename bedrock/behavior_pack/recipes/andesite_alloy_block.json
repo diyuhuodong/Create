@@ -1,0 +1,24 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:andesite_alloy_block"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "###",
+      "###",
+      "###"
+    ],
+    "key": {
+      "#": {
+        "item": "createbedrock:andesite_alloy"
+      }
+    },
+    "result": {
+      "item": "createbedrock:andesite_alloy_block"
+    }
+  }
+}

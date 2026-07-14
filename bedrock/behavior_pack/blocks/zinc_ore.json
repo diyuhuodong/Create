@@ -1,0 +1,39 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:zinc_ore",
+      "menu_category": {
+        "category": "items",
+        "group": "itemGroup.name.misc"
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 3
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 3
+      },
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "minecraft:geometry.full_block"
+        },
+        "material_instances": {
+          "*": {
+            "texture": "createbedrock_zinc_ore",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:loot": "loot_tables/blocks/zinc_ore.json",
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "createbedrock_zinc_ore",
+          "render_method": "opaque"
+        }
+      }
+    }
+  }
+}

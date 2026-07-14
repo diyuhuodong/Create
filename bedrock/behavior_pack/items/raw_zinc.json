@@ -1,0 +1,16 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:item": {
+    "description": {
+      "identifier": "createbedrock:raw_zinc",
+      "menu_category": {
+        "category": "items",
+        "group": "itemGroup.name.misc"
+      }
+    },
+    "components": {
+      "minecraft:icon": "createbedrock_raw_zinc",
+      "minecraft:max_stack_size": 64
+    }
+  }
+}

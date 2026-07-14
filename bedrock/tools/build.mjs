@@ -24,4 +24,4 @@ for (const pack of packs) {
 const importedTextureCount = await importJavaAssets(resolve(buildRoot, "resource_pack"));
 const convertedModelCount = await convertJavaModels(resolve(buildRoot, "resource_pack"));
 const contentContract = await validateStage3BuiltContentContract({ buildRoot });
-console.log(`Built Bedrock packs in ${buildRoot}; staged ${importedTextureCount} Java textures, converted ${convertedModelCount} Java models, and verified ${contentContract.staticBlocks} Stage-3 content contracts.`);
+console.log(`Built Bedrock packs in ${buildRoot}; staged ${importedTextureCount} Java textures, converted ${convertedModelCount} Java models, and verified ${contentContract.contentBlocks} Stage-3 content blocks.`);

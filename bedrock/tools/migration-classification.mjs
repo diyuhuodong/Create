@@ -67,6 +67,20 @@ const STAGE_THREE_REDSTONE_CONTROLS = new Map([
 	["andesite_funnel", { domain: "logistics" }],
 	["clutch", { domain: "kinetics" }]
 ]);
+
+// S3-8 starts with a deliberately narrow resource vertical slice. These
+// entries are usable from the creative inventory and have explicit drops and
+// recipes where their Java acquisition path is representable without an
+// unported machine. World generation and enchantment-sensitive ore drops stay
+// partial until their target-platform behavior has been verified.
+const STAGE_THREE_FOUNDATION_CONTENT = new Map([
+	["andesite_alloy_block", { domain: "content" }],
+	["deepslate_zinc_ore", { domain: "content" }],
+	["raw_zinc_block", { domain: "content" }],
+	["rose_quartz_block", { domain: "content" }],
+	["weathered_iron_block", { domain: "content" }],
+	["zinc_ore", { domain: "content" }]
+]);
 const REDSTONE_OUTPUT_BLOCKER = "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.";
 
 const RULES = [
@@ -91,10 +105,13 @@ export function classifyRegistration(identifier, kind) {
 	const processor = STAGE_THREE_PROCESSORS.get(identifier);
 	const fluid = STAGE_THREE_FLUIDS.get(identifier);
 	const redstoneControl = STAGE_THREE_REDSTONE_CONTROLS.get(identifier);
+	const foundationContent = STAGE_THREE_FOUNDATION_CONTENT.get(identifier);
 	const staticSystem = processor ?? fluid ?? redstoneControl;
 	const rule = RULES.find(candidate => candidate.pattern.test(identifier));
 	const classification = staticSystem
 		? { ...staticSystem, phase: 3, status: "static_verified" }
+		: foundationContent
+		? { ...foundationContent, phase: 3, status: "implementation_in_progress" }
 		: prototype
 		? { ...prototype, phase: 2, status: "implementation_in_progress" }
 		: rule ?? { domain: "content", phase: 3 };
@@ -107,7 +124,7 @@ export function classifyRegistration(identifier, kind) {
 		domain: classification.domain,
 		persistenceSchema: staticSystem ? 2 : prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null,
 		phase: classification.phase,
-		resourceStatus: prototype || staticSystem ? "partial" : "pending",
+		resourceStatus: prototype || staticSystem || foundationContent ? "partial" : "pending",
 		status: blockedByTargetVersion ? "blocked" : classification.status ?? "specification_pending"
 	};
 }

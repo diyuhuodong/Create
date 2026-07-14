@@ -138,12 +138,18 @@ async function assertStaticBlockContracts({ bedrockRoot, built }) {
 	])));
 	const convertedGeometry = new Set(JAVA_MODELS.map(entry => `geometry.createbedrock.${entry.name}`));
 	const builtGeometry = built ? await geometryIdentifiers(resourcePackRoot) : undefined;
-	const verified = matrix.entries.filter(entry => entry.phase === 3 && entry.status === "static_verified");
-	const covered = new Set();
+	const staticEntries = matrix.entries.filter(entry => entry.phase === 3 && entry.status === "static_verified");
+	const foundationEntries = matrix.entries.filter(entry => entry.phase === 3
+		&& entry.domain === "content"
+		&& entry.status === "implementation_in_progress");
+	const deliverableEntries = [...staticEntries, ...foundationEntries];
+	const coveredStatic = new Set();
+	const coveredFoundation = new Set();
 	const visualFallbacks = [];
 
-	for (const entry of verified) {
-		if (typeof entry.behaviorPath !== "string" || !await fileExists(resolve(bedrockRoot, entry.behaviorPath)))
+	for (const entry of deliverableEntries) {
+		const isStatic = entry.status === "static_verified";
+		if (isStatic && (typeof entry.behaviorPath !== "string" || !await fileExists(resolve(bedrockRoot, entry.behaviorPath))))
 			throw new Error(`Static migration entry ${entry.acceptanceId} is missing behaviorPath implementation.`);
 		const block = blocksByIdentifier.get(entry.bedrockIdentifier);
 		if (!block)
@@ -166,7 +172,7 @@ async function assertStaticBlockContracts({ bedrockRoot, built }) {
 			if (built && !builtGeometry.has(geometry))
 				throw new Error(`Built resource pack is missing generated geometry ${geometry}.`);
 		}
-		if (geometries.has("minecraft:geometry.full_block")) {
+		if (isStatic && geometries.has("minecraft:geometry.full_block")) {
 			const reason = STATIC_VISUAL_EXCEPTIONS.get(entry.bedrockIdentifier);
 			if (!reason)
 				throw new Error(`Static migration entry ${entry.acceptanceId} uses an undocumented full-block visual fallback.`);
@@ -185,12 +191,23 @@ async function assertStaticBlockContracts({ bedrockRoot, built }) {
 			if (!expectedFile || !await fileExists(expectedFile))
 				throw new Error(`Static migration entry ${entry.acceptanceId} is missing staged texture for ${texture}.`);
 		}
-		covered.add(entry.bedrockIdentifier);
+		if (!isStatic) {
+			const lootPath = block.definition["minecraft:block"].components?.["minecraft:loot"];
+			if (typeof lootPath !== "string" || !await fileExists(resolve(behaviorPackRoot, lootPath)))
+				throw new Error(`Foundation content entry ${entry.acceptanceId} is missing an explicit loot table.`);
+			coveredFoundation.add(entry.bedrockIdentifier);
+		} else {
+			coveredStatic.add(entry.bedrockIdentifier);
+		}
 	}
 
 	return {
-		staticEntries: verified.length,
-		staticBlocks: covered.size,
+		contentEntries: deliverableEntries.length,
+		contentBlocks: new Set([...coveredStatic, ...coveredFoundation]).size,
+		foundationEntries: foundationEntries.length,
+		foundationBlocks: coveredFoundation.size,
+		staticEntries: staticEntries.length,
+		staticBlocks: coveredStatic.size,
 		visualFallbacks: [...new Map(visualFallbacks.map(entry => [entry.identifier, entry])).values()]
 	};
 }

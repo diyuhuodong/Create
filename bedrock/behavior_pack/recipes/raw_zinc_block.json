@@ -1,0 +1,24 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:raw_zinc_block"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "###",
+      "###",
+      "###"
+    ],
+    "key": {
+      "#": {
+        "item": "createbedrock:raw_zinc"
+      }
+    },
+    "result": {
+      "item": "createbedrock:raw_zinc_block"
+    }
+  }
+}

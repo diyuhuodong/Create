@@ -1,13 +1,24 @@
-import { readdir, readFile } from "node:fs/promises";
+import { readdir, readFile, stat } from "node:fs/promises";
 import { dirname, extname, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 import { validateMigrationMatrix } from "./migration-matrix-schema.mjs";
 import { validateStage3SourceContentContract } from "./stage3-content-contract.mjs";
+import { validateStage3ContentSpecifications } from "./stage3-content-specification-schema.mjs";
+import { validateStage3WorkQueue } from "./stage3-work-queue-schema.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(toolDirectory, "..");
+const repositoryRoot = resolve(bedrockRoot, "..");
+
+async function fileExists(file) {
+	try {
+		return (await stat(file)).isFile();
+	} catch {
+		return false;
+	}
+}
 
 async function jsonFiles(directory) {
 	const files = [];
@@ -51,7 +62,23 @@ const resourceManifest = await readJson(resolve(bedrockRoot, "resource_pack", "m
 const terrainAtlas = await readJson(resolve(bedrockRoot, "resource_pack", "textures", "terrain_texture.json"));
 const itemAtlas = await readJson(resolve(bedrockRoot, "resource_pack", "textures", "item_texture.json"));
 const migrationMatrix = await readJson(resolve(bedrockRoot, "data", "migration-matrix.json"));
+const stage3ContentSpecifications = await readJson(resolve(bedrockRoot, "data", "stage3-content-specifications.json"));
+const stage3WorkQueue = await readJson(resolve(bedrockRoot, "data", "stage3-work-queue.json"));
 validateMigrationMatrix(migrationMatrix);
+validateStage3WorkQueue(stage3WorkQueue, migrationMatrix);
+const contentSpecificationCoverage = validateStage3ContentSpecifications(stage3ContentSpecifications, stage3WorkQueue);
+for (const entry of stage3ContentSpecifications.entries) {
+	const sourcePaths = [
+		...entry.sourceModelPaths,
+		...entry.sourceRecipePaths,
+		...entry.sourceTexturePaths,
+		...(entry.sourceLootPath ? [entry.sourceLootPath] : [])
+	];
+	for (const sourcePath of sourcePaths) {
+		if (!await fileExists(resolve(repositoryRoot, sourcePath)))
+			throw new Error(`Content specification ${entry.acceptanceId} references missing Java source ${sourcePath}.`);
+	}
+}
 const allUuids = [
 	behaviorManifest.header.uuid,
 	resourceManifest.header.uuid,
@@ -75,6 +102,11 @@ const itemTextures = new Set(Object.keys(itemAtlas.texture_data ?? {}));
 for (const blockFile of await jsonFiles(resolve(bedrockRoot, "behavior_pack", "blocks"))) {
 	const block = await readJson(blockFile);
 	const components = block["minecraft:block"]?.components ?? {};
+	const lootPath = components["minecraft:loot"];
+	if (typeof lootPath === "string") {
+		const lootFile = resolve(bedrockRoot, "behavior_pack", lootPath);
+		await readJson(lootFile);
+	}
 	const instances = [
 		components["minecraft:material_instances"],
 		components["minecraft:item_visual"]?.material_instances
@@ -103,4 +135,4 @@ for (const script of await filesWithExtension(resolve(bedrockRoot, "behavior_pac
 
 const contentContract = await validateStage3SourceContentContract();
 
-console.log(`Bedrock manifests, JSON files, JavaScript syntax, and ${contentContract.staticBlocks} Stage-3 content contracts are valid.`);
+console.log(`Bedrock manifests, JSON files, JavaScript syntax, ${contentContract.contentBlocks} Stage-3 content blocks, the ${stage3WorkQueue.entries.length}-entry work queue, and ${contentSpecificationCoverage.entries} S3-8B content specifications are valid.`);

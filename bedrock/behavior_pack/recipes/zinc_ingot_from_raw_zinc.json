@@ -1,0 +1,14 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:recipe_furnace": {
+    "description": {
+      "identifier": "createbedrock:zinc_ingot_from_raw_zinc"
+    },
+    "tags": [
+      "furnace",
+      "blast_furnace"
+    ],
+    "input": "createbedrock:raw_zinc",
+    "output": "createbedrock:zinc_ingot"
+  }
+}

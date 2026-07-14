@@ -91,6 +91,19 @@ test("migration classification records S3-6 input controls and blocks custom red
 	assert.match(blocked.blockingReason, /minecraft:redstone_producer/);
 });
 
+test("migration classification records the S3-8 foundation material slice as partial implementation", () => {
+	assert.deepEqual(classifyRegistration("zinc_ore", "block"), {
+		acceptanceId: "CONTENT-ZINC-ORE-BLOCK",
+		behaviorPath: null,
+		blockingReason: null,
+		domain: "content",
+		persistenceSchema: null,
+		phase: 3,
+		resourceStatus: "partial",
+		status: "implementation_in_progress"
+	});
+});
+
 test("migration classification assigns later dynamic, train, and equipment work to their planned phases", () => {
 	assert.deepEqual(classifyRegistration("mechanical_piston", "block").phase, 4);
 	assert.deepEqual(classifyRegistration("track_signal", "block").phase, 5);

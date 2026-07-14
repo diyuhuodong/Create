@@ -1,0 +1,42 @@
+# Create Bedrock 阶段 3 后续开发计划
+
+**状态：** S3-8 已完成：基础材料静态实现与其余内容规格锁定均已通过仓库验证
+
+**基线：** S3-7 已提交为 `378853863`。阶段 3 共有 245 条矩阵记录：15 条 `static_verified`、6 条 `implementation_in_progress`、195 条 `specification_pending`、29 条 `blocked`。本计划只处理 `phase: 3`；移动机械、蓝图和机械 actor 仍属于阶段 4，列车调度和高级物流属于阶段 5。
+
+## 目标与总规则
+
+每个开发包只接收一组明确的 Java identifier。开始编码前必须为该组补齐 Bedrock identifier、依赖、配方结论、持久化 schema、资源清单和验收项；完成后才可从 `specification_pending` 变为 `implementation_in_progress` 或 `static_verified`。不得用注册空壳、临时立方体或未分类配方扩大“完成”统计。
+
+每包必须包含正向、失败、重启和并发 Node 测试，并执行 `npm test`、`npm run validate`、`npm run matrix`、`npm run build` 和 `npm run pack`。Windows、Realm、PS 结果始终另行记录。
+
+## 队列与顺序
+
+| 包 | 范围与交付物 | 前置条件 | 静态退出条件 |
+|---|---|---|---|
+| S3-8 | 规格锁定与基础材料。先为 201 项建立按依赖分组的工作清单；首批只实现不依赖未迁移机器的材料、装饰/结构方块与其获取路径。 | 无 | 每条首批记录有规格、资源、配方结论和测试归属。 |
+| S3-9 | 固定动力扩展：encased shaft/cogwheel、vertical gearbox、gearshift、chain conveyor、large water wheel 等。 | S3-8 的材料与配方依赖已落地。 | 网络传动比、方向、过载、破坏和重启均有测试；资源契约覆盖新增方块。 |
+| S3-10 | 基础物流闭环：可放置/可见 belt、物品渲染、depot/chute/funnel 变体、filter、tunnel、item vault。 | S3-9 提供稳定动力输入。 | 端到端转移、过滤、满端、反向、断带、重启和并发不复制/吞没物品。 |
+| S3-11 | 固定加工扩展：basin、mechanical mixer、mechanical saw、encased fan；扩展源配方分类报告。 | S3-8 材料、S3-9 动力、S3-10 端口可用。 | 每个支持配方均为 migrated 或显式 blocked；机器状态和随机结果可重启恢复。 |
+| S3-12 | 流体扩展：glass/encased/smart pipe、valve、drain、spout、portable interface。 | S3-8 材料、现有 Tank/Pump 事务内核。 | 容量守恒、分支竞争、阀门、外部端点异常和重启恢复测试通过。 |
+| S3-13 | 资源等价性收敛：Crushing Wheel OBJ/poly-mesh、belt 几何/物品可视化、Tank 液面与多方块视觉。 | 相应行为已稳定。 | 不再用 full-block fallback 宣称模型完成；构建产物契约验证模型、贴图、语言和掉落/获取路径。 |
+| S3-14 | 红石版本决策与实现。二选一：保持 1.21.80 并保留 29 项 blocker，或升级最低 Bedrock/Realm 目标并实现 producer/consumer。 | 用户确认目标版本与实验策略。 | 每项 blocker 有最终结论；若升级，Windows/Realm/PS 兼容性记录齐全。 |
+| S3-15 | 平台验收与性能收敛。 | S3-8 至 S3-14 的代码范围完成。 | Windows 本地世界、测试 Realm、PS 分别完成烟雾测试、双人并发和 30 分钟压力记录。 |
+
+## 工作量边界
+
+当前待规格项按域分布为：内容 116、动力 33、物流 26、流体 18、加工 8。S3-8 只负责将它们按实际依赖分批和交付第一批基础内容，不尝试一次性实现 201 项。29 个红石 blocker 不进入普通开发队列，必须等待 S3-14 的版本决策。
+
+## 已完成开发包：S3-8
+
+1. 已完成：从迁移矩阵生成按域、kind、依赖的 245 条工作清单，并校验每项都有配方、资源、掉落、测试和 blocker 字段。
+2. 已完成：以“原版材料可表达、无移动机械依赖、无实验 API”为筛选条件，交付 `andesite_alloy_block`、`zinc_ore`、`deepslate_zinc_ore`、`raw_zinc_block`、`rose_quartz_block`、`weathered_iron_block` 与支撑物品的 BP、RP、语言、创造获取、掉落和基础配方。
+3. 已完成：资源契约从 8 个静态方块扩展到 14 个已交付内容方块。矿石自然生成、Silk Touch、Fortune、未转换 OBJ/动画和多方块外观仍为 partial。
+4. 已完成：110 条 S3-8B 内容记录已逐项固化 Java 配方/掉落/资产来源、行为边界、后续实现包和测试策略。后续按该规格由 S3-9 至 S3-14、S4、S6 实现；Windows、Realm、PS 实机验证仍保留到 S3-15。
+
+## 风险控制
+
+- 不把 `specification_pending` 改为完成来改善数字；矩阵状态必须由行为、资源和测试共同证明。
+- 先交付固定方块与服务端权威逻辑，再处理客户端高复杂度资源；资源缺失时维持 `partial`。
+- 任何涉及 `minecraft:redstone_producer` 或 `minecraft:redstone_consumer` 的代码必须等待 S3-14，不在 1.21.80 包中开启实验功能。
+- 每包完成后自动回归当前测试、源包校验和生成包检查；平台测试失败会阻止下一阶段的发布声明。

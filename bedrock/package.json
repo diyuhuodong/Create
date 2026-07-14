@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "node tools/build.mjs",
+    "content-specs": "node tools/generate-stage3-content-specifications.mjs",
     "deploy:win": "node tools/deploy-win.mjs",
     "inventory": "node tools/generate-domain-inventory.mjs",
     "matrix": "node tools/generate-migration-matrix.mjs",
@@ -16,6 +17,7 @@
     "recipes:crushing": "node tools/convert-crushing-recipes.mjs",
     "recipes:pressing": "node tools/convert-pressing-recipes.mjs",
     "test": "node tools/run-tests.mjs",
-    "validate": "node tools/validate-packs.mjs"
+    "validate": "node tools/validate-packs.mjs",
+    "work-queue": "node tools/generate-stage3-work-queue.mjs"
   }
 }

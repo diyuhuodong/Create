@@ -8,11 +8,15 @@ import { STATIC_VISUAL_EXCEPTIONS, validateStage3SourceContentContract } from ".
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(testDirectory, "..");
 
-test("Stage-3 static content has behavior, translations, creative access, and source assets", async () => {
+test("Stage-3 delivered content has behavior or explicit acquisition, translations, creative access, and source assets", async () => {
 	const coverage = await validateStage3SourceContentContract({ bedrockRoot });
 
 	assert.equal(coverage.staticEntries, 15);
 	assert.equal(coverage.staticBlocks, 8);
+	assert.equal(coverage.foundationEntries, 6);
+	assert.equal(coverage.foundationBlocks, 6);
+	assert.equal(coverage.contentEntries, 21);
+	assert.equal(coverage.contentBlocks, 14);
 	assert.deepEqual(coverage.visualFallbacks, [{
 		identifier: "createbedrock:crushing_wheel",
 		reason: STATIC_VISUAL_EXCEPTIONS.get("createbedrock:crushing_wheel")

@@ -1,0 +1,20 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:raw_zinc_from_raw_zinc_block"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:raw_zinc_block"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:raw_zinc",
+      "count": 9
+    }
+  }
+}

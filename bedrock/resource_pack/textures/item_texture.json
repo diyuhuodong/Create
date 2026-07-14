@@ -4,6 +4,18 @@
   "texture_data": {
     "createbedrock_belt_connector": {
       "textures": "textures/create_java/item/belt_connector"
+    },
+    "createbedrock_raw_zinc": {
+      "textures": "textures/create_java/item/raw_zinc"
+    },
+    "createbedrock_zinc_ingot": {
+      "textures": "textures/create_java/item/zinc_ingot"
+    },
+    "createbedrock_andesite_alloy": {
+      "textures": "textures/create_java/item/andesite_alloy"
+    },
+    "createbedrock_rose_quartz": {
+      "textures": "textures/create_java/item/rose_quartz"
     }
   }
 }

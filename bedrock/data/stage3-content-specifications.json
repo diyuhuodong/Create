@@ -1,0 +1,2390 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "deterministic",
+  "generatedFrom": "bedrock/data/stage3-work-queue.json and committed Java generated resources",
+  "entries": [
+    {
+      "acceptanceId": "CONTENT-ANDESITE-DOOR-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:andesite_door",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:andesite_door",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/andesite_door.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/andesite_door.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-ANDESITE-LADDER-BLOCK",
+      "assetConclusion": "java_model_analysis_required",
+      "bedrockIdentifier": "createbedrock:andesite_ladder",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:andesite_ladder",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/andesite_ladder.json",
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/andesite_ladder.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/andesite_ladder_from_andesite_alloy_stonecutting.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:stonecutting"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-ANDESITE-SCAFFOLDING-BLOCK",
+      "assetConclusion": "java_model_analysis_required",
+      "bedrockIdentifier": "createbedrock:andesite_scaffolding",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:andesite_scaffolding",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/andesite_scaffolding.json",
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/andesite_scaffolding.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/andesite_scaffolding_from_andesite_alloy_stonecutting.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:stonecutting"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-ANDESITE-TABLE-CLOTH-BLOCK",
+      "assetConclusion": "java_model_analysis_required",
+      "bedrockIdentifier": "createbedrock:andesite_table_cloth",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:andesite_table_cloth",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/andesite_table_cloth.json",
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/andesite_table_cloth.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/andesite_table_cloth_from_andesite_alloy_stonecutting.json",
+        "src/generated/resources/data/create/recipe/crafting/logistics/andesite_table_cloth_clear.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless",
+        "minecraft:stonecutting"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-BAR-OF-CHOCOLATE-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:bar_of_chocolate",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:bar_of_chocolate",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/bar_of_chocolate.json"
+      ],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/bar_of_chocolate.png"
+      ],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-BLAZE-BURNER-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:blaze_burner",
+      "behaviorRequirement": "machine_runtime",
+      "implementationPackage": "S3-11",
+      "implementationReason": "The Java registration needs fixed processing-machine state or a processing dependency.",
+      "javaIdentifier": "create:blaze_burner",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/blaze_burner.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "world_or_loot_acquisition",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-BLAZE-CAKE-BASE-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:blaze_cake_base",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:blaze_cake_base",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/blaze_cake_base.json"
+      ],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/blaze_cake_base.png"
+      ],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-BLAZE-CAKE-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:blaze_cake",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:blaze_cake",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/blaze_cake.json"
+      ],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/blaze_cake.png"
+      ],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-BLAZE-HEATER-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:blaze_heater",
+      "behaviorRequirement": "machine_runtime",
+      "implementationPackage": "S3-11",
+      "implementationReason": "The Java registration needs fixed processing-machine state or a processing dependency.",
+      "javaIdentifier": "create:blaze_heater",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-BOUND-CARDBOARD-BLOCK-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:bound_cardboard_block",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:bound_cardboard_block",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/bound_cardboard_block.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/materials/bound_cardboard_block.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-BRASS-BLOCK-BLOCK",
+      "assetConclusion": "java_model_analysis_required",
+      "bedrockIdentifier": "createbedrock:brass_block",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:brass_block",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/brass_block.json",
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/brass_block.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/materials/brass_block_from_compacting.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/brass_block.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-BRASS-DOOR-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:brass_door",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:brass_door",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/brass_door.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/brass_door.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-BRASS-LADDER-BLOCK",
+      "assetConclusion": "java_model_analysis_required",
+      "bedrockIdentifier": "createbedrock:brass_ladder",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:brass_ladder",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/brass_ladder.json",
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/brass_ladder.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/brass_ladder_from_ingots_brass_stonecutting.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:stonecutting"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-BRASS-SCAFFOLDING-BLOCK",
+      "assetConclusion": "java_model_analysis_required",
+      "bedrockIdentifier": "createbedrock:brass_scaffolding",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:brass_scaffolding",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/brass_scaffolding.json",
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/brass_scaffolding.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/brass_scaffolding_from_ingots_brass_stonecutting.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:stonecutting"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-BRASS-TABLE-CLOTH-BLOCK",
+      "assetConclusion": "java_model_analysis_required",
+      "bedrockIdentifier": "createbedrock:brass_table_cloth",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:brass_table_cloth",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/brass_table_cloth.json",
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/brass_table_cloth.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/brass_table_cloth_from_ingots_brass_stonecutting.json",
+        "src/generated/resources/data/create/recipe/crafting/logistics/brass_table_cloth_clear.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless",
+        "minecraft:stonecutting"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-BUILDERS-TEA-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:builders_tea",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:builders_tea",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/builders_tea.json"
+      ],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/builders_tea.png"
+      ],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-CARDBOARD-BLOCK-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:cardboard_block",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:cardboard_block",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/cardboard_block.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/materials/cardboard_block.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-CARDBOARD-BOOTS-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:cardboard_boots",
+      "behaviorRequirement": "special_item_component",
+      "implementationPackage": "S6",
+      "implementationReason": "The Java registration requires equipment, projectile, or special item interaction semantics.",
+      "javaIdentifier": "create:cardboard_boots",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/cardboard_boots.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/appliances/cardboard_boots.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/cardboard_boots.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-CARDBOARD-CHESTPLATE-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:cardboard_chestplate",
+      "behaviorRequirement": "special_item_component",
+      "implementationPackage": "S6",
+      "implementationReason": "The Java registration requires equipment, projectile, or special item interaction semantics.",
+      "javaIdentifier": "create:cardboard_chestplate",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/cardboard_chestplate.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/appliances/cardboard_chestplate.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/cardboard_chestplate.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-CARDBOARD-HELMET-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:cardboard_helmet",
+      "behaviorRequirement": "special_item_component",
+      "implementationPackage": "S6",
+      "implementationReason": "The Java registration requires equipment, projectile, or special item interaction semantics.",
+      "javaIdentifier": "create:cardboard_helmet",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/cardboard_helmet.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/appliances/cardboard_helmet.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/cardboard_helmet.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-CARDBOARD-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:cardboard",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:cardboard",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/cardboard.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/materials/cardboard_from_block.json",
+        "src/generated/resources/data/create/recipe/crafting/materials/cardboard_from_bound_block.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/cardboard.png",
+        "src/main/resources/assets/create/textures/item/package/cardboard.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-CARDBOARD-LEGGINGS-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:cardboard_leggings",
+      "behaviorRequirement": "special_item_component",
+      "implementationPackage": "S6",
+      "implementationReason": "The Java registration requires equipment, projectile, or special item interaction semantics.",
+      "javaIdentifier": "create:cardboard_leggings",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/cardboard_leggings.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/appliances/cardboard_leggings.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/cardboard_leggings.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-CARDBOARD-SWORD-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:cardboard_sword",
+      "behaviorRequirement": "special_item_component",
+      "implementationPackage": "S6",
+      "implementationReason": "The Java registration requires equipment, projectile, or special item interaction semantics.",
+      "javaIdentifier": "create:cardboard_sword",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/cardboard_sword.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/appliances/cardboard_sword.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/cardboard_sword.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-CHASSIS-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:chassis",
+      "behaviorRequirement": "contraption_actor",
+      "implementationPackage": "S4",
+      "implementationReason": "The Java registration participates in movable contraptions or their attachments.",
+      "javaIdentifier": "create:chassis",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-CHOCOLATE-GLAZED-BERRIES-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:chocolate_glazed_berries",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:chocolate_glazed_berries",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/chocolate_glazed_berries.json"
+      ],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/chocolate_glazed_berries.png"
+      ],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-CHROMATIC-COMPOUND-ITEM",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:chromatic_compound",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:chromatic_compound",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-CLOCKWORK-BEARING-BLOCK",
+      "assetConclusion": "java_model_analysis_required",
+      "bedrockIdentifier": "createbedrock:clockwork_bearing",
+      "behaviorRequirement": "contraption_actor",
+      "implementationPackage": "S4",
+      "implementationReason": "The Java registration participates in movable contraptions or their attachments.",
+      "javaIdentifier": "create:clockwork_bearing",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/clockwork_bearing.json",
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/clockwork_bearing.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/clockwork_bearing.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-CLOCKWORK-BEARING-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:clockwork_bearing",
+      "behaviorRequirement": "contraption_actor",
+      "implementationPackage": "S4",
+      "implementationReason": "The Java registration participates in movable contraptions or their attachments.",
+      "javaIdentifier": "create:clockwork_bearing",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/clockwork_bearing.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/clockwork_bearing.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-CONTROLS-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:controls",
+      "behaviorRequirement": "contraption_actor",
+      "implementationPackage": "S4",
+      "implementationReason": "The Java registration participates in movable contraptions or their attachments.",
+      "javaIdentifier": "create:controls",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/controls.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/controls.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/controls.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-COPPER-DOOR-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:copper_door",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:copper_door",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/copper_door.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/copper_door.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-COPPER-LADDER-BLOCK",
+      "assetConclusion": "java_model_analysis_required",
+      "bedrockIdentifier": "createbedrock:copper_ladder",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:copper_ladder",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/copper_ladder.json",
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/copper_ladder.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/copper_ladder_from_ingots_copper_stonecutting.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:stonecutting"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-COPPER-SCAFFOLDING-BLOCK",
+      "assetConclusion": "java_model_analysis_required",
+      "bedrockIdentifier": "createbedrock:copper_scaffolding",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:copper_scaffolding",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/copper_scaffolding.json",
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/copper_scaffolding.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/copper_scaffolding_from_ingots_copper_stonecutting.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:stonecutting"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-COPPER-TABLE-CLOTH-BLOCK",
+      "assetConclusion": "java_model_analysis_required",
+      "bedrockIdentifier": "createbedrock:copper_table_cloth",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:copper_table_cloth",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/copper_table_cloth.json",
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/copper_table_cloth.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/copper_table_cloth_from_ingots_copper_stonecutting.json",
+        "src/generated/resources/data/create/recipe/crafting/logistics/copper_table_cloth_clear.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless",
+        "minecraft:stonecutting"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-COPYCAT-BARS-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:copycat_bars",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-10",
+      "implementationReason": "The Java registration needs logistics or copycat-state behavior beyond a static block definition.",
+      "javaIdentifier": "create:copycat_bars",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/copycat_bars.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "world_or_loot_acquisition",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-COPYCAT-BASE-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:copycat_base",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-10",
+      "implementationReason": "The Java registration needs logistics or copycat-state behavior beyond a static block definition.",
+      "javaIdentifier": "create:copycat_base",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/copycat_base.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/copycat_base.png"
+      ],
+      "acquisitionConclusion": "world_or_loot_acquisition",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-COPYCAT-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:copycat",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-10",
+      "implementationReason": "The Java registration needs logistics or copycat-state behavior beyond a static block definition.",
+      "javaIdentifier": "create:copycat",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-COPYCAT-PANEL-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:copycat_panel",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-10",
+      "implementationReason": "The Java registration needs logistics or copycat-state behavior beyond a static block definition.",
+      "javaIdentifier": "create:copycat_panel",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/copycat_panel.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/copycat_panel_from_ingots_zinc_stonecutting.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:stonecutting"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-COPYCAT-STEP-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:copycat_step",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-10",
+      "implementationReason": "The Java registration needs logistics or copycat-state behavior beyond a static block definition.",
+      "javaIdentifier": "create:copycat_step",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/copycat_step.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/copycat_step_from_ingots_zinc_stonecutting.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:stonecutting"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-CREATIVE-BLAZE-CAKE-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:creative_blaze_cake",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:creative_blaze_cake",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/creative_blaze_cake.json"
+      ],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/creative_blaze_cake.png"
+      ],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-CRUSHED-RAW--ITEM",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:crushed_raw_",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:crushed_raw_",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-CUCKOO-CLOCK-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:cuckoo_clock",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:cuckoo_clock",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/cuckoo_clock.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/cuckoo_clock.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/cuckoo_clock.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-CUCKOO-CLOCK-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:cuckoo_clock",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:cuckoo_clock",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/cuckoo_clock.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/cuckoo_clock.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-CURSED-BELL-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:cursed_bell",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:cursed_bell",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-DESK-BELL-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:desk_bell",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:desk_bell",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/desk_bell.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/logistics/desk_bell.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/desk_bell.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-DESK-BELL-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:desk_bell",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:desk_bell",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/logistics/desk_bell.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/desk_bell.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-DISPLAY-BOARD-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:display_board",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:display_board",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/display_board.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/display_board.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-EMPTY-BLAZE-BURNER-ITEM",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:empty_blaze_burner",
+      "behaviorRequirement": "machine_runtime",
+      "implementationPackage": "S3-11",
+      "implementationReason": "The Java registration needs fixed processing-machine state or a processing dependency.",
+      "javaIdentifier": "create:empty_blaze_burner",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/empty_blaze_burner.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/empty_blaze_burner.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-EXPERIENCE-BLOCK-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:experience_block",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:experience_block",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/experience_block.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/materials/experience_block.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/experience_block.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-EXPERIENCE-NUGGET-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:experience_nugget",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:experience_nugget",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/experience_nugget.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/materials/experience_nugget_from_block.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/experience_nugget.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-FLAP-DISPLAY-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:flap_display",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:flap_display",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-FRAMED-GLASS-DOOR-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:framed_glass_door",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:framed_glass_door",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/framed_glass_door.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/framed_glass_door.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-FRAMED-GLASS-TRAPDOOR-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:framed_glass_trapdoor",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:framed_glass_trapdoor",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/framed_glass_trapdoor.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/framed_glass_trapdoor.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-HANDHELD-WORLDSHAPER-ITEM",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:handheld_worldshaper",
+      "behaviorRequirement": "special_item_component",
+      "implementationPackage": "S6",
+      "implementationReason": "The Java registration requires equipment, projectile, or special item interaction semantics.",
+      "javaIdentifier": "create:handheld_worldshaper",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/handheld_worldshaper.json"
+      ],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-HAUNTED-BELL-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:haunted_bell",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:haunted_bell",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/haunted_bell.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "world_or_loot_acquisition",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-HONEYED-APPLE-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:honeyed_apple",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:honeyed_apple",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/honeyed_apple.json"
+      ],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/honeyed_apple.png"
+      ],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-LINEAR-CHASSIS-BLOCK",
+      "assetConclusion": "java_model_analysis_required",
+      "bedrockIdentifier": "createbedrock:linear_chassis",
+      "behaviorRequirement": "contraption_actor",
+      "implementationPackage": "S4",
+      "implementationReason": "The Java registration participates in movable contraptions or their attachments.",
+      "javaIdentifier": "create:linear_chassis",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/linear_chassis.json",
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/linear_chassis.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/linear_chassis_from_conversion.json",
+        "src/generated/resources/data/create/recipe/crafting/kinetics/linear_chassis.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped",
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-LIT-BLAZE-BURNER-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:lit_blaze_burner",
+      "behaviorRequirement": "machine_runtime",
+      "implementationPackage": "S3-11",
+      "implementationReason": "The Java registration needs fixed processing-machine state or a processing dependency.",
+      "javaIdentifier": "create:lit_blaze_burner",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/lit_blaze_burner.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "world_or_loot_acquisition",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-MECHANICAL-CRAFTER-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:mechanical_crafter",
+      "behaviorRequirement": "machine_runtime",
+      "implementationPackage": "S3-11",
+      "implementationReason": "The Java registration needs fixed processing-machine state or a processing dependency.",
+      "javaIdentifier": "create:mechanical_crafter",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/mechanical_crafter.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/mechanical_crafter.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-MECHANICAL-CRAFTER-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:mechanical_crafter",
+      "behaviorRequirement": "machine_runtime",
+      "implementationPackage": "S3-11",
+      "implementationReason": "The Java registration needs fixed processing-machine state or a processing dependency.",
+      "javaIdentifier": "create:mechanical_crafter",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/mechanical_crafter.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-MECHANICAL-PLOUGH-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:mechanical_plough",
+      "behaviorRequirement": "contraption_actor",
+      "implementationPackage": "S4",
+      "implementationReason": "The Java registration participates in movable contraptions or their attachments.",
+      "javaIdentifier": "create:mechanical_plough",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/mechanical_plough.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/mechanical_plough.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-MECHANICAL-ROLLER-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:mechanical_roller",
+      "behaviorRequirement": "contraption_actor",
+      "implementationPackage": "S4",
+      "implementationReason": "The Java registration participates in movable contraptions or their attachments.",
+      "javaIdentifier": "create:mechanical_roller",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/mechanical_roller.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/mechanical_roller.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-MECHANICAL-ROLLER-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:mechanical_roller",
+      "behaviorRequirement": "contraption_actor",
+      "implementationPackage": "S4",
+      "implementationReason": "The Java registration participates in movable contraptions or their attachments.",
+      "javaIdentifier": "create:mechanical_roller",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/mechanical_roller.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-METAL-BRACKET-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:metal_bracket",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-9",
+      "implementationReason": "The Java registration is a kinetic structural component and must join the expanded kinetic graph.",
+      "javaIdentifier": "create:metal_bracket",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/metal_bracket.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/metal_bracket.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-METAL-GIRDER-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:metal_girder",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-9",
+      "implementationReason": "The Java registration is a kinetic structural component and must join the expanded kinetic graph.",
+      "javaIdentifier": "create:metal_girder",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/metal_girder.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/metal_girder.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-MYSTERIOUS-CUCKOO-CLOCK-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:mysterious_cuckoo_clock",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:mysterious_cuckoo_clock",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/mysterious_cuckoo_clock.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/mysterious_cuckoo_clock.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-NOZZLE-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:nozzle",
+      "behaviorRequirement": "machine_runtime",
+      "implementationPackage": "S3-11",
+      "implementationReason": "The Java registration needs fixed processing-machine state or a processing dependency.",
+      "javaIdentifier": "create:nozzle",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/nozzle.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/nozzle.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-NOZZLE-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:nozzle",
+      "behaviorRequirement": "machine_runtime",
+      "implementationPackage": "S3-11",
+      "implementationReason": "The Java registration needs fixed processing-machine state or a processing dependency.",
+      "javaIdentifier": "create:nozzle",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/nozzle.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-PECULIAR-BELL-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:peculiar_bell",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:peculiar_bell",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/peculiar_bell.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/curiosities/peculiar_bell.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-PECULIAR-BELL-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:peculiar_bell",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:peculiar_bell",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/curiosities/peculiar_bell.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-PISTON-EXTENSION-POLE-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:piston_extension_pole",
+      "behaviorRequirement": "contraption_actor",
+      "implementationPackage": "S4",
+      "implementationReason": "The Java registration participates in movable contraptions or their attachments.",
+      "javaIdentifier": "create:piston_extension_pole",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/piston_extension_pole.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/piston_extension_pole.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-PLACARD-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:placard",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:placard",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/placard.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/placard.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/placard.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-PLACARD-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:placard",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:placard",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/placard.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/placard.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-PORTABLE-STORAGE-INTERFACE-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:portable_storage_interface",
+      "behaviorRequirement": "contraption_actor",
+      "implementationPackage": "S4",
+      "implementationReason": "The Java registration participates in movable contraptions or their attachments.",
+      "javaIdentifier": "create:portable_storage_interface",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/portable_storage_interface.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/portable_storage_interface.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/portable_storage_interface.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-PORTABLE-STORAGE-INTERFACE-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:portable_storage_interface",
+      "behaviorRequirement": "contraption_actor",
+      "implementationPackage": "S4",
+      "implementationReason": "The Java registration participates in movable contraptions or their attachments.",
+      "javaIdentifier": "create:portable_storage_interface",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/portable_storage_interface.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/portable_storage_interface.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-POTATO-PROJECTILE-ENTITY",
+      "assetConclusion": "entity_visual_and_actor_required",
+      "bedrockIdentifier": "createbedrock:potato_projectile",
+      "behaviorRequirement": "entity_runtime",
+      "implementationPackage": "S6",
+      "implementationReason": "The Java registration requires equipment, projectile, or special item interaction semantics.",
+      "javaIdentifier": "create:potato_projectile",
+      "kind": "entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-RADIAL-CHASSIS-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:radial_chassis",
+      "behaviorRequirement": "contraption_actor",
+      "implementationPackage": "S4",
+      "implementationReason": "The Java registration participates in movable contraptions or their attachments.",
+      "javaIdentifier": "create:radial_chassis",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/radial_chassis.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/radial_chassis.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-RAILWAY-CASING-BLOCK",
+      "assetConclusion": "java_model_analysis_required",
+      "bedrockIdentifier": "createbedrock:railway_casing",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:railway_casing",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/railway_casing.json",
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/railway_casing.json"
+      ],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/railway_casing.png"
+      ],
+      "acquisitionConclusion": "world_or_loot_acquisition",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-RED-SAND-PAPER-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:red_sand_paper",
+      "behaviorRequirement": "special_item_component",
+      "implementationPackage": "S6",
+      "implementationReason": "The Java registration requires equipment, projectile, or special item interaction semantics.",
+      "javaIdentifier": "create:red_sand_paper",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/red_sand_paper.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/materials/red_sand_paper.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/red_sand_paper.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-REFINED-RADIANCE-CASING-BLOCK",
+      "assetConclusion": "java_model_analysis_required",
+      "bedrockIdentifier": "createbedrock:refined_radiance_casing",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:refined_radiance_casing",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/refined_radiance_casing.json",
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/refined_radiance_casing.json"
+      ],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/refined_radiance_casing.png"
+      ],
+      "acquisitionConclusion": "world_or_loot_acquisition",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-REFINED-RADIANCE-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:refined_radiance",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:refined_radiance",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/refined_radiance.json"
+      ],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/refined_radiance.png"
+      ],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-ROSE-QUARTZ-LAMP-BLOCK",
+      "assetConclusion": "java_model_analysis_required",
+      "bedrockIdentifier": "createbedrock:rose_quartz_lamp",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:rose_quartz_lamp",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/rose_quartz_lamp.json",
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/rose_quartz_lamp.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/rose_quartz_lamp.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/rose_quartz_lamp.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-ROSE-QUARTZ-TILES-BLOCK",
+      "assetConclusion": "java_model_analysis_required",
+      "bedrockIdentifier": "createbedrock:rose_quartz_tiles",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:rose_quartz_tiles",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/rose_quartz_tiles.json",
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/rose_quartz_tiles.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/materials/rose_quartz_tiles_from_conversion.json",
+        "src/generated/resources/data/create/recipe/rose_quartz_tiles_from_polished_rose_quartz_stonecutting.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless",
+        "minecraft:stonecutting"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/palettes/rose_quartz_tiles.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-SAIL-FRAME-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:sail_frame",
+      "behaviorRequirement": "contraption_actor",
+      "implementationPackage": "S4",
+      "implementationReason": "The Java registration participates in movable contraptions or their attachments.",
+      "javaIdentifier": "create:sail_frame",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/sail_frame.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/sail_frame_from_conversion.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-SAND-PAPER-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:sand_paper",
+      "behaviorRequirement": "special_item_component",
+      "implementationPackage": "S6",
+      "implementationReason": "The Java registration requires equipment, projectile, or special item interaction semantics.",
+      "javaIdentifier": "create:sand_paper",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/sand_paper.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/materials/sand_paper.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/sand_paper.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-SECONDARY-LINEAR-CHASSIS-BLOCK",
+      "assetConclusion": "java_model_analysis_required",
+      "bedrockIdentifier": "createbedrock:secondary_linear_chassis",
+      "behaviorRequirement": "contraption_actor",
+      "implementationPackage": "S4",
+      "implementationReason": "The Java registration participates in movable contraptions or their attachments.",
+      "javaIdentifier": "create:secondary_linear_chassis",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/secondary_linear_chassis.json",
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/secondary_linear_chassis.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/secondary_linear_chassis_from_conversion.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-SHADOW-STEEL-CASING-BLOCK",
+      "assetConclusion": "java_model_analysis_required",
+      "bedrockIdentifier": "createbedrock:shadow_steel_casing",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:shadow_steel_casing",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/shadow_steel_casing.json",
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/shadow_steel_casing.json"
+      ],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/shadow_steel_casing.png"
+      ],
+      "acquisitionConclusion": "world_or_loot_acquisition",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-SHADOW-STEEL-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:shadow_steel",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:shadow_steel",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/shadow_steel.json"
+      ],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/shadow_steel.png"
+      ],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-SHOPPING-LIST-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:shopping_list",
+      "behaviorRequirement": "special_item_component",
+      "implementationPackage": "S6",
+      "implementationReason": "The Java registration requires equipment, projectile, or special item interaction semantics.",
+      "javaIdentifier": "create:shopping_list",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/shopping_list.json"
+      ],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/shopping_list.png"
+      ],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-SLIDING-DOOR-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:sliding_door",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:sliding_door",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-SMALL-ROSE-QUARTZ-TILES-BLOCK",
+      "assetConclusion": "java_model_analysis_required",
+      "bedrockIdentifier": "createbedrock:small_rose_quartz_tiles",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:small_rose_quartz_tiles",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/small_rose_quartz_tiles.json",
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/block/small_rose_quartz_tiles.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/materials/small_rose_quartz_tiles_from_conversion.json",
+        "src/generated/resources/data/create/recipe/small_rose_quartz_tiles_from_polished_rose_quartz_stonecutting.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless",
+        "minecraft:stonecutting"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/palettes/small_rose_quartz_tiles.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-SPEEDOMETER-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:speedometer",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:speedometer",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/speedometer.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/speedometer_from_conversion.json",
+        "src/generated/resources/data/create/recipe/crafting/kinetics/speedometer.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped",
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-SPEEDOMETER-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:speedometer",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:speedometer",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/speedometer_from_conversion.json",
+        "src/generated/resources/data/create/recipe/crafting/kinetics/speedometer.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped",
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-STEAM-WHISTLE-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:steam_whistle",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:steam_whistle",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/steam_whistle.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/steam_whistle.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-STEAM-WHISTLE-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:steam_whistle",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:steam_whistle",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/steam_whistle.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-STEAM-WHISTLE-EXTENSION-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:steam_whistle_extension",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:steam_whistle_extension",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/steam_whistle_extension.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "world_or_loot_acquisition",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-STOCK-TICKER-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:stock_ticker",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:stock_ticker",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/stock_ticker.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/logistics/stock_ticker_clear.json",
+        "src/generated/resources/data/create/recipe/crafting/logistics/stock_ticker.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped",
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/stock_ticker.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-STOCK-TICKER-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:stock_ticker",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:stock_ticker",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/logistics/stock_ticker_clear.json",
+        "src/generated/resources/data/create/recipe/crafting/logistics/stock_ticker.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped",
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/block/stock_ticker.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-STOCKPILE-SWITCH-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:stockpile_switch",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:stockpile_switch",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/stockpile_switch.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/logistics/stockpile_switch.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-STOCKPILE-SWITCH-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:stockpile_switch",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:stockpile_switch",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/logistics/stockpile_switch.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-STRESSOMETER-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:stressometer",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:stressometer",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/stressometer.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/stressometer_from_conversion.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-STRESSOMETER-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:stressometer",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:stressometer",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/stressometer_from_conversion.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-SUPER-GLUE-ENTITY",
+      "assetConclusion": "entity_visual_and_actor_required",
+      "bedrockIdentifier": "createbedrock:super_glue",
+      "behaviorRequirement": "entity_runtime",
+      "implementationPackage": "S6",
+      "implementationReason": "The Java registration requires equipment, projectile, or special item interaction semantics.",
+      "javaIdentifier": "create:super_glue",
+      "kind": "entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/super_glue.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-SUPER-GLUE-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:super_glue",
+      "behaviorRequirement": "special_item_component",
+      "implementationPackage": "S6",
+      "implementationReason": "The Java registration requires equipment, projectile, or special item interaction semantics.",
+      "javaIdentifier": "create:super_glue",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/super_glue.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/super_glue.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/super_glue.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-SWEET-ROLL-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:sweet_roll",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:sweet_roll",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/sweet_roll.json"
+      ],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/sweet_roll.png"
+      ],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-TABLE-CLOTH-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:table_cloth",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-14",
+      "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
+      "javaIdentifier": "create:table_cloth",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [],
+      "sourceRecipeTypes": [],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "no_static_acquisition_recipe",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-TREE-FERTILIZER-ITEM",
+      "assetConclusion": "source_item_texture_available",
+      "bedrockIdentifier": "createbedrock:tree_fertilizer",
+      "behaviorRequirement": "stateless_content",
+      "implementationPackage": "S3-13",
+      "implementationReason": "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work.",
+      "javaIdentifier": "create:tree_fertilizer",
+      "kind": "item",
+      "sourceLootPath": null,
+      "sourceModelPaths": [
+        "src/generated/resources/assets/create/models/item/tree_fertilizer.json"
+      ],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/appliances/tree_fertilizer.json",
+        "src/generated/resources/data/create/recipe/crafting/tree_fertilizer.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [
+        "src/main/resources/assets/create/textures/item/tree_fertilizer.png"
+      ],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Source and built resource/recipe contract before platform visual verification."
+    },
+    {
+      "acceptanceId": "CONTENT-TURNTABLE-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:turntable",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-9",
+      "implementationReason": "The Java registration is a kinetic structural component and must join the expanded kinetic graph.",
+      "javaIdentifier": "create:turntable",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/turntable.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/turntable.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-TURNTABLE-BLOCK_ENTITY",
+      "assetConclusion": "persistent_block_visual_required",
+      "bedrockIdentifier": "createbedrock:turntable",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-9",
+      "implementationReason": "The Java registration is a kinetic structural component and must join the expanded kinetic graph.",
+      "javaIdentifier": "create:turntable",
+      "kind": "block_entity",
+      "sourceLootPath": null,
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/turntable.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-WHITE-SAIL-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:white_sail",
+      "behaviorRequirement": "contraption_actor",
+      "implementationPackage": "S4",
+      "implementationReason": "The Java registration participates in movable contraptions or their attachments.",
+      "javaIdentifier": "create:white_sail",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/white_sail.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/white_sail_from_conversion.json",
+        "src/generated/resources/data/create/recipe/crafting/kinetics/white_sail.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped",
+        "minecraft:crafting_shapeless"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    },
+    {
+      "acceptanceId": "CONTENT-WOODEN-BRACKET-BLOCK",
+      "assetConclusion": "source_model_not_found",
+      "bedrockIdentifier": "createbedrock:wooden_bracket",
+      "behaviorRequirement": "persistent_block_runtime",
+      "implementationPackage": "S3-9",
+      "implementationReason": "The Java registration is a kinetic structural component and must join the expanded kinetic graph.",
+      "javaIdentifier": "create:wooden_bracket",
+      "kind": "block",
+      "sourceLootPath": "src/generated/resources/data/create/loot_table/blocks/wooden_bracket.json",
+      "sourceModelPaths": [],
+      "sourceRecipePaths": [
+        "src/generated/resources/data/create/recipe/crafting/kinetics/wooden_bracket.json"
+      ],
+      "sourceRecipeTypes": [
+        "minecraft:crafting_shaped"
+      ],
+      "sourceTexturePaths": [],
+      "acquisitionConclusion": "vanilla_recipe_candidate",
+      "testPlan": "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+    }
+  ]
+}
