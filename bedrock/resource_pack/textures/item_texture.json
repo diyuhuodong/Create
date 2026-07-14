@@ -5,6 +5,12 @@
     "createbedrock_belt_connector": {
       "textures": "textures/create_java/item/belt_connector"
     },
+    "createbedrock_filter": {
+      "textures": "textures/create_java/item/filter"
+    },
+    "createbedrock_attribute_filter": {
+      "textures": "textures/create_java/item/attribute_filter"
+    },
     "createbedrock_raw_zinc": {
       "textures": "textures/create_java/item/raw_zinc"
     },

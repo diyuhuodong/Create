@@ -8,6 +8,8 @@ import { validateStage3SourceContentContract } from "./stage3-content-contract.m
 import { validateStage3ContentSpecifications } from "./stage3-content-specification-schema.mjs";
 import { validateStage3KineticSourceContract } from "./stage3-kinetic-contract.mjs";
 import { validateStage3KineticSpecifications } from "./stage3-kinetic-specification-schema.mjs";
+import { validateStage3LogisticsSourceContract } from "./stage3-logistics-contract.mjs";
+import { validateStage3LogisticsSpecifications } from "./stage3-logistics-specification-schema.mjs";
 import { validateStage3WorkQueue } from "./stage3-work-queue-schema.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
@@ -66,11 +68,13 @@ const itemAtlas = await readJson(resolve(bedrockRoot, "resource_pack", "textures
 const migrationMatrix = await readJson(resolve(bedrockRoot, "data", "migration-matrix.json"));
 const stage3ContentSpecifications = await readJson(resolve(bedrockRoot, "data", "stage3-content-specifications.json"));
 const stage3KineticSpecifications = await readJson(resolve(bedrockRoot, "data", "stage3-kinetic-specifications.json"));
+const stage3LogisticsSpecifications = await readJson(resolve(bedrockRoot, "data", "stage3-logistics-specifications.json"));
 const stage3WorkQueue = await readJson(resolve(bedrockRoot, "data", "stage3-work-queue.json"));
 validateMigrationMatrix(migrationMatrix);
 validateStage3WorkQueue(stage3WorkQueue, migrationMatrix);
 const contentSpecificationCoverage = validateStage3ContentSpecifications(stage3ContentSpecifications, stage3WorkQueue);
 const kineticSpecificationCoverage = validateStage3KineticSpecifications(stage3KineticSpecifications, stage3WorkQueue);
+const logisticsSpecificationCoverage = validateStage3LogisticsSpecifications(stage3LogisticsSpecifications, stage3WorkQueue);
 for (const entry of stage3ContentSpecifications.entries) {
 	const sourcePaths = [
 		...entry.sourceModelPaths,
@@ -87,6 +91,12 @@ for (const entry of stage3KineticSpecifications.entries) {
 	for (const sourcePath of entry.javaEvidencePaths) {
 		if (!await fileExists(resolve(repositoryRoot, sourcePath)))
 			throw new Error(`Kinetic specification ${entry.acceptanceId} references missing Java source ${sourcePath}.`);
+	}
+}
+for (const entry of stage3LogisticsSpecifications.entries) {
+	for (const sourcePath of entry.javaEvidencePaths) {
+		if (!await fileExists(resolve(repositoryRoot, sourcePath)))
+			throw new Error(`Logistics specification ${entry.acceptanceId} references missing Java source ${sourcePath}.`);
 	}
 }
 const allUuids = [
@@ -145,5 +155,6 @@ for (const script of await filesWithExtension(resolve(bedrockRoot, "behavior_pac
 
 const contentContract = await validateStage3SourceContentContract();
 const kineticContract = await validateStage3KineticSourceContract();
+const logisticsContract = await validateStage3LogisticsSourceContract();
 
-console.log(`Bedrock manifests, JSON files, JavaScript syntax, ${contentContract.contentBlocks} Stage-3 content blocks, ${kineticContract.blocks} S3-9 kinetic blocks, the ${stage3WorkQueue.entries.length}-entry work queue, ${contentSpecificationCoverage.entries} S3-8B content specifications, and ${kineticSpecificationCoverage.entries} S3-9 kinetic specifications are valid.`);
+console.log(`Bedrock manifests, JSON files, JavaScript syntax, ${contentContract.contentBlocks} Stage-3 content blocks, ${kineticContract.blocks} S3-9 kinetic blocks, ${logisticsContract.blocks} S3-10 logistics blocks, the ${stage3WorkQueue.entries.length}-entry work queue, ${contentSpecificationCoverage.entries} S3-8B content specifications, ${kineticSpecificationCoverage.entries} S3-9 kinetic specifications, and ${logisticsSpecificationCoverage.entries} S3-10 logistics specifications are valid.`);

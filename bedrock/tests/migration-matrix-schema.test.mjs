@@ -117,6 +117,21 @@ test("migration classification records S3-9 kinetic foundations without overstat
 	});
 });
 
+test("migration classification assigns S3-10 logistics resources to the durable DepotNetwork boundary", () => {
+	assert.deepEqual(classifyRegistration("belt", "block"), {
+		acceptanceId: "LOGISTICS-BELT-BLOCK",
+		behaviorPath: "behavior_pack/scripts/logistics/depot-runtime.js",
+		blockingReason: null,
+		domain: "logistics",
+		persistenceSchema: 2,
+		phase: 3,
+		resourceStatus: "partial",
+		status: "implementation_in_progress"
+	});
+	assert.equal(classifyRegistration("creative_crate", "block_entity").persistenceSchema, 2);
+	assert.equal(classifyRegistration("attribute_filter", "item").behaviorPath, "behavior_pack/scripts/logistics/depot-runtime.js");
+});
+
 test("migration classification assigns later dynamic, train, and equipment work to their planned phases", () => {
 	assert.deepEqual(classifyRegistration("mechanical_piston", "block").phase, 4);
 	assert.deepEqual(classifyRegistration("track_signal", "block").phase, 5);

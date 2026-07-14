@@ -1,4 +1,5 @@
 import { ShardedStateStore } from "../kernel/sharded-state-store.js";
+import { CreativeItemPort } from "./creative-item-port.js";
 import { ItemFilter } from "./item-filter.js";
 import { cloneItemStack, itemStackFingerprint, ItemPort } from "./item-port.js";
 import { ItemTransferJournal } from "./item-transfer-journal.js";
@@ -234,14 +235,20 @@ export class DepotNetwork {
 		return id;
 	}
 
-	createChute({ destinationId, id, sourceId }) {
+	createChute({ destinationId, filter, id, sourceId }) {
 		if (typeof id !== "string" || id.length === 0)
 			throw new TypeError("Chutes require an identifier");
 		if (this.#chutes.has(id))
 			return id;
 		this.#requireDepot(sourceId);
 		this.#requireDepot(destinationId);
-		this.#chutes.set(id, { destinationId, id, nextTransfer: 0, sourceId });
+		this.#chutes.set(id, {
+			destinationId,
+			filter: filter instanceof ItemFilter ? filter : new ItemFilter(filter),
+			id,
+			nextTransfer: 0,
+			sourceId
+		});
 		this.#persist();
 		return id;
 	}
@@ -262,7 +269,10 @@ export class DepotNetwork {
 			return false;
 		if ([...this.#externalWithdrawals.values()].some(withdrawal => withdrawal.depotId === id))
 			return false;
-		return depot.port.snapshot().slots.every(stack => stack === undefined);
+		const inspection = depot.port.inspect();
+		return Array.isArray(inspection.slots)
+			? inspection.slots.every(stack => stack === undefined)
+			: inspection.template === undefined;
 	}
 
 	canRemoveBelt(id) {
@@ -277,19 +287,32 @@ export class DepotNetwork {
 		return !this.#journal.snapshot().some(record => record.id.startsWith(`funnel:${id}:`));
 	}
 
-	createDepot({ dimensionId, location, maxStackSize = 64, size = 1 }) {
+	createDepot({ dimensionId, kind = "depot", location, maxStackSize = 64, size = 1 }) {
+		if (kind !== "depot" && kind !== "creative")
+			throw new TypeError("Logistics ports must be standard depots or creative crates");
 		const id = depotId(dimensionId, location);
 		const existing = this.#depots.get(id);
 		if (existing)
 			return id;
 		const depot = {
 			dimensionId,
+			kind,
 			location: assertLocation(location),
-			port: new ItemPort({ id, maxStackSize, size })
+			port: kind === "creative" ? new CreativeItemPort({ id }) : new ItemPort({ id, maxStackSize, size })
 		};
 		this.#depots.set(id, depot);
 		this.#persist();
 		return id;
+	}
+
+	setCreativeTemplate(id, template) {
+		const depot = this.#requireDepot(id);
+		if (depot.kind !== "creative" || typeof depot.port.setTemplate !== "function")
+			return false;
+		const changed = depot.port.setTemplate(template);
+		if (changed)
+			this.#persist();
+		return changed;
 	}
 
 	diagnostics() {
@@ -583,6 +606,24 @@ export class DepotNetwork {
 		return true;
 	}
 
+	setFunnelFilter(id, filter) {
+		const funnel = this.#funnels.get(id);
+		if (!funnel)
+			throw new Error(`Unknown funnel ${id}`);
+		funnel.filter = filter instanceof ItemFilter ? filter : new ItemFilter(filter);
+		this.#persist();
+		return true;
+	}
+
+	setChuteFilter(id, filter) {
+		const chute = this.#chutes.get(id);
+		if (!chute)
+			throw new Error(`Unknown chute ${id}`);
+		chute.filter = filter instanceof ItemFilter ? filter : new ItemFilter(filter);
+		this.#persist();
+		return true;
+	}
+
 	#beltFromRecord(record, depots) {
 		if (record?.kind !== "belt" || typeof record.id !== "string" || record.id.length === 0 || typeof record.sourceId !== "string" || typeof record.destinationId !== "string")
 			throw new TypeError("Belt records require identifiers");
@@ -605,15 +646,20 @@ export class DepotNetwork {
 			throw new TypeError("Depot records require a dimension, location, and port state");
 		const location = assertLocation(record.location);
 		const id = depotId(record.dimensionId, location);
-		if (record.port.id !== id || !Array.isArray(record.port.slots))
+		if (record.port.id !== id)
 			throw new TypeError("Depot port identity does not match its location");
-		const port = new ItemPort({
-			id,
-			maxStackSize: record.port.maxStackSize,
-			size: record.port.slots.length
-		});
+		const kind = record.portKind === "creative" || record.port.kind === "creative" ? "creative" : "depot";
+		if (kind === "depot" && !Array.isArray(record.port.slots))
+			throw new TypeError("Standard depot records require slot state");
+		const port = kind === "creative"
+			? new CreativeItemPort({ id })
+			: new ItemPort({
+				id,
+				maxStackSize: record.port.maxStackSize,
+				size: record.port.slots.length
+			});
 		port.restore(record.port);
-		return { dimensionId: record.dimensionId, location, port };
+		return { dimensionId: record.dimensionId, kind, location, port };
 	}
 
 	#externalDepositFromRecord(record, depots) {
@@ -658,6 +704,7 @@ export class DepotNetwork {
 			throw new Error("Chute endpoints must refer to restored depots");
 		return {
 			destinationId: record.destinationId,
+			filter: new ItemFilter(record.filter),
 			id: record.id,
 			nextTransfer: record.nextTransfer,
 			sourceId: record.sourceId
@@ -727,6 +774,7 @@ export class DepotNetwork {
 				dimensionId: depot.dimensionId,
 				kind: "depot",
 				location: { ...depot.location },
+				portKind: depot.kind,
 				port: depot.port.snapshot()
 			}))
 			.sort((left, right) => left.port.id.localeCompare(right.port.id));
@@ -745,7 +793,14 @@ export class DepotNetwork {
 			}))
 			.sort((left, right) => left.id.localeCompare(right.id));
 		const chutes = [...this.#chutes.values()]
-			.map(chute => ({ ...chute, kind: "chute" }))
+			.map(chute => ({
+				destinationId: chute.destinationId,
+				filter: chute.filter.snapshot(),
+				id: chute.id,
+				kind: "chute",
+				nextTransfer: chute.nextTransfer,
+				sourceId: chute.sourceId
+			}))
 			.sort((left, right) => left.id.localeCompare(right.id));
 		const externalDeposits = [...this.#externalDeposits.values()]
 			.map(deposit => ({ ...deposit, item: cloneItemStack(deposit.item), kind: "external_deposit", source: clone(deposit.source) }))
@@ -858,6 +913,7 @@ export class DepotNetwork {
 			const result = this.#journal.begin({
 				destination: this.#depots.get(chute.destinationId)?.port,
 				id: `chute:${chute.id}:${chute.nextTransfer}`,
+				predicate: stack => chute.filter.accepts(stack),
 				source: this.#depots.get(chute.sourceId)?.port
 			});
 			if (!result.ok)

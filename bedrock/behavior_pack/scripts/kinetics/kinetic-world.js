@@ -108,6 +108,11 @@ export const KINETIC_BLOCKS = {
 		axis: "y",
 		stressImpact: 8
 	},
+	"createbedrock:belt": {
+		kind: "consumer",
+		axis: "y",
+		stressImpact: 8
+	},
 	"createbedrock:powered_shaft": {
 		kind: "external_source",
 		axis: "y",

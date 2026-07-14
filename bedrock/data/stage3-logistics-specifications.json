@@ -1,0 +1,371 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "deterministic",
+  "generatedFrom": "bedrock/data/stage3-work-queue.json and Java registration sources",
+  "entries": [
+    {
+      "acceptanceId": "LOGISTICS-ANDESITE-BELT-FUNNEL-BLOCK",
+      "bedrockIdentifier": "createbedrock:andesite_belt_funnel",
+      "behaviorBoundary": "Implemented by DepotNetwork's durable item-port and directed device-transfer runtime, including restart-safe intents and delivery retry.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "Placeable block with creative access, explicit self-drop, EN/ZH name, and a documented Java-asset or fixed-geometry resource mapping.",
+      "testPlan": "Focused port, filter, transport, restart, resource-contract, validation, build, and package tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:andesite_belt_funnel",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "LOGISTICS-ANDESITE-TUNNEL-BLOCK",
+      "bedrockIdentifier": "createbedrock:andesite_tunnel",
+      "behaviorBoundary": "Implemented by DepotNetwork's durable item-port and directed device-transfer runtime, including restart-safe intents and delivery retry.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "Placeable block with creative access, explicit self-drop, EN/ZH name, and a documented Java-asset or fixed-geometry resource mapping.",
+      "testPlan": "Focused port, filter, transport, restart, resource-contract, validation, build, and package tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:andesite_tunnel",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "LOGISTICS-ANDESITE-TUNNEL-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:andesite_tunnel",
+      "behaviorBoundary": "The Java block-entity state is represented by DepotNetwork's world-persisted port, transfer journal, and device records; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "This registration shares the corresponding placeable block and has no duplicate Bedrock resource identifier.",
+      "testPlan": "Durable transfer, restart, break-protection, and source-contract tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:andesite_tunnel",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "LOGISTICS-ATTRIBUTE-FILTER-ITEM",
+      "bedrockIdentifier": "createbedrock:attribute_filter",
+      "behaviorBoundary": "Implemented as configuration resources for durable allow-list device filters. The safe Bedrock item codec intentionally does not infer Java NBT or attribute predicates from live ItemStacks.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "Creative-menu item with imported Java icon, EN/ZH name, and no standalone block resource.",
+      "testPlan": "Focused port, filter, transport, restart, resource-contract, validation, build, and package tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllItems.java"
+      ],
+      "javaIdentifier": "create:attribute_filter",
+      "kind": "item"
+    },
+    {
+      "acceptanceId": "LOGISTICS-BELT-BLOCK",
+      "bedrockIdentifier": "createbedrock:belt",
+      "behaviorBoundary": "Implemented as an axis-aware kinetic DepotNetwork belt with persisted in-flight transport, reversal, restart rescanning, and break protection.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "Placeable block with creative access, explicit self-drop, EN/ZH name, and a documented Java-asset or fixed-geometry resource mapping.",
+      "testPlan": "Focused port, filter, transport, restart, resource-contract, validation, build, and package tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:belt",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "LOGISTICS-BELT-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:belt",
+      "behaviorBoundary": "The Java block-entity state is represented by DepotNetwork's world-persisted port, transfer journal, and device records; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "This registration shares the corresponding placeable block and has no duplicate Bedrock resource identifier.",
+      "testPlan": "Durable transfer, restart, break-protection, and source-contract tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:belt",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "LOGISTICS-BRASS-BELT-FUNNEL-BLOCK",
+      "bedrockIdentifier": "createbedrock:brass_belt_funnel",
+      "behaviorBoundary": "Implemented by DepotNetwork's durable item-port and directed device-transfer runtime, including restart-safe intents and delivery retry.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "Placeable block with creative access, explicit self-drop, EN/ZH name, and a documented Java-asset or fixed-geometry resource mapping.",
+      "testPlan": "Focused port, filter, transport, restart, resource-contract, validation, build, and package tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:brass_belt_funnel",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "LOGISTICS-BRASS-FUNNEL-BLOCK",
+      "bedrockIdentifier": "createbedrock:brass_funnel",
+      "behaviorBoundary": "Implemented by DepotNetwork's durable item-port and directed device-transfer runtime, including restart-safe intents and delivery retry.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "Placeable block with creative access, explicit self-drop, EN/ZH name, and a documented Java-asset or fixed-geometry resource mapping.",
+      "testPlan": "Focused port, filter, transport, restart, resource-contract, validation, build, and package tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:brass_funnel",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "LOGISTICS-BRASS-TUNNEL-BLOCK",
+      "bedrockIdentifier": "createbedrock:brass_tunnel",
+      "behaviorBoundary": "Implemented by DepotNetwork's durable item-port and directed device-transfer runtime, including restart-safe intents and delivery retry.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "Placeable block with creative access, explicit self-drop, EN/ZH name, and a documented Java-asset or fixed-geometry resource mapping.",
+      "testPlan": "Focused port, filter, transport, restart, resource-contract, validation, build, and package tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:brass_tunnel",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "LOGISTICS-BRASS-TUNNEL-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:brass_tunnel",
+      "behaviorBoundary": "The Java block-entity state is represented by DepotNetwork's world-persisted port, transfer journal, and device records; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "This registration shares the corresponding placeable block and has no duplicate Bedrock resource identifier.",
+      "testPlan": "Durable transfer, restart, break-protection, and source-contract tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:brass_tunnel",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "LOGISTICS-CHUTE-BLOCK",
+      "bedrockIdentifier": "createbedrock:chute",
+      "behaviorBoundary": "Implemented by DepotNetwork's durable item-port and directed device-transfer runtime, including restart-safe intents and delivery retry.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "Placeable block with creative access, explicit self-drop, EN/ZH name, and a documented Java-asset or fixed-geometry resource mapping.",
+      "testPlan": "Focused port, filter, transport, restart, resource-contract, validation, build, and package tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:chute",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "LOGISTICS-CHUTE-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:chute",
+      "behaviorBoundary": "The Java block-entity state is represented by DepotNetwork's world-persisted port, transfer journal, and device records; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "This registration shares the corresponding placeable block and has no duplicate Bedrock resource identifier.",
+      "testPlan": "Durable transfer, restart, break-protection, and source-contract tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:chute",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "LOGISTICS-CREATIVE-CRATE-BLOCK",
+      "bedrockIdentifier": "createbedrock:creative_crate",
+      "behaviorBoundary": "Implemented as a revisioned non-consuming CreativeItemPort that participates in the same durable transfer journal as normal ports.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "Placeable block with creative access, explicit self-drop, EN/ZH name, and a documented Java-asset or fixed-geometry resource mapping.",
+      "testPlan": "Focused port, filter, transport, restart, resource-contract, validation, build, and package tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:creative_crate",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "LOGISTICS-CREATIVE-CRATE-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:creative_crate",
+      "behaviorBoundary": "The Java block-entity state is represented by DepotNetwork's world-persisted port, transfer journal, and device records; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "This registration shares the corresponding placeable block and has no duplicate Bedrock resource identifier.",
+      "testPlan": "Durable transfer, restart, break-protection, and source-contract tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:creative_crate",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "LOGISTICS-DEPOT-BLOCK",
+      "bedrockIdentifier": "createbedrock:depot",
+      "behaviorBoundary": "Implemented by DepotNetwork's durable item-port and directed device-transfer runtime, including restart-safe intents and delivery retry.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "Placeable block with creative access, explicit self-drop, EN/ZH name, and a documented Java-asset or fixed-geometry resource mapping.",
+      "testPlan": "Focused port, filter, transport, restart, resource-contract, validation, build, and package tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:depot",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "LOGISTICS-DEPOT-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:depot",
+      "behaviorBoundary": "The Java block-entity state is represented by DepotNetwork's world-persisted port, transfer journal, and device records; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "This registration shares the corresponding placeable block and has no duplicate Bedrock resource identifier.",
+      "testPlan": "Durable transfer, restart, break-protection, and source-contract tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:depot",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "LOGISTICS-FILTER-ITEM",
+      "bedrockIdentifier": "createbedrock:filter",
+      "behaviorBoundary": "Implemented as configuration resources for durable allow-list device filters. The safe Bedrock item codec intentionally does not infer Java NBT or attribute predicates from live ItemStacks.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "Creative-menu item with imported Java icon, EN/ZH name, and no standalone block resource.",
+      "testPlan": "Focused port, filter, transport, restart, resource-contract, validation, build, and package tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllItems.java"
+      ],
+      "javaIdentifier": "create:filter",
+      "kind": "item"
+    },
+    {
+      "acceptanceId": "LOGISTICS-FUNNEL-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:funnel",
+      "behaviorBoundary": "The Java block-entity state is represented by DepotNetwork's world-persisted port, transfer journal, and device records; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "This registration shares the corresponding placeable block and has no duplicate Bedrock resource identifier.",
+      "testPlan": "Durable transfer, restart, break-protection, and source-contract tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:funnel",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "LOGISTICS-ITEM-HATCH-BLOCK",
+      "bedrockIdentifier": "createbedrock:item_hatch",
+      "behaviorBoundary": "Implemented by DepotNetwork's durable item-port and directed device-transfer runtime, including restart-safe intents and delivery retry.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "Placeable block with creative access, explicit self-drop, EN/ZH name, and a documented Java-asset or fixed-geometry resource mapping.",
+      "testPlan": "Focused port, filter, transport, restart, resource-contract, validation, build, and package tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:item_hatch",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "LOGISTICS-ITEM-HATCH-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:item_hatch",
+      "behaviorBoundary": "The Java block-entity state is represented by DepotNetwork's world-persisted port, transfer journal, and device records; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "This registration shares the corresponding placeable block and has no duplicate Bedrock resource identifier.",
+      "testPlan": "Durable transfer, restart, break-protection, and source-contract tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:item_hatch",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "LOGISTICS-ITEM-VAULT-BLOCK",
+      "bedrockIdentifier": "createbedrock:item_vault",
+      "behaviorBoundary": "Implemented by DepotNetwork's durable item-port and directed device-transfer runtime, including restart-safe intents and delivery retry.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "Placeable block with creative access, explicit self-drop, EN/ZH name, and a documented Java-asset or fixed-geometry resource mapping.",
+      "testPlan": "Focused port, filter, transport, restart, resource-contract, validation, build, and package tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:item_vault",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "LOGISTICS-ITEM-VAULT-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:item_vault",
+      "behaviorBoundary": "The Java block-entity state is represented by DepotNetwork's world-persisted port, transfer journal, and device records; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "This registration shares the corresponding placeable block and has no duplicate Bedrock resource identifier.",
+      "testPlan": "Durable transfer, restart, break-protection, and source-contract tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:item_vault",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "LOGISTICS-SMART-CHUTE-BLOCK",
+      "bedrockIdentifier": "createbedrock:smart_chute",
+      "behaviorBoundary": "Implemented by DepotNetwork's durable item-port and directed device-transfer runtime, including restart-safe intents and delivery retry.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "Placeable block with creative access, explicit self-drop, EN/ZH name, and a documented Java-asset or fixed-geometry resource mapping.",
+      "testPlan": "Focused port, filter, transport, restart, resource-contract, validation, build, and package tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:smart_chute",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "LOGISTICS-SMART-CHUTE-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:smart_chute",
+      "behaviorBoundary": "The Java block-entity state is represented by DepotNetwork's world-persisted port, transfer journal, and device records; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "This registration shares the corresponding placeable block and has no duplicate Bedrock resource identifier.",
+      "testPlan": "Durable transfer, restart, break-protection, and source-contract tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:smart_chute",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "LOGISTICS-WEIGHTED-EJECTOR-BLOCK",
+      "bedrockIdentifier": "createbedrock:weighted_ejector",
+      "behaviorBoundary": "Implemented by DepotNetwork's durable item-port and directed device-transfer runtime, including restart-safe intents and delivery retry.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "Placeable block with creative access, explicit self-drop, EN/ZH name, and a documented Java-asset or fixed-geometry resource mapping.",
+      "testPlan": "Focused port, filter, transport, restart, resource-contract, validation, build, and package tests cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java"
+      ],
+      "javaIdentifier": "create:weighted_ejector",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "LOGISTICS-WEIGHTED-EJECTOR-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:weighted_ejector",
+      "behaviorBoundary": "The Java block-entity state is represented by DepotNetwork's world-persisted port, transfer journal, and device records; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-10",
+      "resourceBoundary": "This registration shares the corresponding placeable block and has no duplicate Bedrock resource identifier.",
+      "testPlan": "Durable transfer, restart, break-protection, and source-contract tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:weighted_ejector",
+      "kind": "block_entity"
+    }
+  ]
+}

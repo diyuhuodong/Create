@@ -2,7 +2,8 @@
   "format_version": "1.21.80",
   "minecraft:block": {
     "description": {
-      "identifier": "createbedrock:depot"
+      "identifier": "createbedrock:depot",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" }
     },
     "components": {
       "minecraft:destructible_by_explosion": {
@@ -12,6 +13,7 @@
         "seconds_to_destroy": 1
       },
       "minecraft:geometry": "geometry.createbedrock.depot",
+		"minecraft:loot": "loot_tables/blocks/depot.json",
       "minecraft:item_visual": {
         "geometry": {
           "identifier": "geometry.createbedrock.depot"

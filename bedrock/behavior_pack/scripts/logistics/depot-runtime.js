@@ -11,9 +11,29 @@ import { registerEscrowProtection } from "./external-escrow-runtime.js";
 const DEPOT_BLOCK = "createbedrock:depot";
 const CHUTE_BLOCK = "createbedrock:chute";
 const CHAIN_CONVEYOR_BLOCK = "createbedrock:chain_conveyor";
+const BELT_BLOCK = "createbedrock:belt";
 const BELT_CONNECTOR = "createbedrock:belt_connector";
 const MAX_DEPOT_BELT_LENGTH = 20;
 const FUNNEL_BLOCK = "createbedrock:andesite_funnel";
+const SMART_CHUTE_BLOCK = "createbedrock:smart_chute";
+const FILTER_ITEM = "createbedrock:filter";
+const ATTRIBUTE_FILTER_ITEM = "createbedrock:attribute_filter";
+const PORT_BLOCKS = new Map([
+	[DEPOT_BLOCK, { size: 1 }],
+	["createbedrock:item_hatch", { size: 9 }],
+	["createbedrock:item_vault", { size: 27 }],
+	["createbedrock:creative_crate", { kind: "creative", size: 1 }]
+]);
+const FUNNEL_BLOCKS = new Set([
+	FUNNEL_BLOCK,
+	"createbedrock:brass_funnel",
+	"createbedrock:andesite_belt_funnel",
+	"createbedrock:brass_belt_funnel",
+	"createbedrock:andesite_tunnel",
+	"createbedrock:brass_tunnel",
+	"createbedrock:weighted_ejector"
+]);
+const CHUTE_BLOCKS = new Set([CHUTE_BLOCK, SMART_CHUTE_BLOCK]);
 const DEPOT_TASK_BUDGET = 8;
 const DEPOT_TASK_GROUP = "depot-logistics";
 const NEIGHBOR_OFFSETS = [
@@ -55,8 +75,10 @@ const network = new DepotNetwork({
 const escrows = new BedrockEscrowRegistry();
 const pendingDepotBeltEndpoints = new Map();
 const chainConveyorLocations = new Map();
+const physicalBeltLocations = new Map();
 let nextPlayerTransaction = 0;
 let chainConveyorRescanTicks = 0;
+let physicalBeltRescanTicks = 0;
 
 registerEscrowProtection(() => network.activeEscrowIds());
 
@@ -93,13 +115,31 @@ function kineticSpeedForDepot(dimensionId, location) {
 	return selected;
 }
 
+function kineticSpeedForLocations(dimensionId, locations) {
+	let selected = 0;
+	for (const location of locations) {
+		const direct = getKineticSpeedAt(dimensionId, location);
+		if (Math.abs(direct) > Math.abs(selected))
+			selected = direct;
+		for (const offset of KINETIC_NEIGHBOR_OFFSETS) {
+			const nearby = getKineticSpeedAt(dimensionId, offsetLocation(location, offset));
+			if (Math.abs(nearby) > Math.abs(selected))
+				selected = nearby;
+		}
+	}
+	return selected;
+}
+
 function refreshDepotBeltSpeeds() {
 	let changed = false;
 	for (const belt of network.worldBelts()) {
 		const conveyor = chainConveyorLocations.get(belt.id);
+		const physicalBelt = physicalBeltLocations.get(belt.id);
 		const speed = conveyor
 			? getKineticSpeedAt(conveyor.dimensionId, conveyor.location)
-			: kineticSpeedForDepot(belt.source.dimensionId, belt.source.location);
+			: physicalBelt
+				? kineticSpeedForLocations(physicalBelt.dimensionId, physicalBelt.locations)
+				: kineticSpeedForDepot(belt.source.dimensionId, belt.source.location);
 		if (network.setBeltSpeed(belt.id, speed))
 			changed = true;
 	}
@@ -191,18 +231,38 @@ function opposite(offset) {
 	return { x: -offset.x, y: -offset.y, z: -offset.z };
 }
 
-function depotAt(dimension, location) {
+function portAt(dimension, location) {
 	const block = dimension.getBlock(location);
-	return block?.typeId === DEPOT_BLOCK ? block : undefined;
+	return PORT_BLOCKS.has(block?.typeId) ? block : undefined;
+}
+
+function depotAt(dimension, location) {
+	return portAt(dimension, location);
+}
+
+function createPort(block) {
+	const settings = PORT_BLOCKS.get(block?.typeId);
+	if (!settings)
+		return false;
+	network.createDepot({
+		dimensionId: block.dimension.id,
+		kind: settings.kind,
+		location: block.location,
+		size: settings.size
+	});
+	return true;
 }
 
 function configureChute(block) {
+	if (!CHUTE_BLOCKS.has(block?.typeId))
+		return false;
 	const source = depotAt(block.dimension, offsetLocation(block.location, { x: 0, y: 1, z: 0 }));
 	const destination = depotAt(block.dimension, offsetLocation(block.location, { x: 0, y: -1, z: 0 }));
 	if (!source || !destination)
 		return false;
 	network.createChute({
 		destinationId: identifierFor(destination),
+		filter: undefined,
 		id: deviceId("chute", block),
 		sourceId: identifierFor(source)
 	});
@@ -210,6 +270,8 @@ function configureChute(block) {
 }
 
 function configureFunnel(block) {
+	if (!FUNNEL_BLOCKS.has(block?.typeId))
+		return false;
 	const facing = block.permutation.getAllStates()["minecraft:facing_direction"];
 	const direction = FACING_OFFSETS[facing];
 	if (!direction)
@@ -226,15 +288,131 @@ function configureFunnel(block) {
 	return true;
 }
 
+function physicalBeltId(dimensionId, first, last) {
+	return `physical-belt:${dimensionId}:${first.x}:${first.y}:${first.z}:${last.x}:${last.y}:${last.z}`;
+}
+
+function sameLocation(left, right) {
+	return left.x === right.x && left.y === right.y && left.z === right.z;
+}
+
+function beltRunFor(block) {
+	if (block?.typeId !== BELT_BLOCK)
+		return undefined;
+	const direction = chainDirection(block);
+	if (direction.y !== 0)
+		return undefined;
+	let first = { ...block.location };
+	let previous = block.dimension.getBlock(offsetLocation(first, opposite(direction)));
+	while (previous?.typeId === BELT_BLOCK && sameLocation(chainDirection(previous), direction)) {
+		first = { ...previous.location };
+		previous = block.dimension.getBlock(offsetLocation(first, opposite(direction)));
+	}
+	const locations = [{ ...first }];
+	let last = first;
+	let next = block.dimension.getBlock(offsetLocation(last, direction));
+	while (next?.typeId === BELT_BLOCK && sameLocation(chainDirection(next), direction)) {
+		last = { ...next.location };
+		locations.push(last);
+		next = block.dimension.getBlock(offsetLocation(last, direction));
+	}
+	const source = portAt(block.dimension, offsetLocation(first, opposite(direction)));
+	const destination = portAt(block.dimension, offsetLocation(last, direction));
+	if (!source || !destination)
+		return undefined;
+	return {
+		destination,
+		id: physicalBeltId(block.dimension.id, first, last),
+		locations,
+		source
+	};
+}
+
+function configurePhysicalBelt(block) {
+	const run = beltRunFor(block);
+	if (!run)
+		return false;
+	physicalBeltLocations.set(run.id, {
+		dimensionId: block.dimension.id,
+		locations: run.locations.map(location => ({ ...location }))
+	});
+	if (network.hasBelt(run.id))
+		return false;
+	network.createBelt({
+		destinationId: identifierFor(run.destination),
+		id: run.id,
+		length: run.locations.length,
+		sourceId: identifierFor(run.source),
+		speed: kineticSpeedForLocations(block.dimension.id, run.locations)
+	});
+	return true;
+}
+
+function physicalBeltIdsAt(dimensionId, location) {
+	return [...physicalBeltLocations.entries()]
+		.filter(([, belt]) => belt.dimensionId === dimensionId && belt.locations.some(candidate => sameLocation(candidate, location)))
+		.map(([id]) => id);
+}
+
+function rescanPhysicalBelts() {
+	const discovered = new Set();
+	let changed = false;
+	for (const node of getKineticWorldForTesting().getNodesByType(BELT_BLOCK)) {
+		try {
+			const block = world.getDimension(node.dimensionId).getBlock(node.location);
+			const run = beltRunFor(block);
+			if (!run)
+				continue;
+			discovered.add(run.id);
+			changed = configurePhysicalBelt(block) || changed;
+		} catch (error) {
+			console.warn(`[Create Bedrock] Could not restore belt: ${error}`);
+		}
+	}
+	for (const id of [...physicalBeltLocations.keys()]) {
+		if (discovered.has(id) || !network.canRemoveBelt(id))
+			continue;
+		physicalBeltLocations.delete(id);
+		if (network.hasBelt(id)) {
+			network.removeBelt(id);
+			changed = true;
+		}
+	}
+	return changed;
+}
+
 function configureAdjacentDevices(depot) {
 	for (const offset of NEIGHBOR_OFFSETS) {
 		const block = depot.dimension.getBlock(offsetLocation(depot.location, offset));
-		if (block?.typeId === FUNNEL_BLOCK)
-			configureFunnel(block);
-		if (block?.typeId === CHUTE_BLOCK)
-			configureChute(block);
-		if (block?.typeId === CHAIN_CONVEYOR_BLOCK)
-			configureChainConveyor(block);
+		configureFunnel(block);
+		configureChute(block);
+		configureChainConveyor(block);
+		configurePhysicalBelt(block);
+	}
+}
+
+function configureLogisticsDevice(block) {
+	return configureFunnel(block)
+		|| configureChute(block)
+		|| configureChainConveyor(block)
+		|| configurePhysicalBelt(block);
+}
+
+function configureFilter(block, item) {
+	if (!item || (!FUNNEL_BLOCKS.has(block.typeId) && !CHUTE_BLOCKS.has(block.typeId)))
+		return false;
+	const filter = item.typeId === FILTER_ITEM || item.typeId === ATTRIBUTE_FILTER_ITEM
+		? { mode: "allow", typeIds: [] }
+		: { mode: "allow", typeIds: [item.typeId] };
+	try {
+		if (FUNNEL_BLOCKS.has(block.typeId))
+			network.setFunnelFilter(deviceId("funnel", block), filter);
+		else
+			network.setChuteFilter(deviceId("chute", block), filter);
+		return true;
+	} catch (error) {
+		console.warn(`[Create Bedrock] Could not configure logistics filter: ${error}`);
+		return false;
 	}
 }
 
@@ -368,6 +546,10 @@ export function createDepotChute(options) {
 	return network.createChute(options);
 }
 
+export function setDepotChuteFilter(id, filter) {
+	return network.setChuteFilter(id, filter);
+}
+
 export function getDepotDiagnostics() {
 	return network.diagnostics();
 }
@@ -382,6 +564,14 @@ export function setDepotBeltSpeed(id, speed) {
 
 export function setDepotFunnelLocked(id, locked) {
 	return network.setFunnelLocked(id, locked);
+}
+
+export function setDepotFunnelFilter(id, filter) {
+	return network.setFunnelFilter(id, filter);
+}
+
+export function setDepotCreativeTemplate(id, template) {
+	return network.setCreativeTemplate(id, template);
 }
 
 export function setDepotFunnelRedstonePowered(dimensionId, location, powered) {
@@ -416,37 +606,31 @@ export function getDepotFunnelRedstoneControls() {
 export function registerDepots() {
 	registerKernelTaskGroup(DEPOT_TASK_GROUP, DEPOT_TASK_BUDGET);
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
-		if (event.block.typeId === DEPOT_BLOCK) {
-			network.createDepot({
-				dimensionId: event.block.dimension.id,
-				location: event.block.location
-			});
+		if (createPort(event.block))
 			configureAdjacentDevices(event.block);
-		}
-		if (event.block.typeId === FUNNEL_BLOCK)
-			configureFunnel(event.block);
-		if (event.block.typeId === CHUTE_BLOCK)
-			configureChute(event.block);
-		if (event.block.typeId === CHAIN_CONVEYOR_BLOCK)
-			configureChainConveyor(event.block);
+		configureLogisticsDevice(event.block);
 	});
 
 	world.beforeEvents.playerBreakBlock.subscribe(event => {
-		if (event.block.typeId === DEPOT_BLOCK && !network.canRemoveDepot(identifierFor(event.block))) {
+		if (PORT_BLOCKS.has(event.block.typeId) && !network.canRemoveDepot(identifierFor(event.block))) {
 			event.cancel = true;
-			event.player.sendMessage("Cannot remove a depot while it stores items or has an active transfer.");
+			event.player.sendMessage("Cannot remove a logistics port while it stores items or has an active transfer.");
 		}
-		if (event.block.typeId === FUNNEL_BLOCK && !network.canRemoveFunnel(deviceId("funnel", event.block))) {
+		if (FUNNEL_BLOCKS.has(event.block.typeId) && !network.canRemoveFunnel(deviceId("funnel", event.block))) {
 			event.cancel = true;
 			event.player.sendMessage("Cannot remove a funnel with an active transfer.");
 		}
-		if (event.block.typeId === CHUTE_BLOCK && !network.canRemoveChute(deviceId("chute", event.block))) {
+		if (CHUTE_BLOCKS.has(event.block.typeId) && !network.canRemoveChute(deviceId("chute", event.block))) {
 			event.cancel = true;
 			event.player.sendMessage("Cannot remove a chute with an active transfer.");
 		}
 		if (event.block.typeId === CHAIN_CONVEYOR_BLOCK && !network.canRemoveBelt(chainConveyorId(event.block))) {
 			event.cancel = true;
 			event.player.sendMessage("Cannot remove a chain conveyor with an active transport.");
+		}
+		if (event.block.typeId === BELT_BLOCK && physicalBeltIdsAt(event.block.dimension.id, event.block.location).some(id => !network.canRemoveBelt(id))) {
+			event.cancel = true;
+			event.player.sendMessage("Cannot remove a belt with an active transport.");
 		}
 	});
 
@@ -459,15 +643,18 @@ export function registerDepots() {
 			chainConveyorLocations.delete(chainId);
 			if (network.hasBelt(chainId))
 				network.removeBelt(chainId);
+			for (const id of physicalBeltIdsAt(event.dimension.id, event.block.location)) {
+				physicalBeltLocations.delete(id);
+				if (network.hasBelt(id))
+					network.removeBelt(id);
+			}
 		} catch (error) {
 			console.warn(`[Create Bedrock] Logistics endpoint removal deferred: ${error}`);
 		}
 	});
 
 	world.afterEvents.playerInteractWithBlock.subscribe(event => {
-		if (event.block.typeId !== DEPOT_BLOCK)
-			return;
-		if (event.itemStack?.typeId === BELT_CONNECTOR) {
+		if (PORT_BLOCKS.has(event.block.typeId) && event.itemStack?.typeId === BELT_CONNECTOR) {
 			const playerId = event.player.id;
 			const pending = pendingDepotBeltEndpoints.get(playerId);
 			if (!pending) {
@@ -484,25 +671,41 @@ export function registerDepots() {
 				return;
 			}
 			const first = world.getDimension(pending.dimensionId).getBlock(pending.location);
-			if (first?.typeId !== DEPOT_BLOCK) {
-				event.player.sendMessage("The selected depot no longer exists.");
+			if (!PORT_BLOCKS.has(first?.typeId)) {
+				event.player.sendMessage("The selected logistics port no longer exists.");
 				return;
 			}
 			toggleDepotBelt(event.player, first, event.block);
 			return;
 		}
+		if (configureFilter(event.block, event.itemStack)) {
+			event.player.sendMessage(event.itemStack.typeId === FILTER_ITEM || event.itemStack.typeId === ATTRIBUTE_FILTER_ITEM
+				? "Logistics filter cleared. Use an item on the device to allow only that item."
+				: `Logistics filter set to ${event.itemStack.typeId}.`);
+			return;
+		}
+		if (!PORT_BLOCKS.has(event.block.typeId))
+			return;
 		const player = event.player;
 		const dimensionId = event.block.dimension.id;
 		const location = { ...event.block.location };
 		system.run(() => {
 			const block = world.getDimension(dimensionId).getBlock(location);
-			if (block?.typeId !== DEPOT_BLOCK)
+			if (!PORT_BLOCKS.has(block?.typeId))
 				return;
 			const inventory = player.getComponent("minecraft:inventory")?.container;
 			const slot = player.selectedSlotIndex;
 			if (!inventory || !Number.isInteger(slot) || slot < 0 || slot >= inventory.size)
 				return;
-			if (inventory.getItem(slot) === undefined)
+			const item = inventory.getItem(slot);
+			if (block.typeId === "createbedrock:creative_crate" && item !== undefined) {
+				try {
+					network.setCreativeTemplate(identifierFor(block), decodeBedrockContainerStack(item));
+					player.sendMessage(`Creative crate template set to ${item.typeId}.`);
+				} catch (error) {
+					player.sendMessage(`Creative crate template could not be set: ${error}`);
+				}
+			} else if (item === undefined)
 				beginPlayerWithdrawal(player, block);
 			else
 				beginPlayerDeposit(player, block);
@@ -512,7 +715,9 @@ export function registerDepots() {
 	registerTickHandler(() => {
 		chainConveyorRescanTicks++;
 		const rescanned = chainConveyorRescanTicks >= 20 && (chainConveyorRescanTicks = 0, rescanChainConveyors());
-		return rescanned || refreshDepotBeltSpeeds() || network.tick() || network.tickExternalDeposits({
+		physicalBeltRescanTicks++;
+		const physicalRescanned = physicalBeltRescanTicks >= 20 && (physicalBeltRescanTicks = 0, rescanPhysicalBelts());
+		return rescanned || physicalRescanned || refreshDepotBeltSpeeds() || network.tick() || network.tickExternalDeposits({
 		decodeStack: decodeBedrockContainerStack,
 		resolveEscrow(record) {
 			return escrows.resolve(record.escrowId, record.id);

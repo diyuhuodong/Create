@@ -23,6 +23,22 @@ const STAGE_TWO_PROTOTYPES = new Map([
 
 const BEHAVIOR_PATHS = new Map([
 	["andesite_funnel", "behavior_pack/scripts/logistics/depot-runtime.js"],
+	["andesite_belt_funnel", "behavior_pack/scripts/logistics/depot-runtime.js"],
+	["andesite_tunnel", "behavior_pack/scripts/logistics/depot-runtime.js"],
+	["attribute_filter", "behavior_pack/scripts/logistics/depot-runtime.js"],
+	["belt", "behavior_pack/scripts/logistics/depot-runtime.js"],
+	["brass_belt_funnel", "behavior_pack/scripts/logistics/depot-runtime.js"],
+	["brass_funnel", "behavior_pack/scripts/logistics/depot-runtime.js"],
+	["brass_tunnel", "behavior_pack/scripts/logistics/depot-runtime.js"],
+	["chute", "behavior_pack/scripts/logistics/depot-runtime.js"],
+	["creative_crate", "behavior_pack/scripts/logistics/depot-runtime.js"],
+	["depot", "behavior_pack/scripts/logistics/depot-runtime.js"],
+	["filter", "behavior_pack/scripts/logistics/depot-runtime.js"],
+	["funnel", "behavior_pack/scripts/logistics/depot-runtime.js"],
+	["item_hatch", "behavior_pack/scripts/logistics/depot-runtime.js"],
+	["item_vault", "behavior_pack/scripts/logistics/depot-runtime.js"],
+	["smart_chute", "behavior_pack/scripts/logistics/depot-runtime.js"],
+	["weighted_ejector", "behavior_pack/scripts/logistics/depot-runtime.js"],
 	["belt_connector", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["clutch", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["cogwheel", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
@@ -119,6 +135,28 @@ const STAGE_THREE_KINETIC_FOUNDATION = new Map([
 	["water_wheel_structure", { domain: "kinetics" }],
 	["windmill_bearing", { domain: "kinetics" }]
 ]);
+
+// S3-10 moves the foundational item network into a single durable port and
+// transfer journal. Block-entity registrations are intentionally absorbed by
+// that runtime rather than represented as unsafe Bedrock block entities.
+const STAGE_THREE_LOGISTICS_FOUNDATION = new Map([
+	["andesite_belt_funnel", { domain: "logistics" }],
+	["andesite_tunnel", { domain: "logistics" }],
+	["attribute_filter", { domain: "logistics" }],
+	["belt", { domain: "logistics" }],
+	["brass_belt_funnel", { domain: "logistics" }],
+	["brass_funnel", { domain: "logistics" }],
+	["brass_tunnel", { domain: "logistics" }],
+	["chute", { domain: "logistics" }],
+	["creative_crate", { domain: "logistics" }],
+	["depot", { domain: "logistics" }],
+	["filter", { domain: "logistics" }],
+	["funnel", { domain: "logistics" }],
+	["item_hatch", { domain: "logistics" }],
+	["item_vault", { domain: "logistics" }],
+	["smart_chute", { domain: "logistics" }],
+	["weighted_ejector", { domain: "logistics" }]
+]);
 const REDSTONE_OUTPUT_BLOCKER = "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.";
 
 const RULES = [
@@ -145,6 +183,7 @@ export function classifyRegistration(identifier, kind) {
 	const redstoneControl = STAGE_THREE_REDSTONE_CONTROLS.get(identifier);
 	const foundationContent = STAGE_THREE_FOUNDATION_CONTENT.get(identifier);
 	const kineticFoundation = STAGE_THREE_KINETIC_FOUNDATION.get(identifier);
+	const logisticsFoundation = STAGE_THREE_LOGISTICS_FOUNDATION.get(identifier);
 	const staticSystem = processor ?? fluid ?? redstoneControl;
 	const rule = RULES.find(candidate => candidate.pattern.test(identifier));
 	const classification = staticSystem
@@ -153,6 +192,8 @@ export function classifyRegistration(identifier, kind) {
 		? { ...foundationContent, phase: 3, status: "implementation_in_progress" }
 		: kineticFoundation
 		? { ...kineticFoundation, phase: 3, status: "implementation_in_progress" }
+		: logisticsFoundation
+		? { ...logisticsFoundation, phase: 3, status: "implementation_in_progress" }
 		: prototype
 		? { ...prototype, phase: 2, status: "implementation_in_progress" }
 		: rule ?? { domain: "content", phase: 3 };
@@ -163,9 +204,9 @@ export function classifyRegistration(identifier, kind) {
 		behaviorPath: BEHAVIOR_PATHS.get(identifier) ?? null,
 		blockingReason: blockedByTargetVersion ? REDSTONE_OUTPUT_BLOCKER : null,
 		domain: classification.domain,
-		persistenceSchema: staticSystem || kineticFoundation ? 2 : prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null,
+		persistenceSchema: staticSystem || kineticFoundation || logisticsFoundation ? 2 : prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null,
 		phase: classification.phase,
-		resourceStatus: prototype || staticSystem || foundationContent || kineticFoundation ? "partial" : "pending",
+		resourceStatus: prototype || staticSystem || foundationContent || kineticFoundation || logisticsFoundation ? "partial" : "pending",
 		status: blockedByTargetVersion ? "blocked" : classification.status ?? "specification_pending"
 	};
 }

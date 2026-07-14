@@ -387,3 +387,31 @@ test("DepotNetwork chutes transfer items downward through the same recovery jour
 	assert.deepEqual(network.extract(source), undefined);
 	assert.deepEqual(network.extract(destination), { count: 3, typeId: "minecraft:andesite" });
 });
+
+test("DepotNetwork persists a creative crate template and does not consume it during transfers", () => {
+	const storage = memoryStorage();
+	const first = createNetwork(storage, "createbedrock:creative_crate");
+	const source = first.createDepot({ dimensionId: "minecraft:overworld", kind: "creative", location: { x: 0, y: 64, z: 0 } });
+	const destination = first.createDepot({ dimensionId: "minecraft:overworld", location: { x: 1, y: 64, z: 0 } });
+	assert.equal(first.setCreativeTemplate(source, { count: 4, typeId: "minecraft:brass_ingot" }), true);
+	first.createFunnel({ destinationId: destination, id: "creative-funnel", sourceId: source });
+	advance(first, () => depotSlots(first, destination)?.[0]?.count === 4 && !first.diagnostics().waitingForCommit);
+	assert.deepEqual(first.extract(source), { count: 4, typeId: "minecraft:brass_ingot" });
+	assert.deepEqual(first.extract(source), { count: 4, typeId: "minecraft:brass_ingot" });
+
+	const restored = createNetwork(storage, "createbedrock:creative_crate");
+	assert.equal(restored.restore().depots, 2);
+	assert.deepEqual(restored.extract(source), { count: 4, typeId: "minecraft:brass_ingot" });
+});
+
+test("DepotNetwork applies durable smart-chute filters before reserving a source item", () => {
+	const network = createNetwork(memoryStorage(), "createbedrock:smart_chute_filter");
+	const source = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 65, z: 0 }, size: 2 });
+	const destination = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 63, z: 0 } });
+	network.insert(source, { count: 1, typeId: "minecraft:dirt" });
+	network.insert(source, { count: 2, typeId: "minecraft:iron_ingot" });
+	network.createChute({ destinationId: destination, filter: { typeIds: ["minecraft:iron_ingot"] }, id: "smart-chute", sourceId: source });
+	advance(network, () => depotSlots(network, destination)?.[0]?.typeId === "minecraft:iron_ingot" && !network.diagnostics().waitingForCommit);
+	assert.deepEqual(network.extract(destination), { count: 2, typeId: "minecraft:iron_ingot" });
+	assert.deepEqual(network.extract(source), { count: 1, typeId: "minecraft:dirt" });
+});

@@ -1,0 +1,14 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": { "identifier": "createbedrock:brass_belt_funnel", "menu_category": { "category": "items", "group": "itemGroup.name.misc" }, "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } } },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.andesite_funnel",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.andesite_funnel" }, "material_instances": { "*": { "texture": "createbedrock_brass_casing", "render_method": "opaque" } } },
+      "minecraft:loot": "loot_tables/blocks/brass_belt_funnel.json",
+      "minecraft:material_instances": { "*": { "texture": "createbedrock_brass_casing", "render_method": "opaque" } }
+    }
+  }
+}

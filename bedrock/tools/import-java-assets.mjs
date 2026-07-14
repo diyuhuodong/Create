@@ -13,6 +13,7 @@ const TEXTURES = [
 	"axis_top.png",
 	"andesite_block.png",
 	"andesite_casing.png",
+	"belt.png",
 	"funnel/andesite_funnel.png",
 	"bearing_top.png",
 	"brass_casing.png",
@@ -55,7 +56,7 @@ const TEXTURES = [
 	"palettes/rose_quartz_side.png",
 	"palettes/rose_quartz_top.png"
 ];
-const ITEM_TEXTURES = ["belt_connector.png", "raw_zinc.png", "zinc_ingot.png", "andesite_alloy.png", "rose_quartz.png"];
+const ITEM_TEXTURES = ["belt_connector.png", "raw_zinc.png", "zinc_ingot.png", "andesite_alloy.png", "rose_quartz.png", "filter.png", "attribute_filter.png"];
 
 export async function importJavaAssets(resourcePackRoot) {
 	const sourceDirectory = resolve(repositoryRoot, "src/main/resources/assets/create/textures/block");

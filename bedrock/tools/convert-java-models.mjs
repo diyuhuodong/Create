@@ -15,6 +15,7 @@ export const JAVA_MODELS = [
 	{ name: "millstone", source: "millstone/block.json" },
 	{ name: "mechanical_press", source: "mechanical_press/block.json" },
 	{ name: "depot", source: "depot/block.json" },
+	{ name: "belt", source: "belt/middle.json" },
 	{ name: "chute", source: "chute/block.json" },
 	{ name: "fluid_tank", source: "fluid_tank/block_single.json" },
 	{ name: "fluid_pipe", source: "fluid_pipe/item.json" },

@@ -11,6 +11,9 @@
     "createbedrock_andesite_casing": {
       "textures": "textures/create_java/block/andesite_casing"
     },
+    "createbedrock_belt": {
+      "textures": "textures/create_java/block/belt"
+    },
     "createbedrock_brass_casing": {
       "textures": "textures/create_java/block/brass_casing"
     },

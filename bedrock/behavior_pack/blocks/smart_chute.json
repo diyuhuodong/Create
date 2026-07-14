@@ -1,0 +1,14 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": { "identifier": "createbedrock:smart_chute", "menu_category": { "category": "items", "group": "itemGroup.name.misc" } },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.chute",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.chute" }, "material_instances": { "*": { "texture": "createbedrock_chute", "render_method": "opaque" } } },
+      "minecraft:loot": "loot_tables/blocks/smart_chute.json",
+      "minecraft:material_instances": { "*": { "texture": "createbedrock_chute", "render_method": "opaque" } }
+    }
+  }
+}
