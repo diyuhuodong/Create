@@ -12,6 +12,18 @@ function clone(value) {
 	return JSON.parse(JSON.stringify(value));
 }
 
+function cloneExternalDescriptor(descriptor) {
+	if (!descriptor || typeof descriptor !== "object" || Array.isArray(descriptor) || typeof descriptor.kind !== "string" || descriptor.kind.length === 0)
+		throw new TypeError("External fluid ports require a typed descriptor");
+	return clone(descriptor);
+}
+
+function assertPartition(partition) {
+	if (typeof partition !== "string" || partition.length === 0)
+		throw new TypeError("Fluid ports require a persistent partition");
+	return partition;
+}
+
 function sectionKey(dimensionId, location) {
 	return `${dimensionId}:${Math.floor(location.x / 16)}:${Math.floor(location.y / 16)}:${Math.floor(location.z / 16)}`;
 }
@@ -24,21 +36,28 @@ export function fluidTankId(dimensionId, location) {
 }
 
 export class FluidNetworkState {
+	#externalPortFactory;
+	#externalPorts = new Map();
 	#frozen = false;
 	#network;
 	#onError;
+	#retirements = new Map();
 	#store;
 	#tanks = new Map();
 	#transfersPerTick;
 
-	constructor({ keyPrefix = "createbedrock:fluid_state_v1", onError, storage, transfersPerTick, writesPerTick }) {
+	constructor({ externalPortFactory, keyPrefix = "createbedrock:fluid_state_v1", onError, storage, transfersPerTick, writesPerTick }) {
+		if (externalPortFactory !== undefined && typeof externalPortFactory !== "function")
+			throw new TypeError("Fluid external-port factories must be functions");
 		if (onError !== undefined && typeof onError !== "function")
 			throw new TypeError("Fluid network error handlers must be functions");
 		this.#onError = onError ?? (() => {});
+		this.#externalPortFactory = externalPortFactory;
 		this.#transfersPerTick = transfersPerTick;
 		this.#network = this.#newNetwork();
 		this.#store = new ShardedStateStore({
 			keyPrefix,
+			onCommit: () => this.#retireCommittedExternalEscrows(),
 			onError: error => this.#report(error),
 			partitionFor(record) {
 				if (typeof record?.partition !== "string" || record.partition.length === 0)
@@ -107,12 +126,21 @@ export class FluidNetworkState {
 
 	diagnostics() {
 		return {
+			externalPorts: this.#externalPorts.size,
 			frozen: this.#frozen,
+			retiringExternalEscrows: this.#retirements.size,
 			tanks: this.#tanks.size,
 			waitingForCommit: this.#persistencePending(),
 			...this.#network.diagnostics(),
 			...this.#store.diagnostics()
 		};
+	}
+
+	activeExternalEscrowIds() {
+		return new Set([
+			...this.#network.snapshot().transfers.flatMap(transfer => [transfer.reservation?.escrowId, transfer.delivery?.escrowId]).filter(Boolean),
+			...[...this.#retirements.values()].map(retirement => retirement.reservation.escrowId)
+		]);
 	}
 
 	extract(id, { maxAmount, predicate, receiptId } = {}) {
@@ -137,6 +165,51 @@ export class FluidNetworkState {
 		return result;
 	}
 
+	registerExternalPort({ descriptor, partition, port }) {
+		this.#assertActive();
+		const normalizedDescriptor = cloneExternalDescriptor(descriptor);
+		const normalizedPartition = assertPartition(partition);
+		if (!port || typeof port.id !== "string" || port.id.length === 0)
+			throw new TypeError("External fluid ports require stable identifiers");
+		if (this.#tanks.has(port.id))
+			throw new Error(`External fluid port ${port.id} conflicts with a fluid tank`);
+		const existing = this.#externalPorts.get(port.id);
+		if (existing) {
+			if (existing.partition !== normalizedPartition || JSON.stringify(existing.descriptor) !== JSON.stringify(normalizedDescriptor))
+				throw new Error(`External fluid port ${port.id} was registered with conflicting metadata`);
+			return port.id;
+		}
+		this.#network.registerPort(port);
+		this.#externalPorts.set(port.id, {
+			descriptor: normalizedDescriptor,
+			partition: normalizedPartition,
+			port
+		});
+		this.#persist();
+		return port.id;
+	}
+
+	pruneExternalPorts() {
+		this.#assertActive();
+		const network = this.#network.snapshot();
+		const referenced = new Set([
+			...network.links.flatMap(link => [link.sourceId, link.destinationId]),
+			...network.transfers.flatMap(transfer => [transfer.sourceId, transfer.destinationId]),
+			...[...this.#retirements.values()].map(retirement => retirement.portId)
+		]);
+		let removed = 0;
+		for (const id of [...this.#externalPorts.keys()]) {
+			if (referenced.has(id))
+				continue;
+			this.#network.removePort(id);
+			this.#externalPorts.delete(id);
+			removed++;
+		}
+		if (removed > 0)
+			this.#persist();
+		return removed;
+	}
+
 	removeLink(id) {
 		this.#assertActive();
 		const removed = this.#network.removeLink(id);
@@ -152,6 +225,17 @@ export class FluidNetworkState {
 		if (!this.#tanks.delete(id))
 			return false;
 		this.#network.removePort(id);
+		this.#persist();
+		return true;
+	}
+
+	unregisterExternalPort(id) {
+		this.#assertActive();
+		const entry = this.#externalPorts.get(id);
+		if (!entry)
+			return false;
+		this.#network.removePort(id);
+		this.#externalPorts.delete(id);
 		this.#persist();
 		return true;
 	}
@@ -173,7 +257,9 @@ export class FluidNetworkState {
 
 		try {
 			const tanks = new Map();
+			const externalPortRecords = [];
 			const linkRecords = [];
+			const retirements = new Map();
 			const transfers = [];
 			let roundRobinAfter;
 			for (const record of restored.records) {
@@ -186,6 +272,10 @@ export class FluidNetworkState {
 				}
 				if (record?.kind === "link") {
 					linkRecords.push({ link: clone(record.link), partition: record.partition });
+					continue;
+				}
+				if (record?.kind === "external_port") {
+					externalPortRecords.push(clone(record));
 					continue;
 				}
 				if (record?.kind === "transfer") {
@@ -202,21 +292,46 @@ export class FluidNetworkState {
 					roundRobinAfter = record.roundRobinAfter;
 					continue;
 				}
+				if (record?.kind === "external_escrow_retirement") {
+					const retirement = this.#retirementFromRecord(record);
+					if (retirements.has(retirement.retirementId))
+						throw new Error(`Fluid state contains duplicate external escrow retirement ${retirement.retirementId}`);
+					retirements.set(retirement.retirementId, retirement);
+					continue;
+				}
 				throw new Error("Fluid state contains an unknown record kind");
 			}
 			const network = this.#newNetwork();
 			for (const entry of tanks.values())
 				network.registerPort(entry.tank);
+			const externalPorts = new Map();
+			for (const record of externalPortRecords) {
+				const entry = this.#externalPortFromRecord(record);
+				if (tanks.has(entry.port.id) || externalPorts.has(entry.port.id))
+					throw new Error(`Fluid state contains duplicate port ${entry.port.id}`);
+				network.registerPort(entry.port);
+				externalPorts.set(entry.port.id, entry);
+			}
+			for (const retirement of retirements.values()) {
+				const port = externalPorts.get(retirement.portId);
+				if (!port || retirement.partition !== port.partition)
+					throw new Error("Fluid escrow retirement does not match a persistent external source");
+			}
 			const links = linkRecords.map(record => {
-				const source = tanks.get(record.link?.sourceId);
-				if (!source || record.partition !== sectionKey(source.dimensionId, source.location))
+				const source = tanks.get(record.link?.sourceId) ?? externalPorts.get(record.link?.sourceId);
+				if (!source || record.partition !== this.#partitionForEntry(source))
 					throw new Error("Fluid link partition does not match its source tank");
 				return record.link;
 			});
 			network.restore({ links, roundRobinAfter, transfers });
 			this.#frozen = false;
 			this.#network = network;
+			this.#externalPorts = externalPorts;
+			this.#retirements = retirements;
 			this.#tanks = tanks;
+			this.#retireCommittedExternalEscrows();
+			if (this.#frozen)
+				return { frozen: true, links: 0, tanks: 0, transfers: 0, warnings: [{ error: "Fluid escrow retirement could not be recovered", partition: "fluid:network" }] };
 			return { frozen: false, links: links.length, tanks: tanks.size, transfers: transfers.length, warnings: [] };
 		} catch (error) {
 			this.#freeze(`Fluid state restore rejected: ${error}`);
@@ -249,6 +364,18 @@ export class FluidNetworkState {
 		if (wrote || this.#persistencePending() || this.#frozen)
 			return wrote;
 		const result = this.#network.tick();
+		const uncertain = result.outcomes.find(outcome => outcome.reason === "source_uncertain" || outcome.reason === "destination_uncertain");
+		if (uncertain) {
+			this.#freeze(`Fluid transfer ${uncertain.id} has an unresolved world-state conflict`);
+			return wrote;
+		}
+		try {
+			for (const transfer of this.#network.takeCompletedTransfers())
+				this.#queueExternalEscrowRetirement(transfer);
+		} catch (error) {
+			this.#freeze(`Fluid escrow retirement could not be scheduled: ${error}`);
+			return wrote;
+		}
 		if (result.processed > 0)
 			this.#persist();
 		return wrote || result.processed > 0;
@@ -290,11 +417,17 @@ export class FluidNetworkState {
 			tank: entry.tank.snapshot()
 	}));
 		const network = this.#network.snapshot();
+		const externalPorts = [...this.#externalPorts.values()].map(entry => ({
+			descriptor: clone(entry.descriptor),
+			id: entry.port.id,
+			kind: "external_port",
+			partition: entry.partition
+		}));
 		const links = network.links.map(link => ({
 			kind: "link",
 			link,
-			partition: sectionKey(this.#requireTank(link.sourceId).dimensionId, this.#requireTank(link.sourceId).location)
-	}));
+			partition: this.#partitionForPort(link.sourceId)
+		}));
 		const transfers = network.transfers.map(transfer => ({
 			kind: "transfer",
 			partition: transfer.partition,
@@ -302,8 +435,16 @@ export class FluidNetworkState {
 		}));
 		return [
 			...tanks,
+			...externalPorts,
 			...links,
 			...transfers,
+			...[...this.#retirements.values()].map(retirement => ({
+				kind: "external_escrow_retirement",
+				partition: retirement.partition,
+				portId: retirement.portId,
+				reservation: clone(retirement.reservation),
+				retirementId: retirement.retirementId
+			})),
 			{ kind: "network", partition: "fluid:network", roundRobinAfter: network.roundRobinAfter }
 		];
 	}
@@ -317,6 +458,93 @@ export class FluidNetworkState {
 		if (!tank)
 			throw new Error(`Unknown fluid tank ${id}`);
 		return tank;
+	}
+
+	#externalPortFromRecord(record) {
+		if (typeof record?.id !== "string" || record.id.length === 0)
+			throw new TypeError("External fluid port records require identifiers");
+		const descriptor = cloneExternalDescriptor(record.descriptor);
+		const partition = assertPartition(record.partition);
+		if (!this.#externalPortFactory)
+			throw new Error(`Fluid state requires external port ${record.id}, but no factory is configured`);
+		const port = this.#externalPortFactory({ descriptor: clone(descriptor), id: record.id });
+		if (!port || port.id !== record.id)
+			throw new Error(`Fluid external-port factory could not restore ${record.id}`);
+		return { descriptor, partition, port };
+	}
+
+	#queueExternalEscrowRetirement(transfer) {
+		if (typeof transfer?.id !== "string" || typeof transfer.sourceId !== "string" || typeof transfer.destinationId !== "string")
+			throw new Error("Completed fluid transfers require stable identifiers");
+		const candidates = [
+			{ portId: transfer.sourceId, reservation: transfer.reservation },
+			{ portId: transfer.destinationId, reservation: transfer.delivery }
+		];
+		const retiredEscrows = new Set();
+		for (const candidate of candidates) {
+			if (!candidate.reservation?.escrowId || retiredEscrows.has(candidate.reservation.escrowId))
+				continue;
+			const port = this.#network.getPort(candidate.portId);
+			if (!port || typeof port.finalizeReservation !== "function")
+				throw new Error(`Fluid port ${candidate.portId} cannot retire its escrow`);
+			const retirementId = `${transfer.id}:${candidate.portId}`;
+			this.#retirements.set(retirementId, {
+				partition: this.#partitionForPort(candidate.portId),
+				portId: candidate.portId,
+				reservation: clone(candidate.reservation),
+				retirementId
+			});
+			retiredEscrows.add(candidate.reservation.escrowId);
+		}
+	}
+
+	#retirementFromRecord(record) {
+		const portId = record?.portId ?? record?.sourceId;
+		const retirementId = record?.retirementId ?? record?.transferId;
+		if (typeof portId !== "string" || typeof retirementId !== "string" || retirementId.length === 0)
+			throw new TypeError("External fluid escrow retirements require identifiers");
+		const reservation = clone(record.reservation);
+		if (!reservation || typeof reservation.escrowId !== "string" || reservation.escrowId.length === 0)
+			throw new TypeError("External fluid escrow retirements require escrow reservations");
+		return {
+			partition: assertPartition(record.partition),
+			portId,
+			reservation,
+			retirementId
+		};
+	}
+
+	#retireCommittedExternalEscrows() {
+		if (this.#retirements.size === 0 || this.#frozen)
+			return;
+		let changed = false;
+		for (const retirement of [...this.#retirements.values()]) {
+			try {
+				const port = this.#network.getPort(retirement.portId);
+				if (!port || typeof port.finalizeReservation !== "function")
+					throw new Error(`Fluid port ${retirement.portId} cannot retire its escrow`);
+				if (port.finalizeReservation(retirement.reservation) === false)
+					continue;
+				this.#retirements.delete(retirement.retirementId);
+				changed = true;
+			} catch (error) {
+				this.#freeze(`Fluid escrow retirement failed: ${error}`);
+				return;
+			}
+		}
+		if (changed)
+			this.#persist();
+	}
+
+	#partitionForEntry(entry) {
+		return entry.partition ?? sectionKey(entry.dimensionId, entry.location);
+	}
+
+	#partitionForPort(id) {
+		const entry = this.#tanks.get(id) ?? this.#externalPorts.get(id);
+		if (!entry)
+			throw new Error(`Unknown fluid port ${id}`);
+		return this.#partitionForEntry(entry);
 	}
 
 	#tankFromRecord(record) {

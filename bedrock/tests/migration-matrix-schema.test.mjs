@@ -62,6 +62,19 @@ test("migration classification records S3-4 processor behavior independently of 
 	});
 });
 
+test("migration classification records the durable S3-5 fluid vertical slice independently of unfinished visuals", () => {
+	assert.deepEqual(classifyRegistration("mechanical_pump", "block"), {
+		acceptanceId: "FLUIDS-MECHANICAL-PUMP-BLOCK",
+		behaviorPath: "behavior_pack/scripts/fluids/fluid-runtime.js",
+		blockingReason: null,
+		domain: "fluids",
+		persistenceSchema: 2,
+		phase: 3,
+		resourceStatus: "partial",
+		status: "static_verified"
+	});
+});
+
 test("migration classification assigns later dynamic, train, and equipment work to their planned phases", () => {
 	assert.deepEqual(classifyRegistration("mechanical_piston", "block").phase, 4);
 	assert.deepEqual(classifyRegistration("track_signal", "block").phase, 5);

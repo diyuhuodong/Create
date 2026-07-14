@@ -31,8 +31,11 @@ const BEHAVIOR_PATHS = new Map([
 	["hand_crank", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["large_cogwheel", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["mechanical_bearing", "behavior_pack/scripts/contraptions/contraption-runtime.js"],
+	["mechanical_pump", "behavior_pack/scripts/fluids/fluid-runtime.js"],
 	["mechanical_press", "behavior_pack/scripts/processing/mechanical-press-runtime.js"],
 	["millstone", "behavior_pack/scripts/processing/millstone-runtime.js"],
+	["fluid_pipe", "behavior_pack/scripts/fluids/fluid-runtime.js"],
+	["fluid_tank", "behavior_pack/scripts/fluids/fluid-runtime.js"],
 	["shaft", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["track", "behavior_pack/scripts/trains/train-runtime.js"],
 	["track_station", "behavior_pack/scripts/trains/train-runtime.js"],
@@ -46,6 +49,14 @@ const STAGE_THREE_PROCESSORS = new Map([
 	["crushing_wheel", { domain: "processing" }],
 	["mechanical_press", { domain: "processing" }],
 	["millstone", { domain: "processing" }]
+]);
+
+// S3-5 makes the fixed, virtual-fluid vertical slice durable. Pipe visuals,
+// multiblock tanks, and the remaining fluid machines stay explicitly partial.
+const STAGE_THREE_FLUIDS = new Map([
+	["fluid_pipe", { domain: "fluids" }],
+	["fluid_tank", { domain: "fluids" }],
+	["mechanical_pump", { domain: "fluids" }]
 ]);
 
 const RULES = [
@@ -68,8 +79,10 @@ function acceptanceId(identifier, domain, kind) {
 export function classifyRegistration(identifier, kind) {
 	const prototype = STAGE_TWO_PROTOTYPES.get(identifier);
 	const processor = STAGE_THREE_PROCESSORS.get(identifier);
-	const classification = processor
-		? { ...processor, phase: 3, status: "static_verified" }
+	const fluid = STAGE_THREE_FLUIDS.get(identifier);
+	const staticSystem = processor ?? fluid;
+	const classification = staticSystem
+		? { ...staticSystem, phase: 3, status: "static_verified" }
 		: prototype
 		? { ...prototype, phase: 2, status: "implementation_in_progress" }
 		: RULES.find(rule => rule.pattern.test(identifier)) ?? { domain: "content", phase: 3 };
@@ -79,9 +92,9 @@ export function classifyRegistration(identifier, kind) {
 		behaviorPath: BEHAVIOR_PATHS.get(identifier) ?? null,
 		blockingReason: null,
 		domain: classification.domain,
-		persistenceSchema: processor ? 2 : prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null,
+		persistenceSchema: staticSystem ? 2 : prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null,
 		phase: classification.phase,
-		resourceStatus: prototype || processor ? "partial" : "pending",
+		resourceStatus: prototype || staticSystem ? "partial" : "pending",
 		status: classification.status ?? "specification_pending"
 	};
 }

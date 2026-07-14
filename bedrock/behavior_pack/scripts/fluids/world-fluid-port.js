@@ -40,12 +40,32 @@ function sameReservation(left, right) {
 	return stableStringify(left) === stableStringify(right);
 }
 
+function sameFluid(left, right) {
+	if (left === undefined || right === undefined)
+		return left === right;
+	return sameReservation(cloneFluidStack(left), cloneFluidStack(right));
+}
+
 function uncertainWorldState(message, cause) {
 	const error = new Error(message);
 	if (cause !== undefined)
 		error.cause = cause;
 	error.transactionState = "uncertain";
 	return error;
+}
+
+function retryWorldTransaction(message, cause) {
+	const error = new Error(message);
+	if (cause !== undefined)
+		error.cause = cause;
+	error.transactionState = "retry";
+	return error;
+}
+
+function validateEscrowAdapter(escrows) {
+	if (!escrows || typeof escrows.create !== "function" || typeof escrows.resolve !== "function")
+		throw new TypeError("Durable world fluid ports require escrow create and resolve callbacks");
+	return escrows;
 }
 
 /**
@@ -74,24 +94,26 @@ export function vanillaSourceForFluid(fluid) {
 }
 
 /**
- * Adapter contract for one world location. It is intentionally detached from
- * FluidNetworkState until a durable in-world escrow marker is added: deleting a
- * vanilla source before an escrow record commits would otherwise lose fluid on
- * a process crash.
+ * Adapter contract for one world location. When supplied with a private
+ * escrow adapter it moves a source into that physical escrow before reporting
+ * an in-memory fluid transfer as extracted, so restart recovery can identify
+ * the sole owner instead of rolling a second world mutation.
  */
 export class VanillaWorldFluidPort {
+	#escrows;
 	#extractionReceipts = new Map();
 	#id;
 	#insertionReceipts = new Map();
 	#readBlock;
 	#writeBlock;
 
-	constructor({ id, readBlock, writeBlock }) {
+	constructor({ escrows, id, readBlock, writeBlock }) {
 		if (typeof id !== "string" || id.length === 0)
 			throw new TypeError("World fluid ports require an identifier");
 		if (typeof readBlock !== "function" || typeof writeBlock !== "function")
 			throw new TypeError("World fluid ports require block read and write callbacks");
 		this.#id = id;
+		this.#escrows = escrows === undefined ? undefined : validateEscrowAdapter(escrows);
 		this.#readBlock = readBlock;
 		this.#writeBlock = writeBlock;
 	}
@@ -105,7 +127,7 @@ export class VanillaWorldFluidPort {
 		return { block, fluid: fluidFromVanillaSource(block), id: this.#id };
 	}
 
-	insert(fluid, { receiptId } = {}) {
+	insert(fluid, { delivery, receiptId, sourceReservation, transactionId } = {}) {
 		const requested = cloneFluidStack(fluid);
 		if (receiptId !== undefined) {
 			const existing = this.#insertionReceipts.get(receiptId);
@@ -114,6 +136,15 @@ export class VanillaWorldFluidPort {
 					throw new Error(`World fluid insertion receipt ${receiptId} was reused with another fluid stack`);
 				return clone(existing.result);
 			}
+		}
+		const witness = sourceReservation?.escrowId !== undefined
+			? sourceReservation
+			: delivery?.escrowId !== undefined ? delivery : undefined;
+		if (witness) {
+			const result = this.#insertThroughEscrow(requested, witness);
+			if (receiptId !== undefined)
+				this.#insertionReceipts.set(receiptId, { fluid: requested, result: clone(result) });
+			return result;
 		}
 		const replacement = vanillaSourceForFluid(requested);
 		if (!replacement)
@@ -128,7 +159,21 @@ export class VanillaWorldFluidPort {
 		return result;
 	}
 
-	reserve({ maxAmount = Number.MAX_SAFE_INTEGER, predicate = () => true } = {}) {
+	prepareDelivery({ fluid, sourceReservation, transactionId }) {
+		if (!this.#escrows || sourceReservation?.escrowId !== undefined || !vanillaSourceForFluid(fluid))
+			return undefined;
+		if (typeof transactionId !== "string" || transactionId.length === 0)
+			throw new TypeError("Durable world fluid deliveries require transaction identifiers");
+		const before = this.#read();
+		if (!sameBlock(before, AIR_BLOCK) || before.isWaterlogged)
+			return undefined;
+		const escrow = this.#escrows.create({ portId: this.#id, transactionId });
+		if (!escrow || typeof escrow.id !== "string" || escrow.id.length === 0)
+			throw new Error("World fluid delivery escrow factories must return stable identifiers");
+		return { escrowId: escrow.id, fluid: cloneFluidStack(fluid), transactionId };
+	}
+
+	reserve({ maxAmount = Number.MAX_SAFE_INTEGER, predicate = () => true, transactionId } = {}) {
 		if (!Number.isSafeInteger(maxAmount) || maxAmount < 1)
 			throw new RangeError("World fluid reservation limits must be positive safe integers");
 		if (typeof predicate !== "function")
@@ -137,11 +182,19 @@ export class VanillaWorldFluidPort {
 		const fluid = fluidFromVanillaSource(block);
 		if (!fluid || fluid.amount > maxAmount || !predicate(cloneFluidStack(fluid)))
 			return undefined;
-		return {
+		const reservation = {
 			fluid,
 			revision: stableStringify(block),
 			tankId: this.#id
 		};
+		if (!this.#escrows)
+			return reservation;
+		if (typeof transactionId !== "string" || transactionId.length === 0)
+			throw new TypeError("Durable world fluid reservations require transaction identifiers");
+		const escrow = this.#escrows.create({ portId: this.#id, transactionId });
+		if (!escrow || typeof escrow.id !== "string" || escrow.id.length === 0)
+			throw new Error("World fluid escrow factories must return stable identifiers");
+		return { ...reservation, escrowId: escrow.id, transactionId };
 	}
 
 	extract(reservation, { receiptId } = {}) {
@@ -155,6 +208,8 @@ export class VanillaWorldFluidPort {
 				return cloneFluidStack(existing.fluid);
 			}
 		}
+		if (reservation.escrowId !== undefined)
+			return this.#extractThroughEscrow(reservation);
 		const before = this.#read();
 		const fluid = fluidFromVanillaSource(before);
 		if (!fluid || stableStringify(before) !== reservation.revision || !sameReservation(fluid, reservation.fluid))
@@ -163,6 +218,119 @@ export class VanillaWorldFluidPort {
 		if (receiptId !== undefined)
 			this.#extractionReceipts.set(receiptId, { fluid: cloneFluidStack(fluid), reservation: clone(reservation) });
 		return fluid;
+	}
+
+	finalizeReservation(reservation) {
+		if (!this.#escrows || reservation?.escrowId === undefined)
+			return true;
+		const escrow = this.#resolveEscrow(reservation);
+		// An already-destroyed entity is the idempotent completed state.
+		if (!escrow)
+			return true;
+		const held = this.#readEscrow(escrow);
+		if (held !== undefined && !sameFluid(held, reservation.fluid))
+			throw uncertainWorldState("World fluid escrow contains conflicting fluid during retirement");
+		if (typeof escrow.retire !== "function")
+			throw new Error("World fluid escrow cannot be retired");
+		escrow.retire();
+		return true;
+	}
+
+	#extractThroughEscrow(reservation) {
+		const expected = cloneFluidStack(reservation.fluid);
+		const escrow = this.#resolveEscrow(reservation);
+		if (!escrow)
+			throw retryWorldTransaction("World fluid escrow is temporarily unavailable");
+		const before = this.#read();
+		const sourceFluid = fluidFromVanillaSource(before);
+		const escrowFluid = this.#readEscrow(escrow);
+		if (sameFluid(sourceFluid, expected) && escrowFluid === undefined) {
+			this.#writeEscrow(escrow, expected);
+			try {
+				this.#writeAndConfirm(before, AIR_BLOCK);
+			} catch (error) {
+				const after = this.#read();
+				if (sameBlock(after, before)) {
+					this.#clearEscrow(escrow);
+					throw error;
+				}
+				throw uncertainWorldState("World fluid source changed while moving to escrow", error);
+			}
+			return expected;
+		}
+		if (sameBlock(before, AIR_BLOCK) && sameFluid(escrowFluid, expected))
+			return expected;
+		if (sameFluid(sourceFluid, expected) && sameFluid(escrowFluid, expected)) {
+			this.#clearEscrow(escrow);
+			throw retryWorldTransaction("World source still owns fluid after escrow write");
+		}
+		if (sameBlock(before, AIR_BLOCK) && escrowFluid === undefined)
+			throw uncertainWorldState("World fluid escrow lost its source fluid");
+		throw uncertainWorldState("World fluid escrow ownership is conflicting");
+	}
+
+	#insertThroughEscrow(fluid, reservation) {
+		const replacement = vanillaSourceForFluid(fluid);
+		if (!replacement)
+			return { accepted: undefined, remainder: fluid };
+		const escrow = this.#resolveEscrow(reservation);
+		if (!escrow)
+			throw retryWorldTransaction("World fluid delivery escrow is temporarily unavailable");
+		const before = this.#read();
+		const escrowFluid = this.#readEscrow(escrow);
+		if (sameBlock(before, replacement)) {
+			if (sameFluid(escrowFluid, fluid))
+				return { accepted: fluid, remainder: undefined };
+			throw uncertainWorldState("World fluid target exists without its escrow witness");
+		}
+		if (!sameBlock(before, AIR_BLOCK) || before.isWaterlogged)
+			return { accepted: undefined, remainder: fluid };
+		if (escrowFluid === undefined)
+			this.#writeEscrow(escrow, fluid);
+		else if (!sameFluid(escrowFluid, fluid))
+			throw uncertainWorldState("World fluid delivery escrow contains conflicting fluid");
+		try {
+			this.#writeAndConfirm(before, replacement);
+		} catch (error) {
+			const after = this.#read();
+			if (sameBlock(after, before)) {
+				this.#clearEscrow(escrow);
+				throw error;
+			}
+			throw uncertainWorldState("World fluid target changed while receiving escrow", error);
+		}
+		return { accepted: fluid, remainder: undefined };
+	}
+
+	#clearEscrow(escrow) {
+		if (typeof escrow.clear !== "function")
+			throw new Error("World fluid escrow cannot be cleared");
+		escrow.clear();
+		if (this.#readEscrow(escrow) !== undefined)
+			throw uncertainWorldState("World fluid escrow clear could not be verified");
+	}
+
+	#readEscrow(escrow) {
+		if (typeof escrow.read !== "function")
+			throw new Error("World fluid escrow cannot be inspected");
+		const fluid = escrow.read();
+		return fluid === undefined ? undefined : cloneFluidStack(fluid);
+	}
+
+	#resolveEscrow(reservation) {
+		try {
+			return this.#escrows.resolve({ escrowId: reservation.escrowId, transactionId: reservation.transactionId });
+		} catch (error) {
+			throw retryWorldTransaction("World fluid escrow could not be resolved", error);
+		}
+	}
+
+	#writeEscrow(escrow, fluid) {
+		if (typeof escrow.write !== "function")
+			throw new Error("World fluid escrow cannot be written");
+		escrow.write(cloneFluidStack(fluid));
+		if (!sameFluid(this.#readEscrow(escrow), fluid))
+			throw uncertainWorldState("World fluid escrow write could not be verified");
 	}
 
 	#read() {

@@ -33,10 +33,21 @@ function validateLink(record) {
 		throw new TypeError("Fluid link state is invalid");
 	if (record.activeTransferId !== undefined && (typeof record.activeTransferId !== "string" || record.activeTransferId.length === 0))
 		throw new TypeError("Fluid link active transfer identifiers are invalid");
+	if (record.members !== undefined && (!Array.isArray(record.members) || record.members.length === 0 || record.members.some(member => typeof member !== "string" || member.length === 0) || [...new Set(record.members)].length !== record.members.length))
+		throw new TypeError("Fluid link members must be unique stable identifiers");
 	return record;
 }
 
+function normalizeMembers(members) {
+	if (members === undefined)
+		return undefined;
+	if (!Array.isArray(members) || members.length === 0 || members.some(member => typeof member !== "string" || member.length === 0) || [...new Set(members)].length !== members.length)
+		throw new TypeError("Fluid link members must be unique stable identifiers");
+	return [...members].sort();
+}
+
 export class FluidNetwork {
+	#completedTransfers = [];
 	#dirtyLinks = new Set();
 	#journal = new FluidTransferJournal();
 	#links = new Map();
@@ -49,12 +60,12 @@ export class FluidNetwork {
 		this.#transfersPerTick = transfersPerTick;
 	}
 
-	createPipe({ destinationId, id, maxAmountPerTick = 250, open = true, sourceId }) {
-		return this.#createLink({ destinationId, enabled: open, id, kind: "pipe", maxAmountPerTick, sourceId });
+	createPipe({ destinationId, id, maxAmountPerTick = 250, members, open = true, sourceId }) {
+		return this.#createLink({ destinationId, enabled: open, id, kind: "pipe", maxAmountPerTick, members, sourceId });
 	}
 
-	createPump({ destinationId, id, maxAmountPerTick = 250, running = true, sourceId }) {
-		return this.#createLink({ destinationId, enabled: running, id, kind: "pump", maxAmountPerTick, sourceId });
+	createPump({ destinationId, id, maxAmountPerTick = 250, members, running = true, sourceId }) {
+		return this.#createLink({ destinationId, enabled: running, id, kind: "pump", maxAmountPerTick, members, sourceId });
 	}
 
 	diagnostics() {
@@ -64,6 +75,10 @@ export class FluidNetwork {
 			links: this.#links.size,
 			ports: this.#ports.size
 		};
+	}
+
+	getPort(id) {
+		return this.#ports.get(id);
 	}
 
 	markLinkDirty(id) {
@@ -128,6 +143,7 @@ export class FluidNetwork {
 		if (transferIds.size > 0)
 			throw new Error("Fluid network snapshot contains an unowned transfer");
 		this.#journal = journal;
+		this.#completedTransfers = [];
 		this.#links = links;
 		this.#dirtyLinks = new Set([...links.values()].filter(link => link.enabled || link.activeTransferId).map(link => link.id));
 		this.#roundRobinAfter = snapshot.roundRobinAfter;
@@ -163,6 +179,12 @@ export class FluidNetwork {
 		};
 	}
 
+	takeCompletedTransfers() {
+		const completed = this.#completedTransfers.map(clone);
+		this.#completedTransfers = [];
+		return completed;
+	}
+
 	tick({ budget = this.#transfersPerTick } = {}) {
 		assertPositiveAmount(budget, "Fluid network tick budgets");
 		let processed = 0;
@@ -181,7 +203,7 @@ export class FluidNetwork {
 		return { outcomes, processed };
 	}
 
-	#createLink({ destinationId, enabled, id, kind, maxAmountPerTick, sourceId }) {
+	#createLink({ destinationId, enabled, id, kind, maxAmountPerTick, members, sourceId }) {
 		assertLinkId(id);
 		if (this.#links.has(id))
 			throw new Error(`Fluid link ${id} already exists`);
@@ -189,12 +211,14 @@ export class FluidNetwork {
 			throw new TypeError("Fluid link enabled state must be boolean");
 		this.#requirePort(sourceId);
 		this.#requirePort(destinationId);
+		const normalizedMembers = normalizeMembers(members);
 		const link = {
 			destinationId,
 			enabled,
 			id,
 			kind,
 			maxAmountPerTick: assertPositiveAmount(maxAmountPerTick, "Fluid link transfer limits"),
+			...(normalizedMembers === undefined ? {} : { members: normalizedMembers }),
 			nextTransfer: 0,
 			sourceId
 		};
@@ -261,9 +285,12 @@ export class FluidNetwork {
 		if (completed || abandoned) {
 			link.activeTransferId = undefined;
 			this.markPortDirty(link.sourceId);
-		} else if (settled.ok && settled.state === "escrowed") {
+		} else if ((settled.ok && (settled.state === "escrowed" || settled.state === "delivery_intent")) || settled.reason === "source_missing" || settled.reason === "source_retry" || settled.reason === "destination_retry") {
 			this.markLinkDirty(link.id);
 		}
-		return settled;
+		if (!completed)
+			return settled;
+		this.#completedTransfers.push(...this.#journal.takeCompletedTransfers());
+		return { ok: true, state: "committed" };
 	}
 }

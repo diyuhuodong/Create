@@ -129,3 +129,36 @@ test("FluidNetwork settles existing escrow after a pump stops without launching 
 	assert.equal(network.diagnostics().activeTransfers, 0);
 	assert.equal(network.tick().processed, 0);
 });
+
+test("FluidNetwork retries an unavailable durable destination without discarding its escrow", () => {
+	const source = tankPort({ contents: { amount: 100, typeId: "minecraft:water" }, id: "tank:source" });
+	const target = tankPort({ id: "world:target" });
+	let available = false;
+	const destination = {
+		extract(reservation, options) {
+			return target.port.extract(reservation, options);
+		},
+		id: target.port.id,
+		insert(fluid, options) {
+			if (!available) {
+				const error = new Error("target chunk is unavailable");
+				error.transactionState = "retry";
+				throw error;
+			}
+			return target.port.insert(fluid, options);
+		},
+		reserve(options) {
+			return target.port.reserve(options);
+		}
+	};
+	const network = createNetwork(source.port, destination);
+	network.createPump({ destinationId: destination.id, id: "pump:retry", maxAmountPerTick: 100, sourceId: source.port.id });
+	assert.equal(network.tick().outcomes[0].state, "intent");
+	assert.equal(network.tick().outcomes[0].state, "escrowed");
+	assert.deepEqual(network.tick().outcomes, [{ error: "Error: target chunk is unavailable", id: "pump:retry", ok: false, reason: "destination_retry", state: "escrowed" }]);
+	assert.deepEqual(source.tank.inspect().contents, undefined);
+	assert.equal(network.diagnostics().activeTransfers, 1);
+	available = true;
+	assert.deepEqual(network.tick().outcomes, [{ id: "pump:retry", ok: true, state: "committed" }]);
+	assert.deepEqual(target.tank.inspect().contents, { amount: 100, typeId: "minecraft:water" });
+});

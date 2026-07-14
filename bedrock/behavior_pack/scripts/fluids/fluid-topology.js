@@ -25,6 +25,66 @@ function assertDeviceKind(kind) {
 	return kind;
 }
 
+function axisForDirection(direction) {
+	if (direction.x !== 0)
+		return "x";
+	if (direction.y !== 0)
+		return "y";
+	if (direction.z !== 0)
+		return "z";
+	throw new TypeError("Fluid directions require one non-zero axis");
+}
+
+function hash(value) {
+	let result = 0x811c9dc5;
+	for (let index = 0; index < value.length; index++) {
+		result ^= value.charCodeAt(index);
+		result = Math.imul(result, 0x01000193);
+	}
+	return (result >>> 0).toString(16).padStart(8, "0");
+}
+
+function negate(offset) {
+	return { x: -offset.x, y: -offset.y, z: -offset.z };
+}
+
+function normalizedDevice(device) {
+	if (!device || typeof device.kind !== "string" || !FLUID_FACING_OFFSETS[device.facing])
+		return undefined;
+	assertDeviceKind(device.kind);
+	assertLocation(device.location);
+	if (typeof device.dimensionId !== "string" || device.dimensionId.length === 0)
+		throw new TypeError("Fluid topology devices require a dimension identifier");
+	return {
+		...device,
+		direction: FLUID_FACING_OFFSETS[device.facing],
+		id: fluidDeviceId(device.kind, device.dimensionId, device.location)
+	};
+}
+
+function runId(kind, device) {
+	return device.members.length === 1
+		? device.members[0]
+		: `fluid-run:${kind}:${hash(`${device.dimensionId}:${device.members.join("|")}`)}`;
+}
+
+function traceEndpoint({ deviceAt, direction, endpointAt, start }) {
+	const members = [start.id];
+	const axis = axisForDirection(direction);
+	let location = { ...start.location };
+	for (let steps = 0; steps < 64; steps++) {
+		location = offsetFluidLocation(location, direction);
+		const endpoint = endpointAt(location);
+		if (endpoint)
+			return { endpoint, members };
+		const next = normalizedDevice(deviceAt(location));
+		if (!next || next.kind !== "pipe" || axisForDirection(next.direction) !== axis)
+			return undefined;
+		members.push(next.id);
+	}
+	return undefined;
+}
+
 export function fluidDeviceId(kind, dimensionId, location) {
 	assertDeviceKind(kind);
 	if (typeof dimensionId !== "string" || dimensionId.length === 0)
@@ -57,12 +117,54 @@ export function offsetFluidLocation(location, offset) {
 	return { x: normalized.x + offset.x, y: normalized.y + offset.y, z: normalized.z + offset.z };
 }
 
-export function configureFluidDevice({ createLink, device, facing, hasLink = () => false, kind, tankAt }) {
+/**
+ * Finds one straight physical pipe run. Pipes are bidirectional, while a
+ * mechanical pump remains directional. A run is emitted only by its
+ * lexicographically first device, so placement events can safely rescan all
+ * neighboring devices without creating duplicate links.
+ */
+export function configureFluidRun({ createLink, destinationAt, device, deviceAt, hasLink = () => false, sourceAt }) {
+	const start = normalizedDevice(device);
+	if (!start)
+		return { ok: false, reason: "invalid_device" };
+	if (typeof createLink !== "function" || typeof deviceAt !== "function" || typeof hasLink !== "function" || typeof sourceAt !== "function" || typeof destinationAt !== "function")
+		throw new TypeError("Fluid run topology requires device, endpoint, and link callbacks");
+
+	const backwards = traceEndpoint({ deviceAt, direction: negate(start.direction), endpointAt: sourceAt, start });
+	const forwards = traceEndpoint({ deviceAt, direction: start.direction, endpointAt: destinationAt, start });
+	if (!backwards || !forwards)
+		return { ok: false, reason: "endpoints_missing" };
+	const members = [...new Set([...backwards.members, ...forwards.members])].sort();
+	// A pump is the sole directed controller of its run. A normal pipe run has
+	// no pump member and is instead owned by its lexicographically first pipe.
+	if (start.kind === "pipe" && start.id !== members[0])
+		return { members, ok: false, reason: "noncanonical_device" };
+	const run = { dimensionId: start.dimensionId, members };
+	const baseId = runId(start.kind, run);
+	const links = start.kind === "pump"
+		? [{ destinationId: forwards.endpoint, id: baseId, kind: "pump", members, sourceId: backwards.endpoint }]
+		: [
+			{ destinationId: forwards.endpoint, id: baseId, kind: "pipe", members, sourceId: backwards.endpoint },
+			{ destinationId: backwards.endpoint, id: `${baseId}:reverse`, kind: "pipe", members, sourceId: forwards.endpoint }
+		];
+	let created = 0;
+	for (const link of links) {
+		if (hasLink(link.id))
+			continue;
+		createLink(link);
+		created++;
+	}
+	return { id: baseId, links, members, ok: true, reused: created === 0 };
+}
+
+export function configureFluidDevice({ createLink, destinationAt, device, facing, hasLink = () => false, kind, sourceAt, tankAt }) {
 	assertDeviceKind(kind);
 	if (!device || typeof device.dimensionId !== "string")
 		throw new TypeError("Fluid topology devices require a dimension identifier");
 	assertLocation(device.location);
-	if (typeof createLink !== "function" || typeof hasLink !== "function" || typeof tankAt !== "function")
+	const sourceEndpointAt = sourceAt ?? tankAt;
+	const destinationEndpointAt = destinationAt ?? tankAt;
+	if (typeof createLink !== "function" || typeof hasLink !== "function" || typeof sourceEndpointAt !== "function" || typeof destinationEndpointAt !== "function")
 		throw new TypeError("Fluid topology requires link and tank callbacks");
 	const direction = FLUID_FACING_OFFSETS[facing];
 	if (!direction)
@@ -70,8 +172,8 @@ export function configureFluidDevice({ createLink, device, facing, hasLink = () 
 	const id = fluidDeviceId(kind, device.dimensionId, device.location);
 	if (hasLink(id))
 		return { id, ok: true, reused: true };
-	const sourceId = tankAt(offsetFluidLocation(device.location, { x: -direction.x, y: -direction.y, z: -direction.z }));
-	const destinationId = tankAt(offsetFluidLocation(device.location, direction));
+	const sourceId = sourceEndpointAt(offsetFluidLocation(device.location, { x: -direction.x, y: -direction.y, z: -direction.z }));
+	const destinationId = destinationEndpointAt(offsetFluidLocation(device.location, direction));
 	if (!sourceId || !destinationId)
 		return { ok: false, reason: "endpoints_missing" };
 	createLink({ destinationId, id, sourceId });

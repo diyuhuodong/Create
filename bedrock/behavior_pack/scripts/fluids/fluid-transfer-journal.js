@@ -22,6 +22,11 @@ function validateRecord(record) {
 		cloneFluidStack(record.fluid);
 		if (!Number.isSafeInteger(record.deliveryAttempt) || record.deliveryAttempt < 0)
 			throw new TypeError("Escrowed fluid transfers require a delivery attempt");
+		if (record.delivery !== undefined) {
+			if (!record.delivery || typeof record.delivery.escrowId !== "string" || record.delivery.escrowId.length === 0 || typeof record.delivery.transactionId !== "string" || record.delivery.transactionId.length === 0)
+				throw new TypeError("Fluid delivery escrow records require stable identifiers");
+			cloneFluidStack(record.delivery.fluid);
+		}
 	}
 }
 
@@ -40,6 +45,7 @@ export function fluidTransferPartition(id, partitionCount = 64) {
 }
 
 export class FluidTransferJournal {
+	#completedTransfers = [];
 	#records = new Map();
 
 	begin({ destination, id, maxAmount, partition = fluidTransferPartition(id), predicate, source }) {
@@ -49,7 +55,7 @@ export class FluidTransferJournal {
 			throw new Error(`Fluid transfer ${id} already exists`);
 		if (!source || !destination)
 			throw new TypeError("Fluid transfers require source and destination ports");
-		const reservation = source.reserve({ maxAmount, predicate });
+		const reservation = source.reserve({ maxAmount, predicate, transactionId: id });
 		if (!reservation)
 			return { ok: false, reason: "source_empty" };
 		const record = {
@@ -88,6 +94,8 @@ export class FluidTransferJournal {
 		} catch (error) {
 			if (error?.transactionState === "uncertain")
 				return { ok: false, reason: "source_uncertain", state: "intent", error: String(error) };
+			if (error?.transactionState === "retry")
+				return { ok: false, reason: "source_retry", state: "intent", error: String(error) };
 			this.#records.delete(id);
 			return { ok: false, reason: "source_changed", error: String(error) };
 		}
@@ -103,16 +111,48 @@ export class FluidTransferJournal {
 		const destination = resolvePort(record.destinationId);
 		if (!destination)
 			return { ok: false, reason: "destination_missing", state: "escrowed" };
+		if (record.delivery === undefined && typeof destination.prepareDelivery === "function") {
+			try {
+				const delivery = destination.prepareDelivery({
+					fluid: cloneFluidStack(record.fluid),
+					sourceReservation: clone(record.reservation),
+					transactionId: record.id
+				});
+				if (delivery !== undefined) {
+					if (!delivery || typeof delivery.escrowId !== "string" || delivery.escrowId.length === 0 || typeof delivery.transactionId !== "string" || delivery.transactionId.length === 0)
+						throw new TypeError("Fluid delivery preparation returned invalid escrow metadata");
+					record.delivery = clone(delivery);
+					return { ok: true, state: "delivery_intent" };
+				}
+			} catch (error) {
+				if (error?.transactionState === "uncertain")
+					return { ok: false, reason: "destination_uncertain", state: "escrowed", error: String(error) };
+				if (error?.transactionState === "retry")
+					return { ok: false, reason: "destination_retry", state: "escrowed", error: String(error) };
+				return { ok: false, reason: "destination_rejected", state: "escrowed", error: String(error) };
+			}
+		}
 		try {
-			const result = destination.insert(record.fluid, { receiptId: `${id}:deliver:${record.deliveryAttempt}` });
+			const result = destination.insert(record.fluid, {
+				delivery: record.delivery,
+				receiptId: `${id}:deliver:${record.deliveryAttempt}`,
+				sourceReservation: record.reservation,
+				transactionId: id
+			});
 			if (result.remainder) {
 				record.fluid = result.remainder;
 				record.deliveryAttempt++;
 				return { ok: false, reason: "destination_full", state: "escrowed" };
 			}
+			const committed = clone(record);
 			this.#records.delete(id);
+			this.#completedTransfers.push(committed);
 			return { ok: true, state: "committed" };
 		} catch (error) {
+			if (error?.transactionState === "uncertain")
+				return { ok: false, reason: "destination_uncertain", state: "escrowed", error: String(error) };
+			if (error?.transactionState === "retry")
+				return { ok: false, reason: "destination_retry", state: "escrowed", error: String(error) };
 			return { ok: false, reason: "destination_rejected", state: "escrowed", error: String(error) };
 		}
 	}
@@ -152,6 +192,7 @@ export class FluidTransferJournal {
 			restored.set(normalized.id, clone(normalized));
 		}
 		this.#records = restored;
+		this.#completedTransfers = [];
 	}
 
 	settle(id, resolvePort) {
@@ -169,6 +210,12 @@ export class FluidTransferJournal {
 	stateOf(id) {
 		const record = this.#records.get(id);
 		return record?.state;
+	}
+
+	takeCompletedTransfers() {
+		const completed = this.#completedTransfers.map(clone);
+		this.#completedTransfers = [];
+		return completed;
 	}
 
 	snapshot() {
