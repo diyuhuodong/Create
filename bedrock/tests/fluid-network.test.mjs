@@ -40,6 +40,28 @@ test("FluidNetwork moves bounded virtual-fluid amounts only after a pipe valve o
 	assert.deepEqual(destination.tank.inspect().contents, { amount: 500, typeId: "minecraft:water" });
 });
 
+test("FluidNetwork applies a smart-pipe filter before reserving its source and persists it across restart", () => {
+	const source = tankPort({ contents: { amount: 300, typeId: "minecraft:water" }, id: "tank:source" });
+	const destination = tankPort({ id: "tank:destination" });
+	const first = createNetwork(source.port, destination.port);
+	first.createPipe({ destinationId: destination.port.id, filter: "minecraft:lava", id: "pipe:filtered", maxAmountPerTick: 250, sourceId: source.port.id });
+	assert.deepEqual(first.tick().outcomes, [{ id: "pipe:filtered", ok: false, reason: "source_empty" }]);
+	assert.deepEqual(source.tank.inspect().contents, { amount: 300, typeId: "minecraft:water" });
+	first.setPipeFilter("pipe:filtered", "minecraft:water");
+	assert.equal(first.snapshot().links[0].filter, "minecraft:water");
+
+	const restoredSource = tankPort({ id: "tank:source" });
+	restoredSource.tank.restore(source.tank.snapshot());
+	const restoredDestination = tankPort({ id: "tank:destination" });
+	const restored = createNetwork(restoredSource.port, restoredDestination.port);
+	restored.restore(first.snapshot());
+	assert.equal(restored.snapshot().links[0].filter, "minecraft:water");
+	assert.equal(restored.tick().outcomes[0].state, "intent");
+	assert.equal(restored.tick().outcomes[0].state, "escrowed");
+	assert.equal(restored.tick().outcomes[0].state, "committed");
+	assert.deepEqual(restoredDestination.tank.inspect().contents, { amount: 250, typeId: "minecraft:water" });
+});
+
 test("FluidNetwork retains a pump escrow while full and resumes it exactly once after restart", () => {
 	const source = tankPort({ contents: { amount: 500, typeId: "minecraft:water" }, id: "tank:source" });
 	const destination = tankPort({ capacity: 200, contents: { amount: 200, typeId: "minecraft:water" }, id: "tank:destination" });

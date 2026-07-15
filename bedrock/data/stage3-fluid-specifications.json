@@ -1,0 +1,268 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "deterministic",
+  "generatedFrom": "bedrock/data/stage3-work-queue.json and Java registration/model sources",
+  "entries": [
+    {
+      "acceptanceId": "FLUIDS-COPPER-VALVE-HANDLE-BLOCK",
+      "bedrockIdentifier": "createbedrock:copper_valve_handle",
+      "behaviorBoundary": "This pipe variant participates in the shared straight-run FluidNetwork topology and persistent transactional transfer journal.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-12",
+      "resourceBoundary": "Placeable block with creative access, explicit self-drop, EN/ZH translation, and a hand-crank geometry fallback because the source Valve Handle model is a NeoForge OBJ not accepted by the JSON converter.",
+      "testPlan": "Focused positive, failure, restart, and branch-contention fluid tests plus source-contract, validation, build, and package checks cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java",
+        "src/main/resources/assets/create/models/block/valve_handle.json"
+      ],
+      "javaIdentifier": "create:copper_valve_handle",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "FLUIDS-CREATIVE-FLUID-TANK-BLOCK",
+      "bedrockIdentifier": "createbedrock:creative_fluid_tank",
+      "behaviorBoundary": "Creative Fluid Tank registers an inexhaustible, selected water/lava source through CreativeFluidPort. Its descriptor is persisted and selection changes invalidate incompatible in-flight reservations safely.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-12",
+      "resourceBoundary": "Placeable block with Java-model conversion, staged Java PNGs, creative access, explicit Java-equivalent drop, EN/ZH translation, and terrain-atlas mapping. Platform visual parity remains an acceptance test.",
+      "testPlan": "Focused positive, failure, restart, and branch-contention fluid tests plus source-contract, validation, build, and package checks cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java",
+        "src/main/resources/assets/create/models/block/fluid_tank/block_single.json"
+      ],
+      "javaIdentifier": "create:creative_fluid_tank",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "FLUIDS-CREATIVE-FLUID-TANK-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:creative_fluid_tank",
+      "behaviorBoundary": "The Java block-entity registration is represented by the world-persisted FluidNetworkState, transactional FluidNetwork links, and endpoint descriptors; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-12",
+      "resourceBoundary": "This Java block entity shares the paired placeable block and durable fluid runtime. The valve-handle entity is absorbed by createbedrock:copper_valve_handle.",
+      "testPlan": "Filter, valve, creative-source, capacity conservation, branch competition, restart, source-contract, validation, build, and package tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:creative_fluid_tank",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "FLUIDS-ENCASED-FLUID-PIPE-BLOCK",
+      "bedrockIdentifier": "createbedrock:encased_fluid_pipe",
+      "behaviorBoundary": "This pipe variant participates in the shared straight-run FluidNetwork topology and persistent transactional transfer journal.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-12",
+      "resourceBoundary": "Placeable block with Java-model conversion, staged Java PNGs, creative access, explicit Java-equivalent drop, EN/ZH translation, and terrain-atlas mapping. Platform visual parity remains an acceptance test.",
+      "testPlan": "Focused positive, failure, restart, and branch-contention fluid tests plus source-contract, validation, build, and package checks cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java",
+        "src/main/resources/assets/create/models/block/encased_fluid_pipe/block_open.json"
+      ],
+      "javaIdentifier": "create:encased_fluid_pipe",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "FLUIDS-ENCASED-FLUID-PIPE-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:encased_fluid_pipe",
+      "behaviorBoundary": "The Java block-entity registration is represented by the world-persisted FluidNetworkState, transactional FluidNetwork links, and endpoint descriptors; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-12",
+      "resourceBoundary": "This Java block entity shares the paired placeable block and durable fluid runtime. The valve-handle entity is absorbed by createbedrock:copper_valve_handle.",
+      "testPlan": "Filter, valve, creative-source, capacity conservation, branch competition, restart, source-contract, validation, build, and package tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:encased_fluid_pipe",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "FLUIDS-FLUID-VALVE-BLOCK",
+      "bedrockIdentifier": "createbedrock:fluid_valve",
+      "behaviorBoundary": "Fluid Valve is a pipe-run member whose open state gates both directional journal links. Empty-hand use toggles the durable link state; a Copper Valve Handle can toggle an adjacent valve.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-12",
+      "resourceBoundary": "Placeable block with Java-model conversion, staged Java PNGs, creative access, explicit Java-equivalent drop, EN/ZH translation, and terrain-atlas mapping. Platform visual parity remains an acceptance test.",
+      "testPlan": "Focused positive, failure, restart, and branch-contention fluid tests plus source-contract, validation, build, and package checks cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java",
+        "src/main/resources/assets/create/models/block/fluid_valve/item.json"
+      ],
+      "javaIdentifier": "create:fluid_valve",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "FLUIDS-FLUID-VALVE-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:fluid_valve",
+      "behaviorBoundary": "The Java block-entity registration is represented by the world-persisted FluidNetworkState, transactional FluidNetwork links, and endpoint descriptors; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-12",
+      "resourceBoundary": "This Java block entity shares the paired placeable block and durable fluid runtime. The valve-handle entity is absorbed by createbedrock:copper_valve_handle.",
+      "testPlan": "Filter, valve, creative-source, capacity conservation, branch competition, restart, source-contract, validation, build, and package tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:fluid_valve",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "FLUIDS-GLASS-FLUID-PIPE-BLOCK",
+      "bedrockIdentifier": "createbedrock:glass_fluid_pipe",
+      "behaviorBoundary": "This pipe variant participates in the shared straight-run FluidNetwork topology and persistent transactional transfer journal.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-12",
+      "resourceBoundary": "Placeable block with Java-model conversion, staged Java PNGs, creative access, explicit Java-equivalent drop, EN/ZH translation, and terrain-atlas mapping. Platform visual parity remains an acceptance test.",
+      "testPlan": "Focused positive, failure, restart, and branch-contention fluid tests plus source-contract, validation, build, and package checks cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java",
+        "src/main/resources/assets/create/models/block/fluid_pipe/window.json"
+      ],
+      "javaIdentifier": "create:glass_fluid_pipe",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "FLUIDS-GLASS-FLUID-PIPE-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:glass_fluid_pipe",
+      "behaviorBoundary": "The Java block-entity registration is represented by the world-persisted FluidNetworkState, transactional FluidNetwork links, and endpoint descriptors; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-12",
+      "resourceBoundary": "This Java block entity shares the paired placeable block and durable fluid runtime. The valve-handle entity is absorbed by createbedrock:copper_valve_handle.",
+      "testPlan": "Filter, valve, creative-source, capacity conservation, branch competition, restart, source-contract, validation, build, and package tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:glass_fluid_pipe",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "FLUIDS-ITEM-DRAIN-BLOCK",
+      "bedrockIdentifier": "createbedrock:item_drain",
+      "behaviorBoundary": "Item Drain exposes a 1,000 mB persisted endpoint that accepts a filled water or lava bucket through the standard compensated bucket transaction.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-12",
+      "resourceBoundary": "Placeable block with Java-model conversion, staged Java PNGs, creative access, explicit Java-equivalent drop, EN/ZH translation, and terrain-atlas mapping. Platform visual parity remains an acceptance test.",
+      "testPlan": "Focused positive, failure, restart, and branch-contention fluid tests plus source-contract, validation, build, and package checks cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java",
+        "src/main/resources/assets/create/models/block/item_drain.json"
+      ],
+      "javaIdentifier": "create:item_drain",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "FLUIDS-ITEM-DRAIN-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:item_drain",
+      "behaviorBoundary": "The Java block-entity registration is represented by the world-persisted FluidNetworkState, transactional FluidNetwork links, and endpoint descriptors; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-12",
+      "resourceBoundary": "This Java block entity shares the paired placeable block and durable fluid runtime. The valve-handle entity is absorbed by createbedrock:copper_valve_handle.",
+      "testPlan": "Filter, valve, creative-source, capacity conservation, branch competition, restart, source-contract, validation, build, and package tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:item_drain",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "FLUIDS-PORTABLE-FLUID-INTERFACE-BLOCK",
+      "bedrockIdentifier": "createbedrock:portable_fluid_interface",
+      "behaviorBoundary": "Portable Fluid Interface exposes a 1,000 mB local persisted endpoint for pipe and bucket exchange; contraption attachment is deferred to the later moving-contraption delivery.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-12",
+      "resourceBoundary": "Placeable block with Java-model conversion, staged Java PNGs, creative access, explicit Java-equivalent drop, EN/ZH translation, and terrain-atlas mapping. Platform visual parity remains an acceptance test.",
+      "testPlan": "Focused positive, failure, restart, and branch-contention fluid tests plus source-contract, validation, build, and package checks cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java",
+        "src/main/resources/assets/create/models/block/portable_fluid_interface/block.json"
+      ],
+      "javaIdentifier": "create:portable_fluid_interface",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "FLUIDS-PORTABLE-FLUID-INTERFACE-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:portable_fluid_interface",
+      "behaviorBoundary": "The Java block-entity registration is represented by the world-persisted FluidNetworkState, transactional FluidNetwork links, and endpoint descriptors; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-12",
+      "resourceBoundary": "This Java block entity shares the paired placeable block and durable fluid runtime. The valve-handle entity is absorbed by createbedrock:copper_valve_handle.",
+      "testPlan": "Filter, valve, creative-source, capacity conservation, branch competition, restart, source-contract, validation, build, and package tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:portable_fluid_interface",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "FLUIDS-SMART-FLUID-PIPE-BLOCK",
+      "bedrockIdentifier": "createbedrock:smart_fluid_pipe",
+      "behaviorBoundary": "Smart Fluid Pipe contributes an any/water/lava filter to its straight run before a source reservation is created, preserving transfer capacity and preventing wrong-fluid extraction.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-12",
+      "resourceBoundary": "Placeable block with Java-model conversion, staged Java PNGs, creative access, explicit Java-equivalent drop, EN/ZH translation, and terrain-atlas mapping. Platform visual parity remains an acceptance test.",
+      "testPlan": "Focused positive, failure, restart, and branch-contention fluid tests plus source-contract, validation, build, and package checks cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java",
+        "src/main/resources/assets/create/models/block/smart_fluid_pipe/item.json"
+      ],
+      "javaIdentifier": "create:smart_fluid_pipe",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "FLUIDS-SMART-FLUID-PIPE-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:smart_fluid_pipe",
+      "behaviorBoundary": "The Java block-entity registration is represented by the world-persisted FluidNetworkState, transactional FluidNetwork links, and endpoint descriptors; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-12",
+      "resourceBoundary": "This Java block entity shares the paired placeable block and durable fluid runtime. The valve-handle entity is absorbed by createbedrock:copper_valve_handle.",
+      "testPlan": "Filter, valve, creative-source, capacity conservation, branch competition, restart, source-contract, validation, build, and package tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:smart_fluid_pipe",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "FLUIDS-SPOUT-BLOCK",
+      "bedrockIdentifier": "createbedrock:spout",
+      "behaviorBoundary": "Spout exposes a 1,000 mB persisted endpoint that fills an empty bucket through the standard compensated bucket transaction.",
+      "deliveryState": "implemented",
+      "implementationPackage": "S3-12",
+      "resourceBoundary": "Placeable block with Java-model conversion, staged Java PNGs, creative access, explicit Java-equivalent drop, EN/ZH translation, and terrain-atlas mapping. Platform visual parity remains an acceptance test.",
+      "testPlan": "Focused positive, failure, restart, and branch-contention fluid tests plus source-contract, validation, build, and package checks cover this implementation.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlocks.java",
+        "src/main/resources/assets/create/models/block/spout/item.json"
+      ],
+      "javaIdentifier": "create:spout",
+      "kind": "block"
+    },
+    {
+      "acceptanceId": "FLUIDS-SPOUT-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:spout",
+      "behaviorBoundary": "The Java block-entity registration is represented by the world-persisted FluidNetworkState, transactional FluidNetwork links, and endpoint descriptors; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-12",
+      "resourceBoundary": "This Java block entity shares the paired placeable block and durable fluid runtime. The valve-handle entity is absorbed by createbedrock:copper_valve_handle.",
+      "testPlan": "Filter, valve, creative-source, capacity conservation, branch competition, restart, source-contract, validation, build, and package tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:spout",
+      "kind": "block_entity"
+    },
+    {
+      "acceptanceId": "FLUIDS-VALVE-HANDLE-BLOCK_ENTITY",
+      "bedrockIdentifier": "createbedrock:valve_handle",
+      "behaviorBoundary": "The Java block-entity registration is represented by the world-persisted FluidNetworkState, transactional FluidNetwork links, and endpoint descriptors; no unsafe custom Bedrock block entity is emitted.",
+      "deliveryState": "runtime_absorbed",
+      "implementationPackage": "S3-12",
+      "resourceBoundary": "This Java block entity shares the paired placeable block and durable fluid runtime. The valve-handle entity is absorbed by createbedrock:copper_valve_handle.",
+      "testPlan": "Filter, valve, creative-source, capacity conservation, branch competition, restart, source-contract, validation, build, and package tests exercise the shared runtime.",
+      "javaEvidencePaths": [
+        "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
+      ],
+      "javaIdentifier": "create:valve_handle",
+      "kind": "block_entity"
+    }
+  ]
+}

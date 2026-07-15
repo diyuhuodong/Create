@@ -126,6 +126,33 @@ test("FluidNetworkState persists sectioned tanks and links without creating flui
 	assert.equal(state.canRemoveTank(destination), false);
 });
 
+test("FluidNetworkState persists a changed creative-fluid descriptor without replacing its port", () => {
+	const storage = memoryStorage();
+	const id = "creative-fluid:minecraft:overworld:0:64:0";
+	const createPort = () => new FluidPort({ tank: new FluidTank({ capacity: 1_000, id }) });
+	const first = createState(storage, "createbedrock:fluid_state_creative_descriptor", { externalPortFactory: () => createPort() });
+	const port = createPort();
+	first.registerExternalPort({
+		descriptor: { fluidType: "minecraft:water", kind: "creative_fluid_tank" },
+		partition: "minecraft:overworld:0:4:0",
+		port
+	});
+	assert.equal(first.updateExternalPortDescriptor(id, { fluidType: "minecraft:lava", kind: "creative_fluid_tank" }), true);
+	assert.equal(first.updateExternalPortDescriptor(id, { fluidType: "minecraft:lava", kind: "creative_fluid_tank" }), false);
+	advance(first, () => !first.diagnostics().waitingForCommit);
+
+	let restoredDescriptor;
+	const restored = createState(storage, "createbedrock:fluid_state_creative_descriptor", {
+		externalPortFactory({ descriptor }) {
+			restoredDescriptor = descriptor;
+			return createPort();
+		}
+	});
+	assert.deepEqual(restored.restore(), { frozen: false, links: 0, tanks: 0, transfers: 0, warnings: [] });
+	assert.deepEqual(restoredDescriptor, { fluidType: "minecraft:lava", kind: "creative_fluid_tank" });
+	assert.equal(restored.canRemovePort(id), true);
+});
+
 test("FluidNetworkState commits a durable intent before extracting its source tank", () => {
 	const storage = memoryStorage();
 	const state = createState(storage, "createbedrock:fluid_state_intent");

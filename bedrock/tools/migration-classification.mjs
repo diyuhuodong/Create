@@ -69,6 +69,15 @@ const BEHAVIOR_PATHS = new Map([
 	["millstone", "behavior_pack/scripts/processing/millstone-runtime.js"],
 	["fluid_pipe", "behavior_pack/scripts/fluids/fluid-runtime.js"],
 	["fluid_tank", "behavior_pack/scripts/fluids/fluid-runtime.js"],
+	["copper_valve_handle", "behavior_pack/scripts/fluids/fluid-runtime.js"],
+	["creative_fluid_tank", "behavior_pack/scripts/fluids/fluid-runtime.js"],
+	["encased_fluid_pipe", "behavior_pack/scripts/fluids/fluid-runtime.js"],
+	["fluid_valve", "behavior_pack/scripts/fluids/fluid-runtime.js"],
+	["glass_fluid_pipe", "behavior_pack/scripts/fluids/fluid-runtime.js"],
+	["item_drain", "behavior_pack/scripts/fluids/fluid-runtime.js"],
+	["portable_fluid_interface", "behavior_pack/scripts/fluids/fluid-runtime.js"],
+	["smart_fluid_pipe", "behavior_pack/scripts/fluids/fluid-runtime.js"],
+	["spout", "behavior_pack/scripts/fluids/fluid-runtime.js"],
 	["shaft", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["saw", "behavior_pack/scripts/processing/stage3-processing-runtime.js"],
 	["track", "behavior_pack/scripts/trains/train-runtime.js"],
@@ -102,6 +111,22 @@ const STAGE_THREE_FLUIDS = new Map([
 	["fluid_pipe", { domain: "fluids" }],
 	["fluid_tank", { domain: "fluids" }],
 	["mechanical_pump", { domain: "fluids" }]
+]);
+
+// S3-12 extends the durable S3-5 fluid journal with filterable pipe variants,
+// an inexhaustible creative source, local fill/drain endpoints, and valve
+// controls. The Java block entities are intentionally represented by those
+// persisted runtime records instead of unsafe custom Bedrock block entities.
+const STAGE_THREE_FLUID_FOUNDATION = new Map([
+	["copper_valve_handle", { domain: "fluids" }],
+	["creative_fluid_tank", { domain: "fluids" }],
+	["encased_fluid_pipe", { domain: "fluids" }],
+	["fluid_valve", { domain: "fluids" }],
+	["glass_fluid_pipe", { domain: "fluids" }],
+	["item_drain", { domain: "fluids" }],
+	["portable_fluid_interface", { domain: "fluids" }],
+	["smart_fluid_pipe", { domain: "fluids" }],
+	["spout", { domain: "fluids" }]
 ]);
 
 // S3-6 uses stable Block.getRedstonePower polling to control the existing
@@ -197,6 +222,7 @@ export function classifyRegistration(identifier, kind) {
 	const processor = STAGE_THREE_PROCESSORS.get(identifier);
 	const processingFoundation = STAGE_THREE_PROCESSING_FOUNDATION.get(identifier);
 	const fluid = STAGE_THREE_FLUIDS.get(identifier);
+	const fluidFoundation = STAGE_THREE_FLUID_FOUNDATION.get(identifier);
 	const redstoneControl = STAGE_THREE_REDSTONE_CONTROLS.get(identifier);
 	const foundationContent = STAGE_THREE_FOUNDATION_CONTENT.get(identifier);
 	const kineticFoundation = STAGE_THREE_KINETIC_FOUNDATION.get(identifier);
@@ -213,6 +239,8 @@ export function classifyRegistration(identifier, kind) {
 		? { ...kineticFoundation, phase: 3, status: "implementation_in_progress" }
 		: logisticsFoundation
 		? { ...logisticsFoundation, phase: 3, status: "implementation_in_progress" }
+		: fluidFoundation
+		? { ...fluidFoundation, phase: 3, status: "implementation_in_progress" }
 		: prototype
 		? { ...prototype, phase: 2, status: "implementation_in_progress" }
 		: rule ?? { domain: "content", phase: 3 };
@@ -223,9 +251,9 @@ export function classifyRegistration(identifier, kind) {
 		behaviorPath: BEHAVIOR_PATHS.get(identifier) ?? null,
 		blockingReason: blockedByTargetVersion ? REDSTONE_OUTPUT_BLOCKER : null,
 		domain: classification.domain,
-		persistenceSchema: staticSystem || processingFoundation || kineticFoundation || logisticsFoundation ? 2 : prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null,
+		persistenceSchema: staticSystem || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation ? 2 : prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null,
 		phase: classification.phase,
-		resourceStatus: prototype || staticSystem || foundationContent || processingFoundation || kineticFoundation || logisticsFoundation ? "partial" : "pending",
+		resourceStatus: prototype || staticSystem || foundationContent || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation ? "partial" : "pending",
 		status: blockedByTargetVersion ? "blocked" : classification.status ?? "specification_pending"
 	};
 }

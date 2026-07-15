@@ -1,0 +1,33 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:fluid_valve",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
+      "properties": { "createbedrock:open": [0, 1] },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.fluid_valve",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.fluid_valve" }, "material_instances": { "axis": { "texture": "createbedrock_axis", "render_method": "opaque" }, "axis_top": { "texture": "createbedrock_axis_top", "render_method": "opaque" }, "fluid_valve": { "texture": "createbedrock_fluid_valve", "render_method": "opaque" }, "valve_open": { "texture": "createbedrock_valve_open", "render_method": "opaque" }, "*": { "texture": "createbedrock_fluid_valve", "render_method": "opaque" } } },
+      "minecraft:loot": "loot_tables/blocks/fluid_valve.json",
+      "minecraft:material_instances": { "axis": { "texture": "createbedrock_axis", "render_method": "opaque" }, "axis_top": { "texture": "createbedrock_axis_top", "render_method": "opaque" }, "fluid_valve": { "texture": "createbedrock_fluid_valve", "render_method": "opaque" }, "valve_open": { "texture": "createbedrock_valve_open", "render_method": "opaque" }, "*": { "texture": "createbedrock_fluid_valve", "render_method": "opaque" } }
+    },
+    "permutations": [
+      {
+        "condition": "query.block_state('createbedrock:open') == 0",
+        "components": {
+          "minecraft:material_instances": {
+            "axis": { "texture": "createbedrock_axis", "render_method": "opaque" },
+            "axis_top": { "texture": "createbedrock_axis_top", "render_method": "opaque" },
+            "fluid_valve": { "texture": "createbedrock_fluid_valve", "render_method": "opaque" },
+            "valve_open": { "texture": "createbedrock_valve_closed", "render_method": "opaque" },
+            "*": { "texture": "createbedrock_fluid_valve", "render_method": "opaque" }
+          }
+        }
+      }
+    ]
+  }
+}

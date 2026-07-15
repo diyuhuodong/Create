@@ -35,6 +35,8 @@ function validateLink(record) {
 		throw new TypeError("Fluid link active transfer identifiers are invalid");
 	if (record.members !== undefined && (!Array.isArray(record.members) || record.members.length === 0 || record.members.some(member => typeof member !== "string" || member.length === 0) || [...new Set(record.members)].length !== record.members.length))
 		throw new TypeError("Fluid link members must be unique stable identifiers");
+	if (record.filter !== undefined && (typeof record.filter !== "string" || record.filter.length === 0))
+		throw new TypeError("Fluid pipe filters must be non-empty fluid identifiers");
 	return record;
 }
 
@@ -44,6 +46,14 @@ function normalizeMembers(members) {
 	if (!Array.isArray(members) || members.length === 0 || members.some(member => typeof member !== "string" || member.length === 0) || [...new Set(members)].length !== members.length)
 		throw new TypeError("Fluid link members must be unique stable identifiers");
 	return [...members].sort();
+}
+
+function normalizeFilter(filter) {
+	if (filter === undefined)
+		return undefined;
+	if (typeof filter !== "string" || filter.length === 0)
+		throw new TypeError("Fluid pipe filters must be non-empty fluid identifiers");
+	return filter;
 }
 
 export class FluidNetwork {
@@ -60,8 +70,8 @@ export class FluidNetwork {
 		this.#transfersPerTick = transfersPerTick;
 	}
 
-	createPipe({ destinationId, id, maxAmountPerTick = 250, members, open = true, sourceId }) {
-		return this.#createLink({ destinationId, enabled: open, id, kind: "pipe", maxAmountPerTick, members, sourceId });
+	createPipe({ destinationId, filter, id, maxAmountPerTick = 250, members, open = true, sourceId }) {
+		return this.#createLink({ destinationId, enabled: open, filter, id, kind: "pipe", maxAmountPerTick, members, sourceId });
 	}
 
 	createPump({ destinationId, id, maxAmountPerTick = 250, members, running = true, sourceId }) {
@@ -161,6 +171,16 @@ export class FluidNetwork {
 		return true;
 	}
 
+	setPipeFilter(id, filter) {
+		const link = this.#requireKind(id, "pipe");
+		const normalized = normalizeFilter(filter);
+		if (link.filter === normalized)
+			return false;
+		link.filter = normalized;
+		this.markLinkDirty(id);
+		return true;
+	}
+
 	setPumpRunning(id, running) {
 		const link = this.#requireKind(id, "pump");
 		if (typeof running !== "boolean")
@@ -204,7 +224,7 @@ export class FluidNetwork {
 		return { outcomes, processed };
 	}
 
-	#createLink({ destinationId, enabled, id, kind, maxAmountPerTick, members, sourceId }) {
+	#createLink({ destinationId, enabled, filter, id, kind, maxAmountPerTick, members, sourceId }) {
 		assertLinkId(id);
 		if (this.#links.has(id))
 			throw new Error(`Fluid link ${id} already exists`);
@@ -213,12 +233,14 @@ export class FluidNetwork {
 		this.#requirePort(sourceId);
 		this.#requirePort(destinationId);
 		const normalizedMembers = normalizeMembers(members);
+		const normalizedFilter = kind === "pipe" ? normalizeFilter(filter) : undefined;
 		const link = {
 			destinationId,
 			enabled,
 			id,
 			kind,
 			maxAmountPerTick: assertPositiveAmount(maxAmountPerTick, "Fluid link transfer limits"),
+			...(normalizedFilter === undefined ? {} : { filter: normalizedFilter }),
 			...(normalizedMembers === undefined ? {} : { members: normalizedMembers }),
 			nextTransfer: 0,
 			sourceId
@@ -268,6 +290,7 @@ export class FluidNetwork {
 				destination: this.#requirePort(link.destinationId),
 				id,
 				maxAmount: link.maxAmountPerTick,
+				predicate: link.filter === undefined ? undefined : fluid => fluid.typeId === link.filter,
 				source: this.#requirePort(link.sourceId)
 			});
 			if (!began.ok)

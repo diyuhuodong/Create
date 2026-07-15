@@ -2115,7 +2115,7 @@
       "javaIdentifier": "create:copper_valve_handle",
       "kind": "block",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -2134,7 +2134,7 @@
       "javaIdentifier": "create:creative_fluid_tank",
       "kind": "block",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -2153,7 +2153,7 @@
       "javaIdentifier": "create:creative_fluid_tank",
       "kind": "block_entity",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -2172,7 +2172,7 @@
       "javaIdentifier": "create:encased_fluid_pipe",
       "kind": "block",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -2191,7 +2191,7 @@
       "javaIdentifier": "create:encased_fluid_pipe",
       "kind": "block_entity",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -2282,7 +2282,7 @@
       "javaIdentifier": "create:fluid_valve",
       "kind": "block",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -2301,7 +2301,7 @@
       "javaIdentifier": "create:fluid_valve",
       "kind": "block_entity",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -2320,7 +2320,7 @@
       "javaIdentifier": "create:glass_fluid_pipe",
       "kind": "block",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -2339,7 +2339,7 @@
       "javaIdentifier": "create:glass_fluid_pipe",
       "kind": "block_entity",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -2358,7 +2358,7 @@
       "javaIdentifier": "create:item_drain",
       "kind": "block",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -2377,7 +2377,7 @@
       "javaIdentifier": "create:item_drain",
       "kind": "block_entity",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -2432,7 +2432,7 @@
       "javaIdentifier": "create:portable_fluid_interface",
       "kind": "block",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -2451,7 +2451,7 @@
       "javaIdentifier": "create:portable_fluid_interface",
       "kind": "block_entity",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -2470,7 +2470,7 @@
       "javaIdentifier": "create:smart_fluid_pipe",
       "kind": "block",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -2489,7 +2489,7 @@
       "javaIdentifier": "create:smart_fluid_pipe",
       "kind": "block_entity",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -2508,7 +2508,7 @@
       "javaIdentifier": "create:spout",
       "kind": "block",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
@@ -2527,7 +2527,7 @@
       "javaIdentifier": "create:spout",
       "kind": "block_entity",
       "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
       "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."

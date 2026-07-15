@@ -12,6 +12,8 @@ import { validateStage3LogisticsSourceContract } from "./stage3-logistics-contra
 import { validateStage3LogisticsSpecifications } from "./stage3-logistics-specification-schema.mjs";
 import { validateStage3ProcessingSourceContract } from "./stage3-processing-contract.mjs";
 import { validateStage3ProcessingSpecifications } from "./stage3-processing-specification-schema.mjs";
+import { validateStage3FluidSpecifications } from "./stage3-fluid-specification-schema.mjs";
+import { validateStage3FluidSourceContract } from "./stage3-fluid-contract.mjs";
 import { validateStage3WorkQueue } from "./stage3-work-queue-schema.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
@@ -72,6 +74,7 @@ const stage3ContentSpecifications = await readJson(resolve(bedrockRoot, "data", 
 const stage3KineticSpecifications = await readJson(resolve(bedrockRoot, "data", "stage3-kinetic-specifications.json"));
 const stage3LogisticsSpecifications = await readJson(resolve(bedrockRoot, "data", "stage3-logistics-specifications.json"));
 const stage3ProcessingSpecifications = await readJson(resolve(bedrockRoot, "data", "stage3-processing-specifications.json"));
+const stage3FluidSpecifications = await readJson(resolve(bedrockRoot, "data", "stage3-fluid-specifications.json"));
 const stage3WorkQueue = await readJson(resolve(bedrockRoot, "data", "stage3-work-queue.json"));
 validateMigrationMatrix(migrationMatrix);
 validateStage3WorkQueue(stage3WorkQueue, migrationMatrix);
@@ -79,6 +82,7 @@ const contentSpecificationCoverage = validateStage3ContentSpecifications(stage3C
 const kineticSpecificationCoverage = validateStage3KineticSpecifications(stage3KineticSpecifications, stage3WorkQueue);
 const logisticsSpecificationCoverage = validateStage3LogisticsSpecifications(stage3LogisticsSpecifications, stage3WorkQueue);
 const processingSpecificationCoverage = validateStage3ProcessingSpecifications(stage3ProcessingSpecifications, stage3WorkQueue);
+const fluidSpecificationCoverage = validateStage3FluidSpecifications(stage3FluidSpecifications, stage3WorkQueue);
 for (const entry of stage3ContentSpecifications.entries) {
 	const sourcePaths = [
 		...entry.sourceModelPaths,
@@ -107,6 +111,12 @@ for (const entry of stage3ProcessingSpecifications.entries) {
 	for (const sourcePath of entry.javaEvidencePaths) {
 		if (!await fileExists(resolve(repositoryRoot, sourcePath)))
 			throw new Error(`Processing specification ${entry.acceptanceId} references missing Java source ${sourcePath}.`);
+	}
+}
+for (const entry of stage3FluidSpecifications.entries) {
+	for (const sourcePath of entry.javaEvidencePaths) {
+		if (!await fileExists(resolve(repositoryRoot, sourcePath)))
+			throw new Error(`Fluid specification ${entry.acceptanceId} references missing Java source ${sourcePath}.`);
 	}
 }
 const allUuids = [
@@ -167,5 +177,6 @@ const contentContract = await validateStage3SourceContentContract();
 const kineticContract = await validateStage3KineticSourceContract();
 const logisticsContract = await validateStage3LogisticsSourceContract();
 const processingContract = await validateStage3ProcessingSourceContract();
+const fluidContract = await validateStage3FluidSourceContract();
 
-console.log(`Bedrock manifests, JSON files, JavaScript syntax, ${contentContract.contentBlocks} Stage-3 content blocks, ${kineticContract.blocks} S3-9 kinetic blocks, ${logisticsContract.blocks} S3-10 logistics blocks, ${processingContract.blocks} S3-11 processing blocks, the ${stage3WorkQueue.entries.length}-entry work queue, ${contentSpecificationCoverage.entries} S3-8B content specifications, ${kineticSpecificationCoverage.entries} S3-9 kinetic specifications, ${logisticsSpecificationCoverage.entries} S3-10 logistics specifications, and ${processingSpecificationCoverage.entries} S3-11 processing specifications are valid.`);
+console.log(`Bedrock manifests, JSON files, JavaScript syntax, ${contentContract.contentBlocks} Stage-3 content blocks, ${kineticContract.blocks} S3-9 kinetic blocks, ${logisticsContract.blocks} S3-10 logistics blocks, ${processingContract.blocks} S3-11 processing blocks, ${fluidContract.blocks} S3-12 fluid blocks, the ${stage3WorkQueue.entries.length}-entry work queue, ${contentSpecificationCoverage.entries} S3-8B content specifications, ${kineticSpecificationCoverage.entries} S3-9 kinetic specifications, ${logisticsSpecificationCoverage.entries} S3-10 logistics specifications, ${processingSpecificationCoverage.entries} S3-11 processing specifications, and ${fluidSpecificationCoverage.entries} S3-12 fluid specifications are valid.`);

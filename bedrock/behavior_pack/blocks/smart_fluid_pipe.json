@@ -1,0 +1,19 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:smart_fluid_pipe",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
+      "properties": { "createbedrock:fluid_filter": ["any", "water", "lava"] },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.smart_fluid_pipe",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.smart_fluid_pipe" }, "material_instances": { "pipes": { "texture": "createbedrock_pipes", "render_method": "opaque" }, "smart_pipe_1": { "texture": "createbedrock_smart_pipe_1", "render_method": "opaque" }, "smart_pipe_2": { "texture": "createbedrock_smart_pipe_2", "render_method": "opaque" }, "smart_pipe_3": { "texture": "createbedrock_smart_pipe_3", "render_method": "opaque" }, "*": { "texture": "createbedrock_smart_pipe_3", "render_method": "opaque" } } },
+      "minecraft:loot": "loot_tables/blocks/smart_fluid_pipe.json",
+      "minecraft:material_instances": { "pipes": { "texture": "createbedrock_pipes", "render_method": "opaque" }, "smart_pipe_1": { "texture": "createbedrock_smart_pipe_1", "render_method": "opaque" }, "smart_pipe_2": { "texture": "createbedrock_smart_pipe_2", "render_method": "opaque" }, "smart_pipe_3": { "texture": "createbedrock_smart_pipe_3", "render_method": "opaque" }, "*": { "texture": "createbedrock_smart_pipe_3", "render_method": "opaque" } }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": { "identifier": "createbedrock:spout", "menu_category": { "category": "items", "group": "itemGroup.name.misc" } },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.spout",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.spout" }, "material_instances": { "encased_pipe": { "texture": "createbedrock_encased_pipe", "render_method": "opaque" }, "spout": { "texture": "createbedrock_spout", "render_method": "opaque" }, "spout_nozzle": { "texture": "createbedrock_spout_nozzle", "render_method": "opaque" }, "*": { "texture": "createbedrock_spout", "render_method": "opaque" } } },
+      "minecraft:loot": "loot_tables/blocks/spout.json",
+      "minecraft:material_instances": { "encased_pipe": { "texture": "createbedrock_encased_pipe", "render_method": "opaque" }, "spout": { "texture": "createbedrock_spout", "render_method": "opaque" }, "spout_nozzle": { "texture": "createbedrock_spout_nozzle", "render_method": "opaque" }, "*": { "texture": "createbedrock_spout", "render_method": "opaque" } }
+    }
+  }
+}

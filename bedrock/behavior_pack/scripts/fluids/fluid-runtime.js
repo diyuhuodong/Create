@@ -5,19 +5,41 @@ import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-prope
 import { BedrockEscrowRegistry } from "../logistics/bedrock-escrow-registry.js";
 import { registerEscrowProtection } from "../logistics/external-escrow-runtime.js";
 import { createBedrockWorldFluidEscrows } from "./bedrock-world-fluid-escrow.js";
+import { CreativeFluidPort } from "./creative-fluid-port.js";
 import { planFluidBucketInteraction, settleFluidBucketInteraction } from "./fluid-container.js";
 import { fluidTankId, FluidNetworkState } from "./fluid-network-state.js";
 import { configureFluidRun, FLUID_FACING_OFFSETS, fluidDeviceId, fluidDeviceLocation, offsetFluidLocation } from "./fluid-topology.js";
 import { fluidFromVanillaSource, VanillaWorldFluidPort } from "./world-fluid-port.js";
 import { steamEngineOutput } from "../kinetics/steam-engine.js";
 
-const FLUID_PIPE_BLOCK = "createbedrock:fluid_pipe";
+const COPPER_VALVE_HANDLE_BLOCK = "createbedrock:copper_valve_handle";
+const CREATIVE_FLUID_TANK_BLOCK = "createbedrock:creative_fluid_tank";
+const ENCASED_FLUID_PIPE_BLOCK = "createbedrock:encased_fluid_pipe";
 const FLUID_TASK_BUDGET = 8;
 const FLUID_TASK_GROUP = "fluids";
 const FLUID_TANK_BLOCK = "createbedrock:fluid_tank";
+const FLUID_VALVE_BLOCK = "createbedrock:fluid_valve";
+const GLASS_FLUID_PIPE_BLOCK = "createbedrock:glass_fluid_pipe";
+const ITEM_DRAIN_BLOCK = "createbedrock:item_drain";
 const MECHANICAL_PUMP_BLOCK = "createbedrock:mechanical_pump";
+const PORTABLE_FLUID_INTERFACE_BLOCK = "createbedrock:portable_fluid_interface";
 const POWERED_SHAFT_BLOCK = "createbedrock:powered_shaft";
+const SMART_FLUID_PIPE_BLOCK = "createbedrock:smart_fluid_pipe";
+const SPOUT_BLOCK = "createbedrock:spout";
 const STEAM_ENGINE_BLOCK = "createbedrock:steam_engine";
+const FLUID_PIPE_BLOCKS = new Set([
+	"createbedrock:fluid_pipe",
+	ENCASED_FLUID_PIPE_BLOCK,
+	FLUID_VALVE_BLOCK,
+	GLASS_FLUID_PIPE_BLOCK,
+	SMART_FLUID_PIPE_BLOCK
+]);
+const FLUID_ENDPOINT_CAPACITIES = new Map([
+	[FLUID_TANK_BLOCK, 8_000],
+	[ITEM_DRAIN_BLOCK, 1_000],
+	[PORTABLE_FLUID_INTERFACE_BLOCK, 1_000],
+	[SPOUT_BLOCK, 1_000]
+]);
 const NEIGHBOR_OFFSETS = [
 	{ x: 1, y: 0, z: 0 },
 	{ x: -1, y: 0, z: 0 },
@@ -27,6 +49,7 @@ const NEIGHBOR_OFFSETS = [
 	{ x: 0, y: 0, z: -1 }
 ];
 let kineticWorldProvider;
+const creativePorts = new Map();
 const redstoneLockedPumpIds = new Set();
 const worldFluidEscrows = new BedrockEscrowRegistry();
 const state = new FluidNetworkState({
@@ -42,7 +65,7 @@ const state = new FluidNetworkState({
 registerEscrowProtection(() => state.activeExternalEscrowIds());
 
 function blockKind(block) {
-	if (block?.typeId === FLUID_PIPE_BLOCK)
+	if (FLUID_PIPE_BLOCKS.has(block?.typeId))
 		return "pipe";
 	if (block?.typeId === MECHANICAL_PUMP_BLOCK)
 		return "pump";
@@ -51,7 +74,7 @@ function blockKind(block) {
 
 function fluidTankAt(dimension, location) {
 	const block = dimension.getBlock(location);
-	return block?.typeId === FLUID_TANK_BLOCK ? fluidTankId(dimension.id, block.location) : undefined;
+	return FLUID_ENDPOINT_CAPACITIES.has(block?.typeId) ? fluidTankId(dimension.id, block.location) : undefined;
 }
 
 function fluidSectionPartition(dimensionId, location) {
@@ -72,6 +95,24 @@ function worldFluidPortId(dimensionId, location) {
 	return `world-fluid:${dimensionId}:${location.x}:${location.y}:${location.z}`;
 }
 
+function creativeFluidPortId(dimensionId, location) {
+	return `creative-fluid:${dimensionId}:${location.x}:${location.y}:${location.z}`;
+}
+
+function creativeFluidType(block) {
+	const configured = block?.permutation?.getAllStates?.()["createbedrock:fluid_type"];
+	return configured === "lava" ? "minecraft:lava" : "minecraft:water";
+}
+
+function creativeFluidDescriptor(dimensionId, location, fluidType) {
+	return {
+		dimensionId,
+		fluidType,
+		kind: "creative_fluid_tank",
+		location: { x: location.x, y: location.y, z: location.z }
+	};
+}
+
 function worldFluidDescriptor(dimensionId, kind, location) {
 	return {
 		dimensionId,
@@ -81,6 +122,20 @@ function worldFluidDescriptor(dimensionId, kind, location) {
 }
 
 function createWorldFluidPort(descriptor, id) {
+	if (descriptor?.kind === "creative_fluid_tank") {
+		if (typeof descriptor.dimensionId !== "string" || !descriptor.location || !Number.isInteger(descriptor.location.x) || !Number.isInteger(descriptor.location.y) || !Number.isInteger(descriptor.location.z))
+			throw new TypeError("Invalid persisted creative-fluid endpoint descriptor");
+		if (id !== creativeFluidPortId(descriptor.dimensionId, descriptor.location))
+			throw new Error("Creative-fluid endpoint identifier does not match its descriptor");
+		const existing = creativePorts.get(id);
+		if (existing) {
+			existing.setFluidType(descriptor.fluidType);
+			return existing;
+		}
+		const port = new CreativeFluidPort({ fluidType: descriptor.fluidType, id });
+		creativePorts.set(id, port);
+		return port;
+	}
 	if ((descriptor?.kind !== "vanilla_world_source" && descriptor?.kind !== "vanilla_world_sink") || typeof descriptor.dimensionId !== "string" || !descriptor.location || !Number.isInteger(descriptor.location.x) || !Number.isInteger(descriptor.location.y) || !Number.isInteger(descriptor.location.z))
 		throw new TypeError("Invalid persisted world-fluid endpoint descriptor");
 	if (id !== worldFluidPortId(descriptor.dimensionId, descriptor.location))
@@ -100,6 +155,32 @@ function createWorldFluidPort(descriptor, id) {
 			block.setType(replacement.typeId);
 		}
 	});
+}
+
+function creativePortAt(dimension, location) {
+	const block = dimension.getBlock(location);
+	if (block?.typeId !== CREATIVE_FLUID_TANK_BLOCK)
+		return undefined;
+	const id = creativeFluidPortId(dimension.id, block.location);
+	const descriptor = creativeFluidDescriptor(dimension.id, block.location, creativeFluidType(block));
+	let port = creativePorts.get(id);
+	if (!port) {
+		port = new CreativeFluidPort({ fluidType: descriptor.fluidType, id });
+		creativePorts.set(id, port);
+	}
+	port.setFluidType(descriptor.fluidType);
+	try {
+		state.registerExternalPort({
+			descriptor,
+			partition: fluidSectionPartition(dimension.id, block.location),
+			port
+		});
+	} catch (error) {
+		if (!String(error).includes("conflicting metadata"))
+			throw error;
+		state.updateExternalPortDescriptor(id, descriptor);
+	}
+	return id;
 }
 
 function worldSourceAt(dimension, location) {
@@ -135,6 +216,21 @@ function tankIdentifier(block) {
 	return fluidTankId(block.dimension.id, block.location);
 }
 
+function endpointCapacity(block) {
+	return FLUID_ENDPOINT_CAPACITIES.get(block?.typeId);
+}
+
+function isFluidEndpoint(block) {
+	return endpointCapacity(block) !== undefined;
+}
+
+function createFluidEndpoint(block) {
+	const capacity = endpointCapacity(block);
+	if (capacity === undefined)
+		return undefined;
+	return state.createTank({ capacity, dimensionId: block.dimension.id, location: block.location });
+}
+
 function pumpRunning(block, kineticWorld) {
 	return Math.abs(kineticWorld?.speedAt(block.dimension.id, block.location) ?? 0) > 0;
 }
@@ -152,14 +248,44 @@ function topologyDeviceAt(dimension, location) {
 	};
 }
 
+function pipeRunConfiguration(dimension, members) {
+	let filter;
+	let open = true;
+	for (const member of members) {
+		const device = fluidDeviceLocation("pipe", member);
+		if (!device)
+			continue;
+		const block = dimension.getBlock(device.location);
+		if (block?.typeId === FLUID_VALVE_BLOCK && block.permutation.getAllStates()["createbedrock:open"] !== 1)
+			open = false;
+		if (block?.typeId !== SMART_FLUID_PIPE_BLOCK)
+			continue;
+		const selected = block.permutation.getAllStates()["createbedrock:fluid_filter"];
+		const next = selected === "water" ? "minecraft:water" : selected === "lava" ? "minecraft:lava" : undefined;
+		if (!next)
+			continue;
+		if (filter && filter !== next)
+			open = false;
+		else
+			filter = next;
+	}
+	return { filter, open };
+}
+
+function endpointAt(dimension, location) {
+	return fluidTankAt(dimension, location) ?? creativePortAt(dimension, location);
+}
+
 function configureDevice(block, kineticWorld) {
 	const kind = blockKind(block);
 	if (!kind)
 		return false;
 	const result = configureFluidRun({
 		createLink(options) {
-			if (options.kind === "pipe")
-				state.createPipe(options);
+			if (options.kind === "pipe") {
+				const configuration = pipeRunConfiguration(block.dimension, options.members);
+				state.createPipe({ ...options, ...configuration });
+			}
 			else
 				state.createPump({
 					...options,
@@ -167,7 +293,7 @@ function configureDevice(block, kineticWorld) {
 				});
 		},
 		destinationAt(location) {
-			return fluidTankAt(block.dimension, location)
+			return endpointAt(block.dimension, location)
 				?? (kind === "pump" ? worldSinkAt(block.dimension, location) : undefined);
 		},
 		device: topologyDeviceAt(block.dimension, block.location),
@@ -178,7 +304,7 @@ function configureDevice(block, kineticWorld) {
 			return state.hasLink(id);
 		},
 		sourceAt(location) {
-			return fluidTankAt(block.dimension, location)
+			return endpointAt(block.dimension, location)
 				?? (kind === "pump" ? worldSourceAt(block.dimension, location) : undefined);
 		}
 	});
@@ -187,6 +313,18 @@ function configureDevice(block, kineticWorld) {
 	if (!result.ok)
 		state.pruneExternalPorts();
 	return result.ok && !result.reused;
+}
+
+function syncPipeConfiguration(block) {
+	if (blockKind(block) !== "pipe")
+		return false;
+	let changed = false;
+	for (const link of linksForDevice(block).filter(link => link.kind === "pipe")) {
+		const configuration = pipeRunConfiguration(block.dimension, link.members ?? [fluidDeviceId("pipe", block.dimension.id, block.location)]);
+		changed = state.setPipeOpen(link.id, configuration.open) || changed;
+		changed = state.setPipeFilter(link.id, configuration.filter) || changed;
+	}
+	return changed;
 }
 
 function configureAdjacentDevices(anchor, kineticWorld) {
@@ -215,13 +353,15 @@ function removeDevice(block) {
 	return links.length > 0;
 }
 
-function interactWithTankBucket({ dimensionId, location, plan, player, slot }) {
+function interactWithTankBucket({ allowedDirection, dimensionId, location, plan, player, slot }) {
 	if (player.selectedSlotIndex !== slot)
 		return { ok: false, reason: "held_slot_changed" };
 	const dimension = world.getDimension(dimensionId);
 	const block = dimension.getBlock(location);
-	if (block?.typeId !== FLUID_TANK_BLOCK)
+	if (!isFluidEndpoint(block))
 		return { ok: false, reason: "tank_removed" };
+	if (allowedDirection && plan.direction !== allowedDirection)
+		return { ok: false, reason: "unsupported_direction" };
 	const tankId = tankIdentifier(block);
 	if (!state.hasTank(tankId))
 		return { ok: false, reason: "tank_unavailable" };
@@ -244,6 +384,54 @@ function interactWithTankBucket({ dimensionId, location, plan, player, slot }) {
 			inventory.setItem(slot, new ItemStack(item.typeId, item.amount));
 		}
 	});
+}
+
+function setBlockState(block, property, value) {
+	const states = block?.permutation?.getAllStates?.();
+	if (!states || states[property] === undefined || states[property] === value)
+		return false;
+	block.setPermutation(block.permutation.withState(property, value));
+	return true;
+}
+
+function fluidTypeForBucket(item) {
+	if (item?.typeId === "minecraft:water_bucket")
+		return "water";
+	if (item?.typeId === "minecraft:lava_bucket")
+		return "lava";
+	return undefined;
+}
+
+function cycleSmartPipeFilter(block) {
+	const current = block.permutation.getAllStates()["createbedrock:fluid_filter"];
+	const next = current === "any" ? "water" : current === "water" ? "lava" : "any";
+	return setBlockState(block, "createbedrock:fluid_filter", next);
+}
+
+function toggleValve(block) {
+	const current = block.permutation.getAllStates()["createbedrock:open"];
+	const changed = setBlockState(block, "createbedrock:open", current === 1 ? 0 : 1);
+	if (changed)
+		syncPipeConfiguration(block);
+	return changed;
+}
+
+function toggleAdjacentValve(block) {
+	for (const offset of NEIGHBOR_OFFSETS) {
+		const valve = block.dimension.getBlock(offsetFluidLocation(block.location, offset));
+		if (valve?.typeId === FLUID_VALVE_BLOCK)
+			return toggleValve(valve);
+	}
+	return false;
+}
+
+function configureCreativeFluidType(block, type) {
+	if (!setBlockState(block, "createbedrock:fluid_type", type))
+		return false;
+	creativePortAt(block.dimension, block.location);
+	for (const neighbor of NEIGHBOR_OFFSETS)
+		configureDevice(block.dimension.getBlock(offsetFluidLocation(block.location, neighbor)), kineticWorldProvider?.());
+	return true;
 }
 
 function syncPumpStates(kineticWorld) {
@@ -362,8 +550,13 @@ export function registerFluids(getKineticWorld) {
 	registerKernelTaskGroup(FLUID_TASK_GROUP, FLUID_TASK_BUDGET);
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
 		try {
-			if (event.block.typeId === FLUID_TANK_BLOCK) {
-				state.createTank({ dimensionId: event.block.dimension.id, location: event.block.location });
+			if (isFluidEndpoint(event.block)) {
+				createFluidEndpoint(event.block);
+				configureAdjacentDevices(event.block, getKineticWorld());
+				return;
+			}
+			if (event.block.typeId === CREATIVE_FLUID_TANK_BLOCK) {
+				creativePortAt(event.block.dimension, event.block.location);
 				configureAdjacentDevices(event.block, getKineticWorld());
 				return;
 			}
@@ -376,9 +569,14 @@ export function registerFluids(getKineticWorld) {
 
 	world.beforeEvents.playerBreakBlock.subscribe(event => {
 		try {
-			if (event.block.typeId === FLUID_TANK_BLOCK && !state.canRemoveTank(tankIdentifier(event.block))) {
+			if (isFluidEndpoint(event.block) && !state.canRemoveTank(tankIdentifier(event.block))) {
 				event.cancel = true;
-				event.player.sendMessage("Cannot remove a fluid tank while it stores fluid or has an active connection.");
+				event.player.sendMessage("Cannot remove a fluid endpoint while it stores fluid or has an active connection.");
+				return;
+			}
+			if (event.block.typeId === CREATIVE_FLUID_TANK_BLOCK && !state.canRemovePort(creativeFluidPortId(event.block.dimension.id, event.block.location))) {
+				event.cancel = true;
+				event.player.sendMessage("Cannot remove a creative fluid tank while it has an active connection.");
 				return;
 			}
 			if (linksForDevice(event.block).some(link => link.activeTransferId)) {
@@ -391,9 +589,61 @@ export function registerFluids(getKineticWorld) {
 	});
 
 	world.beforeEvents.playerInteractWithBlock.subscribe(event => {
-		if (!event.isFirstEvent || event.block.typeId !== FLUID_TANK_BLOCK)
+		if (!event.isFirstEvent)
 			return;
 		try {
+			const selectedFluid = fluidTypeForBucket(event.itemStack);
+			if (event.block.typeId === CREATIVE_FLUID_TANK_BLOCK && selectedFluid) {
+				event.cancel = true;
+				const dimensionId = event.block.dimension.id;
+				const location = { ...event.block.location };
+				system.run(() => {
+					const block = world.getDimension(dimensionId).getBlock(location);
+					if (block?.typeId === CREATIVE_FLUID_TANK_BLOCK)
+						configureCreativeFluidType(block, selectedFluid);
+				});
+				return;
+			}
+			if (event.block.typeId === SMART_FLUID_PIPE_BLOCK && (selectedFluid || !event.itemStack)) {
+				event.cancel = true;
+				const dimensionId = event.block.dimension.id;
+				const location = { ...event.block.location };
+				system.run(() => {
+					const block = world.getDimension(dimensionId).getBlock(location);
+					if (block?.typeId !== SMART_FLUID_PIPE_BLOCK)
+						return;
+					if (selectedFluid)
+						setBlockState(block, "createbedrock:fluid_filter", selectedFluid);
+					else
+						cycleSmartPipeFilter(block);
+					syncPipeConfiguration(block);
+				});
+				return;
+			}
+			if (event.block.typeId === FLUID_VALVE_BLOCK && !event.itemStack) {
+				event.cancel = true;
+				const dimensionId = event.block.dimension.id;
+				const location = { ...event.block.location };
+				system.run(() => {
+					const block = world.getDimension(dimensionId).getBlock(location);
+					if (block?.typeId === FLUID_VALVE_BLOCK)
+						toggleValve(block);
+				});
+				return;
+			}
+			if (event.block.typeId === COPPER_VALVE_HANDLE_BLOCK && !event.itemStack) {
+				event.cancel = true;
+				const dimensionId = event.block.dimension.id;
+				const location = { ...event.block.location };
+				system.run(() => {
+					const block = world.getDimension(dimensionId).getBlock(location);
+					if (block?.typeId === COPPER_VALVE_HANDLE_BLOCK)
+						toggleAdjacentValve(block);
+				});
+				return;
+			}
+			if (!isFluidEndpoint(event.block))
+				return;
 			const tankId = tankIdentifier(event.block);
 			if (!state.hasTank(tankId))
 				return;
@@ -405,13 +655,16 @@ export function registerFluids(getKineticWorld) {
 			});
 			if (!plan)
 				return;
+			const allowedDirection = event.block.typeId === ITEM_DRAIN_BLOCK ? "drain" : event.block.typeId === SPOUT_BLOCK ? "fill" : undefined;
+			if (allowedDirection && plan.direction !== allowedDirection)
+				return;
 			const slot = event.player.selectedSlotIndex;
 			event.cancel = true;
 			const dimensionId = event.block.dimension.id;
 			const location = { ...event.block.location };
 			system.run(() => {
 				try {
-					const result = interactWithTankBucket({ dimensionId, location, plan, player: event.player, slot });
+					const result = interactWithTankBucket({ allowedDirection, dimensionId, location, plan, player: event.player, slot });
 					if (!result.ok && result.reason === "rollback_failed")
 						console.warn(`[Create Bedrock] Fluid bucket rollback failed at ${dimensionId}:${location.x}:${location.y}:${location.z}`);
 				} catch (error) {
@@ -425,8 +678,14 @@ export function registerFluids(getKineticWorld) {
 
 	world.afterEvents.playerBreakBlock.subscribe(event => {
 		try {
-			if (event.block.typeId === FLUID_TANK_BLOCK && state.hasTank(tankIdentifier(event.block)))
+			if (isFluidEndpoint(event.block) && state.hasTank(tankIdentifier(event.block)))
 				state.removeTank(tankIdentifier(event.block));
+			else if (event.block.typeId === CREATIVE_FLUID_TANK_BLOCK) {
+				const id = creativeFluidPortId(event.block.dimension.id, event.block.location);
+				state.unregisterExternalPort(id);
+				creativePorts.delete(id);
+				configureAdjacentDevices(event.block, getKineticWorld());
+			}
 			else {
 				removeDevice(event.block);
 				configureAdjacentDevices(event.block, getKineticWorld());

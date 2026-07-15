@@ -1,0 +1,18 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:copper_valve_handle",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.hand_crank",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.hand_crank" }, "material_instances": { "*": { "texture": "createbedrock_valve_handle_copper", "render_method": "opaque" } } },
+      "minecraft:loot": "loot_tables/blocks/copper_valve_handle.json",
+      "minecraft:material_instances": { "*": { "texture": "createbedrock_valve_handle_copper", "render_method": "opaque" } }
+    }
+  }
+}

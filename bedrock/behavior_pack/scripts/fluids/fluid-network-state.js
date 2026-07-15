@@ -89,12 +89,15 @@ export class FluidNetworkState {
 		const tank = this.#tanks.get(id);
 		if (!tank)
 			return true;
-		const state = this.#network.snapshot();
-		if (state.links.some(link => link.sourceId === id || link.destinationId === id))
-			return false;
-		if (state.transfers.some(transfer => transfer.sourceId === id || transfer.destinationId === id))
+		if (!this.canRemovePort(id))
 			return false;
 		return tank.tank.inspect().contents === undefined;
+	}
+
+	canRemovePort(id) {
+		const state = this.#network.snapshot();
+		return !state.links.some(link => link.sourceId === id || link.destinationId === id)
+			&& !state.transfers.some(transfer => transfer.sourceId === id || transfer.destinationId === id);
 	}
 
 	createPipe(options) {
@@ -187,6 +190,20 @@ export class FluidNetworkState {
 		});
 		this.#persist();
 		return port.id;
+	}
+
+	updateExternalPortDescriptor(id, descriptor) {
+		this.#assertActive();
+		const entry = this.#externalPorts.get(id);
+		if (!entry)
+			throw new Error(`Unknown external fluid port ${id}`);
+		const normalizedDescriptor = cloneExternalDescriptor(descriptor);
+		if (JSON.stringify(entry.descriptor) === JSON.stringify(normalizedDescriptor))
+			return false;
+		entry.descriptor = normalizedDescriptor;
+		this.#network.markPortDirty(id);
+		this.#persist();
+		return true;
 	}
 
 	pruneExternalPorts() {
@@ -342,6 +359,14 @@ export class FluidNetworkState {
 	setPipeOpen(id, open) {
 		this.#assertActive();
 		const changed = this.#network.setPipeOpen(id, open);
+		if (changed)
+			this.#persist();
+		return changed;
+	}
+
+	setPipeFilter(id, filter) {
+		this.#assertActive();
+		const changed = this.#network.setPipeFilter(id, filter);
 		if (changed)
 			this.#persist();
 		return changed;

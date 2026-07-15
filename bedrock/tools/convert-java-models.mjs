@@ -50,6 +50,13 @@ export const JAVA_MODELS = [
 	{ name: "chute", source: "chute/block.json" },
 	{ name: "fluid_tank", source: "fluid_tank/block_single.json" },
 	{ name: "fluid_pipe", source: "fluid_pipe/item.json" },
+	{ name: "encased_fluid_pipe", source: "encased_fluid_pipe/block_open.json" },
+	{ name: "glass_fluid_pipe", source: "fluid_pipe/window.json" },
+	{ name: "fluid_valve", source: "fluid_valve/item.json" },
+	{ name: "item_drain", source: "item_drain.json" },
+	{ name: "portable_fluid_interface", source: "portable_fluid_interface/block.json" },
+	{ name: "smart_fluid_pipe", source: "smart_fluid_pipe/item.json" },
+	{ name: "spout", source: "spout/item.json" },
 	{ name: "mechanical_pump", source: "mechanical_pump/block.json" },
 	{
 		name: "andesite_funnel",

@@ -1,0 +1,18 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:creative_fluid_tank",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
+      "properties": { "createbedrock:fluid_type": ["water", "lava"] }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1.5 },
+      "minecraft:geometry": "geometry.createbedrock.fluid_tank",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.fluid_tank" }, "material_instances": { "*": { "texture": "createbedrock_creative_fluid_tank", "render_method": "opaque" } } },
+      "minecraft:loot": "loot_tables/blocks/creative_fluid_tank.json",
+      "minecraft:material_instances": { "*": { "texture": "createbedrock_creative_fluid_tank", "render_method": "opaque" } }
+    }
+  }
+}

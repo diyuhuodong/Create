@@ -1,0 +1,18 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:encased_fluid_pipe",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.encased_fluid_pipe",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.encased_fluid_pipe" }, "material_instances": { "*": { "texture": "createbedrock_encased_pipe", "render_method": "opaque" } } },
+      "minecraft:loot": "loot_tables/blocks/encased_fluid_pipe.json",
+      "minecraft:material_instances": { "*": { "texture": "createbedrock_encased_pipe", "render_method": "opaque" } }
+    }
+  }
+}

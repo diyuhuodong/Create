@@ -38,8 +38,17 @@
     "createbedrock_copper_casing": {
       "textures": "textures/create_java/block/copper_casing"
     },
+    "createbedrock_copper_underside": {
+      "textures": "textures/create_java/block/copper_underside"
+    },
+    "createbedrock_creative_fluid_tank": {
+      "textures": "textures/create_java/block/creative_fluid_tank"
+    },
     "createbedrock_encased_chain_drive": {
       "textures": "textures/create_java/block/encased_chain_drive"
+    },
+    "createbedrock_encased_pipe": {
+      "textures": "textures/create_java/block/encased_pipe"
     },
     "createbedrock_funnel_frame": {
       "textures": "textures/create_java/block/funnel/andesite_funnel_frame"
@@ -80,6 +89,12 @@
     "createbedrock_fluid_tank_top": {
       "textures": "textures/create_java/block/fluid_tank_top"
     },
+    "createbedrock_fluid_valve": {
+      "textures": "textures/create_java/block/fluid_valve"
+    },
+    "createbedrock_glass_fluid_pipe": {
+      "textures": "textures/create_java/block/glass_fluid_pipe"
+    },
     "createbedrock_fan_casing": {
       "textures": "textures/create_java/block/fan_casing"
     },
@@ -101,14 +116,38 @@
     "createbedrock_industrial_iron_block": {
       "textures": "textures/create_java/block/industrial_iron_block"
     },
+    "createbedrock_item_drain_side": {
+      "textures": "textures/create_java/block/item_drain_side"
+    },
+    "createbedrock_item_drain_top": {
+      "textures": "textures/create_java/block/item_drain_top"
+    },
     "createbedrock_millstone": {
       "textures": "textures/create_java/block/millstone"
     },
     "createbedrock_pipes": {
       "textures": "textures/create_java/block/pipes"
     },
+    "createbedrock_portable_fluid_interface": {
+      "textures": "textures/create_java/block/portable_fluid_interface"
+    },
     "createbedrock_pump": {
       "textures": "textures/create_java/block/pump"
+    },
+    "createbedrock_smart_pipe_1": {
+      "textures": "textures/create_java/block/smart_pipe_1"
+    },
+    "createbedrock_smart_pipe_2": {
+      "textures": "textures/create_java/block/smart_pipe_2"
+    },
+    "createbedrock_smart_pipe_3": {
+      "textures": "textures/create_java/block/smart_pipe_3"
+    },
+    "createbedrock_spout": {
+      "textures": "textures/create_java/block/spout"
+    },
+    "createbedrock_spout_nozzle": {
+      "textures": "textures/create_java/block/spout_nozzle"
     },
     "createbedrock_mechanical_bearing": {
       "textures": "textures/create_java/block/mechanical_bearing_side"
@@ -148,6 +187,15 @@
     },
     "createbedrock_weathered_iron_block": {
       "textures": "textures/create_java/block/weathered_iron_block"
+    },
+    "createbedrock_valve_closed": {
+      "textures": "textures/create_java/block/valve_closed"
+    },
+    "createbedrock_valve_handle_copper": {
+      "textures": "textures/create_java/block/valve_handle/valve_handle_copper"
+    },
+    "createbedrock_valve_open": {
+      "textures": "textures/create_java/block/valve_open"
     },
     "createbedrock_andesite_alloy_block": {
       "textures": "textures/create_java/block/andesite_block"

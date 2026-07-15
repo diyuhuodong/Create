@@ -1,0 +1,14 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:block": {
+    "description": { "identifier": "createbedrock:item_drain", "menu_category": { "category": "items", "group": "itemGroup.name.misc" } },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.item_drain",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.item_drain" }, "material_instances": { "copper_underside": { "texture": "createbedrock_copper_underside", "render_method": "opaque" }, "item_drain_side": { "texture": "createbedrock_item_drain_side", "render_method": "opaque" }, "item_drain_top": { "texture": "createbedrock_item_drain_top", "render_method": "opaque" }, "pump": { "texture": "createbedrock_pump", "render_method": "opaque" }, "*": { "texture": "createbedrock_item_drain_side", "render_method": "opaque" } } },
+      "minecraft:loot": "loot_tables/blocks/item_drain.json",
+      "minecraft:material_instances": { "copper_underside": { "texture": "createbedrock_copper_underside", "render_method": "opaque" }, "item_drain_side": { "texture": "createbedrock_item_drain_side", "render_method": "opaque" }, "item_drain_top": { "texture": "createbedrock_item_drain_top", "render_method": "opaque" }, "pump": { "texture": "createbedrock_pump", "render_method": "opaque" }, "*": { "texture": "createbedrock_item_drain_side", "render_method": "opaque" } }
+    }
+  }
+}
