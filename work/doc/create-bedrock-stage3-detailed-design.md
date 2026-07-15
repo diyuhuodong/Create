@@ -170,9 +170,9 @@ Create 专用流体使用虚拟流体记录，不把任意数量直接转换为�
 
 S3-14 已将最低 Bedrock/Realm 目标提升到 1.26.0。该版本的 `minecraft:redstone_consumer` 不再要求实验开关，并覆盖 `minecraft:redstone_producer` 所需的最低 block format。BP/RP manifest、行为包 JSON 与 `@minecraft/server` 依赖必须一致地使用 1.26.0 / 2.5.0，正式包仍不得启用实验开关。
 
-现有六类输入暂保留已注册方块的 `Block.getRedstonePower()` 轮询：读取失败或区块不可用时采用“失效关闭”，随后读到真实零功率才重新启用。后续逐项接入 `minecraft:redstone_consumer` 和 `BlockComponentRedstoneUpdateEvent`；`RedstoneSignalBus` 保持与具体组件解耦，避免迁移时扩散重写。
+六类既有输入已接入 `minecraft:redstone_consumer` 和 `BlockComponentRedstoneUpdateEvent`：事件经自定义组件立即进入 `RedstoneSignalBus`。`Block.getRedstonePower()` 仅作为低预算、失效关闭的恢复回退；读取失败或区块不可用时关闭，随后读到真实零功率才重新启用。`RedstoneSignalBus` 保持与具体组件解耦，避免迁移时扩散重写。
 
-此前 29 条输出/显示/定时设备不再是版本 blocker，已转为 `specification_pending`。这只说明原生 `minecraft:redstone_producer` 可用；每个设备仍必须实现 BP/RP、状态、配方、持久化和正向/失败/重启/并发测试后才能提升状态，且 Windows、Realm、PS 验收仍是独立门槛。
+29 条输出/显示/定时设备已实现为 16 个方块和 1 个物品，使用原生 `minecraft:redstone_consumer`/`minecraft:redstone_producer`、可持久化的确定性状态机、BP/RP、掉落、配方、双语文本与 Java 来源资产转换。Redstone Link 具备双频率、模拟强度、256 格范围和按热栏位选择的六个 Controller 频道；Requester/Stock Link 接入 Depot 的持久化库存、跨源请求 intent 与阈值检查；调速器成为受输入启停的可配置动力节点；Crushing Wheel Controller 以真实的双轮反向速度驱动持久化物品加工。它们仍处于 `implementation_in_progress`：完整 Create GUI/文本渲染、按物品栈保存的 Controller、物流网络/包裹、Java 的逐齿轮调速传动、移动机械/电梯接触，以及控制器实体/皮带语义尚未实现。Windows、Realm、PS 验收仍是独立门槛。
 
 ## 5. 内容、配方与资源迁移
 
@@ -230,7 +230,7 @@ Crushing Wheel 的 Java 来源是 NeoForge OBJ，当前转换器不能安全等�
 
 ### 6.4 S3-8 实施设计
 
-`bedrock/data/stage3-work-queue.json` 从迁移矩阵确定性生成，并由 schema 校验每条 `phase: 3` 记录恰好出现一次。当前 245 条记录分配为：S3-7 已交付 15 条、S3-8A 基础材料 6 条、S3-8B 内容规格 110 条、S3-9 动力 33 条、S3-10 物流 26 条、S3-11 加工 8 条、S3-12 流体 18 条、S3-14 红石版本决策 29 条。每条队列记录保存依赖、配方、资源、掉落、测试和 blocker 结论，队列不会改变矩阵的完成状态。
+`bedrock/data/stage3-work-queue.json` 从迁移矩阵确定性生成，并由 schema 校验每条 `phase: 3` 记录恰好出现一次。当前 245 条记录分配为：S3-7 已交付 15 条、S3-8A 基础材料 6 条、S3-8B 内容规格 110 条、S3-9 动力 33 条、S3-10 物流 26 条、S3-11 加工 8 条、S3-12 流体 18 条、S3-14 红石实现 29 条。每条队列记录保存依赖、配方、资源、掉落、测试和 blocker 结论，队列不会改变矩阵的完成状态。
 
 S3-8A 实现 `andesite_alloy_block`、`zinc_ore`、`deepslate_zinc_ore`、`raw_zinc_block`、`rose_quartz_block` 与 `weathered_iron_block`。六个方块都具有 BP/RP 定义、创造菜单、英文/中文名称、直接来自 Java 源的贴图、显式 loot table 与资源契约。新增 `andesite_alloy`、`raw_zinc`、`zinc_ingot`、`rose_quartz` 支撑物品；安山合金、粗锌与锌块均保留原 Java 基础合成/反向拆分路径，玫瑰石英保留石英加红石的合成与石匠台成块路径，石匠台以一个铁锭产出两个风化工业铁块。
 

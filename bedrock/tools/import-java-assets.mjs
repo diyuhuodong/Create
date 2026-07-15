@@ -79,9 +79,22 @@ const TEXTURES = [
 	"valve_handle/valve_handle_copper.png",
 	"weathered_iron_block.png",
 	"palettes/rose_quartz_side.png",
-	"palettes/rose_quartz_top.png"
+	"palettes/rose_quartz_top.png",
+	"analog_lever.png",
+	"smart_observer.png",
+	"diodes/brass_diode_base.png",
+	"diodes/pulse_extender/idle.png",
+	"diodes/pulse_repeater/idle.png",
+	"diodes/pulse_timer/idle.png",
+	"contact_front.png",
+	"redstone_antenna.png",
+	"redstone_requester.png",
+	"rotation_speed_controller.png",
+	"nixie_tube.png",
+	"link_base_unpowered.png",
+	"stock_link.png"
 ];
-const ITEM_TEXTURES = ["belt_connector.png", "raw_zinc.png", "zinc_ingot.png", "andesite_alloy.png", "rose_quartz.png", "filter.png", "attribute_filter.png"];
+const ITEM_TEXTURES = ["belt_connector.png", "raw_zinc.png", "zinc_ingot.png", "andesite_alloy.png", "rose_quartz.png", "filter.png", "attribute_filter.png", "linked_controller.png"];
 
 export async function importJavaAssets(resourcePackRoot) {
 	const sourceDirectory = resolve(repositoryRoot, "src/main/resources/assets/create/textures/block");

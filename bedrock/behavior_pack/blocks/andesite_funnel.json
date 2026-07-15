@@ -23,6 +23,11 @@
       "minecraft:redstone_conductivity": {
         "redstone_conductor": true
       },
+      "minecraft:redstone_consumer": {
+        "min_power": 0,
+        "propagates_power": false
+      },
+      "createbedrock:redstone_input": {},
       "minecraft:loot": "loot_tables/blocks/andesite_funnel.json",
       "minecraft:geometry": "geometry.createbedrock.andesite_funnel",
       "minecraft:item_visual": {

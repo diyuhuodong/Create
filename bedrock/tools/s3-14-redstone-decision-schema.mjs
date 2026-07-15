@@ -2,8 +2,9 @@ import { readdir, readFile } from "node:fs/promises";
 import { dirname, extname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { COMPATIBILITY_REDSTONE_CONTROLS, hasCompatibilityEngineVersion, NATIVE_REDSTONE_COMPONENTS, NATIVE_REDSTONE_SCRIPT_API_VERSION, REDSTONE_COMPATIBILITY_TARGET } from "../behavior_pack/scripts/redstone/redstone-target.js";
+import { COMPATIBILITY_REDSTONE_CONTROLS, hasCompatibilityEngineVersion, NATIVE_REDSTONE_COMPONENTS, NATIVE_REDSTONE_INPUT_COMPONENT, NATIVE_REDSTONE_SCRIPT_API_VERSION, REDSTONE_COMPATIBILITY_TARGET } from "../behavior_pack/scripts/redstone/redstone-target.js";
 import { validateMigrationMatrix } from "./migration-matrix-schema.mjs";
+import { validateStage3RedstoneDeviceSourceContract } from "./s3-14-redstone-device-contract.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultBedrockRoot = resolve(toolDirectory, "..");
@@ -65,8 +66,8 @@ export function validateStage3RedstoneDecisionDocument(decision) {
 		|| decision.input.failureMode !== "fail_closed"
 		|| decision.input.nativeConsumer?.component !== "minecraft:redstone_consumer"
 		|| decision.input.nativeConsumer.event !== "BlockComponentRedstoneUpdateEvent"
-		|| decision.input.nativeConsumer.status !== "pending_implementation")
-		throw new Error("S3-14 decision must retain safe polling while native consumer events are wired");
+		|| decision.input.nativeConsumer.status !== "implemented_for_compatibility_controls")
+		throw new Error("S3-14 decision must route compatibility controls through native consumer events");
 	const expectedControls = COMPATIBILITY_REDSTONE_CONTROLS.map(([block, type]) => ({ block, type }));
 	if (!sameJson(decision.input.controls, expectedControls))
 		throw new Error("S3-14 decision controls do not match the compatibility runtime");
@@ -78,12 +79,12 @@ export function validateStage3RedstoneDecisionDocument(decision) {
 		|| !sameJson(decision.output.reconsiderWhen, S3_14_IMPLEMENTATION_REQUIREMENTS))
 		throw new Error("S3-14 output policy does not preserve the native-component implementation gate");
 	if (!Array.isArray(decision.entries) || decision.entries.length === 0)
-		throw new Error("S3-14 decision must name every pending native-redstone entry");
+		throw new Error("S3-14 decision must name every native-redstone implementation entry");
 	const entryIds = new Set();
 	for (const entry of decision.entries) {
 		assertString(entry?.acceptanceId, "entry acceptanceId");
-		if (entry.resolution !== "pending_implementation")
-			throw new Error(`S3-14 entry ${entry.acceptanceId} must remain pending implementation`);
+		if (entry.resolution !== "implementation_in_progress")
+			throw new Error(`S3-14 entry ${entry.acceptanceId} must remain implementation in progress until parity is proven`);
 		if (entryIds.has(entry.acceptanceId))
 			throw new Error(`S3-14 decision contains duplicate entry ${entry.acceptanceId}`);
 		entryIds.add(entry.acceptanceId);
@@ -101,7 +102,10 @@ export async function validateStage3RedstoneDecision({ bedrockRoot = defaultBedr
 		readJson(resolve(dataRoot, "data", "s3-14-redstone-decision.json")),
 		readFile(resolve(behaviorRoot, "scripts", "redstone", "redstone-runtime.js"), "utf8")
 	]);
-	const decisionCoverage = validateStage3RedstoneDecisionDocument(decision);
+	const [decisionCoverage, deviceContract] = await Promise.all([
+		Promise.resolve(validateStage3RedstoneDecisionDocument(decision)),
+		validateStage3RedstoneDeviceSourceContract({ bedrockRoot })
+	]);
 	validateMigrationMatrix(matrix);
 	if (!hasCompatibilityEngineVersion(behaviorManifest.header?.min_engine_version)
 		|| !hasCompatibilityEngineVersion(resourceManifest.header?.min_engine_version))
@@ -111,11 +115,12 @@ export async function validateStage3RedstoneDecision({ bedrockRoot = defaultBedr
 		throw new Error("S3-14 behavior manifest must use the stable native-redstone Script API version");
 
 	const matrixEntries = matrix.entries.filter(entry => entry.phase === 3 && entry.domain === "redstone");
-	if (matrixEntries.length !== decisionCoverage.entryIds.size)
+	if (matrixEntries.length !== decisionCoverage.entryIds.size || matrixEntries.length !== deviceContract.acceptanceIds)
 		throw new Error("S3-14 decision does not name every phase-3 redstone matrix entry");
 	for (const entry of matrixEntries) {
-		if (entry.status !== "specification_pending" || entry.blockingReason !== null)
-			throw new Error(`S3-14 matrix entry ${entry.acceptanceId} must be pending native-redstone implementation`);
+		if (entry.status !== "implementation_in_progress" || entry.resourceStatus !== "partial" || entry.blockingReason !== null
+			|| entry.behaviorPath !== "behavior_pack/scripts/redstone/redstone-device-runtime.js" || entry.persistenceSchema !== 1)
+			throw new Error(`S3-14 matrix entry ${entry.acceptanceId} must retain its partial native-redstone implementation evidence`);
 		if (!decisionCoverage.entryIds.has(entry.acceptanceId))
 			throw new Error(`S3-14 decision is missing matrix entry ${entry.acceptanceId}`);
 	}
@@ -132,11 +137,16 @@ export async function validateStage3RedstoneDecision({ bedrockRoot = defaultBedr
 		const definition = await readJson(resolve(behaviorRoot, "blocks", `${filename}.json`));
 		if (definition.format_version !== EXPECTED_BLOCK_FORMAT)
 			throw new Error(`S3-14 input control ${blockType} must use block format ${EXPECTED_BLOCK_FORMAT}`);
-		if (definition["minecraft:block"]?.components?.["minecraft:redstone_conductivity"]?.redstone_conductor !== true)
+		const components = definition["minecraft:block"]?.components ?? {};
+		if (components["minecraft:redstone_conductivity"]?.redstone_conductor !== true)
 			throw new Error(`S3-14 input control ${blockType} must remain redstone-conductive`);
+		if (components["minecraft:redstone_consumer"]?.min_power !== 0
+			|| components["minecraft:redstone_consumer"]?.propagates_power !== false
+			|| !(NATIVE_REDSTONE_INPUT_COMPONENT in components))
+			throw new Error(`S3-14 input control ${blockType} must bind the stable native consumer component`);
 	}
-	if (!runtime.includes("Block.getRedstonePower") || !runtime.includes("REDSTONE_COMPATIBILITY_TARGET"))
-		throw new Error("S3-14 runtime must retain fail-closed polling until native consumer events are wired");
+	if (!runtime.includes("Block.getRedstonePower") || !runtime.includes("registerNativeRedstoneEventHandler") || !runtime.includes("REDSTONE_COMPATIBILITY_TARGET"))
+		throw new Error("S3-14 runtime must combine native consumer events with fail-closed polling fallback");
 	for (const file of await jsonFiles(behaviorRoot)) {
 		const definition = await readJson(file);
 		const components = definition["minecraft:block"]?.components ?? {};
@@ -146,7 +156,7 @@ export async function validateStage3RedstoneDecision({ bedrockRoot = defaultBedr
 	}
 	return {
 		controls: decisionCoverage.controls,
-		pending: matrixEntries.length,
+		implementationInProgress: matrixEntries.length,
 		target: REDSTONE_COMPATIBILITY_TARGET.id
 	};
 }

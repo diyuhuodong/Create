@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:pulse_repeater"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:redstone"
+      },
+      {
+        "item": "minecraft:redstone_torch"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:pulse_repeater"
+    }
+  }
+}

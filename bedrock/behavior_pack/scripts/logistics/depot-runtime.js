@@ -594,6 +594,33 @@ export function getDepotId(block) {
 	return identifierFor(block);
 }
 
+export function hasDepotAt(dimensionId, location) {
+	if (typeof dimensionId !== "string" || !location)
+		throw new TypeError("Depot lookups require a dimension and location");
+	const id = depotId(dimensionId, location);
+	return network.hasDepot(id);
+}
+
+/** Count one item across the durable, dimension-local depot network. */
+export function countDepotItem({ dimensionId, itemType, location }) {
+	if (typeof dimensionId !== "string" || typeof itemType !== "string" || !location)
+		throw new TypeError("Depot stock queries require a dimension, item identifier, and location");
+	const id = depotId(dimensionId, location);
+	return network.hasDepot(id) ? network.stockCount(id, itemType) : 0;
+}
+
+/**
+ * Start one journaled redstone request. The caller supplies a persistent ID;
+ * DepotNetwork owns reservation, persistence-before-extraction, and recovery.
+ */
+export function requestDepotItem({ allowPartial = false, destinationLocation, dimensionId, id, itemType, maxCount }) {
+	if (typeof dimensionId !== "string" || !destinationLocation || typeof id !== "string" || id.length === 0
+		|| typeof itemType !== "string" || !Number.isInteger(maxCount) || maxCount < 1)
+		throw new TypeError("Redstone depot requests require a valid destination, item, amount, and persistent ID");
+	const destinationId = depotId(dimensionId, destinationLocation);
+	return network.requestItem({ allowPartial, destinationId, id, itemType, maxCount });
+}
+
 export function setDepotBeltSpeed(id, speed) {
 	return network.setBeltSpeed(id, speed);
 }

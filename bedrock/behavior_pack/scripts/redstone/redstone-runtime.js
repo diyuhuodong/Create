@@ -12,6 +12,8 @@ import {
 	setKineticSequencedGearshiftRedstonePowered
 } from "../kinetics/kinetic-runtime.js";
 import { getDepotFunnelRedstoneControls, setDepotFunnelRedstonePowered } from "../logistics/depot-runtime.js";
+import { registerNativeRedstoneEventHandler } from "./redstone-native-events.js";
+import { registerNativeRedstoneInputComponent } from "./redstone-native-component.js";
 import { RedstoneSignalBus, redstoneControlId } from "./redstone-signal-bus.js";
 import { COMPATIBILITY_REDSTONE_CONTROLS, REDSTONE_COMPATIBILITY_TARGET } from "./redstone-target.js";
 
@@ -137,6 +139,17 @@ function unregisterAt(dimensionId, location) {
 	return removed;
 }
 
+function handleNativeRedstoneUpdate({ block, powerLevel }) {
+	const device = deviceForBlock(block);
+	if (!device)
+		return false;
+	const registered = registerBlock(block);
+	const changed = bus.publish(device.id, { available: true, power: powerLevel });
+	if (registered || changed)
+		persist();
+	return true;
+}
+
 function bootstrapPersistedControls() {
 	let registered = 0;
 	const kineticNodes = getKineticWorldForTesting().snapshot().nodes;
@@ -221,6 +234,8 @@ export function getRedstoneDiagnostics() {
 }
 
 export function registerRedstone() {
+	registerNativeRedstoneInputComponent();
+	registerNativeRedstoneEventHandler(handleNativeRedstoneUpdate);
 	registerKernelTaskGroup(REDSTONE_TASK_GROUP, REDSTONE_TASK_BUDGET);
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
 		try {

@@ -1,3 +1,5 @@
+import { REDSTONE_DEVICE_CATALOG } from "../behavior_pack/scripts/redstone/redstone-device-catalog.js";
+
 const STAGE_TWO_PROTOTYPES = new Map([
 	["andesite_casing", { domain: "content" }],
 	["brass_casing", { domain: "content" }],
@@ -85,6 +87,9 @@ const BEHAVIOR_PATHS = new Map([
 	["water_wheel", "behavior_pack/scripts/kinetics/kinetic-runtime.js"]
 ]);
 
+for (const device of REDSTONE_DEVICE_CATALOG)
+	BEHAVIOR_PATHS.set(device.id, "behavior_pack/scripts/redstone/redstone-device-runtime.js");
+
 // S3-4 replaces the Stage-2 processor prototypes with durable input/output
 // ports and a source-recipe conversion report. Their resource state remains
 // partial because the visual conversion work is deliberately tracked in S3-7.
@@ -136,6 +141,12 @@ const STAGE_THREE_REDSTONE_CONTROLS = new Map([
 	["andesite_funnel", { domain: "logistics" }],
 	["clutch", { domain: "kinetics" }]
 ]);
+
+// S3-14 now has source resources, native producer/consumer declarations,
+// deterministic state transitions, and sharded persistence for every tracked
+// Create redstone registration. They remain implementation-in-progress until
+// the per-device parity contract and platform evidence are complete.
+const STAGE_THREE_REDSTONE_FOUNDATION = new Map(REDSTONE_DEVICE_CATALOG.map(device => [device.id, { domain: "redstone" }]));
 
 // S3-8 starts with a deliberately narrow resource vertical slice. These
 // entries are usable from the creative inventory and have explicit drops and
@@ -224,6 +235,7 @@ export function classifyRegistration(identifier, kind) {
 	const fluid = STAGE_THREE_FLUIDS.get(identifier);
 	const fluidFoundation = STAGE_THREE_FLUID_FOUNDATION.get(identifier);
 	const redstoneControl = STAGE_THREE_REDSTONE_CONTROLS.get(identifier);
+	const redstoneFoundation = STAGE_THREE_REDSTONE_FOUNDATION.get(identifier);
 	const foundationContent = STAGE_THREE_FOUNDATION_CONTENT.get(identifier);
 	const kineticFoundation = STAGE_THREE_KINETIC_FOUNDATION.get(identifier);
 	const logisticsFoundation = STAGE_THREE_LOGISTICS_FOUNDATION.get(identifier);
@@ -241,6 +253,8 @@ export function classifyRegistration(identifier, kind) {
 		? { ...logisticsFoundation, phase: 3, status: "implementation_in_progress" }
 		: fluidFoundation
 		? { ...fluidFoundation, phase: 3, status: "implementation_in_progress" }
+		: redstoneFoundation
+		? { ...redstoneFoundation, phase: 3, status: "implementation_in_progress" }
 		: prototype
 		? { ...prototype, phase: 2, status: "implementation_in_progress" }
 		: rule ?? { domain: "content", phase: 3 };
@@ -249,9 +263,9 @@ export function classifyRegistration(identifier, kind) {
 		behaviorPath: BEHAVIOR_PATHS.get(identifier) ?? null,
 		blockingReason: null,
 		domain: classification.domain,
-		persistenceSchema: staticSystem || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation ? 2 : prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null,
+		persistenceSchema: staticSystem || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation ? 2 : redstoneFoundation || prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null,
 		phase: classification.phase,
-		resourceStatus: prototype || staticSystem || foundationContent || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation ? "partial" : "pending",
+		resourceStatus: prototype || staticSystem || foundationContent || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation || redstoneFoundation ? "partial" : "pending",
 		status: classification.status ?? "specification_pending"
 	};
 }

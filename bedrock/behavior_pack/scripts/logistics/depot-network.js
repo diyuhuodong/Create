@@ -360,6 +360,84 @@ export class DepotNetwork {
 		return result;
 	}
 
+	hasDepot(id) {
+		return this.#depots.has(id);
+	}
+
+	stockCount(id, itemType) {
+		if (typeof itemType !== "string" || itemType.length === 0)
+			throw new TypeError("Depot stock counts require a non-empty item identifier");
+		const inspection = this.#requireDepot(id).port.inspect();
+		const stacks = Array.isArray(inspection.slots) ? inspection.slots : [inspection.template];
+		return stacks.filter(stack => stack?.typeId === itemType).reduce((count, stack) => count + stack.count, 0);
+	}
+
+	/**
+	 * Reserve matching stock through the ordinary crash-safe transfer journal.
+	 *
+	 * A Redstone Requester must be able to fulfil a single order from more than
+	 * one depot.  Each selected depot receives its own durable journal record;
+	 * this keeps extraction/restart recovery exactly the same as a normal depot
+	 * transfer while allowing one request to fan out safely.
+	 */
+	requestItem({ allowPartial = false, destinationId, id, itemType, maxCount }) {
+		if (typeof allowPartial !== "boolean" || typeof itemType !== "string" || itemType.length === 0
+			|| !Number.isInteger(maxCount) || maxCount < 1)
+			throw new TypeError("Depot item requests require a filter, positive amount, and partial-request flag");
+		const destination = this.#requireDepot(destinationId);
+		if (this.#isDepotWithdrawalLocked(destinationId))
+			return { ok: false, reason: "destination_withdrawal_active" };
+		const candidates = [...this.#depots.values()]
+			.filter(depot => depot.port.id !== destinationId
+				&& !this.#isDepotWithdrawalLocked(depot.port.id)
+				&& !this.#journal.hasSource(depot.port.id))
+			.map(depot => ({ available: this.stockCount(depot.port.id, itemType), id: depot.port.id }))
+			.filter(candidate => candidate.available > 0)
+			.sort((left, right) => right.available - left.available || left.id.localeCompare(right.id));
+		const available = candidates.reduce((total, candidate) => total + candidate.available, 0);
+		if (available === 0)
+			return { ok: false, reason: "item_unavailable" };
+		if (!allowPartial && available < maxCount)
+			return { ok: false, reason: "insufficient_total_stock" };
+
+		const requested = allowPartial ? Math.min(maxCount, available) : maxCount;
+		const transfers = [];
+		let remaining = requested;
+		for (const candidate of candidates) {
+			if (remaining === 0)
+				break;
+			const result = this.#journal.begin({
+				destination: destination.port,
+				id: `${id}:source:${transfers.length}`,
+				maxCount: remaining,
+				predicate: stack => stack.typeId === itemType,
+				source: this.#requireDepot(candidate.id).port
+			});
+			if (!result.ok)
+				continue;
+			transfers.push(result.record);
+			remaining -= result.record.reservation.item.count;
+		}
+
+		if (!allowPartial && remaining > 0) {
+			// No extraction has happened before the following tick, so rolling back
+			// these intents is deterministic and leaves no partially accepted order.
+			for (const transfer of transfers)
+				this.#journal.rollback(transfer.id, sourceId => this.#depots.get(sourceId)?.port);
+			return { ok: false, reason: "insufficient_reservable_stock" };
+		}
+		if (transfers.length === 0)
+			return { ok: false, reason: "item_unavailable" };
+
+		this.#persist();
+		return {
+			ok: true,
+			requested,
+			reserved: requested - remaining,
+			transfers: transfers.map(transfer => clone(transfer))
+		};
+	}
+
 	removeDepot(id) {
 		if (!this.canRemoveDepot(id))
 			throw new Error(`Depot ${id} is not empty or has an active item transfer`);

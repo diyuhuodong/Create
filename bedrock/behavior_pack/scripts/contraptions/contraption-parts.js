@@ -12,6 +12,7 @@ export const CONTRAPTION_PART_TYPES = Object.freeze({
 	"createbedrock:millstone": "createbedrock:contraption_part_millstone",
 	"createbedrock:mechanical_press": "createbedrock:contraption_part_mechanical_press",
 	"createbedrock:crushing_wheel": "createbedrock:contraption_part_crushing_wheel",
+	"createbedrock:crushing_wheel_controller": "createbedrock:contraption_part_crushing_wheel_controller",
 	"createbedrock:andesite_casing": "createbedrock:contraption_part_andesite_casing",
 	"createbedrock:brass_casing": "createbedrock:contraption_part_brass_casing",
 	"createbedrock:copper_casing": "createbedrock:contraption_part_copper_casing",

@@ -220,6 +220,45 @@
     },
     "createbedrock_rose_quartz_block_side": {
       "textures": "textures/create_java/block/palettes/rose_quartz_side"
+    },
+    "createbedrock_redstone_analog_lever": {
+      "textures": "textures/create_java/block/analog_lever"
+    },
+    "createbedrock_redstone_content_observer": {
+      "textures": "textures/create_java/block/smart_observer"
+    },
+    "createbedrock_redstone_diode": {
+      "textures": "textures/create_java/block/diodes/brass_diode_base"
+    },
+    "createbedrock_redstone_pulse_extender": {
+      "textures": "textures/create_java/block/diodes/pulse_extender/idle"
+    },
+    "createbedrock_redstone_pulse_repeater": {
+      "textures": "textures/create_java/block/diodes/pulse_repeater/idle"
+    },
+    "createbedrock_redstone_pulse_timer": {
+      "textures": "textures/create_java/block/diodes/pulse_timer/idle"
+    },
+    "createbedrock_redstone_contact": {
+      "textures": "textures/create_java/block/contact_front"
+    },
+    "createbedrock_redstone_link": {
+      "textures": "textures/create_java/block/redstone_antenna"
+    },
+    "createbedrock_redstone_requester": {
+      "textures": "textures/create_java/block/redstone_requester"
+    },
+    "createbedrock_redstone_rotation_speed_controller": {
+      "textures": "textures/create_java/block/rotation_speed_controller"
+    },
+    "createbedrock_redstone_nixie_tube": {
+      "textures": "textures/create_java/block/nixie_tube"
+    },
+    "createbedrock_redstone_display_link": {
+      "textures": "textures/create_java/block/link_base_unpowered"
+    },
+    "createbedrock_redstone_stock_link": {
+      "textures": "textures/create_java/block/stock_link"
     }
   }
 }

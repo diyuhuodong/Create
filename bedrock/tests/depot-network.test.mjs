@@ -130,6 +130,46 @@ test("DepotNetwork moves an item through a single atomic persisted state domain"
 	assert.deepEqual(network.extract(destination), { count: 3, typeId: "minecraft:iron_ingot" });
 });
 
+test("DepotNetwork supplies Redstone Requester stock through its durable transfer journal", () => {
+	const network = createNetwork(memoryStorage(), "createbedrock:redstone_request");
+	const source = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } });
+	const destination = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 1, y: 64, z: 0 } });
+	network.insert(source, { count: 12, typeId: "minecraft:copper_ingot" });
+	assert.equal(network.stockCount(source, "minecraft:copper_ingot"), 12);
+	assert.equal(network.requestItem({ destinationId: destination, id: "request-copper", itemType: "minecraft:copper_ingot", maxCount: 8 }).ok, true);
+	advance(network, () => network.diagnostics().transfers === 0 && !network.diagnostics().waitingForCommit);
+	assert.equal(network.stockCount(destination, "minecraft:copper_ingot"), 8);
+	assert.equal(network.requestItem({ destinationId: destination, id: "request-too-many", itemType: "minecraft:copper_ingot", maxCount: 8 }).reason, "insufficient_total_stock");
+});
+
+test("DepotNetwork fulfils one Redstone Requester order from multiple persisted source intents", () => {
+	const network = createNetwork(memoryStorage(), "createbedrock:redstone_request_multiple_sources");
+	const first = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } });
+	const second = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 2, y: 64, z: 0 } });
+	const destination = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 1, y: 64, z: 0 }, size: 2 });
+	network.insert(first, { count: 3, typeId: "minecraft:brass_ingot" });
+	network.insert(second, { count: 5, typeId: "minecraft:brass_ingot" });
+	const request = network.requestItem({ destinationId: destination, id: "request-brass", itemType: "minecraft:brass_ingot", maxCount: 8 });
+	assert.equal(request.ok, true);
+	assert.equal(request.reserved, 8);
+	assert.equal(request.transfers.length, 2);
+	advance(network, () => network.diagnostics().transfers === 0 && !network.diagnostics().waitingForCommit);
+	assert.equal(network.stockCount(first, "minecraft:brass_ingot"), 0);
+	assert.equal(network.stockCount(second, "minecraft:brass_ingot"), 0);
+	assert.equal(network.stockCount(destination, "minecraft:brass_ingot"), 8);
+
+	network.insert(first, { count: 2, typeId: "minecraft:brass_ingot" });
+	const partial = network.requestItem({
+		allowPartial: true,
+		destinationId: destination,
+		id: "request-brass-partial",
+		itemType: "minecraft:brass_ingot",
+		maxCount: 5
+	});
+	assert.equal(partial.ok, true);
+	assert.equal(partial.reserved, 2);
+});
+
 test("DepotNetwork restores a durable intent before changing its source depot", () => {
 	const storage = memoryStorage();
 	const first = createNetwork(storage, "createbedrock:depot_intent_restart");

@@ -4000,7 +4000,7 @@
       "javaIdentifier": "create:analog_lever",
       "kind": "block",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4019,7 +4019,7 @@
       "javaIdentifier": "create:analog_lever",
       "kind": "block_entity",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4038,7 +4038,7 @@
       "javaIdentifier": "create:content_observer",
       "kind": "block",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4057,7 +4057,7 @@
       "javaIdentifier": "create:content_observer",
       "kind": "block_entity",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4076,7 +4076,7 @@
       "javaIdentifier": "create:crushing_wheel_controller",
       "kind": "block",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4095,7 +4095,7 @@
       "javaIdentifier": "create:crushing_wheel_controller",
       "kind": "block_entity",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4114,7 +4114,7 @@
       "javaIdentifier": "create:display_link",
       "kind": "block",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4133,7 +4133,7 @@
       "javaIdentifier": "create:display_link",
       "kind": "block_entity",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4152,7 +4152,7 @@
       "javaIdentifier": "create:lectern_controller",
       "kind": "block",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4171,7 +4171,7 @@
       "javaIdentifier": "create:lectern_controller",
       "kind": "block_entity",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4190,7 +4190,7 @@
       "javaIdentifier": "create:linked_controller",
       "kind": "item",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4209,7 +4209,7 @@
       "javaIdentifier": "create:nixie_tube",
       "kind": "block",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4228,7 +4228,7 @@
       "javaIdentifier": "create:nixie_tube",
       "kind": "block_entity",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4247,7 +4247,7 @@
       "javaIdentifier": "create:powered_latch",
       "kind": "block",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4266,7 +4266,7 @@
       "javaIdentifier": "create:powered_toggle_latch",
       "kind": "block",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4285,7 +4285,7 @@
       "javaIdentifier": "create:pulse_extender",
       "kind": "block",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4304,7 +4304,7 @@
       "javaIdentifier": "create:pulse_extender",
       "kind": "block_entity",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4323,7 +4323,7 @@
       "javaIdentifier": "create:pulse_repeater",
       "kind": "block",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4342,7 +4342,7 @@
       "javaIdentifier": "create:pulse_repeater",
       "kind": "block_entity",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4361,7 +4361,7 @@
       "javaIdentifier": "create:pulse_timer",
       "kind": "block",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4380,7 +4380,7 @@
       "javaIdentifier": "create:pulse_timer",
       "kind": "block_entity",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4399,7 +4399,7 @@
       "javaIdentifier": "create:redstone_contact",
       "kind": "block",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4418,7 +4418,7 @@
       "javaIdentifier": "create:redstone_link",
       "kind": "block",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4437,7 +4437,7 @@
       "javaIdentifier": "create:redstone_link",
       "kind": "block_entity",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4456,7 +4456,7 @@
       "javaIdentifier": "create:redstone_requester",
       "kind": "block",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4475,7 +4475,7 @@
       "javaIdentifier": "create:redstone_requester",
       "kind": "block_entity",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4494,7 +4494,7 @@
       "javaIdentifier": "create:rotation_speed_controller",
       "kind": "block",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4513,7 +4513,7 @@
       "javaIdentifier": "create:rotation_speed_controller",
       "kind": "block_entity",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
@@ -4532,7 +4532,7 @@
       "javaIdentifier": "create:stock_link",
       "kind": "block",
       "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
-      "matrixStatus": "specification_pending",
+      "matrixStatus": "implementation_in_progress",
       "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
       "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
       "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."

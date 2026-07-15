@@ -69,16 +69,14 @@ test("Contraption snapshots enforce the shared sixteen-block prototype cap", () 
 	}), /16 block prototype limit/);
 });
 
-test("Contraption snapshots accept one connected copy of every stage-2 movable type", () => {
-	const snapshot = createContraptionSnapshot({
-		anchor: { x: 0, y: 64, z: 0 },
-		blocks: [...MOVABLE_BLOCK_TYPES].map((typeId, x) => ({
-			location: { x, y: 64, z: 0 },
-			typeId
-		}))
-	});
-	assert.equal(snapshot.blocks.length, 16);
-	assert.deepEqual(new Set(snapshot.blocks.map(block => block.typeId)), MOVABLE_BLOCK_TYPES);
+test("Contraption snapshots accept every movable type without weakening the sixteen-block prototype cap", () => {
+	for (const typeId of MOVABLE_BLOCK_TYPES) {
+		const snapshot = createContraptionSnapshot({
+			anchor: { x: 0, y: 64, z: 0 },
+			blocks: [{ location: { x: 0, y: 64, z: 0 }, typeId }]
+		});
+		assert.equal(snapshot.blocks[0].typeId, typeId);
+	}
 });
 
 test("Contraption snapshots rotate around their anchor in quarter turns", () => {

@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:crushing_wheel_controller"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:redstone"
+      },
+      {
+        "item": "createbedrock:andesite_alloy"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:crushing_wheel_controller"
+    }
+  }
+}

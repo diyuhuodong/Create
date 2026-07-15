@@ -1,0 +1,86 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:pulse_timer",
+      "menu_category": {
+        "category": "items",
+        "group": "itemGroup.name.misc"
+      },
+      "properties": {
+        "createbedrock:powered": [
+          0,
+          1
+        ]
+      },
+      "traits": {
+        "minecraft:placement_direction": {
+          "enabled_states": [
+            "minecraft:facing_direction"
+          ]
+        }
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 6
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1
+      },
+      "minecraft:redstone_conductivity": {
+        "redstone_conductor": true
+      },
+      "minecraft:geometry": "geometry.createbedrock.redstone_pulse_timer",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.redstone_pulse_timer"
+        },
+        "material_instances": {
+          "redstone_surface": {
+            "texture": "createbedrock_redstone_pulse_timer",
+            "render_method": "opaque"
+          },
+          "*": {
+            "texture": "createbedrock_redstone_pulse_timer",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:loot": "loot_tables/blocks/pulse_timer.json",
+      "minecraft:material_instances": {
+        "redstone_surface": {
+          "texture": "createbedrock_redstone_pulse_timer",
+          "render_method": "opaque"
+        },
+        "*": {
+          "texture": "createbedrock_redstone_pulse_timer",
+          "render_method": "opaque"
+        }
+      },
+      "minecraft:redstone_consumer": {
+        "min_power": 0,
+        "propagates_power": false
+      },
+      "createbedrock:redstone_input": {}
+    },
+    "permutations": [
+      {
+        "condition": "query.block_state('createbedrock:powered') == 0",
+        "components": {
+          "minecraft:redstone_producer": {
+            "power": 0
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powered') == 1",
+        "components": {
+          "minecraft:redstone_producer": {
+            "power": 15
+          }
+        }
+      }
+    ]
+  }
+}

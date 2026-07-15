@@ -18,6 +18,7 @@ test("Contraption part registry covers the currently movable kinetic blocks", ()
 		"createbedrock:millstone",
 		"createbedrock:mechanical_press",
 		"createbedrock:crushing_wheel",
+		"createbedrock:crushing_wheel_controller",
 		"createbedrock:andesite_casing",
 		"createbedrock:brass_casing",
 		"createbedrock:copper_casing",
@@ -29,7 +30,7 @@ test("Contraption part registry covers the currently movable kinetic blocks", ()
 	}
 	assert.equal(isMovableBlockType("createbedrock:track"), false);
 	assert.equal(partTypeFor("createbedrock:track"), undefined);
-	assert.equal(MOVABLE_BLOCK_TYPES.size, 16);
+	assert.equal(MOVABLE_BLOCK_TYPES.size, 17);
 	assert.deepEqual([...STATELESS_MOVABLE_BLOCK_TYPES].sort(), [
 		"createbedrock:andesite_casing",
 		"createbedrock:brass_casing",

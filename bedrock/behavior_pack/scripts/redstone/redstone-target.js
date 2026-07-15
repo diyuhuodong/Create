@@ -1,8 +1,8 @@
 export const REDSTONE_COMPATIBILITY_TARGET = Object.freeze({
 	id: "realm-console-1.26.0",
-	inputMode: "registered_block_polling_until_native_events_are_wired",
+	inputMode: "native_consumer_events_with_fail_closed_polling_fallback",
 	minimumEngineVersion: Object.freeze([1, 26, 0]),
-	outputMode: "native_components_pending_implementation"
+	outputMode: "native_components_with_device_implementations_in_progress"
 });
 
 export const COMPATIBILITY_REDSTONE_CONTROLS = Object.freeze([
@@ -20,6 +20,8 @@ export const NATIVE_REDSTONE_COMPONENTS = Object.freeze([
 ]);
 
 export const NATIVE_REDSTONE_SCRIPT_API_VERSION = "2.5.0";
+
+export const NATIVE_REDSTONE_INPUT_COMPONENT = "createbedrock:redstone_input";
 
 export function hasCompatibilityEngineVersion(version) {
 	return Array.isArray(version)

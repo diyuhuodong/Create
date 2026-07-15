@@ -22,6 +22,9 @@
     },
     "createbedrock_rose_quartz": {
       "textures": "textures/create_java/item/rose_quartz"
+    },
+    "createbedrock_linked_controller": {
+      "textures": "textures/create_java/item/linked_controller"
     }
   }
 }

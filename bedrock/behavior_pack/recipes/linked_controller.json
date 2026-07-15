@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:linked_controller"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:redstone_link"
+      },
+      {
+        "item": "minecraft:stone_button"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:linked_controller"
+    }
+  }
+}

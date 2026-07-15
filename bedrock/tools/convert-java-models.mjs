@@ -85,7 +85,21 @@ export const JAVA_MODELS = [
 			back: "create:block/gearbox",
 			side: "create:block/mechanical_bearing_side"
 		}
-	}
+	},
+	{ name: "redstone_analog_lever", source: "analog_lever/block.json", materialName: "redstone_surface" },
+	{ name: "redstone_content_observer", source: "content_observer/block.json", materialName: "redstone_surface" },
+	{ name: "redstone_powered_latch", source: "diodes/latch_off.json", materialName: "redstone_surface" },
+	{ name: "redstone_pulse_extender", source: "diodes/pulse_extender.json", materialName: "redstone_surface" },
+	{ name: "redstone_pulse_repeater", source: "diodes/pulse_repeater.json", materialName: "redstone_surface" },
+	{ name: "redstone_pulse_timer", source: "diodes/pulse_timer.json", materialName: "redstone_surface" },
+	{ name: "redstone_contact", source: "redstone_contact/block.json", materialName: "redstone_surface" },
+	{ name: "redstone_link", source: "redstone_link/receiver.json", materialName: "redstone_surface" },
+	{ name: "redstone_requester", source: "redstone_requester/block.json", materialName: "redstone_surface" },
+	{ name: "redstone_rotation_speed_controller", source: "rotation_speed_controller/block.json", materialName: "redstone_surface" },
+	{ name: "redstone_display_link", source: "display_link/block.json", materialName: "redstone_surface" },
+	{ name: "redstone_nixie_tube", source: "nixie_tube/block.json", materialName: "redstone_surface" },
+	{ name: "redstone_stock_link", source: "stock_link/block_horizontal.json", materialName: "redstone_surface" },
+	{ name: "redstone_lectern_controller", converter: "lectern_controller_proxy" }
 ];
 
 export function plannedGeometryIdentifiers() {
@@ -119,12 +133,12 @@ function resolveTexture(reference, textures, overrides, seen = new Set()) {
 	return resolveTexture(resolved, textures, overrides, seen);
 }
 
-function convertFace(face, textures, textureOverrides) {
+function convertFace(face, textures, textureOverrides, materialOverride) {
 	if (!Array.isArray(face.uv) || face.uv.length !== 4)
 		throw new TypeError("Java model faces must specify four UV coordinates");
 	const [left, top, right, bottom] = face.uv;
 	const converted = {
-		material_instance: materialName(resolveTexture(face.texture, textures, textureOverrides)),
+		material_instance: materialOverride ?? materialName(resolveTexture(face.texture, textures, textureOverrides)),
 		uv: [left, top],
 		uv_size: [right - left, bottom - top]
 	};
@@ -147,25 +161,41 @@ function convertRotation(rotation) {
 	return converted;
 }
 
-export function convertJavaModel({ identifier, model, textureOverrides = {} }) {
-	if (!identifier || !Array.isArray(model?.elements))
+function modelParts(model) {
+	const parts = [];
+	if (Array.isArray(model?.elements))
+		parts.push({ elements: model.elements, textures: model.textures ?? {} });
+	for (const child of Object.values(model?.children ?? {})) {
+		if (!Array.isArray(child?.elements))
+			continue;
+		parts.push({
+			elements: child.elements,
+			textures: { ...(model.textures ?? {}), ...(child.textures ?? {}) }
+		});
+	}
+	return parts;
+}
+
+export function convertJavaModel({ identifier, model, textureOverrides = {}, materialName: materialOverride }) {
+	const parts = modelParts(model);
+	if (!identifier || parts.length === 0)
 		throw new TypeError("Java model conversion requires an identifier and elements");
 	const textureSize = model.texture_size ?? [16, 16];
 	if (!Array.isArray(textureSize) || textureSize.length !== 2)
 		throw new TypeError("Java model texture_size must contain width and height");
 
-	const cubes = model.elements.map(element => {
+	const cubes = parts.flatMap(part => part.elements.map(element => {
 		if (!Array.isArray(element.from) || !Array.isArray(element.to))
 			throw new TypeError("Java model elements require from and to coordinates");
 		const uv = Object.fromEntries(Object.entries(element.faces ?? {})
-			.map(([direction, face]) => [direction, convertFace(face, model.textures ?? {}, textureOverrides)]));
+			.map(([direction, face]) => [direction, convertFace(face, part.textures, textureOverrides, materialOverride)]));
 		return {
 			origin: [element.from[0] - 8, element.from[1], element.from[2] - 8],
 			size: element.to.map((coordinate, index) => coordinate - element.from[index]),
 			uv,
 			...convertRotation(element.rotation)
 		};
-	});
+	}));
 
 	return {
 		format_version: "1.21.0",
@@ -247,11 +277,40 @@ export function addTankFillLevels(geometry, name) {
 	}));
 }
 
+// Create reuses the vanilla lectern model for the controller, so no Java
+// model is present in its assets. This cuboid conversion keeps the distinct
+// sloped reading stand and pedestal while the pack retains a standard
+// Bedrock-only geometry with the existing brass-casing material.
+export function convertLecternControllerProxy(identifier) {
+	return {
+		format_version: "1.21.0",
+		"minecraft:geometry": [{
+			description: {
+				identifier,
+				texture_width: 16,
+				texture_height: 16,
+				visible_bounds_width: 2,
+				visible_bounds_height: 2,
+				visible_bounds_offset: [0, 0.5, 0]
+			},
+			bones: [{
+				name: "lectern_controller",
+				pivot: [0, 0, 0],
+				cubes: [
+					cube([-7, 0, -7], [14, 2, 14], "redstone_surface"),
+					cube([-3, 2, -3], [6, 8, 6], "redstone_surface"),
+					cube([-7, 10, -5], [14, 3, 10], "redstone_surface", [-35, 0, 0])
+				]
+			}]
+		}]
+	};
+}
+
 export async function convertJavaModels(resourcePackRoot) {
 	const outputDirectory = resolve(resourcePackRoot, "models/blocks");
 	await mkdir(outputDirectory, { recursive: true });
 	for (const entry of JAVA_MODELS) {
-		const source = resolve(repositoryRoot, "src/main/resources/assets/create/models/block", entry.source);
+		const source = entry.source && resolve(repositoryRoot, "src/main/resources/assets/create/models/block", entry.source);
 		if (entry.converter === "crushing_wheel_proxy") {
 			const geometry = convertCrushingWheelObj({
 				identifier: `geometry.createbedrock.${entry.name}`,
@@ -260,10 +319,16 @@ export async function convertJavaModels(resourcePackRoot) {
 			await writeFile(resolve(outputDirectory, `${entry.name}.geo.json`), `${JSON.stringify(geometry, null, 2)}\n`);
 			continue;
 		}
+		if (entry.converter === "lectern_controller_proxy") {
+			const geometry = convertLecternControllerProxy(`geometry.createbedrock.${entry.name}`);
+			await writeFile(resolve(outputDirectory, `${entry.name}.geo.json`), `${JSON.stringify(geometry, null, 2)}\n`);
+			continue;
+		}
 		const model = JSON.parse(await readFile(source, "utf8"));
 		const geometry = convertJavaModel({
 			identifier: `geometry.createbedrock.${entry.name}`,
 			model,
+			materialName: entry.materialName,
 			textureOverrides: entry.textureOverrides
 		});
 		await writeFile(resolve(outputDirectory, `${entry.name}.geo.json`), `${JSON.stringify(geometry, null, 2)}\n`);

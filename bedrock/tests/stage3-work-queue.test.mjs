@@ -37,5 +37,5 @@ test("Stage-3 work queue covers every matrix entry exactly once and preserves de
 	const analogLever = queue.entries.find(entry => entry.acceptanceId === "REDSTONE-ANALOG-LEVER-BLOCK");
 	assert.equal(analogLever.deliveryPackage, "S3-14");
 	assert.equal(analogLever.blocker, null);
-	assert.equal(analogLever.matrixStatus, "specification_pending");
+	assert.equal(analogLever.matrixStatus, "implementation_in_progress");
 });

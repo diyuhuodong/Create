@@ -1,8 +1,8 @@
 # Create Bedrock 阶段 3 后续开发计划
 
-**状态：** S3-14 已升级到 1.26.0 非实验原生红石基线；29 项红石条目已从版本 blocker 转为待实现规格。S3-15 已完成平台验收账本、性能基线和静态防伪校验，但 Windows、测试 Realm 与 PS 的物理验收仍全部待执行
+**状态：** S3-14 已升级到 1.26.0 非实验原生红石基线；29 项红石条目均已进入有资源、持久化状态和原生 I/O 的 `implementation_in_progress`，尚未达到 Create 语义完整或 `static_verified`。S3-15 已完成平台验收账本、性能基线和静态防伪校验，但 Windows、测试 Realm 与 PS 的物理验收仍全部待执行
 
-**基线：** S3-7 已提交为 `378853863`。阶段 3 共有 245 条矩阵记录：15 条 `static_verified`、84 条 `implementation_in_progress`、146 条 `specification_pending`、0 条 `blocked`。本计划只处理 `phase: 3`；移动机械、蓝图和机械 actor 仍属于阶段 4，列车调度和高级物流属于阶段 5。
+**基线：** S3-7 已提交为 `378853863`。阶段 3 共有 245 条矩阵记录：15 条 `static_verified`、113 条 `implementation_in_progress`、117 条 `specification_pending`、0 条 `blocked`。本计划只处理 `phase: 3`；移动机械、蓝图和机械 actor 仍属于阶段 4，列车调度和高级物流属于阶段 5。
 
 ## 目标与总规则
 
@@ -20,12 +20,12 @@
 | S3-11 | 固定加工扩展：basin、mechanical mixer、mechanical saw、encased fan；扩展源配方分类报告。 | S3-8 材料、S3-9 动力、S3-10 端口可用。 | 每个支持配方均为 migrated 或显式 blocked；机器状态和随机结果可重启恢复。 |
 | S3-12 | 流体扩展：glass/encased/smart pipe、valve、drain、spout、portable interface。 | S3-8 材料、现有 Tank/Pump 事务内核。 | 容量守恒、分支竞争、阀门、外部端点异常和重启恢复测试通过。 |
 | S3-13 | 资源等价性收敛：Crushing Wheel 的 OBJ 派生可移植几何、belt 几何/物品可视化、Tank 液面与多方块视觉。 | 相应行为已稳定。 | 不再用 full-block fallback 宣称模型完成；构建产物契约验证模型、贴图、语言和掉落/获取路径。 |
-| S3-14 | 1.26.0 原生红石基线与 29 项实现规格。保持非实验生产包和安全轮询输入，逐步迁移到 consumer/producer。 | S3-6 的稳定输入总线。 | manifest、方块格式、脚本 API、矩阵、队列和每个待实现 acceptance ID 由契约一致校验。 |
+| S3-14 | 1.26.0 原生红石基线与 29 项设备实现。使用 non-experimental consumer/producer、事件输入和安全轮询回退。 | S3-6 的稳定输入总线。 | manifest、方块格式、脚本 API、矩阵、队列、资源、状态运行时和每个 acceptance ID 由契约一致校验。 |
 | S3-15 | 平台验收与性能收敛。 | S3-8 至 S3-14 的代码范围完成。 | 已交付可校验账本和性能基线；Windows 本地世界、测试 Realm、PS 仍需分别完成烟雾测试、双人并发和 30 分钟压力记录。 |
 
 ## 工作量边界
 
-当前未达到 `static_verified` 的条目按域分布为：内容 116、动力 33、物流 26、流体 18、加工 8、红石 29。S3-8 只负责将它们按实际依赖分批和交付第一批基础内容，不尝试一次性实现全部条目。S3-14 现在把 29 项红石设备纳入普通实现队列；升级版本不等同于已实现这些设备。
+当前未达到 `static_verified` 的条目按域分布为：内容 116、动力 33、物流 26、流体 18、加工 8、红石 29。S3-8 只负责将它们按实际依赖分批和交付第一批基础内容，不尝试一次性实现全部条目。S3-14 已为全部红石条目交付基础实现；升级版本或静态文件存在均不等同于 Create 语义完成。
 
 ## 已完成开发包
 
@@ -35,7 +35,7 @@
 4. 已完成：110 条 S3-8B 内容记录已逐项固化 Java 配方/掉落/资产来源、行为边界、后续实现包和测试策略。后续按该规格由 S3-9 至 S3-14、S4、S6 实现；Windows、Realm、PS 实机验证仍保留到 S3-15。
 5. 已完成：S3-9 以 `stage3-kinetic-specifications.json` 锁定并实现全部 33 条动力记录：27 条直接实现、6 条共享运行时吸收。链式输送机复用持久化 DepotNetwork，蒸汽引擎驱动动力轴，顺序变速器持久化程序，风车轴承复用动态结构控制器；不存在以空壳方块替代的移交项。
 6. 已完成：S3-13 以标准 Bedrock cuboid 几何替换 Crushing Wheel 的 full-block fallback，并在构建时保留 Java OBJ 作为来源证据；不使用已弃用的 `poly_mesh`。belt 根据相邻同向段持久化 start/middle/end 视觉状态；Tank 根据内容物和上下相邻 Tank 持久化液面、液体类型及单体/顶端/中段/底端视觉。构建会生成最小水/岩浆液面贴图并验证生成资源；Windows、Realm 与 PS 的实际渲染仍由 S3-15 记录。
-7. 已完成：S3-14 将 manifest、行为包格式与 Script API 升至 1.26.0 / 2.5.0 非实验原生红石基线。六类现有输入暂保留 fail-closed 轮询；`s3-14-redstone-decision.json` 将 29 条输出/显示/计时记录逐项列为 `pending_implementation`，并与矩阵和队列同步。原生 consumer 事件与 producer 设备仍需逐项实现，详见 [S3-14 决策](create-bedrock-s3-14-decision.md)。
+7. 已完成：S3-14 将 manifest、行为包格式与 Script API 升至 1.26.0 / 2.5.0 非实验原生红石基线。六类既有输入接入 native consumer 事件并保留 fail-closed 轮询回退；29 条输出/显示/计时记录均具有 producer/consumer 声明、资源、状态运行时和契约测试，并在矩阵与队列中标为 `implementation_in_progress`。后续增量已加入六频道 Linked Controller、跨 Depot 来源的 Requester intent、网络化可配置调速器和双粉碎轮控制器的持久化物品加工。Create 专属 UI/文本、物品栈配置、完整物流/传动语义和移动机械/电梯联动仍是后续实现，详见 [S3-14 决策](create-bedrock-s3-14-decision.md)。
 8. 已完成：S3-15 交付 `s3-15-platform-acceptance.json`、性能基线和校验器，固定 Windows、测试 Realm、PS 各九项场景、双人和 30 分钟门槛。当前所有记录均为 `pending`；只有每项写入真实证据后才能声明平台通过。执行步骤见 [S3-15 平台验收](create-bedrock-s3-15-platform-acceptance.md)。
 
 ## 风险控制

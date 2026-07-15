@@ -95,6 +95,20 @@ export class RedstoneSignalBus {
 		return true;
 	}
 
+	/**
+	 * Publish an event-driven sample for a registered control. Native consumer
+	 * callbacks use this path; the bounded poller remains a compatibility
+	 * fallback when the event has not reached a restored or unloaded device.
+	 */
+	publish(id, sample) {
+		if (typeof id !== "string" || id.length === 0)
+			throw new TypeError("Redstone control identifiers must be non-empty strings");
+		const device = this.#devices.get(id);
+		if (!device)
+			return false;
+		return this.#publish(device, normalizeSample(sample));
+	}
+
 	restore(snapshot) {
 		if (!snapshot || !Array.isArray(snapshot.devices) || (snapshot.roundRobinAfter !== undefined && typeof snapshot.roundRobinAfter !== "string"))
 			throw new TypeError("Redstone signal snapshots require device records");

@@ -22,6 +22,7 @@
     "recipes:crushing": "node tools/convert-crushing-recipes.mjs",
     "recipes:s3-processing": "node tools/convert-stage3-processing-recipes.mjs",
     "recipes:pressing": "node tools/convert-pressing-recipes.mjs",
+    "redstone:content": "node tools/generate-redstone-content.mjs",
     "test": "node tools/run-tests.mjs",
     "validate": "node tools/validate-packs.mjs",
     "work-queue": "node tools/generate-stage3-work-queue.mjs"

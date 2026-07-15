@@ -197,6 +197,20 @@ export function configureKineticSequencedGearshift(dimensionId, location, progra
 	return changed;
 }
 
+/**
+ * Set a configurable kinetic source's target speed. Redstone devices use this
+ * narrow API instead of mutating KineticWorld directly so persistence and
+ * dirty-network propagation remain identical to normal player configuration.
+ */
+export function setKineticGeneratedSpeed(dimensionId, location, speed) {
+	if (typeof dimensionId !== "string" || !location || !Number.isFinite(speed))
+		throw new TypeError("Kinetic speed updates require a dimension, location, and finite speed");
+	const changed = kineticWorld.setGeneratedSpeed(dimensionId, location, speed);
+	if (changed)
+		persist();
+	return changed;
+}
+
 function restore() {
 	try {
 		const restored = shardedPersistence.read();

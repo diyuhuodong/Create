@@ -1,0 +1,81 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:crushing_wheel_controller",
+      "menu_category": {
+        "category": "items",
+        "group": "itemGroup.name.misc"
+      },
+      "properties": {
+        "createbedrock:powered": [
+          0,
+          1
+        ]
+      },
+      "traits": {
+        "minecraft:placement_direction": {
+          "enabled_states": [
+            "minecraft:facing_direction"
+          ]
+        }
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 6
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1
+      },
+      "minecraft:redstone_conductivity": {
+        "redstone_conductor": true
+      },
+      "minecraft:geometry": "geometry.createbedrock.crushing_wheel",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.crushing_wheel"
+        },
+        "material_instances": {
+          "redstone_surface": {
+            "texture": "createbedrock_crushing_wheel",
+            "render_method": "opaque"
+          },
+          "*": {
+            "texture": "createbedrock_crushing_wheel",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:loot": "loot_tables/blocks/crushing_wheel_controller.json",
+      "minecraft:material_instances": {
+        "redstone_surface": {
+          "texture": "createbedrock_crushing_wheel",
+          "render_method": "opaque"
+        },
+        "*": {
+          "texture": "createbedrock_crushing_wheel",
+          "render_method": "opaque"
+        }
+      }
+    },
+    "permutations": [
+      {
+        "condition": "query.block_state('createbedrock:powered') == 0",
+        "components": {
+          "minecraft:redstone_producer": {
+            "power": 0
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powered') == 1",
+        "components": {
+          "minecraft:redstone_producer": {
+            "power": 15
+          }
+        }
+      }
+    ]
+  }
+}

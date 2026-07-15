@@ -30,6 +30,18 @@ export const KINETIC_BLOCKS = {
 		maxSpeed: 256,
 		stressCapacity: 16384
 	},
+	"createbedrock:rotation_speed_controller": {
+		// Bedrock does not expose Java Create's per-cog propagation hook. Model
+		// the controller as a configurable network source instead, so its target
+		// speed drives every ordinary shaft/cog/belt connection without requiring
+		// an adjacent Creative Motor. The target remains persisted with the
+		// kinetic graph and is switched by the redstone-device runtime.
+		kind: "configurable_source",
+		axis: "y",
+		defaultSpeed: 16,
+		maxSpeed: 256,
+		stressCapacity: 16384
+	},
 	"createbedrock:shaft": {
 		kind: "transmission",
 		axis: "y"

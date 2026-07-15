@@ -16,6 +16,11 @@
       "minecraft:redstone_conductivity": {
         "redstone_conductor": true
       },
+      "minecraft:redstone_consumer": {
+        "min_power": 0,
+        "propagates_power": false
+      },
+      "createbedrock:redstone_input": {},
       "minecraft:geometry": "geometry.createbedrock.shaft",
       "minecraft:item_visual": {
         "geometry": { "identifier": "geometry.createbedrock.shaft" },

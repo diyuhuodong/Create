@@ -111,6 +111,22 @@ test("KineticWorld propagates and persists generated source speed", () => {
 	assert.equal(restored.speedAt("minecraft:overworld", shaft.location), 0);
 });
 
+test("KineticWorld treats the Rotation Speed Controller as a persisted configurable network source", () => {
+	const world = new KineticWorld();
+	const controller = block("createbedrock:rotation_speed_controller", 0, 64, 0);
+	const shaft = block("createbedrock:shaft", 0, 65, 0);
+	world.trackPlacedBlock(controller);
+	world.trackPlacedBlock(shaft);
+	assert.equal(world.setGeneratedSpeed("minecraft:overworld", controller.location, -96), true);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", shaft.location), -96);
+
+	const restored = new KineticWorld();
+	restored.restore(world.snapshot());
+	restored.tick();
+	assert.equal(restored.speedAt("minecraft:overworld", shaft.location), -96);
+});
+
 test("KineticWorld resumes an active hand crank after a restart", () => {
 	const source = new KineticWorld();
 	const crank = block("createbedrock:hand_crank", 0, 64, 0);

@@ -83,3 +83,14 @@ test("RedstoneSignalBus coalesces conflicting registrations at one fixed locatio
 	assert.equal(events.length, 1);
 	assert.equal(events[0].device.type, "pump");
 });
+
+test("RedstoneSignalBus accepts immediate native-event samples without waiting for a poll", () => {
+	const events = [];
+	const bus = new RedstoneSignalBus({ onSignal: event => events.push(event) });
+	const control = device("clutch", 8);
+	bus.register(control);
+	assert.equal(bus.publish(control.id, { available: true, power: 13 }), true);
+	assert.equal(bus.publish(control.id, { available: true, power: 13 }), false);
+	assert.equal(bus.publish("redstone-control:minecraft:overworld:99:64:0", 0), false);
+	assert.deepEqual(events.map(event => ({ power: event.power, available: event.available })), [{ power: 13, available: true }]);
+});

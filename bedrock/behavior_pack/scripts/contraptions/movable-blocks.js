@@ -12,6 +12,7 @@ export const MOVABLE_BLOCK_TYPES = new Set([
 	"createbedrock:millstone",
 	"createbedrock:mechanical_press",
 	"createbedrock:crushing_wheel",
+	"createbedrock:crushing_wheel_controller",
 	"createbedrock:andesite_casing",
 	"createbedrock:brass_casing",
 	"createbedrock:copper_casing",
