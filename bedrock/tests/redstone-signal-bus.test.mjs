@@ -72,3 +72,14 @@ test("RedstoneSignalBus snapshots only fixed device descriptors and replays them
 	assert.equal(restoredEvents.length, 2);
 	assert.ok(restoredEvents.every(event => event.available && event.power === 0));
 });
+
+test("RedstoneSignalBus coalesces conflicting registrations at one fixed location", () => {
+	const events = [];
+	const bus = new RedstoneSignalBus({ onSignal: event => events.push(event) });
+	assert.equal(bus.register(device("clutch", 4)), true);
+	assert.equal(bus.register(device("pump", 4)), true);
+	assert.deepEqual(bus.devices().map(control => control.type), ["pump"]);
+	bus.tick(() => 0);
+	assert.equal(events.length, 1);
+	assert.equal(events[0].device.type, "pump");
+});

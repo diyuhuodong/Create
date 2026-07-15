@@ -13,17 +13,11 @@ import {
 } from "../kinetics/kinetic-runtime.js";
 import { getDepotFunnelRedstoneControls, setDepotFunnelRedstonePowered } from "../logistics/depot-runtime.js";
 import { RedstoneSignalBus, redstoneControlId } from "./redstone-signal-bus.js";
+import { COMPATIBILITY_REDSTONE_CONTROLS, REDSTONE_COMPATIBILITY_TARGET } from "./redstone-target.js";
 
 const REDSTONE_TASK_BUDGET = 8;
 const REDSTONE_TASK_GROUP = "redstone";
-const CONTROLLED_BLOCKS = new Map([
-	["createbedrock:andesite_funnel", "funnel"],
-	["createbedrock:adjustable_chain_gearshift", "chain_gearshift"],
-	["createbedrock:clutch", "clutch"],
-	["createbedrock:gearshift", "gearshift"],
-	["createbedrock:sequenced_gearshift", "sequenced_gearshift"],
-	["createbedrock:mechanical_pump", "pump"]
-]);
+const CONTROLLED_BLOCKS = new Map(COMPATIBILITY_REDSTONE_CONTROLS);
 
 function clone(value) {
 	return JSON.parse(JSON.stringify(value));
@@ -218,7 +212,12 @@ function restore() {
 }
 
 export function getRedstoneDiagnostics() {
-	return { ...bus.diagnostics(), persistence: store.diagnostics() };
+	return {
+		...bus.diagnostics(),
+		compatibilityTarget: REDSTONE_COMPATIBILITY_TARGET.id,
+		outputMode: REDSTONE_COMPATIBILITY_TARGET.outputMode,
+		persistence: store.diagnostics()
+	};
 }
 
 export function registerRedstone() {

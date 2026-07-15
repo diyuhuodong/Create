@@ -168,7 +168,7 @@ Create 专用流体使用虚拟流体记录，不把任意数量直接转换为�
 
 红石使用 `RedstoneSignalBus`，把原版输入转为 `(location, face, level, tick)` 事件；设备订阅后更新离合器、阀门、漏斗锁定、比较器输出和控制逻辑。事件只标脏，不直接进行长网络重算。
 
-这里存在明确的版本闸门：当前 manifest 的最低引擎为 1.21.80，而官方文档显示 `minecraft:redstone_producer` 需至少 1.21.120，`minecraft:redstone_consumer` 在 format 1.26.0 才解除实验限制。因此阶段 3 开始红石内容前必须作出以下决策之一：
+这里存在明确的版本闸门：当前 manifest 的最低引擎为 1.21.80，而官方文档显示 `minecraft:redstone_producer` 需至少 1.21.120，`minecraft:redstone_consumer` 需至少 1.21.130 且在 format 1.26.0 前仍受实验限制。因此阶段 3 开始红石内容前必须作出以下决策之一：
 
 1. 将目标最低 Bedrock/Realm 版本提升到对应的稳定版本，并在 Windows、Realm、PS 验证；或
 2. 为当前 1.21.80 目标实现不依赖实验组件的兼容适配层，并将无法等价的设备标为 `blocked`。

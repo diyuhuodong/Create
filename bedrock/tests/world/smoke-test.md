@@ -6,10 +6,11 @@ This checklist is executed only after the code-completion milestone, on Windows 
 2. Use `/scriptevent createbedrock:diagnostics` as an operator. Confirm it returns valid JSON counters, includes scheduler/persistence data, and contains no item stacks, inventory slots, player data, or coordinates.
 3. Obtain the S3 static blocks from the creative menu. Verify their English and Chinese names, item visuals, placed visuals, and source textures load without missing-texture markers. Inspect the Crushing Wheel's oversized toothed geometry, a one-to-three-block belt run (start/middle/end caps), and one-to-three Tank columns at empty, water, and lava fill levels; record each platform's render result.
 4. Build a mixed kinetic line with crank, shafts, both cog sizes, gearbox, clutch, chain drive, water wheel, millstone, press, and crushing wheel. Check normal power, overload stall, source conflict, broken links, and recovery.
-5. Connect two valid shafts with the belt connector. Reject a cross-dimension or over-length attempt; break one endpoint; then restart the world and verify one restored link only.
-6. Start a millstone, press, and crushing wheel. Restart during processing, then assemble/disassemble each on a bearing. Confirm progress, inputs, and outputs neither duplicate nor disappear.
-7. Assemble a connected 16-block bearing contraption containing all five structural blocks. Verify rotation, collision freeze, occupied-space rejection, entity deletion/recovery, and two-player repeated interaction.
-8. Build flat, curved, and one-block-rising track. Run two two-carriage trains through a reservation conflict, a chunk unload/reload, world-block collision, player collision, and restart while the rear carriage is still clearing the final edge.
-9. Upload the same world to the test Realm; repeat steps 2-8 with two players and then on PS. Record Windows, Realm, and PS results separately.
+5. Apply and remove vanilla redstone power to Andesite Funnel, Clutch, Gearshift, Sequenced Gearshift, Adjustable Chain Gearshift, and Mechanical Pump. Confirm each fails closed across a chunk unload/reload and resumes only after a zero-power sample. Confirm no S3-14 output block is exposed in creative mode; these remain documented blockers on the 1.21.80 target.
+6. Connect two valid shafts with the belt connector. Reject a cross-dimension or over-length attempt; break one endpoint; then restart the world and verify one restored link only.
+7. Start a millstone, press, and crushing wheel. Restart during processing, then assemble/disassemble each on a bearing. Confirm progress, inputs, and outputs neither duplicate nor disappear.
+8. Assemble a connected 16-block bearing contraption containing all five structural blocks. Verify rotation, collision freeze, occupied-space rejection, entity deletion/recovery, and two-player repeated interaction.
+9. Build flat, curved, and one-block-rising track. Run two two-carriage trains through a reservation conflict, a chunk unload/reload, world-block collision, player collision, and restart while the rear carriage is still clearing the final edge.
+10. Upload the same world to the test Realm; repeat steps 2-9 with two players and then on PS. Record Windows, Realm, and PS results separately.
 
 Do not mark stages 1 or 2 as platform-accepted until every item has a recorded Windows, Realm, and PS result.

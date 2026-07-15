@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "decisionId": "s3-14-realm-console-compatibility-baseline",
+  "target": {
+    "minimumEngineVersion": [1, 21, 80],
+    "blockFormatVersion": "1.21.80",
+    "experimentalFeatures": [],
+    "platformAcceptance": "pending_s3_15"
+  },
+  "input": {
+    "mode": "registered_block_polling",
+    "api": "Block.getRedstonePower",
+    "conductivityComponent": "minecraft:redstone_conductivity",
+    "failureMode": "fail_closed",
+    "controls": [
+      { "block": "createbedrock:andesite_funnel", "type": "funnel" },
+      { "block": "createbedrock:adjustable_chain_gearshift", "type": "chain_gearshift" },
+      { "block": "createbedrock:clutch", "type": "clutch" },
+      { "block": "createbedrock:gearshift", "type": "gearshift" },
+      { "block": "createbedrock:sequenced_gearshift", "type": "sequenced_gearshift" },
+      { "block": "createbedrock:mechanical_pump", "type": "pump" }
+    ]
+  },
+  "output": {
+    "mode": "blocked_on_compatibility_target",
+    "forbiddenComponents": ["minecraft:redstone_consumer", "minecraft:redstone_producer"],
+    "producerMinimumFormatVersion": "1.21.120",
+    "consumerMinimumFormatVersion": "1.21.130",
+    "consumerStableFormatVersion": "1.26.0",
+    "reconsiderWhen": [
+      "raise the minimum Bedrock and Realm target to a stable component version",
+      "do not enable experimental creator features in the production pack",
+      "record Windows, Realm, and PS acceptance before changing matrix status"
+    ]
+  },
+  "blockers": [
+    { "acceptanceId": "REDSTONE-ANALOG-LEVER-BLOCK", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-ANALOG-LEVER-BLOCK_ENTITY", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-CONTENT-OBSERVER-BLOCK", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-CONTENT-OBSERVER-BLOCK_ENTITY", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-CRUSHING-WHEEL-CONTROLLER-BLOCK", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-CRUSHING-WHEEL-CONTROLLER-BLOCK_ENTITY", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-DISPLAY-LINK-BLOCK", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-DISPLAY-LINK-BLOCK_ENTITY", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-LECTERN-CONTROLLER-BLOCK", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-LECTERN-CONTROLLER-BLOCK_ENTITY", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-LINKED-CONTROLLER-ITEM", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-NIXIE-TUBE-BLOCK", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-NIXIE-TUBE-BLOCK_ENTITY", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-POWERED-LATCH-BLOCK", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-POWERED-TOGGLE-LATCH-BLOCK", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-PULSE-EXTENDER-BLOCK", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-PULSE-EXTENDER-BLOCK_ENTITY", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-PULSE-REPEATER-BLOCK", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-PULSE-REPEATER-BLOCK_ENTITY", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-PULSE-TIMER-BLOCK", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-PULSE-TIMER-BLOCK_ENTITY", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-REDSTONE-CONTACT-BLOCK", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-REDSTONE-LINK-BLOCK", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-REDSTONE-LINK-BLOCK_ENTITY", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-REDSTONE-REQUESTER-BLOCK", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-REDSTONE-REQUESTER-BLOCK_ENTITY", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-ROTATION-SPEED-CONTROLLER-BLOCK", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-ROTATION-SPEED-CONTROLLER-BLOCK_ENTITY", "resolution": "blocked" },
+    { "acceptanceId": "REDSTONE-STOCK-LINK-BLOCK", "resolution": "blocked" }
+  ]
+}
