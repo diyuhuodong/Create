@@ -48,10 +48,12 @@ function schedulerSummary(groups) {
 export function createDiagnosticsSummary(diagnostics) {
 	const providers = summarizeValue(diagnostics?.providers ?? {}, "providers") ?? {};
 	const failures = summarizeValue(diagnostics?.failures ?? {}, "failures") ?? {};
+	const performance = summarizeValue(diagnostics?.performance ?? {}, "performance") ?? {};
 	const scheduler = summarizeValue(diagnostics?.scheduler ?? {}, "scheduler") ?? {};
 	return {
 		failures,
 		kernel: schedulerSummary(diagnostics?.scheduler),
+		performance,
 		providers,
 		scheduler
 	};

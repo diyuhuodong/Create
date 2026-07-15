@@ -1,6 +1,6 @@
 # Create Bedrock 阶段 3 后续开发计划
 
-**状态：** S3-14 已完成兼容性版本决策：1.21.80 非实验目标、6 类轮询输入控制和 29 项显式输出 blocker 均已通过仓库验证
+**状态：** S3-14 已完成兼容性版本决策；S3-15 已完成平台验收账本、性能基线和静态防伪校验，但 Windows、测试 Realm 与 PS 的物理验收仍全部待执行
 
 **基线：** S3-7 已提交为 `378853863`。阶段 3 共有 245 条矩阵记录：15 条 `static_verified`、6 条 `implementation_in_progress`、195 条 `specification_pending`、29 条 `blocked`。本计划只处理 `phase: 3`；移动机械、蓝图和机械 actor 仍属于阶段 4，列车调度和高级物流属于阶段 5。
 
@@ -21,7 +21,7 @@
 | S3-12 | 流体扩展：glass/encased/smart pipe、valve、drain、spout、portable interface。 | S3-8 材料、现有 Tank/Pump 事务内核。 | 容量守恒、分支竞争、阀门、外部端点异常和重启恢复测试通过。 |
 | S3-13 | 资源等价性收敛：Crushing Wheel 的 OBJ 派生可移植几何、belt 几何/物品可视化、Tank 液面与多方块视觉。 | 相应行为已稳定。 | 不再用 full-block fallback 宣称模型完成；构建产物契约验证模型、贴图、语言和掉落/获取路径。 |
 | S3-14 | 已完成：红石兼容性版本决策。保持 1.21.80、非实验生产包与已有轮询输入；29 项自定义输出需求显式保留为 blocker。 | S3-6 的稳定输入总线。 | 决策数据、manifest、矩阵、工作队列、导电输入方块和禁止组件扫描由契约一致校验。 |
-| S3-15 | 平台验收与性能收敛。 | S3-8 至 S3-14 的代码范围完成。 | Windows 本地世界、测试 Realm、PS 分别完成烟雾测试、双人并发和 30 分钟压力记录。 |
+| S3-15 | 平台验收与性能收敛。 | S3-8 至 S3-14 的代码范围完成。 | 已交付可校验账本和性能基线；Windows 本地世界、测试 Realm、PS 仍需分别完成烟雾测试、双人并发和 30 分钟压力记录。 |
 
 ## 工作量边界
 
@@ -36,6 +36,7 @@
 5. 已完成：S3-9 以 `stage3-kinetic-specifications.json` 锁定并实现全部 33 条动力记录：27 条直接实现、6 条共享运行时吸收。链式输送机复用持久化 DepotNetwork，蒸汽引擎驱动动力轴，顺序变速器持久化程序，风车轴承复用动态结构控制器；不存在以空壳方块替代的移交项。
 6. 已完成：S3-13 以标准 Bedrock cuboid 几何替换 Crushing Wheel 的 full-block fallback，并在构建时保留 Java OBJ 作为来源证据；不使用已弃用的 `poly_mesh`。belt 根据相邻同向段持久化 start/middle/end 视觉状态；Tank 根据内容物和上下相邻 Tank 持久化液面、液体类型及单体/顶端/中段/底端视觉。构建会生成最小水/岩浆液面贴图并验证生成资源；Windows、Realm 与 PS 的实际渲染仍由 S3-15 记录。
 7. 已完成：S3-14 固定 1.21.80 非实验兼容基线；六类输入控制使用已注册方块的 fail-closed 轮询。`s3-14-redstone-decision.json` 为 29 条红石输出/显示/计时记录给出逐项 blocker 结论，契约验证 manifest、矩阵、队列、运行时、导电组件与 BP 中不存在 producer/consumer。升级条件见 [S3-14 决策](create-bedrock-s3-14-decision.md)。
+8. 已完成：S3-15 交付 `s3-15-platform-acceptance.json`、性能基线和校验器，固定 Windows、测试 Realm、PS 各九项场景、双人和 30 分钟门槛。当前所有记录均为 `pending`；只有每项写入真实证据后才能声明平台通过。执行步骤见 [S3-15 平台验收](create-bedrock-s3-15-platform-acceptance.md)。
 
 ## 风险控制
 

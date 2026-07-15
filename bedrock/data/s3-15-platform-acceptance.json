@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "outcome": "pending_platform_validation",
+  "target": {
+    "id": "realm-console-1.21.80",
+    "minimumEngineVersion": [1, 21, 80]
+  },
+  "platforms": [
+    {
+      "id": "windows_bedrock",
+      "state": "pending",
+      "scenarios": [
+        { "id": "pack_load_content_log", "state": "pending", "evidence": null },
+        { "id": "diagnostics_summary", "state": "pending", "evidence": null },
+        { "id": "visual_resources", "state": "pending", "evidence": null },
+        { "id": "kinetics_processing_restart", "state": "pending", "evidence": null },
+        { "id": "redstone_controls", "state": "pending", "evidence": null },
+        { "id": "logistics_fluid_transactions", "state": "pending", "evidence": null },
+        { "id": "contraption_train_recovery", "state": "pending", "evidence": null },
+        { "id": "two_player_concurrency", "state": "pending", "evidence": null, "minimumPlayers": 2 },
+        { "id": "stress_30_minutes", "state": "pending", "evidence": null, "minimumPlayers": 2, "minimumDurationMinutes": 30 }
+      ]
+    },
+    {
+      "id": "test_realm",
+      "state": "pending",
+      "scenarios": [
+        { "id": "pack_load_content_log", "state": "pending", "evidence": null },
+        { "id": "diagnostics_summary", "state": "pending", "evidence": null },
+        { "id": "visual_resources", "state": "pending", "evidence": null },
+        { "id": "kinetics_processing_restart", "state": "pending", "evidence": null },
+        { "id": "redstone_controls", "state": "pending", "evidence": null },
+        { "id": "logistics_fluid_transactions", "state": "pending", "evidence": null },
+        { "id": "contraption_train_recovery", "state": "pending", "evidence": null },
+        { "id": "two_player_concurrency", "state": "pending", "evidence": null, "minimumPlayers": 2 },
+        { "id": "stress_30_minutes", "state": "pending", "evidence": null, "minimumPlayers": 2, "minimumDurationMinutes": 30 }
+      ]
+    },
+    {
+      "id": "playstation",
+      "state": "pending",
+      "scenarios": [
+        { "id": "pack_load_content_log", "state": "pending", "evidence": null },
+        { "id": "diagnostics_summary", "state": "pending", "evidence": null },
+        { "id": "visual_resources", "state": "pending", "evidence": null },
+        { "id": "kinetics_processing_restart", "state": "pending", "evidence": null },
+        { "id": "redstone_controls", "state": "pending", "evidence": null },
+        { "id": "logistics_fluid_transactions", "state": "pending", "evidence": null },
+        { "id": "contraption_train_recovery", "state": "pending", "evidence": null },
+        { "id": "two_player_concurrency", "state": "pending", "evidence": null, "minimumPlayers": 2 },
+        { "id": "stress_30_minutes", "state": "pending", "evidence": null, "minimumPlayers": 2, "minimumDurationMinutes": 30 }
+      ]
+    }
+  ]
+}

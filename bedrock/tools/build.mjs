@@ -11,6 +11,7 @@ import { validateStage3LogisticsSourceContract } from "./stage3-logistics-contra
 import { validateStage3ProcessingSourceContract } from "./stage3-processing-contract.mjs";
 import { validateStage3FluidSourceContract } from "./stage3-fluid-contract.mjs";
 import { validateStage3RedstoneDecision } from "./s3-14-redstone-decision-schema.mjs";
+import { validateStage3PlatformAcceptance } from "./s3-15-platform-acceptance-schema.mjs";
 import { validateStage3BuiltVisualContract } from "./stage3-visual-contract.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
@@ -37,5 +38,6 @@ const logisticsContract = await validateStage3LogisticsSourceContract({ bedrockR
 const processingContract = await validateStage3ProcessingSourceContract({ bedrockRoot: buildRoot });
 const fluidContract = await validateStage3FluidSourceContract({ bedrockRoot: buildRoot });
 const redstoneDecision = await validateStage3RedstoneDecision({ bedrockRoot: buildRoot });
+const platformAcceptance = await validateStage3PlatformAcceptance({ bedrockRoot: buildRoot });
 const visualContract = await validateStage3BuiltVisualContract({ buildRoot });
-console.log(`Built Bedrock packs in ${buildRoot}; generated ${generatedTextureCount} S3-13 fluid textures, staged ${importedTextureCount} Java textures, converted ${convertedModelCount} Java models, and verified ${contentContract.contentBlocks} Stage-3 content blocks, ${kineticContract.blocks} S3-9 kinetic blocks, ${logisticsContract.blocks} S3-10 logistics blocks, ${processingContract.blocks} S3-11 processing blocks, ${fluidContract.blocks} S3-12 fluid blocks, ${visualContract.tankSegments} S3-13 Tank visual segments, and ${redstoneDecision.blockers} S3-14 compatibility blockers.`);
+console.log(`Built Bedrock packs in ${buildRoot}; generated ${generatedTextureCount} S3-13 fluid textures, staged ${importedTextureCount} Java textures, converted ${convertedModelCount} Java models, and verified ${contentContract.contentBlocks} Stage-3 content blocks, ${kineticContract.blocks} S3-9 kinetic blocks, ${logisticsContract.blocks} S3-10 logistics blocks, ${processingContract.blocks} S3-11 processing blocks, ${fluidContract.blocks} S3-12 fluid blocks, ${visualContract.tankSegments} S3-13 Tank visual segments, ${redstoneDecision.blockers} S3-14 compatibility blockers, and ${platformAcceptance.pendingPlatforms}/${platformAcceptance.platforms} pending S3-15 platform records.`);

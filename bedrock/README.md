@@ -21,6 +21,7 @@ npm run recipes:pressing
 npm run validate
 npm run build
 npm run pack
+npm run acceptance:status
 npm test
 ```
 
@@ -31,6 +32,8 @@ npm test
 `npm run recipes:crushing` imports crushing recipes with native Bedrock inputs and outputs. The report tracks recipes blocked on Create-specific materials or compatibility content.
 
 `npm run deploy:win` copies built packs to the Windows Bedrock development directory specified by `BEDROCK_DEV_ROOT`. `npm run pack` creates a `.mcaddon` archive after a successful build.
+
+`npm run acceptance:status` validates the S3-15 Windows, Realm, and PS evidence ledger and prints its current status. It does not run Minecraft or turn pending records into passes; follow [`tests/world/smoke-test.md`](tests/world/smoke-test.md) and record each physical result before changing the ledger.
 
 With cheats enabled, a Game Director can run `/scriptevent createbedrock:diagnostics summary` to write compact scheduler, kinetic, contraption, train, and dynamic-property diagnostics to the Content Log. The command source also receives the summary when the Script API provides one.
 

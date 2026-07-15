@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "node tools/build.mjs",
+    "acceptance:status": "node tools/report-s3-15-platform-acceptance.mjs",
     "content-specs": "node tools/generate-stage3-content-specifications.mjs",
     "kinetics:specs": "node tools/generate-stage3-kinetic-specifications.mjs",
     "logistics:specs": "node tools/generate-stage3-logistics-specifications.mjs",

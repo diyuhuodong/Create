@@ -16,11 +16,13 @@ test("diagnostic summary retains operational counters and removes inventory payl
 		scheduler: {
 			fluids: { budget: 8, failed: 1, pending: 3 },
 			logistics: { budget: 8, failed: 0, pending: 1 }
-		}
+		},
+		performance: { deferred: 4, executed: 12, maxTasksPerTick: 64 }
 	};
 
 	const summary = createDiagnosticsSummary(diagnostics);
 	assert.deepEqual(summary.kernel, { budget: 16, failed: 1, groups: 2, pending: 4 });
+	assert.deepEqual(summary.performance, { deferred: 4, executed: 12, maxTasksPerTick: 64 });
 	assert.deepEqual(summary.providers.fluids.journal, { rollbackAttempts: 3, rollbacks: 1 });
 	assert.equal(summary.providers.logistics.inventory, undefined);
 	assert.equal(JSON.stringify(summary).includes("minecraft:diamond"), false);

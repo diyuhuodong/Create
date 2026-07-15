@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "kernel": {
+    "defaultTaskBudget": 32,
+    "maxTasksPerTick": 64
+  },
+  "observation": {
+    "minimumPlayers": 2,
+    "minimumDurationMinutes": 30,
+    "requiredMetrics": [
+      "content_log_error_count",
+      "content_log_warning_count",
+      "kernel_pending",
+      "kernel_failed",
+      "scheduler_executed",
+      "scheduler_deferred",
+      "dynamic_property_bytes"
+    ]
+  }
+}

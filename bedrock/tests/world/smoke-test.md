@@ -11,6 +11,7 @@ This checklist is executed only after the code-completion milestone, on Windows 
 7. Start a millstone, press, and crushing wheel. Restart during processing, then assemble/disassemble each on a bearing. Confirm progress, inputs, and outputs neither duplicate nor disappear.
 8. Assemble a connected 16-block bearing contraption containing all five structural blocks. Verify rotation, collision freeze, occupied-space rejection, entity deletion/recovery, and two-player repeated interaction.
 9. Build flat, curved, and one-block-rising track. Run two two-carriage trains through a reservation conflict, a chunk unload/reload, world-block collision, player collision, and restart while the rear carriage is still clearing the final edge.
-10. Upload the same world to the test Realm; repeat steps 2-9 with two players and then on PS. Record Windows, Realm, and PS results separately.
+10. Run a two-player, 30-minute pressure pass on Windows, the test Realm, and PS. On each platform, repeat steps 2-9; record Content Log errors/warnings, kernel pending/failed counters, scheduler executed/deferred counters, and Dynamic Property bytes.
+11. Save a separate evidence report for every passed or failed platform scenario, then update `data/s3-15-platform-acceptance.json` with its path. A pending scenario must keep `evidence: null`; do not mark a platform passed until all nine scenarios have evidence.
 
-Do not mark stages 1 or 2 as platform-accepted until every item has a recorded Windows, Realm, and PS result.
+Do not mark any stage as platform-accepted until every item has a recorded Windows, Realm, and PS result.

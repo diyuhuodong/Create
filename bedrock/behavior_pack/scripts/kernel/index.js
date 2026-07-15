@@ -2,16 +2,16 @@ import { system } from "@minecraft/server";
 
 import { BudgetScheduler } from "./budget-scheduler.js";
 import { DiagnosticsRegistry } from "./diagnostics-registry.js";
+import { KERNEL_DEFAULT_TASK_BUDGET, KERNEL_MAX_TASKS_PER_TICK } from "./kernel-target.js";
 
-const TASK_BUDGET_PER_TICK = 32;
 const DEFAULT_TASK_GROUP = "default";
 const scheduler = new BudgetScheduler({
-	maxTasksPerTick: 64,
+	maxTasksPerTick: KERNEL_MAX_TASKS_PER_TICK,
 	onError(name, error) {
 		console.warn(`[Create Bedrock] Kernel task in ${name} failed: ${error}`);
 	}
 });
-scheduler.registerGroup(DEFAULT_TASK_GROUP, TASK_BUDGET_PER_TICK);
+scheduler.registerGroup(DEFAULT_TASK_GROUP, KERNEL_DEFAULT_TASK_BUDGET);
 const diagnostics = new DiagnosticsRegistry();
 const tickHandlers = [];
 let started = false;
