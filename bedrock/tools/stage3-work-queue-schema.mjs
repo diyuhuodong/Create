@@ -78,6 +78,8 @@ export function validateStage3WorkQueue(queue, matrix) {
             throw new Error(`Stage-3 queue entry ${entry.acceptanceId} no longer matches the migration matrix`);
         if (matrixEntry.status === "blocked" && entry.deliveryPackage !== "S3-14")
             throw new Error(`Blocked queue entry ${entry.acceptanceId} must be assigned to S3-14`);
+		if (matrixEntry.domain === "redstone" && entry.deliveryPackage !== "S3-14")
+			throw new Error(`Redstone queue entry ${entry.acceptanceId} must be assigned to S3-14`);
         if (matrixEntry.status === "static_verified" && entry.deliveryPackage !== "completed:S3-7")
             throw new Error(`Static queue entry ${entry.acceptanceId} must remain attributed to S3-7`);
         if (matrixEntry.status === "blocked" && entry.blocker !== matrixEntry.blockingReason)

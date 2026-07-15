@@ -75,7 +75,7 @@ test("migration classification records the durable S3-5 fluid vertical slice ind
 	});
 });
 
-test("migration classification records S3-6 input controls and blocks custom redstone outputs on the current target", () => {
+test("migration classification retains S3-6 input controls and queues native redstone outputs on the 1.26 target", () => {
 	assert.deepEqual(classifyRegistration("clutch", "block"), {
 		acceptanceId: "KINETICS-CLUTCH-BLOCK",
 		behaviorPath: "behavior_pack/scripts/kinetics/kinetic-runtime.js",
@@ -86,9 +86,9 @@ test("migration classification records S3-6 input controls and blocks custom red
 		resourceStatus: "partial",
 		status: "static_verified"
 	});
-	const blocked = classifyRegistration("analog_lever", "block");
-	assert.equal(blocked.status, "blocked");
-	assert.match(blocked.blockingReason, /minecraft:redstone_producer/);
+	const pending = classifyRegistration("analog_lever", "block");
+	assert.equal(pending.status, "specification_pending");
+	assert.equal(pending.blockingReason, null);
 });
 
 test("migration classification records the S3-8 foundation material slice as partial implementation", () => {

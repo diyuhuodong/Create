@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "outcome": "pending_platform_validation",
   "target": {
-    "id": "realm-console-1.21.80",
-    "minimumEngineVersion": [1, 21, 80]
+    "id": "realm-console-1.26.0",
+    "minimumEngineVersion": [1, 26, 0]
   },
   "platforms": [
     {

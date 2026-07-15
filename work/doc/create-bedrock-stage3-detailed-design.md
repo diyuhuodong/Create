@@ -4,7 +4,7 @@
 
 **关联总规划：** `Create Bedrock / Realm 完整迁移规划与设计`
 
-**目标基线：** Create 6.0.11 / Java 1.21.1；Bedrock 行为包当前声明最低 1.21.80
+**目标基线：** Create 6.0.11 / Java 1.21.1；Bedrock 行为包当前声明最低 1.26.0
 **阶段目标：** 完成静态系统的可扩展实现：动力、加工、基础物流、流体、红石，以及对应内容、配方、资源和迁移矩阵。
 
 ## 1. 阶段定义与完成条件
@@ -168,14 +168,11 @@ Create 专用流体使用虚拟流体记录，不把任意数量直接转换为�
 
 红石使用 `RedstoneSignalBus`，把原版输入转为 `(location, face, level, tick)` 事件；设备订阅后更新离合器、阀门、漏斗锁定、比较器输出和控制逻辑。事件只标脏，不直接进行长网络重算。
 
-这里存在明确的版本闸门：当前 manifest 的最低引擎为 1.21.80，而官方文档显示 `minecraft:redstone_producer` 需至少 1.21.120，`minecraft:redstone_consumer` 需至少 1.21.130 且在 format 1.26.0 前仍受实验限制。因此阶段 3 开始红石内容前必须作出以下决策之一：
+S3-14 已将最低 Bedrock/Realm 目标提升到 1.26.0。该版本的 `minecraft:redstone_consumer` 不再要求实验开关，并覆盖 `minecraft:redstone_producer` 所需的最低 block format。BP/RP manifest、行为包 JSON 与 `@minecraft/server` 依赖必须一致地使用 1.26.0 / 2.5.0，正式包仍不得启用实验开关。
 
-1. 将目标最低 Bedrock/Realm 版本提升到对应的稳定版本，并在 Windows、Realm、PS 验证；或
-2. 为当前 1.21.80 目标实现不依赖实验组件的兼容适配层，并将无法等价的设备标为 `blocked`。
+现有六类输入暂保留已注册方块的 `Block.getRedstonePower()` 轮询：读取失败或区块不可用时采用“失效关闭”，随后读到真实零功率才重新启用。后续逐项接入 `minecraft:redstone_consumer` 和 `BlockComponentRedstoneUpdateEvent`；`RedstoneSignalBus` 保持与具体组件解耦，避免迁移时扩散重写。
 
-不得在正式包中启用实验开关来掩盖该问题。`RedstoneSignalBus` 的接口先保持与具体 Bedrock 组件解耦，避免未来升级时扩散重写。
-
-S3-6 选择第二条兼容路径：目标仍保持 `min_engine_version: 1.21.80`，使用稳定的 `Block.getRedstonePower()` 轮询已注册的固定设备，而不是声明实验 `minecraft:redstone_consumer`。每个设备只在放置时注册，按固定预算轮询；读取失败或区块不可用时采用“失效关闭”，随后读到真实零功率才重新启用。`minecraft:redstone_conductivity` 用于现有 Clutch、Mechanical Pump 和 Andesite Funnel 的输入感知。自定义红石**输出**仍不能等价实现：`minecraft:redstone_producer` 要求至少 block format 1.21.120，因此所有尚未实现的 Create 红石输出设备在迁移矩阵中以明确版本原因标为 `blocked`，不会伪装为完成。
+此前 29 条输出/显示/定时设备不再是版本 blocker，已转为 `specification_pending`。这只说明原生 `minecraft:redstone_producer` 可用；每个设备仍必须实现 BP/RP、状态、配方、持久化和正向/失败/重启/并发测试后才能提升状态，且 Windows、Realm、PS 验收仍是独立门槛。
 
 ## 5. 内容、配方与资源迁移
 

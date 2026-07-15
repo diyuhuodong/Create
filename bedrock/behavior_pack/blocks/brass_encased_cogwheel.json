@@ -1,5 +1,5 @@
 {
-  "format_version": "1.21.80",
+  "format_version": "1.26.0",
   "minecraft:block": {
     "description": {
       "identifier": "createbedrock:brass_encased_cogwheel",

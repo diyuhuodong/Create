@@ -198,7 +198,7 @@ const STAGE_THREE_LOGISTICS_FOUNDATION = new Map([
 	["smart_chute", { domain: "logistics" }],
 	["weighted_ejector", { domain: "logistics" }]
 ]);
-export const REDSTONE_OUTPUT_BLOCKER = "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.";
+export const REDSTONE_NATIVE_COMPONENT_BASELINE = "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.";
 
 const RULES = [
 	{ domain: "contraptions", phase: 4, pattern: /(cart_assembler|contraption|deployer|drill|elevator|gantry|harvester|mechanical_arm|mechanical_piston|minecart|pulley|rope|seat|sticker)/ },
@@ -244,16 +244,14 @@ export function classifyRegistration(identifier, kind) {
 		: prototype
 		? { ...prototype, phase: 2, status: "implementation_in_progress" }
 		: rule ?? { domain: "content", phase: 3 };
-	const blockedByTargetVersion = !staticSystem && !prototype && classification.domain === "redstone";
-
 	return {
 		acceptanceId: acceptanceId(identifier, classification.domain, kind),
 		behaviorPath: BEHAVIOR_PATHS.get(identifier) ?? null,
-		blockingReason: blockedByTargetVersion ? REDSTONE_OUTPUT_BLOCKER : null,
+		blockingReason: null,
 		domain: classification.domain,
 		persistenceSchema: staticSystem || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation ? 2 : prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null,
 		phase: classification.phase,
 		resourceStatus: prototype || staticSystem || foundationContent || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation ? "partial" : "pending",
-		status: blockedByTargetVersion ? "blocked" : classification.status ?? "specification_pending"
+		status: classification.status ?? "specification_pending"
 	};
 }

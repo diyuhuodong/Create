@@ -98,7 +98,7 @@ export function validateStage3PlatformAcceptanceDocument(ledger) {
 		throw new Error("S3-15 platform acceptance ledger must use schema version 1");
 	if (ledger.target?.id !== REDSTONE_COMPATIBILITY_TARGET.id
 		|| !hasCompatibilityEngineVersion(ledger.target.minimumEngineVersion))
-		throw new Error("S3-15 platform acceptance ledger must retain the 1.21.80 compatibility target");
+		throw new Error("S3-15 platform acceptance ledger must retain the 1.26.0 native-redstone target");
 	assertExactIds(ledger.platforms, PLATFORM_IDS, "platforms");
 
 	let acceptedPlatforms = 0;
@@ -137,7 +137,7 @@ export async function validateStage3PlatformAcceptance({ bedrockRoot = defaultBe
 	]);
 	if (!hasCompatibilityEngineVersion(behaviorManifest.header?.min_engine_version)
 		|| !hasCompatibilityEngineVersion(resourceManifest.header?.min_engine_version))
-		throw new Error("S3-15 manifests must retain the shared 1.21.80 compatibility target");
+		throw new Error("S3-15 manifests must retain the shared 1.26.0 native-redstone target");
 	if (!/two[- ]players?/.test(smokeTest) || !smokeTest.includes("30-minute"))
 		throw new Error("S3-15 smoke test must require two players and a 30-minute pressure run");
 	validatePerformanceBaseline(baseline);

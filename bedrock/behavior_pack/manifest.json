@@ -5,7 +5,7 @@
     "description": "Server-authoritative Create mechanics for Bedrock and Realms.",
     "uuid": "f0d04e1a-0b1f-4c23-8f2f-44d0dca3ba41",
     "version": [0, 1, 0],
-    "min_engine_version": [1, 21, 80]
+    "min_engine_version": [1, 26, 0]
   },
   "modules": [
     {
@@ -28,7 +28,7 @@
     },
     {
       "module_name": "@minecraft/server",
-      "version": "1.17.0"
+      "version": "2.5.0"
     }
   ]
 }

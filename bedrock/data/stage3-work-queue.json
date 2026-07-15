@@ -3988,525 +3988,554 @@
     },
     {
       "acceptanceId": "REDSTONE-ANALOG-LEVER-BLOCK",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:analog_lever",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:analog_lever",
       "kind": "block",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-ANALOG-LEVER-BLOCK_ENTITY",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:analog_lever",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:analog_lever",
       "kind": "block_entity",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-CONTENT-OBSERVER-BLOCK",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:content_observer",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:content_observer",
       "kind": "block",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-CONTENT-OBSERVER-BLOCK_ENTITY",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:content_observer",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:content_observer",
       "kind": "block_entity",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-CRUSHING-WHEEL-CONTROLLER-BLOCK",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:crushing_wheel_controller",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:crushing_wheel_controller",
       "kind": "block",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-CRUSHING-WHEEL-CONTROLLER-BLOCK_ENTITY",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:crushing_wheel_controller",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:crushing_wheel_controller",
       "kind": "block_entity",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-DISPLAY-LINK-BLOCK",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:display_link",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:display_link",
       "kind": "block",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-DISPLAY-LINK-BLOCK_ENTITY",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:display_link",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:display_link",
       "kind": "block_entity",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-LECTERN-CONTROLLER-BLOCK",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:lectern_controller",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:lectern_controller",
       "kind": "block",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-LECTERN-CONTROLLER-BLOCK_ENTITY",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:lectern_controller",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:lectern_controller",
       "kind": "block_entity",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-LINKED-CONTROLLER-ITEM",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:linked_controller",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:linked_controller",
       "kind": "item",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-NIXIE-TUBE-BLOCK",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:nixie_tube",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:nixie_tube",
       "kind": "block",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-NIXIE-TUBE-BLOCK_ENTITY",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:nixie_tube",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:nixie_tube",
       "kind": "block_entity",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-POWERED-LATCH-BLOCK",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:powered_latch",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:powered_latch",
       "kind": "block",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-POWERED-TOGGLE-LATCH-BLOCK",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:powered_toggle_latch",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:powered_toggle_latch",
       "kind": "block",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-PULSE-EXTENDER-BLOCK",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:pulse_extender",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:pulse_extender",
       "kind": "block",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-PULSE-EXTENDER-BLOCK_ENTITY",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:pulse_extender",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:pulse_extender",
       "kind": "block_entity",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-PULSE-REPEATER-BLOCK",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:pulse_repeater",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:pulse_repeater",
       "kind": "block",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-PULSE-REPEATER-BLOCK_ENTITY",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:pulse_repeater",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:pulse_repeater",
       "kind": "block_entity",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-PULSE-TIMER-BLOCK",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:pulse_timer",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:pulse_timer",
       "kind": "block",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-PULSE-TIMER-BLOCK_ENTITY",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:pulse_timer",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:pulse_timer",
       "kind": "block_entity",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-REDSTONE-CONTACT-BLOCK",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:redstone_contact",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:redstone_contact",
       "kind": "block",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-REDSTONE-LINK-BLOCK",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:redstone_link",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:redstone_link",
       "kind": "block",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-REDSTONE-LINK-BLOCK_ENTITY",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:redstone_link",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:redstone_link",
       "kind": "block_entity",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-REDSTONE-REQUESTER-BLOCK",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:redstone_requester",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:redstone_requester",
       "kind": "block",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-REDSTONE-REQUESTER-BLOCK_ENTITY",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:redstone_requester",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:redstone_requester",
       "kind": "block_entity",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-ROTATION-SPEED-CONTROLLER-BLOCK",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:rotation_speed_controller",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:rotation_speed_controller",
       "kind": "block",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-ROTATION-SPEED-CONTROLLER-BLOCK_ENTITY",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:rotation_speed_controller",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:rotation_speed_controller",
       "kind": "block_entity",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     },
     {
       "acceptanceId": "REDSTONE-STOCK-LINK-BLOCK",
-      "assetPlan": "Defer assets until the target API decision is made.",
+      "assetPlan": "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
       "bedrockIdentifier": "createbedrock:stock_link",
-      "blocker": "Target Bedrock 1.21.80 cannot provide this custom redstone output without minecraft:redstone_producer (requires block format 1.21.120); retain it as an explicit compatibility blocker.",
+      "blocker": null,
       "dependencies": [
-        "S3-14 target-version decision"
+        "S3-14 native redstone baseline",
+        "Stable Bedrock 1.26.0 producer/consumer components"
       ],
       "deliveryPackage": "S3-14",
       "domain": "redstone",
       "javaIdentifier": "create:stock_link",
       "kind": "block",
-      "lootPlan": "Classify after the target-version decision.",
-      "matrixStatus": "blocked",
-      "recipePlan": "Classify after the target-version decision.",
-      "resourcePlan": "No resource claim while the API blocker remains active.",
-      "testPlan": "Target-version compatibility test after the blocker is resolved."
+      "lootPlan": "Classify destruction and retained-state behavior from the Java device before implementation.",
+      "matrixStatus": "specification_pending",
+      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+      "resourcePlan": "Target Bedrock 1.26.0 provides stable minecraft:redstone_consumer and minecraft:redstone_producer components; implement the device before claiming parity.",
+      "testPlan": "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
     }
   ]
 }

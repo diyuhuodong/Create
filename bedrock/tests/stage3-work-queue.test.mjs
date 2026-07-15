@@ -34,4 +34,8 @@ test("Stage-3 work queue covers every matrix entry exactly once and preserves de
     const zincOre = queue.entries.find(entry => entry.acceptanceId === "CONTENT-ZINC-ORE-BLOCK");
     assert.equal(zincOre.deliveryPackage, "S3-8A");
     assert.match(zincOre.lootPlan, /raw-zinc/i);
+	const analogLever = queue.entries.find(entry => entry.acceptanceId === "REDSTONE-ANALOG-LEVER-BLOCK");
+	assert.equal(analogLever.deliveryPackage, "S3-14");
+	assert.equal(analogLever.blocker, null);
+	assert.equal(analogLever.matrixStatus, "specification_pending");
 });

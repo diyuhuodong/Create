@@ -2,6 +2,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { REDSTONE_NATIVE_COMPONENT_BASELINE } from "./migration-classification.mjs";
 import { validateMigrationMatrix } from "./migration-matrix-schema.mjs";
 import { STAGE3_WORK_QUEUE_SCHEMA_VERSION, validateStage3WorkQueue } from "./stage3-work-queue-schema.mjs";
 
@@ -21,7 +22,8 @@ const DELIVERY_BY_DOMAIN = new Map([
     ["kinetics", "S3-9"],
     ["logistics", "S3-10"],
     ["processing", "S3-11"],
-    ["fluids", "S3-12"]
+    ["fluids", "S3-12"],
+    ["redstone", "S3-14"]
 ]);
 
 function planFor(entry) {
@@ -76,6 +78,17 @@ function planFor(entry) {
             testPlan: "Add a focused resource/recipe contract and persistence test where stateful."
         };
     }
+	if (entry.domain === "redstone") {
+		return {
+			dependencies: ["S3-14 native redstone baseline", "Stable Bedrock 1.26.0 producer/consumer components"],
+			deliveryPackage: "S3-14",
+			assetPlan: "Implement a purpose-specific Bedrock block/item visual; do not register a placeholder output device.",
+			lootPlan: "Classify destruction and retained-state behavior from the Java device before implementation.",
+			recipePlan: "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
+			resourcePlan: REDSTONE_NATIVE_COMPONENT_BASELINE,
+			testPlan: "Add native producer/consumer, positive, failure, restart, and concurrency coverage before changing matrix status."
+		};
+	}
     const deliveryPackage = DELIVERY_BY_DOMAIN.get(entry.domain) ?? "S3-8B";
     return {
         dependencies: ["S3-8A foundation materials", `${deliveryPackage} domain runtime`],
