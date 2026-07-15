@@ -17,7 +17,28 @@ export const MOVABLE_BLOCK_TYPES = new Set([
 	"createbedrock:brass_casing",
 	"createbedrock:copper_casing",
 	"createbedrock:industrial_iron_block",
-	"createbedrock:zinc_block"
+	"createbedrock:zinc_block",
+	"createbedrock:analog_lever",
+	"createbedrock:content_observer",
+	"createbedrock:display_link",
+	"createbedrock:lectern_controller",
+	"createbedrock:nixie_tube",
+	"createbedrock:powered_latch",
+	"createbedrock:powered_toggle_latch",
+	"createbedrock:pulse_extender",
+	"createbedrock:pulse_repeater",
+	"createbedrock:pulse_timer",
+	"createbedrock:redstone_contact",
+	"createbedrock:redstone_link",
+	"createbedrock:redstone_requester",
+	"createbedrock:rotation_speed_controller",
+	"createbedrock:stock_link",
+	"createbedrock:depot",
+	"createbedrock:item_hatch",
+	"createbedrock:item_vault",
+	"createbedrock:creative_crate",
+	"createbedrock:elevator_contact",
+	"createbedrock:belt"
 ]);
 
 // These structural blocks carry no block-entity state.  They still receive a

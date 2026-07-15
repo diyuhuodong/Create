@@ -123,7 +123,7 @@ const DEVICE_DEFINITIONS = [
 		id: "rotation_speed_controller",
 		blockId: "createbedrock:rotation_speed_controller",
 		acceptanceIds: ["REDSTONE-ROTATION-SPEED-CONTROLLER-BLOCK", "REDSTONE-ROTATION-SPEED-CONTROLLER-BLOCK_ENTITY"],
-		input: true,
+		input: false,
 		output: false,
 		persistenceSchema: 1
 	},

@@ -8,7 +8,9 @@ Andesite Funnel、Clutch、Gearshift、Sequenced Gearshift、Adjustable Chain Ge
 
 ## 29 项红石工作
 
-Analog Lever、Content Observer、Crushing Wheel Controller、Lectern/Linked Controller、Pulse 元件、Redstone Link/Requester、Rotation Speed Controller、Display/Stock Link 与 Nixie Tube 的 29 条矩阵记录统一归属 S3-14，现为 `implementation_in_progress`。17 个设备记录对应 16 个方块和 1 个物品；它们具有 BP/RP、原生 consumer/producer、持久化状态、配方、掉落、双语文本、Java 资产转换和确定性单元/契约测试。Link 现使用双物品频率、0–15 模拟强度、256 格范围，以及按玩家热栏位选择的六个持久化 Controller 频道；Requester 会把一笔订单拆成多个 Depot 的崩溃可恢复 journal intent，Stock Link 读取相邻 Depot 阈值。调速器作为持久化的可配置动力节点驱动已连接的 Bedrock 动力网络；接触器自动匹配相对面；显示强度映射到原生亮度。Crushing Wheel Controller 仅在中间两格、同轴且反向旋转的一对轮子存在时激活，并持久化其物品加工状态。仍不等同于 Create 完整功能：Controller/Display/Nixie 的 GUI 与文本渲染、按物品栈保存的 Controller 配置、完整物流网络/包裹、Java 调速器的逐齿轮传动语义、移动机械/电梯接触，以及控制器的实体吸入和皮带直接输入仍待实现和实机验证。
+Analog Lever、Content Observer、Crushing Wheel Controller、Lectern/Linked Controller、Pulse 元件、Redstone Link/Requester、Rotation Speed Controller、Display/Stock Link 与 Nixie Tube 的 29 条矩阵记录统一归属 S3-14。R0–R5 的代码现为 `implementation_complete_pending_static_validation`：16 个方块和 1 个物品均具有 BP/RP、原生 consumer/producer、持久化状态、配方、掉落、双语文本、转换资源和确定性测试入口。Linked Controller 的六频道状态保存在非堆叠 ItemStack，Lectern 使用服务端会话；Requester/Stock Link 已接入地址化 Depot 网络和可恢复 journal；调速器接入约束化的动力/应力端口；Contact 已接入移动 transform 与电梯回调；Display/Nixie 使用可恢复显示实体；Crusher 已使用受管 Depot 端点与物理皮带交接。
+
+这不是平台通过声明：当前没有执行本轮静态回归，矩阵仍是 `implementation_in_progress`，Windows、Realm 与 PS 账本均为 pending。静态契约将每台设备连接到实际运行时符号和测试路径，详见 [S3-14 静态完成设计](create-bedrock-s3-14-static-completion-design.md)。
 
 ## 验收
 

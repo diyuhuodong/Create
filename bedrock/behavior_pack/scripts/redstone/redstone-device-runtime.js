@@ -1,23 +1,37 @@
-import { system, world } from "@minecraft/server";
+import { ItemStack, system, world } from "@minecraft/server";
 
 import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { ShardedStateStore } from "../kernel/sharded-state-store.js";
 import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-property-storage.js";
-import { getKineticWorldForTesting, setKineticGeneratedSpeed } from "../kinetics/kinetic-runtime.js";
-import { countDepotItem, hasDepotAt, requestDepotItem } from "../logistics/depot-runtime.js";
+import { getKineticWorldForTesting, setKineticSpeedControllerTarget } from "../kinetics/kinetic-runtime.js";
+import { countDepotNetworkItem, depotRequestStatus, hasDepotAt, requestDepotItem } from "../logistics/depot-runtime.js";
 import { getCrushingWheelControllerState } from "../processing/crushing-wheel-runtime.js";
-import { linkedControllerChannelForSlot, normalizeLinkedControllerBindings, setLinkedControllerChannel } from "./linked-controller-bindings.js";
+import { linkedControllerChannelForSlot, normalizeLinkedControllerBindings } from "./linked-controller-bindings.js";
+import { configureLinkedControllerChannel, configureLinkedControllerChannels, readLinkedControllerItemState, writeLinkedControllerItemState } from "./linked-controller-item-state.js";
+import { resolveDisplayLinkWrite } from "./display-target.js";
+import { collectNixieTubeGroup, composeNixieTubeDisplay, NIXIE_TUBE_BLOCK, nixieTubeGroupId } from "./nixie-display.js";
+import { beginLecternControllerUse, clearLecternControllerSession, createLecternControllerState, endLecternControllerUse, installLecternController, normalizeLecternControllerState, triggerLecternControllerChannel } from "./lectern-controller-state.js";
+import { fingerprintInventoryStacks } from "./redstone-inventory-fingerprint.js";
 import { registerNativeRedstoneEventHandler } from "./redstone-native-events.js";
-import { REDSTONE_BLOCK_DEVICES, redstoneDeviceForBlock } from "./redstone-device-catalog.js";
+import { REDSTONE_BLOCK_DEVICES, redstoneDeviceForBlock, redstoneDeviceForId } from "./redstone-device-catalog.js";
+import { configureRedstoneDevice, createRedstoneDeviceConfiguration, normalizeRedstoneDeviceConfiguration } from "./redstone-device-configuration.js";
+import { showLecternControllerUseForm, showLinkedControllerConfigurationForm, showRedstoneDeviceConfigurationForm } from "./redstone-device-ui.js";
 import { REDSTONE_LINK_RANGE, normalizeRedstoneLinkFrequency, receivedRedstoneLinkPower, redstoneLinkFrequencyKey } from "./redstone-link-network.js";
 import { MAX_CONFIGURED_TICKS, createRedstoneDeviceState, nativeOutputPower, transitionRedstoneDevice, validateRedstoneDeviceState } from "./redstone-device-state.js";
 
 const DEVICE_TASK_BUDGET = 8;
 const DEVICE_TASK_GROUP = "redstone_devices";
 const LINKED_CONTROLLER_ITEM = "createbedrock:linked_controller";
+const CONFIGURABLE_BLOCK_DEVICE_IDS = new Set([
+	"content_observer", "display_link", "nixie_tube", "pulse_extender", "pulse_repeater", "pulse_timer",
+	"redstone_link", "redstone_requester", "rotation_speed_controller", "stock_link"
+]);
 const OUTPUT_STATE = "createbedrock:powered";
 const ANALOG_OUTPUT_STATE = "createbedrock:signal";
 const DISPLAY_STATE = "createbedrock:display_signal";
+const NIXIE_DISPLAY_ENTITY = "createbedrock:nixie_display";
+const NIXIE_DISPLAY_GROUP_PROPERTY = "createbedrock:nixie_display_group";
+const NIXIE_COLOR_CODES = Object.freeze({ blue: "§9", green: "§a", orange: "§6", red: "§c", white: "§f", yellow: "§e" });
 const NEIGHBOR_OFFSETS = [
 	{ x: -1, y: 0, z: 0 }, { x: 1, y: 0, z: 0 },
 	{ x: 0, y: -1, z: 0 }, { x: 0, y: 1, z: 0 },
@@ -40,6 +54,7 @@ const FACING_OFFSETS = {
 const devices = new Map();
 const controllerBindings = new Map();
 const controllerSignals = new Map();
+const dirtyNixieDimensions = new Set();
 let roundRobinAfter;
 let deviceTick = 0;
 
@@ -87,6 +102,8 @@ function records() {
 			id: record.id,
 			dimensionId: record.dimensionId,
 			location: record.location,
+			configuration: record.configuration,
+			...(record.lectern ? { lectern: record.lectern } : {}),
 			state: record.state
 		}))
 		.concat([...controllerBindings.entries()].map(([playerId, frequencies]) => ({
@@ -150,15 +167,108 @@ function applyStateToBlock(record, block = resolveBlock(record)) {
 		return setBlockState(block, property, value);
 	}
 	if (record.definition.id === "display_link" || record.definition.id === "nixie_tube")
-		return setBlockState(block, DISPLAY_STATE, Number(record.state.displayValue) || 0);
+		return setBlockState(block, DISPLAY_STATE, record.definition.id === "nixie_tube"
+			? record.state.display.lines.some(line => line.length > 0) ? record.state.display.style.brightness : 0
+			: Number(record.state.displayValue) || 0);
 	return false;
+}
+
+function queueNixieDisplay(dimensionId) {
+	if (typeof dimensionId === "string" && dimensionId.length > 0)
+		dirtyNixieDimensions.add(dimensionId);
+}
+
+function nixieTubeRecord(record) {
+	if (record?.definition.id !== "nixie_tube")
+		return undefined;
+	const block = resolveBlock(record);
+	if (block?.typeId !== NIXIE_TUBE_BLOCK)
+		return undefined;
+	const facing = block.permutation?.getAllStates?.()["minecraft:facing_direction"];
+	if (facing === undefined)
+		return undefined;
+	return { display: record.state.display, facing, location: record.location, typeId: NIXIE_TUBE_BLOCK };
+}
+
+function nixieMarkerLocation(group) {
+	const center = group.tubes.reduce((sum, tube) => ({
+		x: sum.x + tube.location.x + 0.5,
+		y: sum.y + tube.location.y + 0.5,
+		z: sum.z + tube.location.z + 0.5
+	}), { x: 0, y: 0, z: 0 });
+	center.x /= group.tubes.length;
+	center.y /= group.tubes.length;
+	center.z /= group.tubes.length;
+	const facing = FACING_OFFSETS[group.facing] ?? { x: 0, y: 0, z: 0 };
+	return { x: center.x + facing.x * 0.51, y: center.y + facing.y * 0.51 + 0.15, z: center.z + facing.z * 0.51 };
+}
+
+function reconcileNixieDisplays(dimensionId) {
+	let dimension;
+	try {
+		dimension = world.getDimension(dimensionId);
+	} catch {
+		return false;
+	}
+	const recognized = new Set();
+	const visited = new Set();
+	const tubes = [...devices.values()]
+		.filter(record => record.dimensionId === dimensionId && record.definition.id === "nixie_tube")
+		.sort((left, right) => left.id.localeCompare(right.id));
+	for (const record of tubes) {
+		const seed = nixieTubeRecord(record);
+		const seedKey = seed && `${seed.location.x}:${seed.location.y}:${seed.location.z}`;
+		if (!seed || visited.has(seedKey))
+			continue;
+		try {
+			const group = collectNixieTubeGroup({
+				anchor: seed.location,
+				readTube(location) {
+					return nixieTubeRecord(devices.get(deviceId(dimensionId, location)));
+				}
+			});
+			if (!group)
+				continue;
+			for (const tube of group.tubes)
+				visited.add(`${tube.location.x}:${tube.location.y}:${tube.location.z}`);
+			const groupId = nixieTubeGroupId(dimensionId, group);
+			recognized.add(groupId);
+			let marker = dimension.getEntities({ type: NIXIE_DISPLAY_ENTITY })
+				.find(entity => entity.getDynamicProperty(NIXIE_DISPLAY_GROUP_PROPERTY) === groupId);
+			const composed = composeNixieTubeDisplay(group);
+			if (composed.text.length === 0) {
+				marker?.remove();
+				continue;
+			}
+			marker ??= dimension.spawnEntity(NIXIE_DISPLAY_ENTITY, nixieMarkerLocation(group));
+			marker.setDynamicProperty(NIXIE_DISPLAY_GROUP_PROPERTY, groupId);
+			marker.nameTag = `${NIXIE_COLOR_CODES[composed.style.color]}${composed.text}`;
+			marker.teleport(nixieMarkerLocation(group));
+		} catch (error) {
+			console.warn(`[Create Bedrock] Could not render Nixie Tube group in ${dimensionId}: ${error}`);
+		}
+	}
+	for (const marker of dimension.getEntities({ type: NIXIE_DISPLAY_ENTITY })) {
+		if (!recognized.has(marker.getDynamicProperty(NIXIE_DISPLAY_GROUP_PROPERTY)))
+			marker.remove();
+	}
+	return true;
+}
+
+function flushNixieDisplays() {
+	let changed = false;
+	for (const dimensionId of [...dirtyNixieDimensions].sort()) {
+		dirtyNixieDimensions.delete(dimensionId);
+		changed = reconcileNixieDisplays(dimensionId) || changed;
+	}
+	return changed;
 }
 
 function applyRotationSpeedController(record) {
 	if (record.definition.id !== "rotation_speed_controller")
 		return false;
 	try {
-		return setKineticGeneratedSpeed(record.dimensionId, record.location, record.state.active ? record.state.targetSpeed : 0);
+		return setKineticSpeedControllerTarget(record.dimensionId, record.location, record.state.targetSpeed);
 	} catch (error) {
 		console.warn(`[Create Bedrock] Could not apply Rotation Speed Controller at ${record.id}: ${error}`);
 	}
@@ -171,6 +281,13 @@ function adjacentDepotLocations(record) {
 		y: record.location.y + offset.y,
 		z: record.location.z + offset.z
 	})).filter(location => hasDepotAt(record.dimensionId, location));
+}
+
+function logisticsRouting(record) {
+	return {
+		networkId: record.configuration?.settings?.networkId ?? "default",
+		targetAddress: record.configuration?.settings?.targetAddress ?? ""
+	};
 }
 
 function executeRedstoneRequest(record) {
@@ -186,7 +303,8 @@ function executeRedstoneRequest(record) {
 				dimensionId: record.dimensionId,
 				id: `${record.id}:request:${nonce}`,
 				itemType: record.state.filterItem,
-				maxCount: record.state.requestAmount
+				maxCount: record.state.requestAmount,
+				...logisticsRouting(record)
 			});
 			if (result.ok)
 				break;
@@ -194,15 +312,48 @@ function executeRedstoneRequest(record) {
 			console.warn(`[Create Bedrock] Redstone requester at ${record.id} could not create a depot request: ${error}`);
 		}
 	}
-	return updateRecord(record, { type: "request_result", nonce, success: result.ok });
+	const status = result.order?.state ?? (result.ok ? "pending" : "failed");
+	return updateRecord(record, {
+		type: "request_result",
+		inFlight: status === "pending",
+		nonce,
+		status,
+		success: status === "fulfilled" || status === "partial"
+	});
+}
+
+function refreshRedstoneRequester(record) {
+	if (record.definition.id !== "redstone_requester" || !record.state.requestInFlight)
+		return false;
+	try {
+		const status = depotRequestStatus(`${record.id}:request:${record.state.requestNonce}`);
+		if (!status || status.state === "pending")
+			return false;
+		return updateRecord(record, {
+			type: "request_progress",
+			nonce: record.state.requestNonce,
+			status: status.state
+		}, { persistState: false });
+	} catch (error) {
+		console.warn(`[Create Bedrock] Redstone Requester at ${record.id} could not read request status: ${error}`);
+		return false;
+	}
 }
 
 function refreshStockLink(record) {
 	if (record.definition.id !== "stock_link" || record.state.filterItem === "minecraft:air")
 		return false;
-	const available = adjacentDepotLocations(record)
-		.reduce((count, location) => count + countDepotItem({ dimensionId: record.dimensionId, itemType: record.state.filterItem, location }), 0);
-	return updateRecord(record, { type: "set_stock_available", active: available >= record.state.minimumStock }, { persistState: false });
+	try {
+		const summary = countDepotNetworkItem({
+			dimensionId: record.dimensionId,
+			itemType: record.state.filterItem,
+			...logisticsRouting(record)
+		});
+		return updateRecord(record, { type: "set_stock_available", active: summary.available >= record.state.minimumStock }, { persistState: false });
+	} catch (error) {
+		console.warn(`[Create Bedrock] Stock Link at ${record.id} could not query logistics stock: ${error}`);
+		return false;
+	}
 }
 
 function sameOffset(left, right) {
@@ -244,6 +395,51 @@ function refreshCrushingWheelController(record) {
 	}
 }
 
+function readDisplayRedstoneSource(record, source) {
+	const sourceRecord = devices.get(deviceId(record.dimensionId, source.location));
+	if (sourceRecord)
+		return nativeOutputPower(sourceRecord.state);
+	try {
+		const states = world.getDimension(record.dimensionId).getBlock(source.location)?.permutation?.getAllStates?.() ?? {};
+		for (const property of [ANALOG_OUTPUT_STATE, OUTPUT_STATE, "minecraft:redstone_signal"])
+			if (Number.isInteger(states[property]) && states[property] >= 0 && states[property] <= 15)
+				return states[property];
+		return states[OUTPUT_STATE] === true ? 15 : 0;
+	} catch {
+		return 0;
+	}
+}
+
+/** Display Link stores offsets only; this is the sole world-facing target adapter. */
+function refreshDisplayLink(record) {
+	if (record.definition.id !== "display_link")
+		return false;
+	let write;
+	try {
+		write = resolveDisplayLinkWrite({
+			configuration: record.configuration,
+			location: record.location,
+			readSource: source => readDisplayRedstoneSource(record, source)
+		});
+	} catch (error) {
+		console.warn(`[Create Bedrock] Display Link at ${record.id} could not resolve its source: ${error}`);
+		return false;
+	}
+	let target = devices.get(deviceId(record.dimensionId, write.target));
+	if (!target) {
+		try {
+			target = ensureDevice(world.getDimension(record.dimensionId).getBlock(write.target));
+		} catch {
+			return false;
+		}
+	}
+	if (target?.definition.id !== "nixie_tube")
+		return false;
+	if (write.line >= target.state.display.lines.length)
+		return false;
+	return updateRecord(target, { line: write.line, text: write.text, type: "set_display_text" }, { persistState: false });
+}
+
 function ensureDevice(block) {
 	const descriptor = recordForBlock(block);
 	if (!descriptor)
@@ -253,10 +449,14 @@ function ensureDevice(block) {
 		return record;
 	record = {
 		...descriptor,
+		configuration: createRedstoneDeviceConfiguration(),
+		lectern: descriptor.definition.id === "lectern_controller" ? createLecternControllerState() : undefined,
 		state: createRedstoneDeviceState(descriptor.definition.id)
 	};
 	devices.set(record.id, record);
 	applyStateToBlock(record, block);
+	if (record.definition.id === "nixie_tube")
+		queueNixieDisplay(record.dimensionId);
 	persist();
 	return record;
 }
@@ -270,6 +470,8 @@ function updateRecord(record, action, { persistState = true } = {}) {
 	record.state = next;
 	applyStateToBlock(record);
 	applyRotationSpeedController(record);
+	if (record.definition.id === "nixie_tube")
+		queueNixieDisplay(record.dimensionId);
 	if (record.definition.id === "redstone_link") {
 		refreshRedstoneLinkNetwork(record.dimensionId, previousState.frequency);
 		refreshRedstoneLinkNetwork(record.dimensionId, record.state.frequency);
@@ -281,6 +483,44 @@ function updateRecord(record, action, { persistState = true } = {}) {
 	return true;
 }
 
+function configureRecord(record, player, expectedRevision, patch) {
+	const result = configureRedstoneDevice({
+		configuration: record.configuration,
+		editorId: player?.id,
+		expectedRevision,
+		patch,
+		state: record.state
+	});
+	if (result.conflict) {
+		player?.sendMessage?.("These settings changed while the form was open. Reopen it and try again.");
+		return false;
+	}
+	if (!result.changed)
+		return false;
+	const previousState = record.state;
+	record.configuration = result.configuration;
+	record.state = result.state;
+	if (record.definition.id === "nixie_tube") {
+		record.state = transitionRedstoneDevice(record.state, {
+			brightness: record.configuration.settings.styleBrightness ?? 15,
+			color: record.configuration.settings.styleColor ?? "orange",
+			type: "set_display_style"
+		});
+		if (patch.customText !== undefined)
+			record.state = transitionRedstoneDevice(record.state, { text: patch.customText, type: "set_display_text" });
+		queueNixieDisplay(record.dimensionId);
+	}
+	applyStateToBlock(record);
+	applyRotationSpeedController(record);
+	if (record.definition.id === "redstone_link") {
+		refreshRedstoneLinkNetwork(record.dimensionId, previousState.frequency);
+		refreshRedstoneLinkNetwork(record.dimensionId, record.state.frequency);
+	}
+	persist();
+	player?.sendMessage?.(`${record.definition.id.replaceAll("_", " ")} settings saved.`);
+	return true;
+}
+
 function handleNativeDeviceInput({ block, powerLevel }) {
 	const record = ensureDevice(block);
 	if (!record || !record.definition.input)
@@ -289,24 +529,146 @@ function handleNativeDeviceInput({ block, powerLevel }) {
 	return true;
 }
 
-function bindLinkedController(player, frequency) {
+function replaceSelectedItem(player, itemStack) {
+	try {
+		const container = player?.getComponent?.("minecraft:inventory")?.container;
+		if (!container || !Number.isInteger(player.selectedSlotIndex) || player.selectedSlotIndex < 0)
+			return false;
+		container.setItem(player.selectedSlotIndex, itemStack);
+		return true;
+	} catch {
+		return false;
+	}
+}
+
+function stateForLinkedControllerItem(player, itemStack) {
+	const state = readLinkedControllerItemState(itemStack);
+	const legacy = controllerBindings.get(player?.id);
+	// Migrates controller bindings written by the pre-R1 player-scoped prototype
+	// at the first safe interaction with the actual controller ItemStack.
+	if (legacy && state.revision === 0 && state.channels.every(pair => pair[0] === "minecraft:air" && pair[1] === "minecraft:air"))
+		return { ...state, channels: normalizeLinkedControllerBindings(legacy) };
+	return state;
+}
+
+function createLinkedControllerItem(controllerState) {
+	const itemStack = new ItemStack(LINKED_CONTROLLER_ITEM, 1);
+	writeLinkedControllerItemState(itemStack, controllerState);
+	return itemStack;
+}
+
+function installLinkedControllerInLectern(record, player, itemStack) {
+	if (record.definition.id !== "lectern_controller")
+		return false;
+	try {
+		const result = installLecternController({
+			controller: stateForLinkedControllerItem(player, itemStack),
+			state: record.lectern
+		});
+		if (!result.changed) {
+			player.sendMessage?.("This Lectern Controller already contains a controller. Sneak-break it to recover the stored item.");
+			return false;
+		}
+		if (!replaceSelectedItem(player, undefined))
+			throw new Error("could not remove the installed controller from the selected slot");
+		record.lectern = result.state;
+		controllerBindings.delete(player.id);
+		persist();
+		player.sendMessage?.("Linked Controller installed in Lectern Controller.");
+		return true;
+	} catch (error) {
+		player.sendMessage?.(`Could not install Linked Controller: ${error}`);
+		return false;
+	}
+}
+
+function playerNearLectern(player, record) {
+	if (!player?.location || !record?.location)
+		return false;
+	const dx = player.location.x - (record.location.x + 0.5);
+	const dy = player.location.y - (record.location.y + 0.5);
+	const dz = player.location.z - (record.location.z + 0.5);
+	return dx * dx + dy * dy + dz * dz <= 16;
+}
+
+function openLecternController(record, player) {
 	if (!player?.id)
 		return false;
-	const channel = linkedControllerChannelForSlot(player.selectedSlotIndex);
-	const bindings = setLinkedControllerChannel(controllerBindings.get(player.id), channel, frequency);
-	if (JSON.stringify(controllerBindings.get(player.id)) === JSON.stringify(bindings))
+	const started = beginLecternControllerUse({ playerId: player.id, state: record.lectern, tick: deviceTick });
+	if (!started.changed) {
+		player.sendMessage?.(started.reason === "in_use"
+			? "This Lectern Controller is currently in use by another player."
+			: "Install a Linked Controller before using this Lectern Controller.");
 		return false;
-	controllerBindings.set(player.id, bindings);
+	}
+	record.lectern = started.state;
 	persist();
-	player.sendMessage?.(`Linked Controller channel ${channel + 1} bound to ${bindings[channel][0]} + ${bindings[channel][1]}.`);
+	showLecternControllerUseForm({
+		player,
+		state: record.lectern,
+		trigger(channel) {
+			if (!playerNearLectern(player, record)) {
+				player.sendMessage?.("Move back within range of the Lectern Controller.");
+				return false;
+			}
+			const signal = triggerLecternControllerChannel({ channel, playerId: player.id, state: record.lectern, tick: deviceTick });
+			if (!signal.frequency) {
+				player.sendMessage?.("The Lectern Controller session has expired.");
+				return false;
+			}
+			updateRecord(record, { type: "trigger" });
+			return activateControllerFrequency(player, signal.frequency);
+		},
+		close() {
+			const ended = endLecternControllerUse({ playerId: player.id, state: record.lectern });
+			if (ended.changed) {
+				record.lectern = ended.state;
+				persist();
+			}
+		}
+	});
 	return true;
 }
 
-function activateLinkedController(source) {
+function dropLecternController(event, record) {
+	if (!record?.lectern?.controller)
+		return;
+	try {
+		event.dimension.spawnItem(createLinkedControllerItem(record.lectern.controller), {
+			x: record.location.x + 0.5,
+			y: record.location.y + 0.5,
+			z: record.location.z + 0.5
+		});
+	} catch (error) {
+		console.warn(`[Create Bedrock] Could not recover Lectern Controller item at ${record.id}: ${error}`);
+	}
+}
+
+function bindLinkedController(player, itemStack, frequency) {
+	if (!player?.id || !itemStack)
+		return false;
+	try {
+		const state = stateForLinkedControllerItem(player, itemStack);
+		const channel = linkedControllerChannelForSlot(player.selectedSlotIndex);
+		const result = configureLinkedControllerChannel({ channel, expectedRevision: state.revision, frequency, state });
+		if (!result.changed)
+			return false;
+		writeLinkedControllerItemState(itemStack, result.state);
+		if (!replaceSelectedItem(player, itemStack))
+			throw new Error("could not update the selected controller slot");
+		if (controllerBindings.delete(player.id))
+			persist();
+		player.sendMessage?.(`Linked Controller channel ${channel + 1} bound to ${result.state.channels[channel][0]} + ${result.state.channels[channel][1]}.`);
+		return true;
+	} catch (error) {
+		player.sendMessage?.(`Could not bind this Linked Controller: ${error}`);
+		return false;
+	}
+}
+
+function activateControllerFrequency(source, frequency) {
 	if (!source?.id || !source.dimension?.id || !source.location)
 		return false;
-	const channel = linkedControllerChannelForSlot(source.selectedSlotIndex);
-	const frequency = normalizeLinkedControllerBindings(controllerBindings.get(source.id))[channel];
 	const previous = controllerSignals.get(source.id);
 	controllerSignals.set(source.id, {
 		dimensionId: source.dimension.id,
@@ -318,6 +680,18 @@ function activateLinkedController(source) {
 		refreshRedstoneLinkNetwork(previous.dimensionId, previous.frequency);
 	refreshRedstoneLinkNetwork(source.dimension.id, frequency);
 	return true;
+}
+
+function activateLinkedController(source, itemStack) {
+	if (!source?.id || !itemStack)
+		return false;
+	try {
+		const state = stateForLinkedControllerItem(source, itemStack);
+		return activateControllerFrequency(source, state.channels[linkedControllerChannelForSlot(source.selectedSlotIndex)]);
+	} catch (error) {
+		source.sendMessage?.(`Could not read this Linked Controller: ${error}`);
+		return false;
+	}
 }
 
 /**
@@ -343,7 +717,7 @@ function refreshRedstoneLinkNetwork(dimensionId, frequency) {
 	}
 }
 
-function inventoryFingerprint(block) {
+function inventoryFingerprint(block, filterItem) {
 	try {
 		const container = block?.getComponent("minecraft:inventory")?.container;
 		if (!container)
@@ -351,9 +725,9 @@ function inventoryFingerprint(block) {
 		const contents = [];
 		for (let slot = 0; slot < container.size; slot++) {
 			const item = container.getItem(slot);
-			contents.push(item ? `${slot}:${item.typeId}:${item.amount}` : `${slot}:`);
+			contents.push(item ? { amount: item.amount, typeId: item.typeId } : undefined);
 		}
-		return contents.join("|");
+		return fingerprintInventoryStacks(contents, filterItem);
 	} catch {
 		return "";
 	}
@@ -366,7 +740,7 @@ function adjacentInventoryFingerprint(record) {
 			x: record.location.x + offset.x,
 			y: record.location.y + offset.y,
 			z: record.location.z + offset.z
-		}))).join(";");
+		}), record.state.filterItem)).join(";");
 	} catch {
 		return undefined;
 	}
@@ -375,10 +749,10 @@ function adjacentInventoryFingerprint(record) {
 function setRedstoneLinkFrequency(record, item, player) {
 	if (record.definition.id !== "redstone_link" || !item?.typeId)
 		return false;
-	const frequency = [...record.state.frequency];
 	const slot = player?.isSneaking ? 1 : 0;
-	frequency[slot] = item.typeId;
-	const changed = updateRecord(record, { type: "configure", frequency });
+	const changed = configureRecord(record, player, record.configuration.revision, slot === 0
+		? { frequencyLeft: item.typeId }
+		: { frequencyRight: item.typeId });
 	if (changed)
 		player?.sendMessage?.(`Redstone Link frequency ${slot + 1} set to ${item.typeId}.`);
 	return changed;
@@ -387,7 +761,7 @@ function setRedstoneLinkFrequency(record, item, player) {
 function setLogisticsFilter(record, item, player) {
 	if (!["redstone_requester", "stock_link"].includes(record.definition.id) || !item?.typeId)
 		return false;
-	const changed = updateRecord(record, { type: "configure", filterItem: item.typeId });
+	const changed = configureRecord(record, player, record.configuration.revision, { filterItem: item.typeId });
 	if (changed)
 		player?.sendMessage?.(`${record.definition.id === "stock_link" ? "Stock Link" : "Redstone Requester"} filter set to ${item.typeId}.`);
 	return changed;
@@ -451,10 +825,18 @@ function tickOne(record) {
 	}
 	if (record.definition.id === "stock_link")
 		changed = refreshStockLink(record) || changed;
+	if (record.definition.id === "redstone_requester")
+		changed = refreshRedstoneRequester(record) || changed;
 	if (record.definition.id === "redstone_contact")
 		changed = refreshRedstoneContact(record) || changed;
 	if (record.definition.id === "crushing_wheel_controller")
 		changed = refreshCrushingWheelController(record) || changed;
+	if (record.definition.id === "display_link")
+		changed = refreshDisplayLink(record) || changed;
+	if (record.definition.id === "lectern_controller" && record.lectern?.activeUserId !== "" && record.lectern.activeUntilTick <= deviceTick) {
+		record.lectern = clearLecternControllerSession(record.lectern);
+		changed = true;
+	}
 	return changed;
 }
 
@@ -476,14 +858,20 @@ function restore() {
 				throw new Error("Redstone device state contains an unknown record");
 			const location = assertLocation(record.location);
 			const state = validateRedstoneDeviceState(record.state);
+			const configuration = normalizeRedstoneDeviceConfiguration(record.configuration);
 			const definition = redstoneDeviceForBlock(`createbedrock:${state.kind}`);
 			if (!definition || record.id !== deviceId(record.dimensionId, location))
 				throw new Error("Redstone device state has an invalid identity");
-			devices.set(record.id, { definition, dimensionId: record.dimensionId, id: record.id, location, state });
+			const lectern = definition.id === "lectern_controller"
+				? clearLecternControllerSession(normalizeLecternControllerState(record.lectern))
+				: undefined;
+			devices.set(record.id, { configuration, definition, dimensionId: record.dimensionId, id: record.id, lectern, location, state });
 		}
 		for (const record of devices.values()) {
 			applyStateToBlock(record);
 			applyRotationSpeedController(record);
+			if (record.definition.id === "nixie_tube")
+				queueNixieDisplay(record.dimensionId);
 		}
 		if (devices.size > 0)
 			console.warn(`[Create Bedrock] Restored ${devices.size} redstone devices`);
@@ -492,13 +880,75 @@ function restore() {
 	}
 }
 
+/** Capture only the durable block-scoped state; transient controller signals stay world-local. */
+export function captureRedstoneDeviceMovingData(dimensionId, location) {
+	const record = devices.get(deviceId(dimensionId, location));
+	if (!record)
+		return undefined;
+	return {
+		configuration: clone(record.configuration),
+		...(record.lectern === undefined ? {} : { lectern: clone(record.lectern) }),
+		state: clone(record.state)
+	};
+}
+
+export function detachRedstoneDeviceMovingData(dimensionId, location) {
+	const id = deviceId(dimensionId, location);
+	if (!devices.delete(id))
+		return false;
+	persist();
+	return true;
+}
+
+export function restoreRedstoneDeviceMovingData(dimensionId, location, data) {
+	if (data === undefined)
+		return false;
+	const id = deviceId(dimensionId, location);
+	if (devices.has(id))
+		throw new Error(`Cannot restore moving redstone state over existing device ${id}`);
+	const state = validateRedstoneDeviceState(data?.state);
+	const definition = redstoneDeviceForId(state.kind);
+	if (!definition?.blockId)
+		throw new TypeError("Moving redstone data must identify a block device");
+	const configuration = normalizeRedstoneDeviceConfiguration(data.configuration);
+	const lectern = definition.id === "lectern_controller"
+		? clearLecternControllerSession(normalizeLecternControllerState(data.lectern))
+		: undefined;
+	const record = { configuration, definition, dimensionId, id, lectern, location: assertLocation(location), state };
+	devices.set(id, record);
+	applyStateToBlock(record);
+	applyRotationSpeedController(record);
+	if (record.definition.id === "nixie_tube")
+		queueNixieDisplay(record.dimensionId);
+	persist();
+	return true;
+}
+
+/**
+ * A moving contact can only drive a real Bedrock redstone output on the
+ * stationary counterpart.  Route that edge through the same authoritative
+ * device state used by ordinary world contacts.
+ */
+export function setRedstoneContactFromAssembly(dimensionId, location, active) {
+	if (typeof dimensionId !== "string" || typeof active !== "boolean")
+		throw new TypeError("Assembly contact updates require a dimension and boolean output");
+	let record = devices.get(deviceId(dimensionId, location));
+	if (!record) {
+		const block = world.getDimension(dimensionId).getBlock(location);
+		record = ensureDevice(block);
+	}
+	if (record?.definition.id !== "redstone_contact")
+		return false;
+	return updateRecord(record, { type: "set_contact", active });
+}
+
 export function getRedstoneDeviceDiagnostics() {
 	const byKind = Object.fromEntries(REDSTONE_BLOCK_DEVICES.map(device => [device.id, 0]));
 	for (const record of devices.values())
 		byKind[record.definition.id]++;
 	return {
 		active: devices.size,
-		controllerBindings: controllerBindings.size,
+		legacyControllerBindings: controllerBindings.size,
 		controllerSignals: controllerSignals.size,
 		byKind,
 		roundRobinAfter,
@@ -512,28 +962,83 @@ export function registerRedstoneDevices() {
 	world.afterEvents.playerPlaceBlock.subscribe(event => ensureDevice(event.block));
 	world.afterEvents.playerBreakBlock.subscribe(event => {
 		const id = deviceId(event.dimension.id, event.block.location);
-		if (devices.delete(id))
+		const record = devices.get(id);
+		if (record) {
+			dropLecternController(event, record);
+			devices.delete(id);
+			if (record.definition.id === "nixie_tube")
+				queueNixieDisplay(record.dimensionId);
 			persist();
+		}
 	});
 	world.afterEvents.playerInteractWithBlock.subscribe(event => {
 		const record = ensureDevice(event.block);
+		if (record?.definition.id === "lectern_controller" && event.itemStack?.typeId === LINKED_CONTROLLER_ITEM) {
+			installLinkedControllerInLectern(record, event.player, event.itemStack);
+			return;
+		}
 		if (record?.definition.id === "redstone_link" && event.itemStack?.typeId === LINKED_CONTROLLER_ITEM) {
-			bindLinkedController(event.player, record.state.frequency);
+			bindLinkedController(event.player, event.itemStack, record.state.frequency);
 			return;
 		}
 		if (record?.definition.id === "redstone_link" && event.itemStack)
 			setRedstoneLinkFrequency(record, event.itemStack, event.player);
 		else if (["redstone_requester", "stock_link"].includes(record?.definition.id) && event.itemStack)
 			setLogisticsFilter(record, event.itemStack, event.player);
-		else if (record && !event.itemStack)
-			interact(record, event.player);
+		else if (record && !event.itemStack) {
+			if (record.definition.id === "lectern_controller")
+				openLecternController(record, event.player);
+			else if (CONFIGURABLE_BLOCK_DEVICE_IDS.has(record.definition.id)) {
+				showRedstoneDeviceConfigurationForm({
+					configuration: record.configuration,
+					player: event.player,
+					state: record.state,
+					submit: ({ expectedRevision, patch }) => configureRecord(record, event.player, expectedRevision, patch)
+				});
+			} else
+				interact(record, event.player);
+		}
 	});
 	world.afterEvents.itemUse.subscribe(event => {
-		if (event.itemStack?.typeId === LINKED_CONTROLLER_ITEM)
-			activateLinkedController(event.source);
+		if (event.itemStack?.typeId !== LINKED_CONTROLLER_ITEM)
+			return;
+		if (event.source?.isSneaking) {
+			try {
+				const state = stateForLinkedControllerItem(event.source, event.itemStack);
+				showLinkedControllerConfigurationForm({
+					player: event.source,
+					state,
+					submit: ({ expectedRevision, frequencies }) => {
+						try {
+							const current = stateForLinkedControllerItem(event.source, event.itemStack);
+							const result = configureLinkedControllerChannels({ expectedRevision, frequencies, state: current });
+							if (result.conflict) {
+								event.source.sendMessage?.("This controller changed while the form was open. Reopen it and try again.");
+								return false;
+							}
+							if (!result.changed)
+								return false;
+							writeLinkedControllerItemState(event.itemStack, result.state);
+							if (!replaceSelectedItem(event.source, event.itemStack))
+								throw new Error("could not update the selected controller slot");
+							event.source.sendMessage?.("Linked Controller settings saved.");
+							return true;
+						} catch (error) {
+							event.source.sendMessage?.(`Could not save this Linked Controller: ${error}`);
+							return false;
+						}
+					}
+				});
+			} catch (error) {
+				event.source.sendMessage?.(`Could not open Linked Controller settings: ${error}`);
+			}
+			return;
+		}
+		activateLinkedController(event.source, event.itemStack);
 	});
 	registerTickHandler(() => {
 		deviceTick++;
+		const displaysChanged = flushNixieDisplays();
 		for (const [playerId, signal] of controllerSignals) {
 			if (signal.expiresAt > deviceTick)
 				continue;
@@ -542,7 +1047,7 @@ export function registerRedstoneDevices() {
 		}
 		const ordered = [...devices.values()].sort((left, right) => left.id.localeCompare(right.id));
 		if (ordered.length === 0)
-			return store.tick();
+			return store.tick() || displaysChanged;
 		const start = roundRobinAfter ? Math.max(0, ordered.findIndex(record => record.id > roundRobinAfter)) : 0;
 		const selected = [...ordered.slice(start), ...ordered.slice(0, start)].slice(0, DEVICE_TASK_BUDGET);
 		let changed = false;
@@ -552,7 +1057,7 @@ export function registerRedstoneDevices() {
 		}
 		if (changed)
 			persist();
-		return store.tick() || changed;
+		return store.tick() || changed || displaysChanged;
 	}, DEVICE_TASK_GROUP);
 	system.run(restore);
 }

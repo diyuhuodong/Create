@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { depotId, DepotNetwork } from "../behavior_pack/scripts/logistics/depot-network.js";
+import { ItemPort } from "../behavior_pack/scripts/logistics/item-port.js";
 
 function memoryStorage() {
 	const values = new Map();
@@ -130,6 +131,87 @@ test("DepotNetwork moves an item through a single atomic persisted state domain"
 	assert.deepEqual(network.extract(destination), { count: 3, typeId: "minecraft:iron_ingot" });
 });
 
+test("DepotNetwork recovers an in-flight belt transport through machine-owned managed ports", () => {
+	const storage = memoryStorage();
+	const sourcePort = new ItemPort({ id: "crusher:source:output", size: 1 });
+	const destinationPort = new ItemPort({ id: "crusher:destination:input", size: 1 });
+	const sourceId = "crusher-controller:source:output";
+	const destinationId = "crusher-controller:destination:input";
+	let sourceCheckpoints = 0;
+	let destinationCheckpoints = 0;
+	const network = createNetwork(storage, "createbedrock:managed_belt_ports");
+	network.registerExternalManagedDepot({
+		dimensionId: "minecraft:overworld",
+		id: sourceId,
+		location: { x: 0, y: 64, z: 0 },
+		onPortMutation() {
+			sourceCheckpoints++;
+		},
+		port: sourcePort,
+		role: "output"
+	});
+	network.registerExternalManagedDepot({
+		dimensionId: "minecraft:overworld",
+		id: destinationId,
+		location: { x: 3, y: 64, z: 0 },
+		onPortMutation() {
+			destinationCheckpoints++;
+		},
+		port: destinationPort,
+		role: "input"
+	});
+	network.createBelt({ destinationId, id: "managed-belt", length: 3, sourceId, speed: 96 });
+	assert.deepEqual(sourcePort.insert({ count: 1, typeId: "minecraft:iron_ore" }).accepted, {
+		count: 1,
+		typeId: "minecraft:iron_ore"
+	});
+	advance(network, () => network.diagnostics().transports === 1 && !network.diagnostics().waitingForCommit);
+	assert.equal(sourceCheckpoints, 1);
+	const persistedEndpoint = network.snapshot().find(record => record.kind === "external_managed_depot" && record.id === sourceId);
+	assert.deepEqual(persistedEndpoint, {
+		dimensionId: "minecraft:overworld",
+		id: sourceId,
+		kind: "external_managed_depot",
+		location: { x: 0, y: 64, z: 0 },
+		logistics: { acceptsRequests: true, address: "", networkId: "default", revision: 0 },
+		role: "output"
+	});
+
+	// The machine owner snapshots the two ports. DepotNetwork restores only its
+	// endpoints and transport record, then resumes when the owner reattaches.
+	const sourceSnapshot = sourcePort.snapshot();
+	const destinationSnapshot = destinationPort.snapshot();
+	const restored = createNetwork(storage, "createbedrock:managed_belt_ports");
+	assert.equal(restored.restore().transports, 1);
+	const restoredSource = new ItemPort({ id: "crusher:source:output", size: 1 });
+	const restoredDestination = new ItemPort({ id: "crusher:destination:input", size: 1 });
+	restoredSource.restore(sourceSnapshot);
+	restoredDestination.restore(destinationSnapshot);
+	restored.registerExternalManagedDepot({
+		dimensionId: "minecraft:overworld",
+		id: sourceId,
+		location: { x: 0, y: 64, z: 0 },
+		onPortMutation() {
+			sourceCheckpoints++;
+		},
+		port: restoredSource,
+		role: "output"
+	});
+	restored.registerExternalManagedDepot({
+		dimensionId: "minecraft:overworld",
+		id: destinationId,
+		location: { x: 3, y: 64, z: 0 },
+		onPortMutation() {
+			destinationCheckpoints++;
+		},
+		port: restoredDestination,
+		role: "input"
+	});
+	advance(restored, () => restoredDestination.inspect().slots[0]?.count === 1 && !restored.diagnostics().waitingForCommit);
+	assert.equal(destinationCheckpoints, 1);
+	assert.deepEqual(restoredDestination.inspect().slots[0], { count: 1, typeId: "minecraft:iron_ore" });
+});
+
 test("DepotNetwork supplies Redstone Requester stock through its durable transfer journal", () => {
 	const network = createNetwork(memoryStorage(), "createbedrock:redstone_request");
 	const source = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } });
@@ -140,6 +222,135 @@ test("DepotNetwork supplies Redstone Requester stock through its durable transfe
 	advance(network, () => network.diagnostics().transfers === 0 && !network.diagnostics().waitingForCommit);
 	assert.equal(network.stockCount(destination, "minecraft:copper_ingot"), 8);
 	assert.equal(network.requestItem({ destinationId: destination, id: "request-too-many", itemType: "minecraft:copper_ingot", maxCount: 8 }).reason, "insufficient_total_stock");
+});
+
+test("DepotNetwork routes addressed requests and excludes reserved stock from network availability", () => {
+	const network = createNetwork(memoryStorage(), "createbedrock:addressed_requests");
+	const alpha = network.createDepot({
+		dimensionId: "minecraft:overworld",
+		location: { x: 0, y: 64, z: 0 },
+		logistics: { address: "alpha", networkId: "factory" }
+	});
+	const beta = network.createDepot({
+		dimensionId: "minecraft:overworld",
+		location: { x: 2, y: 64, z: 0 },
+		logistics: { address: "beta", networkId: "factory" }
+	});
+	const foreign = network.createDepot({
+		dimensionId: "minecraft:overworld",
+		location: { x: 4, y: 64, z: 0 },
+		logistics: { address: "alpha", networkId: "warehouse" }
+	});
+	const destination = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 1, y: 64, z: 0 } });
+	network.insert(alpha, { count: 8, typeId: "minecraft:copper_ingot" });
+	network.insert(beta, { count: 5, typeId: "minecraft:copper_ingot" });
+	network.insert(foreign, { count: 9, typeId: "minecraft:copper_ingot" });
+	assert.deepEqual(network.networkStockSummary({ dimensionId: "minecraft:overworld", itemType: "minecraft:copper_ingot", networkId: "factory", targetAddress: "alpha" }), {
+		available: 8, endpointCount: 1, inFlight: 0, physical: 8, reserved: 0
+	});
+	assert.deepEqual(network.networkStockSummary({ dimensionId: "minecraft:the_nether", itemType: "minecraft:copper_ingot", networkId: "factory", targetAddress: "alpha" }), {
+		available: 0, endpointCount: 0, inFlight: 0, physical: 0, reserved: 0
+	});
+	const request = network.requestItem({
+		destinationId: destination,
+		id: "addressed-copper",
+		itemType: "minecraft:copper_ingot",
+		maxCount: 3,
+		networkId: "factory",
+		targetAddress: "alpha"
+	});
+	assert.equal(request.ok, true);
+	assert.equal(request.transfers.length, 1);
+	assert.equal(network.networkStockSummary({ dimensionId: "minecraft:overworld", itemType: "minecraft:copper_ingot", networkId: "factory", targetAddress: "alpha" }).available, 5);
+	assert.equal(network.requestItem({
+		destinationId: destination,
+		id: "missing-address",
+		itemType: "minecraft:copper_ingot",
+		maxCount: 1,
+		networkId: "factory",
+		targetAddress: "gamma"
+	}).reason, "address_unavailable");
+	advance(network, () => network.diagnostics().transfers === 0 && !network.diagnostics().waitingForCommit);
+	assert.equal(network.stockCount(destination, "minecraft:copper_ingot"), 3);
+	assert.equal(network.stockCount(beta, "minecraft:copper_ingot"), 5);
+	assert.equal(network.stockCount(foreign, "minecraft:copper_ingot"), 9);
+});
+
+test("DepotNetwork persists endpoint addresses and rejects stale endpoint edits", () => {
+	const storage = memoryStorage();
+	const first = createNetwork(storage, "createbedrock:endpoint_configuration");
+	const id = first.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } });
+	assert.deepEqual(first.logisticsEndpoint(id), { acceptsRequests: true, address: "", networkId: "default", revision: 0 });
+	const configured = first.configureLogisticsEndpoint(id, {
+		expectedRevision: 0,
+		patch: { acceptsRequests: false, address: "Smelter A", networkId: "Factory" }
+	});
+	assert.equal(configured.changed, true);
+	assert.deepEqual(configured.endpoint, { acceptsRequests: false, address: "Smelter A", networkId: "factory", revision: 1 });
+	assert.equal(first.configureLogisticsEndpoint(id, {
+		expectedRevision: 0,
+		patch: { address: "stale" }
+	}).conflict, true);
+	advance(first, () => !first.diagnostics().waitingForCommit);
+	const restored = createNetwork(storage, "createbedrock:endpoint_configuration");
+	restored.restore();
+	assert.deepEqual(restored.logisticsEndpoint(id), { acceptsRequests: false, address: "Smelter A", networkId: "factory", revision: 1 });
+});
+
+test("DepotNetwork persists one multi-source Requester order until every transfer reaches a terminal state", () => {
+	const storage = memoryStorage();
+	const first = createNetwork(storage, "createbedrock:request_orders");
+	const left = first.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } });
+	const right = first.createDepot({ dimensionId: "minecraft:overworld", location: { x: 2, y: 64, z: 0 } });
+	const destination = first.createDepot({ dimensionId: "minecraft:overworld", location: { x: 1, y: 64, z: 0 }, size: 2 });
+	first.insert(left, { count: 3, typeId: "minecraft:brass_ingot" });
+	first.insert(right, { count: 5, typeId: "minecraft:brass_ingot" });
+	const request = first.requestItem({ destinationId: destination, id: "request-order", itemType: "minecraft:brass_ingot", maxCount: 8 });
+	assert.equal(request.ok, true);
+	assert.equal(request.order.state, "pending");
+	assert.equal(request.order.transferIds.length, 2);
+	advance(first, () => !first.diagnostics().waitingForCommit);
+
+	const restored = createNetwork(storage, "createbedrock:request_orders");
+	restored.restore();
+	assert.equal(restored.requestStatus("request-order")?.state, "pending");
+	advance(restored, () => restored.requestStatus("request-order")?.state === "fulfilled" && restored.diagnostics().transfers === 0 && !restored.diagnostics().waitingForCommit);
+	const completed = restored.requestStatus("request-order");
+	assert.equal(completed?.state, "fulfilled");
+	assert.deepEqual(completed?.completedTransferIds, completed?.transferIds);
+	assert.equal(restored.stockCount(destination, "minecraft:brass_ingot"), 8);
+	assert.equal(restored.requestItem({ destinationId: destination, id: "request-order", itemType: "minecraft:brass_ingot", maxCount: 8 }).duplicate, true);
+});
+
+test("DepotNetwork keeps a Requester order pending while its destination is full, then completes it once", () => {
+	const network = createNetwork(memoryStorage(), "createbedrock:request_order_destination_full");
+	const source = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } });
+	const destination = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 1, y: 64, z: 0 }, maxStackSize: 1 });
+	network.insert(source, { count: 1, typeId: "minecraft:brass_ingot" });
+	network.insert(destination, { count: 1, typeId: "minecraft:dirt" });
+	assert.equal(network.requestItem({ destinationId: destination, id: "blocked-order", itemType: "minecraft:brass_ingot", maxCount: 1 }).ok, true);
+	advance(network, () => network.snapshot().some(record => record.kind === "transfer" && record.state === "escrowed") && !network.diagnostics().waitingForCommit);
+	assert.equal(network.requestStatus("blocked-order")?.state, "pending");
+	assert.deepEqual(network.extract(destination), { count: 1, typeId: "minecraft:dirt" });
+	advance(network, () => network.requestStatus("blocked-order")?.state === "fulfilled" && network.diagnostics().transfers === 0 && !network.diagnostics().waitingForCommit);
+	assert.deepEqual(network.extract(destination), { count: 1, typeId: "minecraft:brass_ingot" });
+});
+
+test("DepotNetwork persists a failed Requester order after a reserved source changes", () => {
+	const storage = memoryStorage();
+	const first = createNetwork(storage, "createbedrock:request_order_source_changed");
+	const source = first.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } });
+	const destination = first.createDepot({ dimensionId: "minecraft:overworld", location: { x: 1, y: 64, z: 0 } });
+	first.insert(source, { count: 2, typeId: "minecraft:brass_ingot" });
+	assert.equal(first.requestItem({ destinationId: destination, id: "changed-order", itemType: "minecraft:brass_ingot", maxCount: 2 }).ok, true);
+	assert.deepEqual(first.extract(source), { count: 2, typeId: "minecraft:brass_ingot" });
+	advance(first, () => first.requestStatus("changed-order")?.state === "failed" && first.diagnostics().transfers === 0 && !first.diagnostics().waitingForCommit);
+	assert.equal(first.requestItem({ destinationId: destination, id: "changed-order", itemType: "minecraft:brass_ingot", maxCount: 2 }).reason, "request_failed");
+
+	const restored = createNetwork(storage, "createbedrock:request_order_source_changed");
+	restored.restore();
+	assert.equal(restored.requestStatus("changed-order")?.state, "failed");
+	assert.equal(restored.stockCount(destination, "minecraft:brass_ingot"), 0);
 });
 
 test("DepotNetwork fulfils one Redstone Requester order from multiple persisted source intents", () => {
@@ -220,6 +431,81 @@ test("DepotNetwork retains escrow while the destination is full and protects act
 	advance(network, () => network.diagnostics().transfers === 0 && !network.diagnostics().waitingForCommit);
 	assert.deepEqual(network.extract(destination), { count: 1, typeId: "minecraft:gold_ingot" });
 	assert.equal(network.canRemoveDepot(destination), true);
+});
+
+test("DepotNetwork re-keys a detached inventory port when an assembly materializes", () => {
+	const network = createNetwork(memoryStorage(), "createbedrock:depot_assembly_move");
+	const sourceLocation = { x: 0, y: 64, z: 0 };
+	const targetLocation = { x: 8, y: 70, z: -3 };
+	const source = network.createDepot({ dimensionId: "minecraft:overworld", location: sourceLocation, size: 2 });
+	network.configureLogisticsEndpoint(source, {
+		expectedRevision: 0,
+		patch: { acceptsRequests: false, address: "assembly-line", networkId: "factory" }
+	});
+	network.insert(source, { count: 12, typeId: "minecraft:iron_ingot" });
+	const captured = network.snapshotDepotForAssembly(source);
+	assert.equal(captured.port.id, source);
+	assert.equal(network.takeDepotForAssembly(source).port.id, source);
+	assert.equal(network.hasDepot(source), false);
+
+	const target = network.restoreDepotFromAssembly({
+		dimensionId: "minecraft:overworld",
+		location: targetLocation,
+		record: captured
+	});
+	assert.equal(target, depotId("minecraft:overworld", targetLocation));
+	assert.deepEqual(depotSlots(network, target), [{ count: 12, typeId: "minecraft:iron_ingot" }, undefined]);
+	assert.deepEqual(network.logisticsEndpoint(target), {
+		acceptsRequests: false,
+		address: "assembly-line",
+		networkId: "factory",
+		revision: 1
+	});
+	assert.equal(network.snapshot().find(record => record.kind === "depot" && record.port.id === target)?.port.id, target);
+});
+
+test("DepotNetwork re-keys historical managed-port receipts with the moved depot", () => {
+	const network = createNetwork(memoryStorage(), "createbedrock:depot_assembly_receipts");
+	const source = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } });
+	const destination = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 1, y: 64, z: 0 } });
+	network.insert(source, { count: 1, typeId: "minecraft:copper_ingot" });
+	network.beginTransfer({ destinationId: destination, id: "receipt-history", maxCount: 1, sourceId: source });
+	advance(network, () => network.diagnostics().transfers === 0 && !network.diagnostics().waitingForCommit);
+	const record = network.takeDepotForAssembly(source);
+	const target = network.restoreDepotFromAssembly({
+		dimensionId: "minecraft:overworld",
+		location: { x: 9, y: 64, z: 0 },
+		record
+	});
+	const restored = network.snapshot().find(candidate => candidate.kind === "depot" && candidate.port.id === target)?.port;
+	assert.ok(restored.extractionReceipts.length > 0);
+	assert.ok(restored.extractionReceipts.every(([, receipt]) => receipt.reservationFingerprint.includes(target)));
+	assert.ok(restored.extractionReceipts.every(([, receipt]) => !receipt.reservationFingerprint.includes(source)));
+});
+
+test("DepotNetwork refuses to detach ports that still own fixed logistics work", () => {
+	const network = createNetwork(memoryStorage(), "createbedrock:depot_assembly_busy");
+	const source = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } });
+	const destination = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 1, y: 64, z: 0 } });
+	network.insert(source, { count: 1, typeId: "minecraft:iron_ingot" });
+	assert.equal(network.beginTransfer({ destinationId: destination, id: "assembly-busy", maxCount: 1, sourceId: source }).ok, true);
+	assert.throws(() => network.snapshotDepotForAssembly(source), /active transfer or logistics connection/);
+	assert.equal(network.hasDepot(source), true);
+});
+
+test("DepotNetwork carries a Creative Crate template through an assembly move", () => {
+	const network = createNetwork(memoryStorage(), "createbedrock:creative_assembly_move");
+	const source = network.createDepot({ dimensionId: "minecraft:overworld", kind: "creative", location: { x: 0, y: 64, z: 0 } });
+	network.setCreativeTemplate(source, { count: 1, typeId: "minecraft:brass_ingot" });
+	const record = network.takeDepotForAssembly(source);
+	const target = network.restoreDepotFromAssembly({
+		dimensionId: "minecraft:overworld",
+		location: { x: 4, y: 64, z: 0 },
+		record
+	});
+	const restored = network.snapshot().find(candidate => candidate.kind === "depot" && candidate.port.id === target);
+	assert.equal(restored.portKind, "creative");
+	assert.deepEqual(restored.port.template, { count: 1, typeId: "minecraft:brass_ingot" });
 });
 
 test("DepotNetwork commits a player deposit only after its physical escrow checkpoint", () => {

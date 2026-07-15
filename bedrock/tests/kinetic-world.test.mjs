@@ -111,20 +111,103 @@ test("KineticWorld propagates and persists generated source speed", () => {
 	assert.equal(restored.speedAt("minecraft:overworld", shaft.location), 0);
 });
 
-test("KineticWorld treats the Rotation Speed Controller as a persisted configurable network source", () => {
+test("KineticWorld captures and restores one moving kinetic node without replacing its neighbors", () => {
 	const world = new KineticWorld();
-	const controller = block("createbedrock:rotation_speed_controller", 0, 64, 0);
+	const motor = block("createbedrock:creative_motor", 0, 64, 0);
 	const shaft = block("createbedrock:shaft", 0, 65, 0);
-	world.trackPlacedBlock(controller);
+	world.trackPlacedBlock(motor);
 	world.trackPlacedBlock(shaft);
-	assert.equal(world.setGeneratedSpeed("minecraft:overworld", controller.location, -96), true);
+	world.setGeneratedSpeed("minecraft:overworld", motor.location, -96);
+	const captured = world.captureNode("minecraft:overworld", motor.location);
+	assert.equal(captured?.generatedSpeed, -96);
+	world.trackBrokenBlock("minecraft:overworld", motor.location);
+	assert.equal(world.captureNode("minecraft:overworld", motor.location), undefined);
+	world.restoreCapturedNode(captured);
+	assert.equal(world.generatedSpeedAt("minecraft:overworld", motor.location), -96);
+	assert.deepEqual(world.getNodesByType("createbedrock:shaft")[0].location, shaft.location);
+});
+
+test("KineticWorld transfers a Rotation Speed Controller target through its powered axial input and upper large cog", () => {
+	const world = new KineticWorld();
+	const motor = facedBlock("createbedrock:creative_motor", -1, 64, 0, "east");
+	const controller = facedBlock("createbedrock:rotation_speed_controller", 0, 64, 0, "east");
+	const wheel = facedBlock("createbedrock:large_cogwheel", 0, 65, 0, "north");
+	const shaft = facedBlock("createbedrock:shaft", 0, 65, 1, "north");
+	world.trackPlacedBlock(motor);
+	world.trackPlacedBlock(controller);
+	world.trackPlacedBlock(wheel);
+	world.trackPlacedBlock(shaft);
+	assert.equal(world.setGeneratedSpeed("minecraft:overworld", controller.location, -96), false);
+	assert.equal(world.setSpeedControllerTarget("minecraft:overworld", controller.location, -96), true);
 	world.tick();
 	assert.equal(world.speedAt("minecraft:overworld", shaft.location), -96);
+	assert.equal(world.speedAt("minecraft:overworld", motor.location), 16);
 
 	const restored = new KineticWorld();
 	restored.restore(world.snapshot());
 	restored.tick();
 	assert.equal(restored.speedAt("minecraft:overworld", shaft.location), -96);
+	assert.equal(restored.speedControllerTargetAt("minecraft:overworld", controller.location), -96);
+	assert.throws(() => restored.setSpeedControllerTarget("minecraft:overworld", controller.location, 257), /between/);
+	assert.equal(restored.setSpeedControllerTarget("minecraft:overworld", controller.location, 0), true);
+	restored.tick();
+	assert.equal(restored.speedAt("minecraft:overworld", shaft.location), 0);
+	assert.equal(restored.speedAt("minecraft:overworld", motor.location), 16);
+});
+
+test("KineticWorld can regulate in the opposite direction when the upper cog is the powered side", () => {
+	const world = new KineticWorld();
+	const controller = facedBlock("createbedrock:rotation_speed_controller", 0, 64, 0, "east");
+	const inputShaft = facedBlock("createbedrock:shaft", 1, 64, 0, "east");
+	const largeCog = facedBlock("createbedrock:large_cogwheel", 0, 65, 0, "north");
+	const motor = facedBlock("createbedrock:creative_motor", 0, 65, -1, "north");
+	for (const placed of [controller, inputShaft, largeCog, motor])
+		world.trackPlacedBlock(placed);
+	world.setSpeedControllerTarget("minecraft:overworld", controller.location, -48);
+	world.tick();
+	assert.equal(world.speedAt("minecraft:overworld", motor.location), 16);
+	assert.equal(world.speedAt("minecraft:overworld", inputShaft.location), -48);
+});
+
+test("KineticWorld does not let an unpowered or invalid Rotation Speed Controller create motion", () => {
+	const unpowered = new KineticWorld();
+	const controller = facedBlock("createbedrock:rotation_speed_controller", 0, 64, 0, "east");
+	const wheel = facedBlock("createbedrock:large_cogwheel", 0, 65, 0, "north");
+	const shaft = facedBlock("createbedrock:shaft", 0, 65, 1, "north");
+	for (const placed of [controller, wheel, shaft])
+		unpowered.trackPlacedBlock(placed);
+	unpowered.setSpeedControllerTarget("minecraft:overworld", controller.location, 64);
+	unpowered.tick();
+	assert.equal(unpowered.speedAt("minecraft:overworld", shaft.location), 0);
+
+	const invalidOutput = new KineticWorld();
+	const motor = facedBlock("createbedrock:creative_motor", -1, 64, 0, "east");
+	const invalidController = facedBlock("createbedrock:rotation_speed_controller", 0, 64, 0, "east");
+	const invalidShaft = facedBlock("createbedrock:shaft", 0, 65, 0, "north");
+	for (const placed of [motor, invalidController, invalidShaft])
+		invalidOutput.trackPlacedBlock(placed);
+	invalidOutput.setSpeedControllerTarget("minecraft:overworld", invalidController.location, 64);
+	invalidOutput.tick();
+	assert.equal(invalidOutput.speedAt("minecraft:overworld", invalidShaft.location), 0);
+});
+
+test("KineticWorld hands only spare input stress capacity to Rotation Speed Controller output", () => {
+	const world = new KineticWorld();
+	const waterWheel = facedBlock("createbedrock:water_wheel", -1, 64, 0, "east");
+	const controller = facedBlock("createbedrock:rotation_speed_controller", 0, 64, 0, "east");
+	const largeCog = facedBlock("createbedrock:large_cogwheel", 0, 65, 0, "north");
+	const shaft = facedBlock("createbedrock:shaft", 0, 65, 1, "north");
+	for (const placed of [waterWheel, controller, largeCog, shaft])
+		world.trackPlacedBlock(placed);
+	for (let z = 2; z <= 10; z++)
+		world.trackPlacedBlock(facedBlock("createbedrock:millstone", 0, 65, z, "north"));
+	world.setGeneratedSpeed("minecraft:overworld", waterWheel.location, 8);
+	world.setSpeedControllerTarget("minecraft:overworld", controller.location, 64);
+	world.tick();
+	const outputNetwork = world.latestResolved.find(network => network.stressImpact === 72);
+	assert.equal(outputNetwork?.stressCapacity, 64);
+	assert.equal(outputNetwork?.overloaded, true);
+	assert.equal(world.speedAt("minecraft:overworld", shaft.location), 0);
 });
 
 test("KineticWorld resumes an active hand crank after a restart", () => {

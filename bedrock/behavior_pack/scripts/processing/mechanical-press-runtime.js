@@ -199,7 +199,12 @@ export function registerMechanicalPresses(getKineticWorld) {
 	registerMovingBlockDataAdapter(PRESS_BLOCK, {
 		capture: capturePress,
 		detach: detachPress,
-		restore: restorePress
+		restore: restorePress,
+		schemaVersion: 1,
+		validate(state) {
+			if (!state || typeof state !== "object" || Array.isArray(state))
+				throw new TypeError("Mechanical Press moving data must be a machine snapshot");
+		}
 	});
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
 		if (event.block.typeId === PRESS_BLOCK) {

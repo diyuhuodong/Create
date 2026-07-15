@@ -1,3 +1,5 @@
+import { isMovableBlockType } from "./movable-blocks.js";
+
 const LEGACY_CONTRAPTION_PART = "createbedrock:contraption_part";
 
 export const CONTRAPTION_PART_TYPES = Object.freeze({
@@ -23,5 +25,5 @@ export const CONTRAPTION_PART_TYPES = Object.freeze({
 export const ALL_CONTRAPTION_PART_TYPES = [LEGACY_CONTRAPTION_PART, ...new Set(Object.values(CONTRAPTION_PART_TYPES))];
 
 export function partTypeFor(blockTypeId) {
-	return CONTRAPTION_PART_TYPES[blockTypeId];
+	return CONTRAPTION_PART_TYPES[blockTypeId] ?? (isMovableBlockType(blockTypeId) ? LEGACY_CONTRAPTION_PART : undefined);
 }

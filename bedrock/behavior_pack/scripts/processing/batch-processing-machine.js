@@ -1,4 +1,4 @@
-import { cloneItemStack, itemStackFingerprint, ItemPort } from "../logistics/item-port.js";
+import { cloneItemStack, itemStackFingerprint, ItemPort, rekeyItemPortSnapshot } from "../logistics/item-port.js";
 
 function clone(value) {
 	return JSON.parse(JSON.stringify(value));
@@ -152,8 +152,8 @@ export class BatchProcessingMachine {
 			throw new TypeError("Batch processing snapshots require ports, outputs, and sequence state");
 		if (snapshot.active !== undefined && (!this.#recipes.has(snapshot.active?.recipeId) || !Number.isFinite(snapshot.active.progress) || snapshot.active.progress < 0 || !Array.isArray(snapshot.active.outputs)))
 			throw new TypeError("Batch processing snapshots contain invalid active work");
-		this.#input.restore(snapshot.input);
-		this.#output.restore(snapshot.output);
+		this.#input.restore(rekeyItemPortSnapshot(snapshot.input, this.#input.id));
+		this.#output.restore(rekeyItemPortSnapshot(snapshot.output, this.#output.id));
 		this.#active = snapshot.active && {
 			ingredients: normalizedIngredients(snapshot.active.ingredients),
 			mode: this.#recipes.get(snapshot.active.recipeId).mode,

@@ -199,7 +199,12 @@ export function registerMillstones(getKineticWorld) {
 	registerMovingBlockDataAdapter("createbedrock:millstone", {
 		capture: captureMillstone,
 		detach: detachMillstone,
-		restore: restoreMillstone
+		restore: restoreMillstone,
+		schemaVersion: 1,
+		validate(state) {
+			if (!state || typeof state !== "object" || Array.isArray(state))
+				throw new TypeError("Millstone moving data must be a machine snapshot");
+		}
 	});
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
 		if (event.block.typeId === "createbedrock:millstone") {

@@ -16,7 +16,7 @@ test("collectConnectedBlocks returns one face-connected assembly", () => {
 	assert.equal(blocks.length, 3);
 });
 
-test("collectConnectedBlocks enforces a bounded prototype size", () => {
+test("collectConnectedBlocks enforces the dynamic-assembly safety limit without retaining the sixteen-block prototype", () => {
 	assert.throws(() => collectConnectedBlocks({
 		start: { x: 0, y: 0, z: 0 },
 		maxBlocks: 1,
@@ -24,7 +24,12 @@ test("collectConnectedBlocks enforces a bounded prototype size", () => {
 	}), /exceeds/);
 	assert.throws(() => collectConnectedBlocks({
 		start: { x: 0, y: 0, z: 0 },
-		maxBlocks: 17,
+		maxBlocks: 513,
 		readBlock: worldWith({ x: 0, y: 0, z: 0 })
-	}), /between one and 16/);
+	}), /between one and 512/);
+	assert.equal(collectConnectedBlocks({
+		start: { x: 0, y: 0, z: 0 },
+		maxBlocks: 17,
+		readBlock: worldWith(...Array.from({ length: 17 }, (_, x) => ({ x, y: 0, z: 0 })))
+	}).length, 17);
 });

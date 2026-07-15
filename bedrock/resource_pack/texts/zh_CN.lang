@@ -96,6 +96,7 @@ tile.createbedrock:pulse_extender.name=脉冲延长器
 tile.createbedrock:pulse_repeater.name=脉冲中继器
 tile.createbedrock:pulse_timer.name=脉冲计时器
 tile.createbedrock:redstone_contact.name=红石触点
+tile.createbedrock:elevator_contact.name=电梯触点
 tile.createbedrock:redstone_link.name=红石链接器
 tile.createbedrock:redstone_requester.name=红石请求器
 tile.createbedrock:rotation_speed_controller.name=转速控制器

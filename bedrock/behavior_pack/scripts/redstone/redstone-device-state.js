@@ -1,4 +1,5 @@
 import { redstoneDeviceForId } from "./redstone-device-catalog.js";
+import { configureDisplayTargetStyle, createDisplayTargetState, normalizeDisplayTargetState, writeDisplayTargetLine } from "./display-target.js";
 import { normalizeRedstoneLinkFrequency } from "./redstone-link-network.js";
 
 export const REDSTONE_DEVICE_STATE_SCHEMA = 1;
@@ -53,10 +54,13 @@ function freshState(kind) {
 		requestAmount: 64,
 		allowPartialRequests: false,
 		lastRequestSucceeded: false,
+		requestInFlight: false,
+		requestStatus: "idle",
 		minimumStock: 1,
 		requestNonce: 0,
 		mode: "transmitter",
 		observedInventory: "",
+		display: createDisplayTargetState(),
 		displayValue: "0",
 		active: false
 	};
@@ -64,8 +68,7 @@ function freshState(kind) {
 
 export function createRedstoneDeviceState(kind, patch = {}) {
 	const state = { ...freshState(kind), ...clone(patch), kind };
-	validateRedstoneDeviceState(state);
-	return state;
+	return validateRedstoneDeviceState(state);
 }
 
 export function validateRedstoneDeviceState(state) {
@@ -94,6 +97,10 @@ export function validateRedstoneDeviceState(state) {
 		throw new RangeError(`Redstone device ${state.kind} request amount must be from 1 through 64`);
 	if (typeof state.allowPartialRequests !== "boolean" || typeof state.lastRequestSucceeded !== "boolean")
 		throw new TypeError(`Redstone device ${state.kind} request flags are invalid`);
+	const requestInFlight = state.requestInFlight ?? false;
+	const requestStatus = state.requestStatus ?? "idle";
+	if (typeof requestInFlight !== "boolean" || !["idle", "pending", "fulfilled", "partial", "failed"].includes(requestStatus))
+		throw new TypeError(`Redstone device ${state.kind} request status is invalid`);
 	if (!Number.isInteger(state.minimumStock) || state.minimumStock < 1 || state.minimumStock > 4096)
 		throw new RangeError(`Redstone device ${state.kind} stock minimum must be from 1 through 4096`);
 	if (!Number.isInteger(state.requestNonce) || state.requestNonce < 0 || state.requestNonce > Number.MAX_SAFE_INTEGER)
@@ -102,7 +109,8 @@ export function validateRedstoneDeviceState(state) {
 		throw new Error(`Redstone device ${state.kind} mode is invalid`);
 	if (typeof state.observedInventory !== "string" || typeof state.displayValue !== "string")
 		throw new TypeError(`Redstone device ${state.kind} text state is invalid`);
-	return clone(state);
+	const display = normalizeDisplayTargetState(state.display);
+	return clone({ ...state, display, requestInFlight, requestStatus });
 }
 
 function configured(state, action) {
@@ -191,12 +199,11 @@ function onInput(state, power) {
 			next.active = powered;
 			next.output = false;
 			break;
-		case "rotation_speed_controller":
-			next.active = powered;
-			break;
 		case "display_link":
 		case "nixie_tube":
 			next.displayValue = String(inputPower);
+			if (next.kind === "nixie_tube")
+				next.display = writeDisplayTargetLine(next.display, { text: next.displayValue }).state;
 			break;
 		default:
 			break;
@@ -236,6 +243,15 @@ function onAction(state, action) {
 				next.output = next.active;
 			}
 			return next;
+		case "nixie_tube":
+			if (action.type === "set_display_text") {
+				const changed = writeDisplayTargetLine(next.display, { line: action.line ?? 0, text: action.text });
+				next.display = changed.state;
+				next.displayValue = changed.state.lines[0];
+			}
+			if (action.type === "set_display_style")
+				next.display = configureDisplayTargetStyle(next.display, { brightness: action.brightness, color: action.color }).state;
+			return next;
 		case "lectern_controller":
 			if (action.type === "trigger") {
 				next.output = true;
@@ -265,7 +281,19 @@ function onAction(state, action) {
 				if (!Number.isInteger(action.nonce) || action.nonce !== next.requestNonce + 1)
 					throw new RangeError("Redstone requester results must advance the persistent request nonce once");
 				next.requestNonce = action.nonce;
-				next.lastRequestSucceeded = action.success === true;
+				next.requestInFlight = action.inFlight === true;
+				next.requestStatus = action.status ?? (next.requestInFlight ? "pending" : action.success === true ? "fulfilled" : "failed");
+				next.lastRequestSucceeded = next.requestStatus === "fulfilled" || next.requestStatus === "partial";
+				next.output = next.lastRequestSucceeded;
+			}
+			if (action.type === "request_progress") {
+				if (!Number.isInteger(action.nonce) || action.nonce !== next.requestNonce)
+					throw new RangeError("Redstone requester progress must match the active persistent request nonce");
+				if (!["pending", "fulfilled", "partial", "failed"].includes(action.status))
+					throw new RangeError("Redstone requester progress has an invalid status");
+				next.requestStatus = action.status;
+				next.requestInFlight = action.status === "pending";
+				next.lastRequestSucceeded = action.status === "fulfilled" || action.status === "partial";
 				next.output = next.lastRequestSucceeded;
 			}
 			return next;

@@ -3,6 +3,7 @@ import { CreativeItemPort } from "./creative-item-port.js";
 import { ItemFilter } from "./item-filter.js";
 import { cloneItemStack, itemStackFingerprint, ItemPort } from "./item-port.js";
 import { ItemTransferJournal } from "./item-transfer-journal.js";
+import { createLogisticsEndpoint, matchesLogisticsEndpoint, normalizeLogisticsAddress, normalizeLogisticsNetworkId, updateLogisticsEndpoint } from "./logistics-address.js";
 
 function assertLocation(location) {
 	if (!location || !Number.isInteger(location.x) || !Number.isInteger(location.y) || !Number.isInteger(location.z))
@@ -16,6 +17,36 @@ function sectionKey(dimensionId, location) {
 
 function clone(value) {
 	return JSON.parse(JSON.stringify(value));
+}
+
+function stableStringify(value) {
+	if (value === null || typeof value !== "object")
+		return JSON.stringify(value);
+	if (Array.isArray(value))
+		return `[${value.map(stableStringify).join(",")}]`;
+	return `{${Object.keys(value).sort().map(key => `${JSON.stringify(key)}:${stableStringify(value[key])}`).join(",")}}`;
+}
+
+function rekeyPortSnapshot(snapshot, id) {
+	const port = clone(snapshot);
+	const sourceId = port.id;
+	port.id = id;
+	if (!Array.isArray(port.extractionReceipts))
+		return port;
+	port.extractionReceipts = port.extractionReceipts.map(([receiptId, receipt]) => {
+		if (typeof receipt?.reservationFingerprint !== "string")
+			return [receiptId, receipt];
+		let reservation;
+		try {
+			reservation = JSON.parse(receipt.reservationFingerprint);
+		} catch {
+			throw new TypeError("Moving depot extraction receipts must be valid reservation snapshots");
+		}
+		if (reservation?.portId !== sourceId)
+			return [receiptId, receipt];
+		return [receiptId, { ...receipt, reservationFingerprint: stableStringify({ ...reservation, portId: id }) }];
+	});
+	return port;
 }
 
 function sameStack(left, right) {
@@ -54,6 +85,14 @@ function assertExternalWithdrawalCallbacks(callbacks) {
 	return callbacks;
 }
 
+function assertManagedPort(port) {
+	if (!port || typeof port.id !== "string" || port.transactionStorage !== "managed"
+		|| typeof port.extract !== "function" || typeof port.insert !== "function" || typeof port.reserve !== "function"
+		|| typeof port.snapshot !== "function" || typeof port.restore !== "function")
+		throw new TypeError("External logistics endpoints require managed ItemPort-compatible storage");
+	return port;
+}
+
 export function depotId(dimensionId, location) {
 	if (typeof dimensionId !== "string" || dimensionId.length === 0)
 		throw new TypeError("Depots require a dimension identifier");
@@ -66,11 +105,13 @@ export class DepotNetwork {
 	#chutes = new Map();
 	#cooldownTicks = 0;
 	#depots = new Map();
+	#externalManagedDepotIds = new Set();
 	#externalDeposits = new Map();
 	#externalWithdrawals = new Map();
 	#funnels = new Map();
 	#journal = new ItemTransferJournal();
 	#onError;
+	#requestOrders = new Map();
 	#retryIntervalTicks;
 	#store;
 	#transports = new Map();
@@ -89,11 +130,15 @@ export class DepotNetwork {
 				this.#waitingForCommit = false;
 			},
 			onError: error => this.#report(error),
-			partitionFor(record) {
-				if (record.kind === "depot")
-					return sectionKey(record.dimensionId, record.location);
+		partitionFor(record) {
+			if (record.kind === "depot")
+				return sectionKey(record.dimensionId, record.location);
+			if (record.kind === "external_managed_depot")
+				return sectionKey(record.dimensionId, record.location);
 				if (record.kind === "transfer")
 					return record.partition;
+				if (record.kind === "request_order")
+					return `request_order:${record.id}`;
 				if (record.kind === "belt")
 					return `belt:${record.id}`;
 				if (record.kind === "transport")
@@ -186,8 +231,12 @@ export class DepotNetwork {
 			throw new RangeError("Belts require a positive length");
 		if (!Number.isFinite(speed))
 			throw new TypeError("Belt speeds must be finite");
-		this.#requireDepot(sourceId);
-		this.#requireDepot(destinationId);
+		const source = this.#requireDepot(sourceId);
+		const destination = this.#requireDepot(destinationId);
+		if (source.externalManaged && source.role !== "output")
+			throw new Error("External managed belt sources must expose an output port");
+		if (destination.externalManaged && destination.role !== "input")
+			throw new Error("External managed belt destinations must expose an input port");
 		this.#belts.set(id, { destinationId, id, length, nextTransport: 0, sourceId, speed });
 		this.#persist();
 		return id;
@@ -257,22 +306,69 @@ export class DepotNetwork {
 		const depot = this.#depots.get(id);
 		if (!depot)
 			return true;
-		if (this.#journal.snapshot().some(record => record.sourceId === id || record.destinationId === id))
+		if (this.#hasDepotRelocationDependency(id))
 			return false;
-		if ([...this.#belts.values()].some(belt => belt.sourceId === id || belt.destinationId === id))
-			return false;
-		if ([...this.#funnels.values()].some(funnel => funnel.sourceId === id || funnel.destinationId === id))
-			return false;
-		if ([...this.#chutes.values()].some(chute => chute.sourceId === id || chute.destinationId === id))
-			return false;
-		if ([...this.#externalDeposits.values()].some(deposit => deposit.depotId === id))
-			return false;
-		if ([...this.#externalWithdrawals.values()].some(withdrawal => withdrawal.depotId === id))
+		// A restored external endpoint is deliberately unattached until its owning
+		// machine restores. Do not dereference that port during early startup.
+		if (!depot.port)
 			return false;
 		const inspection = depot.port.inspect();
 		return Array.isArray(inspection.slots)
 			? inspection.slots.every(stack => stack === undefined)
 			: inspection.template === undefined;
+	}
+
+	/**
+	 * Capture a port for a dynamic assembly without removing it.  Inventory is
+	 * intentionally included: unlike a player break, a contraption carries the
+	 * port as one authoritative object.  Connections and in-flight work remain
+	 * at fixed world coordinates, so those are an explicit safe-refusal.
+	 */
+	snapshotDepotForAssembly(id) {
+		const depot = this.#requireDepot(id);
+		if (this.#hasDepotRelocationDependency(id))
+			throw new Error(`Depot ${id} has an active transfer or logistics connection`);
+		return {
+			logistics: clone(depot.logistics),
+			port: clone(depot.port.snapshot()),
+			portKind: depot.kind,
+			schemaVersion: 1
+		};
+	}
+
+	/** Remove the source identity only after its portable record was validated. */
+	takeDepotForAssembly(id) {
+		const record = this.snapshotDepotForAssembly(id);
+		this.#depots.delete(id);
+		this.#persist();
+		return record;
+	}
+
+	/**
+	 * Re-key a detached port to its materialized world location.  Port receipt
+	 * history is retained, but its location-derived ID is rewritten so stale
+	 * source coordinates cannot own the inventory after disassembly.
+	 */
+	restoreDepotFromAssembly({ dimensionId, location, record }) {
+		if (!record || record.schemaVersion !== 1 || !["depot", "creative"].includes(record.portKind) || !record.port)
+			throw new TypeError("Dynamic assembly depot records require a versioned port snapshot");
+		const normalizedLocation = assertLocation(location);
+		const id = depotId(dimensionId, normalizedLocation);
+		const port = rekeyPortSnapshot(record.port, id);
+		const restored = this.#depotFromRecord({
+			dimensionId,
+			kind: "depot",
+			logistics: clone(record.logistics),
+			location: normalizedLocation,
+			port,
+			portKind: record.portKind
+		});
+		const existing = this.#depots.get(id);
+		if (existing && existing.kind !== restored.kind)
+			throw new Error(`Depot ${id} conflicts with a different port kind`);
+		this.#depots.set(id, restored);
+		this.#persist();
+		return id;
 	}
 
 	canRemoveBelt(id) {
@@ -287,7 +383,7 @@ export class DepotNetwork {
 		return !this.#journal.snapshot().some(record => record.id.startsWith(`funnel:${id}:`));
 	}
 
-	createDepot({ dimensionId, kind = "depot", location, maxStackSize = 64, size = 1 }) {
+	createDepot({ dimensionId, kind = "depot", location, logistics, maxStackSize = 64, size = 1 }) {
 		if (kind !== "depot" && kind !== "creative")
 			throw new TypeError("Logistics ports must be standard depots or creative crates");
 		const id = depotId(dimensionId, location);
@@ -297,12 +393,86 @@ export class DepotNetwork {
 		const depot = {
 			dimensionId,
 			kind,
+			logistics: createLogisticsEndpoint(logistics),
 			location: assertLocation(location),
 			port: kind === "creative" ? new CreativeItemPort({ id }) : new ItemPort({ id, maxStackSize, size })
 		};
 		this.#depots.set(id, depot);
 		this.#persist();
 		return id;
+	}
+
+	/**
+	 * Register a live managed port owned by another durable subsystem. Its
+	 * inventory remains in that subsystem's snapshot; this network persists only
+	 * the stable endpoint identity so belts recover before the owner reattaches.
+	 */
+	registerExternalManagedDepot({ dimensionId, id, location, logistics, onPortMutation, port, role }) {
+		if (typeof id !== "string" || id.length === 0)
+			throw new TypeError("External logistics endpoints require stable identifiers");
+		if (!["input", "output"].includes(role))
+			throw new TypeError("External logistics endpoint roles must be input or output");
+		if (onPortMutation !== undefined && typeof onPortMutation !== "function")
+			throw new TypeError("External logistics endpoint mutation hooks must be functions");
+		const normalizedPort = assertManagedPort(port);
+		const normalizedLocation = assertLocation(location);
+		const existing = this.#depots.get(id);
+		if (existing) {
+			if (!existing.externalManaged || existing.dimensionId !== dimensionId || existing.role !== role
+				|| existing.location.x !== normalizedLocation.x || existing.location.y !== normalizedLocation.y || existing.location.z !== normalizedLocation.z)
+				throw new Error(`External logistics endpoint ${id} conflicts with an existing depot`);
+			existing.port = normalizedPort;
+			existing.onPortMutation = onPortMutation;
+			return id;
+		}
+		this.#depots.set(id, {
+			dimensionId,
+			externalManaged: true,
+			kind: "external",
+			logistics: createLogisticsEndpoint(logistics),
+			location: normalizedLocation,
+			onPortMutation,
+			port: normalizedPort,
+			role
+		});
+		this.#externalManagedDepotIds.add(id);
+		this.#persist();
+		return id;
+	}
+
+	/** A moved owner can release its live port while retaining route recovery metadata. */
+	releaseExternalManagedDepot(id) {
+		const depot = this.#depots.get(id);
+		if (!depot?.externalManaged)
+			return false;
+		depot.port = undefined;
+		return true;
+	}
+
+	removeExternalManagedDepot(id) {
+		const depot = this.#depots.get(id);
+		if (!depot?.externalManaged)
+			return false;
+		if (this.#hasDepotRelocationDependency(id))
+			throw new Error(`External logistics endpoint ${id} still has a fixed connection or active transfer`);
+		this.#depots.delete(id);
+		this.#externalManagedDepotIds.delete(id);
+		this.#persist();
+		return true;
+	}
+
+	configureLogisticsEndpoint(id, { expectedRevision, patch }) {
+		const depot = this.#requireDepot(id);
+		const result = updateLogisticsEndpoint(depot.logistics, { expectedRevision, patch });
+		if (!result.changed)
+			return result;
+		depot.logistics = createLogisticsEndpoint(result.endpoint);
+		this.#persist();
+		return { ...result, endpoint: { ...depot.logistics } };
+	}
+
+	logisticsEndpoint(id) {
+		return { ...this.#requireDepot(id).logistics };
 	}
 
 	setCreativeTemplate(id, template) {
@@ -325,6 +495,7 @@ export class DepotNetwork {
 			externalWithdrawals: this.#externalWithdrawals.size,
 			funnels: this.#funnels.size,
 			journal: this.#journal.diagnostics(),
+			requestOrders: this.#requestOrders.size,
 			transfers: this.#journal.snapshot().length,
 			transports: this.#transports.size,
 			waitingForCommit: this.#waitingForCommit,
@@ -373,6 +544,44 @@ export class DepotNetwork {
 	}
 
 	/**
+	 * Summarize one addressed network without treating pending reservations as
+	 * freely requestable inventory. `inFlight` is escrowed stock already removed
+	 * from a source but not yet delivered.
+	 */
+	networkStockSummary({ dimensionId, itemType, networkId, targetAddress = "" }) {
+		if (typeof dimensionId !== "string" || dimensionId.length === 0 || typeof itemType !== "string" || itemType.length === 0)
+			throw new TypeError("Network stock summaries require a dimension and non-empty item identifier");
+		const routing = { networkId: normalizeLogisticsNetworkId(networkId), targetAddress: normalizeLogisticsAddress(targetAddress) };
+		// Managed machine ports are belt-only in this phase. Their ItemPort IDs
+		// belong to the machine, rather than the depot-address namespace used by
+		// Redstone requester journals.
+		const endpoints = [...this.#depots.values()]
+			.filter(depot => !depot.externalManaged && depot.port && depot.dimensionId === dimensionId && matchesLogisticsEndpoint(depot.logistics, routing));
+		const endpointIds = new Set(endpoints.map(depot => depot.port.id));
+		let physical = endpoints.reduce((count, depot) => count + this.stockCount(depot.port.id, itemType), 0);
+		let reserved = 0;
+		let inFlight = 0;
+		for (const transfer of this.#journal.snapshot()) {
+			if (!endpointIds.has(transfer.sourceId))
+				continue;
+			const stack = transfer.state === "intent" ? transfer.reservation?.item : transfer.item;
+			if (stack?.typeId !== itemType)
+				continue;
+			if (transfer.state === "intent")
+				reserved += stack.count;
+			else
+				inFlight += stack.count;
+		}
+		return {
+			available: Math.max(0, physical - reserved),
+			endpointCount: endpoints.length,
+			inFlight,
+			physical,
+			reserved
+		};
+	}
+
+	/**
 	 * Reserve matching stock through the ordinary crash-safe transfer journal.
 	 *
 	 * A Redstone Requester must be able to fulfil a single order from more than
@@ -380,23 +589,37 @@ export class DepotNetwork {
 	 * this keeps extraction/restart recovery exactly the same as a normal depot
 	 * transfer while allowing one request to fan out safely.
 	 */
-	requestItem({ allowPartial = false, destinationId, id, itemType, maxCount }) {
+	requestItem({ allowPartial = false, destinationId, id, itemType, maxCount, networkId = "default", targetAddress = "" }) {
 		if (typeof allowPartial !== "boolean" || typeof itemType !== "string" || itemType.length === 0
 			|| !Number.isInteger(maxCount) || maxCount < 1)
 			throw new TypeError("Depot item requests require a filter, positive amount, and partial-request flag");
+		const existing = this.#requestOrders.get(id);
+		if (existing)
+			return {
+				duplicate: true,
+				ok: existing.state !== "failed",
+				order: clone(existing),
+				...(existing.state === "failed" ? { reason: "request_failed" } : {})
+			};
 		const destination = this.#requireDepot(destinationId);
 		if (this.#isDepotWithdrawalLocked(destinationId))
 			return { ok: false, reason: "destination_withdrawal_active" };
+		const routing = { networkId: normalizeLogisticsNetworkId(networkId), targetAddress: normalizeLogisticsAddress(targetAddress) };
 		const candidates = [...this.#depots.values()]
-			.filter(depot => depot.port.id !== destinationId
+			.filter(depot => !depot.externalManaged && depot.port && depot.dimensionId === destination.dimensionId
+				&& depot.port.id !== destinationId
+				&& matchesLogisticsEndpoint(depot.logistics, routing)
 				&& !this.#isDepotWithdrawalLocked(depot.port.id)
 				&& !this.#journal.hasSource(depot.port.id))
-			.map(depot => ({ available: this.stockCount(depot.port.id, itemType), id: depot.port.id }))
+			.map(depot => ({
+				available: this.#availableStockAt(depot.port.id, itemType),
+				id: depot.port.id
+			}))
 			.filter(candidate => candidate.available > 0)
 			.sort((left, right) => right.available - left.available || left.id.localeCompare(right.id));
 		const available = candidates.reduce((total, candidate) => total + candidate.available, 0);
 		if (available === 0)
-			return { ok: false, reason: "item_unavailable" };
+			return { ok: false, reason: targetAddress === "" ? "item_unavailable" : "address_unavailable" };
 		if (!allowPartial && available < maxCount)
 			return { ok: false, reason: "insufficient_total_stock" };
 
@@ -429,13 +652,32 @@ export class DepotNetwork {
 		if (transfers.length === 0)
 			return { ok: false, reason: "item_unavailable" };
 
+		const order = {
+			completedTransferIds: [],
+			destinationId,
+			id,
+			requested,
+			reserved: requested - remaining,
+			state: "pending",
+			transferIds: transfers.map(transfer => transfer.id)
+		};
+		this.#requestOrders.set(id, order);
 		this.#persist();
 		return {
 			ok: true,
+			order: clone(order),
+			routing,
 			requested,
 			reserved: requested - remaining,
 			transfers: transfers.map(transfer => clone(transfer))
 		};
+	}
+
+	requestStatus(id) {
+		if (typeof id !== "string" || id.length === 0)
+			throw new TypeError("Request status lookups require an identifier");
+		const order = this.#requestOrders.get(id);
+		return order ? clone(order) : undefined;
 	}
 
 	removeDepot(id) {
@@ -484,12 +726,17 @@ export class DepotNetwork {
 		const externalDeposits = [];
 		const externalWithdrawals = [];
 		const funnels = [];
+		const requestOrders = [];
 		const transfers = [];
 		const transports = [];
 		for (const record of restored.records) {
 			try {
 				if (record?.kind === "transfer") {
 					transfers.push(this.#transferFromRecord(record));
+					continue;
+				}
+				if (record?.kind === "request_order") {
+					requestOrders.push(record);
 					continue;
 				}
 				if (record?.kind === "belt") {
@@ -516,10 +763,12 @@ export class DepotNetwork {
 					externalWithdrawals.push(record);
 					continue;
 				}
-				const depot = this.#depotFromRecord(record);
-				if (depots.has(depot.port.id))
-					throw new Error(`duplicate depot ${depot.port.id}`);
-				depots.set(depot.port.id, depot);
+				const depot = record?.kind === "external_managed_depot"
+					? this.#externalManagedDepotFromRecord(record)
+					: this.#depotFromRecord(record);
+				if (depots.has(depot.id))
+					throw new Error(`duplicate depot ${depot.id}`);
+				depots.set(depot.id, depot);
 			} catch (error) {
 				this.#report(new Error(`Ignored invalid depot record: ${error}`));
 			}
@@ -590,13 +839,28 @@ export class DepotNetwork {
 				this.#report(new Error(`Ignored invalid external depot withdrawal: ${error}`));
 			}
 		}
+		const restoredRequestOrders = new Map();
+		for (const record of requestOrders) {
+			try {
+				const order = this.#requestOrderFromRecord(record, depots);
+				if (restoredRequestOrders.has(order.id))
+					throw new Error(`duplicate request order ${order.id}`);
+				restoredRequestOrders.set(order.id, order);
+			} catch (error) {
+				this.#report(new Error(`Ignored invalid request order: ${error}`));
+			}
+		}
 		this.#journal.restore(transfers);
 		this.#belts = restoredBelts;
 		this.#chutes = restoredChutes;
 		this.#depots = depots;
+		this.#externalManagedDepotIds = new Set([...depots.entries()]
+			.filter(([, depot]) => depot.externalManaged)
+			.map(([id]) => id));
 		this.#externalDeposits = restoredExternalDeposits;
 		this.#externalWithdrawals = restoredExternalWithdrawals;
 		this.#funnels = restoredFunnels;
+		this.#requestOrders = restoredRequestOrders;
 		this.#transports = restoredTransports;
 		for (const warning of restored.warnings)
 			this.#report(new Error(`Ignored corrupt depot shard ${warning.partition}: ${warning.error}`));
@@ -737,7 +1001,30 @@ export class DepotNetwork {
 				size: record.port.slots.length
 			});
 		port.restore(record.port);
-		return { dimensionId: record.dimensionId, kind, location, port };
+		return {
+			dimensionId: record.dimensionId,
+			id,
+			kind,
+			logistics: createLogisticsEndpoint(record.logistics),
+			location,
+			port
+		};
+	}
+
+	#externalManagedDepotFromRecord(record) {
+		if (record?.kind !== "external_managed_depot" || typeof record.id !== "string" || record.id.length === 0
+			|| typeof record.dimensionId !== "string" || !["input", "output"].includes(record.role))
+			throw new TypeError("External managed depot records require an identity, location, and role");
+		return {
+			dimensionId: record.dimensionId,
+			externalManaged: true,
+			id: record.id,
+			kind: "external",
+			logistics: createLogisticsEndpoint(record.logistics),
+			location: assertLocation(record.location),
+			port: undefined,
+			role: record.role
+		};
 	}
 
 	#externalDepositFromRecord(record, depots) {
@@ -804,6 +1091,28 @@ export class DepotNetwork {
 		};
 	}
 
+	#requestOrderFromRecord(record, depots) {
+		if (record?.kind !== "request_order" || typeof record.id !== "string" || record.id.length === 0
+			|| typeof record.destinationId !== "string" || !depots.has(record.destinationId)
+			|| !Number.isInteger(record.requested) || record.requested < 1
+			|| !Number.isInteger(record.reserved) || record.reserved < 1 || record.reserved > record.requested
+			|| !["pending", "fulfilled", "partial", "failed"].includes(record.state)
+			|| !Array.isArray(record.transferIds) || record.transferIds.length < 1
+			|| record.transferIds.some(id => typeof id !== "string" || id.length === 0)
+			|| !Array.isArray(record.completedTransferIds ?? [])
+			|| (record.completedTransferIds ?? []).some(id => typeof id !== "string" || !record.transferIds.includes(id)))
+			throw new TypeError("Request orders require a destination, positive amounts, state, and transfer IDs");
+		return {
+			completedTransferIds: [...new Set(record.completedTransferIds ?? [])].sort(),
+			destinationId: record.destinationId,
+			id: record.id,
+			requested: record.requested,
+			reserved: record.reserved,
+			state: record.state,
+			transferIds: [...new Set(record.transferIds)].sort()
+		};
+	}
+
 	#launchBeltTransport() {
 		for (const belt of [...this.#belts.values()].sort((left, right) => left.id.localeCompare(right.id))) {
 			if (belt.speed === 0 || [...this.#transports.values()].some(transport => transport.beltId === belt.id))
@@ -813,7 +1122,8 @@ export class DepotNetwork {
 			const sourceId = belt.speed > 0 ? belt.sourceId : belt.destinationId;
 			const destinationId = belt.speed > 0 ? belt.destinationId : belt.sourceId;
 			const source = this.#depots.get(sourceId)?.port;
-			if (!source)
+			const destination = this.#depots.get(destinationId)?.port;
+			if (!source || !destination)
 				continue;
 			const reservation = source.reserve();
 			if (!reservation)
@@ -821,6 +1131,7 @@ export class DepotNetwork {
 			const sequence = belt.nextTransport++;
 			const id = `${belt.id}:${sequence}`;
 			const item = source.extract(reservation, { receiptId: `belt:${belt.id}:extract:${sequence}` });
+			this.#notifyExternalPortMutation(sourceId);
 			this.#transports.set(id, {
 				attempt: 0,
 				beltId: belt.id,
@@ -846,16 +1157,40 @@ export class DepotNetwork {
 		}
 	}
 
+	#notifyExternalPortMutation(id) {
+		const callback = this.#depots.get(id)?.onPortMutation;
+		if (!callback)
+			return;
+		try {
+			callback();
+		} catch (error) {
+			this.#report(new Error(`External logistics endpoint ${id} could not checkpoint its owner: ${error}`));
+		}
+	}
+
 	#records() {
 		const depots = [...this.#depots.values()]
+			.filter(depot => !depot.externalManaged)
 			.map(depot => ({
 				dimensionId: depot.dimensionId,
 				kind: "depot",
+				logistics: { ...depot.logistics },
 				location: { ...depot.location },
 				portKind: depot.kind,
 				port: depot.port.snapshot()
 			}))
 			.sort((left, right) => left.port.id.localeCompare(right.port.id));
+		const externalManagedDepots = [...this.#depots.entries()]
+			.filter(([, depot]) => depot.externalManaged)
+			.map(([id, depot]) => ({
+				dimensionId: depot.dimensionId,
+				id,
+				kind: "external_managed_depot",
+				logistics: { ...depot.logistics },
+				location: { ...depot.location },
+				role: depot.role
+			}))
+			.sort((left, right) => left.id.localeCompare(right.id));
 		const belts = [...this.#belts.values()]
 			.map(belt => ({ ...belt, kind: "belt" }))
 			.sort((left, right) => left.id.localeCompare(right.id));
@@ -887,10 +1222,13 @@ export class DepotNetwork {
 			.map(withdrawal => ({ ...withdrawal, item: cloneItemStack(withdrawal.item), kind: "external_withdrawal", reservation: clone(withdrawal.reservation), target: clone(withdrawal.target) }))
 			.sort((left, right) => left.id.localeCompare(right.id));
 		const transfers = this.#journal.snapshot().map(record => ({ ...record, kind: "transfer" }));
+		const requestOrders = [...this.#requestOrders.values()]
+			.map(order => ({ ...order, completedTransferIds: [...order.completedTransferIds], kind: "request_order", transferIds: [...order.transferIds] }))
+			.sort((left, right) => left.id.localeCompare(right.id));
 		const transports = [...this.#transports.values()]
 			.map(transport => ({ ...transport, item: cloneItemStack(transport.item), kind: "transport" }))
 			.sort((left, right) => left.id.localeCompare(right.id));
-		return [...depots, ...belts, ...funnels, ...chutes, ...externalDeposits, ...externalWithdrawals, ...transfers, ...transports];
+		return [...depots, ...externalManagedDepots, ...belts, ...funnels, ...chutes, ...externalDeposits, ...externalWithdrawals, ...requestOrders, ...transfers, ...transports];
 	}
 
 	#report(error) {
@@ -906,11 +1244,30 @@ export class DepotNetwork {
 		return depot;
 	}
 
+	#availableStockAt(id, itemType) {
+		let available = this.stockCount(id, itemType);
+		for (const transfer of this.#journal.snapshot())
+			if (transfer.sourceId === id && transfer.state === "intent" && transfer.reservation?.item?.typeId === itemType)
+				available -= transfer.reservation.item.count;
+		return Math.max(0, available);
+	}
+
 	#isDepotBusy(id) {
 		return this.#isDepotWithdrawalLocked(id)
 			|| this.#journal.snapshot().some(record => record.sourceId === id || record.destinationId === id)
 			|| [...this.#transports.values()].some(transport => transport.sourceId === id || transport.destinationId === id)
 			|| [...this.#externalDeposits.values()].some(deposit => deposit.depotId === id);
+	}
+
+	#hasDepotRelocationDependency(id) {
+		return this.#journal.snapshot().some(record => record.sourceId === id || record.destinationId === id)
+			|| [...this.#belts.values()].some(belt => belt.sourceId === id || belt.destinationId === id)
+			|| [...this.#funnels.values()].some(funnel => funnel.sourceId === id || funnel.destinationId === id)
+			|| [...this.#chutes.values()].some(chute => chute.sourceId === id || chute.destinationId === id)
+			|| [...this.#transports.values()].some(transport => transport.sourceId === id || transport.destinationId === id)
+			|| [...this.#externalDeposits.values()].some(deposit => deposit.depotId === id)
+			|| [...this.#externalWithdrawals.values()].some(withdrawal => withdrawal.depotId === id)
+			|| [...this.#requestOrders.values()].some(order => order.state === "pending" && order.destinationId === id);
 	}
 
 	#isDepotWithdrawalLocked(id) {
@@ -945,14 +1302,14 @@ export class DepotNetwork {
 		}
 		const endpointId = transport.progress === 1 ? transport.destinationId : transport.sourceId;
 		const destination = this.#depots.get(endpointId)?.port;
-		if (!destination) {
-			this.#report(new Error(`Transport ${transport.id} has no endpoint depot`));
+		if (!destination)
 			return false;
-		}
 		if (this.#isDepotWithdrawalLocked(endpointId))
 			return false;
 		const operation = transport.progress === 1 ? "deliver" : "return";
 		const result = destination.insert(transport.item, { receiptId: `belt:${transport.id}:${operation}:${transport.attempt}` });
+		if (result.accepted)
+			this.#notifyExternalPortMutation(endpointId);
 		if (result.remainder) {
 			transport.attempt++;
 			transport.item = result.remainder;
@@ -969,11 +1326,15 @@ export class DepotNetwork {
 				continue;
 			if (this.#isDepotWithdrawalLocked(funnel.sourceId) || this.#isDepotWithdrawalLocked(funnel.destinationId))
 				continue;
+			const source = this.#depots.get(funnel.sourceId)?.port;
+			const destination = this.#depots.get(funnel.destinationId)?.port;
+			if (!source || !destination)
+				continue;
 			const result = this.#journal.begin({
-				destination: this.#depots.get(funnel.destinationId)?.port,
+				destination,
 				id: `funnel:${funnel.id}:${funnel.nextTransfer}`,
 				predicate: stack => funnel.filter.accepts(stack),
-				source: this.#depots.get(funnel.sourceId)?.port
+				source
 			});
 			if (!result.ok)
 				continue;
@@ -988,11 +1349,15 @@ export class DepotNetwork {
 		for (const chute of [...this.#chutes.values()].sort((left, right) => left.id.localeCompare(right.id))) {
 			if (this.#isDepotWithdrawalLocked(chute.sourceId) || this.#isDepotWithdrawalLocked(chute.destinationId))
 				continue;
+			const source = this.#depots.get(chute.sourceId)?.port;
+			const destination = this.#depots.get(chute.destinationId)?.port;
+			if (!source || !destination)
+				continue;
 			const result = this.#journal.begin({
-				destination: this.#depots.get(chute.destinationId)?.port,
+				destination,
 				id: `chute:${chute.id}:${chute.nextTransfer}`,
 				predicate: stack => chute.filter.accepts(stack),
-				source: this.#depots.get(chute.sourceId)?.port
+				source
 			});
 			if (!result.ok)
 				continue;
@@ -1200,11 +1565,31 @@ export class DepotNetwork {
 		const result = record.state === "intent"
 			? this.#journal.extract(record.id, id => this.#depots.get(id)?.port)
 			: this.#journal.deliver(record.id, id => this.#depots.get(id)?.port);
-		if (result.ok || result.reason === "destination_full" || result.reason === "source_changed")
+		this.#updateRequestOrder(record.id, result);
+		if (result.ok || result.reason === "destination_full" || result.reason === "source_changed" || result.reason === "source_missing")
 			this.#persist();
 		if (!result.ok)
 			this.#cooldownTicks = this.#retryIntervalTicks;
 		return true;
+	}
+
+	#updateRequestOrder(transferId, result) {
+		const order = [...this.#requestOrders.values()].find(candidate => candidate.state === "pending" && candidate.transferIds.includes(transferId));
+		if (!order)
+			return false;
+		if (result.state === "committed" && result.ok) {
+			if (!order.completedTransferIds.includes(transferId))
+				order.completedTransferIds.push(transferId);
+			const remaining = order.transferIds.filter(id => !order.completedTransferIds.includes(id));
+			if (remaining.length === 0)
+				order.state = order.reserved === order.requested ? "fulfilled" : "partial";
+			return true;
+		}
+		if (["source_changed", "source_missing"].includes(result.reason)) {
+			order.state = "failed";
+			return true;
+		}
+		return false;
 	}
 
 	#readExternalStack(container, slot, decodeStack) {

@@ -211,6 +211,20 @@ export function setKineticGeneratedSpeed(dimensionId, location, speed) {
 	return changed;
 }
 
+/**
+ * Set the requested output speed of a Rotation Speed Controller. Unlike a
+ * generated source, the controller only transfers capacity from a powered
+ * kinetic side through a valid large-cog output.
+ */
+export function setKineticSpeedControllerTarget(dimensionId, location, speed) {
+	if (typeof dimensionId !== "string" || !location || !Number.isFinite(speed))
+		throw new TypeError("Rotation Speed Controller updates require a dimension, location, and finite target speed");
+	const changed = kineticWorld.setSpeedControllerTarget(dimensionId, location, speed);
+	if (changed)
+		persist();
+	return changed;
+}
+
 function restore() {
 	try {
 		const restored = shardedPersistence.read();

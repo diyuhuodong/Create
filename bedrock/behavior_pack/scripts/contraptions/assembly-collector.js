@@ -1,4 +1,4 @@
-import { MAX_CONTRAPTION_BLOCKS } from "./movable-blocks.js";
+import { MAX_DYNAMIC_ASSEMBLY_BLOCKS } from "./dynamic-assembly-snapshot.js";
 
 const NEIGHBOR_OFFSETS = [
 	[1, 0, 0],
@@ -13,11 +13,11 @@ function keyFor(location) {
 	return `${location.x}:${location.y}:${location.z}`;
 }
 
-export function collectConnectedBlocks({ start, readBlock, maxBlocks = MAX_CONTRAPTION_BLOCKS, canCollect = () => true }) {
+export function collectConnectedBlocks({ start, readBlock, maxBlocks = MAX_DYNAMIC_ASSEMBLY_BLOCKS, canCollect = () => true }) {
 	if (typeof readBlock !== "function")
 		throw new TypeError("Contraption collection requires readBlock()");
-	if (!Number.isInteger(maxBlocks) || maxBlocks < 1 || maxBlocks > MAX_CONTRAPTION_BLOCKS)
-		throw new RangeError(`Contraption collection limit must be between one and ${MAX_CONTRAPTION_BLOCKS}`);
+	if (!Number.isInteger(maxBlocks) || maxBlocks < 1 || maxBlocks > MAX_DYNAMIC_ASSEMBLY_BLOCKS)
+		throw new RangeError(`Contraption collection limit must be between one and ${MAX_DYNAMIC_ASSEMBLY_BLOCKS}`);
 
 	const first = readBlock(start);
 	if (!first || !canCollect(first))
@@ -34,7 +34,7 @@ export function collectConnectedBlocks({ start, readBlock, maxBlocks = MAX_CONTR
 
 		blocks.push({ ...block, location: { ...location } });
 		if (blocks.length > maxBlocks)
-			throw new RangeError(`Contraption exceeds the ${maxBlocks} block prototype limit`);
+			throw new RangeError(`Contraption exceeds the ${maxBlocks} block collection limit`);
 
 		for (const [x, y, z] of NEIGHBOR_OFFSETS) {
 			const adjacent = { x: location.x + x, y: location.y + y, z: location.z + z };

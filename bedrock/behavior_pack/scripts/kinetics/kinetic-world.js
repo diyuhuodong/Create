@@ -31,16 +31,13 @@ export const KINETIC_BLOCKS = {
 		stressCapacity: 16384
 	},
 	"createbedrock:rotation_speed_controller": {
-		// Bedrock does not expose Java Create's per-cog propagation hook. Model
-		// the controller as a configurable network source instead, so its target
-		// speed drives every ordinary shaft/cog/belt connection without requiring
-		// an adjacent Creative Motor. The target remains persisted with the
-		// kinetic graph and is switched by the redstone-device runtime.
-		kind: "configurable_source",
-		axis: "y",
+		// A controller has an axial input and an output through the perpendicular
+		// large cog directly above it. It is deliberately not a source: #resolve
+		// transfers only spare capacity from the powered side to the target side.
+		kind: "speed_controller",
+		axis: "x",
 		defaultSpeed: 16,
-		maxSpeed: 256,
-		stressCapacity: 16384
+		maxSpeed: 256
 	},
 	"createbedrock:shaft": {
 		kind: "transmission",
@@ -244,6 +241,36 @@ function isSplitGearshift(configuration) {
 	return configuration.kind === "gearshift" || configuration.kind === "sequenced_gearshift";
 }
 
+function isSpeedController(configuration) {
+	return configuration.kind === "speed_controller";
+}
+
+function speedControllerPortId(node, side) {
+	return `${node.id}:speed_controller:${side}`;
+}
+
+function isSpeedControllerOutput(controller, adjacent) {
+	return isSpeedController(controller.configuration)
+		&& adjacent.configuration.kind === "large_cogwheel"
+		&& controller.axis !== "y"
+		&& adjacent.axis !== "y"
+		&& controller.axis !== adjacent.axis
+		&& adjacent.location.x === controller.location.x
+		&& adjacent.location.y === controller.location.y + 1
+		&& adjacent.location.z === controller.location.z;
+}
+
+function speedControllerPortFor(controller, adjacent) {
+	if (isSpeedControllerOutput(controller, adjacent))
+		return speedControllerPortId(controller, "output");
+	const directionAxis = axisOfOffset(
+		adjacent.location.x - controller.location.x,
+		adjacent.location.y - controller.location.y,
+		adjacent.location.z - controller.location.z
+	);
+	return directionAxis === controller.axis ? speedControllerPortId(controller, "input") : undefined;
+}
+
 function normalizeSequence(program) {
 	if (!Array.isArray(program) || program.length === 0 || program.length > 16)
 		throw new RangeError("Sequenced gearshift programs require one to sixteen steps");
@@ -279,6 +306,12 @@ function connectionRatio(left, right, x, y, z) {
 	const directionAxis = axisOfOffset(x, y, z);
 	if (!directionAxis)
 		return undefined;
+	const controller = isSpeedController(left.configuration) ? left
+		: isSpeedController(right.configuration) ? right : undefined;
+	if (controller) {
+		const adjacent = controller === left ? right : left;
+		return speedControllerPortFor(controller, adjacent) ? 1 : undefined;
+	}
 	const chainDrives = new Set(["chain_drive", "chain_gearshift"]);
 	if (chainDrives.has(left.configuration.kind) && chainDrives.has(right.configuration.kind)) {
 		const chainAxis = axis => ({ x: "z", y: "z", z: "y" })[axis];
@@ -358,6 +391,9 @@ export class KineticWorld {
 			generatedSpeed: configuration.kind === "configurable_source"
 				? previous?.generatedSpeed ?? configuration.defaultSpeed
 				: previous?.generatedSpeed ?? 0,
+			targetSpeed: isSpeedController(configuration)
+				? previous?.targetSpeed ?? configuration.defaultSpeed
+				: 0,
 			sourceCapacity: configuration.kind === "external_source" ? previous?.sourceCapacity ?? 0 : 0,
 			reversed: isSplitGearshift(configuration) ? previous?.reversed ?? reversedFor(block, configuration) : false,
 			sequence: configuration.kind === "sequenced_gearshift"
@@ -391,6 +427,33 @@ export class KineticWorld {
 		return deleted || removedLinks;
 	}
 
+	/** Capture exactly one configured node for a moving-block data adapter. */
+	captureNode(dimensionId, location) {
+		if (typeof dimensionId !== "string" || !Number.isInteger(location?.x) || !Number.isInteger(location?.y) || !Number.isInteger(location?.z))
+			throw new TypeError("Kinetic node capture requires a dimension and integer location");
+		return this.snapshot().nodes.find(node => node.dimensionId === dimensionId
+			&& node.location.x === location.x && node.location.y === location.y && node.location.z === location.z);
+	}
+
+	/**
+	 * Reinstates one captured node without replacing unrelated world state. Any
+	 * belt attachment is restored separately from the assembly attachment record.
+	 */
+	restoreCapturedNode(node) {
+		if (!node?.dimensionId || !KINETIC_BLOCKS[node.typeId]
+			|| !Number.isInteger(node.location?.x) || !Number.isInteger(node.location?.y) || !Number.isInteger(node.location?.z))
+			throw new TypeError("Captured kinetic nodes require a known type and integer world location");
+		const current = this.snapshot();
+		const sameLocation = candidate => candidate.dimensionId === node.dimensionId
+			&& candidate.location.x === node.location.x && candidate.location.y === node.location.y && candidate.location.z === node.location.z;
+		const nodes = current.nodes.filter(candidate => !sameLocation(candidate));
+		nodes.push({ ...node, location: { ...node.location } });
+		const beltLinks = current.beltLinks.filter(link => !sameLocation(link.left) && !sameLocation(link.right));
+		this.restore({ beltLinks, nodes });
+		this.#persistenceDirty = true;
+		return true;
+	}
+
 	snapshot() {
 		const nodes = [...this.#nodes.values()]
 			.map(node => ({
@@ -400,6 +463,7 @@ export class KineticWorld {
 				...(isGeneratedSource(node.configuration)
 					? { generatedSpeed: node.generatedSpeed }
 					: {}),
+				...(isSpeedController(node.configuration) ? { targetSpeed: node.targetSpeed } : {}),
 				...(node.configuration.kind === "external_source" && node.sourceCapacity > 0 ? { sourceCapacity: node.sourceCapacity } : {}),
 				...(node.configuration.kind === "chain_gearshift" && node.chainSignal > 0 ? { chainSignal: node.chainSignal } : {}),
 				...(isSplitGearshift(node.configuration) && node.reversed ? { reversed: true } : {}),
@@ -451,6 +515,9 @@ export class KineticWorld {
 					? Number.isFinite(entry.generatedSpeed) && Math.abs(entry.generatedSpeed) <= configuration.maxSpeed
 						? entry.generatedSpeed : configuration.defaultSpeed
 					: isGeneratedSource(configuration) && Number.isFinite(entry.generatedSpeed) ? entry.generatedSpeed : 0,
+				targetSpeed: isSpeedController(configuration)
+					&& Number.isFinite(entry.targetSpeed) && Math.abs(entry.targetSpeed) <= configuration.maxSpeed
+					? entry.targetSpeed : configuration.defaultSpeed,
 				location: { ...location },
 				sourceCapacity: configuration.kind === "external_source" && Number.isFinite(entry.sourceCapacity) && entry.sourceCapacity >= 0
 					? entry.sourceCapacity : 0,
@@ -522,6 +589,27 @@ export class KineticWorld {
 		this.#markDirty(dimensionId);
 		this.#persistenceDirty = true;
 		return true;
+	}
+
+	setSpeedControllerTarget(dimensionId, location, speed) {
+		if (!Number.isFinite(speed))
+			throw new TypeError("Rotation Speed Controller targets must be finite");
+		const node = this.#nodes.get(dimensionId, location);
+		if (!node || !isSpeedController(node.configuration))
+			return false;
+		if (Math.abs(speed) > node.configuration.maxSpeed)
+			throw new RangeError(`Rotation Speed Controller target must be between ${-node.configuration.maxSpeed} and ${node.configuration.maxSpeed}`);
+		if (node.targetSpeed === speed)
+			return false;
+		node.targetSpeed = speed;
+		this.#markDirty(dimensionId);
+		this.#persistenceDirty = true;
+		return true;
+	}
+
+	speedControllerTargetAt(dimensionId, location) {
+		const node = this.#nodes.get(dimensionId, location);
+		return node && isSpeedController(node.configuration) ? node.targetSpeed : 0;
 	}
 
 	generatedSpeedAt(dimensionId, location) {
@@ -760,89 +848,148 @@ export class KineticWorld {
 	}
 
 	#resolve(dimensionId) {
-		const network = new KineticNetwork();
 		const nodes = this.#nodes.entriesInDimension(dimensionId).map(entry => entry.value);
 		const nodesById = new Map(nodes.map(node => [node.id, node]));
 		const nodeIds = new Set(nodes.map(node => node.id));
-		const portParentIds = new Map();
-		const connectedPairs = new Set();
-		const connect = (leftId, rightId, ratio) => {
-			const id = linkKey(leftId, rightId);
-			if (connectedPairs.has(id))
-				return;
-			connectedPairs.add(id);
-			network.connect(leftId, rightId, ratio);
-		};
-		for (const node of nodes) {
-			if (isSplitGearshift(node.configuration)) {
-				for (const side of ["negative", "positive"]) {
-					const portId = `${node.id}:gearshift:${side}`;
-					network.addNode({ id: portId });
-					portParentIds.set(portId, node.id);
+		const buildNetwork = (controllerSources = new Map()) => {
+			const network = new KineticNetwork();
+			const portParentIds = new Map();
+			const connectedPairs = new Set();
+			const connect = (leftId, rightId, ratio) => {
+				if (!leftId || !rightId)
+					return;
+				const id = linkKey(leftId, rightId);
+				if (connectedPairs.has(id))
+					return;
+				connectedPairs.add(id);
+				network.connect(leftId, rightId, ratio);
+			};
+
+			for (const node of nodes) {
+				if (isSplitGearshift(node.configuration)) {
+					for (const side of ["negative", "positive"]) {
+						const portId = `${node.id}:gearshift:${side}`;
+						network.addNode({ id: portId });
+						portParentIds.set(portId, node.id);
+					}
+					continue;
 				}
-				continue;
+				if (isSpeedController(node.configuration)) {
+					for (const side of ["input", "output"]) {
+						const portId = speedControllerPortId(node, side);
+						const source = controllerSources.get(portId);
+						network.addNode({
+							id: portId,
+							sourceSpeed: source?.speed ?? 0,
+							stressCapacity: source?.capacity ?? 0
+						});
+						portParentIds.set(portId, node.id);
+					}
+					continue;
+				}
+				const isTurning = node.turnTicksRemaining > 0;
+				const sourceSpeed = isGeneratedSource(node.configuration)
+					? node.generatedSpeed
+					: isTurning ? node.configuration.turnSpeed ?? 0 : 0;
+				const stressCapacity = isGeneratedSource(node.configuration)
+					? Math.abs(sourceSpeed) > 0 ? node.configuration.kind === "external_source"
+						? node.sourceCapacity
+						: node.configuration.stressCapacity ?? 0 : 0
+					: isTurning ? node.configuration.stressCapacity ?? 0 : 0;
+				network.addNode({
+					id: node.id,
+					sourceSpeed,
+					stressCapacity,
+					stressImpact: node.configuration.stressImpact ?? 0
+				});
 			}
-			const isTurning = node.turnTicksRemaining > 0;
-			const sourceSpeed = isGeneratedSource(node.configuration)
-				? node.generatedSpeed
-				: isTurning ? node.configuration.turnSpeed ?? 0 : 0;
-			const stressCapacity = isGeneratedSource(node.configuration)
-				? Math.abs(sourceSpeed) > 0 ? node.configuration.kind === "external_source"
-					? node.sourceCapacity
-					: node.configuration.stressCapacity ?? 0 : 0
-				: isTurning ? node.configuration.stressCapacity ?? 0 : 0;
-			network.addNode({
-				id: node.id,
-				sourceSpeed,
-				stressCapacity,
-				stressImpact: node.configuration.stressImpact ?? 0
-			});
-		}
 
-		for (const node of nodes) {
-			if (!isSplitGearshift(node.configuration))
-				continue;
-			const ratio = node.configuration.kind === "sequenced_gearshift"
-				? node.sequence?.active ? node.sequence.program[node.sequence.step].multiplier : 0
-				: node.reversed ? -1 : 1;
-			if (ratio !== 0)
-				network.connect(
-					`${node.id}:gearshift:negative`,
-					`${node.id}:gearshift:positive`,
-					ratio
-				);
-		}
+			for (const node of nodes) {
+				if (!isSplitGearshift(node.configuration))
+					continue;
+				const ratio = node.configuration.kind === "sequenced_gearshift"
+					? node.sequence?.active ? node.sequence.program[node.sequence.step].multiplier : 0
+					: node.reversed ? -1 : 1;
+				if (ratio !== 0)
+					network.connect(
+						`${node.id}:gearshift:negative`,
+						`${node.id}:gearshift:positive`,
+						ratio
+					);
+			}
 
-		const endpointFor = (nodeId, adjacentId) => {
-			const node = nodesById.get(nodeId);
-			const adjacent = nodesById.get(adjacentId);
-			if (!node || !adjacent || !isSplitGearshift(node.configuration))
-				return nodeId;
-			const side = adjacent.location[node.axis] > node.location[node.axis] ? "positive" : "negative";
-			return `${node.id}:gearshift:${side}`;
+			const endpointFor = (nodeId, adjacentId) => {
+				const node = nodesById.get(nodeId);
+				const adjacent = nodesById.get(adjacentId);
+				if (!node || !adjacent)
+					return undefined;
+				if (isSpeedController(node.configuration))
+					return speedControllerPortFor(node, adjacent);
+				if (!isSplitGearshift(node.configuration))
+					return nodeId;
+				const side = adjacent.location[node.axis] > node.location[node.axis] ? "positive" : "negative";
+				return `${node.id}:gearshift:${side}`;
+			};
+
+			for (const connection of this.#connections.values())
+				if (nodeIds.has(connection.leftId) && nodeIds.has(connection.rightId))
+					connect(
+						endpointFor(connection.leftId, connection.rightId),
+						endpointFor(connection.rightId, connection.leftId),
+						connection.ratio
+					);
+
+			for (const link of this.#beltLinks.values()) {
+				if (link.left.dimensionId === dimensionId
+					&& this.#nodes.has(link.left.dimensionId, link.left.location)
+					&& this.#nodes.has(link.right.dimensionId, link.right.location))
+					connect(link.leftId, link.rightId, 1);
+			}
+			return { network, portParentIds };
 		};
 
-		for (const connection of this.#connections.values())
-			if (nodeIds.has(connection.leftId) && nodeIds.has(connection.rightId))
-				connect(
-					endpointFor(connection.leftId, connection.rightId),
-					endpointFor(connection.rightId, connection.leftId),
-					connection.ratio
-				);
+		const base = buildNetwork();
+		const baseResults = base.network.resolve();
+		const resultForPort = new Map();
+		for (const result of baseResults)
+			for (const state of result.nodeStates)
+				resultForPort.set(state.id, result);
 
-		for (const link of this.#beltLinks.values()) {
-			if (link.left.dimensionId === dimensionId
-				&& this.#nodes.has(link.left.dimensionId, link.left.location)
-				&& this.#nodes.has(link.right.dimensionId, link.right.location))
-				connect(link.leftId, link.rightId, 1);
+		const canSupplyController = (result, portId) => {
+			const port = result?.nodeStates.find(state => state.id === portId);
+			return Boolean(result && port && Math.abs(port.requestedSpeed) > 0.000001
+				&& result.stressCapacity > 0 && !result.hasConflict && !result.overloaded);
+		};
+		const controllerSources = new Map();
+		for (const node of nodes) {
+			if (!isSpeedController(node.configuration) || node.targetSpeed === 0)
+				continue;
+			const inputId = speedControllerPortId(node, "input");
+			const outputId = speedControllerPortId(node, "output");
+			const inputResult = resultForPort.get(inputId);
+			const outputResult = resultForPort.get(outputId);
+			const inputPowered = canSupplyController(inputResult, inputId);
+			const outputPowered = canSupplyController(outputResult, outputId);
+			// Two independently powered sides are intentionally not bridged. The
+			// final graph will fail closed on a conflicting target instead of adding
+			// an unbounded source or silently choosing a direction.
+			if (inputPowered === outputPowered)
+				continue;
+			const sourceResult = inputPowered ? inputResult : outputResult;
+			const targetPortId = inputPowered ? outputId : inputId;
+			const capacity = Math.max(0, sourceResult.stressCapacity - sourceResult.stressImpact);
+			if (capacity > 0)
+				controllerSources.set(targetPortId, { capacity, speed: node.targetSpeed });
 		}
 
-		return network.resolve().map(result => {
+		const resolved = buildNetwork(controllerSources);
+		return resolved.network.resolve().map(result => {
 			const nodeStates = new Map();
 			for (const state of result.nodeStates) {
-				const parentId = portParentIds.get(state.id) ?? state.id;
+				const parentId = resolved.portParentIds.get(state.id) ?? state.id;
 				const isPositiveGearshiftPort = state.id.endsWith(":gearshift:positive");
-				if (!nodeStates.has(parentId) || isPositiveGearshiftPort)
+				const isControllerInputPort = state.id.endsWith(":speed_controller:input");
+				if (!nodeStates.has(parentId) || isPositiveGearshiftPort || isControllerInputPort)
 					nodeStates.set(parentId, { ...state, id: parentId });
 			}
 			const physicalNodeStates = [...nodeStates.values()].sort((left, right) => left.id.localeCompare(right.id));

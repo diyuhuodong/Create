@@ -16,7 +16,7 @@ test("redstone device catalog owns all 29 S3-14 acceptance IDs exactly once", ()
 	const acceptanceIds = allRedstoneAcceptanceIds();
 	assert.equal(acceptanceIds.length, 29);
 	assert.equal(new Set(acceptanceIds).size, acceptanceIds.length);
-	assert.equal(REDSTONE_DEVICE_CATALOG.filter(device => device.input).length, 10);
+	assert.equal(REDSTONE_DEVICE_CATALOG.filter(device => device.input).length, 9);
 	assert.equal(REDSTONE_DEVICE_CATALOG.filter(device => device.output).length, 13);
 });
 
@@ -88,15 +88,41 @@ test("observers, contacts, links, requester, stock, and displays retain only det
 	requester = transitionRedstoneDevice(requester, { type: "request_result", nonce: 1, success: true });
 	assert.equal(nativeOutputPower(requester), 15);
 	assert.equal(requester.requestNonce, 1);
+	requester = transitionRedstoneDevice(requester, { type: "request_result", inFlight: true, nonce: 2, status: "pending", success: false });
+	assert.equal(requester.requestInFlight, true);
+	assert.equal(requester.requestStatus, "pending");
+	assert.equal(nativeOutputPower(requester), 0);
+	requester = transitionRedstoneDevice(requester, { type: "request_progress", nonce: 2, status: "fulfilled" });
+	assert.equal(requester.requestInFlight, false);
+	assert.equal(nativeOutputPower(requester), 15);
+
+	let stockLink = createRedstoneDeviceState("stock_link", { minimumStock: 2 });
+	stockLink = transitionRedstoneDevice(stockLink, { type: "set_stock_available", active: false });
+	const unchangedStockLink = transitionRedstoneDevice(stockLink, { type: "set_stock_available", active: false });
+	assert.deepEqual(unchangedStockLink, stockLink);
+	stockLink = transitionRedstoneDevice(stockLink, { type: "set_stock_available", active: true });
+	assert.equal(nativeOutputPower(stockLink), 15);
 
 	let speedController = createRedstoneDeviceState("rotation_speed_controller");
 	speedController = transitionRedstoneDevice(speedController, { type: "configure", targetSpeed: -96 });
 	speedController = transitionRedstoneDevice(speedController, { type: "input", power: 15 });
-	assert.equal(speedController.active, true);
+	assert.equal(speedController.active, false);
 	assert.equal(speedController.targetSpeed, -96);
 
 	let nixie = createRedstoneDeviceState("nixie_tube");
 	nixie = transitionRedstoneDevice(nixie, { type: "input", power: 12 });
 	assert.equal(nixie.displayValue, "12");
+	assert.deepEqual(nixie.display.lines, ["12"]);
 	assert.equal(nativeOutputPower(nixie), 0);
+});
+
+test("Nixie target text is versioned state that survives a state validation round trip", () => {
+	let nixie = createRedstoneDeviceState("nixie_tube");
+	nixie = transitionRedstoneDevice(nixie, { type: "set_display_text", text: "Assembly 7" });
+	assert.equal(nixie.display.revision, 1);
+	assert.equal(nixie.display.lines[0], "Assembly 7");
+	assert.equal(nixie.displayValue, "Assembly 7");
+	assert.equal(transitionRedstoneDevice(nixie, { type: "set_display_text", text: "Assembly 7" }).display.revision, 1);
+	nixie = transitionRedstoneDevice(nixie, { type: "set_display_style", color: "green", brightness: 6 });
+	assert.deepEqual(nixie.display.style, { color: "green", brightness: 6 });
 });

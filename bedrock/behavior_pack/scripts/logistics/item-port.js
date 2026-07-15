@@ -33,6 +33,40 @@ export function itemStackFingerprint(stack) {
 	return stableStringify({ metadata: normalized.metadata ?? null, typeId: normalized.typeId });
 }
 
+/**
+ * Rebind an ItemPort snapshot to the stable identifier of a reconstructed
+ * machine. Contraptions recreate managed ports at their destination, so an
+ * extraction receipt's embedded reservation must move with the port as well.
+ */
+export function rekeyItemPortSnapshot(snapshot, id) {
+	if (!snapshot || typeof snapshot !== "object" || Array.isArray(snapshot) || typeof snapshot.id !== "string" || snapshot.id.length === 0)
+		throw new TypeError("Re-keyed item port snapshots require a source identifier");
+	if (typeof id !== "string" || id.length === 0)
+		throw new TypeError("Re-keyed item ports require a destination identifier");
+	const port = JSON.parse(JSON.stringify(snapshot));
+	const sourceId = port.id;
+	port.id = id;
+	if (!Array.isArray(port.extractionReceipts))
+		return port;
+	port.extractionReceipts = port.extractionReceipts.map(([receiptId, receipt]) => {
+		if (typeof receipt?.reservationFingerprint !== "string")
+			return [receiptId, receipt];
+		let reservation;
+		try {
+			reservation = JSON.parse(receipt.reservationFingerprint);
+		} catch {
+			throw new TypeError("Re-keyed item port extraction receipts must contain valid reservations");
+		}
+		if (reservation?.portId !== sourceId)
+			return [receiptId, receipt];
+		return [receiptId, {
+			...receipt,
+			reservationFingerprint: stableStringify({ ...reservation, portId: id })
+		}];
+	});
+	return port;
+}
+
 export class ItemPort {
 	#extractionReceipts = new Map();
 	#id;

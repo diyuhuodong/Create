@@ -1,4 +1,5 @@
 import { ItemStack, system, world } from "@minecraft/server";
+import { ModalFormData } from "@minecraft/server-ui";
 
 import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-property-storage.js";
@@ -8,11 +9,13 @@ import { BedrockEscrowRegistry } from "./bedrock-escrow-registry.js";
 import { depotId, DepotNetwork } from "./depot-network.js";
 import { registerEscrowProtection } from "./external-escrow-runtime.js";
 import { beltSegmentForNeighbors } from "./belt-visuals.js";
+import { capturePhysicalBeltAssemblyAttachments } from "../contraptions/physical-belt-assembly.js";
 
 const DEPOT_BLOCK = "createbedrock:depot";
 const CHUTE_BLOCK = "createbedrock:chute";
 const CHAIN_CONVEYOR_BLOCK = "createbedrock:chain_conveyor";
-const BELT_BLOCK = "createbedrock:belt";
+export const PHYSICAL_BELT_BLOCK = "createbedrock:belt";
+const BELT_BLOCK = PHYSICAL_BELT_BLOCK;
 const BELT_CONNECTOR = "createbedrock:belt_connector";
 const MAX_DEPOT_BELT_LENGTH = 20;
 const FUNNEL_BLOCK = "createbedrock:andesite_funnel";
@@ -25,6 +28,11 @@ const PORT_BLOCKS = new Map([
 	["createbedrock:item_vault", { size: 27 }],
 	["createbedrock:creative_crate", { kind: "creative", size: 1 }]
 ]);
+export const DEPOT_PORT_MOVEMENT_DEFINITIONS = Object.freeze([...PORT_BLOCKS.entries()].map(([typeId, settings]) => Object.freeze({
+	kind: settings.kind ?? "depot",
+	size: settings.size,
+	typeId
+})));
 const FUNNEL_BLOCKS = new Set([
 	FUNNEL_BLOCK,
 	"createbedrock:brass_funnel",
@@ -77,6 +85,10 @@ const escrows = new BedrockEscrowRegistry();
 const pendingDepotBeltEndpoints = new Map();
 const chainConveyorLocations = new Map();
 const physicalBeltLocations = new Map();
+// Non-depot machines own their own ItemPort snapshots. This index only maps a
+// world-facing endpoint to the durable DepotNetwork identity that physical
+// belts use while the owner is loaded.
+const managedLogisticsPorts = new Map();
 let nextPlayerTransaction = 0;
 let chainConveyorRescanTicks = 0;
 let physicalBeltRescanTicks = 0;
@@ -85,6 +97,41 @@ registerEscrowProtection(() => network.activeEscrowIds());
 
 function identifierFor(block) {
 	return depotId(block.dimension.id, block.location);
+}
+
+function showDepotLogisticsConfiguration(player, block) {
+	const id = identifierFor(block);
+	let endpoint;
+	try {
+		endpoint = network.logisticsEndpoint(id);
+	} catch (error) {
+		player.sendMessage?.(`Could not read this logistics endpoint: ${error}`);
+		return false;
+	}
+	const form = new ModalFormData()
+		.title("Depot Logistics Settings")
+		.label(`Public endpoint settings • revision ${endpoint.revision}`)
+		.textField("Logistics network", "default", { defaultValue: endpoint.networkId })
+		.textField("Address (blank for all)", "Optional endpoint address", { defaultValue: endpoint.address })
+		.toggle("Accept Redstone Requests", { defaultValue: endpoint.acceptsRequests })
+		.submitButton("Save endpoint");
+	form.show(player).then(response => {
+		if (response.canceled)
+			return false;
+		const [networkId, address, acceptsRequests] = response.formValues ?? [];
+		const result = network.configureLogisticsEndpoint(id, {
+			expectedRevision: endpoint.revision,
+			patch: { acceptsRequests, address, networkId }
+		});
+		if (result.conflict) {
+			player.sendMessage?.("This endpoint changed while the form was open. Reopen it and try again.");
+			return false;
+		}
+		if (result.changed)
+			player.sendMessage?.(`Depot endpoint saved: ${result.endpoint.networkId} / ${result.endpoint.address || "all"}.`);
+		return result.changed;
+	}).catch(error => player.sendMessage?.(`Could not save this logistics endpoint: ${error}`));
+	return true;
 }
 
 function deviceId(kind, block) {
@@ -237,6 +284,24 @@ function portAt(dimension, location) {
 	return PORT_BLOCKS.has(block?.typeId) ? block : undefined;
 }
 
+function managedPortLocationKey(dimensionId, location, role) {
+	if (typeof dimensionId !== "string" || !location || !["input", "output"].includes(role))
+		throw new TypeError("Managed logistics port keys require a dimension, location, and input/output role");
+	return `${dimensionId}:${location.x}:${location.y}:${location.z}:${role}`;
+}
+
+function managedPortIdAt(dimensionId, location, role) {
+	return managedLogisticsPorts.get(managedPortLocationKey(dimensionId, location, role));
+}
+
+function beltEndpointAt(dimension, location, role) {
+	const depot = portAt(dimension, location);
+	if (depot)
+		return { id: identifierFor(depot), location: { ...depot.location } };
+	const id = managedPortIdAt(dimension.id, location, role);
+	return id ? { id, location: { ...location } } : undefined;
+}
+
 function depotAt(dimension, location) {
 	return portAt(dimension, location);
 }
@@ -350,8 +415,8 @@ function beltRunFor(block) {
 		locations.push(last);
 		next = block.dimension.getBlock(offsetLocation(last, direction));
 	}
-	const source = portAt(block.dimension, offsetLocation(first, opposite(direction)));
-	const destination = portAt(block.dimension, offsetLocation(last, direction));
+	const source = beltEndpointAt(block.dimension, offsetLocation(first, opposite(direction)), "output");
+	const destination = beltEndpointAt(block.dimension, offsetLocation(last, direction), "input");
 	if (!source || !destination)
 		return undefined;
 	return {
@@ -374,10 +439,10 @@ function configurePhysicalBelt(block) {
 	if (network.hasBelt(run.id))
 		return false;
 	network.createBelt({
-		destinationId: identifierFor(run.destination),
+		destinationId: run.destination.id,
 		id: run.id,
 		length: run.locations.length,
-		sourceId: identifierFor(run.source),
+		sourceId: run.source.id,
 		speed: kineticSpeedForLocations(block.dimension.id, run.locations)
 	});
 	return true;
@@ -601,6 +666,162 @@ export function hasDepotAt(dimensionId, location) {
 	return network.hasDepot(id);
 }
 
+/**
+ * Attach a machine-owned, managed ItemPort to the world logistics graph. The
+ * caller keeps the port inventory in its own snapshot; DepotNetwork persists
+ * only this identity and pauses adjacent routes while it is not attached.
+ */
+export function registerManagedLogisticsPort({ dimensionId, id, location, logistics, onPortMutation, port, role }) {
+	if (typeof dimensionId !== "string" || typeof id !== "string" || id.length === 0 || !location || !["input", "output"].includes(role))
+		throw new TypeError("Managed logistics ports require a stable identity, location, and role");
+	const key = managedPortLocationKey(dimensionId, location, role);
+	const existing = managedLogisticsPorts.get(key);
+	if (existing && existing !== id)
+		throw new Error(`Managed logistics location ${key} is already owned by ${existing}`);
+	const registered = network.registerExternalManagedDepot({ dimensionId, id, location, logistics, onPortMutation, port, role });
+	managedLogisticsPorts.set(key, registered);
+	// A controller can be placed after its belts. Recheck the four horizontal
+	// neighbors now instead of waiting for the periodic global rescan.
+	const dimension = world.getDimension(dimensionId);
+	for (const offset of [FACING_OFFSETS.east, FACING_OFFSETS.west, FACING_OFFSETS.north, FACING_OFFSETS.south])
+		configurePhysicalBelt(dimension.getBlock(offsetLocation(location, offset)));
+	return registered;
+}
+
+export function releaseManagedLogisticsPort({ dimensionId, id, location, role }) {
+	if (typeof dimensionId !== "string" || typeof id !== "string" || !location || !["input", "output"].includes(role))
+		throw new TypeError("Managed logistics port release requires an identity, location, and role");
+	const released = network.releaseExternalManagedDepot(id);
+	if (released && managedLogisticsPorts.get(managedPortLocationKey(dimensionId, location, role)) === id)
+		managedLogisticsPorts.delete(managedPortLocationKey(dimensionId, location, role));
+	return released;
+}
+
+export function canRemoveManagedLogisticsPort(id) {
+	if (typeof id !== "string" || id.length === 0)
+		throw new TypeError("Managed logistics port removal requires an identifier");
+	return network.canRemoveDepot(id);
+}
+
+export function removeManagedLogisticsPort({ dimensionId, id, location, role }) {
+	if (typeof dimensionId !== "string" || typeof id !== "string" || !location || !["input", "output"].includes(role))
+		throw new TypeError("Managed logistics port removal requires an identity, location, and role");
+	const removed = network.removeExternalManagedDepot(id);
+	if (removed && managedLogisticsPorts.get(managedPortLocationKey(dimensionId, location, role)) === id)
+		managedLogisticsPorts.delete(managedPortLocationKey(dimensionId, location, role));
+	return removed;
+}
+
+/**
+ * Moving assemblies need a location-independent payload.  Ensure a just
+ * placed port is represented before capturing it, then let DepotNetwork
+ * validate that no fixed logistics connection would be left behind.
+ */
+export function captureDepotMovingData(dimensionId, location, { kind = "depot", size = 1 } = {}) {
+	if (typeof dimensionId !== "string" || !location || !Number.isInteger(size) || size < 1)
+		throw new TypeError("Moving depot capture requires a dimension, location, and positive port size");
+	const id = network.createDepot({ dimensionId, kind, location, size });
+	return network.snapshotDepotForAssembly(id);
+}
+
+export function detachDepotMovingData(dimensionId, location) {
+	if (typeof dimensionId !== "string" || !location)
+		throw new TypeError("Moving depot detach requires a dimension and location");
+	const id = depotId(dimensionId, location);
+	return network.hasDepot(id) ? network.takeDepotForAssembly(id) : undefined;
+}
+
+export function restoreDepotMovingData(dimensionId, location, record) {
+	if (record === undefined)
+		return undefined;
+	return network.restoreDepotFromAssembly({ dimensionId, location, record });
+}
+
+function physicalBeltRunsForAssembly(dimensionId, locations) {
+	const dimension = world.getDimension(dimensionId);
+	const runs = new Map();
+	for (const location of locations) {
+		const run = beltRunFor(dimension.getBlock(location));
+		if (!run || runs.has(run.id))
+			continue;
+		runs.set(run.id, {
+			destinationLocation: { ...run.destination.location },
+			id: run.id,
+			locations: run.locations.map(candidate => ({ ...candidate })),
+			movable: !network.hasBelt(run.id) || network.canRemoveBelt(run.id),
+			sourceLocation: { ...run.source.location }
+		});
+	}
+	return [...runs.values()];
+}
+
+/** Validate and retain only complete, idle physical belt runs for one assembly. */
+export function captureInternalPhysicalBeltRuns(dimensionId, locations, anchor) {
+	if (typeof dimensionId !== "string")
+		throw new TypeError("Physical belt assembly capture requires a dimension");
+	return capturePhysicalBeltAssemblyAttachments({
+		anchor,
+		locations,
+		runs: physicalBeltRunsForAssembly(dimensionId, locations)
+	});
+}
+
+/** Recreate belt routes after every moved port and segment has materialized. */
+export function restoreInternalPhysicalBeltRuns(dimensionId, origin, records) {
+	if (!Array.isArray(records))
+		return 0;
+	const dimension = world.getDimension(dimensionId);
+	let restored = 0;
+	for (const record of records) {
+		const first = record?.locations?.[0];
+		if (!first || ![first.x, first.y, first.z].every(Number.isInteger))
+			continue;
+		const block = dimension.getBlock({ x: origin.x + first.x, y: origin.y + first.y, z: origin.z + first.z });
+		if (configurePhysicalBelt(block))
+			restored++;
+	}
+	return restored;
+}
+
+/** Remove durable route records before their endpoint depots are detached. */
+export function detachInternalPhysicalBeltRuns(records) {
+	if (!Array.isArray(records))
+		return 0;
+	let detached = 0;
+	for (const record of records) {
+		if (typeof record?.name !== "string" || !network.hasBelt(record.name))
+			continue;
+		if (!network.canRemoveBelt(record.name))
+			throw new Error(`Physical belt ${record.name} has an active item transport`);
+		physicalBeltLocations.delete(record.name);
+		network.removeBelt(record.name);
+		detached++;
+	}
+	return detached;
+}
+
+export function capturePhysicalBeltMovingData(dimensionId, location) {
+	if (typeof dimensionId !== "string" || !location)
+		throw new TypeError("Moving physical belt capture requires a dimension and location");
+	return { schemaVersion: 1 };
+}
+
+export function detachPhysicalBeltMovingData(dimensionId, location) {
+	if (typeof dimensionId !== "string" || !location)
+		throw new TypeError("Moving physical belt detach requires a dimension and location");
+	const run = beltRunFor(world.getDimension(dimensionId).getBlock(location));
+	if (!run || !network.hasBelt(run.id))
+		return false;
+	if (!network.canRemoveBelt(run.id))
+		throw new Error(`Physical belt ${run.id} has an active item transport`);
+	physicalBeltLocations.delete(run.id);
+	return network.removeBelt(run.id);
+}
+
+// Full routes are recreated as one attachment after all blocks and ports are
+// restored; restoring an individual segment would race the port re-key step.
+export function restorePhysicalBeltMovingData() {}
+
 /** Count one item across the durable, dimension-local depot network. */
 export function countDepotItem({ dimensionId, itemType, location }) {
 	if (typeof dimensionId !== "string" || typeof itemType !== "string" || !location)
@@ -609,16 +830,39 @@ export function countDepotItem({ dimensionId, itemType, location }) {
 	return network.hasDepot(id) ? network.stockCount(id, itemType) : 0;
 }
 
+/** Query the addressed, dimension-local Depot network used by Requesters and Stock Links. */
+export function countDepotNetworkItem({ dimensionId, itemType, networkId = "default", targetAddress = "" }) {
+	if (typeof dimensionId !== "string" || typeof itemType !== "string")
+		throw new TypeError("Network stock queries require a dimension and item identifier");
+	return network.networkStockSummary({ dimensionId, itemType, networkId, targetAddress });
+}
+
+export function depotLogisticsEndpoint({ dimensionId, location }) {
+	if (typeof dimensionId !== "string" || !location)
+		throw new TypeError("Logistics endpoint queries require a dimension and location");
+	return network.logisticsEndpoint(depotId(dimensionId, location));
+}
+
+export function configureDepotLogisticsEndpoint({ dimensionId, expectedRevision, location, patch }) {
+	if (typeof dimensionId !== "string" || !location)
+		throw new TypeError("Logistics endpoint updates require a dimension and location");
+	return network.configureLogisticsEndpoint(depotId(dimensionId, location), { expectedRevision, patch });
+}
+
 /**
  * Start one journaled redstone request. The caller supplies a persistent ID;
  * DepotNetwork owns reservation, persistence-before-extraction, and recovery.
  */
-export function requestDepotItem({ allowPartial = false, destinationLocation, dimensionId, id, itemType, maxCount }) {
+export function requestDepotItem({ allowPartial = false, destinationLocation, dimensionId, id, itemType, maxCount, networkId = "default", targetAddress = "" }) {
 	if (typeof dimensionId !== "string" || !destinationLocation || typeof id !== "string" || id.length === 0
 		|| typeof itemType !== "string" || !Number.isInteger(maxCount) || maxCount < 1)
 		throw new TypeError("Redstone depot requests require a valid destination, item, amount, and persistent ID");
 	const destinationId = depotId(dimensionId, destinationLocation);
-	return network.requestItem({ allowPartial, destinationId, id, itemType, maxCount });
+	return network.requestItem({ allowPartial, destinationId, id, itemType, maxCount, networkId, targetAddress });
+}
+
+export function depotRequestStatus(id) {
+	return network.requestStatus(id);
 }
 
 export function setDepotBeltSpeed(id, speed) {
@@ -753,6 +997,10 @@ export function registerDepots() {
 		if (!PORT_BLOCKS.has(event.block.typeId))
 			return;
 		const player = event.player;
+		if (!event.itemStack && player.isSneaking) {
+			showDepotLogisticsConfiguration(player, event.block);
+			return;
+		}
 		const dimensionId = event.block.dimension.id;
 		const location = { ...event.block.location };
 		system.run(() => {
