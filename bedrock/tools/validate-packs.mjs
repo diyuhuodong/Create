@@ -14,6 +14,7 @@ import { validateStage3ProcessingSourceContract } from "./stage3-processing-cont
 import { validateStage3ProcessingSpecifications } from "./stage3-processing-specification-schema.mjs";
 import { validateStage3FluidSpecifications } from "./stage3-fluid-specification-schema.mjs";
 import { validateStage3FluidSourceContract } from "./stage3-fluid-contract.mjs";
+import { validateStage3VisualSourceContract } from "./stage3-visual-contract.mjs";
 import { validateStage3WorkQueue } from "./stage3-work-queue-schema.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
@@ -178,5 +179,6 @@ const kineticContract = await validateStage3KineticSourceContract();
 const logisticsContract = await validateStage3LogisticsSourceContract();
 const processingContract = await validateStage3ProcessingSourceContract();
 const fluidContract = await validateStage3FluidSourceContract();
+const visualContract = await validateStage3VisualSourceContract();
 
-console.log(`Bedrock manifests, JSON files, JavaScript syntax, ${contentContract.contentBlocks} Stage-3 content blocks, ${kineticContract.blocks} S3-9 kinetic blocks, ${logisticsContract.blocks} S3-10 logistics blocks, ${processingContract.blocks} S3-11 processing blocks, ${fluidContract.blocks} S3-12 fluid blocks, the ${stage3WorkQueue.entries.length}-entry work queue, ${contentSpecificationCoverage.entries} S3-8B content specifications, ${kineticSpecificationCoverage.entries} S3-9 kinetic specifications, ${logisticsSpecificationCoverage.entries} S3-10 logistics specifications, ${processingSpecificationCoverage.entries} S3-11 processing specifications, and ${fluidSpecificationCoverage.entries} S3-12 fluid specifications are valid.`);
+console.log(`Bedrock manifests, JSON files, JavaScript syntax, ${contentContract.contentBlocks} Stage-3 content blocks, ${kineticContract.blocks} S3-9 kinetic blocks, ${logisticsContract.blocks} S3-10 logistics blocks, ${processingContract.blocks} S3-11 processing blocks, ${fluidContract.blocks} S3-12 fluid blocks, ${visualContract.tankSegments} S3-13 Tank visual segments, the ${stage3WorkQueue.entries.length}-entry work queue, ${contentSpecificationCoverage.entries} S3-8B content specifications, ${kineticSpecificationCoverage.entries} S3-9 kinetic specifications, ${logisticsSpecificationCoverage.entries} S3-10 logistics specifications, ${processingSpecificationCoverage.entries} S3-11 processing specifications, and ${fluidSpecificationCoverage.entries} S3-12 fluid specifications are valid.`);

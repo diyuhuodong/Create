@@ -10,6 +10,7 @@ import { planFluidBucketInteraction, settleFluidBucketInteraction } from "./flui
 import { fluidTankId, FluidNetworkState } from "./fluid-network-state.js";
 import { configureFluidRun, FLUID_FACING_OFFSETS, fluidDeviceId, fluidDeviceLocation, offsetFluidLocation } from "./fluid-topology.js";
 import { fluidFromVanillaSource, VanillaWorldFluidPort } from "./world-fluid-port.js";
+import { fluidFillLevel, fluidVisualKind, tankSegmentForNeighbors } from "./fluid-tank-visuals.js";
 import { steamEngineOutput } from "../kinetics/steam-engine.js";
 
 const COPPER_VALVE_HANDLE_BLOCK = "createbedrock:copper_valve_handle";
@@ -231,6 +232,56 @@ function createFluidEndpoint(block) {
 	return state.createTank({ capacity, dimensionId: block.dimension.id, location: block.location });
 }
 
+function isNormalFluidTank(block) {
+	return block?.typeId === FLUID_TANK_BLOCK;
+}
+
+function tankVisualSegment(block) {
+	return tankSegmentForNeighbors({
+		hasTankAbove: isNormalFluidTank(block.dimension.getBlock(offsetFluidLocation(block.location, { x: 0, y: 1, z: 0 }))),
+		hasTankBelow: isNormalFluidTank(block.dimension.getBlock(offsetFluidLocation(block.location, { x: 0, y: -1, z: 0 })))
+	});
+}
+
+function syncFluidTankVisual(block) {
+	if (!isNormalFluidTank(block) || !state.hasTank(tankIdentifier(block)))
+		return false;
+	const inspection = state.inspectTank(tankIdentifier(block));
+	const visual = {
+		"createbedrock:fluid_kind": fluidVisualKind(inspection.contents),
+		"createbedrock:fluid_level": fluidFillLevel(inspection),
+		"createbedrock:tank_segment": tankVisualSegment(block)
+	};
+	let permutation = block.permutation;
+	let changed = false;
+	for (const [property, value] of Object.entries(visual)) {
+		const states = permutation.getAllStates();
+		if (states[property] === undefined || states[property] === value)
+			continue;
+		permutation = permutation.withState(property, value);
+		changed = true;
+	}
+	if (changed)
+		block.setPermutation(permutation);
+	return changed;
+}
+
+function syncFluidTankColumn(dimension, location) {
+	let changed = false;
+	for (const offset of [{ x: 0, y: -1, z: 0 }, { x: 0, y: 0, z: 0 }, { x: 0, y: 1, z: 0 }])
+		changed = syncFluidTankVisual(dimension.getBlock(offsetFluidLocation(location, offset))) || changed;
+	return changed;
+}
+
+function syncFluidTankVisuals() {
+	let changed = false;
+	for (const entry of state.tankEntries()) {
+		const block = world.getDimension(entry.dimensionId).getBlock(entry.location);
+		changed = syncFluidTankVisual(block) || changed;
+	}
+	return changed;
+}
+
 function pumpRunning(block, kineticWorld) {
 	return Math.abs(kineticWorld?.speedAt(block.dimension.id, block.location) ?? 0) > 0;
 }
@@ -368,7 +419,7 @@ function interactWithTankBucket({ allowedDirection, dimensionId, location, plan,
 	const inventory = player.getComponent("minecraft:inventory")?.container;
 	if (!inventory)
 		return { ok: false, reason: "inventory_unavailable" };
-	return settleFluidBucketInteraction({
+	const result = settleFluidBucketInteraction({
 		extractFluid(options) {
 			return state.extract(tankId, options);
 		},
@@ -384,6 +435,9 @@ function interactWithTankBucket({ allowedDirection, dimensionId, location, plan,
 			inventory.setItem(slot, new ItemStack(item.typeId, item.amount));
 		}
 	});
+	if (result.ok)
+		syncFluidTankVisual(block);
+	return result;
 }
 
 function setBlockState(block, property, value) {
@@ -507,7 +561,10 @@ function syncSteamEngines(kineticWorld) {
 }
 
 export function extractFluidTank(block, options) {
-	return state.extract(tankIdentifier(block), options);
+	const fluid = state.extract(tankIdentifier(block), options);
+	if (fluid)
+		syncFluidTankVisual(block);
+	return fluid;
 }
 
 export function getFluidDiagnostics() {
@@ -523,7 +580,10 @@ export function getFluidTankId(block) {
 }
 
 export function insertFluidTank(block, fluid, options) {
-	return state.insert(tankIdentifier(block), fluid, options);
+	const result = state.insert(tankIdentifier(block), fluid, options);
+	if (result.accepted)
+		syncFluidTankVisual(block);
+	return result;
 }
 
 export function setFluidPumpRedstonePowered(dimensionId, location, powered) {
@@ -552,6 +612,8 @@ export function registerFluids(getKineticWorld) {
 		try {
 			if (isFluidEndpoint(event.block)) {
 				createFluidEndpoint(event.block);
+				if (isNormalFluidTank(event.block))
+					syncFluidTankColumn(event.block.dimension, event.block.location);
 				configureAdjacentDevices(event.block, getKineticWorld());
 				return;
 			}
@@ -680,6 +742,8 @@ export function registerFluids(getKineticWorld) {
 		try {
 			if (isFluidEndpoint(event.block) && state.hasTank(tankIdentifier(event.block)))
 				state.removeTank(tankIdentifier(event.block));
+			if (event.block.typeId === FLUID_TANK_BLOCK)
+				syncFluidTankColumn(event.dimension, event.block.location);
 			else if (event.block.typeId === CREATIVE_FLUID_TANK_BLOCK) {
 				const id = creativeFluidPortId(event.block.dimension.id, event.block.location);
 				state.unregisterExternalPort(id);
@@ -698,12 +762,15 @@ export function registerFluids(getKineticWorld) {
 	registerTickHandler(() => {
 		const kineticWorld = getKineticWorld();
 		syncPumpStates(kineticWorld);
-		syncSteamEngines(kineticWorld);
-		return state.tick();
+		const steamChanged = syncSteamEngines(kineticWorld);
+		const ticked = state.tick();
+		const visualsChanged = steamChanged || ticked ? syncFluidTankVisuals() : false;
+		return steamChanged || ticked || visualsChanged;
 	}, FLUID_TASK_GROUP);
 	system.run(() => {
 		try {
 			const restored = state.restore();
+			syncFluidTankVisuals();
 			if (restored.tanks > 0 || restored.links > 0 || restored.transfers > 0 || restored.frozen)
 				console.warn(`[Create Bedrock] Restored ${restored.tanks} fluid tanks, ${restored.links} links, and ${restored.transfers} fluid transfers${restored.frozen ? " (frozen)" : ""}`);
 		} catch (error) {

@@ -3,6 +3,11 @@
   "minecraft:block": {
     "description": {
       "identifier": "createbedrock:fluid_tank",
+      "properties": {
+        "createbedrock:tank_segment": ["single", "bottom", "middle", "top"],
+        "createbedrock:fluid_level": [0, 1, 2, 3, 4],
+        "createbedrock:fluid_kind": ["empty", "water", "lava"]
+      },
       "menu_category": {
         "category": "items",
         "group": "itemGroup.name.misc"
@@ -33,6 +38,18 @@
             "texture": "createbedrock_fluid_tank_top",
             "render_method": "opaque"
           },
+          "fluid_tank_window": {
+            "texture": "createbedrock_fluid_tank_window",
+            "render_method": "alpha_test"
+          },
+          "fluid_tank_window_single": {
+            "texture": "createbedrock_fluid_tank_window_single",
+            "render_method": "alpha_test"
+          },
+          "fluid_fill": {
+            "texture": "createbedrock_fluid_water",
+            "render_method": "alpha_blend"
+          },
           "*": {
             "texture": "createbedrock_fluid_tank",
             "render_method": "opaque"
@@ -52,11 +69,39 @@
           "texture": "createbedrock_fluid_tank_top",
           "render_method": "opaque"
         },
+        "fluid_tank_window": {
+          "texture": "createbedrock_fluid_tank_window",
+          "render_method": "alpha_test"
+        },
+        "fluid_tank_window_single": {
+          "texture": "createbedrock_fluid_tank_window_single",
+          "render_method": "alpha_test"
+        },
+        "fluid_fill": {
+          "texture": "createbedrock_fluid_water",
+          "render_method": "alpha_blend"
+        },
         "*": {
           "texture": "createbedrock_fluid_tank",
           "render_method": "opaque"
         }
       }
-    }
+    },
+    "permutations": [
+      { "condition": "query.block_state('createbedrock:tank_segment') == 'bottom' && query.block_state('createbedrock:fluid_level') == 0", "components": { "minecraft:geometry": "geometry.createbedrock.fluid_tank_bottom" } },
+      { "condition": "query.block_state('createbedrock:tank_segment') == 'middle' && query.block_state('createbedrock:fluid_level') == 0", "components": { "minecraft:geometry": "geometry.createbedrock.fluid_tank_middle" } },
+      { "condition": "query.block_state('createbedrock:tank_segment') == 'top' && query.block_state('createbedrock:fluid_level') == 0", "components": { "minecraft:geometry": "geometry.createbedrock.fluid_tank_top" } },
+      { "condition": "query.block_state('createbedrock:tank_segment') == 'single' && query.block_state('createbedrock:fluid_level') == 1", "components": { "minecraft:geometry": "geometry.createbedrock.fluid_tank_level_1" } },
+      { "condition": "query.block_state('createbedrock:tank_segment') == 'single' && query.block_state('createbedrock:fluid_level') == 2", "components": { "minecraft:geometry": "geometry.createbedrock.fluid_tank_level_2" } },
+      { "condition": "query.block_state('createbedrock:tank_segment') == 'single' && query.block_state('createbedrock:fluid_level') == 3", "components": { "minecraft:geometry": "geometry.createbedrock.fluid_tank_level_3" } },
+      { "condition": "query.block_state('createbedrock:tank_segment') == 'single' && query.block_state('createbedrock:fluid_level') == 4", "components": { "minecraft:geometry": "geometry.createbedrock.fluid_tank_level_4" } },
+      { "condition": "query.block_state('createbedrock:tank_segment') == 'bottom' && query.block_state('createbedrock:fluid_level') >= 1", "components": { "minecraft:geometry": "geometry.createbedrock.fluid_tank_bottom_level_4" } },
+      { "condition": "query.block_state('createbedrock:tank_segment') == 'middle' && query.block_state('createbedrock:fluid_level') >= 1", "components": { "minecraft:geometry": "geometry.createbedrock.fluid_tank_middle_level_4" } },
+      { "condition": "query.block_state('createbedrock:tank_segment') == 'top' && query.block_state('createbedrock:fluid_level') == 1", "components": { "minecraft:geometry": "geometry.createbedrock.fluid_tank_top_level_1" } },
+      { "condition": "query.block_state('createbedrock:tank_segment') == 'top' && query.block_state('createbedrock:fluid_level') == 2", "components": { "minecraft:geometry": "geometry.createbedrock.fluid_tank_top_level_2" } },
+      { "condition": "query.block_state('createbedrock:tank_segment') == 'top' && query.block_state('createbedrock:fluid_level') == 3", "components": { "minecraft:geometry": "geometry.createbedrock.fluid_tank_top_level_3" } },
+      { "condition": "query.block_state('createbedrock:tank_segment') == 'top' && query.block_state('createbedrock:fluid_level') == 4", "components": { "minecraft:geometry": "geometry.createbedrock.fluid_tank_top_level_4" } },
+      { "condition": "query.block_state('createbedrock:fluid_kind') == 'lava'", "components": { "minecraft:material_instances": { "fluid_fill": { "texture": "createbedrock_fluid_lava", "render_method": "alpha_blend" } } } }
+    ]
   }
 }

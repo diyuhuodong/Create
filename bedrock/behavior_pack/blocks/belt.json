@@ -4,6 +4,9 @@
     "description": {
       "identifier": "createbedrock:belt",
       "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
+      "properties": {
+        "createbedrock:belt_segment": ["single", "start", "middle", "end"]
+      },
       "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
     },
     "components": {
@@ -15,6 +18,8 @@
       "minecraft:material_instances": { "*": { "texture": "createbedrock_belt", "render_method": "opaque" } }
     },
     "permutations": [
+      { "condition": "query.block_state('createbedrock:belt_segment') == 'start'", "components": { "minecraft:geometry": "geometry.createbedrock.belt_start" } },
+      { "condition": "query.block_state('createbedrock:belt_segment') == 'end'", "components": { "minecraft:geometry": "geometry.createbedrock.belt_end" } },
       { "condition": "query.block_state('minecraft:facing_direction') == 2 || query.block_state('minecraft:facing_direction') == 3", "components": { "minecraft:transformation": { "rotation": [0, 90, 0] } } }
     ]
   }

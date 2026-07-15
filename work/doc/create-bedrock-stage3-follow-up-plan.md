@@ -19,7 +19,7 @@
 | S3-10 | 基础物流闭环：可放置/可见 belt、物品渲染、depot/chute/funnel 变体、filter、tunnel、item vault。 | S3-9 提供稳定动力输入。 | 端到端转移、过滤、满端、反向、断带、重启和并发不复制/吞没物品。 |
 | S3-11 | 固定加工扩展：basin、mechanical mixer、mechanical saw、encased fan；扩展源配方分类报告。 | S3-8 材料、S3-9 动力、S3-10 端口可用。 | 每个支持配方均为 migrated 或显式 blocked；机器状态和随机结果可重启恢复。 |
 | S3-12 | 流体扩展：glass/encased/smart pipe、valve、drain、spout、portable interface。 | S3-8 材料、现有 Tank/Pump 事务内核。 | 容量守恒、分支竞争、阀门、外部端点异常和重启恢复测试通过。 |
-| S3-13 | 资源等价性收敛：Crushing Wheel OBJ/poly-mesh、belt 几何/物品可视化、Tank 液面与多方块视觉。 | 相应行为已稳定。 | 不再用 full-block fallback 宣称模型完成；构建产物契约验证模型、贴图、语言和掉落/获取路径。 |
+| S3-13 | 资源等价性收敛：Crushing Wheel 的 OBJ 派生可移植几何、belt 几何/物品可视化、Tank 液面与多方块视觉。 | 相应行为已稳定。 | 不再用 full-block fallback 宣称模型完成；构建产物契约验证模型、贴图、语言和掉落/获取路径。 |
 | S3-14 | 红石版本决策与实现。二选一：保持 1.21.80 并保留 29 项 blocker，或升级最低 Bedrock/Realm 目标并实现 producer/consumer。 | 用户确认目标版本与实验策略。 | 每项 blocker 有最终结论；若升级，Windows/Realm/PS 兼容性记录齐全。 |
 | S3-15 | 平台验收与性能收敛。 | S3-8 至 S3-14 的代码范围完成。 | Windows 本地世界、测试 Realm、PS 分别完成烟雾测试、双人并发和 30 分钟压力记录。 |
 
@@ -34,6 +34,7 @@
 3. 已完成：资源契约从 8 个静态方块扩展到 14 个已交付内容方块。矿石自然生成、Silk Touch、Fortune、未转换 OBJ/动画和多方块外观仍为 partial。
 4. 已完成：110 条 S3-8B 内容记录已逐项固化 Java 配方/掉落/资产来源、行为边界、后续实现包和测试策略。后续按该规格由 S3-9 至 S3-14、S4、S6 实现；Windows、Realm、PS 实机验证仍保留到 S3-15。
 5. 已完成：S3-9 以 `stage3-kinetic-specifications.json` 锁定并实现全部 33 条动力记录：27 条直接实现、6 条共享运行时吸收。链式输送机复用持久化 DepotNetwork，蒸汽引擎驱动动力轴，顺序变速器持久化程序，风车轴承复用动态结构控制器；不存在以空壳方块替代的移交项。
+6. 已完成：S3-13 以标准 Bedrock cuboid 几何替换 Crushing Wheel 的 full-block fallback，并在构建时保留 Java OBJ 作为来源证据；不使用已弃用的 `poly_mesh`。belt 根据相邻同向段持久化 start/middle/end 视觉状态；Tank 根据内容物和上下相邻 Tank 持久化液面、液体类型及单体/顶端/中段/底端视觉。构建会生成最小水/岩浆液面贴图并验证生成资源；Windows、Realm 与 PS 的实际渲染仍由 S3-15 记录。
 
 ## 风险控制
 

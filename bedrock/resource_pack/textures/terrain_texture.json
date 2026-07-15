@@ -89,6 +89,18 @@
     "createbedrock_fluid_tank_top": {
       "textures": "textures/create_java/block/fluid_tank_top"
     },
+    "createbedrock_fluid_tank_window": {
+      "textures": "textures/create_java/block/fluid_tank_window"
+    },
+    "createbedrock_fluid_tank_window_single": {
+      "textures": "textures/create_java/block/fluid_tank_window_single"
+    },
+    "createbedrock_fluid_water": {
+      "textures": "textures/createbedrock/generated/fluid_water"
+    },
+    "createbedrock_fluid_lava": {
+      "textures": "textures/createbedrock/generated/fluid_lava"
+    },
     "createbedrock_fluid_valve": {
       "textures": "textures/create_java/block/fluid_valve"
     },
@@ -106,6 +118,9 @@
     },
     "createbedrock_crushing_wheel": {
       "textures": "textures/create_java/block/crushing_wheel_plates"
+    },
+    "createbedrock_crushing_wheel_insert": {
+      "textures": "textures/create_java/block/crushing_wheel_insert"
     },
     "createbedrock_gearbox": {
       "textures": "textures/create_java/block/gearbox"

@@ -81,6 +81,14 @@ export class FluidNetworkState {
 		return this.#requireTank(id).tank.inspect();
 	}
 
+	tankEntries() {
+		return [...this.#tanks.values()].map(entry => ({
+			dimensionId: entry.dimensionId,
+			inspection: entry.tank.inspect(),
+			location: { ...entry.location }
+		}));
+	}
+
 	links() {
 		return this.#network.snapshot().links;
 	}

@@ -2,19 +2,13 @@ import { readdir, readFile, stat } from "node:fs/promises";
 import { dirname, extname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { JAVA_MODELS } from "./convert-java-models.mjs";
+import { plannedGeometryIdentifiers } from "./convert-java-models.mjs";
 import { validateMigrationMatrix } from "./migration-matrix-schema.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultBedrockRoot = resolve(toolDirectory, "..");
 
-// The Java source uses an OBJ model for this two-block machine.  Bedrock's
-// current fixed-block implementation deliberately keeps a cube fallback until
-// a verified OBJ/poly-mesh converter is available; it must never be mistaken
-// for a Java-model-equivalent visual.
-export const STATIC_VISUAL_EXCEPTIONS = new Map([
-	["createbedrock:crushing_wheel", "Java source uses a NeoForge OBJ; fixed-block visual remains a documented cube fallback."]
-]);
+export const STATIC_VISUAL_EXCEPTIONS = new Map();
 
 async function fileExists(file) {
 	try {
@@ -92,6 +86,12 @@ function sourceTexturePath(texturePath, repositoryRoot) {
 	return undefined;
 }
 
+function generatedTextureSource(texturePath, bedrockRoot) {
+	return texturePath.startsWith("textures/createbedrock/generated/")
+		? resolve(bedrockRoot, "tools", "generate-stage3-visual-textures.mjs")
+		: undefined;
+}
+
 async function geometryIdentifiers(resourcePackRoot) {
 	const identifiers = new Set();
 	const directory = resolve(resourcePackRoot, "models", "blocks");
@@ -136,7 +136,7 @@ async function assertStaticBlockContracts({ bedrockRoot, built }) {
 		locale,
 		languageKeys(await readFile(resolve(resourcePackRoot, "texts", `${locale}.lang`), "utf8"))
 	])));
-	const convertedGeometry = new Set(JAVA_MODELS.map(entry => `geometry.createbedrock.${entry.name}`));
+	const convertedGeometry = plannedGeometryIdentifiers();
 	const builtGeometry = built ? await geometryIdentifiers(resourcePackRoot) : undefined;
 	const staticEntries = matrix.entries.filter(entry => entry.phase === 3 && entry.status === "static_verified");
 	const foundationEntries = matrix.entries.filter(entry => entry.phase === 3
@@ -187,7 +187,7 @@ async function assertStaticBlockContracts({ bedrockRoot, built }) {
 				throw new Error(`Static migration entry ${entry.acceptanceId} is missing texture ${texture} in terrain_texture.json.`);
 			const expectedFile = built
 				? resolve(resourcePackRoot, `${texturePath}.png`)
-				: sourceTexturePath(texturePath, repositoryRoot);
+				: sourceTexturePath(texturePath, repositoryRoot) ?? generatedTextureSource(texturePath, bedrockRoot);
 			if (!expectedFile || !await fileExists(expectedFile))
 				throw new Error(`Static migration entry ${entry.acceptanceId} is missing staged texture for ${texture}.`);
 		}

@@ -47,8 +47,18 @@ export const JAVA_MODELS = [
 	},
 	{ name: "depot", source: "depot/block.json" },
 	{ name: "belt", source: "belt/middle.json" },
+	{ name: "belt_start", source: "belt/start.json" },
+	{ name: "belt_end", source: "belt/end.json" },
 	{ name: "chute", source: "chute/block.json" },
-	{ name: "fluid_tank", source: "fluid_tank/block_single.json" },
+	{ name: "fluid_tank", source: "fluid_tank/block_single_window.json" },
+	{ name: "fluid_tank_bottom", source: "fluid_tank/block_bottom_window.json" },
+	{ name: "fluid_tank_middle", source: "fluid_tank/block_middle_window.json" },
+	{ name: "fluid_tank_top", source: "fluid_tank/block_top_window.json" },
+	{
+		name: "crushing_wheel",
+		source: "crushing_wheel/crushing_wheel.obj",
+		converter: "crushing_wheel_proxy"
+	},
 	{ name: "fluid_pipe", source: "fluid_pipe/item.json" },
 	{ name: "encased_fluid_pipe", source: "encased_fluid_pipe/block_open.json" },
 	{ name: "glass_fluid_pipe", source: "fluid_pipe/window.json" },
@@ -77,6 +87,17 @@ export const JAVA_MODELS = [
 		}
 	}
 ];
+
+export function plannedGeometryIdentifiers() {
+	const identifiers = new Set(JAVA_MODELS.map(entry => `geometry.createbedrock.${entry.name}`));
+	for (const entry of JAVA_MODELS) {
+		if (!entry.name.startsWith("fluid_tank"))
+			continue;
+		for (const level of [1, 2, 3, 4])
+			identifiers.add(`geometry.createbedrock.${entry.name}_level_${level}`);
+	}
+	return identifiers;
+}
 
 function materialName(texturePath) {
 	return basename(texturePath).replace(/[^a-zA-Z0-9_]/g, "_");
@@ -162,11 +183,83 @@ export function convertJavaModel({ identifier, model, textureOverrides = {} }) {
 	};
 }
 
+function face(material, uv = [0, 0], uvSize = [16, 16]) {
+	return { material_instance: material, uv, uv_size: uvSize };
+}
+
+function cube(origin, size, material, rotation) {
+	return {
+		origin,
+		size,
+		uv: Object.fromEntries(["north", "south", "east", "west", "up", "down"].map(direction => [direction, face(material)])),
+		...(rotation ? { pivot: [0, 8, 0], rotation } : {})
+	};
+}
+
+// Bedrock's poly_mesh is deprecated and rejected by current content tooling.
+// The Java OBJ remains the authoritative source, while this stable cuboid
+// approximation preserves its oversized, toothed wheel silhouette on console
+// and Realm clients that only need standard block geometry.
+export function convertCrushingWheelObj({ identifier, source }) {
+	if (typeof source !== "string" || !/^v\s/m.test(source) || !/^f\s/m.test(source) || !/^usemtl\s/m.test(source))
+		throw new TypeError("Crushing Wheel OBJ must contain vertices, faces, and material groups");
+	const rim = [
+		[-4, 1, -18, 8, 14, 10], [10, 1, -18, 8, 14, 10],
+		[-18, 1, -4, 10, 14, 8], [8, 1, -4, 10, 14, 8],
+		[-14, 1, -14, 8, 14, 8], [6, 1, -14, 8, 14, 8],
+		[-14, 1, 6, 8, 14, 8], [6, 1, 6, 8, 14, 8]
+	].map(([x, y, z, width, height, depth]) => cube([x, y, z], [width, height, depth], "crushing_wheel_plates"));
+	const hub = [
+		cube([-5, 4, -5], [10, 8, 10], "crushing_wheel_insert"),
+		cube([-2, -2, -2], [4, 20, 4], "axis"),
+		cube([-3, 16, -3], [6, 1, 6], "axis_top")
+	];
+	return {
+		format_version: "1.21.0",
+		"minecraft:geometry": [{
+			description: {
+				identifier,
+				texture_width: 16,
+				texture_height: 16,
+				visible_bounds_width: 3,
+				visible_bounds_height: 2,
+				visible_bounds_offset: [0, 0.5, 0]
+			},
+			bones: [{ name: "crushing_wheel", pivot: [0, 8, 0], cubes: [...rim, ...hub] }]
+		}]
+	};
+}
+
+function liquidCube(level) {
+	return cube([-7, 4, -7], [14, level * 2, 14], "fluid_fill");
+}
+
+export function addTankFillLevels(geometry, name) {
+	const base = geometry?.["minecraft:geometry"]?.[0];
+	if (!base?.bones?.[0]?.cubes)
+		throw new TypeError("Fluid tank geometry must contain a converted Java-model bone");
+	return [1, 2, 3, 4].map(level => ({
+		format_version: geometry.format_version,
+		"minecraft:geometry": [{
+			description: { ...base.description, identifier: `geometry.createbedrock.${name}_level_${level}` },
+			bones: [{ ...base.bones[0], cubes: [...base.bones[0].cubes, liquidCube(level)] }]
+		}]
+	}));
+}
+
 export async function convertJavaModels(resourcePackRoot) {
 	const outputDirectory = resolve(resourcePackRoot, "models/blocks");
 	await mkdir(outputDirectory, { recursive: true });
 	for (const entry of JAVA_MODELS) {
 		const source = resolve(repositoryRoot, "src/main/resources/assets/create/models/block", entry.source);
+		if (entry.converter === "crushing_wheel_proxy") {
+			const geometry = convertCrushingWheelObj({
+				identifier: `geometry.createbedrock.${entry.name}`,
+				source: await readFile(source, "utf8")
+			});
+			await writeFile(resolve(outputDirectory, `${entry.name}.geo.json`), `${JSON.stringify(geometry, null, 2)}\n`);
+			continue;
+		}
 		const model = JSON.parse(await readFile(source, "utf8"));
 		const geometry = convertJavaModel({
 			identifier: `geometry.createbedrock.${entry.name}`,
@@ -174,6 +267,12 @@ export async function convertJavaModels(resourcePackRoot) {
 			textureOverrides: entry.textureOverrides
 		});
 		await writeFile(resolve(outputDirectory, `${entry.name}.geo.json`), `${JSON.stringify(geometry, null, 2)}\n`);
+		if (entry.name.startsWith("fluid_tank")) {
+			for (const filledGeometry of addTankFillLevels(geometry, entry.name)) {
+				const identifier = filledGeometry["minecraft:geometry"][0].description.identifier.replace("geometry.createbedrock.", "");
+				await writeFile(resolve(outputDirectory, `${identifier}.geo.json`), `${JSON.stringify(filledGeometry, null, 2)}\n`);
+			}
+		}
 	}
 	return JAVA_MODELS.length;
 }

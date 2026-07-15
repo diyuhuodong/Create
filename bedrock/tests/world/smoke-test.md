@@ -4,7 +4,7 @@ This checklist is executed only after the code-completion milestone, on Windows 
 
 1. Deploy both packs with `npm run deploy:win` and activate them in a new survival test world. Confirm the Content Log has no error or warning.
 2. Use `/scriptevent createbedrock:diagnostics` as an operator. Confirm it returns valid JSON counters, includes scheduler/persistence data, and contains no item stacks, inventory slots, player data, or coordinates.
-3. Obtain the eight S3-7 static blocks from the creative menu. Verify their English and Chinese names, item visuals, placed visuals, and source textures load without missing-texture markers. Record Crushing Wheel separately as an acknowledged cube fallback, not a visual-equivalence pass.
+3. Obtain the S3 static blocks from the creative menu. Verify their English and Chinese names, item visuals, placed visuals, and source textures load without missing-texture markers. Inspect the Crushing Wheel's oversized toothed geometry, a one-to-three-block belt run (start/middle/end caps), and one-to-three Tank columns at empty, water, and lava fill levels; record each platform's render result.
 4. Build a mixed kinetic line with crank, shafts, both cog sizes, gearbox, clutch, chain drive, water wheel, millstone, press, and crushing wheel. Check normal power, overload stall, source conflict, broken links, and recovery.
 5. Connect two valid shafts with the belt connector. Reject a cross-dimension or over-length attempt; break one endpoint; then restart the world and verify one restored link only.
 6. Start a millstone, press, and crushing wheel. Restart during processing, then assemble/disassemble each on a bearing. Confirm progress, inputs, and outputs neither duplicate nor disappear.

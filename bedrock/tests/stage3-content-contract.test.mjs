@@ -17,8 +17,6 @@ test("Stage-3 delivered content has behavior or explicit acquisition, translatio
 	assert.equal(coverage.foundationBlocks, 6);
 	assert.equal(coverage.contentEntries, 21);
 	assert.equal(coverage.contentBlocks, 14);
-	assert.deepEqual(coverage.visualFallbacks, [{
-		identifier: "createbedrock:crushing_wheel",
-		reason: STATIC_VISUAL_EXCEPTIONS.get("createbedrock:crushing_wheel")
-	}]);
+	assert.equal(STATIC_VISUAL_EXCEPTIONS.size, 0);
+	assert.deepEqual(coverage.visualFallbacks, []);
 });

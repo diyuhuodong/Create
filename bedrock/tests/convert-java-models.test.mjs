@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { convertJavaModel } from "../tools/convert-java-models.mjs";
+import { addTankFillLevels, convertCrushingWheelObj, convertJavaModel } from "../tools/convert-java-models.mjs";
 
 test("convertJavaModel preserves Java cube bounds, rotations, UVs, and materials", () => {
 	const geometry = convertJavaModel({
@@ -47,4 +47,29 @@ test("convertJavaModel uses configured values for unresolved parent texture vari
 	});
 
 	assert.equal(geometry["minecraft:geometry"][0].bones[0].cubes[0].uv.north.material_instance, "mechanical_bearing_side");
+});
+
+test("Crushing Wheel OBJ conversion emits standard cuboids instead of unsupported poly meshes", () => {
+	const geometry = convertCrushingWheelObj({
+		identifier: "geometry.createbedrock.crushing_wheel",
+		source: "v 0 0 0\nv 1 0 0\nf 1 2 1\nusemtl crushing_wheel_plates\n"
+	});
+	const cubes = geometry["minecraft:geometry"][0].bones[0].cubes;
+	assert.ok(cubes.length >= 10);
+	assert.equal(JSON.stringify(geometry).includes("poly_mesh"), false);
+	assert.equal(cubes.some(cube => cube.uv.north.material_instance === "crushing_wheel_insert"), true);
+});
+
+test("Fluid Tank fill variants retain source cubes and append a fluid material cube", () => {
+	const base = convertJavaModel({
+		identifier: "geometry.createbedrock.fluid_tank",
+		model: {
+			elements: [{ from: [0, 0, 0], to: [16, 16, 16], faces: { north: { texture: "create:block/fluid_tank", uv: [0, 0, 16, 16] } } }]
+		}
+	});
+	const variants = addTankFillLevels(base, "fluid_tank");
+	assert.equal(variants.length, 4);
+	const fourth = variants[3]["minecraft:geometry"][0];
+	assert.equal(fourth.description.identifier, "geometry.createbedrock.fluid_tank_level_4");
+	assert.equal(fourth.bones[0].cubes.at(-1).uv.up.material_instance, "fluid_fill");
 });

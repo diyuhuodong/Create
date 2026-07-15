@@ -7,6 +7,7 @@ import { decodeBedrockContainerStack } from "./bedrock-container-item-port.js";
 import { BedrockEscrowRegistry } from "./bedrock-escrow-registry.js";
 import { depotId, DepotNetwork } from "./depot-network.js";
 import { registerEscrowProtection } from "./external-escrow-runtime.js";
+import { beltSegmentForNeighbors } from "./belt-visuals.js";
 
 const DEPOT_BLOCK = "createbedrock:depot";
 const CHUTE_BLOCK = "createbedrock:chute";
@@ -296,6 +297,39 @@ function sameLocation(left, right) {
 	return left.x === right.x && left.y === right.y && left.z === right.z;
 }
 
+function setBlockState(block, property, value) {
+	const states = block?.permutation?.getAllStates?.();
+	if (!states || states[property] === undefined || states[property] === value)
+		return false;
+	block.setPermutation(block.permutation.withState(property, value));
+	return true;
+}
+
+function beltSegment(block) {
+	if (block?.typeId !== BELT_BLOCK)
+		return "single";
+	const direction = chainDirection(block);
+	if (direction.y !== 0)
+		return "single";
+	const previous = block.dimension.getBlock(offsetLocation(block.location, opposite(direction)));
+	const next = block.dimension.getBlock(offsetLocation(block.location, direction));
+	return beltSegmentForNeighbors({
+		hasNext: next?.typeId === BELT_BLOCK && sameLocation(chainDirection(next), direction),
+		hasPrevious: previous?.typeId === BELT_BLOCK && sameLocation(chainDirection(previous), direction)
+	});
+}
+
+function syncBeltSegment(block) {
+	return block?.typeId === BELT_BLOCK && setBlockState(block, "createbedrock:belt_segment", beltSegment(block));
+}
+
+function syncBeltSegmentsAround(dimension, location) {
+	let changed = false;
+	for (const offset of NEIGHBOR_OFFSETS)
+		changed = syncBeltSegment(dimension.getBlock(offsetLocation(location, offset))) || changed;
+	return syncBeltSegment(dimension.getBlock(location)) || changed;
+}
+
 function beltRunFor(block) {
 	if (block?.typeId !== BELT_BLOCK)
 		return undefined;
@@ -329,6 +363,7 @@ function beltRunFor(block) {
 }
 
 function configurePhysicalBelt(block) {
+	syncBeltSegment(block);
 	const run = beltRunFor(block);
 	if (!run)
 		return false;
@@ -360,6 +395,7 @@ function rescanPhysicalBelts() {
 	for (const node of getKineticWorldForTesting().getNodesByType(BELT_BLOCK)) {
 		try {
 			const block = world.getDimension(node.dimensionId).getBlock(node.location);
+			syncBeltSegment(block);
 			const run = beltRunFor(block);
 			if (!run)
 				continue;
@@ -609,6 +645,8 @@ export function registerDepots() {
 		if (createPort(event.block))
 			configureAdjacentDevices(event.block);
 		configureLogisticsDevice(event.block);
+		if (event.block.typeId === BELT_BLOCK)
+			syncBeltSegmentsAround(event.block.dimension, event.block.location);
 	});
 
 	world.beforeEvents.playerBreakBlock.subscribe(event => {
@@ -648,6 +686,7 @@ export function registerDepots() {
 				if (network.hasBelt(id))
 					network.removeBelt(id);
 			}
+			syncBeltSegmentsAround(event.dimension, event.block.location);
 		} catch (error) {
 			console.warn(`[Create Bedrock] Logistics endpoint removal deferred: ${error}`);
 		}
