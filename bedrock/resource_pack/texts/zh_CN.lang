@@ -193,6 +193,7 @@ entity.createbedrock:potato_projectile.name=马铃薯投射物
 tile.createbedrock:mechanical_crafter.name=机械合成器
 tile.createbedrock:clockwork_bearing.name=时钟轴承
 tile.createbedrock:controls.name=动力结构控制器
+tile.createbedrock:contraption_controls.name=动力结构控制器
 tile.createbedrock:mechanical_plough.name=机械犁
 tile.createbedrock:mechanical_drill.name=机械钻头
 tile.createbedrock:mechanical_roller.name=机械压路机

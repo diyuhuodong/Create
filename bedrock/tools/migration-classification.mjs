@@ -100,6 +100,16 @@ const BEHAVIOR_PATHS = new Map([
 	["vertical_gearbox", "behavior_pack/scripts/kinetics/kinetic-runtime.js"]
 ]);
 
+export const STAGE_FOUR_CONTRAPTION_FOUNDATION = new Map([
+	["contraption", { domain: "contraptions", persistenceSchema: 2 }],
+	["stationary_contraption", { domain: "contraptions", persistenceSchema: 2 }],
+	["contraption_controls", { domain: "contraptions", persistenceSchema: 1 }]
+]);
+
+for (const identifier of ["contraption", "stationary_contraption"])
+	BEHAVIOR_PATHS.set(identifier, "behavior_pack/scripts/contraptions/contraption-runtime.js");
+BEHAVIOR_PATHS.set("contraption_controls", "behavior_pack/scripts/contraptions/contraption-actors-runtime.js");
+
 for (const device of REDSTONE_DEVICE_CATALOG)
 	BEHAVIOR_PATHS.set(device.id, "behavior_pack/scripts/redstone/redstone-device-runtime.js");
 
@@ -259,6 +269,7 @@ export function classifyRegistration(identifier, kind) {
 	const foundationContent = STAGE_THREE_FOUNDATION_CONTENT.get(identifier);
 	const kineticFoundation = STAGE_THREE_KINETIC_FOUNDATION.get(identifier);
 	const logisticsFoundation = STAGE_THREE_LOGISTICS_FOUNDATION.get(identifier);
+	const stageFourFoundation = STAGE_FOUR_CONTRAPTION_FOUNDATION.get(identifier);
 	const staticSystem = processor ?? fluid ?? redstoneControl;
 	const rule = RULES.find(candidate => candidate.pattern.test(identifier));
 	const classification = staticSystem
@@ -273,8 +284,10 @@ export function classifyRegistration(identifier, kind) {
 		? { ...logisticsFoundation, phase: 3, status: "static_verified" }
 		: fluidFoundation
 		? { ...fluidFoundation, phase: 3, status: "static_verified" }
-		: redstoneFoundation
+	: redstoneFoundation
 		? { ...redstoneFoundation, phase: 3, status: "static_verified" }
+	: stageFourFoundation
+		? { ...stageFourFoundation, phase: 4, status: "static_verified" }
 		: prototype
 		? { ...prototype, phase: 2, status: "implementation_in_progress" }
 		: rule ?? { domain: "content", phase: 3 };
@@ -285,9 +298,9 @@ export function classifyRegistration(identifier, kind) {
 		behaviorPath: BEHAVIOR_PATHS.get(identifier) ?? null,
 		blockingReason: null,
 		domain: classification.domain,
-		persistenceSchema: staticSystem || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation ? 2 : redstoneFoundation || prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null,
+		persistenceSchema: stageFourFoundation?.persistenceSchema ?? (staticSystem || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation ? 2 : redstoneFoundation || prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null),
 		phase: classification.phase,
-		resourceStatus: prototype || staticSystem || foundationContent || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation || redstoneFoundation || classification.status === "static_verified" ? "partial" : "pending",
+		resourceStatus: prototype || staticSystem || foundationContent || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation || redstoneFoundation || stageFourFoundation || classification.status === "static_verified" ? "partial" : "pending",
 		status: classification.status ?? "specification_pending"
 	};
 }

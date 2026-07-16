@@ -54,6 +54,8 @@ export const JAVA_BLOCK_TEXTURES = [
 	"cogwheel.png",
 	"cogwheel_axis.png",
 	"clockwork_bearing_side.png",
+	"contraption_controls.png",
+	"contraption_controls_frame.png",
 	"controls.png",
 	"controls_frame.png",
 	"crafter_side.png",

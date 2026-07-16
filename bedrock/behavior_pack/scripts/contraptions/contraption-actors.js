@@ -1,6 +1,6 @@
 import { transformAssemblyPoint } from "./assembly-transform.js";
 
-export const CONTRAPTION_CONTROLS_BLOCK = "createbedrock:controls";
+export const CONTRAPTION_CONTROLS_BLOCK = "createbedrock:contraption_controls";
 export const MECHANICAL_PLOUGH_BLOCK = "createbedrock:mechanical_plough";
 export const MECHANICAL_ROLLER_BLOCK = "createbedrock:mechanical_roller";
 export const MECHANICAL_DRILL_BLOCK = "createbedrock:mechanical_drill";

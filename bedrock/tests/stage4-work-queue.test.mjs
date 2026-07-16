@@ -21,7 +21,7 @@ test("Stage-4 work queue assigns every dynamic-mechanics and schematic entry to 
 	const coverage = validateStage4WorkQueue(queue, matrix);
 	assert.equal(coverage.entries, 54);
 	assert.deepEqual(coverage.deliveryCounts, {
-		"P4.1": 4,
+		"completed:P4.1": 4,
 		"P4.2": 15,
 		"P4.3": 4,
 		"P4.4": 8,

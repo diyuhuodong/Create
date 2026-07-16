@@ -15,6 +15,7 @@ export const MOVABLE_BLOCK_TYPES = new Set([
 	"createbedrock:mechanical_plough",
 	"createbedrock:mechanical_roller",
 	"createbedrock:mechanical_drill",
+	"createbedrock:contraption_controls",
 	"createbedrock:controls",
 	"createbedrock:piston_extension_pole",
 	"createbedrock:portable_storage_interface",

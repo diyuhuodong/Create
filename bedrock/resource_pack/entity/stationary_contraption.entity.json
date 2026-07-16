@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "createbedrock:stationary_contraption",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/create_java/block/cogwheel"
+      },
+      "geometry": {
+        "default": "geometry.createbedrock.contraption_marker"
+      },
+      "render_controllers": [
+        "controller.render.createbedrock.contraption"
+      ]
+    }
+  }
+}

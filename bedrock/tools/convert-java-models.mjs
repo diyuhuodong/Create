@@ -21,6 +21,7 @@ export const JAVA_MODELS = [
 		textureOverrides: { back: "create:block/gearbox", side: "create:block/clockwork_bearing_side" }
 	},
 	{ name: "controls", source: "controls/item.json" },
+	{ name: "contraption_controls", source: "contraption_controls/item.json" },
 	{ name: "mechanical_plough", source: "mechanical_plough.json" },
 	{
 		name: "mechanical_drill",

@@ -168,6 +168,14 @@ test("migration classification statically verifies S3-12 fluid expansion resourc
 });
 
 test("migration classification assigns later dynamic, train, and equipment work to their planned phases", () => {
+	const contraption = classifyRegistration("contraption", "entity");
+	assert.equal(contraption.phase, 4);
+	assert.equal(contraption.status, "static_verified");
+	assert.equal(contraption.behaviorPath, "behavior_pack/scripts/contraptions/contraption-runtime.js");
+	const contraptionControls = classifyRegistration("contraption_controls", "block");
+	assert.equal(contraptionControls.phase, 4);
+	assert.equal(contraptionControls.status, "static_verified");
+	assert.equal(contraptionControls.behaviorPath, "behavior_pack/scripts/contraptions/contraption-actors-runtime.js");
 	assert.deepEqual(classifyRegistration("mechanical_piston", "block").phase, 4);
 	assert.deepEqual(classifyRegistration("track_signal", "block").phase, 5);
 	assert.deepEqual(classifyRegistration("backtank", "item").phase, 6);

@@ -1,0 +1,36 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:contraption_controls",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
+      "properties": { "createbedrock:disabled": [0, 1] },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 4 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.contraption_controls",
+      "minecraft:loot": "loot_tables/blocks/contraption_controls.json",
+      "minecraft:item_visual": {
+        "geometry": { "identifier": "geometry.createbedrock.contraption_controls" },
+        "material_instances": {
+          "contraption_controls": { "texture": "createbedrock_contraption_controls", "render_method": "opaque" },
+          "contraption_controls_frame": { "texture": "createbedrock_contraption_controls_frame", "render_method": "opaque" },
+          "*": { "texture": "createbedrock_contraption_controls", "render_method": "opaque" }
+        }
+      },
+      "minecraft:material_instances": {
+        "contraption_controls": { "texture": "createbedrock_contraption_controls", "render_method": "opaque" },
+        "contraption_controls_frame": { "texture": "createbedrock_contraption_controls_frame", "render_method": "opaque" },
+        "*": { "texture": "createbedrock_contraption_controls", "render_method": "opaque" }
+      }
+    },
+    "permutations": [
+      { "condition": "query.block_state('minecraft:facing_direction') == 2", "components": { "minecraft:transformation": { "rotation": [0, 180, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 4", "components": { "minecraft:transformation": { "rotation": [0, 90, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 5", "components": { "minecraft:transformation": { "rotation": [0, -90, 0] } } },
+      { "condition": "query.block_state('createbedrock:disabled') == 1", "components": { "minecraft:light_dampening": 1 } }
+    ]
+  }
+}

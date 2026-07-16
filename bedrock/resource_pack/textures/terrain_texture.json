@@ -107,6 +107,12 @@
 	"createbedrock_clockwork_bearing_side": {
 	  "textures": "textures/create_java/block/clockwork_bearing_side"
 	},
+	"createbedrock_contraption_controls": {
+	  "textures": "textures/create_java/block/contraption_controls"
+	},
+	"createbedrock_contraption_controls_frame": {
+	  "textures": "textures/create_java/block/contraption_controls_frame"
+	},
 	"createbedrock_controls": {
 	  "textures": "textures/create_java/block/controls"
 	},
