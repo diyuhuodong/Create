@@ -1,0 +1,1087 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "deterministic",
+  "generatedFrom": "bedrock/data/migration-matrix.json",
+  "entries": [
+    {
+      "acceptanceId": "CONTRAPTIONS-CARRIAGE-CONTRAPTION-ENTITY",
+      "assetPlan": "Trace entity resources to src/main/java/com/simibubi/create/AllEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Assemble contraption minecarts and passengers transactionally while reusing track-route persistence without claiming Stage-5 scheduling.",
+      "bedrockIdentifier": "createbedrock:carriage_contraption",
+      "deliveryPackage": "P4.5",
+      "domain": "contraptions",
+      "javaIdentifier": "create:carriage_contraption",
+      "javaSource": "src/main/java/com/simibubi/create/AllEntityTypes.java",
+      "kind": "entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist cart/assembly identity, seat/passenger binding, route reservation, coupling endpoints, and safe disassembly state.",
+      "platformScenarios": [
+        "minecart-assemble-disassemble",
+        "seat-rejoin",
+        "coupling-restart"
+      ],
+      "resourcePlan": "Provide cart items, entities, BP/RP definitions, language, recipes, drops, and explicit creative access.",
+      "testPlan": "Test cart ownership, passenger lifecycle, route conflicts, coupling idempotency, recovery, and all entity/item definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-CART-ASSEMBLER-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Assemble contraption minecarts and passengers transactionally while reusing track-route persistence without claiming Stage-5 scheduling.",
+      "bedrockIdentifier": "createbedrock:cart_assembler",
+      "deliveryPackage": "P4.5",
+      "domain": "contraptions",
+      "javaIdentifier": "create:cart_assembler",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist cart/assembly identity, seat/passenger binding, route reservation, coupling endpoints, and safe disassembly state.",
+      "platformScenarios": [
+        "minecart-assemble-disassemble",
+        "seat-rejoin",
+        "coupling-restart"
+      ],
+      "resourcePlan": "Provide cart items, entities, BP/RP definitions, language, recipes, drops, and explicit creative access.",
+      "testPlan": "Test cart ownership, passenger lifecycle, route conflicts, coupling idempotency, recovery, and all entity/item definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-CART-ASSEMBLER-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Assemble contraption minecarts and passengers transactionally while reusing track-route persistence without claiming Stage-5 scheduling.",
+      "bedrockIdentifier": "createbedrock:cart_assembler",
+      "deliveryPackage": "P4.5",
+      "domain": "contraptions",
+      "javaIdentifier": "create:cart_assembler",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist cart/assembly identity, seat/passenger binding, route reservation, coupling endpoints, and safe disassembly state.",
+      "platformScenarios": [
+        "minecart-assemble-disassemble",
+        "seat-rejoin",
+        "coupling-restart"
+      ],
+      "resourcePlan": "Provide cart items, entities, BP/RP definitions, language, recipes, drops, and explicit creative access.",
+      "testPlan": "Test cart ownership, passenger lifecycle, route conflicts, coupling idempotency, recovery, and all entity/item definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-CHEST-MINECART-CONTRAPTION-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Assemble contraption minecarts and passengers transactionally while reusing track-route persistence without claiming Stage-5 scheduling.",
+      "bedrockIdentifier": "createbedrock:chest_minecart_contraption",
+      "deliveryPackage": "P4.5",
+      "domain": "contraptions",
+      "javaIdentifier": "create:chest_minecart_contraption",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist cart/assembly identity, seat/passenger binding, route reservation, coupling endpoints, and safe disassembly state.",
+      "platformScenarios": [
+        "minecart-assemble-disassemble",
+        "seat-rejoin",
+        "coupling-restart"
+      ],
+      "resourcePlan": "Provide cart items, entities, BP/RP definitions, language, recipes, drops, and explicit creative access.",
+      "testPlan": "Test cart ownership, passenger lifecycle, route conflicts, coupling idempotency, recovery, and all entity/item definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-CONTRAPTION-CONTROLS-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Connect Mechanical/Windmill Bearing ownership and Contraption Controls to DynamicAssemblyController; projections remain non-authoritative.",
+      "bedrockIdentifier": "createbedrock:contraption_controls",
+      "deliveryPackage": "P4.1",
+      "domain": "contraptions",
+      "javaIdentifier": "create:contraption_controls",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist a sharded dynamic_assembly root, snapshot shards, transform, epoch, phase, owner, and frozen reason.",
+      "platformScenarios": [
+        "assembly-restart",
+        "projection-loss-recovery",
+        "bearing-disassembly"
+      ],
+      "resourcePlan": "Provide purpose-specific BP/RP definitions, creative access, EN/ZH text, Java asset provenance, recipe, and drop behavior.",
+      "testPlan": "Test assembly ownership, 512-block collection, rollback, restart restoration, projection regeneration, and definition coverage."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-CONTRAPTION-CONTROLS-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Connect Mechanical/Windmill Bearing ownership and Contraption Controls to DynamicAssemblyController; projections remain non-authoritative.",
+      "bedrockIdentifier": "createbedrock:contraption_controls",
+      "deliveryPackage": "P4.1",
+      "domain": "contraptions",
+      "javaIdentifier": "create:contraption_controls",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist a sharded dynamic_assembly root, snapshot shards, transform, epoch, phase, owner, and frozen reason.",
+      "platformScenarios": [
+        "assembly-restart",
+        "projection-loss-recovery",
+        "bearing-disassembly"
+      ],
+      "resourcePlan": "Provide purpose-specific BP/RP definitions, creative access, EN/ZH text, Java asset provenance, recipe, and drop behavior.",
+      "testPlan": "Test assembly ownership, 512-block collection, rollback, restart restoration, projection regeneration, and definition coverage."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-CONTRAPTION-ENTITY",
+      "assetPlan": "Trace entity resources to src/main/java/com/simibubi/create/AllEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Connect Mechanical/Windmill Bearing ownership and Contraption Controls to DynamicAssemblyController; projections remain non-authoritative.",
+      "bedrockIdentifier": "createbedrock:contraption",
+      "deliveryPackage": "P4.1",
+      "domain": "contraptions",
+      "javaIdentifier": "create:contraption",
+      "javaSource": "src/main/java/com/simibubi/create/AllEntityTypes.java",
+      "kind": "entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist a sharded dynamic_assembly root, snapshot shards, transform, epoch, phase, owner, and frozen reason.",
+      "platformScenarios": [
+        "assembly-restart",
+        "projection-loss-recovery",
+        "bearing-disassembly"
+      ],
+      "resourcePlan": "Provide purpose-specific BP/RP definitions, creative access, EN/ZH text, Java asset provenance, recipe, and drop behavior.",
+      "testPlan": "Test assembly ownership, 512-block collection, rollback, restart restoration, projection regeneration, and definition coverage."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-DEPLOYER-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Execute actor targets and item/fluid/process effects at authoritative snapshot coordinates through durable transaction ports.",
+      "bedrockIdentifier": "createbedrock:deployer",
+      "deliveryPackage": "P4.4",
+      "domain": "contraptions",
+      "javaIdentifier": "create:deployer",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actor configuration, cooldown, target selection, inventories, pending work, and idempotency receipts in moving data.",
+      "platformScenarios": [
+        "actor-item-conservation",
+        "actor-restart",
+        "actor-concurrent-target"
+      ],
+      "resourcePlan": "Provide actor blocks/items/resources, creative access, EN/ZH text, Java-derived recipes/drops, and no placeholder actors.",
+      "testPlan": "Test target selection, cooldown, transaction rollback, inventory conservation, restart, and conflicting actor ownership."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-DEPLOYER-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Execute actor targets and item/fluid/process effects at authoritative snapshot coordinates through durable transaction ports.",
+      "bedrockIdentifier": "createbedrock:deployer",
+      "deliveryPackage": "P4.4",
+      "domain": "contraptions",
+      "javaIdentifier": "create:deployer",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actor configuration, cooldown, target selection, inventories, pending work, and idempotency receipts in moving data.",
+      "platformScenarios": [
+        "actor-item-conservation",
+        "actor-restart",
+        "actor-concurrent-target"
+      ],
+      "resourcePlan": "Provide actor blocks/items/resources, creative access, EN/ZH text, Java-derived recipes/drops, and no placeholder actors.",
+      "testPlan": "Test target selection, cooldown, transaction rollback, inventory conservation, restart, and conflicting actor ownership."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-DRILL-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Execute actor targets and item/fluid/process effects at authoritative snapshot coordinates through durable transaction ports.",
+      "bedrockIdentifier": "createbedrock:drill",
+      "deliveryPackage": "P4.4",
+      "domain": "contraptions",
+      "javaIdentifier": "create:drill",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actor configuration, cooldown, target selection, inventories, pending work, and idempotency receipts in moving data.",
+      "platformScenarios": [
+        "actor-item-conservation",
+        "actor-restart",
+        "actor-concurrent-target"
+      ],
+      "resourcePlan": "Provide actor blocks/items/resources, creative access, EN/ZH text, Java-derived recipes/drops, and no placeholder actors.",
+      "testPlan": "Test target selection, cooldown, transaction rollback, inventory conservation, restart, and conflicting actor ownership."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-ELEVATOR-CONTACT-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Use column-owned elevator state and transform-sampled moving contacts; only contact edges write native redstone outputs.",
+      "bedrockIdentifier": "createbedrock:elevator_contact",
+      "deliveryPackage": "P4.3",
+      "domain": "contraptions",
+      "javaIdentifier": "create:elevator_contact",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist column X/Z, floor ID/name, facing, requests, cabin state, current floor, and contact edge state.",
+      "platformScenarios": [
+        "elevator-floor-crossing",
+        "moving-contact-edge",
+        "elevator-restart"
+      ],
+      "resourcePlan": "Provide independent Elevator Contact/Pulley BP/RP definitions, language, recipes, drops, and visible floor feedback.",
+      "testPlan": "Test exactly-once floor arrival, opposing-face contacts, redstone rise/fall, column isolation, and restart recovery."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-ELEVATOR-CONTACT-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Use column-owned elevator state and transform-sampled moving contacts; only contact edges write native redstone outputs.",
+      "bedrockIdentifier": "createbedrock:elevator_contact",
+      "deliveryPackage": "P4.3",
+      "domain": "contraptions",
+      "javaIdentifier": "create:elevator_contact",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist column X/Z, floor ID/name, facing, requests, cabin state, current floor, and contact edge state.",
+      "platformScenarios": [
+        "elevator-floor-crossing",
+        "moving-contact-edge",
+        "elevator-restart"
+      ],
+      "resourcePlan": "Provide independent Elevator Contact/Pulley BP/RP definitions, language, recipes, drops, and visible floor feedback.",
+      "testPlan": "Test exactly-once floor arrival, opposing-face contacts, redstone rise/fall, column isolation, and restart recovery."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-ELEVATOR-PULLEY-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Use column-owned elevator state and transform-sampled moving contacts; only contact edges write native redstone outputs.",
+      "bedrockIdentifier": "createbedrock:elevator_pulley",
+      "deliveryPackage": "P4.3",
+      "domain": "contraptions",
+      "javaIdentifier": "create:elevator_pulley",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist column X/Z, floor ID/name, facing, requests, cabin state, current floor, and contact edge state.",
+      "platformScenarios": [
+        "elevator-floor-crossing",
+        "moving-contact-edge",
+        "elevator-restart"
+      ],
+      "resourcePlan": "Provide independent Elevator Contact/Pulley BP/RP definitions, language, recipes, drops, and visible floor feedback.",
+      "testPlan": "Test exactly-once floor arrival, opposing-face contacts, redstone rise/fall, column isolation, and restart recovery."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-ELEVATOR-PULLEY-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Use column-owned elevator state and transform-sampled moving contacts; only contact edges write native redstone outputs.",
+      "bedrockIdentifier": "createbedrock:elevator_pulley",
+      "deliveryPackage": "P4.3",
+      "domain": "contraptions",
+      "javaIdentifier": "create:elevator_pulley",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist column X/Z, floor ID/name, facing, requests, cabin state, current floor, and contact edge state.",
+      "platformScenarios": [
+        "elevator-floor-crossing",
+        "moving-contact-edge",
+        "elevator-restart"
+      ],
+      "resourcePlan": "Provide independent Elevator Contact/Pulley BP/RP definitions, language, recipes, drops, and visible floor feedback.",
+      "testPlan": "Test exactly-once floor arrival, opposing-face contacts, redstone rise/fall, column isolation, and restart recovery."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-FURNACE-MINECART-CONTRAPTION-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Assemble contraption minecarts and passengers transactionally while reusing track-route persistence without claiming Stage-5 scheduling.",
+      "bedrockIdentifier": "createbedrock:furnace_minecart_contraption",
+      "deliveryPackage": "P4.5",
+      "domain": "contraptions",
+      "javaIdentifier": "create:furnace_minecart_contraption",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist cart/assembly identity, seat/passenger binding, route reservation, coupling endpoints, and safe disassembly state.",
+      "platformScenarios": [
+        "minecart-assemble-disassemble",
+        "seat-rejoin",
+        "coupling-restart"
+      ],
+      "resourcePlan": "Provide cart items, entities, BP/RP definitions, language, recipes, drops, and explicit creative access.",
+      "testPlan": "Test cart ownership, passenger lifecycle, route conflicts, coupling idempotency, recovery, and all entity/item definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-GANTRY-CARRIAGE-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Drive linear translation from kinetic speed through DynamicAssemblyController and swept occupancy; conflicting movement freezes safely.",
+      "bedrockIdentifier": "createbedrock:gantry_carriage",
+      "deliveryPackage": "P4.2",
+      "domain": "contraptions",
+      "javaIdentifier": "create:gantry_carriage",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actuator direction, extension, target, kinetic dependency, dynamic assembly ID, and recovery/frozen state.",
+      "platformScenarios": [
+        "linear-reverse",
+        "linear-collision-freeze",
+        "linear-restart"
+      ],
+      "resourcePlan": "Provide block states, head/rope projection resources, creative access, EN/ZH text, source-derived recipes, and drops.",
+      "testPlan": "Test extension, retraction, reversal, collision, unload/restart, destination reservation, and all acceptance definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-GANTRY-CONTRAPTION-ENTITY",
+      "assetPlan": "Trace entity resources to src/main/java/com/simibubi/create/AllEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Drive linear translation from kinetic speed through DynamicAssemblyController and swept occupancy; conflicting movement freezes safely.",
+      "bedrockIdentifier": "createbedrock:gantry_contraption",
+      "deliveryPackage": "P4.2",
+      "domain": "contraptions",
+      "javaIdentifier": "create:gantry_contraption",
+      "javaSource": "src/main/java/com/simibubi/create/AllEntityTypes.java",
+      "kind": "entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actuator direction, extension, target, kinetic dependency, dynamic assembly ID, and recovery/frozen state.",
+      "platformScenarios": [
+        "linear-reverse",
+        "linear-collision-freeze",
+        "linear-restart"
+      ],
+      "resourcePlan": "Provide block states, head/rope projection resources, creative access, EN/ZH text, source-derived recipes, and drops.",
+      "testPlan": "Test extension, retraction, reversal, collision, unload/restart, destination reservation, and all acceptance definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-GANTRY-PINION-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Drive linear translation from kinetic speed through DynamicAssemblyController and swept occupancy; conflicting movement freezes safely.",
+      "bedrockIdentifier": "createbedrock:gantry_pinion",
+      "deliveryPackage": "P4.2",
+      "domain": "contraptions",
+      "javaIdentifier": "create:gantry_pinion",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actuator direction, extension, target, kinetic dependency, dynamic assembly ID, and recovery/frozen state.",
+      "platformScenarios": [
+        "linear-reverse",
+        "linear-collision-freeze",
+        "linear-restart"
+      ],
+      "resourcePlan": "Provide block states, head/rope projection resources, creative access, EN/ZH text, source-derived recipes, and drops.",
+      "testPlan": "Test extension, retraction, reversal, collision, unload/restart, destination reservation, and all acceptance definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-GANTRY-SHAFT-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Drive linear translation from kinetic speed through DynamicAssemblyController and swept occupancy; conflicting movement freezes safely.",
+      "bedrockIdentifier": "createbedrock:gantry_shaft",
+      "deliveryPackage": "P4.2",
+      "domain": "contraptions",
+      "javaIdentifier": "create:gantry_shaft",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actuator direction, extension, target, kinetic dependency, dynamic assembly ID, and recovery/frozen state.",
+      "platformScenarios": [
+        "linear-reverse",
+        "linear-collision-freeze",
+        "linear-restart"
+      ],
+      "resourcePlan": "Provide block states, head/rope projection resources, creative access, EN/ZH text, source-derived recipes, and drops.",
+      "testPlan": "Test extension, retraction, reversal, collision, unload/restart, destination reservation, and all acceptance definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-GANTRY-SHAFT-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Drive linear translation from kinetic speed through DynamicAssemblyController and swept occupancy; conflicting movement freezes safely.",
+      "bedrockIdentifier": "createbedrock:gantry_shaft",
+      "deliveryPackage": "P4.2",
+      "domain": "contraptions",
+      "javaIdentifier": "create:gantry_shaft",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actuator direction, extension, target, kinetic dependency, dynamic assembly ID, and recovery/frozen state.",
+      "platformScenarios": [
+        "linear-reverse",
+        "linear-collision-freeze",
+        "linear-restart"
+      ],
+      "resourcePlan": "Provide block states, head/rope projection resources, creative access, EN/ZH text, source-derived recipes, and drops.",
+      "testPlan": "Test extension, retraction, reversal, collision, unload/restart, destination reservation, and all acceptance definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-HARVESTER-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Execute actor targets and item/fluid/process effects at authoritative snapshot coordinates through durable transaction ports.",
+      "bedrockIdentifier": "createbedrock:harvester",
+      "deliveryPackage": "P4.4",
+      "domain": "contraptions",
+      "javaIdentifier": "create:harvester",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actor configuration, cooldown, target selection, inventories, pending work, and idempotency receipts in moving data.",
+      "platformScenarios": [
+        "actor-item-conservation",
+        "actor-restart",
+        "actor-concurrent-target"
+      ],
+      "resourcePlan": "Provide actor blocks/items/resources, creative access, EN/ZH text, Java-derived recipes/drops, and no placeholder actors.",
+      "testPlan": "Test target selection, cooldown, transaction rollback, inventory conservation, restart, and conflicting actor ownership."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-HOSE-PULLEY-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Drive linear translation from kinetic speed through DynamicAssemblyController and swept occupancy; conflicting movement freezes safely.",
+      "bedrockIdentifier": "createbedrock:hose_pulley",
+      "deliveryPackage": "P4.2",
+      "domain": "contraptions",
+      "javaIdentifier": "create:hose_pulley",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actuator direction, extension, target, kinetic dependency, dynamic assembly ID, and recovery/frozen state.",
+      "platformScenarios": [
+        "linear-reverse",
+        "linear-collision-freeze",
+        "linear-restart"
+      ],
+      "resourcePlan": "Provide block states, head/rope projection resources, creative access, EN/ZH text, source-derived recipes, and drops.",
+      "testPlan": "Test extension, retraction, reversal, collision, unload/restart, destination reservation, and all acceptance definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-HOSE-PULLEY-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Drive linear translation from kinetic speed through DynamicAssemblyController and swept occupancy; conflicting movement freezes safely.",
+      "bedrockIdentifier": "createbedrock:hose_pulley",
+      "deliveryPackage": "P4.2",
+      "domain": "contraptions",
+      "javaIdentifier": "create:hose_pulley",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actuator direction, extension, target, kinetic dependency, dynamic assembly ID, and recovery/frozen state.",
+      "platformScenarios": [
+        "linear-reverse",
+        "linear-collision-freeze",
+        "linear-restart"
+      ],
+      "resourcePlan": "Provide block states, head/rope projection resources, creative access, EN/ZH text, source-derived recipes, and drops.",
+      "testPlan": "Test extension, retraction, reversal, collision, unload/restart, destination reservation, and all acceptance definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-MECHANICAL-ARM-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Execute actor targets and item/fluid/process effects at authoritative snapshot coordinates through durable transaction ports.",
+      "bedrockIdentifier": "createbedrock:mechanical_arm",
+      "deliveryPackage": "P4.4",
+      "domain": "contraptions",
+      "javaIdentifier": "create:mechanical_arm",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actor configuration, cooldown, target selection, inventories, pending work, and idempotency receipts in moving data.",
+      "platformScenarios": [
+        "actor-item-conservation",
+        "actor-restart",
+        "actor-concurrent-target"
+      ],
+      "resourcePlan": "Provide actor blocks/items/resources, creative access, EN/ZH text, Java-derived recipes/drops, and no placeholder actors.",
+      "testPlan": "Test target selection, cooldown, transaction rollback, inventory conservation, restart, and conflicting actor ownership."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-MECHANICAL-ARM-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Execute actor targets and item/fluid/process effects at authoritative snapshot coordinates through durable transaction ports.",
+      "bedrockIdentifier": "createbedrock:mechanical_arm",
+      "deliveryPackage": "P4.4",
+      "domain": "contraptions",
+      "javaIdentifier": "create:mechanical_arm",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actor configuration, cooldown, target selection, inventories, pending work, and idempotency receipts in moving data.",
+      "platformScenarios": [
+        "actor-item-conservation",
+        "actor-restart",
+        "actor-concurrent-target"
+      ],
+      "resourcePlan": "Provide actor blocks/items/resources, creative access, EN/ZH text, Java-derived recipes/drops, and no placeholder actors.",
+      "testPlan": "Test target selection, cooldown, transaction rollback, inventory conservation, restart, and conflicting actor ownership."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-MECHANICAL-DRILL-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Execute actor targets and item/fluid/process effects at authoritative snapshot coordinates through durable transaction ports.",
+      "bedrockIdentifier": "createbedrock:mechanical_drill",
+      "deliveryPackage": "P4.4",
+      "domain": "contraptions",
+      "javaIdentifier": "create:mechanical_drill",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actor configuration, cooldown, target selection, inventories, pending work, and idempotency receipts in moving data.",
+      "platformScenarios": [
+        "actor-item-conservation",
+        "actor-restart",
+        "actor-concurrent-target"
+      ],
+      "resourcePlan": "Provide actor blocks/items/resources, creative access, EN/ZH text, Java-derived recipes/drops, and no placeholder actors.",
+      "testPlan": "Test target selection, cooldown, transaction rollback, inventory conservation, restart, and conflicting actor ownership."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-MECHANICAL-HARVESTER-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Execute actor targets and item/fluid/process effects at authoritative snapshot coordinates through durable transaction ports.",
+      "bedrockIdentifier": "createbedrock:mechanical_harvester",
+      "deliveryPackage": "P4.4",
+      "domain": "contraptions",
+      "javaIdentifier": "create:mechanical_harvester",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actor configuration, cooldown, target selection, inventories, pending work, and idempotency receipts in moving data.",
+      "platformScenarios": [
+        "actor-item-conservation",
+        "actor-restart",
+        "actor-concurrent-target"
+      ],
+      "resourcePlan": "Provide actor blocks/items/resources, creative access, EN/ZH text, Java-derived recipes/drops, and no placeholder actors.",
+      "testPlan": "Test target selection, cooldown, transaction rollback, inventory conservation, restart, and conflicting actor ownership."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-MECHANICAL-PISTON-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Drive linear translation from kinetic speed through DynamicAssemblyController and swept occupancy; conflicting movement freezes safely.",
+      "bedrockIdentifier": "createbedrock:mechanical_piston",
+      "deliveryPackage": "P4.2",
+      "domain": "contraptions",
+      "javaIdentifier": "create:mechanical_piston",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actuator direction, extension, target, kinetic dependency, dynamic assembly ID, and recovery/frozen state.",
+      "platformScenarios": [
+        "linear-reverse",
+        "linear-collision-freeze",
+        "linear-restart"
+      ],
+      "resourcePlan": "Provide block states, head/rope projection resources, creative access, EN/ZH text, source-derived recipes, and drops.",
+      "testPlan": "Test extension, retraction, reversal, collision, unload/restart, destination reservation, and all acceptance definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-MECHANICAL-PISTON-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Drive linear translation from kinetic speed through DynamicAssemblyController and swept occupancy; conflicting movement freezes safely.",
+      "bedrockIdentifier": "createbedrock:mechanical_piston",
+      "deliveryPackage": "P4.2",
+      "domain": "contraptions",
+      "javaIdentifier": "create:mechanical_piston",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actuator direction, extension, target, kinetic dependency, dynamic assembly ID, and recovery/frozen state.",
+      "platformScenarios": [
+        "linear-reverse",
+        "linear-collision-freeze",
+        "linear-restart"
+      ],
+      "resourcePlan": "Provide block states, head/rope projection resources, creative access, EN/ZH text, source-derived recipes, and drops.",
+      "testPlan": "Test extension, retraction, reversal, collision, unload/restart, destination reservation, and all acceptance definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-MECHANICAL-PISTON-HEAD-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Drive linear translation from kinetic speed through DynamicAssemblyController and swept occupancy; conflicting movement freezes safely.",
+      "bedrockIdentifier": "createbedrock:mechanical_piston_head",
+      "deliveryPackage": "P4.2",
+      "domain": "contraptions",
+      "javaIdentifier": "create:mechanical_piston_head",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actuator direction, extension, target, kinetic dependency, dynamic assembly ID, and recovery/frozen state.",
+      "platformScenarios": [
+        "linear-reverse",
+        "linear-collision-freeze",
+        "linear-restart"
+      ],
+      "resourcePlan": "Provide block states, head/rope projection resources, creative access, EN/ZH text, source-derived recipes, and drops.",
+      "testPlan": "Test extension, retraction, reversal, collision, unload/restart, destination reservation, and all acceptance definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-MINECART-ANCHOR-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Assemble contraption minecarts and passengers transactionally while reusing track-route persistence without claiming Stage-5 scheduling.",
+      "bedrockIdentifier": "createbedrock:minecart_anchor",
+      "deliveryPackage": "P4.5",
+      "domain": "contraptions",
+      "javaIdentifier": "create:minecart_anchor",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist cart/assembly identity, seat/passenger binding, route reservation, coupling endpoints, and safe disassembly state.",
+      "platformScenarios": [
+        "minecart-assemble-disassemble",
+        "seat-rejoin",
+        "coupling-restart"
+      ],
+      "resourcePlan": "Provide cart items, entities, BP/RP definitions, language, recipes, drops, and explicit creative access.",
+      "testPlan": "Test cart ownership, passenger lifecycle, route conflicts, coupling idempotency, recovery, and all entity/item definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-MINECART-CONTRAPTION-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Assemble contraption minecarts and passengers transactionally while reusing track-route persistence without claiming Stage-5 scheduling.",
+      "bedrockIdentifier": "createbedrock:minecart_contraption",
+      "deliveryPackage": "P4.5",
+      "domain": "contraptions",
+      "javaIdentifier": "create:minecart_contraption",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist cart/assembly identity, seat/passenger binding, route reservation, coupling endpoints, and safe disassembly state.",
+      "platformScenarios": [
+        "minecart-assemble-disassemble",
+        "seat-rejoin",
+        "coupling-restart"
+      ],
+      "resourcePlan": "Provide cart items, entities, BP/RP definitions, language, recipes, drops, and explicit creative access.",
+      "testPlan": "Test cart ownership, passenger lifecycle, route conflicts, coupling idempotency, recovery, and all entity/item definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-MINECART-COUPLING-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Assemble contraption minecarts and passengers transactionally while reusing track-route persistence without claiming Stage-5 scheduling.",
+      "bedrockIdentifier": "createbedrock:minecart_coupling",
+      "deliveryPackage": "P4.5",
+      "domain": "contraptions",
+      "javaIdentifier": "create:minecart_coupling",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist cart/assembly identity, seat/passenger binding, route reservation, coupling endpoints, and safe disassembly state.",
+      "platformScenarios": [
+        "minecart-assemble-disassemble",
+        "seat-rejoin",
+        "coupling-restart"
+      ],
+      "resourcePlan": "Provide cart items, entities, BP/RP definitions, language, recipes, drops, and explicit creative access.",
+      "testPlan": "Test cart ownership, passenger lifecycle, route conflicts, coupling idempotency, recovery, and all entity/item definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-PULLEY-MAGNET-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Drive linear translation from kinetic speed through DynamicAssemblyController and swept occupancy; conflicting movement freezes safely.",
+      "bedrockIdentifier": "createbedrock:pulley_magnet",
+      "deliveryPackage": "P4.2",
+      "domain": "contraptions",
+      "javaIdentifier": "create:pulley_magnet",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actuator direction, extension, target, kinetic dependency, dynamic assembly ID, and recovery/frozen state.",
+      "platformScenarios": [
+        "linear-reverse",
+        "linear-collision-freeze",
+        "linear-restart"
+      ],
+      "resourcePlan": "Provide block states, head/rope projection resources, creative access, EN/ZH text, source-derived recipes, and drops.",
+      "testPlan": "Test extension, retraction, reversal, collision, unload/restart, destination reservation, and all acceptance definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-ROPE-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Drive linear translation from kinetic speed through DynamicAssemblyController and swept occupancy; conflicting movement freezes safely.",
+      "bedrockIdentifier": "createbedrock:rope",
+      "deliveryPackage": "P4.2",
+      "domain": "contraptions",
+      "javaIdentifier": "create:rope",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actuator direction, extension, target, kinetic dependency, dynamic assembly ID, and recovery/frozen state.",
+      "platformScenarios": [
+        "linear-reverse",
+        "linear-collision-freeze",
+        "linear-restart"
+      ],
+      "resourcePlan": "Provide block states, head/rope projection resources, creative access, EN/ZH text, source-derived recipes, and drops.",
+      "testPlan": "Test extension, retraction, reversal, collision, unload/restart, destination reservation, and all acceptance definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-ROPE-PULLEY-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Drive linear translation from kinetic speed through DynamicAssemblyController and swept occupancy; conflicting movement freezes safely.",
+      "bedrockIdentifier": "createbedrock:rope_pulley",
+      "deliveryPackage": "P4.2",
+      "domain": "contraptions",
+      "javaIdentifier": "create:rope_pulley",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actuator direction, extension, target, kinetic dependency, dynamic assembly ID, and recovery/frozen state.",
+      "platformScenarios": [
+        "linear-reverse",
+        "linear-collision-freeze",
+        "linear-restart"
+      ],
+      "resourcePlan": "Provide block states, head/rope projection resources, creative access, EN/ZH text, source-derived recipes, and drops.",
+      "testPlan": "Test extension, retraction, reversal, collision, unload/restart, destination reservation, and all acceptance definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-ROPE-PULLEY-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Drive linear translation from kinetic speed through DynamicAssemblyController and swept occupancy; conflicting movement freezes safely.",
+      "bedrockIdentifier": "createbedrock:rope_pulley",
+      "deliveryPackage": "P4.2",
+      "domain": "contraptions",
+      "javaIdentifier": "create:rope_pulley",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actuator direction, extension, target, kinetic dependency, dynamic assembly ID, and recovery/frozen state.",
+      "platformScenarios": [
+        "linear-reverse",
+        "linear-collision-freeze",
+        "linear-restart"
+      ],
+      "resourcePlan": "Provide block states, head/rope projection resources, creative access, EN/ZH text, source-derived recipes, and drops.",
+      "testPlan": "Test extension, retraction, reversal, collision, unload/restart, destination reservation, and all acceptance definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-SEAT-ENTITY",
+      "assetPlan": "Trace entity resources to src/main/java/com/simibubi/create/AllEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Assemble contraption minecarts and passengers transactionally while reusing track-route persistence without claiming Stage-5 scheduling.",
+      "bedrockIdentifier": "createbedrock:seat",
+      "deliveryPackage": "P4.5",
+      "domain": "contraptions",
+      "javaIdentifier": "create:seat",
+      "javaSource": "src/main/java/com/simibubi/create/AllEntityTypes.java",
+      "kind": "entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist cart/assembly identity, seat/passenger binding, route reservation, coupling endpoints, and safe disassembly state.",
+      "platformScenarios": [
+        "minecart-assemble-disassemble",
+        "seat-rejoin",
+        "coupling-restart"
+      ],
+      "resourcePlan": "Provide cart items, entities, BP/RP definitions, language, recipes, drops, and explicit creative access.",
+      "testPlan": "Test cart ownership, passenger lifecycle, route conflicts, coupling idempotency, recovery, and all entity/item definitions."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-STATIONARY-CONTRAPTION-ENTITY",
+      "assetPlan": "Trace entity resources to src/main/java/com/simibubi/create/AllEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Connect Mechanical/Windmill Bearing ownership and Contraption Controls to DynamicAssemblyController; projections remain non-authoritative.",
+      "bedrockIdentifier": "createbedrock:stationary_contraption",
+      "deliveryPackage": "P4.1",
+      "domain": "contraptions",
+      "javaIdentifier": "create:stationary_contraption",
+      "javaSource": "src/main/java/com/simibubi/create/AllEntityTypes.java",
+      "kind": "entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist a sharded dynamic_assembly root, snapshot shards, transform, epoch, phase, owner, and frozen reason.",
+      "platformScenarios": [
+        "assembly-restart",
+        "projection-loss-recovery",
+        "bearing-disassembly"
+      ],
+      "resourcePlan": "Provide purpose-specific BP/RP definitions, creative access, EN/ZH text, Java asset provenance, recipe, and drop behavior.",
+      "testPlan": "Test assembly ownership, 512-block collection, rollback, restart restoration, projection regeneration, and definition coverage."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-STICKER-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Use a deterministic Sticker/Super Glue graph to include or reject blocks before a dynamic assembly transaction begins.",
+      "bedrockIdentifier": "createbedrock:sticker",
+      "deliveryPackage": "P4.6",
+      "domain": "contraptions",
+      "javaIdentifier": "create:sticker",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist sticker orientation/state and glue attachment references; rebuild only from authoritative world or snapshot data.",
+      "platformScenarios": [
+        "sticker-attachment",
+        "sticker-conflict",
+        "sticker-restart"
+      ],
+      "resourcePlan": "Provide Sticker BP/RP definitions, language, creative access, Java-derived recipes, and drops.",
+      "testPlan": "Test graph traversal, cycles, invalid targets, cross-assembly conflicts, detach/restore ordering, and resource coverage."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-STICKER-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Use a deterministic Sticker/Super Glue graph to include or reject blocks before a dynamic assembly transaction begins.",
+      "bedrockIdentifier": "createbedrock:sticker",
+      "deliveryPackage": "P4.6",
+      "domain": "contraptions",
+      "javaIdentifier": "create:sticker",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist sticker orientation/state and glue attachment references; rebuild only from authoritative world or snapshot data.",
+      "platformScenarios": [
+        "sticker-attachment",
+        "sticker-conflict",
+        "sticker-restart"
+      ],
+      "resourcePlan": "Provide Sticker BP/RP definitions, language, creative access, Java-derived recipes, and drops.",
+      "testPlan": "Test graph traversal, cycles, invalid targets, cross-assembly conflicts, detach/restore ordering, and resource coverage."
+    },
+    {
+      "acceptanceId": "CONTRAPTIONS-STICKY-MECHANICAL-PISTON-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Drive linear translation from kinetic speed through DynamicAssemblyController and swept occupancy; conflicting movement freezes safely.",
+      "bedrockIdentifier": "createbedrock:sticky_mechanical_piston",
+      "deliveryPackage": "P4.2",
+      "domain": "contraptions",
+      "javaIdentifier": "create:sticky_mechanical_piston",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist actuator direction, extension, target, kinetic dependency, dynamic assembly ID, and recovery/frozen state.",
+      "platformScenarios": [
+        "linear-reverse",
+        "linear-collision-freeze",
+        "linear-restart"
+      ],
+      "resourcePlan": "Provide block states, head/rope projection resources, creative access, EN/ZH text, source-derived recipes, and drops.",
+      "testPlan": "Test extension, retraction, reversal, collision, unload/restart, destination reservation, and all acceptance definitions."
+    },
+    {
+      "acceptanceId": "SCHEMATICS-CLIPBOARD-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Use versioned, allowlisted snapshots and bounded transactional placement for blueprints, cannon batches, clipboard text, and symmetry.",
+      "bedrockIdentifier": "createbedrock:clipboard",
+      "deliveryPackage": "P4.7",
+      "domain": "schematics",
+      "javaIdentifier": "create:clipboard",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist blueprint schema/version, bounded block payloads, placement cursor, owner, reservation journal, and rollback state.",
+      "platformScenarios": [
+        "schematic-conflict-rollback",
+        "schematic-restart",
+        "schematic-multiplayer"
+      ],
+      "resourcePlan": "Provide schematic item/block/entity resources, language, creative access, Java-derived acquisition, and visible placement feedback.",
+      "testPlan": "Test schema migration, allowlist rejection, preflight failure, partial-write rollback, bounded batches, restart, and concurrency."
+    },
+    {
+      "acceptanceId": "SCHEMATICS-CLIPBOARD-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Use versioned, allowlisted snapshots and bounded transactional placement for blueprints, cannon batches, clipboard text, and symmetry.",
+      "bedrockIdentifier": "createbedrock:clipboard",
+      "deliveryPackage": "P4.7",
+      "domain": "schematics",
+      "javaIdentifier": "create:clipboard",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist blueprint schema/version, bounded block payloads, placement cursor, owner, reservation journal, and rollback state.",
+      "platformScenarios": [
+        "schematic-conflict-rollback",
+        "schematic-restart",
+        "schematic-multiplayer"
+      ],
+      "resourcePlan": "Provide schematic item/block/entity resources, language, creative access, Java-derived acquisition, and visible placement feedback.",
+      "testPlan": "Test schema migration, allowlist rejection, preflight failure, partial-write rollback, bounded batches, restart, and concurrency."
+    },
+    {
+      "acceptanceId": "SCHEMATICS-CRAFTING-BLUEPRINT-ENTITY",
+      "assetPlan": "Trace entity resources to src/main/java/com/simibubi/create/AllEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Use versioned, allowlisted snapshots and bounded transactional placement for blueprints, cannon batches, clipboard text, and symmetry.",
+      "bedrockIdentifier": "createbedrock:crafting_blueprint",
+      "deliveryPackage": "P4.7",
+      "domain": "schematics",
+      "javaIdentifier": "create:crafting_blueprint",
+      "javaSource": "src/main/java/com/simibubi/create/AllEntityTypes.java",
+      "kind": "entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist blueprint schema/version, bounded block payloads, placement cursor, owner, reservation journal, and rollback state.",
+      "platformScenarios": [
+        "schematic-conflict-rollback",
+        "schematic-restart",
+        "schematic-multiplayer"
+      ],
+      "resourcePlan": "Provide schematic item/block/entity resources, language, creative access, Java-derived acquisition, and visible placement feedback.",
+      "testPlan": "Test schema migration, allowlist rejection, preflight failure, partial-write rollback, bounded batches, restart, and concurrency."
+    },
+    {
+      "acceptanceId": "SCHEMATICS-CRAFTING-BLUEPRINT-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Use versioned, allowlisted snapshots and bounded transactional placement for blueprints, cannon batches, clipboard text, and symmetry.",
+      "bedrockIdentifier": "createbedrock:crafting_blueprint",
+      "deliveryPackage": "P4.7",
+      "domain": "schematics",
+      "javaIdentifier": "create:crafting_blueprint",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist blueprint schema/version, bounded block payloads, placement cursor, owner, reservation journal, and rollback state.",
+      "platformScenarios": [
+        "schematic-conflict-rollback",
+        "schematic-restart",
+        "schematic-multiplayer"
+      ],
+      "resourcePlan": "Provide schematic item/block/entity resources, language, creative access, Java-derived acquisition, and visible placement feedback.",
+      "testPlan": "Test schema migration, allowlist rejection, preflight failure, partial-write rollback, bounded batches, restart, and concurrency."
+    },
+    {
+      "acceptanceId": "SCHEMATICS-EMPTY-SCHEMATIC-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Use versioned, allowlisted snapshots and bounded transactional placement for blueprints, cannon batches, clipboard text, and symmetry.",
+      "bedrockIdentifier": "createbedrock:empty_schematic",
+      "deliveryPackage": "P4.7",
+      "domain": "schematics",
+      "javaIdentifier": "create:empty_schematic",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist blueprint schema/version, bounded block payloads, placement cursor, owner, reservation journal, and rollback state.",
+      "platformScenarios": [
+        "schematic-conflict-rollback",
+        "schematic-restart",
+        "schematic-multiplayer"
+      ],
+      "resourcePlan": "Provide schematic item/block/entity resources, language, creative access, Java-derived acquisition, and visible placement feedback.",
+      "testPlan": "Test schema migration, allowlist rejection, preflight failure, partial-write rollback, bounded batches, restart, and concurrency."
+    },
+    {
+      "acceptanceId": "SCHEMATICS-SCHEMATIC-AND-QUILL-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Use versioned, allowlisted snapshots and bounded transactional placement for blueprints, cannon batches, clipboard text, and symmetry.",
+      "bedrockIdentifier": "createbedrock:schematic_and_quill",
+      "deliveryPackage": "P4.7",
+      "domain": "schematics",
+      "javaIdentifier": "create:schematic_and_quill",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist blueprint schema/version, bounded block payloads, placement cursor, owner, reservation journal, and rollback state.",
+      "platformScenarios": [
+        "schematic-conflict-rollback",
+        "schematic-restart",
+        "schematic-multiplayer"
+      ],
+      "resourcePlan": "Provide schematic item/block/entity resources, language, creative access, Java-derived acquisition, and visible placement feedback.",
+      "testPlan": "Test schema migration, allowlist rejection, preflight failure, partial-write rollback, bounded batches, restart, and concurrency."
+    },
+    {
+      "acceptanceId": "SCHEMATICS-SCHEMATIC-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Use versioned, allowlisted snapshots and bounded transactional placement for blueprints, cannon batches, clipboard text, and symmetry.",
+      "bedrockIdentifier": "createbedrock:schematic",
+      "deliveryPackage": "P4.7",
+      "domain": "schematics",
+      "javaIdentifier": "create:schematic",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist blueprint schema/version, bounded block payloads, placement cursor, owner, reservation journal, and rollback state.",
+      "platformScenarios": [
+        "schematic-conflict-rollback",
+        "schematic-restart",
+        "schematic-multiplayer"
+      ],
+      "resourcePlan": "Provide schematic item/block/entity resources, language, creative access, Java-derived acquisition, and visible placement feedback.",
+      "testPlan": "Test schema migration, allowlist rejection, preflight failure, partial-write rollback, bounded batches, restart, and concurrency."
+    },
+    {
+      "acceptanceId": "SCHEMATICS-SCHEMATIC-TABLE-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Use versioned, allowlisted snapshots and bounded transactional placement for blueprints, cannon batches, clipboard text, and symmetry.",
+      "bedrockIdentifier": "createbedrock:schematic_table",
+      "deliveryPackage": "P4.7",
+      "domain": "schematics",
+      "javaIdentifier": "create:schematic_table",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist blueprint schema/version, bounded block payloads, placement cursor, owner, reservation journal, and rollback state.",
+      "platformScenarios": [
+        "schematic-conflict-rollback",
+        "schematic-restart",
+        "schematic-multiplayer"
+      ],
+      "resourcePlan": "Provide schematic item/block/entity resources, language, creative access, Java-derived acquisition, and visible placement feedback.",
+      "testPlan": "Test schema migration, allowlist rejection, preflight failure, partial-write rollback, bounded batches, restart, and concurrency."
+    },
+    {
+      "acceptanceId": "SCHEMATICS-SCHEMATIC-TABLE-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Use versioned, allowlisted snapshots and bounded transactional placement for blueprints, cannon batches, clipboard text, and symmetry.",
+      "bedrockIdentifier": "createbedrock:schematic_table",
+      "deliveryPackage": "P4.7",
+      "domain": "schematics",
+      "javaIdentifier": "create:schematic_table",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist blueprint schema/version, bounded block payloads, placement cursor, owner, reservation journal, and rollback state.",
+      "platformScenarios": [
+        "schematic-conflict-rollback",
+        "schematic-restart",
+        "schematic-multiplayer"
+      ],
+      "resourcePlan": "Provide schematic item/block/entity resources, language, creative access, Java-derived acquisition, and visible placement feedback.",
+      "testPlan": "Test schema migration, allowlist rejection, preflight failure, partial-write rollback, bounded batches, restart, and concurrency."
+    },
+    {
+      "acceptanceId": "SCHEMATICS-SCHEMATICANNON-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Use versioned, allowlisted snapshots and bounded transactional placement for blueprints, cannon batches, clipboard text, and symmetry.",
+      "bedrockIdentifier": "createbedrock:schematicannon",
+      "deliveryPackage": "P4.7",
+      "domain": "schematics",
+      "javaIdentifier": "create:schematicannon",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist blueprint schema/version, bounded block payloads, placement cursor, owner, reservation journal, and rollback state.",
+      "platformScenarios": [
+        "schematic-conflict-rollback",
+        "schematic-restart",
+        "schematic-multiplayer"
+      ],
+      "resourcePlan": "Provide schematic item/block/entity resources, language, creative access, Java-derived acquisition, and visible placement feedback.",
+      "testPlan": "Test schema migration, allowlist rejection, preflight failure, partial-write rollback, bounded batches, restart, and concurrency."
+    },
+    {
+      "acceptanceId": "SCHEMATICS-SCHEMATICANNON-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Use versioned, allowlisted snapshots and bounded transactional placement for blueprints, cannon batches, clipboard text, and symmetry.",
+      "bedrockIdentifier": "createbedrock:schematicannon",
+      "deliveryPackage": "P4.7",
+      "domain": "schematics",
+      "javaIdentifier": "create:schematicannon",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist blueprint schema/version, bounded block payloads, placement cursor, owner, reservation journal, and rollback state.",
+      "platformScenarios": [
+        "schematic-conflict-rollback",
+        "schematic-restart",
+        "schematic-multiplayer"
+      ],
+      "resourcePlan": "Provide schematic item/block/entity resources, language, creative access, Java-derived acquisition, and visible placement feedback.",
+      "testPlan": "Test schema migration, allowlist rejection, preflight failure, partial-write rollback, bounded batches, restart, and concurrency."
+    },
+    {
+      "acceptanceId": "SCHEMATICS-WAND-OF-SYMMETRY-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; do not claim Java visual parity until BP/RP conversion is tested in game.",
+      "behaviorPlan": "Use versioned, allowlisted snapshots and bounded transactional placement for blueprints, cannon batches, clipboard text, and symmetry.",
+      "bedrockIdentifier": "createbedrock:wand_of_symmetry",
+      "deliveryPackage": "P4.7",
+      "domain": "schematics",
+      "javaIdentifier": "create:wand_of_symmetry",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "specification_pending",
+      "persistencePlan": "Persist blueprint schema/version, bounded block payloads, placement cursor, owner, reservation journal, and rollback state.",
+      "platformScenarios": [
+        "schematic-conflict-rollback",
+        "schematic-restart",
+        "schematic-multiplayer"
+      ],
+      "resourcePlan": "Provide schematic item/block/entity resources, language, creative access, Java-derived acquisition, and visible placement feedback.",
+      "testPlan": "Test schema migration, allowlist rejection, preflight failure, partial-write rollback, bounded batches, restart, and concurrency."
+    }
+  ]
+}

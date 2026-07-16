@@ -25,6 +25,7 @@
     "redstone:content": "node tools/generate-redstone-content.mjs",
     "test": "node tools/run-tests.mjs",
     "validate": "node tools/validate-packs.mjs",
-    "work-queue": "node tools/generate-stage3-work-queue.mjs"
+    "stage4:queue": "node tools/generate-stage4-work-queue.mjs",
+    "work-queue": "node tools/generate-stage3-work-queue.mjs && node tools/generate-stage4-work-queue.mjs"
   }
 }
