@@ -209,7 +209,7 @@ export const STAGE_THREE_KINETIC_FOUNDATION = new Map([
 // S3-10 moves the foundational item network into a single durable port and
 // transfer journal. Block-entity registrations are intentionally absorbed by
 // that runtime rather than represented as unsafe Bedrock block entities.
-const STAGE_THREE_LOGISTICS_FOUNDATION = new Map([
+export const STAGE_THREE_LOGISTICS_FOUNDATION = new Map([
 	["andesite_belt_funnel", { domain: "logistics" }],
 	["andesite_tunnel", { domain: "logistics" }],
 	["attribute_filter", { domain: "logistics" }],
@@ -268,7 +268,7 @@ export function classifyRegistration(identifier, kind) {
 		: kineticFoundation
 		? { ...kineticFoundation, phase: 3, status: "static_verified" }
 		: logisticsFoundation
-		? { ...logisticsFoundation, phase: 3, status: "implementation_in_progress" }
+		? { ...logisticsFoundation, phase: 3, status: "static_verified" }
 		: fluidFoundation
 		? { ...fluidFoundation, phase: 3, status: "implementation_in_progress" }
 		: redstoneFoundation

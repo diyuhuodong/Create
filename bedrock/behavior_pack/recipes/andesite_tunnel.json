@@ -1,0 +1,12 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:andesite_tunnel" },
+    "tags": ["crafting_table"],
+    "ingredients": [
+      { "item": "createbedrock:andesite_casing" },
+      { "item": "createbedrock:filter" }
+    ],
+    "result": { "item": "createbedrock:andesite_tunnel" }
+  }
+}

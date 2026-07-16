@@ -678,6 +678,52 @@ test("DepotNetwork returns a transport to its source when the belt reverses", ()
 	assert.deepEqual(network.extract(destination), undefined);
 });
 
+test("DepotNetwork advances independent belts while a full endpoint retries", () => {
+	const network = createNetwork(memoryStorage(), "createbedrock:parallel_belts");
+	const blockedSource = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } });
+	const blockedDestination = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 4, y: 64, z: 0 }, maxStackSize: 1 });
+	const openSource = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 2 } });
+	const openDestination = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 4, y: 64, z: 2 } });
+	network.insert(blockedSource, { count: 1, typeId: "minecraft:gold_ingot" });
+	network.insert(blockedDestination, { count: 1, typeId: "minecraft:dirt" });
+	network.insert(openSource, { count: 1, typeId: "minecraft:iron_ingot" });
+	network.createBelt({ destinationId: blockedDestination, id: "belt:blocked", length: 4, sourceId: blockedSource, speed: 256 });
+	network.createBelt({ destinationId: openDestination, id: "belt:open", length: 4, sourceId: openSource, speed: 256 });
+
+	advance(network, () => depotSlots(network, openDestination)?.[0]?.typeId === "minecraft:iron_ingot" && network.diagnostics().transports === 1);
+	assert.deepEqual(depotSlots(network, blockedDestination), [{ count: 1, typeId: "minecraft:dirt" }]);
+	assert.equal(network.canRemoveBelt("belt:blocked"), false);
+	assert.equal(network.canRemoveBelt("belt:open"), true);
+	network.extract(blockedDestination);
+	advance(network, () => network.diagnostics().transports === 0 && !network.diagnostics().waitingForCommit);
+	assert.deepEqual(network.extract(blockedDestination), { count: 1, typeId: "minecraft:gold_ingot" });
+});
+
+test("DepotNetwork retains a disconnected managed belt transport until its endpoint reattaches", () => {
+	const network = createNetwork(memoryStorage(), "createbedrock:managed_belt_disconnect");
+	const sourcePort = new ItemPort({ id: "machine:source", size: 1 });
+	const destinationPort = new ItemPort({ id: "machine:destination", size: 1 });
+	network.registerExternalManagedDepot({
+		dimensionId: "minecraft:overworld", id: "machine:source", location: { x: 0, y: 64, z: 0 }, port: sourcePort, role: "output"
+	});
+	network.registerExternalManagedDepot({
+		dimensionId: "minecraft:overworld", id: "machine:destination", location: { x: 4, y: 64, z: 0 }, port: destinationPort, role: "input"
+	});
+	network.createBelt({ destinationId: "machine:destination", id: "belt:managed-disconnect", length: 4, sourceId: "machine:source", speed: 64 });
+	sourcePort.insert({ count: 1, typeId: "minecraft:copper_ingot" });
+	advance(network, () => network.snapshot().some(record => record.kind === "transport" && record.progress > 0) && !network.diagnostics().waitingForCommit);
+	assert.equal(network.releaseExternalManagedDepot("machine:destination"), true);
+	for (let tick = 0; tick < 8; tick++)
+		network.tick();
+	assert.equal(network.diagnostics().transports, 1);
+	assert.equal(network.canRemoveBelt("belt:managed-disconnect"), false);
+	const reattachedDestination = new ItemPort({ id: "machine:destination", size: 1 });
+	network.registerExternalManagedDepot({
+		dimensionId: "minecraft:overworld", id: "machine:destination", location: { x: 4, y: 64, z: 0 }, port: reattachedDestination, role: "input"
+	});
+	advance(network, () => reattachedDestination.inspect().slots[0]?.typeId === "minecraft:copper_ingot" && network.diagnostics().transports === 0 && !network.diagnostics().waitingForCommit);
+});
+
 test("DepotNetwork funnels filter items and honor their lock state", () => {
 	const network = createNetwork(memoryStorage(), "createbedrock:funnel_transfer");
 	const source = network.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 }, size: 2 });

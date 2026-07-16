@@ -1,0 +1,13 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:brass_funnel" },
+    "tags": ["crafting_table"],
+    "ingredients": [
+      { "item": "createbedrock:brass_casing" },
+      { "item": "createbedrock:filter" },
+      { "item": "minecraft:hopper" }
+    ],
+    "result": { "item": "createbedrock:brass_funnel" }
+  }
+}

@@ -131,7 +131,7 @@ test("migration classification assigns S3-10 logistics resources to the durable 
 		persistenceSchema: 2,
 		phase: 3,
 		resourceStatus: "partial",
-		status: "implementation_in_progress"
+		status: "static_verified"
 	});
 	assert.equal(classifyRegistration("creative_crate", "block_entity").persistenceSchema, 2);
 	assert.equal(classifyRegistration("attribute_filter", "item").behaviorPath, "behavior_pack/scripts/logistics/depot-runtime.js");

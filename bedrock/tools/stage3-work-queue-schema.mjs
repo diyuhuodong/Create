@@ -3,8 +3,9 @@ import { validateMigrationMatrix } from "./migration-matrix-schema.mjs";
 export const STAGE3_WORK_QUEUE_SCHEMA_VERSION = 1;
 
 export const DELIVERY_PACKAGES = new Set([
-    "completed:S3-7",
+	"completed:S3-7",
 	"completed:S3-9",
+	"completed:S3-10",
     "S3-8A",
     "S3-8B",
     "S3-9",

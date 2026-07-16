@@ -1113,7 +1113,7 @@ export class DepotNetwork {
 		};
 	}
 
-	#launchBeltTransport() {
+	#launchBeltTransport(occupiedEndpoints = new Set()) {
 		for (const belt of [...this.#belts.values()].sort((left, right) => left.id.localeCompare(right.id))) {
 			if (belt.speed === 0 || [...this.#transports.values()].some(transport => transport.beltId === belt.id))
 				continue;
@@ -1121,6 +1121,8 @@ export class DepotNetwork {
 				continue;
 			const sourceId = belt.speed > 0 ? belt.sourceId : belt.destinationId;
 			const destinationId = belt.speed > 0 ? belt.destinationId : belt.sourceId;
+			if (occupiedEndpoints.has(sourceId) || occupiedEndpoints.has(destinationId))
+				continue;
 			const source = this.#depots.get(sourceId)?.port;
 			const destination = this.#depots.get(destinationId)?.port;
 			if (!source || !destination)
@@ -1282,9 +1284,22 @@ export class DepotNetwork {
 	}
 
 	#tickBelt() {
-		const transport = [...this.#transports.values()].sort((left, right) => left.id.localeCompare(right.id))[0];
-		if (!transport)
-			return this.#launchBeltTransport();
+		const activeTransports = [...this.#transports.values()].sort((left, right) => left.id.localeCompare(right.id));
+		const occupiedEndpoints = new Set();
+		let changed = false;
+		for (const transport of activeTransports) {
+			// Independent routes may advance in the same scheduler pass.  A shared
+			// endpoint remains exclusive until its in-flight transport reaches a
+			// durable terminal state, preventing competing source reservations or
+			// destination receipt races.
+			occupiedEndpoints.add(transport.sourceId);
+			occupiedEndpoints.add(transport.destinationId);
+			changed = this.#tickBeltTransport(transport) || changed;
+		}
+		return this.#launchBeltTransport(occupiedEndpoints) || changed;
+	}
+
+	#tickBeltTransport(transport) {
 		const belt = this.#belts.get(transport.beltId);
 		if (!belt) {
 			this.#report(new Error(`Transport ${transport.id} has no belt`));
@@ -1313,7 +1328,6 @@ export class DepotNetwork {
 		if (result.remainder) {
 			transport.attempt++;
 			transport.item = result.remainder;
-			this.#cooldownTicks = this.#retryIntervalTicks;
 		} else
 			this.#transports.delete(transport.id);
 		this.#persist();

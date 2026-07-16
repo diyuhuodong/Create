@@ -1,0 +1,12 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:chute" },
+    "tags": ["crafting_table"],
+    "ingredients": [
+      { "item": "createbedrock:andesite_alloy" },
+      { "item": "minecraft:hopper" }
+    ],
+    "result": { "item": "createbedrock:chute" }
+  }
+}

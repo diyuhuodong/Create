@@ -1,0 +1,13 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:smart_chute" },
+    "tags": ["crafting_table"],
+    "ingredients": [
+      { "item": "createbedrock:chute" },
+      { "item": "createbedrock:filter" },
+      { "item": "minecraft:redstone" }
+    ],
+    "result": { "item": "createbedrock:smart_chute" }
+  }
+}

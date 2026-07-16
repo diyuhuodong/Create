@@ -3183,22 +3183,21 @@
     },
     {
       "acceptanceId": "LOGISTICS-ANDESITE-BELT-FUNNEL-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:andesite_belt_funnel",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:andesite_belt_funnel",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-ANDESITE-FUNNEL-BLOCK",
@@ -3220,478 +3219,453 @@
     },
     {
       "acceptanceId": "LOGISTICS-ANDESITE-TUNNEL-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:andesite_tunnel",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:andesite_tunnel",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-ANDESITE-TUNNEL-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:andesite_tunnel",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:andesite_tunnel",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-ATTRIBUTE-FILTER-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:attribute_filter",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:attribute_filter",
       "kind": "item",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-BELT-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:belt",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:belt",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-BELT-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:belt",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:belt",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-BRASS-BELT-FUNNEL-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:brass_belt_funnel",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:brass_belt_funnel",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-BRASS-FUNNEL-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:brass_funnel",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:brass_funnel",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-BRASS-TUNNEL-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:brass_tunnel",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:brass_tunnel",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-BRASS-TUNNEL-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:brass_tunnel",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:brass_tunnel",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-CHUTE-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:chute",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:chute",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-CHUTE-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:chute",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:chute",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-CREATIVE-CRATE-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:creative_crate",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:creative_crate",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-CREATIVE-CRATE-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:creative_crate",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:creative_crate",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-DEPOT-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:depot",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:depot",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-DEPOT-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:depot",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:depot",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-FILTER-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:filter",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:filter",
       "kind": "item",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-FUNNEL-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:funnel",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:funnel",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-ITEM-HATCH-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:item_hatch",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:item_hatch",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-ITEM-HATCH-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:item_hatch",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:item_hatch",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-ITEM-VAULT-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:item_vault",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:item_vault",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-ITEM-VAULT-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:item_vault",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:item_vault",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-SMART-CHUTE-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:smart_chute",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:smart_chute",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-SMART-CHUTE-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:smart_chute",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:smart_chute",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-WEIGHTED-EJECTOR-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:weighted_ejector",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:weighted_ejector",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "LOGISTICS-WEIGHTED-EJECTOR-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-10 source and built content contract.",
       "bedrockIdentifier": "createbedrock:weighted_ejector",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-10 domain runtime"
+        "S3-10 logistics source contract"
       ],
-      "deliveryPackage": "S3-10",
+      "deliveryPackage": "completed:S3-10",
       "domain": "logistics",
       "javaIdentifier": "create:weighted_ejector",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "PROCESSING-BASIN-BLOCK",

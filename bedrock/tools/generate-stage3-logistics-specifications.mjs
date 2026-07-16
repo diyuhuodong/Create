@@ -46,7 +46,7 @@ async function ensureEvidence(paths) {
 
 const workQueue = JSON.parse(await readFile(resolve(bedrockRoot, "data", "stage3-work-queue.json"), "utf8"));
 const entries = workQueue.entries
-	.filter(entry => entry.deliveryPackage === "S3-10")
+	.filter(entry => entry.deliveryPackage === "S3-10" || entry.deliveryPackage === "completed:S3-10")
 	.map(entry => {
 		const javaEvidencePaths = [entry.kind === "block_entity"
 			? "src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
