@@ -1,0 +1,1 @@
+{ "format_version": "1.26.0", "minecraft:recipe_shapeless": { "description": { "identifier": "createbedrock:fake_track" }, "tags": ["crafting_table"], "ingredients": [{ "item": "createbedrock:track" }], "result": { "item": "createbedrock:fake_track" } } }

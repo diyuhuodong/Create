@@ -1,0 +1,24 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:track_signal",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
+      "properties": { "createbedrock:signal_state": [0, 1, 2, 3] }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:loot": "loot_tables/blocks/track_signal.json",
+      "minecraft:material_instances": { "*": { "texture": "createbedrock_railway_casing", "render_method": "opaque" } },
+      "minecraft:item_visual": { "geometry": { "identifier": "minecraft:geometry.full_block" }, "material_instances": { "*": { "texture": "createbedrock_railway_casing", "render_method": "opaque" } } }
+    },
+    "permutations": [
+      { "condition": "query.block_state('createbedrock:signal_state') == 0", "components": { "minecraft:redstone_producer": { "power": 15 } } },
+      { "condition": "query.block_state('createbedrock:signal_state') == 1", "components": { "minecraft:redstone_producer": { "power": 0 } } },
+      { "condition": "query.block_state('createbedrock:signal_state') == 2", "components": { "minecraft:redstone_producer": { "power": 0 } } },
+      { "condition": "query.block_state('createbedrock:signal_state') == 3", "components": { "minecraft:redstone_producer": { "power": 15 } } }
+    ]
+  }
+}

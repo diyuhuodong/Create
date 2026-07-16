@@ -1,0 +1,1 @@
+{ "format_version": "1.26.0", "minecraft:recipe_shapeless": { "description": { "identifier": "createbedrock:train_trapdoor" }, "tags": ["crafting_table"], "ingredients": [{ "item": "createbedrock:railway_casing" }, { "item": "minecraft:iron_trapdoor" }], "result": { "item": "createbedrock:train_trapdoor" } } }

@@ -64,20 +64,21 @@ export class TrainController {
 		return { ok: true, route };
 	}
 
-	setSchedule(id, { stopIds, dwellTicks = 20 }) {
-		return this.setScheduleWithReason(id, { stopIds, dwellTicks }).ok;
+	setSchedule(id, { cyclic = true, stopIds, dwellTicks = 20 }) {
+		return this.setScheduleWithReason(id, { cyclic, stopIds, dwellTicks }).ok;
 	}
 
-	setScheduleWithReason(id, { stopIds, dwellTicks = 20 }) {
+	setScheduleWithReason(id, { cyclic = true, stopIds, dwellTicks = 20 }) {
 		const train = this.#requireTrain(id);
 		if (train.route)
 			return { ok: false, reason: "already_moving" };
-		if (!Array.isArray(stopIds) || stopIds.length === 0 || !Number.isInteger(dwellTicks) || dwellTicks < 0)
+		if (!Array.isArray(stopIds) || stopIds.length === 0 || typeof cyclic !== "boolean" || !Number.isInteger(dwellTicks) || dwellTicks < 0)
 			return { ok: false, reason: "invalid_schedule" };
 		if (stopIds.some(stopId => !this.#graph.getNode(stopId)))
 			return { ok: false, reason: "unknown_station" };
 
 		train.schedule = {
+			cyclic,
 			dwellRemaining: 0,
 			dwellTicks,
 			nextStopIndex: 0,
@@ -172,6 +173,16 @@ export class TrainController {
 		return true;
 	}
 
+	setTargetSpeed(id, speed) {
+		if (!Number.isFinite(speed) || speed <= 0)
+			throw new RangeError("Train target speed must be positive");
+		const train = this.#requireTrain(id);
+		if (train.targetSpeed === speed)
+			return false;
+		train.targetSpeed = speed;
+		return true;
+	}
+
 	setBlocked(id, reason = undefined) {
 		if (reason !== undefined && (typeof reason !== "string" || reason.length === 0))
 			throw new TypeError("Train blocking reasons must be non-empty strings");
@@ -214,6 +225,7 @@ export class TrainController {
 		};
 		if (train.schedule) {
 			state.schedule = {
+				cyclic: train.schedule.cyclic,
 				dwellRemaining: train.schedule.dwellRemaining,
 				dwellTicks: train.schedule.dwellTicks,
 				nextStopIndex: train.schedule.nextStopIndex,
@@ -317,6 +329,7 @@ export class TrainController {
 				settlingDistance: train.route.settlingDistance
 			},
 			schedule: train.schedule && {
+				cyclic: train.schedule.cyclic,
 				dwellRemaining: train.schedule.dwellRemaining,
 				dwellTicks: train.schedule.dwellTicks,
 				nextStopIndex: train.schedule.nextStopIndex,
@@ -492,14 +505,16 @@ export class TrainController {
 			throw new TypeError(`Invalid train schedule for ${id}`);
 		const dwellRemaining = schedule.dwellRemaining ?? 0;
 		const dwellTicks = schedule.dwellTicks ?? 20;
+		const cyclic = schedule.cyclic ?? true;
 		const nextStopIndex = schedule.nextStopIndex ?? 0;
 		if (!Number.isInteger(dwellRemaining) || dwellRemaining < 0 || !Number.isInteger(dwellTicks) || dwellTicks < 0
-			|| !Number.isInteger(nextStopIndex) || nextStopIndex < 0)
+			|| typeof cyclic !== "boolean" || !Number.isInteger(nextStopIndex) || nextStopIndex < 0 || nextStopIndex > schedule.stopIds.length)
 			throw new TypeError(`Invalid train schedule timing for ${id}`);
 		return {
+			cyclic,
 			dwellRemaining,
 			dwellTicks,
-			nextStopIndex: nextStopIndex % schedule.stopIds.length,
+			nextStopIndex: cyclic ? nextStopIndex % schedule.stopIds.length : nextStopIndex,
 			stopIds: [...schedule.stopIds]
 		};
 	}
@@ -513,8 +528,13 @@ export class TrainController {
 			return false;
 		}
 
+		if (schedule.nextStopIndex >= schedule.stopIds.length) {
+			if (!schedule.cyclic)
+				return false;
+			schedule.nextStopIndex = 0;
+		}
 		const destinationId = schedule.stopIds[schedule.nextStopIndex];
-		schedule.nextStopIndex = (schedule.nextStopIndex + 1) % schedule.stopIds.length;
+		schedule.nextStopIndex++;
 		if (destinationId === train.nodeId) {
 			schedule.dwellRemaining = schedule.dwellTicks;
 			return false;

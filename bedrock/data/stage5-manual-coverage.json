@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "bogeyFamily": {
+    "blockEntityAuthority": "createbedrock:rolling_stock_v1",
+    "sizes": ["small", "large"],
+    "styles": ["standard"]
+  },
+  "factoryPanel": {
+    "authority": "createbedrock:package_ledger_v1",
+    "hostBlock": "createbedrock:factory_gauge"
+  },
+  "postboxFamily": {
+    "block": "createbedrock:package_postbox",
+    "colors": ["white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"]
+  }
+}

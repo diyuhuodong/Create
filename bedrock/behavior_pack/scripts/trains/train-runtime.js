@@ -1,20 +1,23 @@
 import { system, world } from "@minecraft/server";
 
 import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
-import { DeferredPersistence } from "../kernel/deferred-persistence.js";
-import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
+import { ShardedStateStore } from "../kernel/sharded-state-store.js";
+import { deserializeVersionedState } from "../kernel/versioned-state.js";
 import { TrackGraph } from "./track-graph.js";
+import { createTrainAuthorityRecords, migrateLegacyTrainSnapshot, readTrainAuthorityRecords, trainAuthorityPartition } from "./train-authority-state.js";
 import { findTrainCollision } from "./train-collision.js";
+import { appendScheduleStop, readScheduleItemState, SCHEDULE_ITEM, toggleScheduleCycle, writeScheduleItemState } from "./schedule-item-state.js";
 import { TrainController } from "./train-controller.js";
 
 const TRACK_BLOCK = "createbedrock:track";
 const STATION_BLOCK = "createbedrock:track_station";
+const CONTROLLER_RAIL_BLOCK = "createbedrock:controller_rail";
 const TRAIN_ENTITY = "createbedrock:train";
 const TRAIN_ID_PROPERTY = "createbedrock:train_id";
 const TRAIN_CARRIAGE_INDEX_PROPERTY = "createbedrock:train_carriage_index";
 const TRAIN_TASK_BUDGET = 4;
-const PERSISTENCE_KEY = "createbedrock:trains_v1";
-const PERSISTENCE_SCHEMA_VERSION = 1;
+const LEGACY_PERSISTENCE_KEY = "createbedrock:trains_v1";
+const LEGACY_PERSISTENCE_SCHEMA_VERSION = 1;
 const TRACK_CONNECTION_OFFSETS = [
 	[1, 0, 0], [-1, 0, 0], [0, 0, 1], [0, 0, -1],
 	[1, 0, 1], [1, 0, -1], [-1, 0, 1], [-1, 0, -1],
@@ -28,19 +31,18 @@ const trains = new Map();
 const selections = new Map();
 let nextTrainId = 1;
 let ticksSinceAvailabilityCheck = 0;
-const persistence = new DeferredPersistence({
-	name: "trains",
-	write() {
-		const dimensions = [...graphs.keys()].map(dimensionId => ({
-			dimensionId,
-			graph: graphFor(dimensionId).snapshot(),
-			trains: controllerFor(dimensionId).snapshot()
-		}));
-		world.setDynamicProperty(PERSISTENCE_KEY, serializeVersionedState(PERSISTENCE_SCHEMA_VERSION, { dimensions, nextTrainId }));
-	},
+const authorityStore = new ShardedStateStore({
+	keyPrefix: "createbedrock:train_authority_v2",
 	onError(error) {
-		console.warn(`[Create Bedrock] Could not persist train state: ${error}`);
-	}
+		console.warn(`[Create Bedrock] Could not persist train authority state: ${error}`);
+	},
+	partitionFor: trainAuthorityPartition,
+	storage: {
+		delete(key) { world.setDynamicProperty(key, undefined); },
+		get(key) { return world.getDynamicProperty(key); },
+		set(key, value) { world.setDynamicProperty(key, value); }
+	},
+	writesPerTick: 2
 });
 
 function nodeId(location) {
@@ -129,51 +131,84 @@ function spawnCarriageMarkers(dimensionId, trainId, controller) {
 }
 
 function persist() {
-	persistence.request();
+	try {
+		authorityStore.request(createTrainAuthorityRecords({
+			dimensions: [...graphs.keys()].sort().map(dimensionId => ({
+				dimensionId,
+				graph: graphFor(dimensionId).snapshot(),
+				trains: controllerFor(dimensionId).snapshot()
+			})),
+			nextTrainId
+		}));
+	} catch (error) {
+		console.warn(`[Create Bedrock] Could not queue train authority state: ${error}`);
+	}
 }
 
-function restore() {
-	const serialized = world.getDynamicProperty(PERSISTENCE_KEY);
+function restoreAuthoritySnapshot(snapshot) {
+	nextTrainId = snapshot.nextTrainId;
+	for (const dimension of snapshot.dimensions) {
+		try {
+			const graph = graphFor(dimension.dimensionId);
+			graph.restore(dimension.graph);
+			const controller = controllerFor(dimension.dimensionId);
+			for (const train of dimension.trains) {
+				let restored = false;
+				try {
+					controller.restore([train]);
+					restored = true;
+					trains.set(train.id, {
+						dimensionId: dimension.dimensionId,
+						entityIds: spawnCarriageMarkers(dimension.dimensionId, train.id, controller)
+					});
+				} catch (error) {
+					if (restored)
+						controller.removeTrain(train.id);
+					console.warn(`[Create Bedrock] Ignored invalid train ${train?.id ?? "unknown"}: ${error}`);
+				}
+			}
+		} catch (error) {
+			console.warn(`[Create Bedrock] Ignored invalid train dimension ${dimension?.dimensionId ?? "unknown"}: ${error}`);
+		}
+	}
+}
+
+function restoreLegacyAuthority() {
+	const serialized = world.getDynamicProperty(LEGACY_PERSISTENCE_KEY);
 	if (typeof serialized !== "string")
-		return;
+		return false;
 
 	try {
 		const snapshot = deserializeVersionedState(serialized, {
-			schemaVersion: PERSISTENCE_SCHEMA_VERSION,
+			schemaVersion: LEGACY_PERSISTENCE_SCHEMA_VERSION,
 			upgrades: {
 				0: legacy => legacy
 			}
 		});
-		nextTrainId = snapshot.nextTrainId ?? 1;
-		for (const dimension of snapshot.dimensions ?? []) {
-			try {
-				if (typeof dimension?.dimensionId !== "string" || !dimension.graph || !Array.isArray(dimension.trains))
-					throw new TypeError("missing dimension train state");
-				const graph = graphFor(dimension.dimensionId);
-				graph.restore(dimension.graph);
-				const controller = controllerFor(dimension.dimensionId);
-				for (const train of dimension.trains) {
-					let restored = false;
-					try {
-						controller.restore([train]);
-						restored = true;
-						trains.set(train.id, {
-							dimensionId: dimension.dimensionId,
-							entityIds: spawnCarriageMarkers(dimension.dimensionId, train.id, controller)
-						});
-					} catch (error) {
-						if (restored)
-							controller.removeTrain(train.id);
-						console.warn(`[Create Bedrock] Ignored invalid train ${train?.id ?? "unknown"}: ${error}`);
-					}
-				}
-			} catch (error) {
-				console.warn(`[Create Bedrock] Ignored invalid train dimension ${dimension?.dimensionId ?? "unknown"}: ${error}`);
-			}
-		}
+		restoreAuthoritySnapshot(migrateLegacyTrainSnapshot(snapshot));
+		persist();
+		return true;
 	} catch (error) {
 		console.warn(`[Create Bedrock] Ignored invalid train state: ${error}`);
+		return false;
 	}
+}
+
+function restore() {
+	try {
+		const restored = authorityStore.read();
+		if (restored) {
+			const snapshot = readTrainAuthorityRecords(restored.records);
+			restoreAuthoritySnapshot(snapshot);
+			for (const warning of restored.warnings)
+				console.warn(`[Create Bedrock] Ignored corrupt train authority shard ${warning.partition}: ${warning.error}`);
+			return;
+		}
+	} catch (error) {
+		console.warn(`[Create Bedrock] Train authority state is invalid and will not be guessed: ${error}`);
+		return;
+	}
+	restoreLegacyAuthority();
 }
 
 function addTrack(block) {
@@ -303,6 +338,65 @@ function toggleStationStop(player, dimensionId, stationNodeId) {
 	}
 }
 
+function replaceSelectedItem(player, itemStack) {
+	const container = player?.getComponent?.("minecraft:inventory")?.container;
+	if (!container || !Number.isInteger(player.selectedSlotIndex) || player.selectedSlotIndex < 0)
+		return false;
+	container.setItem(player.selectedSlotIndex, itemStack);
+	return true;
+}
+
+function configureScheduleAtStation(player, itemStack, dimensionId, stationNodeId) {
+	let schedule;
+	try {
+		schedule = readScheduleItemState(itemStack);
+	} catch (error) {
+		player.sendMessage?.(`Invalid Schedule: ${error}`);
+		return true;
+	}
+	if (player.isSneaking) {
+		const appended = appendScheduleStop(schedule, stationNodeId);
+		if (!appended.changed) {
+			player.sendMessage?.("This station is already in the Schedule.");
+			return true;
+		}
+		writeScheduleItemState(itemStack, appended.state);
+		replaceSelectedItem(player, itemStack);
+		player.sendMessage?.(`Added stop ${appended.state.stopIds.length}/${16} to Schedule.`);
+		return true;
+	}
+	if (schedule.stopIds.length === 0) {
+		player.sendMessage?.("Sneak-use the Schedule on each Track Station to add stops first.");
+		return true;
+	}
+	const controller = controllerFor(dimensionId);
+	const trainId = [...trains.entries()]
+		.filter(([id, train]) => train.dimensionId === dimensionId && controller.getTrain(id).nodeId === stationNodeId && !controller.getTrain(id).destinationId)
+		.map(([id]) => id).sort()[0];
+	if (!trainId) {
+		player.sendMessage?.("No idle train is present at this station.");
+		return true;
+	}
+	const result = controller.setScheduleWithReason(trainId, schedule);
+	if (result.ok) {
+		persist();
+		player.sendMessage?.(schedule.cyclic ? "Cyclic Schedule assigned." : "One-way Schedule assigned.");
+	} else
+		player.sendMessage?.(`Schedule unavailable: ${result.reason}.`);
+	return true;
+}
+
+function toggleHeldScheduleCycle(player, itemStack) {
+	try {
+		const next = toggleScheduleCycle(readScheduleItemState(itemStack));
+		writeScheduleItemState(itemStack, next);
+		replaceSelectedItem(player, itemStack);
+		player.sendMessage?.(next.cyclic ? "Schedule set to cyclic." : "Schedule set to one-way.");
+	} catch (error) {
+		player.sendMessage?.(`Invalid Schedule: ${error}`);
+	}
+}
+
 function updateTrainCollision(dimensionId, id, controller, carriages, ignoredEntityIds) {
 	const dimension = world.getDimension(dimensionId);
 	const collision = findTrainCollision(carriages, location => {
@@ -378,7 +472,7 @@ function tickTrains() {
 
 	if (trains.size > 0)
 		persist();
-	persistence.tick();
+	authorityStore.tick();
 }
 
 export function registerTrains() {
@@ -413,10 +507,18 @@ export function registerTrains() {
 	world.afterEvents.playerInteractWithBlock.subscribe(event => {
 		if (event.block.typeId === TRACK_BLOCK)
 			selectRoute(event.player, event.block.dimension.id, nodeId(event.block.location));
+		if (event.block.typeId === CONTROLLER_RAIL_BLOCK && event.itemStack?.typeId === SCHEDULE_ITEM && event.player.isSneaking) {
+			toggleHeldScheduleCycle(event.player, event.itemStack);
+			return;
+		}
 		if (event.block.typeId === STATION_BLOCK) {
 			const stationNodeId = trackNodeForStation(event.block);
 			if (!stationNodeId) {
 				event.player.sendMessage("Station requires an adjacent track.");
+				return;
+			}
+			if (event.itemStack?.typeId === SCHEDULE_ITEM) {
+				configureScheduleAtStation(event.player, event.itemStack, event.block.dimension.id, stationNodeId);
 				return;
 			}
 			if (event.player.isSneaking)
@@ -460,7 +562,24 @@ export function getTrainDiagnostics() {
 		loadedChunks,
 		markers: [...trains.values()].reduce((total, train) => total + train.entityIds.length, 0),
 		nodes,
-		persistence: persistence.diagnostics(),
+		persistence: authorityStore.diagnostics(),
 		trains: trains.size
 	};
+}
+
+/** Stage-5 control plane access: callers may observe and command the one
+ * authoritative controller, but never create a second route reservation map. */
+export function getTrainAuthority(dimensionId) {
+	if (typeof dimensionId !== "string" || dimensionId.length === 0)
+		throw new TypeError("Train authority requires a dimension identifier");
+	const controller = controllerFor(dimensionId);
+	return {
+		controller,
+		graph: graphFor(dimensionId),
+		trainIds: [...trains.entries()].filter(([, train]) => train.dimensionId === dimensionId).map(([id]) => id).sort()
+	};
+}
+
+export function persistTrainAuthority() {
+	persist();
 }

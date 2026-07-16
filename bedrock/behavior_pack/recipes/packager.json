@@ -1,0 +1,1 @@
+{ "format_version": "1.26.0", "minecraft:recipe_shapeless": { "description": { "identifier": "createbedrock:packager" }, "tags": ["crafting_table"], "ingredients": [{ "item": "createbedrock:cardboard" }, { "item": "createbedrock:andesite_alloy" }], "result": { "item": "createbedrock:packager" } } }

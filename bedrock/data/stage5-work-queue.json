@@ -1,0 +1,507 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "deterministic",
+  "generatedFrom": "bedrock/data/migration-matrix.json",
+  "entries": [
+    {
+      "acceptanceId": "LOGISTICS-FACTORY-GAUGE-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Route PackageLedger records through Frogport, Postbox, Packager Link, Stock Link and Factory Gauge endpoints using deterministic address selection and offline buffering.",
+      "bedrockIdentifier": "createbedrock:factory_gauge",
+      "deliveryPackage": "completed:P5.4",
+      "domain": "logistics",
+      "javaIdentifier": "create:factory_gauge",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist endpoint address/configuration, pending delivery cursor, offline buffers, factory-panel requests, and delivery receipts in sharded records.",
+      "platformScenarios": [
+        "frogport-routing",
+        "postbox-offline-recovery",
+        "factory-gauge-request"
+      ],
+      "resourcePlan": "Provide all endpoint/gauge blocks, colored Postbox family coverage, recipes, drops, EN/ZH strings, and Java asset provenance.",
+      "testPlan": "Test deterministic routing, endpoint competition, full/disconnected retry, offline buffers, stock requests, panel aggregation, restart, and resources."
+    },
+    {
+      "acceptanceId": "LOGISTICS-FACTORY-PANEL-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Route PackageLedger records through Frogport, Postbox, Packager Link, Stock Link and Factory Gauge endpoints using deterministic address selection and offline buffering.",
+      "bedrockIdentifier": "createbedrock:factory_panel",
+      "deliveryPackage": "completed:P5.4",
+      "domain": "logistics",
+      "javaIdentifier": "create:factory_panel",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist endpoint address/configuration, pending delivery cursor, offline buffers, factory-panel requests, and delivery receipts in sharded records.",
+      "platformScenarios": [
+        "frogport-routing",
+        "postbox-offline-recovery",
+        "factory-gauge-request"
+      ],
+      "resourcePlan": "Provide all endpoint/gauge blocks, colored Postbox family coverage, recipes, drops, EN/ZH strings, and Java asset provenance.",
+      "testPlan": "Test deterministic routing, endpoint competition, full/disconnected retry, offline buffers, stock requests, panel aggregation, restart, and resources."
+    },
+    {
+      "acceptanceId": "LOGISTICS-PACKAGE-ENTITY",
+      "assetPlan": "Trace entity resources to src/main/java/com/simibubi/create/AllEntityTypes.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Use PackageLedger and the existing durable item ports to create, unpack, repackage, filter, and project packages without duplicate inventory ownership.",
+      "bedrockIdentifier": "createbedrock:package",
+      "deliveryPackage": "completed:P5.3",
+      "domain": "logistics",
+      "javaIdentifier": "create:package",
+      "javaSource": "src/main/java/com/simibubi/create/AllEntityTypes.java",
+      "kind": "entity",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist package identity, bounded contents, address/order data, port/escrow ownership, state revision, and idempotency receipts.",
+      "platformScenarios": [
+        "packager-restart",
+        "repackager-conservation",
+        "package-full-endpoint"
+      ],
+      "resourcePlan": "Provide package entity/item/filter and Packager/Repackager blocks, recipes, drops, EN/ZH strings, and Java asset provenance.",
+      "testPlan": "Test 9-slot bounds, conservation, address/order preservation, redstone gating, full-target retry, ownership recovery, and definitions."
+    },
+    {
+      "acceptanceId": "LOGISTICS-PACKAGE-FILTER-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Use PackageLedger and the existing durable item ports to create, unpack, repackage, filter, and project packages without duplicate inventory ownership.",
+      "bedrockIdentifier": "createbedrock:package_filter",
+      "deliveryPackage": "completed:P5.3",
+      "domain": "logistics",
+      "javaIdentifier": "create:package_filter",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist package identity, bounded contents, address/order data, port/escrow ownership, state revision, and idempotency receipts.",
+      "platformScenarios": [
+        "packager-restart",
+        "repackager-conservation",
+        "package-full-endpoint"
+      ],
+      "resourcePlan": "Provide package entity/item/filter and Packager/Repackager blocks, recipes, drops, EN/ZH strings, and Java asset provenance.",
+      "testPlan": "Test 9-slot bounds, conservation, address/order preservation, redstone gating, full-target retry, ownership recovery, and definitions."
+    },
+    {
+      "acceptanceId": "LOGISTICS-PACKAGE-FROGPORT-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Route PackageLedger records through Frogport, Postbox, Packager Link, Stock Link and Factory Gauge endpoints using deterministic address selection and offline buffering.",
+      "bedrockIdentifier": "createbedrock:package_frogport",
+      "deliveryPackage": "completed:P5.4",
+      "domain": "logistics",
+      "javaIdentifier": "create:package_frogport",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist endpoint address/configuration, pending delivery cursor, offline buffers, factory-panel requests, and delivery receipts in sharded records.",
+      "platformScenarios": [
+        "frogport-routing",
+        "postbox-offline-recovery",
+        "factory-gauge-request"
+      ],
+      "resourcePlan": "Provide all endpoint/gauge blocks, colored Postbox family coverage, recipes, drops, EN/ZH strings, and Java asset provenance.",
+      "testPlan": "Test deterministic routing, endpoint competition, full/disconnected retry, offline buffers, stock requests, panel aggregation, restart, and resources."
+    },
+    {
+      "acceptanceId": "LOGISTICS-PACKAGE-FROGPORT-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Route PackageLedger records through Frogport, Postbox, Packager Link, Stock Link and Factory Gauge endpoints using deterministic address selection and offline buffering.",
+      "bedrockIdentifier": "createbedrock:package_frogport",
+      "deliveryPackage": "completed:P5.4",
+      "domain": "logistics",
+      "javaIdentifier": "create:package_frogport",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist endpoint address/configuration, pending delivery cursor, offline buffers, factory-panel requests, and delivery receipts in sharded records.",
+      "platformScenarios": [
+        "frogport-routing",
+        "postbox-offline-recovery",
+        "factory-gauge-request"
+      ],
+      "resourcePlan": "Provide all endpoint/gauge blocks, colored Postbox family coverage, recipes, drops, EN/ZH strings, and Java asset provenance.",
+      "testPlan": "Test deterministic routing, endpoint competition, full/disconnected retry, offline buffers, stock requests, panel aggregation, restart, and resources."
+    },
+    {
+      "acceptanceId": "LOGISTICS-PACKAGE-POSTBOX-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Route PackageLedger records through Frogport, Postbox, Packager Link, Stock Link and Factory Gauge endpoints using deterministic address selection and offline buffering.",
+      "bedrockIdentifier": "createbedrock:package_postbox",
+      "deliveryPackage": "completed:P5.4",
+      "domain": "logistics",
+      "javaIdentifier": "create:package_postbox",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist endpoint address/configuration, pending delivery cursor, offline buffers, factory-panel requests, and delivery receipts in sharded records.",
+      "platformScenarios": [
+        "frogport-routing",
+        "postbox-offline-recovery",
+        "factory-gauge-request"
+      ],
+      "resourcePlan": "Provide all endpoint/gauge blocks, colored Postbox family coverage, recipes, drops, EN/ZH strings, and Java asset provenance.",
+      "testPlan": "Test deterministic routing, endpoint competition, full/disconnected retry, offline buffers, stock requests, panel aggregation, restart, and resources."
+    },
+    {
+      "acceptanceId": "LOGISTICS-PACKAGER-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Use PackageLedger and the existing durable item ports to create, unpack, repackage, filter, and project packages without duplicate inventory ownership.",
+      "bedrockIdentifier": "createbedrock:packager",
+      "deliveryPackage": "completed:P5.3",
+      "domain": "logistics",
+      "javaIdentifier": "create:packager",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist package identity, bounded contents, address/order data, port/escrow ownership, state revision, and idempotency receipts.",
+      "platformScenarios": [
+        "packager-restart",
+        "repackager-conservation",
+        "package-full-endpoint"
+      ],
+      "resourcePlan": "Provide package entity/item/filter and Packager/Repackager blocks, recipes, drops, EN/ZH strings, and Java asset provenance.",
+      "testPlan": "Test 9-slot bounds, conservation, address/order preservation, redstone gating, full-target retry, ownership recovery, and definitions."
+    },
+    {
+      "acceptanceId": "LOGISTICS-PACKAGER-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Use PackageLedger and the existing durable item ports to create, unpack, repackage, filter, and project packages without duplicate inventory ownership.",
+      "bedrockIdentifier": "createbedrock:packager",
+      "deliveryPackage": "completed:P5.3",
+      "domain": "logistics",
+      "javaIdentifier": "create:packager",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist package identity, bounded contents, address/order data, port/escrow ownership, state revision, and idempotency receipts.",
+      "platformScenarios": [
+        "packager-restart",
+        "repackager-conservation",
+        "package-full-endpoint"
+      ],
+      "resourcePlan": "Provide package entity/item/filter and Packager/Repackager blocks, recipes, drops, EN/ZH strings, and Java asset provenance.",
+      "testPlan": "Test 9-slot bounds, conservation, address/order preservation, redstone gating, full-target retry, ownership recovery, and definitions."
+    },
+    {
+      "acceptanceId": "LOGISTICS-PACKAGER-LINK-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Route PackageLedger records through Frogport, Postbox, Packager Link, Stock Link and Factory Gauge endpoints using deterministic address selection and offline buffering.",
+      "bedrockIdentifier": "createbedrock:packager_link",
+      "deliveryPackage": "completed:P5.4",
+      "domain": "logistics",
+      "javaIdentifier": "create:packager_link",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist endpoint address/configuration, pending delivery cursor, offline buffers, factory-panel requests, and delivery receipts in sharded records.",
+      "platformScenarios": [
+        "frogport-routing",
+        "postbox-offline-recovery",
+        "factory-gauge-request"
+      ],
+      "resourcePlan": "Provide all endpoint/gauge blocks, colored Postbox family coverage, recipes, drops, EN/ZH strings, and Java asset provenance.",
+      "testPlan": "Test deterministic routing, endpoint competition, full/disconnected retry, offline buffers, stock requests, panel aggregation, restart, and resources."
+    },
+    {
+      "acceptanceId": "LOGISTICS-REPACKAGER-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Use PackageLedger and the existing durable item ports to create, unpack, repackage, filter, and project packages without duplicate inventory ownership.",
+      "bedrockIdentifier": "createbedrock:repackager",
+      "deliveryPackage": "completed:P5.3",
+      "domain": "logistics",
+      "javaIdentifier": "create:repackager",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist package identity, bounded contents, address/order data, port/escrow ownership, state revision, and idempotency receipts.",
+      "platformScenarios": [
+        "packager-restart",
+        "repackager-conservation",
+        "package-full-endpoint"
+      ],
+      "resourcePlan": "Provide package entity/item/filter and Packager/Repackager blocks, recipes, drops, EN/ZH strings, and Java asset provenance.",
+      "testPlan": "Test 9-slot bounds, conservation, address/order preservation, redstone gating, full-target retry, ownership recovery, and definitions."
+    },
+    {
+      "acceptanceId": "LOGISTICS-REPACKAGER-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Use PackageLedger and the existing durable item ports to create, unpack, repackage, filter, and project packages without duplicate inventory ownership.",
+      "bedrockIdentifier": "createbedrock:repackager",
+      "deliveryPackage": "completed:P5.3",
+      "domain": "logistics",
+      "javaIdentifier": "create:repackager",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist package identity, bounded contents, address/order data, port/escrow ownership, state revision, and idempotency receipts.",
+      "platformScenarios": [
+        "packager-restart",
+        "repackager-conservation",
+        "package-full-endpoint"
+      ],
+      "resourcePlan": "Provide package entity/item/filter and Packager/Repackager blocks, recipes, drops, EN/ZH strings, and Java asset provenance.",
+      "testPlan": "Test 9-slot bounds, conservation, address/order preservation, redstone gating, full-target retry, ownership recovery, and definitions."
+    },
+    {
+      "acceptanceId": "TRAINS-BOGEY-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Materialize rolling stock from TrainAuthority placement data and connect P4.5 carriage contraptions without a second route owner.",
+      "bedrockIdentifier": "createbedrock:bogey",
+      "deliveryPackage": "completed:P5.2",
+      "domain": "trains",
+      "javaIdentifier": "create:bogey",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist bogey style/size, formation length, fake-track ownership, station door state, and idempotent disassembly receipts.",
+      "platformScenarios": [
+        "bogey-formation",
+        "station-door-interlock",
+        "carriage-rejoin"
+      ],
+      "resourcePlan": "Provide bogey, fake-track, train-door/trapdoor blocks, recipes, drops, EN/ZH strings, and Java asset provenance.",
+      "testPlan": "Test formation spacing, occupied-sector release, door interlocks, fake-track cleanup, carriage authority integration, restart, and resource coverage."
+    },
+    {
+      "acceptanceId": "TRAINS-CONTROLLER-RAIL-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Make TrainAuthority the sole owner of interlocking, signal state, observer passage edges, controller-rail commands, and bounded schedule progress.",
+      "bedrockIdentifier": "createbedrock:controller_rail",
+      "deliveryPackage": "completed:P5.1",
+      "domain": "trains",
+      "javaIdentifier": "create:controller_rail",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist sharded train topology, train passage tokens, signal attachment/configuration, observer filters, and schedule revision/receipt state.",
+      "platformScenarios": [
+        "signal-interlocking",
+        "schedule-restart",
+        "observer-redstone-edge"
+      ],
+      "resourcePlan": "Provide controller/signal/observer blocks, schedule item, native redstone declarations, recipes, drops, EN/ZH strings, and source asset provenance.",
+      "testPlan": "Test fail-closed signals, exclusive passage tokens, route release, observer filtering, bounded schedule edits, restart, and definition coverage."
+    },
+    {
+      "acceptanceId": "TRAINS-FAKE-TRACK-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Materialize rolling stock from TrainAuthority placement data and connect P4.5 carriage contraptions without a second route owner.",
+      "bedrockIdentifier": "createbedrock:fake_track",
+      "deliveryPackage": "completed:P5.2",
+      "domain": "trains",
+      "javaIdentifier": "create:fake_track",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist bogey style/size, formation length, fake-track ownership, station door state, and idempotent disassembly receipts.",
+      "platformScenarios": [
+        "bogey-formation",
+        "station-door-interlock",
+        "carriage-rejoin"
+      ],
+      "resourcePlan": "Provide bogey, fake-track, train-door/trapdoor blocks, recipes, drops, EN/ZH strings, and Java asset provenance.",
+      "testPlan": "Test formation spacing, occupied-sector release, door interlocks, fake-track cleanup, carriage authority integration, restart, and resource coverage."
+    },
+    {
+      "acceptanceId": "TRAINS-FAKE-TRACK-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Materialize rolling stock from TrainAuthority placement data and connect P4.5 carriage contraptions without a second route owner.",
+      "bedrockIdentifier": "createbedrock:fake_track",
+      "deliveryPackage": "completed:P5.2",
+      "domain": "trains",
+      "javaIdentifier": "create:fake_track",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist bogey style/size, formation length, fake-track ownership, station door state, and idempotent disassembly receipts.",
+      "platformScenarios": [
+        "bogey-formation",
+        "station-door-interlock",
+        "carriage-rejoin"
+      ],
+      "resourcePlan": "Provide bogey, fake-track, train-door/trapdoor blocks, recipes, drops, EN/ZH strings, and Java asset provenance.",
+      "testPlan": "Test formation spacing, occupied-sector release, door interlocks, fake-track cleanup, carriage authority integration, restart, and resource coverage."
+    },
+    {
+      "acceptanceId": "TRAINS-LARGE-BOGEY-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Materialize rolling stock from TrainAuthority placement data and connect P4.5 carriage contraptions without a second route owner.",
+      "bedrockIdentifier": "createbedrock:large_bogey",
+      "deliveryPackage": "completed:P5.2",
+      "domain": "trains",
+      "javaIdentifier": "create:large_bogey",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist bogey style/size, formation length, fake-track ownership, station door state, and idempotent disassembly receipts.",
+      "platformScenarios": [
+        "bogey-formation",
+        "station-door-interlock",
+        "carriage-rejoin"
+      ],
+      "resourcePlan": "Provide bogey, fake-track, train-door/trapdoor blocks, recipes, drops, EN/ZH strings, and Java asset provenance.",
+      "testPlan": "Test formation spacing, occupied-sector release, door interlocks, fake-track cleanup, carriage authority integration, restart, and resource coverage."
+    },
+    {
+      "acceptanceId": "TRAINS-SCHEDULE-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Make TrainAuthority the sole owner of interlocking, signal state, observer passage edges, controller-rail commands, and bounded schedule progress.",
+      "bedrockIdentifier": "createbedrock:schedule",
+      "deliveryPackage": "completed:P5.1",
+      "domain": "trains",
+      "javaIdentifier": "create:schedule",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist sharded train topology, train passage tokens, signal attachment/configuration, observer filters, and schedule revision/receipt state.",
+      "platformScenarios": [
+        "signal-interlocking",
+        "schedule-restart",
+        "observer-redstone-edge"
+      ],
+      "resourcePlan": "Provide controller/signal/observer blocks, schedule item, native redstone declarations, recipes, drops, EN/ZH strings, and source asset provenance.",
+      "testPlan": "Test fail-closed signals, exclusive passage tokens, route release, observer filtering, bounded schedule edits, restart, and definition coverage."
+    },
+    {
+      "acceptanceId": "TRAINS-SMALL-BOGEY-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Materialize rolling stock from TrainAuthority placement data and connect P4.5 carriage contraptions without a second route owner.",
+      "bedrockIdentifier": "createbedrock:small_bogey",
+      "deliveryPackage": "completed:P5.2",
+      "domain": "trains",
+      "javaIdentifier": "create:small_bogey",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist bogey style/size, formation length, fake-track ownership, station door state, and idempotent disassembly receipts.",
+      "platformScenarios": [
+        "bogey-formation",
+        "station-door-interlock",
+        "carriage-rejoin"
+      ],
+      "resourcePlan": "Provide bogey, fake-track, train-door/trapdoor blocks, recipes, drops, EN/ZH strings, and Java asset provenance.",
+      "testPlan": "Test formation spacing, occupied-sector release, door interlocks, fake-track cleanup, carriage authority integration, restart, and resource coverage."
+    },
+    {
+      "acceptanceId": "TRAINS-TRACK-OBSERVER-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Make TrainAuthority the sole owner of interlocking, signal state, observer passage edges, controller-rail commands, and bounded schedule progress.",
+      "bedrockIdentifier": "createbedrock:track_observer",
+      "deliveryPackage": "completed:P5.1",
+      "domain": "trains",
+      "javaIdentifier": "create:track_observer",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist sharded train topology, train passage tokens, signal attachment/configuration, observer filters, and schedule revision/receipt state.",
+      "platformScenarios": [
+        "signal-interlocking",
+        "schedule-restart",
+        "observer-redstone-edge"
+      ],
+      "resourcePlan": "Provide controller/signal/observer blocks, schedule item, native redstone declarations, recipes, drops, EN/ZH strings, and source asset provenance.",
+      "testPlan": "Test fail-closed signals, exclusive passage tokens, route release, observer filtering, bounded schedule edits, restart, and definition coverage."
+    },
+    {
+      "acceptanceId": "TRAINS-TRACK-OBSERVER-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Make TrainAuthority the sole owner of interlocking, signal state, observer passage edges, controller-rail commands, and bounded schedule progress.",
+      "bedrockIdentifier": "createbedrock:track_observer",
+      "deliveryPackage": "completed:P5.1",
+      "domain": "trains",
+      "javaIdentifier": "create:track_observer",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist sharded train topology, train passage tokens, signal attachment/configuration, observer filters, and schedule revision/receipt state.",
+      "platformScenarios": [
+        "signal-interlocking",
+        "schedule-restart",
+        "observer-redstone-edge"
+      ],
+      "resourcePlan": "Provide controller/signal/observer blocks, schedule item, native redstone declarations, recipes, drops, EN/ZH strings, and source asset provenance.",
+      "testPlan": "Test fail-closed signals, exclusive passage tokens, route release, observer filtering, bounded schedule edits, restart, and definition coverage."
+    },
+    {
+      "acceptanceId": "TRAINS-TRACK-SIGNAL-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Make TrainAuthority the sole owner of interlocking, signal state, observer passage edges, controller-rail commands, and bounded schedule progress.",
+      "bedrockIdentifier": "createbedrock:track_signal",
+      "deliveryPackage": "completed:P5.1",
+      "domain": "trains",
+      "javaIdentifier": "create:track_signal",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist sharded train topology, train passage tokens, signal attachment/configuration, observer filters, and schedule revision/receipt state.",
+      "platformScenarios": [
+        "signal-interlocking",
+        "schedule-restart",
+        "observer-redstone-edge"
+      ],
+      "resourcePlan": "Provide controller/signal/observer blocks, schedule item, native redstone declarations, recipes, drops, EN/ZH strings, and source asset provenance.",
+      "testPlan": "Test fail-closed signals, exclusive passage tokens, route release, observer filtering, bounded schedule edits, restart, and definition coverage."
+    },
+    {
+      "acceptanceId": "TRAINS-TRACK-SIGNAL-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Make TrainAuthority the sole owner of interlocking, signal state, observer passage edges, controller-rail commands, and bounded schedule progress.",
+      "bedrockIdentifier": "createbedrock:track_signal",
+      "deliveryPackage": "completed:P5.1",
+      "domain": "trains",
+      "javaIdentifier": "create:track_signal",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist sharded train topology, train passage tokens, signal attachment/configuration, observer filters, and schedule revision/receipt state.",
+      "platformScenarios": [
+        "signal-interlocking",
+        "schedule-restart",
+        "observer-redstone-edge"
+      ],
+      "resourcePlan": "Provide controller/signal/observer blocks, schedule item, native redstone declarations, recipes, drops, EN/ZH strings, and source asset provenance.",
+      "testPlan": "Test fail-closed signals, exclusive passage tokens, route release, observer filtering, bounded schedule edits, restart, and definition coverage."
+    },
+    {
+      "acceptanceId": "TRAINS-TRAIN-DOOR-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Materialize rolling stock from TrainAuthority placement data and connect P4.5 carriage contraptions without a second route owner.",
+      "bedrockIdentifier": "createbedrock:train_door",
+      "deliveryPackage": "completed:P5.2",
+      "domain": "trains",
+      "javaIdentifier": "create:train_door",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist bogey style/size, formation length, fake-track ownership, station door state, and idempotent disassembly receipts.",
+      "platformScenarios": [
+        "bogey-formation",
+        "station-door-interlock",
+        "carriage-rejoin"
+      ],
+      "resourcePlan": "Provide bogey, fake-track, train-door/trapdoor blocks, recipes, drops, EN/ZH strings, and Java asset provenance.",
+      "testPlan": "Test formation spacing, occupied-sector release, door interlocks, fake-track cleanup, carriage authority integration, restart, and resource coverage."
+    },
+    {
+      "acceptanceId": "TRAINS-TRAIN-TRAPDOOR-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Materialize rolling stock from TrainAuthority placement data and connect P4.5 carriage contraptions without a second route owner.",
+      "bedrockIdentifier": "createbedrock:train_trapdoor",
+      "deliveryPackage": "completed:P5.2",
+      "domain": "trains",
+      "javaIdentifier": "create:train_trapdoor",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Persist bogey style/size, formation length, fake-track ownership, station door state, and idempotent disassembly receipts.",
+      "platformScenarios": [
+        "bogey-formation",
+        "station-door-interlock",
+        "carriage-rejoin"
+      ],
+      "resourcePlan": "Provide bogey, fake-track, train-door/trapdoor blocks, recipes, drops, EN/ZH strings, and Java asset provenance.",
+      "testPlan": "Test formation spacing, occupied-sector release, door interlocks, fake-track cleanup, carriage authority integration, restart, and resource coverage."
+    }
+  ]
+}

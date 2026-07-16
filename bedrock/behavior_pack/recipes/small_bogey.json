@@ -1,0 +1,1 @@
+{ "format_version": "1.26.0", "minecraft:recipe_shapeless": { "description": { "identifier": "createbedrock:small_bogey" }, "tags": ["crafting_table"], "ingredients": [{ "item": "createbedrock:railway_casing" }, { "item": "minecraft:iron_ingot" }], "result": { "item": "createbedrock:small_bogey" } } }

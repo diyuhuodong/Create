@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:controller_rail",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:loot": "loot_tables/blocks/controller_rail.json",
+      "minecraft:material_instances": { "*": { "texture": "createbedrock_track", "render_method": "opaque" } },
+      "minecraft:item_visual": { "geometry": { "identifier": "minecraft:geometry.full_block" }, "material_instances": { "*": { "texture": "createbedrock_track", "render_method": "opaque" } } },
+      "minecraft:redstone_consumer": { "min_power": 0, "propagates_power": false },
+      "createbedrock:redstone_input": {}
+    }
+  }
+}

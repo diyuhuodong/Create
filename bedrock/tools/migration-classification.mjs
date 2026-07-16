@@ -203,6 +203,41 @@ for (const identifier of ["crafting_blueprint", "empty_schematic", "schematic", 
 BEHAVIOR_PATHS.set("clipboard", "behavior_pack/scripts/schematics/clipboard-runtime.js");
 BEHAVIOR_PATHS.set("wand_of_symmetry", "behavior_pack/scripts/schematics/symmetry-runtime.js");
 
+// Stage 5 consolidates train movement, signal interlocking, rolling stock,
+// package ledgers and package endpoints.  All Java block-entity registrations
+// are represented by versioned server-side records rather than unsafe client
+// entities; the platform acceptance ledger remains separate from static proof.
+export const STAGE_FIVE_RAILWAY_FOUNDATION = new Map([
+	["controller_rail", { domain: "trains", persistenceSchema: 2 }],
+	["track_signal", { domain: "trains", persistenceSchema: 2 }],
+	["track_observer", { domain: "trains", persistenceSchema: 2 }],
+	["schedule", { domain: "trains", persistenceSchema: 1 }],
+	["bogey", { domain: "trains", persistenceSchema: 1 }],
+	["small_bogey", { domain: "trains", persistenceSchema: 1 }],
+	["large_bogey", { domain: "trains", persistenceSchema: 1 }],
+	["fake_track", { domain: "trains", persistenceSchema: 1 }],
+	["train_door", { domain: "trains", persistenceSchema: 1 }],
+	["train_trapdoor", { domain: "trains", persistenceSchema: 1 }]
+]);
+for (const identifier of ["controller_rail", "track_signal", "track_observer", "schedule"])
+	BEHAVIOR_PATHS.set(identifier, "behavior_pack/scripts/trains/railway-control-runtime.js");
+for (const identifier of ["bogey", "small_bogey", "large_bogey", "fake_track", "train_door", "train_trapdoor"])
+	BEHAVIOR_PATHS.set(identifier, "behavior_pack/scripts/trains/rolling-stock-runtime.js");
+
+export const STAGE_FIVE_PACKAGE_FOUNDATION = new Map([
+	["package", { domain: "logistics", persistenceSchema: 1 }],
+	["package_filter", { domain: "logistics", persistenceSchema: 1 }],
+	["packager", { domain: "logistics", persistenceSchema: 1 }],
+	["repackager", { domain: "logistics", persistenceSchema: 1 }],
+	["package_frogport", { domain: "logistics", persistenceSchema: 1 }],
+	["package_postbox", { domain: "logistics", persistenceSchema: 1 }],
+	["packager_link", { domain: "logistics", persistenceSchema: 1 }],
+	["factory_gauge", { domain: "logistics", persistenceSchema: 1 }],
+	["factory_panel", { domain: "logistics", persistenceSchema: 1 }]
+]);
+for (const identifier of STAGE_FIVE_PACKAGE_FOUNDATION.keys())
+	BEHAVIOR_PATHS.set(identifier, "behavior_pack/scripts/logistics/package-runtime.js");
+
 for (const device of REDSTONE_DEVICE_CATALOG)
 	BEHAVIOR_PATHS.set(device.id, "behavior_pack/scripts/redstone/redstone-device-runtime.js");
 
@@ -369,6 +404,7 @@ export function classifyRegistration(identifier, kind) {
 		?? STAGE_FOUR_MINECART_CONTRAPTION_FOUNDATION.get(identifier)
 		?? STAGE_FOUR_STICKER_FOUNDATION.get(identifier)
 		?? STAGE_FOUR_SCHEMATICS_FOUNDATION.get(identifier);
+	const stageFiveFoundation = STAGE_FIVE_RAILWAY_FOUNDATION.get(identifier) ?? STAGE_FIVE_PACKAGE_FOUNDATION.get(identifier);
 	const staticSystem = processor ?? fluid ?? redstoneControl;
 	const rule = RULES.find(candidate => candidate.pattern.test(identifier));
 	const classification = staticSystem
@@ -387,6 +423,8 @@ export function classifyRegistration(identifier, kind) {
 		? { ...redstoneFoundation, phase: 3, status: "static_verified" }
 	: stageFourFoundation
 		? { ...stageFourFoundation, phase: 4, status: "static_verified" }
+		: stageFiveFoundation
+			? { ...stageFiveFoundation, phase: 5, status: "static_verified" }
 		: prototype
 		? { ...prototype, phase: 2, status: "implementation_in_progress" }
 		: rule ?? { domain: "content", phase: 3 };
@@ -397,9 +435,9 @@ export function classifyRegistration(identifier, kind) {
 		behaviorPath: BEHAVIOR_PATHS.get(identifier) ?? null,
 		blockingReason: null,
 		domain: classification.domain,
-		persistenceSchema: stageFourFoundation?.persistenceSchema ?? (staticSystem || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation ? 2 : redstoneFoundation || prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null),
+		persistenceSchema: stageFiveFoundation?.persistenceSchema ?? stageFourFoundation?.persistenceSchema ?? (staticSystem || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation ? 2 : redstoneFoundation || prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null),
 		phase: classification.phase,
-		resourceStatus: prototype || staticSystem || foundationContent || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation || redstoneFoundation || stageFourFoundation || classification.status === "static_verified" ? "partial" : "pending",
+		resourceStatus: prototype || staticSystem || foundationContent || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation || redstoneFoundation || stageFourFoundation || stageFiveFoundation || classification.status === "static_verified" ? "partial" : "pending",
 		status: classification.status ?? "specification_pending"
 	};
 }
