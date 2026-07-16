@@ -4,6 +4,7 @@ import { ModalFormData } from "@minecraft/server-ui";
 import { ShardedStateStore } from "../kernel/sharded-state-store.js";
 import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-property-storage.js";
 import { ElevatorColumnRegistry } from "./elevator-column.js";
+import { requestElevatorPulleyForColumn } from "./linear-actuator-runtime.js";
 
 const ELEVATOR_CONTACT_BLOCK = "createbedrock:elevator_contact";
 const CALLING_STATE = "createbedrock:calling";
@@ -154,6 +155,13 @@ export function registerElevatorContacts() {
 			return;
 		}
 		applyRequestVisuals(contact.dimensionId, column, result.target);
+		const pulley = requestElevatorPulleyForColumn({
+			column,
+			dimensionId: contact.dimensionId,
+			targetY: result.target.location.y
+		});
+		if (!pulley.ok)
+			event.player.sendMessage?.("No assembled Elevator Pulley is available for this column.");
 		persist();
 	});
 	system.run(() => {

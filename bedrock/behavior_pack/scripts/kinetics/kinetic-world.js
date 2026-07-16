@@ -202,6 +202,11 @@ export const KINETIC_BLOCKS = {
 		axis: "y",
 		stressImpact: 16
 	},
+	"createbedrock:elevator_pulley": {
+		kind: "consumer",
+		axis: "y",
+		stressImpact: 16
+	},
 	"createbedrock:gantry_carriage": {
 		kind: "consumer",
 		axis: "y",

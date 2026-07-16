@@ -15,18 +15,18 @@
     "components": {
       "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
-      "minecraft:geometry": "geometry.createbedrock.redstone_contact",
+      "minecraft:geometry": "geometry.createbedrock.elevator_contact",
       "minecraft:item_visual": {
-        "geometry": { "identifier": "geometry.createbedrock.redstone_contact" },
+        "geometry": { "identifier": "geometry.createbedrock.elevator_contact" },
         "material_instances": {
-          "redstone_surface": { "texture": "createbedrock_redstone_contact", "render_method": "opaque" },
-          "*": { "texture": "createbedrock_redstone_contact", "render_method": "opaque" }
+          "elevator_contact": { "texture": "createbedrock_elevator_contact", "render_method": "opaque" },
+          "*": { "texture": "createbedrock_elevator_contact", "render_method": "opaque" }
         }
       },
       "minecraft:loot": "loot_tables/blocks/elevator_contact.json",
       "minecraft:material_instances": {
-        "redstone_surface": { "texture": "createbedrock_redstone_contact", "render_method": "opaque" },
-        "*": { "texture": "createbedrock_redstone_contact", "render_method": "opaque" }
+        "elevator_contact": { "texture": "createbedrock_elevator_contact", "render_method": "opaque" },
+        "*": { "texture": "createbedrock_elevator_contact", "render_method": "opaque" }
       }
     },
     "permutations": [

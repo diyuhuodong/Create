@@ -509,6 +509,9 @@
     "createbedrock_redstone_contact": {
       "textures": "textures/create_java/block/contact_front"
     },
+    "createbedrock_elevator_contact": {
+      "textures": "textures/create_java/block/elevator_contact_side"
+    },
     "createbedrock_redstone_link": {
       "textures": "textures/create_java/block/redstone_antenna"
     },
@@ -562,6 +565,9 @@
     },
     "createbedrock_hose_pulley": {
       "textures": "textures/create_java/block/hose_pulley"
+    },
+    "createbedrock_elevator_pulley": {
+      "textures": "textures/create_java/block/elevator_pulley"
     },
     "createbedrock_pulley_rope": {
       "textures": "textures/create_java/block/pulley_rope"

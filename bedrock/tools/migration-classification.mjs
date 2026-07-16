@@ -131,6 +131,17 @@ export const STAGE_FOUR_LINEAR_ACTUATOR_FOUNDATION = new Map([
 for (const identifier of STAGE_FOUR_LINEAR_ACTUATOR_FOUNDATION.keys())
 	BEHAVIOR_PATHS.set(identifier, "behavior_pack/scripts/contraptions/linear-actuator-runtime.js");
 
+// P4.3 binds the persistent column registry to an active vertical assembly.
+// Contact state and Pulley target state are both versioned records; the
+// moving-contact tracker remains the sole producer of native redstone edges.
+export const STAGE_FOUR_ELEVATOR_FOUNDATION = new Map([
+	["elevator_contact", { domain: "contraptions", persistenceSchema: 2 }],
+	["elevator_pulley", { domain: "contraptions", persistenceSchema: 2 }]
+]);
+
+BEHAVIOR_PATHS.set("elevator_contact", "behavior_pack/scripts/contraptions/elevator-contact-runtime.js");
+BEHAVIOR_PATHS.set("elevator_pulley", "behavior_pack/scripts/contraptions/linear-actuator-runtime.js");
+
 for (const device of REDSTONE_DEVICE_CATALOG)
 	BEHAVIOR_PATHS.set(device.id, "behavior_pack/scripts/redstone/redstone-device-runtime.js");
 
@@ -291,7 +302,8 @@ export function classifyRegistration(identifier, kind) {
 	const kineticFoundation = STAGE_THREE_KINETIC_FOUNDATION.get(identifier);
 	const logisticsFoundation = STAGE_THREE_LOGISTICS_FOUNDATION.get(identifier);
 	const stageFourFoundation = STAGE_FOUR_CONTRAPTION_FOUNDATION.get(identifier)
-		?? STAGE_FOUR_LINEAR_ACTUATOR_FOUNDATION.get(identifier);
+		?? STAGE_FOUR_LINEAR_ACTUATOR_FOUNDATION.get(identifier)
+		?? STAGE_FOUR_ELEVATOR_FOUNDATION.get(identifier);
 	const staticSystem = processor ?? fluid ?? redstoneControl;
 	const rule = RULES.find(candidate => candidate.pattern.test(identifier));
 	const classification = staticSystem

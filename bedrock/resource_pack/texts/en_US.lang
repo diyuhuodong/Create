@@ -140,6 +140,7 @@ tile.createbedrock:pulse_repeater.name=Pulse Repeater
 tile.createbedrock:pulse_timer.name=Pulse Timer
 tile.createbedrock:redstone_contact.name=Redstone Contact
 tile.createbedrock:elevator_contact.name=Elevator Contact
+tile.createbedrock:elevator_pulley.name=Elevator Pulley
 tile.createbedrock:redstone_link.name=Redstone Link
 tile.createbedrock:redstone_requester.name=Redstone Requester
 tile.createbedrock:rotation_speed_controller.name=Rotation Speed Controller

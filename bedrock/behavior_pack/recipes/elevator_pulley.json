@@ -1,0 +1,14 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "createbedrock:elevator_pulley" },
+    "tags": ["crafting_table"],
+    "pattern": ["B", "C", "I"],
+    "key": {
+      "B": { "item": "createbedrock:brass_casing" },
+      "C": { "item": "minecraft:dried_kelp_block" },
+      "I": { "item": "createbedrock:iron_sheet" }
+    },
+    "result": { "item": "createbedrock:elevator_pulley" }
+  }
+}

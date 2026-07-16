@@ -715,6 +715,13 @@ export function ensureExternalDynamicAssemblyProjection(dimensionId, id) {
 	return valid;
 }
 
+/** Apply moving contact edges after a non-bearing assembly transform. */
+export function sampleDynamicAssemblyMotionContacts(dimensionId) {
+	if (typeof dimensionId !== "string" || dimensionId.length === 0)
+		throw new TypeError("Dynamic motion contact samples require a dimension id");
+	sampleMotionContacts(dimensionId);
+}
+
 export function updateExternalDynamicAssemblyHost(dimensionId, id, updater) {
 	const active = activeExternalAssemblies.get(id);
 	if (!active || active.dimensionId !== dimensionId)
