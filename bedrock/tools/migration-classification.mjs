@@ -157,6 +157,23 @@ export const STAGE_FOUR_ACTOR_FOUNDATION = new Map([
 for (const identifier of STAGE_FOUR_ACTOR_FOUNDATION.keys())
 	BEHAVIOR_PATHS.set(identifier, "behavior_pack/scripts/contraptions/contraption-actors-runtime.js");
 
+// P4.5 stores cart, seat, coupling, and track ownership metadata in the
+// external dynamic-assembly host record. The shared controller remains the
+// only authority for the moving block snapshot and disassembly transaction.
+export const STAGE_FOUR_MINECART_CONTRAPTION_FOUNDATION = new Map([
+	["carriage_contraption", { domain: "contraptions", persistenceSchema: 2 }],
+	["cart_assembler", { domain: "contraptions", persistenceSchema: 2 }],
+	["chest_minecart_contraption", { domain: "contraptions", persistenceSchema: 2 }],
+	["furnace_minecart_contraption", { domain: "contraptions", persistenceSchema: 2 }],
+	["minecart_anchor", { domain: "contraptions", persistenceSchema: 2 }],
+	["minecart_contraption", { domain: "contraptions", persistenceSchema: 2 }],
+	["minecart_coupling", { domain: "contraptions", persistenceSchema: 2 }],
+	["seat", { domain: "contraptions", persistenceSchema: 2 }]
+]);
+
+for (const identifier of STAGE_FOUR_MINECART_CONTRAPTION_FOUNDATION.keys())
+	BEHAVIOR_PATHS.set(identifier, "behavior_pack/scripts/trains/minecart-contraption-runtime.js");
+
 for (const device of REDSTONE_DEVICE_CATALOG)
 	BEHAVIOR_PATHS.set(device.id, "behavior_pack/scripts/redstone/redstone-device-runtime.js");
 
@@ -319,7 +336,8 @@ export function classifyRegistration(identifier, kind) {
 	const stageFourFoundation = STAGE_FOUR_CONTRAPTION_FOUNDATION.get(identifier)
 		?? STAGE_FOUR_LINEAR_ACTUATOR_FOUNDATION.get(identifier)
 		?? STAGE_FOUR_ELEVATOR_FOUNDATION.get(identifier)
-		?? STAGE_FOUR_ACTOR_FOUNDATION.get(identifier);
+		?? STAGE_FOUR_ACTOR_FOUNDATION.get(identifier)
+		?? STAGE_FOUR_MINECART_CONTRAPTION_FOUNDATION.get(identifier);
 	const staticSystem = processor ?? fluid ?? redstoneControl;
 	const rule = RULES.find(candidate => candidate.pattern.test(identifier));
 	const classification = staticSystem

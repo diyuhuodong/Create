@@ -56,6 +56,18 @@
     "createbedrock_super_glue": {
       "textures": "textures/create_java/item/super_glue"
     },
+    "createbedrock_minecart_contraption": {
+      "textures": "textures/create_java/item/minecart_contraption"
+    },
+    "createbedrock_chest_minecart_contraption": {
+      "textures": "textures/create_java/item/chest_minecart_contraption"
+    },
+    "createbedrock_furnace_minecart_contraption": {
+      "textures": "textures/create_java/item/furnace_minecart_contraption"
+    },
+    "createbedrock_minecart_coupling": {
+      "textures": "textures/create_java/item/minecart_coupling"
+    },
     "createbedrock_tree_fertilizer": {
       "textures": "textures/create_java/item/tree_fertilizer"
     },

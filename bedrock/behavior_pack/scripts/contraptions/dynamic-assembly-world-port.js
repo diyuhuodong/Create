@@ -7,6 +7,7 @@ import { ALL_CONTRAPTION_PART_TYPES, partTypeFor } from "./contraption-parts.js"
 
 const CONTRAPTION_ENTITY = "createbedrock:contraption";
 const GANTRY_CONTRAPTION_ENTITY = "createbedrock:gantry_contraption";
+const CARRIAGE_CONTRAPTION_ENTITY = "createbedrock:carriage_contraption";
 const ASSEMBLY_ANCHOR_PROPERTY = "createbedrock:dynamic_assembly_anchor";
 const ASSEMBLY_ID_PROPERTY = "createbedrock:dynamic_assembly_id";
 const LEGACY_ASSEMBLY_ID_PROPERTY = "createbedrock:contraption_id";
@@ -126,8 +127,10 @@ export class DynamicAssemblyWorldPort {
 	}
 
 	spawnAssemblyProjection({ epoch, id, owner, snapshot, transform }) {
-		const markerType = owner?.actuatorKind === "gantry" ? GANTRY_CONTRAPTION_ENTITY : CONTRAPTION_ENTITY;
-		let marker = [CONTRAPTION_ENTITY, GANTRY_CONTRAPTION_ENTITY].flatMap(type => this.#dimension().getEntities({ type }))
+		const markerType = owner?.kind === "minecart_contraption"
+			? CARRIAGE_CONTRAPTION_ENTITY
+			: owner?.actuatorKind === "gantry" ? GANTRY_CONTRAPTION_ENTITY : CONTRAPTION_ENTITY;
+		let marker = [CONTRAPTION_ENTITY, GANTRY_CONTRAPTION_ENTITY, CARRIAGE_CONTRAPTION_ENTITY].flatMap(type => this.#dimension().getEntities({ type }))
 			.find(entity => entity.getDynamicProperty(ASSEMBLY_ID_PROPERTY) === id || entity.getDynamicProperty(LEGACY_ASSEMBLY_ID_PROPERTY) === id);
 		const markerCreated = !marker?.isValid;
 		const markerLocation = this.#markerLocation(snapshot, transform);

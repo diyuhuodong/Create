@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "createbedrock:seat",
+      "is_spawnable": false,
+      "is_summonable": false,
+      "is_experimental": false
+    },
+    "components": {
+      "minecraft:collision_box": { "width": 0.1, "height": 0.1 },
+      "minecraft:health": { "value": 1, "max": 1 },
+      "minecraft:physics": { "has_collision": false, "has_gravity": false },
+      "minecraft:pushable": { "is_pushable": false, "is_pushable_by_piston": false },
+      "minecraft:rideable": { "seat_count": 1, "family_types": ["player"], "interact_text": "action.interact.ride.horse" },
+      "minecraft:type_family": { "family": ["createbedrock_seat"] }
+    }
+  }
+}

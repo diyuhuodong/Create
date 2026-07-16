@@ -43,6 +43,10 @@ export const JAVA_BLOCK_TEXTURES = [
 	"cardboard_block_front.png",
 	"cardboard_block_side.png",
 	"cardboard_block_top.png",
+	"cart_assembler_side.png",
+	"cart_assembler_side_off.png",
+	"cart_assembler_side_on.png",
+	"cart_assembler_top.png",
 	"bound_cardboard_block_front.png",
 	"bound_cardboard_block_side.png",
 	"bound_cardboard_block_top.png",
@@ -222,7 +226,7 @@ export const JAVA_BLOCK_TEXTURES = [
 	,"secondary_linear_chassis_side.png"
 	,"radial_chassis_side.png"
 ];
-export const JAVA_ITEM_TEXTURES = ["belt_connector.png", "brass_ingot.png", "raw_zinc.png", "zinc_ingot.png", "zinc_nugget.png", "copper_nugget.png", "andesite_alloy.png", "rose_quartz.png", "polished_rose_quartz.png", "sand_paper.png", "red_sand_paper.png", "chromatic_compound_1.png", "refined_radiance.png", "shadow_steel.png", "shopping_list.png", "filter.png", "attribute_filter.png", "linked_controller.png", "cardboard.png", "cardboard_boots.png", "cardboard_chestplate.png", "cardboard_helmet.png", "cardboard_leggings.png", "cardboard_sword.png", "blaze_cake_base.png", "blaze_cake.png", "creative_blaze_cake.png", "crushed_raw_copper.png", "crushed_raw_gold.png", "crushed_raw_iron.png", "crushed_raw_zinc.png", "bar_of_chocolate.png", "sweet_roll.png", "chocolate_glazed_berries.png", "honeyed_apple.png", "builders_tea.png", "experience_nugget.png", "super_glue.png", "tree_fertilizer.png"];
+export const JAVA_ITEM_TEXTURES = ["belt_connector.png", "brass_ingot.png", "raw_zinc.png", "zinc_ingot.png", "zinc_nugget.png", "copper_nugget.png", "andesite_alloy.png", "rose_quartz.png", "polished_rose_quartz.png", "sand_paper.png", "red_sand_paper.png", "chromatic_compound_1.png", "refined_radiance.png", "shadow_steel.png", "shopping_list.png", "filter.png", "attribute_filter.png", "linked_controller.png", "cardboard.png", "cardboard_boots.png", "cardboard_chestplate.png", "cardboard_helmet.png", "cardboard_leggings.png", "cardboard_sword.png", "blaze_cake_base.png", "blaze_cake.png", "creative_blaze_cake.png", "crushed_raw_copper.png", "crushed_raw_gold.png", "crushed_raw_iron.png", "crushed_raw_zinc.png", "bar_of_chocolate.png", "sweet_roll.png", "chocolate_glazed_berries.png", "honeyed_apple.png", "builders_tea.png", "experience_nugget.png", "minecart_contraption.png", "chest_minecart_contraption.png", "furnace_minecart_contraption.png", "minecart_coupling.png", "super_glue.png", "tree_fertilizer.png"];
 export const JAVA_ARMOR_TEXTURES = ["models/armor/cardboard_layer_1.png", "models/armor/cardboard_layer_2.png"];
 export const JAVA_SOUND_ASSETS = [
 	{ source: "desk_bell.ogg", target: "create/desk_bell.ogg" },

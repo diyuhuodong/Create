@@ -1,0 +1,13 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "createbedrock:minecart_coupling" },
+    "tags": ["crafting_table"],
+    "pattern": ["  A", " I ", "A  "],
+    "key": {
+      "A": { "item": "createbedrock:andesite_alloy" },
+      "I": { "item": "createbedrock:iron_sheet" }
+    },
+    "result": { "item": "createbedrock:minecart_coupling" }
+  }
+}

@@ -71,6 +71,18 @@
     "createbedrock_cardboard_block_top": {
       "textures": "textures/create_java/block/cardboard_block_top"
     },
+    "createbedrock_cart_assembler_side": {
+      "textures": "textures/create_java/block/cart_assembler_side"
+    },
+    "createbedrock_cart_assembler_side_off": {
+      "textures": "textures/create_java/block/cart_assembler_side_off"
+    },
+    "createbedrock_cart_assembler_side_on": {
+      "textures": "textures/create_java/block/cart_assembler_side_on"
+    },
+    "createbedrock_cart_assembler_top": {
+      "textures": "textures/create_java/block/cart_assembler_top"
+    },
     "createbedrock_bound_cardboard_block_front": {
       "textures": "textures/create_java/block/bound_cardboard_block_front"
     },
