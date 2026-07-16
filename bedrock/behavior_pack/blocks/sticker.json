@@ -1,0 +1,25 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:sticker",
+      "menu_category": { "category": "construction", "group": "itemGroup.name.misc" },
+      "properties": { "createbedrock:active": [0, 1] },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 4 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.sticker",
+      "minecraft:loot": "loot_tables/blocks/sticker.json",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.sticker" }, "material_instances": { "*": { "texture": "createbedrock_sticker", "render_method": "opaque" } } },
+      "minecraft:material_instances": { "*": { "texture": "createbedrock_sticker", "render_method": "opaque" } }
+    },
+    "permutations": [
+      { "condition": "query.block_state('minecraft:facing_direction') == 2", "components": { "minecraft:transformation": { "rotation": [0, 180, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 4", "components": { "minecraft:transformation": { "rotation": [0, 90, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 5", "components": { "minecraft:transformation": { "rotation": [0, -90, 0] } } },
+      { "condition": "query.block_state('createbedrock:active') == 1", "components": { "minecraft:light_dampening": 1 } }
+    ]
+  }
+}

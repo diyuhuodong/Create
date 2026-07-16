@@ -22,7 +22,7 @@ import { captureRedstoneDeviceMovingData, detachRedstoneDeviceMovingData, restor
 import { captureDepotMovingData, captureInternalPhysicalBeltRuns, capturePhysicalBeltMovingData, DEPOT_PORT_MOVEMENT_DEFINITIONS, detachDepotMovingData, detachInternalPhysicalBeltRuns, detachPhysicalBeltMovingData, PHYSICAL_BELT_BLOCK, restoreDepotMovingData, restoreInternalPhysicalBeltRuns, restorePhysicalBeltMovingData } from "../logistics/depot-runtime.js";
 import { windmillSailCount, windmillSpeedForSailCount } from "./windmill-sails.js";
 import { captureSuperGlueAssemblyAttachments, detachSuperGlueAssemblyAttachments, gluedLocationsForAssembly, restoreSuperGlueAssemblyAttachments } from "./super-glue-runtime.js";
-import { chassisLinkedLocationsForAssembly } from "./chassis-runtime.js";
+import { linkedLocationsForAssembly } from "./assembly-attachments.js";
 import { clockworkTargetAngle, CLOCKWORK_BEARING_BLOCK, nextClockworkAngle } from "./clockwork-bearing.js";
 
 const MECHANICAL_BEARING_BLOCK = "createbedrock:mechanical_bearing";
@@ -390,7 +390,7 @@ function collectAboveBearing(block) {
 	return collectConnectedBlocks({
 		canCollect: blockData => isMovableBlockType(blockData.typeId),
 		linkedLocations(location) {
-			return [...gluedLocationsForAssembly(block.dimension.id, location), ...chassisLinkedLocationsForAssembly(block.dimension.id, location)];
+			return linkedLocationsForAssembly(block.dimension.id, location);
 		},
 		maxBlocks: MAX_DYNAMIC_ASSEMBLY_BLOCKS,
 		readBlock(location) {

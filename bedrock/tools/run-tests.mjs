@@ -23,5 +23,7 @@ const testFiles = await findTests(resolve(bedrockRoot, "tests"));
 if (testFiles.length === 0)
 	throw new Error("No Node test files were found.");
 
-const result = spawnSync(process.execPath, ["--test", ...testFiles], { stdio: "inherit" });
+// Resource-contract tests load large JSON/asset manifests. Run files serially
+// so Node does not retain several independent pack graphs near the heap limit.
+const result = spawnSync(process.execPath, ["--test", "--test-concurrency=1", ...testFiles], { stdio: "inherit" });
 process.exitCode = result.status ?? 1;

@@ -24,6 +24,7 @@ export const JAVA_MODELS = [
 	{ name: "contraption_controls", source: "contraption_controls/item.json" },
 	{ name: "cart_assembler", source: "cart_assembler/block.json" },
 	{ name: "minecart_anchor", source: "cart_assembler/minecart_anchor.json" },
+	{ name: "sticker", source: "sticker/block.json" },
 	{ name: "mechanical_plough", source: "mechanical_plough.json" },
 	{
 		name: "mechanical_drill",

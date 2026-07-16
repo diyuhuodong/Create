@@ -1,6 +1,7 @@
 import { world } from "@minecraft/server";
 
 import { collectConnectedBlocks } from "./assembly-collector.js";
+import { linkedLocationsForAssembly } from "./assembly-attachments.js";
 import {
 	assembleExternalDynamicAssembly,
 	disassembleExternalDynamicAssembly,
@@ -94,6 +95,7 @@ function collectPayload(block, direction) {
 	const dimension = block.dimension;
 	return collectConnectedBlocks({
 		canCollect: data => isMovableBlockType(data.typeId),
+		linkedLocations: location => linkedLocationsForAssembly(block.dimension.id, location),
 		maxBlocks: MAX_DYNAMIC_ASSEMBLY_BLOCKS,
 		readBlock(location) {
 			const source = dimension.getBlock(location);

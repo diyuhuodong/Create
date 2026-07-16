@@ -7,6 +7,7 @@ import { getLinearActuatorDiagnostics, registerLinearActuators } from "./contrap
 import { getContraptionActorDiagnostics, registerContraptionActors } from "./contraptions/contraption-actors-runtime.js";
 import { getChassisDiagnostics, registerChassis } from "./contraptions/chassis-runtime.js";
 import { getSuperGlueDiagnostics, registerSuperGlue } from "./contraptions/super-glue-runtime.js";
+import { getStickerDiagnostics, registerStickers } from "./contraptions/sticker-runtime.js";
 import { getElevatorContactDiagnostics, registerElevatorContacts } from "./contraptions/elevator-contact-runtime.js";
 import { getKineticDiagnostics, getKineticWorldForTesting, registerKinetics } from "./kinetics/kinetic-runtime.js";
 import { getLogisticsDiagnostics, registerLogistics } from "./logistics/logistics-runtime.js";
@@ -80,6 +81,7 @@ registerContraptions(getKineticWorldForTesting);
 registerMinecartContraptions();
 registerLinearActuators(getKineticWorldForTesting);
 registerChassis();
+registerStickers();
 registerSuperGlue();
 registerTrains();
 registerBoundCardboard();
@@ -125,6 +127,7 @@ registerKernelDiagnosticProvider("linearActuators", getLinearActuatorDiagnostics
 registerKernelDiagnosticProvider("contraptionActors", getContraptionActorDiagnostics);
 registerKernelDiagnosticProvider("chassis", getChassisDiagnostics);
 registerKernelDiagnosticProvider("superGlue", getSuperGlueDiagnostics);
+registerKernelDiagnosticProvider("stickers", getStickerDiagnostics);
 registerKernelDiagnosticProvider("elevatorContacts", getElevatorContactDiagnostics);
 registerKernelDiagnosticProvider("trains", getTrainDiagnostics);
 registerKernelDiagnosticProvider("minecartContraptions", getMinecartContraptionDiagnostics);

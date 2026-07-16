@@ -189,6 +189,7 @@ item.createbedrock:furnace_minecart_contraption.name=Furnace Minecart Contraptio
 item.createbedrock:minecart_coupling.name=Minecart Coupling
 entity.createbedrock:carriage_contraption.name=Carriage Contraption
 entity.createbedrock:seat.name=Seat
+tile.createbedrock:sticker.name=Sticker
 tile.createbedrock:linear_chassis.name=Linear Chassis
 tile.createbedrock:secondary_linear_chassis.name=Secondary Linear Chassis
 tile.createbedrock:radial_chassis.name=Radial Chassis

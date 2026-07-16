@@ -25,6 +25,7 @@ export const MOVABLE_BLOCK_TYPES = new Set([
 	"createbedrock:hose_pulley",
 	"createbedrock:rope",
 	"createbedrock:pulley_magnet",
+	"createbedrock:sticker",
 	"createbedrock:gantry_carriage",
 	"createbedrock:gantry_shaft",
 	"createbedrock:contraption_controls",

@@ -329,6 +329,15 @@
     "createbedrock_stock_ticker": {
       "textures": "textures/create_java/block/stock_ticker"
     },
+    "createbedrock_sticker": {
+      "textures": "textures/create_java/block/sticker"
+    },
+    "createbedrock_sticker_side": {
+      "textures": "textures/create_java/block/sticker_side"
+    },
+    "createbedrock_sticker_side_powered": {
+      "textures": "textures/create_java/block/sticker_side_powered"
+    },
     "createbedrock_mechanical_bearing": {
       "textures": "textures/create_java/block/mechanical_bearing_side"
     },

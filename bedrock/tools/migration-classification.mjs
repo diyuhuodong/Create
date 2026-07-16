@@ -174,6 +174,15 @@ export const STAGE_FOUR_MINECART_CONTRAPTION_FOUNDATION = new Map([
 for (const identifier of STAGE_FOUR_MINECART_CONTRAPTION_FOUNDATION.keys())
 	BEHAVIOR_PATHS.set(identifier, "behavior_pack/scripts/trains/minecart-contraption-runtime.js");
 
+// P4.6 merges Sticker and Super Glue into the same deterministic collector
+// graph. Orientation and activation are versioned moving data; ownership is
+// still atomically claimed by the shared dynamic-assembly transaction.
+export const STAGE_FOUR_STICKER_FOUNDATION = new Map([
+	["sticker", { domain: "contraptions", persistenceSchema: 2 }]
+]);
+
+BEHAVIOR_PATHS.set("sticker", "behavior_pack/scripts/contraptions/sticker-runtime.js");
+
 for (const device of REDSTONE_DEVICE_CATALOG)
 	BEHAVIOR_PATHS.set(device.id, "behavior_pack/scripts/redstone/redstone-device-runtime.js");
 
@@ -337,7 +346,8 @@ export function classifyRegistration(identifier, kind) {
 		?? STAGE_FOUR_LINEAR_ACTUATOR_FOUNDATION.get(identifier)
 		?? STAGE_FOUR_ELEVATOR_FOUNDATION.get(identifier)
 		?? STAGE_FOUR_ACTOR_FOUNDATION.get(identifier)
-		?? STAGE_FOUR_MINECART_CONTRAPTION_FOUNDATION.get(identifier);
+		?? STAGE_FOUR_MINECART_CONTRAPTION_FOUNDATION.get(identifier)
+		?? STAGE_FOUR_STICKER_FOUNDATION.get(identifier);
 	const staticSystem = processor ?? fluid ?? redstoneControl;
 	const rule = RULES.find(candidate => candidate.pattern.test(identifier));
 	const classification = staticSystem

@@ -110,8 +110,10 @@ export function collectConnectedRoseQuartzLamps({ anchor, readBlock, maxDistance
 		const current = frontier[index];
 		for (const direction of NEIGHBOR_OFFSETS) {
 			const candidate = offset(current, direction);
-			if (manhattanDistance(origin, candidate) > maxDistance || !visited.add(locationKey(candidate)))
+			const key = locationKey(candidate);
+			if (manhattanDistance(origin, candidate) > maxDistance || visited.has(key))
 				continue;
+			visited.add(key);
 			const block = readBlock(candidate);
 			if (block?.typeId !== ROSE_QUARTZ_LAMP_BLOCK)
 				continue;

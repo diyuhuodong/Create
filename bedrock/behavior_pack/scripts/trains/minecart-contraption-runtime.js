@@ -1,6 +1,7 @@
 import { ItemStack, world } from "@minecraft/server";
 
 import { collectConnectedBlocks } from "../contraptions/assembly-collector.js";
+import { linkedLocationsForAssembly } from "../contraptions/assembly-attachments.js";
 import { assemblyTransformToRuntime } from "../contraptions/assembly-transform.js";
 import {
 	assembleExternalDynamicAssembly,
@@ -104,6 +105,7 @@ function findMinecartAnchor(block) {
 function collectPayload(block) {
 	return collectConnectedBlocks({
 		canCollect: data => isMovableBlockType(data.typeId),
+		linkedLocations: location => linkedLocationsForAssembly(block.dimension.id, location),
 		maxBlocks: MAX_DYNAMIC_ASSEMBLY_BLOCKS,
 		readBlock(location) {
 			const source = block.dimension.getBlock(location);

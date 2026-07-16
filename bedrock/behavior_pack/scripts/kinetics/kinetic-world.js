@@ -212,6 +212,11 @@ export const KINETIC_BLOCKS = {
 		axis: "y",
 		stressImpact: 8
 	},
+	"createbedrock:sticker": {
+		kind: "consumer",
+		axis: "y",
+		stressImpact: 4
+	},
 	"createbedrock:rope_pulley": {
 		kind: "consumer",
 		axis: "y",

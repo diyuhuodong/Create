@@ -189,6 +189,7 @@ item.createbedrock:furnace_minecart_contraption.name=熔炉矿车动力结构
 item.createbedrock:minecart_coupling.name=矿车连接器
 entity.createbedrock:carriage_contraption.name=车厢动力结构
 entity.createbedrock:seat.name=座椅
+tile.createbedrock:sticker.name=黏贴器
 tile.createbedrock:linear_chassis.name=线性底盘
 tile.createbedrock:secondary_linear_chassis.name=副线性底盘
 tile.createbedrock:radial_chassis.name=径向底盘

@@ -94,13 +94,14 @@ test("Contraption part registry covers kinetic blocks and uses the generic proje
 		"createbedrock:hose_pulley",
 		"createbedrock:rope",
 		"createbedrock:pulley_magnet",
+		"createbedrock:sticker",
 		"createbedrock:gantry_carriage",
 		"createbedrock:gantry_shaft"
 	]) {
 		assert.equal(isMovableBlockType(typeId), true);
 		assert.equal(partTypeFor(typeId), "createbedrock:contraption_part");
 	}
-	assert.equal(MOVABLE_BLOCK_TYPES.size, 83);
+	assert.equal(MOVABLE_BLOCK_TYPES.size, 84);
 	assert.deepEqual([...STATELESS_MOVABLE_BLOCK_TYPES].sort(), [
 		"createbedrock:andesite_casing",
 		"createbedrock:brass_casing",
