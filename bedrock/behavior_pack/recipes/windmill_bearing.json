@@ -1,0 +1,13 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:windmill_bearing" },
+    "tags": ["crafting_table"],
+    "ingredients": [
+      { "item": "createbedrock:mechanical_bearing" },
+      { "item": "createbedrock:white_sail" },
+      { "item": "createbedrock:white_sail" }
+    ],
+    "result": { "item": "createbedrock:windmill_bearing" }
+  }
+}

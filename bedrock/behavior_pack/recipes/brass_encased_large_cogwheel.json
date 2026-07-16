@@ -1,0 +1,12 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:brass_encased_large_cogwheel" },
+    "tags": ["crafting_table"],
+    "ingredients": [
+      { "item": "createbedrock:large_cogwheel" },
+      { "item": "createbedrock:brass_casing" }
+    ],
+    "result": { "item": "createbedrock:brass_encased_large_cogwheel" }
+  }
+}

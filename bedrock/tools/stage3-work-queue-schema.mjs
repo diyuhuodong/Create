@@ -4,6 +4,7 @@ export const STAGE3_WORK_QUEUE_SCHEMA_VERSION = 1;
 
 export const DELIVERY_PACKAGES = new Set([
     "completed:S3-7",
+	"completed:S3-9",
     "S3-8A",
     "S3-8B",
     "S3-9",
@@ -80,8 +81,10 @@ export function validateStage3WorkQueue(queue, matrix) {
             throw new Error(`Blocked queue entry ${entry.acceptanceId} must be assigned to S3-14`);
 		if (matrixEntry.domain === "redstone" && entry.deliveryPackage !== "S3-14")
 			throw new Error(`Redstone queue entry ${entry.acceptanceId} must be assigned to S3-14`);
-        if (matrixEntry.status === "static_verified" && entry.deliveryPackage !== "completed:S3-7")
-            throw new Error(`Static queue entry ${entry.acceptanceId} must remain attributed to S3-7`);
+		const staticContentPackage = matrixEntry.domain === "content"
+			&& ["S3-8A", "S3-8B"].includes(entry.deliveryPackage);
+        if (matrixEntry.status === "static_verified" && !entry.deliveryPackage.startsWith("completed:S3-") && !staticContentPackage)
+            throw new Error(`Static queue entry ${entry.acceptanceId} must be attributed to its completed Stage-3 package`);
         if (matrixEntry.status === "blocked" && entry.blocker !== matrixEntry.blockingReason)
             throw new Error(`Blocked queue entry ${entry.acceptanceId} must preserve its matrix blocker`);
         if (matrixEntry.status !== "blocked" && entry.blocker !== null)

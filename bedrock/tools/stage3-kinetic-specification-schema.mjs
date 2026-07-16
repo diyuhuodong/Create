@@ -1,5 +1,7 @@
 export const STAGE3_KINETIC_SPECIFICATION_SCHEMA_VERSION = 1;
 
+const S3_9_DELIVERY_PACKAGES = new Set(["S3-9", "completed:S3-9"]);
+
 const DELIVERY_STATES = new Set(["implemented", "runtime_absorbed", "handoff"]);
 const IMPLEMENTATION_PACKAGES = new Set(["S3-9", "S3-10", "S3-12", "S3-13", "S3-14", "S4"]);
 const REQUIRED_FIELDS = [
@@ -33,7 +35,7 @@ export function validateStage3KineticSpecifications(specifications, workQueue) {
     if (!workQueue || !Array.isArray(workQueue.entries))
         throw new TypeError("Stage-3 kinetic specifications require a work queue");
 
-    const queuedEntries = workQueue.entries.filter(entry => entry.deliveryPackage === "S3-9");
+    const queuedEntries = workQueue.entries.filter(entry => S3_9_DELIVERY_PACKAGES.has(entry.deliveryPackage));
     const remaining = new Map(queuedEntries.map(entry => [entry.acceptanceId, entry]));
     for (const entry of specifications.entries) {
         if (!entry || typeof entry !== "object" || Array.isArray(entry))

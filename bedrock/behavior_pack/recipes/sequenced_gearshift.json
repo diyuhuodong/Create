@@ -1,0 +1,13 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:sequenced_gearshift" },
+    "tags": ["crafting_table"],
+    "ingredients": [
+      { "item": "createbedrock:gearshift" },
+      { "item": "createbedrock:brass_casing" },
+      { "item": "minecraft:comparator" }
+    ],
+    "result": { "item": "createbedrock:sequenced_gearshift" }
+  }
+}

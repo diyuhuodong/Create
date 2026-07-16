@@ -2,7 +2,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { REDSTONE_NATIVE_COMPONENT_BASELINE } from "./migration-classification.mjs";
+import { REDSTONE_NATIVE_COMPONENT_BASELINE, STAGE_THREE_KINETIC_FOUNDATION } from "./migration-classification.mjs";
 import { validateMigrationMatrix } from "./migration-matrix-schema.mjs";
 import { STAGE3_WORK_QUEUE_SCHEMA_VERSION, validateStage3WorkQueue } from "./stage3-work-queue-schema.mjs";
 
@@ -27,11 +27,15 @@ const DELIVERY_BY_DOMAIN = new Map([
 ]);
 
 function planFor(entry) {
-    if (entry.status === "static_verified") {
+    if (entry.status === "static_verified" && entry.domain !== "content") {
+		const identifier = entry.javaIdentifier.slice("create:".length);
+		const deliveryPackage = STAGE_THREE_KINETIC_FOUNDATION.has(identifier)
+			? "completed:S3-9"
+			: "completed:S3-7";
         return {
-            dependencies: ["S3-7 static content contract"],
-            deliveryPackage: "completed:S3-7",
-            assetPlan: "Tracked by the S3-7 source and built content contract.",
+            dependencies: [deliveryPackage === "completed:S3-9" ? "S3-9 kinetic source contract" : "S3-7 static content contract"],
+            deliveryPackage,
+            assetPlan: `Tracked by the ${deliveryPackage.slice("completed:".length)} source and built content contract.`,
             lootPlan: "Audit Java-equivalent drops in the owning system package.",
             recipePlan: "Audit Java-equivalent recipes in the owning system package.",
             resourcePlan: "Static behavior, translations, geometry, and texture coverage are verified.",

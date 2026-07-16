@@ -1,0 +1,12 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:adjustable_chain_gearshift" },
+    "tags": ["crafting_table"],
+    "ingredients": [
+      { "item": "createbedrock:encased_chain_drive" },
+      { "item": "minecraft:redstone" }
+    ],
+    "result": { "item": "createbedrock:adjustable_chain_gearshift" }
+  }
+}

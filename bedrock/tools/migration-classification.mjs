@@ -51,10 +51,14 @@ const BEHAVIOR_PATHS = new Map([
 	["brass_encased_cogwheel", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["brass_encased_large_cogwheel", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["brass_encased_shaft", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
+	["chain_conveyor", "behavior_pack/scripts/logistics/depot-runtime.js"],
 	["basin", "behavior_pack/scripts/processing/stage3-processing-runtime.js"],
 	["crushing_wheel", "behavior_pack/scripts/processing/crushing-wheel-runtime.js"],
 	["encased_fan", "behavior_pack/scripts/processing/stage3-processing-runtime.js"],
 	["creative_motor", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
+	["encased_cogwheel", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
+	["encased_large_cogwheel", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
+	["encased_shaft", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["encased_chain_drive", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["flywheel", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["gearbox", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
@@ -64,8 +68,10 @@ const BEHAVIOR_PATHS = new Map([
 	["large_water_wheel", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["mechanical_bearing", "behavior_pack/scripts/contraptions/contraption-runtime.js"],
 	["mechanical_pump", "behavior_pack/scripts/fluids/fluid-runtime.js"],
+	["powered_shaft", "behavior_pack/scripts/fluids/fluid-runtime.js"],
 	["mechanical_mixer", "behavior_pack/scripts/processing/stage3-processing-runtime.js"],
 	["metal_girder_encased_shaft", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
+	["motor", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["mechanical_press", "behavior_pack/scripts/processing/mechanical-press-runtime.js"],
 	["mechanical_saw", "behavior_pack/scripts/processing/stage3-processing-runtime.js"],
 	["millstone", "behavior_pack/scripts/processing/millstone-runtime.js"],
@@ -82,9 +88,15 @@ const BEHAVIOR_PATHS = new Map([
 	["spout", "behavior_pack/scripts/fluids/fluid-runtime.js"],
 	["shaft", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
 	["saw", "behavior_pack/scripts/processing/stage3-processing-runtime.js"],
+	["sequenced_gearshift", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
+	["simple_kinetic", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
+	["steam_engine", "behavior_pack/scripts/fluids/fluid-runtime.js"],
 	["track", "behavior_pack/scripts/trains/train-runtime.js"],
 	["track_station", "behavior_pack/scripts/trains/train-runtime.js"],
-	["water_wheel", "behavior_pack/scripts/kinetics/kinetic-runtime.js"]
+	["water_wheel", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
+	["water_wheel_structure", "behavior_pack/scripts/kinetics/kinetic-runtime.js"],
+	["windmill_bearing", "behavior_pack/scripts/contraptions/contraption-runtime.js"],
+	["vertical_gearbox", "behavior_pack/scripts/kinetics/kinetic-runtime.js"]
 ]);
 
 for (const device of REDSTONE_DEVICE_CATALOG)
@@ -167,7 +179,7 @@ const STAGE_THREE_FOUNDATION_CONTENT = new Map([
 // (the large-wheel structure is generated rather than player-placeable);
 // remaining visual and acquisition work stays visible through
 // `resourceStatus: partial`.
-const STAGE_THREE_KINETIC_FOUNDATION = new Map([
+export const STAGE_THREE_KINETIC_FOUNDATION = new Map([
 	["adjustable_chain_gearshift", { domain: "kinetics" }],
 	["andesite_encased_cogwheel", { domain: "kinetics" }],
 	["andesite_encased_large_cogwheel", { domain: "kinetics" }],
@@ -185,7 +197,13 @@ const STAGE_THREE_KINETIC_FOUNDATION = new Map([
 	["sequenced_gearshift", { domain: "kinetics" }],
 	["steam_engine", { domain: "kinetics" }],
 	["water_wheel_structure", { domain: "kinetics" }],
-	["windmill_bearing", { domain: "kinetics" }]
+	["windmill_bearing", { domain: "kinetics" }],
+	["encased_cogwheel", { domain: "kinetics" }],
+	["encased_large_cogwheel", { domain: "kinetics" }],
+	["encased_shaft", { domain: "kinetics" }],
+	["motor", { domain: "kinetics" }],
+	["simple_kinetic", { domain: "kinetics" }],
+	["vertical_gearbox", { domain: "kinetics" }]
 ]);
 
 // S3-10 moves the foundational item network into a single durable port and
@@ -248,7 +266,7 @@ export function classifyRegistration(identifier, kind) {
 		: processingFoundation
 		? { ...processingFoundation, phase: 3, status: "implementation_in_progress" }
 		: kineticFoundation
-		? { ...kineticFoundation, phase: 3, status: "implementation_in_progress" }
+		? { ...kineticFoundation, phase: 3, status: "static_verified" }
 		: logisticsFoundation
 		? { ...logisticsFoundation, phase: 3, status: "implementation_in_progress" }
 		: fluidFoundation

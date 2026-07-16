@@ -23,13 +23,13 @@ test("Stage-3 work queue covers every matrix entry exactly once and preserves de
     assert.equal(coverage.entries, 245);
     assert.deepEqual(coverage.deliveryCounts, {
         "completed:S3-7": 15,
+		"completed:S3-9": 33,
         "S3-10": 26,
         "S3-11": 8,
         "S3-12": 18,
         "S3-14": 29,
         "S3-8A": 6,
         "S3-8B": 110,
-        "S3-9": 33
     });
     const zincOre = queue.entries.find(entry => entry.acceptanceId === "CONTENT-ZINC-ORE-BLOCK");
     assert.equal(zincOre.deliveryPackage, "S3-8A");

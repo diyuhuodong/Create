@@ -106,7 +106,7 @@ test("migration classification records the S3-8 foundation material slice as par
 	});
 });
 
-test("migration classification records S3-9 kinetic foundations without overstating visual parity", () => {
+test("migration classification statically verifies the S3-9 kinetic runtime without overstating visual parity", () => {
 	assert.deepEqual(classifyRegistration("gearshift", "block"), {
 		acceptanceId: "KINETICS-GEARSHIFT-BLOCK",
 		behaviorPath: "behavior_pack/scripts/kinetics/kinetic-runtime.js",
@@ -115,8 +115,11 @@ test("migration classification records S3-9 kinetic foundations without overstat
 		persistenceSchema: 2,
 		phase: 3,
 		resourceStatus: "partial",
-		status: "implementation_in_progress"
+		status: "static_verified"
 	});
+	assert.equal(classifyRegistration("chain_conveyor", "block").behaviorPath, "behavior_pack/scripts/logistics/depot-runtime.js");
+	assert.equal(classifyRegistration("steam_engine", "block").behaviorPath, "behavior_pack/scripts/fluids/fluid-runtime.js");
+	assert.equal(classifyRegistration("windmill_bearing", "block").behaviorPath, "behavior_pack/scripts/contraptions/contraption-runtime.js");
 });
 
 test("migration classification assigns S3-10 logistics resources to the durable DepotNetwork boundary", () => {

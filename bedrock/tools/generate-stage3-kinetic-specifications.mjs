@@ -82,7 +82,7 @@ async function ensureEvidence(paths) {
 
 const workQueue = JSON.parse(await readFile(resolve(bedrockRoot, "data", "stage3-work-queue.json"), "utf8"));
 const entries = workQueue.entries
-    .filter(entry => entry.deliveryPackage === "S3-9")
+    .filter(entry => entry.deliveryPackage === "S3-9" || entry.deliveryPackage === "completed:S3-9")
     .map(entry => {
         const identifier = entry.javaIdentifier.slice("create:".length);
         const javaEvidencePaths = ["src/main/java/com/simibubi/create/AllBlocks.java"];
