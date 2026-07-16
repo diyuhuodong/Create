@@ -10,13 +10,18 @@ import {
 	actorFacing,
 	actorTraversal,
 	actorWorldCenter,
+	canHarvestBlock,
 	canDrillBlock,
 	CONTRAPTION_CONTROLS_BLOCK,
 	controlsDisableActor,
 	MECHANICAL_PLOUGH_BLOCK,
 	MECHANICAL_DRILL_BLOCK,
+	DEPLOYER_BLOCK,
+	MECHANICAL_ARM_BLOCK,
+	MECHANICAL_HARVESTER_BLOCK,
 	MECHANICAL_ROLLER_BLOCK,
 	normalizeControlsState,
+	normalizeActorItemState,
 	normalizePortableInterfaceState,
 	normalizeRollerState,
 	PISTON_EXTENSION_POLE_BLOCK,
@@ -33,10 +38,21 @@ const ACTOR_TASK_BUDGET = 24;
 const CONTROLS_DISABLED_STATE = "createbedrock:disabled";
 const PSI_CONNECTED_STATE = "createbedrock:connected";
 const ROLLER_MODE_STATE = "createbedrock:mode";
+const PERSISTENT_ACTOR_TYPES = new Set([
+	CONTRAPTION_CONTROLS_BLOCK,
+	DEPLOYER_BLOCK,
+	MECHANICAL_ARM_BLOCK,
+	MECHANICAL_DRILL_BLOCK,
+	MECHANICAL_HARVESTER_BLOCK,
+	MECHANICAL_ROLLER_BLOCK,
+	PORTABLE_STORAGE_INTERFACE_BLOCK
+]);
 const records = new Map();
 const lastActorCells = new Map();
 let failedUpdates = 0;
 let drillBreaks = 0;
+let deployments = 0;
+let harvests = 0;
 let ploughMutations = 0;
 let registered = false;
 let rollerPlacements = 0;
@@ -62,7 +78,7 @@ function partitionFor(record) {
 }
 
 function normalizeRecord(record) {
-	if (record?.kind !== "actor" || ![CONTRAPTION_CONTROLS_BLOCK, MECHANICAL_ROLLER_BLOCK, PORTABLE_STORAGE_INTERFACE_BLOCK].includes(record.typeId))
+	if (record?.kind !== "actor" || !PERSISTENT_ACTOR_TYPES.has(record.typeId))
 		throw new TypeError("Unknown contraption actor record type");
 	const location = assertLocation(record.location);
 	const id = recordId(record.dimensionId, location);
@@ -131,6 +147,8 @@ function defaultState(typeId) {
 		return normalizeRollerState();
 	if (typeId === PORTABLE_STORAGE_INTERFACE_BLOCK)
 		return { ...normalizePortableInterfaceState(), connected: false };
+	if ([DEPLOYER_BLOCK, MECHANICAL_ARM_BLOCK, MECHANICAL_DRILL_BLOCK, MECHANICAL_HARVESTER_BLOCK].includes(typeId))
+		return normalizeActorItemState();
 	throw new TypeError(`Unsupported contraption actor ${typeId}`);
 }
 
@@ -141,11 +159,13 @@ function normalizeStateFor(typeId, state) {
 		return normalizeRollerState(state);
 	if (typeId === PORTABLE_STORAGE_INTERFACE_BLOCK)
 		return { ...normalizePortableInterfaceState(state), connected: Boolean(state?.connected) };
+	if ([DEPLOYER_BLOCK, MECHANICAL_ARM_BLOCK, MECHANICAL_DRILL_BLOCK, MECHANICAL_HARVESTER_BLOCK].includes(typeId))
+		return normalizeActorItemState(state);
 	throw new TypeError(`Unsupported contraption actor ${typeId}`);
 }
 
 function ensureRecord(block) {
-	if (![CONTRAPTION_CONTROLS_BLOCK, MECHANICAL_ROLLER_BLOCK, PORTABLE_STORAGE_INTERFACE_BLOCK].includes(block?.typeId))
+	if (!PERSISTENT_ACTOR_TYPES.has(block?.typeId))
 		return undefined;
 	const id = recordId(block.dimension.id, block.location);
 	let record = records.get(id);
@@ -169,7 +189,11 @@ function actorDataState(typeId, data) {
 function actorContributorName(typeId) {
 	return typeId === CONTRAPTION_CONTROLS_BLOCK ? "controls"
 		: typeId === MECHANICAL_ROLLER_BLOCK ? "roller"
-			: typeId === PORTABLE_STORAGE_INTERFACE_BLOCK ? "portable-storage-interface"
+		: typeId === PORTABLE_STORAGE_INTERFACE_BLOCK ? "portable-storage-interface"
+			: typeId === DEPLOYER_BLOCK ? "deployer"
+				: typeId === MECHANICAL_ARM_BLOCK ? "mechanical-arm"
+					: typeId === MECHANICAL_DRILL_BLOCK ? "drill"
+						: typeId === MECHANICAL_HARVESTER_BLOCK ? "harvester"
 				: undefined;
 }
 
@@ -338,6 +362,22 @@ function interactInterface(record, event) {
 	return true;
 }
 
+function interactSingleSlotActor(record, event) {
+	const state = normalizeActorItemState(record.state);
+	if (event.itemStack) {
+		if (state.heldItem || !consumeOne(event.source, event.itemStack.typeId))
+			return false;
+		record.state = { ...state, heldItem: { count: 1, typeId: event.itemStack.typeId } };
+		persist();
+		return true;
+	}
+	if (!state.heldItem || !giveItem(event.source, event.block, state.heldItem))
+		return false;
+	record.state = { ...state, heldItem: undefined };
+	persist();
+	return true;
+}
+
 function facingCardinal(transform, states) {
 	const vector = rotateActorVector(transform, actorFacing(states));
 	const axis = ["x", "y", "z"].reduce((best, candidate) => Math.abs(vector[candidate]) > Math.abs(vector[best]) ? candidate : best, "x");
@@ -384,6 +424,43 @@ function applyDrillAt(dimension, center, facing) {
 	}
 }
 
+function applyHarvesterAt(dimension, center, facing) {
+	const location = drillTargetCell(center, facing);
+	const target = dimension.getBlock(location);
+	if (!canHarvestBlock(target))
+		return false;
+	try {
+		const drop = target.getItemStack?.(1, true);
+		if (!drop)
+			return false;
+		target.setPermutation(BlockPermutation.resolve("minecraft:air"));
+		dimension.spawnItem(drop, { x: location.x + .5, y: location.y + .5, z: location.z + .5 });
+		harvests++;
+		return true;
+	} catch {
+		failedUpdates++;
+		return false;
+	}
+}
+
+function deployAt(dimension, center, facing, state) {
+	const actor = normalizeActorItemState(state);
+	if (!actor.heldItem)
+		return { changed: false, state: actor };
+	const location = drillTargetCell(center, facing);
+	try {
+		const target = dimension.getBlock(location);
+		if (!target || !["minecraft:air", "minecraft:cave_air"].includes(target.typeId) || !BlockTypes.get(actor.heldItem.typeId))
+			return { changed: false, state: actor };
+		target.setPermutation(BlockPermutation.resolve(actor.heldItem.typeId));
+		deployments++;
+		return { changed: true, state: { cooldown: 0 } };
+	} catch {
+		failedUpdates++;
+		return { changed: false, state: actor };
+	}
+}
+
 function applyRollerAt(dimension, center, facing, state) {
 	if (!state.material)
 		return 0;
@@ -410,7 +487,7 @@ function processMovingActors() {
 		let dimension;
 		try { dimension = world.getDimension(assembly.dimensionId); } catch { continue; }
 		for (const block of assembly.snapshot.blocks) {
-			if (![MECHANICAL_PLOUGH_BLOCK, MECHANICAL_ROLLER_BLOCK, MECHANICAL_DRILL_BLOCK, PORTABLE_STORAGE_INTERFACE_BLOCK].includes(block.typeId))
+			if (![MECHANICAL_PLOUGH_BLOCK, MECHANICAL_ROLLER_BLOCK, MECHANICAL_DRILL_BLOCK, MECHANICAL_HARVESTER_BLOCK, DEPLOYER_BLOCK, MECHANICAL_ARM_BLOCK, PORTABLE_STORAGE_INTERFACE_BLOCK].includes(block.typeId))
 				continue;
 			if (controlsDisableActor(controls, block.typeId))
 				continue;
@@ -435,6 +512,58 @@ function processMovingActors() {
 				const facing = facingCardinal(assembly.transform, block.states);
 				for (const location of previous ? actorTraversal(previous, center) : [actorBlockCell(center)])
 					applyDrillAt(dimension, { x: location.x + .5, y: location.y + .5, z: location.z + .5 }, facing);
+				continue;
+			}
+			if (block.typeId === MECHANICAL_HARVESTER_BLOCK) {
+				const facing = facingCardinal(assembly.transform, block.states);
+				for (const location of previous ? actorTraversal(previous, center) : [actorBlockCell(center)])
+					applyHarvesterAt(dimension, { x: location.x + .5, y: location.y + .5, z: location.z + .5 }, facing);
+				continue;
+			}
+			if (block.typeId === DEPLOYER_BLOCK) {
+				const facing = facingCardinal(assembly.transform, block.states);
+				const result = deployAt(dimension, center, facing, actorDataState(DEPLOYER_BLOCK, block.data));
+				if (!result.changed)
+					continue;
+				try {
+					updateDynamicAssemblyBlockData(assembly.dimensionId, assembly.id, block.relative, data => replaceActorDataState(DEPLOYER_BLOCK, data, result.state));
+					persist();
+				} catch (error) {
+					failedUpdates++;
+					console.warn(`[Create Bedrock] Deployer state update failed: ${error}`);
+				}
+				continue;
+			}
+			if (block.typeId === MECHANICAL_ARM_BLOCK) {
+				const armState = actorDataState(MECHANICAL_ARM_BLOCK, block.data);
+				if (!armState.heldItem)
+					continue;
+				const facing = facingCardinal(assembly.transform, block.states);
+				const cell = actorBlockCell(center);
+				const target = dimension.getBlock({ x: cell.x + facing.x, y: cell.y + facing.y, z: cell.z + facing.z });
+				if (target?.typeId !== PORTABLE_STORAGE_INTERFACE_BLOCK)
+					continue;
+				const targetRecord = ensureRecord(target);
+				if (!targetRecord)
+					continue;
+				const inserted = insertIntoInterface(targetRecord.state, armState.heldItem);
+				if (inserted.accepted === 0)
+					continue;
+				const remaining = armState.heldItem.count - inserted.accepted;
+				targetRecord.state = { ...inserted.state, connected: true };
+				connectedInterfaces.add(targetRecord.id);
+				syncRecordVisual(targetRecord);
+				try {
+					updateDynamicAssemblyBlockData(assembly.dimensionId, assembly.id, block.relative, data => replaceActorDataState(MECHANICAL_ARM_BLOCK, data, {
+						cooldown: 0,
+						...(remaining > 0 ? { heldItem: { count: remaining, typeId: armState.heldItem.typeId } } : {})
+					}));
+					transfers++;
+					persist();
+				} catch (error) {
+					failedUpdates++;
+					console.warn(`[Create Bedrock] Mechanical Arm state update failed: ${error}`);
+				}
 				continue;
 			}
 			const facing = facingCardinal(assembly.transform, block.states);
@@ -499,7 +628,7 @@ function restore() {
 }
 
 export function getContraptionActorDiagnostics() {
-	return { drillBreaks, failedUpdates, ploughMutations, records: records.size, rollerPlacements, transfers, persistence: store.diagnostics() };
+	return { deployments, drillBreaks, failedUpdates, harvests, ploughMutations, records: records.size, rollerPlacements, transfers, persistence: store.diagnostics() };
 }
 
 export function registerContraptionActors() {
@@ -508,6 +637,10 @@ export function registerContraptionActors() {
 	registered = true;
 	for (const [typeId, name] of [
 		[CONTRAPTION_CONTROLS_BLOCK, "controls"],
+		[DEPLOYER_BLOCK, "deployer"],
+		[MECHANICAL_ARM_BLOCK, "mechanical-arm"],
+		[MECHANICAL_DRILL_BLOCK, "drill"],
+		[MECHANICAL_HARVESTER_BLOCK, "harvester"],
 		[MECHANICAL_ROLLER_BLOCK, "roller"],
 		[PORTABLE_STORAGE_INTERFACE_BLOCK, "portable-storage-interface"]
 	]) {
@@ -519,7 +652,7 @@ export function registerContraptionActors() {
 			validate(state) { if (state !== undefined) normalizeStateFor(typeId, state); }
 		});
 	}
-	for (const typeId of [MECHANICAL_DRILL_BLOCK, MECHANICAL_PLOUGH_BLOCK, PISTON_EXTENSION_POLE_BLOCK])
+	for (const typeId of [MECHANICAL_PLOUGH_BLOCK, PISTON_EXTENSION_POLE_BLOCK])
 		registerStatelessMovingBlockDataAdapter(typeId);
 	registerKernelTaskGroup(ACTOR_TASK_GROUP, ACTOR_TASK_BUDGET);
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
@@ -542,8 +675,10 @@ export function registerContraptionActors() {
 				interactControls(record, event);
 			else if (record.typeId === MECHANICAL_ROLLER_BLOCK)
 				interactRoller(record, event);
-			else
+			else if (record.typeId === PORTABLE_STORAGE_INTERFACE_BLOCK)
 				interactInterface(record, event);
+			else
+				interactSingleSlotActor(record, event);
 		} catch (error) {
 			failedUpdates++;
 			event.source?.sendMessage?.(`Contraption actor interaction failed: ${error}`);

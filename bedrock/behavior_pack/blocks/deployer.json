@@ -1,0 +1,18 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:deployer",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.deployer",
+      "minecraft:loot": "loot_tables/blocks/deployer.json",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.deployer" }, "material_instances": { "*": { "texture": "createbedrock_deployer", "render_method": "opaque" } } },
+      "minecraft:material_instances": { "*": { "texture": "createbedrock_deployer", "render_method": "opaque" } }
+    }
+  }
+}

@@ -3,10 +3,12 @@ import test from "node:test";
 
 import {
 	actorTraversal,
+	canHarvestBlock,
 	canDrillBlock,
 	controlsDisableActor,
 	drillTargetCell,
 	ploughMutationFor,
+	normalizeActorItemState,
 	rollerWorkCells,
 	transferPortableInterfaceItem
 } from "../behavior_pack/scripts/contraptions/contraption-actors.js";
@@ -34,4 +36,14 @@ test("Mechanical drills target their transformed facing cell without breaking pr
 	assert.equal(canDrillBlock("minecraft:stone"), true);
 	assert.equal(canDrillBlock("minecraft:bedrock"), false);
 	assert.equal(canDrillBlock("minecraft:water"), false);
+});
+
+test("Deployer, Harvester, and Mechanical Arm retain bounded persistent actor state", () => {
+	assert.deepEqual(normalizeActorItemState({ heldItem: { count: 3, typeId: "minecraft:oak_planks" } }), {
+		cooldown: 0,
+		heldItem: { count: 3, typeId: "minecraft:oak_planks" }
+	});
+	assert.equal(canHarvestBlock({ permutation: { getAllStates: () => ({ growth: 7 }) }, typeId: "minecraft:wheat" }), true);
+	assert.equal(canHarvestBlock({ permutation: { getAllStates: () => ({ growth: 6 }) }, typeId: "minecraft:wheat" }), false);
+	assert.throws(() => normalizeActorItemState({ heldItem: { count: 65, typeId: "minecraft:stone" } }));
 });

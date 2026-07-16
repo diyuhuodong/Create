@@ -33,6 +33,9 @@ export const JAVA_MODELS = [
 			gearbox_top: "create:block/gearbox_top"
 		}
 	},
+	{ name: "deployer", source: "deployer/item.json" },
+	{ name: "mechanical_harvester", source: "mechanical_harvester/item.json" },
+	{ name: "mechanical_arm", source: "mechanical_arm/block.json" },
 	{ name: "mechanical_roller", source: "mechanical_roller/block.json" },
 	{ name: "piston_extension_pole", source: "piston_extension_pole.json" },
 	{

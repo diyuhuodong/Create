@@ -142,6 +142,21 @@ export const STAGE_FOUR_ELEVATOR_FOUNDATION = new Map([
 BEHAVIOR_PATHS.set("elevator_contact", "behavior_pack/scripts/contraptions/elevator-contact-runtime.js");
 BEHAVIOR_PATHS.set("elevator_pulley", "behavior_pack/scripts/contraptions/linear-actuator-runtime.js");
 
+// P4.4 actors execute only from an authoritative moving snapshot.  Their
+// state is a moving-data contributor, so inventories/cooldowns and successful
+// mutations survive assembly recovery rather than living on visual entities.
+export const STAGE_FOUR_ACTOR_FOUNDATION = new Map([
+	["deployer", { domain: "contraptions", persistenceSchema: 2 }],
+	["drill", { domain: "contraptions", persistenceSchema: 2 }],
+	["harvester", { domain: "contraptions", persistenceSchema: 2 }],
+	["mechanical_drill", { domain: "contraptions", persistenceSchema: 2 }],
+	["mechanical_harvester", { domain: "contraptions", persistenceSchema: 2 }],
+	["mechanical_arm", { domain: "contraptions", persistenceSchema: 2 }]
+]);
+
+for (const identifier of STAGE_FOUR_ACTOR_FOUNDATION.keys())
+	BEHAVIOR_PATHS.set(identifier, "behavior_pack/scripts/contraptions/contraption-actors-runtime.js");
+
 for (const device of REDSTONE_DEVICE_CATALOG)
 	BEHAVIOR_PATHS.set(device.id, "behavior_pack/scripts/redstone/redstone-device-runtime.js");
 
@@ -303,7 +318,8 @@ export function classifyRegistration(identifier, kind) {
 	const logisticsFoundation = STAGE_THREE_LOGISTICS_FOUNDATION.get(identifier);
 	const stageFourFoundation = STAGE_FOUR_CONTRAPTION_FOUNDATION.get(identifier)
 		?? STAGE_FOUR_LINEAR_ACTUATOR_FOUNDATION.get(identifier)
-		?? STAGE_FOUR_ELEVATOR_FOUNDATION.get(identifier);
+		?? STAGE_FOUR_ELEVATOR_FOUNDATION.get(identifier)
+		?? STAGE_FOUR_ACTOR_FOUNDATION.get(identifier);
 	const staticSystem = processor ?? fluid ?? redstoneControl;
 	const rule = RULES.find(candidate => candidate.pattern.test(identifier));
 	const classification = staticSystem

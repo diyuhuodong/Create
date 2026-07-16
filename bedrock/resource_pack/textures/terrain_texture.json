@@ -170,6 +170,15 @@
     "createbedrock_depot_top": {
       "textures": "textures/create_java/block/depot_top"
     },
+    "createbedrock_deployer": {
+      "textures": "textures/create_java/block/deployer"
+    },
+    "createbedrock_harvester": {
+      "textures": "textures/create_java/block/harvester"
+    },
+    "createbedrock_mechanical_arm": {
+      "textures": "textures/create_java/block/mechanical_arm"
+    },
     "createbedrock_desk_bell": {
       "textures": "textures/create_java/block/desk_bell"
     },

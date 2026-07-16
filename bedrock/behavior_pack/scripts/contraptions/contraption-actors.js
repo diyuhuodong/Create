@@ -4,6 +4,9 @@ export const CONTRAPTION_CONTROLS_BLOCK = "createbedrock:contraption_controls";
 export const MECHANICAL_PLOUGH_BLOCK = "createbedrock:mechanical_plough";
 export const MECHANICAL_ROLLER_BLOCK = "createbedrock:mechanical_roller";
 export const MECHANICAL_DRILL_BLOCK = "createbedrock:mechanical_drill";
+export const DEPLOYER_BLOCK = "createbedrock:deployer";
+export const MECHANICAL_HARVESTER_BLOCK = "createbedrock:mechanical_harvester";
+export const MECHANICAL_ARM_BLOCK = "createbedrock:mechanical_arm";
 export const PISTON_EXTENSION_POLE_BLOCK = "createbedrock:piston_extension_pole";
 export const PORTABLE_STORAGE_INTERFACE_BLOCK = "createbedrock:portable_storage_interface";
 
@@ -151,6 +154,28 @@ export function normalizePortableInterfaceState(state = {}) {
 			return { count: slot.count, typeId: slot.typeId };
 		})
 	};
+}
+
+export function normalizeActorItemState(state = {}) {
+	if (!state || typeof state !== "object" || Array.isArray(state))
+		throw new TypeError("Contraption actor state must be an object");
+	if (!Number.isInteger(state.cooldown ?? 0) || state.cooldown < 0 || state.cooldown > 1200)
+		throw new RangeError("Contraption actor cooldowns must remain bounded");
+	let heldItem;
+	if (state.heldItem !== undefined && state.heldItem !== null) {
+		if (typeof state.heldItem.typeId !== "string" || !Number.isInteger(state.heldItem.count) || state.heldItem.count < 1 || state.heldItem.count > 64)
+			throw new TypeError("Contraption actor held items require bounded item stacks");
+		heldItem = { count: state.heldItem.count, typeId: state.heldItem.typeId };
+	}
+	return { cooldown: state.cooldown ?? 0, ...(heldItem ? { heldItem } : {}) };
+}
+
+export function canHarvestBlock(block) {
+	if (!block || typeof block.typeId !== "string")
+		return false;
+	const states = block.permutation?.getAllStates?.() ?? {};
+	const growth = states.growth ?? states.age ?? states["minecraft:age"];
+	return Number.isInteger(growth) && growth >= 7;
 }
 
 function insertOne(slots, item) {

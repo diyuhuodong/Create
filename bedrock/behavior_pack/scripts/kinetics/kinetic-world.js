@@ -182,6 +182,26 @@ export const KINETIC_BLOCKS = {
 		axis: "y",
 		stressImpact: 4
 	},
+	"createbedrock:mechanical_drill": {
+		kind: "consumer",
+		axis: "y",
+		stressImpact: 8
+	},
+	"createbedrock:deployer": {
+		kind: "consumer",
+		axis: "y",
+		stressImpact: 8
+	},
+	"createbedrock:mechanical_harvester": {
+		kind: "consumer",
+		axis: "y",
+		stressImpact: 8
+	},
+	"createbedrock:mechanical_arm": {
+		kind: "consumer",
+		axis: "y",
+		stressImpact: 16
+	},
 	"createbedrock:mechanical_piston": {
 		kind: "consumer",
 		axis: "y",
