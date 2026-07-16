@@ -1,0 +1,12 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:copper_valve_handle" },
+    "tags": ["crafting_table"],
+    "ingredients": [
+      { "item": "minecraft:copper_ingot" },
+      { "item": "minecraft:stick" }
+    ],
+    "result": { "item": "createbedrock:copper_valve_handle" }
+  }
+}

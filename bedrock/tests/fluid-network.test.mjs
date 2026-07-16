@@ -40,6 +40,27 @@ test("FluidNetwork moves bounded virtual-fluid amounts only after a pipe valve o
 	assert.deepEqual(destination.tank.inspect().contents, { amount: 500, typeId: "minecraft:water" });
 });
 
+test("FluidNetwork serializes competing pipes from one source without duplicating capacity", () => {
+	const source = tankPort({ contents: { amount: 500, typeId: "minecraft:water" }, id: "tank:source" });
+	const firstDestination = tankPort({ id: "tank:destination-a" });
+	const secondDestination = tankPort({ id: "tank:destination-b" });
+	const network = createNetwork(source.port, firstDestination.port, secondDestination.port);
+	network.createPipe({ destinationId: firstDestination.port.id, id: "pipe:a", maxAmountPerTick: 500, sourceId: source.port.id });
+	network.createPipe({ destinationId: secondDestination.port.id, id: "pipe:b", maxAmountPerTick: 500, sourceId: source.port.id });
+
+	const firstTick = network.tick();
+	assert.deepEqual(firstTick.outcomes, [
+		{ id: "pipe:a", ok: true, state: "intent" },
+		{ id: "pipe:b", ok: false, reason: "source_busy" }
+	]);
+	assert.deepEqual(network.tick().outcomes, [{ id: "pipe:a", ok: true, state: "escrowed" }]);
+	assert.deepEqual(network.tick().outcomes, [{ id: "pipe:a", ok: true, state: "committed" }]);
+	assert.deepEqual(source.tank.inspect().contents, undefined);
+	assert.deepEqual(firstDestination.tank.inspect().contents, { amount: 500, typeId: "minecraft:water" });
+	assert.equal(secondDestination.tank.inspect().contents, undefined);
+	assert.deepEqual(network.takeCompletedTransfers().map(transfer => transfer.fluid.amount), [500]);
+});
+
 test("FluidNetwork applies a smart-pipe filter before reserving its source and persists it across restart", () => {
 	const source = tankPort({ contents: { amount: 300, typeId: "minecraft:water" }, id: "tank:source" });
 	const destination = tankPort({ id: "tank:destination" });

@@ -7,6 +7,7 @@ export const DELIVERY_PACKAGES = new Set([
 	"completed:S3-9",
 	"completed:S3-10",
 	"completed:S3-11",
+	"completed:S3-12",
     "S3-8A",
     "S3-8B",
     "S3-9",

@@ -1,0 +1,12 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:smart_fluid_pipe" },
+    "tags": ["crafting_table"],
+    "ingredients": [
+      { "item": "minecraft:copper_ingot" },
+      { "item": "minecraft:redstone" }
+    ],
+    "result": { "item": "createbedrock:smart_fluid_pipe" }
+  }
+}

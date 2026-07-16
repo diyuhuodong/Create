@@ -51,9 +51,11 @@ function profileFor(entry) {
 		behaviorBoundary,
 		deliveryState: "implemented",
 		implementationPackage: "S3-12",
-		resourceBoundary: identifier === "copper_valve_handle"
-			? "Placeable block with creative access, explicit self-drop, EN/ZH translation, and a hand-crank geometry fallback because the source Valve Handle model is a NeoForge OBJ not accepted by the JSON converter."
-			: "Placeable block with Java-model conversion, staged Java PNGs, creative access, explicit Java-equivalent drop, EN/ZH translation, and terrain-atlas mapping. Platform visual parity remains an acceptance test.",
+		resourceBoundary: identifier === "creative_fluid_tank"
+			? "Creative-only source with explicit self-drop, EN/ZH translation, staged Java PNGs, and terrain-atlas mapping. It intentionally has no survival crafting recipe."
+			: identifier === "copper_valve_handle"
+				? "Placeable block with creative access, explicit self-drop, EN/ZH translation, and a hand-crank geometry fallback because the source Valve Handle model is a NeoForge OBJ not accepted by the JSON converter. Its direct Bedrock crafting-table recipe uses only vanilla survival inputs."
+				: "Placeable block with Java-model conversion, staged Java PNGs, creative access, explicit Java-equivalent drop, EN/ZH translation, and terrain-atlas mapping. Its direct Bedrock crafting-table recipe uses only vanilla survival inputs; platform visual parity remains an acceptance test.",
 		testPlan: "Focused positive, failure, restart, and branch-contention fluid tests plus source-contract, validation, build, and package checks cover this implementation."
 	};
 }
@@ -65,7 +67,7 @@ async function ensureEvidence(paths) {
 
 const workQueue = JSON.parse(await readFile(resolve(bedrockRoot, "data", "stage3-work-queue.json"), "utf8"));
 const entries = workQueue.entries
-	.filter(entry => entry.deliveryPackage === "S3-12")
+	.filter(entry => ["S3-12", "completed:S3-12"].includes(entry.deliveryPackage))
 	.map(entry => {
 		const identifier = entry.javaIdentifier.slice("create:".length);
 		const javaEvidencePaths = entry.kind === "block_entity"

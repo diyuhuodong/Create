@@ -2103,98 +2103,93 @@
     },
     {
       "acceptanceId": "FLUIDS-COPPER-VALVE-HANDLE-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-12 source and built content contract.",
       "bedrockIdentifier": "createbedrock:copper_valve_handle",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-12 domain runtime"
+        "S3-12 fluid source contract"
       ],
-      "deliveryPackage": "S3-12",
+      "deliveryPackage": "completed:S3-12",
       "domain": "fluids",
       "javaIdentifier": "create:copper_valve_handle",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "FLUIDS-CREATIVE-FLUID-TANK-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-12 source and built content contract.",
       "bedrockIdentifier": "createbedrock:creative_fluid_tank",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-12 domain runtime"
+        "S3-12 fluid source contract"
       ],
-      "deliveryPackage": "S3-12",
+      "deliveryPackage": "completed:S3-12",
       "domain": "fluids",
       "javaIdentifier": "create:creative_fluid_tank",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "FLUIDS-CREATIVE-FLUID-TANK-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-12 source and built content contract.",
       "bedrockIdentifier": "createbedrock:creative_fluid_tank",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-12 domain runtime"
+        "S3-12 fluid source contract"
       ],
-      "deliveryPackage": "S3-12",
+      "deliveryPackage": "completed:S3-12",
       "domain": "fluids",
       "javaIdentifier": "create:creative_fluid_tank",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "FLUIDS-ENCASED-FLUID-PIPE-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-12 source and built content contract.",
       "bedrockIdentifier": "createbedrock:encased_fluid_pipe",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-12 domain runtime"
+        "S3-12 fluid source contract"
       ],
-      "deliveryPackage": "S3-12",
+      "deliveryPackage": "completed:S3-12",
       "domain": "fluids",
       "javaIdentifier": "create:encased_fluid_pipe",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "FLUIDS-ENCASED-FLUID-PIPE-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-12 source and built content contract.",
       "bedrockIdentifier": "createbedrock:encased_fluid_pipe",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-12 domain runtime"
+        "S3-12 fluid source contract"
       ],
-      "deliveryPackage": "S3-12",
+      "deliveryPackage": "completed:S3-12",
       "domain": "fluids",
       "javaIdentifier": "create:encased_fluid_pipe",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "FLUIDS-FLUID-PIPE-BLOCK",
@@ -2270,117 +2265,111 @@
     },
     {
       "acceptanceId": "FLUIDS-FLUID-VALVE-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-12 source and built content contract.",
       "bedrockIdentifier": "createbedrock:fluid_valve",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-12 domain runtime"
+        "S3-12 fluid source contract"
       ],
-      "deliveryPackage": "S3-12",
+      "deliveryPackage": "completed:S3-12",
       "domain": "fluids",
       "javaIdentifier": "create:fluid_valve",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "FLUIDS-FLUID-VALVE-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-12 source and built content contract.",
       "bedrockIdentifier": "createbedrock:fluid_valve",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-12 domain runtime"
+        "S3-12 fluid source contract"
       ],
-      "deliveryPackage": "S3-12",
+      "deliveryPackage": "completed:S3-12",
       "domain": "fluids",
       "javaIdentifier": "create:fluid_valve",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "FLUIDS-GLASS-FLUID-PIPE-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-12 source and built content contract.",
       "bedrockIdentifier": "createbedrock:glass_fluid_pipe",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-12 domain runtime"
+        "S3-12 fluid source contract"
       ],
-      "deliveryPackage": "S3-12",
+      "deliveryPackage": "completed:S3-12",
       "domain": "fluids",
       "javaIdentifier": "create:glass_fluid_pipe",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "FLUIDS-GLASS-FLUID-PIPE-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-12 source and built content contract.",
       "bedrockIdentifier": "createbedrock:glass_fluid_pipe",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-12 domain runtime"
+        "S3-12 fluid source contract"
       ],
-      "deliveryPackage": "S3-12",
+      "deliveryPackage": "completed:S3-12",
       "domain": "fluids",
       "javaIdentifier": "create:glass_fluid_pipe",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "FLUIDS-ITEM-DRAIN-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-12 source and built content contract.",
       "bedrockIdentifier": "createbedrock:item_drain",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-12 domain runtime"
+        "S3-12 fluid source contract"
       ],
-      "deliveryPackage": "S3-12",
+      "deliveryPackage": "completed:S3-12",
       "domain": "fluids",
       "javaIdentifier": "create:item_drain",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "FLUIDS-ITEM-DRAIN-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-12 source and built content contract.",
       "bedrockIdentifier": "createbedrock:item_drain",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-12 domain runtime"
+        "S3-12 fluid source contract"
       ],
-      "deliveryPackage": "S3-12",
+      "deliveryPackage": "completed:S3-12",
       "domain": "fluids",
       "javaIdentifier": "create:item_drain",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "FLUIDS-MECHANICAL-PUMP-BLOCK",
@@ -2420,136 +2409,129 @@
     },
     {
       "acceptanceId": "FLUIDS-PORTABLE-FLUID-INTERFACE-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-12 source and built content contract.",
       "bedrockIdentifier": "createbedrock:portable_fluid_interface",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-12 domain runtime"
+        "S3-12 fluid source contract"
       ],
-      "deliveryPackage": "S3-12",
+      "deliveryPackage": "completed:S3-12",
       "domain": "fluids",
       "javaIdentifier": "create:portable_fluid_interface",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "FLUIDS-PORTABLE-FLUID-INTERFACE-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-12 source and built content contract.",
       "bedrockIdentifier": "createbedrock:portable_fluid_interface",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-12 domain runtime"
+        "S3-12 fluid source contract"
       ],
-      "deliveryPackage": "S3-12",
+      "deliveryPackage": "completed:S3-12",
       "domain": "fluids",
       "javaIdentifier": "create:portable_fluid_interface",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "FLUIDS-SMART-FLUID-PIPE-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-12 source and built content contract.",
       "bedrockIdentifier": "createbedrock:smart_fluid_pipe",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-12 domain runtime"
+        "S3-12 fluid source contract"
       ],
-      "deliveryPackage": "S3-12",
+      "deliveryPackage": "completed:S3-12",
       "domain": "fluids",
       "javaIdentifier": "create:smart_fluid_pipe",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "FLUIDS-SMART-FLUID-PIPE-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-12 source and built content contract.",
       "bedrockIdentifier": "createbedrock:smart_fluid_pipe",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-12 domain runtime"
+        "S3-12 fluid source contract"
       ],
-      "deliveryPackage": "S3-12",
+      "deliveryPackage": "completed:S3-12",
       "domain": "fluids",
       "javaIdentifier": "create:smart_fluid_pipe",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "FLUIDS-SPOUT-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-12 source and built content contract.",
       "bedrockIdentifier": "createbedrock:spout",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-12 domain runtime"
+        "S3-12 fluid source contract"
       ],
-      "deliveryPackage": "S3-12",
+      "deliveryPackage": "completed:S3-12",
       "domain": "fluids",
       "javaIdentifier": "create:spout",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "FLUIDS-SPOUT-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-12 source and built content contract.",
       "bedrockIdentifier": "createbedrock:spout",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-12 domain runtime"
+        "S3-12 fluid source contract"
       ],
-      "deliveryPackage": "S3-12",
+      "deliveryPackage": "completed:S3-12",
       "domain": "fluids",
       "javaIdentifier": "create:spout",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "FLUIDS-VALVE-HANDLE-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-12 source and built content contract.",
       "bedrockIdentifier": "createbedrock:valve_handle",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-12 domain runtime"
+        "S3-12 fluid source contract"
       ],
-      "deliveryPackage": "S3-12",
+      "deliveryPackage": "completed:S3-12",
       "domain": "fluids",
       "javaIdentifier": "create:valve_handle",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "KINETICS-ADJUSTABLE-CHAIN-GEARSHIFT-BLOCK",

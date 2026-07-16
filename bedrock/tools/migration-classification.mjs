@@ -78,6 +78,7 @@ const BEHAVIOR_PATHS = new Map([
 	["fluid_pipe", "behavior_pack/scripts/fluids/fluid-runtime.js"],
 	["fluid_tank", "behavior_pack/scripts/fluids/fluid-runtime.js"],
 	["copper_valve_handle", "behavior_pack/scripts/fluids/fluid-runtime.js"],
+	["valve_handle", "behavior_pack/scripts/fluids/fluid-runtime.js"],
 	["creative_fluid_tank", "behavior_pack/scripts/fluids/fluid-runtime.js"],
 	["encased_fluid_pipe", "behavior_pack/scripts/fluids/fluid-runtime.js"],
 	["fluid_valve", "behavior_pack/scripts/fluids/fluid-runtime.js"],
@@ -134,8 +135,9 @@ const STAGE_THREE_FLUIDS = new Map([
 // an inexhaustible creative source, local fill/drain endpoints, and valve
 // controls. The Java block entities are intentionally represented by those
 // persisted runtime records instead of unsafe custom Bedrock block entities.
-const STAGE_THREE_FLUID_FOUNDATION = new Map([
+export const STAGE_THREE_FLUID_FOUNDATION = new Map([
 	["copper_valve_handle", { domain: "fluids" }],
+	["valve_handle", { domain: "fluids" }],
 	["creative_fluid_tank", { domain: "fluids" }],
 	["encased_fluid_pipe", { domain: "fluids" }],
 	["fluid_valve", { domain: "fluids" }],
@@ -267,10 +269,10 @@ export function classifyRegistration(identifier, kind) {
 		? { ...processingFoundation, phase: 3, status: "static_verified" }
 		: kineticFoundation
 		? { ...kineticFoundation, phase: 3, status: "static_verified" }
-		: logisticsFoundation
+	: logisticsFoundation
 		? { ...logisticsFoundation, phase: 3, status: "static_verified" }
 		: fluidFoundation
-		? { ...fluidFoundation, phase: 3, status: "implementation_in_progress" }
+		? { ...fluidFoundation, phase: 3, status: "static_verified" }
 		: redstoneFoundation
 		? { ...redstoneFoundation, phase: 3, status: "implementation_in_progress" }
 		: prototype

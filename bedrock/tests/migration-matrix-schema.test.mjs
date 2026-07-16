@@ -151,7 +151,7 @@ test("migration classification assigns S3-11 fixed processing resources to the d
 	assert.equal(classifyRegistration("saw", "block_entity").behaviorPath, "behavior_pack/scripts/processing/stage3-processing-runtime.js");
 });
 
-test("migration classification assigns S3-12 fluid expansion resources to the persisted fluid runtime", () => {
+test("migration classification statically verifies S3-12 fluid expansion resources in the persisted fluid runtime", () => {
 	assert.deepEqual(classifyRegistration("fluid_valve", "block"), {
 		acceptanceId: "FLUIDS-FLUID-VALVE-BLOCK",
 		behaviorPath: "behavior_pack/scripts/fluids/fluid-runtime.js",
@@ -160,9 +160,10 @@ test("migration classification assigns S3-12 fluid expansion resources to the pe
 		persistenceSchema: 2,
 		phase: 3,
 		resourceStatus: "partial",
-		status: "implementation_in_progress"
+		status: "static_verified"
 	});
 	assert.equal(classifyRegistration("copper_valve_handle", "block_entity").domain, "fluids");
+	assert.equal(classifyRegistration("valve_handle", "block_entity").behaviorPath, "behavior_pack/scripts/fluids/fluid-runtime.js");
 	assert.equal(classifyRegistration("creative_fluid_tank", "block_entity").persistenceSchema, 2);
 });
 

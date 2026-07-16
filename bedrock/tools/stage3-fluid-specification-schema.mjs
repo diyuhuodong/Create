@@ -1,6 +1,7 @@
 export const STAGE3_FLUID_SPECIFICATION_SCHEMA_VERSION = 1;
 
 const DELIVERY_STATES = new Set(["implemented", "runtime_absorbed"]);
+const S3_12_DELIVERY_PACKAGES = new Set(["S3-12", "completed:S3-12"]);
 const REQUIRED_FIELDS = [
 	"acceptanceId",
 	"bedrockIdentifier",
@@ -32,7 +33,7 @@ export function validateStage3FluidSpecifications(specifications, workQueue) {
 	if (!workQueue || !Array.isArray(workQueue.entries))
 		throw new TypeError("Stage-3 fluid specifications require a work queue");
 
-	const queuedEntries = workQueue.entries.filter(entry => entry.deliveryPackage === "S3-12");
+	const queuedEntries = workQueue.entries.filter(entry => S3_12_DELIVERY_PACKAGES.has(entry.deliveryPackage));
 	const remaining = new Map(queuedEntries.map(entry => [entry.acceptanceId, entry]));
 	for (const entry of specifications.entries) {
 		if (!entry || typeof entry !== "object" || Array.isArray(entry))

@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 
 import {
 	REDSTONE_NATIVE_COMPONENT_BASELINE,
+	STAGE_THREE_FLUID_FOUNDATION,
 	STAGE_THREE_KINETIC_FOUNDATION,
 	STAGE_THREE_LOGISTICS_FOUNDATION,
 	STAGE_THREE_PROCESSING_FOUNDATION
@@ -38,8 +39,10 @@ function planFor(entry) {
 			? "completed:S3-9"
 			: STAGE_THREE_LOGISTICS_FOUNDATION.has(identifier)
 				? "completed:S3-10"
-				: STAGE_THREE_PROCESSING_FOUNDATION.has(identifier)
-					? "completed:S3-11"
+			: STAGE_THREE_PROCESSING_FOUNDATION.has(identifier)
+				? "completed:S3-11"
+				: STAGE_THREE_FLUID_FOUNDATION.has(identifier)
+					? "completed:S3-12"
 					: "completed:S3-7";
 		return {
 			dependencies: [deliveryPackage === "completed:S3-9"
@@ -48,7 +51,9 @@ function planFor(entry) {
 					? "S3-10 logistics source contract"
 					: deliveryPackage === "completed:S3-11"
 						? "S3-11 processing source contract"
-						: "S3-7 static content contract"],
+						: deliveryPackage === "completed:S3-12"
+							? "S3-12 fluid source contract"
+							: "S3-7 static content contract"],
             deliveryPackage,
             assetPlan: `Tracked by the ${deliveryPackage.slice("completed:".length)} source and built content contract.`,
             lootPlan: "Audit Java-equivalent drops in the owning system package.",
