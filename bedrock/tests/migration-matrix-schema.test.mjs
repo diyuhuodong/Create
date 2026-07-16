@@ -32,7 +32,7 @@ function validMatrix(entries = [validEntry()]) {
 	};
 }
 
-test("migration classification preserves Stage-2 prototypes and assigns Stage-3 domains", () => {
+test("migration classification statically verifies the bounded Stage-2 foundation and assigns Stage-3 domains", () => {
 	assert.deepEqual(classifyRegistration("shaft", "block"), {
 		acceptanceId: "KINETICS-SHAFT-BLOCK",
 		behaviorPath: "behavior_pack/scripts/kinetics/kinetic-runtime.js",
@@ -41,7 +41,7 @@ test("migration classification preserves Stage-2 prototypes and assigns Stage-3 
 		persistenceSchema: 1,
 		phase: 2,
 		resourceStatus: "partial",
-		status: "implementation_in_progress"
+		status: "static_verified"
 	});
 	assert.equal(classifyRegistration("andesite_funnel", "block").domain, "logistics");
 	assert.equal(classifyRegistration("fluid_tank", "block").domain, "fluids");

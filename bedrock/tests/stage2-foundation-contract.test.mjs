@@ -7,11 +7,13 @@ import { validateStage2FoundationContract } from "../tools/stage2-foundation-con
 
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 
-test("Stage-2 foundation blocks are obtainable, recoverable, and bound to their runtime", async () => {
+test("Stage-2 bounded mechanical foundation is statically complete and recoverable", async () => {
 	assert.deepEqual(await validateStage2FoundationContract({ bedrockRoot: resolve(testDirectory, "..") }), {
 		blocks: 15,
 		directRecipes: 11,
 		entries: 22,
-		runtimeBindings: 3
+		runtimeBindings: 3,
+		semanticRuntimeContracts: 3,
+		structuralContentBlocks: 5
 	});
 });

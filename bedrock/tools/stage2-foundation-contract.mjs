@@ -19,6 +19,40 @@ const DIRECT_RECIPE_BLOCKS = new Set([
 	"zinc_block"
 ]);
 
+const RUNTIME_SEMANTIC_MARKERS = new Map([
+	["behavior_pack/scripts/kinetics/kinetic-runtime.js", [
+		"createbedrock:belt_connector",
+		"createbedrock:hand_crank",
+		"createbedrock:water_wheel",
+		"createbedrock:shaft",
+		"createbedrock:cogwheel",
+		"createbedrock:large_cogwheel",
+		"createbedrock:gearbox",
+		"createbedrock:encased_chain_drive",
+		"connectBelt"
+	]],
+	["behavior_pack/scripts/contraptions/contraption-runtime.js", [
+		"createbedrock:mechanical_bearing",
+		"DynamicAssemblyController",
+		"normalizeContraptionSnapshot"
+	]],
+	["behavior_pack/scripts/trains/train-runtime.js", [
+		"createbedrock:track",
+		"createbedrock:track_station",
+		"TrackGraph",
+		"TrainController",
+		"ShardedStateStore"
+	]]
+]);
+
+const STRUCTURAL_CONTENT_BLOCKS = new Set([
+	"createbedrock:andesite_casing",
+	"createbedrock:brass_casing",
+	"createbedrock:copper_casing",
+	"createbedrock:industrial_iron_block",
+	"createbedrock:zinc_block"
+]);
+
 async function readJson(file) {
 	try {
 		return JSON.parse(await readFile(file, "utf8"));
@@ -42,6 +76,8 @@ export async function validateStage2FoundationContract({ bedrockRoot = defaultBe
 	const phaseEntries = matrix.entries.filter(entry => entry.phase === 2);
 	if (phaseEntries.length !== 22)
 		throw new Error(`Stage-2 foundation contract expects 22 entries, found ${phaseEntries.length}`);
+	if (phaseEntries.some(entry => entry.status !== "static_verified"))
+		throw new Error("Every Stage-2 foundation entry must be static_verified before closure");
 
 	const [english, chinese] = await Promise.all([
 		languageKeys(resolve(bedrockRoot, "resource_pack", "texts", "en_US.lang")),
@@ -59,6 +95,14 @@ export async function validateStage2FoundationContract({ bedrockRoot = defaultBe
 		}
 		if (!behaviorSources.get(entry.behaviorPath).includes(entry.bedrockIdentifier))
 			throw new Error(`Stage-2 runtime ${entry.behaviorPath} does not bind ${entry.bedrockIdentifier}`);
+	}
+	for (const [behaviorPath, markers] of RUNTIME_SEMANTIC_MARKERS) {
+		const source = behaviorSources.get(behaviorPath);
+		if (!source)
+			throw new Error(`Stage-2 runtime contract is missing ${behaviorPath}`);
+		for (const marker of markers)
+			if (!source.includes(marker))
+				throw new Error(`Stage-2 runtime ${behaviorPath} is missing semantic marker ${marker}`);
 	}
 
 	const blocks = new Map();
@@ -101,10 +145,21 @@ export async function validateStage2FoundationContract({ bedrockRoot = defaultBe
 	for (const entry of phaseEntries.filter(entry => entry.kind === "block_entity"))
 		await stat(resolve(bedrockRoot, entry.behaviorPath));
 
+	const [movableBlocks, contraptionParts] = await Promise.all([
+		readFile(resolve(bedrockRoot, "behavior_pack", "scripts", "contraptions", "movable-blocks.js"), "utf8"),
+		readFile(resolve(bedrockRoot, "behavior_pack", "scripts", "contraptions", "contraption-parts.js"), "utf8")
+	]);
+	for (const identifier of STRUCTURAL_CONTENT_BLOCKS) {
+		if (!movableBlocks.includes(identifier) || !contraptionParts.includes(identifier))
+			throw new Error(`Stage-2 structural block ${identifier} is not safe to carry in the bounded bearing assembly`);
+	}
+
 	return {
 		blocks: blocks.size,
 		directRecipes: DIRECT_RECIPE_BLOCKS.size,
 		entries: phaseEntries.length,
-		runtimeBindings: behaviorSources.size
+		runtimeBindings: behaviorSources.size,
+		semanticRuntimeContracts: RUNTIME_SEMANTIC_MARKERS.size,
+		structuralContentBlocks: STRUCTURAL_CONTENT_BLOCKS.size
 	};
 }

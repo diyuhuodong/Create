@@ -1,6 +1,10 @@
 import { REDSTONE_DEVICE_CATALOG } from "../behavior_pack/scripts/redstone/redstone-device-catalog.js";
 
-const STAGE_TWO_PROTOTYPES = new Map([
+// Stage 2 is the bounded mechanical foundation: its 16-block assembly cap is
+// intentional, tested, and remains distinct from the unbounded Stage-4
+// dynamic-assembly architecture.  These entries can therefore be statically
+// verified without claiming full visual or platform parity.
+const STAGE_TWO_FOUNDATION = new Map([
 	["andesite_casing", { domain: "content" }],
 	["brass_casing", { domain: "content" }],
 	["belt_connector", { domain: "kinetics" }],
@@ -387,7 +391,7 @@ function acceptanceId(identifier, domain, kind) {
 }
 
 export function classifyRegistration(identifier, kind) {
-	const prototype = STAGE_TWO_PROTOTYPES.get(identifier);
+	const stageTwoFoundation = STAGE_TWO_FOUNDATION.get(identifier);
 	const processor = STAGE_THREE_PROCESSORS.get(identifier);
 	const processingFoundation = STAGE_THREE_PROCESSING_FOUNDATION.get(identifier);
 	const fluid = STAGE_THREE_FLUIDS.get(identifier);
@@ -425,8 +429,8 @@ export function classifyRegistration(identifier, kind) {
 		? { ...stageFourFoundation, phase: 4, status: "static_verified" }
 		: stageFiveFoundation
 			? { ...stageFiveFoundation, phase: 5, status: "static_verified" }
-		: prototype
-		? { ...prototype, phase: 2, status: "implementation_in_progress" }
+		: stageTwoFoundation
+		? { ...stageTwoFoundation, phase: 2, status: "static_verified" }
 		: rule ?? { domain: "content", phase: 3 };
 	if (classification.phase === 3 && classification.domain === "content" && classification.status === undefined)
 		classification.status = "static_verified";
@@ -435,9 +439,9 @@ export function classifyRegistration(identifier, kind) {
 		behaviorPath: BEHAVIOR_PATHS.get(identifier) ?? null,
 		blockingReason: null,
 		domain: classification.domain,
-		persistenceSchema: stageFiveFoundation?.persistenceSchema ?? stageFourFoundation?.persistenceSchema ?? (staticSystem || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation ? 2 : redstoneFoundation || prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null),
+		persistenceSchema: stageFiveFoundation?.persistenceSchema ?? stageFourFoundation?.persistenceSchema ?? (staticSystem || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation ? 2 : redstoneFoundation || stageTwoFoundation && BEHAVIOR_PATHS.has(identifier) ? 1 : null),
 		phase: classification.phase,
-		resourceStatus: prototype || staticSystem || foundationContent || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation || redstoneFoundation || stageFourFoundation || stageFiveFoundation || classification.status === "static_verified" ? "partial" : "pending",
+		resourceStatus: stageTwoFoundation || staticSystem || foundationContent || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation || redstoneFoundation || stageFourFoundation || stageFiveFoundation || classification.status === "static_verified" ? "partial" : "pending",
 		status: classification.status ?? "specification_pending"
 	};
 }
