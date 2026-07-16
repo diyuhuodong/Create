@@ -25,7 +25,7 @@ test("Stage-3 work queue covers every matrix entry exactly once and preserves de
 		"completed:S3-7": 15,
 		"completed:S3-9": 33,
 		"completed:S3-10": 26,
-        "S3-11": 8,
+		"completed:S3-11": 8,
         "S3-12": 18,
         "S3-14": 29,
         "S3-8A": 6,

@@ -1,0 +1,13 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:mechanical_mixer" },
+    "tags": ["crafting_table"],
+    "ingredients": [
+      { "item": "createbedrock:brass_casing" },
+      { "item": "createbedrock:shaft" },
+      { "item": "minecraft:iron_ingot" }
+    ],
+    "result": { "item": "createbedrock:mechanical_mixer" }
+  }
+}

@@ -146,7 +146,7 @@ test("migration classification assigns S3-11 fixed processing resources to the d
 		persistenceSchema: 2,
 		phase: 3,
 		resourceStatus: "partial",
-		status: "implementation_in_progress"
+		status: "static_verified"
 	});
 	assert.equal(classifyRegistration("saw", "block_entity").behaviorPath, "behavior_pack/scripts/processing/stage3-processing-runtime.js");
 });

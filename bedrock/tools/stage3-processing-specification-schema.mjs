@@ -1,5 +1,7 @@
 export const STAGE3_PROCESSING_SPECIFICATION_SCHEMA_VERSION = 1;
 
+const S3_11_DELIVERY_PACKAGES = new Set(["S3-11", "completed:S3-11"]);
+
 const DELIVERY_STATES = new Set(["implemented", "runtime_absorbed"]);
 const REQUIRED_FIELDS = [
 	"acceptanceId",
@@ -33,7 +35,7 @@ export function validateStage3ProcessingSpecifications(specifications, workQueue
 	if (!workQueue || !Array.isArray(workQueue.entries))
 		throw new TypeError("Stage-3 processing specifications require a work queue");
 
-	const queuedEntries = workQueue.entries.filter(entry => entry.deliveryPackage === "S3-11");
+	const queuedEntries = workQueue.entries.filter(entry => S3_11_DELIVERY_PACKAGES.has(entry.deliveryPackage));
 	const remaining = new Map(queuedEntries.map(entry => [entry.acceptanceId, entry]));
 	for (const entry of specifications.entries) {
 		if (!entry || typeof entry !== "object" || Array.isArray(entry))

@@ -114,7 +114,7 @@ const STAGE_THREE_PROCESSORS = new Map([
 // S3-11 extends fixed processing with a shared multi-input, durable machine
 // boundary. The source assets and recipe outcomes are now specified, while
 // platform execution remains an explicit S3-15 acceptance item.
-const STAGE_THREE_PROCESSING_FOUNDATION = new Map([
+export const STAGE_THREE_PROCESSING_FOUNDATION = new Map([
 	["basin", { domain: "processing" }],
 	["encased_fan", { domain: "processing" }],
 	["mechanical_mixer", { domain: "processing" }],
@@ -264,7 +264,7 @@ export function classifyRegistration(identifier, kind) {
 		: foundationContent
 		? { ...foundationContent, phase: 3, status: "implementation_in_progress" }
 		: processingFoundation
-		? { ...processingFoundation, phase: 3, status: "implementation_in_progress" }
+		? { ...processingFoundation, phase: 3, status: "static_verified" }
 		: kineticFoundation
 		? { ...kineticFoundation, phase: 3, status: "static_verified" }
 		: logisticsFoundation

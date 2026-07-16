@@ -1,0 +1,13 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:mechanical_saw" },
+    "tags": ["crafting_table"],
+    "ingredients": [
+      { "item": "createbedrock:andesite_casing" },
+      { "item": "createbedrock:iron_sheet" },
+      { "item": "createbedrock:shaft" }
+    ],
+    "result": { "item": "createbedrock:mechanical_saw" }
+  }
+}

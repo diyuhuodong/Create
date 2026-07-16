@@ -3669,41 +3669,39 @@
     },
     {
       "acceptanceId": "PROCESSING-BASIN-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-11 source and built content contract.",
       "bedrockIdentifier": "createbedrock:basin",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-11 domain runtime"
+        "S3-11 processing source contract"
       ],
-      "deliveryPackage": "S3-11",
+      "deliveryPackage": "completed:S3-11",
       "domain": "processing",
       "javaIdentifier": "create:basin",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "PROCESSING-BASIN-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-11 source and built content contract.",
       "bedrockIdentifier": "createbedrock:basin",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-11 domain runtime"
+        "S3-11 processing source contract"
       ],
-      "deliveryPackage": "S3-11",
+      "deliveryPackage": "completed:S3-11",
       "domain": "processing",
       "javaIdentifier": "create:basin",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "PROCESSING-CRUSHING-WHEEL-BLOCK",
@@ -3743,79 +3741,75 @@
     },
     {
       "acceptanceId": "PROCESSING-ENCASED-FAN-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-11 source and built content contract.",
       "bedrockIdentifier": "createbedrock:encased_fan",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-11 domain runtime"
+        "S3-11 processing source contract"
       ],
-      "deliveryPackage": "S3-11",
+      "deliveryPackage": "completed:S3-11",
       "domain": "processing",
       "javaIdentifier": "create:encased_fan",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "PROCESSING-ENCASED-FAN-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-11 source and built content contract.",
       "bedrockIdentifier": "createbedrock:encased_fan",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-11 domain runtime"
+        "S3-11 processing source contract"
       ],
-      "deliveryPackage": "S3-11",
+      "deliveryPackage": "completed:S3-11",
       "domain": "processing",
       "javaIdentifier": "create:encased_fan",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "PROCESSING-MECHANICAL-MIXER-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-11 source and built content contract.",
       "bedrockIdentifier": "createbedrock:mechanical_mixer",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-11 domain runtime"
+        "S3-11 processing source contract"
       ],
-      "deliveryPackage": "S3-11",
+      "deliveryPackage": "completed:S3-11",
       "domain": "processing",
       "javaIdentifier": "create:mechanical_mixer",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "PROCESSING-MECHANICAL-MIXER-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-11 source and built content contract.",
       "bedrockIdentifier": "createbedrock:mechanical_mixer",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-11 domain runtime"
+        "S3-11 processing source contract"
       ],
-      "deliveryPackage": "S3-11",
+      "deliveryPackage": "completed:S3-11",
       "domain": "processing",
       "javaIdentifier": "create:mechanical_mixer",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "PROCESSING-MECHANICAL-PRESS-BLOCK",
@@ -3855,22 +3849,21 @@
     },
     {
       "acceptanceId": "PROCESSING-MECHANICAL-SAW-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-11 source and built content contract.",
       "bedrockIdentifier": "createbedrock:mechanical_saw",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-11 domain runtime"
+        "S3-11 processing source contract"
       ],
-      "deliveryPackage": "S3-11",
+      "deliveryPackage": "completed:S3-11",
       "domain": "processing",
       "javaIdentifier": "create:mechanical_saw",
       "kind": "block",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "PROCESSING-MILLSTONE-BLOCK",
@@ -3910,22 +3903,21 @@
     },
     {
       "acceptanceId": "PROCESSING-SAW-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-11 source and built content contract.",
       "bedrockIdentifier": "createbedrock:saw",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials",
-        "S3-11 domain runtime"
+        "S3-11 processing source contract"
       ],
-      "deliveryPackage": "S3-11",
+      "deliveryPackage": "completed:S3-11",
       "domain": "processing",
       "javaIdentifier": "create:saw",
       "kind": "block_entity",
-      "lootPlan": "Classify acquisition and destruction behavior from Java data.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add positive, failure, restart, and concurrency coverage in the owning domain suite."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "REDSTONE-ANALOG-LEVER-BLOCK",
