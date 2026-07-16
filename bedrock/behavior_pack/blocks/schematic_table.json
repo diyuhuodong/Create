@@ -1,0 +1,24 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:schematic_table",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 4 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.schematic_table",
+      "minecraft:loot": "loot_tables/blocks/schematic_table.json",
+      "minecraft:item_visual": {
+        "geometry": { "identifier": "geometry.createbedrock.schematic_table" },
+        "material_instances": {
+          "*": { "texture": "createbedrock_schematic_table_side", "render_method": "opaque" }
+        }
+      },
+      "minecraft:material_instances": {
+        "*": { "texture": "createbedrock_schematic_table_side", "render_method": "opaque" }
+      }
+    }
+  }
+}

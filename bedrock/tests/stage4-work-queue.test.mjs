@@ -27,12 +27,12 @@ test("Stage-4 work queue assigns every dynamic-mechanics and schematic entry to 
 		"completed:P4.4": 8,
 		"completed:P4.5": 9,
 		"completed:P4.6": 2,
-		"P4.7": 12
+		"completed:P4.7": 12
 	});
 	const piston = queue.entries.find(entry => entry.acceptanceId === "CONTRAPTIONS-MECHANICAL-PISTON-BLOCK");
 	assert.equal(piston.deliveryPackage, "completed:P4.2");
 	assert.match(piston.behaviorPlan, /swept occupancy/i);
 	const schematicannon = queue.entries.find(entry => entry.acceptanceId === "SCHEMATICS-SCHEMATICANNON-BLOCK_ENTITY");
-	assert.equal(schematicannon.deliveryPackage, "P4.7");
+	assert.equal(schematicannon.deliveryPackage, "completed:P4.7");
 	assert.match(schematicannon.persistencePlan, /reservation journal/i);
 });

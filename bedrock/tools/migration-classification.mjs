@@ -183,6 +183,26 @@ export const STAGE_FOUR_STICKER_FOUNDATION = new Map([
 
 BEHAVIOR_PATHS.set("sticker", "behavior_pack/scripts/contraptions/sticker-runtime.js");
 
+// P4.7 stores only allowlisted, versioned Create Bedrock block snapshots.
+// Clipboard text, table/cannon records, placement reservations and rollback
+// journals all live in bounded ShardedStateStore records; the wand keeps only
+// its small per-item plane state.
+export const STAGE_FOUR_SCHEMATICS_FOUNDATION = new Map([
+	["clipboard", { domain: "schematics", persistenceSchema: 2 }],
+	["crafting_blueprint", { domain: "schematics", persistenceSchema: 2 }],
+	["empty_schematic", { domain: "schematics", persistenceSchema: 2 }],
+	["schematic", { domain: "schematics", persistenceSchema: 2 }],
+	["schematic_and_quill", { domain: "schematics", persistenceSchema: 2 }],
+	["schematic_table", { domain: "schematics", persistenceSchema: 2 }],
+	["schematicannon", { domain: "schematics", persistenceSchema: 2 }],
+	["wand_of_symmetry", { domain: "schematics", persistenceSchema: 1 }]
+]);
+
+for (const identifier of ["crafting_blueprint", "empty_schematic", "schematic", "schematic_and_quill", "schematic_table", "schematicannon"])
+	BEHAVIOR_PATHS.set(identifier, "behavior_pack/scripts/schematics/schematic-runtime.js");
+BEHAVIOR_PATHS.set("clipboard", "behavior_pack/scripts/schematics/clipboard-runtime.js");
+BEHAVIOR_PATHS.set("wand_of_symmetry", "behavior_pack/scripts/schematics/symmetry-runtime.js");
+
 for (const device of REDSTONE_DEVICE_CATALOG)
 	BEHAVIOR_PATHS.set(device.id, "behavior_pack/scripts/redstone/redstone-device-runtime.js");
 
@@ -347,7 +367,8 @@ export function classifyRegistration(identifier, kind) {
 		?? STAGE_FOUR_ELEVATOR_FOUNDATION.get(identifier)
 		?? STAGE_FOUR_ACTOR_FOUNDATION.get(identifier)
 		?? STAGE_FOUR_MINECART_CONTRAPTION_FOUNDATION.get(identifier)
-		?? STAGE_FOUR_STICKER_FOUNDATION.get(identifier);
+		?? STAGE_FOUR_STICKER_FOUNDATION.get(identifier)
+		?? STAGE_FOUR_SCHEMATICS_FOUNDATION.get(identifier);
 	const staticSystem = processor ?? fluid ?? redstoneControl;
 	const rule = RULES.find(candidate => candidate.pattern.test(identifier));
 	const classification = staticSystem

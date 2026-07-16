@@ -1,0 +1,17 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:schematicannon",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1.5 },
+      "minecraft:geometry": "geometry.createbedrock.schematicannon",
+      "minecraft:loot": "loot_tables/blocks/schematicannon.json",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.schematicannon" }, "material_instances": { "*": { "texture": "createbedrock_schematicannon", "render_method": "opaque" } } },
+      "minecraft:material_instances": { "*": { "texture": "createbedrock_schematicannon", "render_method": "opaque" } }
+    }
+  }
+}

@@ -610,6 +610,18 @@
     },
     "createbedrock_copycat_base": {
       "textures": "textures/create_java/block/copycat_base"
+    },
+    "createbedrock_clipboard_model_blank": {
+      "textures": "textures/create_java/block/clipboard_model_blank"
+    },
+    "createbedrock_schematic_table_side": {
+      "textures": "textures/create_java/block/schematic_table_side"
+    },
+    "createbedrock_schematic_table_top": {
+      "textures": "textures/create_java/block/schematic_table_top"
+    },
+    "createbedrock_schematicannon": {
+      "textures": "textures/create_java/block/schematicannon"
     }
   }
 }

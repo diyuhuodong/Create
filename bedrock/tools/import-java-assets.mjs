@@ -228,8 +228,15 @@ export const JAVA_BLOCK_TEXTURES = [
 	,"linear_chassis_side.png"
 	,"secondary_linear_chassis_side.png"
 	,"radial_chassis_side.png"
+	,"clipboard_model_blank.png"
+	,"clipboard_model_filled.png"
+	,"schematic_table_side.png"
+	,"schematic_table_top.png"
+	,"schematicannon.png"
+	,"symmetry_mirror.png"
 ];
-export const JAVA_ITEM_TEXTURES = ["belt_connector.png", "brass_ingot.png", "raw_zinc.png", "zinc_ingot.png", "zinc_nugget.png", "copper_nugget.png", "andesite_alloy.png", "rose_quartz.png", "polished_rose_quartz.png", "sand_paper.png", "red_sand_paper.png", "chromatic_compound_1.png", "refined_radiance.png", "shadow_steel.png", "shopping_list.png", "filter.png", "attribute_filter.png", "linked_controller.png", "cardboard.png", "cardboard_boots.png", "cardboard_chestplate.png", "cardboard_helmet.png", "cardboard_leggings.png", "cardboard_sword.png", "blaze_cake_base.png", "blaze_cake.png", "creative_blaze_cake.png", "crushed_raw_copper.png", "crushed_raw_gold.png", "crushed_raw_iron.png", "crushed_raw_zinc.png", "bar_of_chocolate.png", "sweet_roll.png", "chocolate_glazed_berries.png", "honeyed_apple.png", "builders_tea.png", "experience_nugget.png", "minecart_contraption.png", "chest_minecart_contraption.png", "furnace_minecart_contraption.png", "minecart_coupling.png", "super_glue.png", "tree_fertilizer.png"];
+export const JAVA_ITEM_TEXTURES = ["belt_connector.png", "brass_ingot.png", "raw_zinc.png", "zinc_ingot.png", "zinc_nugget.png", "copper_nugget.png", "andesite_alloy.png", "rose_quartz.png", "polished_rose_quartz.png", "sand_paper.png", "red_sand_paper.png", "chromatic_compound_1.png", "refined_radiance.png", "shadow_steel.png", "shopping_list.png", "filter.png", "attribute_filter.png", "linked_controller.png", "cardboard.png", "cardboard_boots.png", "cardboard_chestplate.png", "cardboard_helmet.png", "cardboard_leggings.png", "cardboard_sword.png", "blaze_cake_base.png", "blaze_cake.png", "creative_blaze_cake.png", "crushed_raw_copper.png", "crushed_raw_gold.png", "crushed_raw_iron.png", "crushed_raw_zinc.png", "bar_of_chocolate.png", "sweet_roll.png", "chocolate_glazed_berries.png", "honeyed_apple.png", "builders_tea.png", "experience_nugget.png", "minecart_contraption.png", "chest_minecart_contraption.png", "furnace_minecart_contraption.png", "minecart_coupling.png", "super_glue.png", "tree_fertilizer.png", "crafting_blueprint.png", "empty_schematic.png", "schematic.png", "schematic_and_quill.png"];
+export const JAVA_ENTITY_TEXTURES = ["blueprint_small.png"];
 export const JAVA_ARMOR_TEXTURES = ["models/armor/cardboard_layer_1.png", "models/armor/cardboard_layer_2.png"];
 export const JAVA_SOUND_ASSETS = [
 	{ source: "desk_bell.ogg", target: "create/desk_bell.ogg" },
@@ -246,16 +253,21 @@ export async function importJavaAssets(resourcePackRoot) {
 	const targetDirectory = resolve(resourcePackRoot, "textures/create_java/block");
 	const itemSourceDirectory = resolve(repositoryRoot, "src/main/resources/assets/create/textures/item");
 	const itemTargetDirectory = resolve(resourcePackRoot, "textures/create_java/item");
+	const entitySourceDirectory = resolve(repositoryRoot, "src/main/resources/assets/create/textures/entity");
+	const entityTargetDirectory = resolve(resourcePackRoot, "textures/create_java/entity");
 	const soundSourceDirectory = resolve(repositoryRoot, "src/main/resources/assets/create/sounds");
 	const soundTargetDirectory = resolve(resourcePackRoot, "sounds");
 	await mkdir(targetDirectory, { recursive: true });
 	await mkdir(itemTargetDirectory, { recursive: true });
+	await mkdir(entityTargetDirectory, { recursive: true });
 	await mkdir(soundTargetDirectory, { recursive: true });
 
 	for (const texture of JAVA_BLOCK_TEXTURES)
 		await mkdir(dirname(resolve(targetDirectory, texture)), { recursive: true }).then(() => cp(resolve(sourceDirectory, texture), resolve(targetDirectory, texture)));
 	for (const texture of JAVA_ITEM_TEXTURES)
 		await cp(resolve(itemSourceDirectory, texture), resolve(itemTargetDirectory, texture));
+	for (const texture of JAVA_ENTITY_TEXTURES)
+		await cp(resolve(entitySourceDirectory, texture), resolve(entityTargetDirectory, texture));
 	for (const texture of JAVA_ARMOR_TEXTURES)
 		await cp(resolve(repositoryRoot, "src/main/resources/assets/create/textures", texture), resolve(resourcePackRoot, "textures/create_java", texture));
 	for (const sound of JAVA_SOUND_ASSETS) {
@@ -268,10 +280,11 @@ export async function importJavaAssets(resourcePackRoot) {
 			sources: {
 				block: { directory: "src/main/resources/assets/create/textures/block", files: JAVA_BLOCK_TEXTURES },
 				item: { directory: "src/main/resources/assets/create/textures/item", files: JAVA_ITEM_TEXTURES },
+				entity: { directory: "src/main/resources/assets/create/textures/entity", files: JAVA_ENTITY_TEXTURES },
 				armor: { directory: "src/main/resources/assets/create/textures", files: JAVA_ARMOR_TEXTURES },
 				sound: { directory: "src/main/resources/assets/create/sounds", files: JAVA_SOUND_ASSETS }
 		},
 		note: "Build-time copies only. Java models require explicit Bedrock geometry conversion."
 	}, null, 2)}\n`);
-	return JAVA_BLOCK_TEXTURES.length + JAVA_ITEM_TEXTURES.length + JAVA_SOUND_ASSETS.length;
+	return JAVA_BLOCK_TEXTURES.length + JAVA_ITEM_TEXTURES.length + JAVA_ENTITY_TEXTURES.length + JAVA_SOUND_ASSETS.length;
 }

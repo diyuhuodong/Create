@@ -1,0 +1,9 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:schematic_and_quill" },
+    "tags": ["crafting_table"],
+    "ingredients": [{ "item": "createbedrock:empty_schematic" }, { "item": "minecraft:feather" }],
+    "result": { "item": "createbedrock:schematic_and_quill" }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "createbedrock:crafting_blueprint",
+      "materials": { "default": "entity_alphatest" },
+      "textures": { "default": "textures/create_java/entity/blueprint_small" },
+      "geometry": { "default": "geometry.createbedrock.crafting_blueprint" },
+      "render_controllers": ["controller.render.createbedrock.contraption"]
+    }
+  }
+}

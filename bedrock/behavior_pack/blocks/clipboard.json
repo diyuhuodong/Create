@@ -1,0 +1,17 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:clipboard",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 2 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.5 },
+      "minecraft:geometry": "geometry.createbedrock.clipboard",
+      "minecraft:loot": "loot_tables/blocks/clipboard.json",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.clipboard" }, "material_instances": { "*": { "texture": "createbedrock_clipboard_model_blank", "render_method": "opaque" } } },
+      "minecraft:material_instances": { "*": { "texture": "createbedrock_clipboard_model_blank", "render_method": "opaque" } }
+    }
+  }
+}

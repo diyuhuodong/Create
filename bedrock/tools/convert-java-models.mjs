@@ -25,6 +25,9 @@ export const JAVA_MODELS = [
 	{ name: "cart_assembler", source: "cart_assembler/block.json" },
 	{ name: "minecart_anchor", source: "cart_assembler/minecart_anchor.json" },
 	{ name: "sticker", source: "sticker/block.json" },
+	{ name: "clipboard", source: "clipboard/block_empty.json" },
+	{ name: "schematic_table", source: "schematic_table.json" },
+	{ name: "schematicannon", source: "schematicannon/block.json" },
 	{ name: "mechanical_plough", source: "mechanical_plough.json" },
 	{
 		name: "mechanical_drill",

@@ -1,0 +1,9 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:crafting_blueprint" },
+    "tags": ["crafting_table"],
+    "ingredients": [{ "item": "minecraft:painting" }, { "item": "minecraft:crafting_table" }],
+    "result": { "item": "createbedrock:crafting_blueprint" }
+  }
+}

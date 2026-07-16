@@ -136,6 +136,21 @@
     },
     "createbedrock_experience_nugget": {
       "textures": "textures/create_java/item/experience_nugget"
+    },
+    "createbedrock_crafting_blueprint": {
+      "textures": "textures/create_java/item/crafting_blueprint"
+    },
+    "createbedrock_empty_schematic": {
+      "textures": "textures/create_java/item/empty_schematic"
+    },
+    "createbedrock_schematic": {
+      "textures": "textures/create_java/item/schematic"
+    },
+    "createbedrock_schematic_and_quill": {
+      "textures": "textures/create_java/item/schematic_and_quill"
+    },
+    "createbedrock_wand_of_symmetry": {
+      "textures": "textures/create_java/block/symmetry_mirror"
     }
   }
 }

@@ -1,0 +1,10 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "createbedrock:schematic_table" },
+    "tags": ["crafting_table"],
+    "pattern": ["WWW", " S ", " S "],
+    "key": { "S": { "item": "minecraft:smooth_stone" }, "W": { "item": "minecraft:oak_slab" } },
+    "result": { "item": "createbedrock:schematic_table" }
+  }
+}
