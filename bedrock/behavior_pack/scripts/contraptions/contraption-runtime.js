@@ -32,6 +32,11 @@ const CONTRAPTION_TASK_BUDGET = 4;
 const LEGACY_PERSISTENCE_KEY = "createbedrock:contraptions_v1";
 const BLOCKS_PER_SNAPSHOT_SHARD = 32;
 const activeBearings = new Map();
+// Bearings predate the Stage-4 dynamic-assembly root format.  Other moving
+// machines register a small owner record here while sharing the same
+// controller, snapshot shards, collision rules, and projection recovery.
+const activeExternalAssemblies = new Map();
+const assemblyOwnerRestorers = new Map();
 const controllers = new Map();
 const motionContacts = new Map();
 let kineticWorld;
@@ -56,6 +61,21 @@ function hash(value) {
 
 function clone(value) {
 	return value === undefined ? undefined : JSON.parse(JSON.stringify(value));
+}
+
+function normalizeOwnerKind(value) {
+	if (typeof value !== "string" || !/^[a-z][a-z0-9_-]{0,63}$/.test(value))
+		throw new TypeError("Dynamic assembly owner kinds must be short identifiers");
+	return value;
+}
+
+function normalizeExternalHost(value) {
+	if (!value || typeof value !== "object" || Array.isArray(value))
+		throw new TypeError("External dynamic assemblies require an owner host record");
+	const kind = normalizeOwnerKind(value.kind);
+	if (typeof value.key !== "string" || value.key.length === 0 || value.key.length > 256)
+		throw new TypeError("Dynamic assembly owner keys must be short non-empty strings");
+	return { ...clone(value), kind, key: value.key };
 }
 
 const stateStore = new ShardedStateStore({
@@ -173,7 +193,11 @@ function releaseMotionContacts(dimensionId, id) {
 
 function persistentRecords() {
 	const records = [];
-	for (const active of activeBearings.values()) {
+	const activeAssemblies = [
+		...activeBearings.values(),
+		...activeExternalAssemblies.values()
+	];
+	for (const active of activeAssemblies) {
 		let assembly;
 		try {
 			assembly = controllerFor(active.dimensionId).getActive(active.id);
@@ -182,9 +206,6 @@ function persistentRecords() {
 		}
 		const { snapshot } = assembly;
 		records.push({
-			bearingKey: active.bearingKey,
-			bearingKind: active.kind,
-			bearingLocation: { ...active.bearingLocation },
 			blockCount: snapshot.blocks.length,
 			dimensionId: active.dimensionId,
 			epoch: assembly.epoch,
@@ -199,7 +220,14 @@ function persistentRecords() {
 				checksum: snapshot.checksum,
 				schemaVersion: snapshot.schemaVersion
 			},
-			transform: clone(assembly.transform)
+			transform: clone(assembly.transform),
+			...(active.bearingKey === undefined
+				? { host: clone(active.host) }
+				: {
+					bearingKey: active.bearingKey,
+					bearingKind: active.kind,
+					bearingLocation: { ...active.bearingLocation }
+				})
 		});
 		const bySection = new Map();
 		for (const block of snapshot.blocks) {
@@ -257,13 +285,27 @@ function restoreShardedState() {
 				snapshot,
 				transform: root.transform
 			}]);
-			activeBearings.set(root.bearingKey, {
-				bearingKey: root.bearingKey,
-				bearingLocation: { ...root.bearingLocation },
-				dimensionId: root.dimensionId,
-				id: root.id,
-				kind: ["windmill", "clockwork"].includes(root.bearingKind) ? root.bearingKind : "mechanical"
-			});
+			if (root.host) {
+				const host = normalizeExternalHost(root.host);
+				const external = { dimensionId: root.dimensionId, host, id: root.id };
+				activeExternalAssemblies.set(root.id, external);
+				assemblyOwnerRestorers.get(host.kind)?.({
+					assembly: controllerFor(root.dimensionId).getActive(root.id),
+					dimensionId: root.dimensionId,
+					host: clone(host),
+					id: root.id
+				});
+			} else {
+				if (!root.bearingKey || !root.bearingLocation)
+					throw new TypeError("legacy bearing dynamic assembly root is incomplete");
+				activeBearings.set(root.bearingKey, {
+					bearingKey: root.bearingKey,
+					bearingLocation: { ...root.bearingLocation },
+					dimensionId: root.dimensionId,
+					id: root.id,
+					kind: ["windmill", "clockwork"].includes(root.bearingKind) ? root.bearingKind : "mechanical"
+				});
+			}
 		} catch (error) {
 			console.warn(`[Create Bedrock] Ignored invalid dynamic assembly ${root?.id ?? "unknown"}: ${error}`);
 		}
@@ -584,7 +626,7 @@ export function registerContraptions(getKineticWorld) {
 
 export function getContraptionDiagnostics() {
 	const frozenReasons = {};
-	for (const active of activeBearings.values()) {
+	for (const active of [...activeBearings.values(), ...activeExternalAssemblies.values()]) {
 		try {
 			const state = controllerFor(active.dimensionId).getActive(active.id);
 			if (state.frozenReason)
@@ -594,7 +636,8 @@ export function getContraptionDiagnostics() {
 		}
 	}
 	return {
-		active: activeBearings.size,
+		active: activeBearings.size + activeExternalAssemblies.size,
+		external: activeExternalAssemblies.size,
 		motionContacts: Object.fromEntries([...motionContacts.entries()].map(([dimensionId, tracker]) => [dimensionId, tracker.diagnostics()])),
 		frozen: Object.keys(frozenReasons).length,
 		frozenReasons,
@@ -610,12 +653,90 @@ export function getActiveDynamicAssemblies(dimensionId) {
 	if (dimensionId !== undefined && (typeof dimensionId !== "string" || dimensionId.length === 0))
 		throw new TypeError("Dynamic assembly lookups require a dimension id when provided");
 	const result = [];
-	for (const active of activeBearings.values()) {
+	for (const active of [...activeBearings.values(), ...activeExternalAssemblies.values()]) {
 		if (dimensionId !== undefined && active.dimensionId !== dimensionId)
 			continue;
 		try { result.push({ ...controllerFor(active.dimensionId).getActive(active.id), dimensionId: active.dimensionId }); } catch {}
 	}
 	return result.sort((left, right) => left.id.localeCompare(right.id));
+}
+
+/**
+ * Register a restore bridge before the dynamic-assembly store is read.  The
+ * host remains metadata only: snapshots and transforms stay in the shared
+ * controller so a moving machine cannot maintain a competing source of truth.
+ */
+export function registerDynamicAssemblyOwnerRestorer(kind, restorer) {
+	kind = normalizeOwnerKind(kind);
+	if (typeof restorer !== "function")
+		throw new TypeError("Dynamic assembly owner restorers must be functions");
+	if (assemblyOwnerRestorers.has(kind))
+		throw new Error(`Dynamic assembly owner restorer already registered: ${kind}`);
+	assemblyOwnerRestorers.set(kind, restorer);
+}
+
+export function assembleExternalDynamicAssembly({ anchor, dimensionId, host, id, locations, owner } = {}) {
+	if (typeof dimensionId !== "string" || dimensionId.length === 0)
+		throw new TypeError("External dynamic assemblies require a dimension id");
+	if (activeExternalAssemblies.has(id))
+		throw new Error(`External dynamic assembly ${id} already exists`);
+	const normalizedHost = normalizeExternalHost(host);
+	const assembly = controllerFor(dimensionId).assemble({ anchor, id, locations, owner });
+	activeExternalAssemblies.set(id, { dimensionId, host: normalizedHost, id });
+	requestPersist();
+	return assembly;
+}
+
+export function getExternalDynamicAssembly(dimensionId, id) {
+	const active = activeExternalAssemblies.get(id);
+	if (!active || active.dimensionId !== dimensionId)
+		return undefined;
+	return {
+		assembly: controllerFor(dimensionId).getActive(id),
+		host: clone(active.host)
+	};
+}
+
+export function setExternalDynamicAssemblyTransform(dimensionId, id, transform) {
+	const active = activeExternalAssemblies.get(id);
+	if (!active || active.dimensionId !== dimensionId)
+		throw new Error(`Unknown external dynamic assembly ${id}`);
+	const changed = controllerFor(dimensionId).setTransform(id, transform);
+	requestPersist();
+	return changed;
+}
+
+export function ensureExternalDynamicAssemblyProjection(dimensionId, id) {
+	const active = activeExternalAssemblies.get(id);
+	if (!active || active.dimensionId !== dimensionId)
+		throw new Error(`Unknown external dynamic assembly ${id}`);
+	const valid = controllerFor(dimensionId).ensureProjection(id);
+	requestPersist();
+	return valid;
+}
+
+export function updateExternalDynamicAssemblyHost(dimensionId, id, updater) {
+	const active = activeExternalAssemblies.get(id);
+	if (!active || active.dimensionId !== dimensionId)
+		throw new Error(`Unknown external dynamic assembly ${id}`);
+	if (typeof updater !== "function")
+		throw new TypeError("External dynamic assembly host updates require an updater");
+	active.host = normalizeExternalHost(updater(clone(active.host)));
+	requestPersist();
+	return clone(active.host);
+}
+
+export function disassembleExternalDynamicAssembly(dimensionId, id) {
+	const active = activeExternalAssemblies.get(id);
+	if (!active || active.dimensionId !== dimensionId)
+		return false;
+	const controller = controllerFor(dimensionId);
+	if (!controller.disassemble(id))
+		return false;
+	releaseMotionContacts(dimensionId, id);
+	activeExternalAssemblies.delete(id);
+	requestPersist();
+	return true;
 }
 
 export function updateDynamicAssemblyBlockData(dimensionId, assemblyId, relative, updater) {

@@ -35,6 +35,18 @@ export const JAVA_MODELS = [
 	},
 	{ name: "mechanical_roller", source: "mechanical_roller/block.json" },
 	{ name: "piston_extension_pole", source: "piston_extension_pole.json" },
+	{
+		name: "mechanical_piston",
+		source: "mechanical_piston/normal/block.json",
+		textureOverrides: { "0": "create:block/andesite_casing", "1": "create:block/piston_bottom", "2": "create:block/gearbox", "6": "create:block/andesite_casing_piston" }
+	},
+	{ name: "mechanical_piston_head", source: "mechanical_piston/normal/head.json" },
+	{ name: "rope_pulley", source: "rope_pulley/block.json" },
+	{ name: "hose_pulley", source: "hose_pulley/block.json" },
+	{ name: "rope", source: "rope_pulley/rope.json" },
+	{ name: "pulley_magnet", source: "rope_pulley/pulley_magnet.json" },
+	{ name: "gantry_carriage", source: "gantry_carriage/horizontal.json" },
+	{ name: "gantry_shaft", source: "gantry_shaft/block_single.json" },
 	{ name: "portable_storage_interface", source: "portable_storage_interface/item.json" },
 	{ name: "basin", source: "basin/block.json" },
 	{

@@ -110,6 +110,27 @@ for (const identifier of ["contraption", "stationary_contraption"])
 	BEHAVIOR_PATHS.set(identifier, "behavior_pack/scripts/contraptions/contraption-runtime.js");
 BEHAVIOR_PATHS.set("contraption_controls", "behavior_pack/scripts/contraptions/contraption-actors-runtime.js");
 
+// P4.2 keeps every linear mover on the shared dynamic-assembly transaction:
+// one root/shard snapshot, fixed-point transform, swept collision boundary,
+// and owner restore bridge.  The block-entity registrations are represented
+// by that versioned host state rather than unsafe per-block script state.
+export const STAGE_FOUR_LINEAR_ACTUATOR_FOUNDATION = new Map([
+	["mechanical_piston", { domain: "contraptions", persistenceSchema: 2 }],
+	["sticky_mechanical_piston", { domain: "contraptions", persistenceSchema: 2 }],
+	["mechanical_piston_head", { domain: "contraptions", persistenceSchema: 2 }],
+	["rope_pulley", { domain: "contraptions", persistenceSchema: 2 }],
+	["rope", { domain: "contraptions", persistenceSchema: 2 }],
+	["pulley_magnet", { domain: "contraptions", persistenceSchema: 2 }],
+	["hose_pulley", { domain: "contraptions", persistenceSchema: 2 }],
+	["gantry_carriage", { domain: "contraptions", persistenceSchema: 2 }],
+	["gantry_contraption", { domain: "contraptions", persistenceSchema: 2 }],
+	["gantry_pinion", { domain: "contraptions", persistenceSchema: 2 }],
+	["gantry_shaft", { domain: "contraptions", persistenceSchema: 2 }]
+]);
+
+for (const identifier of STAGE_FOUR_LINEAR_ACTUATOR_FOUNDATION.keys())
+	BEHAVIOR_PATHS.set(identifier, "behavior_pack/scripts/contraptions/linear-actuator-runtime.js");
+
 for (const device of REDSTONE_DEVICE_CATALOG)
 	BEHAVIOR_PATHS.set(device.id, "behavior_pack/scripts/redstone/redstone-device-runtime.js");
 
@@ -269,7 +290,8 @@ export function classifyRegistration(identifier, kind) {
 	const foundationContent = STAGE_THREE_FOUNDATION_CONTENT.get(identifier);
 	const kineticFoundation = STAGE_THREE_KINETIC_FOUNDATION.get(identifier);
 	const logisticsFoundation = STAGE_THREE_LOGISTICS_FOUNDATION.get(identifier);
-	const stageFourFoundation = STAGE_FOUR_CONTRAPTION_FOUNDATION.get(identifier);
+	const stageFourFoundation = STAGE_FOUR_CONTRAPTION_FOUNDATION.get(identifier)
+		?? STAGE_FOUR_LINEAR_ACTUATOR_FOUNDATION.get(identifier);
 	const staticSystem = processor ?? fluid ?? redstoneControl;
 	const rule = RULES.find(candidate => candidate.pattern.test(identifier));
 	const classification = staticSystem

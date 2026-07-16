@@ -15,6 +15,15 @@ export const MOVABLE_BLOCK_TYPES = new Set([
 	"createbedrock:mechanical_plough",
 	"createbedrock:mechanical_roller",
 	"createbedrock:mechanical_drill",
+	"createbedrock:mechanical_piston",
+	"createbedrock:sticky_mechanical_piston",
+	"createbedrock:mechanical_piston_head",
+	"createbedrock:rope_pulley",
+	"createbedrock:hose_pulley",
+	"createbedrock:rope",
+	"createbedrock:pulley_magnet",
+	"createbedrock:gantry_carriage",
+	"createbedrock:gantry_shaft",
 	"createbedrock:contraption_controls",
 	"createbedrock:controls",
 	"createbedrock:piston_extension_pole",
@@ -91,7 +100,10 @@ export const STATELESS_MOVABLE_BLOCK_TYPES = new Set([
 	"createbedrock:linear_chassis",
 	"createbedrock:secondary_linear_chassis",
 	"createbedrock:radial_chassis",
-	"createbedrock:mechanical_drill"
+	"createbedrock:mechanical_drill",
+	"createbedrock:mechanical_piston_head",
+	"createbedrock:rope",
+	"createbedrock:pulley_magnet"
 ]);
 
 export function isMovableBlockType(typeId) {

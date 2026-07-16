@@ -548,6 +548,30 @@
     "createbedrock_whistle": {
       "textures": "textures/create_java/block/whistle"
     },
+    "createbedrock_andesite_casing_piston": {
+      "textures": "textures/create_java/block/andesite_casing_piston"
+    },
+    "createbedrock_piston_bottom": {
+      "textures": "textures/create_java/block/piston_bottom"
+    },
+    "createbedrock_piston_inner": {
+      "textures": "textures/create_java/block/piston_inner"
+    },
+    "createbedrock_rope_pulley": {
+      "textures": "textures/create_java/block/rope_pulley"
+    },
+    "createbedrock_hose_pulley": {
+      "textures": "textures/create_java/block/hose_pulley"
+    },
+    "createbedrock_pulley_rope": {
+      "textures": "textures/create_java/block/pulley_rope"
+    },
+    "createbedrock_pulley_magnet": {
+      "textures": "textures/create_java/block/pulley_magnet"
+    },
+    "createbedrock_gantry_shaft": {
+      "textures": "textures/create_java/block/gantry_shaft"
+    },
     "createbedrock_copycat_base": {
       "textures": "textures/create_java/block/copycat_base"
     }

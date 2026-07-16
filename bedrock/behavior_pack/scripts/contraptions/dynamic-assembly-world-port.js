@@ -6,6 +6,7 @@ import { captureMovingBlockData, detachMovingBlockData, restoreMovingBlockData }
 import { ALL_CONTRAPTION_PART_TYPES, partTypeFor } from "./contraption-parts.js";
 
 const CONTRAPTION_ENTITY = "createbedrock:contraption";
+const GANTRY_CONTRAPTION_ENTITY = "createbedrock:gantry_contraption";
 const ASSEMBLY_ANCHOR_PROPERTY = "createbedrock:dynamic_assembly_anchor";
 const ASSEMBLY_ID_PROPERTY = "createbedrock:dynamic_assembly_id";
 const LEGACY_ASSEMBLY_ID_PROPERTY = "createbedrock:contraption_id";
@@ -124,15 +125,16 @@ export class DynamicAssemblyWorldPort {
 		this.#restoreSuperGlueVolumes?.(attachments?.superGlueVolumes, assemblyAnchor, transform);
 	}
 
-	spawnAssemblyProjection({ epoch, id, snapshot, transform }) {
-		let marker = this.#dimension().getEntities({ type: CONTRAPTION_ENTITY })
+	spawnAssemblyProjection({ epoch, id, owner, snapshot, transform }) {
+		const markerType = owner?.actuatorKind === "gantry" ? GANTRY_CONTRAPTION_ENTITY : CONTRAPTION_ENTITY;
+		let marker = [CONTRAPTION_ENTITY, GANTRY_CONTRAPTION_ENTITY].flatMap(type => this.#dimension().getEntities({ type }))
 			.find(entity => entity.getDynamicProperty(ASSEMBLY_ID_PROPERTY) === id || entity.getDynamicProperty(LEGACY_ASSEMBLY_ID_PROPERTY) === id);
 		const markerCreated = !marker?.isValid;
 		const markerLocation = this.#markerLocation(snapshot, transform);
 		if (marker?.isValid)
 			marker.teleport(markerLocation);
 		else {
-			marker = this.#dimension().spawnEntity(CONTRAPTION_ENTITY, markerLocation);
+			marker = this.#dimension().spawnEntity(markerType, markerLocation);
 		}
 		marker.setDynamicProperty(ASSEMBLY_ID_PROPERTY, id);
 		marker.setDynamicProperty(ASSEMBLY_ANCHOR_PROPERTY, JSON.stringify(snapshot.anchor));

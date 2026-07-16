@@ -82,7 +82,7 @@ export class DynamicAssemblyController {
 				this.#world.removeBlock(block.location);
 				removed.push(block);
 			}
-			active.projectionId = this.#world.spawnAssemblyProjection({ epoch: active.epoch, id, snapshot, transform: active.transform });
+			active.projectionId = this.#world.spawnAssemblyProjection({ epoch: active.epoch, id, owner: active.owner, snapshot, transform: active.transform });
 			this.#world.setAssemblyProjectionTransform(active.projectionId, active.transform);
 			active.phase = "active";
 			this.#active.set(id, active);
@@ -145,7 +145,7 @@ export class DynamicAssemblyController {
 			return true;
 		try {
 			const epoch = active.epoch + 1;
-			active.projectionId = this.#world.spawnAssemblyProjection({ epoch, id, snapshot: active.snapshot, transform: active.transform });
+			active.projectionId = this.#world.spawnAssemblyProjection({ epoch, id, owner: active.owner, snapshot: active.snapshot, transform: active.transform });
 			this.#world.setAssemblyProjectionTransform(active.projectionId, active.transform);
 			active.epoch = epoch;
 			active.frozenReason = undefined;

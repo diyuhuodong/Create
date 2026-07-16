@@ -83,7 +83,21 @@ test("Contraption part registry covers kinetic blocks and uses the generic proje
 		assert.equal(isMovableBlockType(typeId), true);
 		assert.equal(partTypeFor(typeId), "createbedrock:contraption_part");
 	}
-	assert.equal(MOVABLE_BLOCK_TYPES.size, 71);
+	for (const typeId of [
+		"createbedrock:mechanical_piston",
+		"createbedrock:sticky_mechanical_piston",
+		"createbedrock:mechanical_piston_head",
+		"createbedrock:rope_pulley",
+		"createbedrock:hose_pulley",
+		"createbedrock:rope",
+		"createbedrock:pulley_magnet",
+		"createbedrock:gantry_carriage",
+		"createbedrock:gantry_shaft"
+	]) {
+		assert.equal(isMovableBlockType(typeId), true);
+		assert.equal(partTypeFor(typeId), "createbedrock:contraption_part");
+	}
+	assert.equal(MOVABLE_BLOCK_TYPES.size, 80);
 	assert.deepEqual([...STATELESS_MOVABLE_BLOCK_TYPES].sort(), [
 		"createbedrock:andesite_casing",
 		"createbedrock:brass_casing",
@@ -91,7 +105,10 @@ test("Contraption part registry covers kinetic blocks and uses the generic proje
 		"createbedrock:industrial_iron_block",
 		"createbedrock:linear_chassis",
 		"createbedrock:mechanical_drill",
+		"createbedrock:mechanical_piston_head",
+		"createbedrock:pulley_magnet",
 		"createbedrock:radial_chassis",
+		"createbedrock:rope",
 		"createbedrock:sail_frame",
 		"createbedrock:secondary_linear_chassis",
 		"createbedrock:steam_whistle_extension",

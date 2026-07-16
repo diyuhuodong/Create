@@ -182,6 +182,35 @@ export const KINETIC_BLOCKS = {
 		axis: "y",
 		stressImpact: 4
 	},
+	"createbedrock:mechanical_piston": {
+		kind: "consumer",
+		axis: "y",
+		stressImpact: 8
+	},
+	"createbedrock:sticky_mechanical_piston": {
+		kind: "consumer",
+		axis: "y",
+		stressImpact: 8
+	},
+	"createbedrock:rope_pulley": {
+		kind: "consumer",
+		axis: "y",
+		stressImpact: 8
+	},
+	"createbedrock:hose_pulley": {
+		kind: "consumer",
+		axis: "y",
+		stressImpact: 16
+	},
+	"createbedrock:gantry_carriage": {
+		kind: "consumer",
+		axis: "y",
+		stressImpact: 8
+	},
+	"createbedrock:gantry_shaft": {
+		kind: "transmission",
+		axis: "y"
+	},
 	"createbedrock:turntable": {
 		kind: "consumer",
 		axis: "y",
