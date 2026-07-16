@@ -343,7 +343,7 @@ const recipes = await Promise.all(recipeFiles
     })));
 
 const entries = [];
-for (const queued of workQueue.entries.filter(entry => entry.deliveryPackage === "S3-8B")) {
+for (const queued of workQueue.entries.filter(entry => ["S3-8B", "completed:S3-8B"].includes(entry.deliveryPackage))) {
     const identifier = queued.javaIdentifier.slice("create:".length);
     const recipeSources = recipes
         .filter(recipe => recipeResultIdentifier(recipe.document) === queued.javaIdentifier)

@@ -32,10 +32,11 @@ const DELIVERY_BY_DOMAIN = new Map([
     ["redstone", "S3-14"]
 ]);
 
-function planFor(entry) {
-    if (entry.status === "static_verified" && entry.domain !== "content") {
+function completedPackageFor(entry) {
+	if (entry.domain === "content")
+		return FOUNDATION_ACCEPTANCE_IDS.has(entry.acceptanceId) ? "completed:S3-8A" : "completed:S3-8B";
 		const identifier = entry.javaIdentifier.slice("create:".length);
-		const deliveryPackage = STAGE_THREE_KINETIC_FOUNDATION.has(identifier)
+	return STAGE_THREE_KINETIC_FOUNDATION.has(identifier)
 			? "completed:S3-9"
 			: STAGE_THREE_LOGISTICS_FOUNDATION.has(identifier)
 				? "completed:S3-10"
@@ -43,7 +44,32 @@ function planFor(entry) {
 				? "completed:S3-11"
 				: STAGE_THREE_FLUID_FOUNDATION.has(identifier)
 					? "completed:S3-12"
-					: "completed:S3-7";
+					: entry.domain === "redstone"
+						? "completed:S3-14"
+						: "completed:S3-7";
+}
+
+function planFor(entry) {
+    if (entry.status === "static_verified") {
+		const deliveryPackage = completedPackageFor(entry);
+		if (deliveryPackage === "completed:S3-8A") {
+			const ore = entry.javaIdentifier.endsWith("zinc_ore") || entry.javaIdentifier.endsWith("deepslate_zinc_ore");
+			return {
+				dependencies: ["Vanilla Bedrock crafting and loot-table formats"],
+				deliveryPackage,
+				assetPlan: "Use the matching Java PNG as a build-time staged Bedrock texture.",
+				lootPlan: ore
+					? "Explicit raw-zinc loot; silk-touch and fortune equivalence remain platform-test work."
+					: "Explicit self-drop loot table.",
+				recipePlan: entry.javaIdentifier.endsWith("raw_zinc_block")
+					? "Nine raw zinc pack into one raw zinc block; one raw zinc block unpacks into nine raw zinc."
+					: entry.javaIdentifier.endsWith("weathered_iron_block")
+						? "One iron ingot at a stonecutter creates two weathered iron blocks."
+						: "World generation is deferred; creative and explicit loot acquisition are available.",
+				resourcePlan: "Full-cube block, creative-menu entry, EN/ZH names, terrain-atlas mapping, and explicit loot.",
+				testPlan: "Foundation resource/recipe contract, source validation, build validation, and pack inspection."
+			};
+		}
 		return {
 			dependencies: [deliveryPackage === "completed:S3-9"
 				? "S3-9 kinetic source contract"
@@ -51,9 +77,15 @@ function planFor(entry) {
 					? "S3-10 logistics source contract"
 					: deliveryPackage === "completed:S3-11"
 						? "S3-11 processing source contract"
-						: deliveryPackage === "completed:S3-12"
+					: deliveryPackage === "completed:S3-12"
 							? "S3-12 fluid source contract"
-							: "S3-7 static content contract"],
+							: deliveryPackage === "completed:S3-14"
+								? "S3-14 redstone static contract"
+								: deliveryPackage === "completed:S3-8A"
+									? "S3-8A content material contracts"
+									: deliveryPackage === "completed:S3-8B"
+										? "S3-8B content source contract"
+										: "S3-7 static content contract"],
             deliveryPackage,
             assetPlan: `Tracked by the ${deliveryPackage.slice("completed:".length)} source and built content contract.`,
             lootPlan: "Audit Java-equivalent drops in the owning system package.",

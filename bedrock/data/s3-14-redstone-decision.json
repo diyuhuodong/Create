@@ -28,7 +28,7 @@
     ]
   },
   "output": {
-    "mode": "native_components_with_code_complete_devices_pending_static_validation",
+    "mode": "native_components_static_verified_pending_platform_acceptance",
     "nativeComponents": ["minecraft:redstone_consumer", "minecraft:redstone_producer"],
     "producerMinimumFormatVersion": "1.21.120",
     "consumerMinimumFormatVersion": "1.21.130",
@@ -36,7 +36,7 @@
     "reconsiderWhen": [
       "run static semantic, restart, failure, and concurrency validation for each redstone acceptance ID",
       "do not enable experimental creator features in the production pack",
-      "record Windows, Realm, and PS acceptance before changing matrix status"
+      "record Windows, Realm, and PS acceptance before platform acceptance"
     ]
   },
   "entries": [

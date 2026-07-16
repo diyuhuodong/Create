@@ -8,6 +8,9 @@ export const DELIVERY_PACKAGES = new Set([
 	"completed:S3-10",
 	"completed:S3-11",
 	"completed:S3-12",
+	"completed:S3-14",
+	"completed:S3-8A",
+	"completed:S3-8B",
     "S3-8A",
     "S3-8B",
     "S3-9",
@@ -82,10 +85,10 @@ export function validateStage3WorkQueue(queue, matrix) {
             throw new Error(`Stage-3 queue entry ${entry.acceptanceId} no longer matches the migration matrix`);
         if (matrixEntry.status === "blocked" && entry.deliveryPackage !== "S3-14")
             throw new Error(`Blocked queue entry ${entry.acceptanceId} must be assigned to S3-14`);
-		if (matrixEntry.domain === "redstone" && entry.deliveryPackage !== "S3-14")
+		if (matrixEntry.domain === "redstone" && !["S3-14", "completed:S3-14"].includes(entry.deliveryPackage))
 			throw new Error(`Redstone queue entry ${entry.acceptanceId} must be assigned to S3-14`);
 		const staticContentPackage = matrixEntry.domain === "content"
-			&& ["S3-8A", "S3-8B"].includes(entry.deliveryPackage);
+			&& ["S3-8A", "S3-8B", "completed:S3-8A", "completed:S3-8B"].includes(entry.deliveryPackage);
         if (matrixEntry.status === "static_verified" && !entry.deliveryPackage.startsWith("completed:S3-") && !staticContentPackage)
             throw new Error(`Static queue entry ${entry.acceptanceId} must be attributed to its completed Stage-3 package`);
         if (matrixEntry.status === "blocked" && entry.blocker !== matrixEntry.blockingReason)

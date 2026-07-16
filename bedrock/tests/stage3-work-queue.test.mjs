@@ -27,15 +27,15 @@ test("Stage-3 work queue covers every matrix entry exactly once and preserves de
 		"completed:S3-10": 26,
 		"completed:S3-11": 8,
 		"completed:S3-12": 18,
-        "S3-14": 29,
-        "S3-8A": 6,
-        "S3-8B": 110,
+		"completed:S3-14": 29,
+		"completed:S3-8A": 6,
+		"completed:S3-8B": 110,
     });
     const zincOre = queue.entries.find(entry => entry.acceptanceId === "CONTENT-ZINC-ORE-BLOCK");
-    assert.equal(zincOre.deliveryPackage, "S3-8A");
+	assert.equal(zincOre.deliveryPackage, "completed:S3-8A");
     assert.match(zincOre.lootPlan, /raw-zinc/i);
 	const analogLever = queue.entries.find(entry => entry.acceptanceId === "REDSTONE-ANALOG-LEVER-BLOCK");
-	assert.equal(analogLever.deliveryPackage, "S3-14");
+	assert.equal(analogLever.deliveryPackage, "completed:S3-14");
 	assert.equal(analogLever.blocker, null);
-	assert.equal(analogLever.matrixStatus, "implementation_in_progress");
+	assert.equal(analogLever.matrixStatus, "static_verified");
 });

@@ -263,8 +263,8 @@ export function classifyRegistration(identifier, kind) {
 	const rule = RULES.find(candidate => candidate.pattern.test(identifier));
 	const classification = staticSystem
 		? { ...staticSystem, phase: 3, status: "static_verified" }
-		: foundationContent
-		? { ...foundationContent, phase: 3, status: "implementation_in_progress" }
+	: foundationContent
+		? { ...foundationContent, phase: 3, status: "static_verified" }
 		: processingFoundation
 		? { ...processingFoundation, phase: 3, status: "static_verified" }
 		: kineticFoundation
@@ -274,10 +274,12 @@ export function classifyRegistration(identifier, kind) {
 		: fluidFoundation
 		? { ...fluidFoundation, phase: 3, status: "static_verified" }
 		: redstoneFoundation
-		? { ...redstoneFoundation, phase: 3, status: "implementation_in_progress" }
+		? { ...redstoneFoundation, phase: 3, status: "static_verified" }
 		: prototype
 		? { ...prototype, phase: 2, status: "implementation_in_progress" }
 		: rule ?? { domain: "content", phase: 3 };
+	if (classification.phase === 3 && classification.domain === "content" && classification.status === undefined)
+		classification.status = "static_verified";
 	return {
 		acceptanceId: acceptanceId(identifier, classification.domain, kind),
 		behaviorPath: BEHAVIOR_PATHS.get(identifier) ?? null,
@@ -285,7 +287,7 @@ export function classifyRegistration(identifier, kind) {
 		domain: classification.domain,
 		persistenceSchema: staticSystem || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation ? 2 : redstoneFoundation || prototype && BEHAVIOR_PATHS.has(identifier) ? 1 : null,
 		phase: classification.phase,
-		resourceStatus: prototype || staticSystem || foundationContent || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation || redstoneFoundation ? "partial" : "pending",
+		resourceStatus: prototype || staticSystem || foundationContent || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation || redstoneFoundation || classification.status === "static_verified" ? "partial" : "pending",
 		status: classification.status ?? "specification_pending"
 	};
 }

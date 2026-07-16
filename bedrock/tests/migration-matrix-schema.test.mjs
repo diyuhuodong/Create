@@ -75,7 +75,7 @@ test("migration classification records the durable S3-5 fluid vertical slice ind
 	});
 });
 
-test("migration classification retains S3-6 input controls and tracks native S3-14 devices as implementation work", () => {
+test("migration classification retains S3-6 input controls and statically verifies native S3-14 devices", () => {
 	assert.deepEqual(classifyRegistration("clutch", "block"), {
 		acceptanceId: "KINETICS-CLUTCH-BLOCK",
 		behaviorPath: "behavior_pack/scripts/kinetics/kinetic-runtime.js",
@@ -87,13 +87,13 @@ test("migration classification retains S3-6 input controls and tracks native S3-
 		status: "static_verified"
 	});
 	const redstone = classifyRegistration("analog_lever", "block");
-	assert.equal(redstone.status, "implementation_in_progress");
+	assert.equal(redstone.status, "static_verified");
 	assert.equal(redstone.behaviorPath, "behavior_pack/scripts/redstone/redstone-device-runtime.js");
 	assert.equal(redstone.persistenceSchema, 1);
 	assert.equal(redstone.blockingReason, null);
 });
 
-test("migration classification records the S3-8 foundation material slice as partial implementation", () => {
+test("migration classification statically verifies the S3-8 foundation material slice", () => {
 	assert.deepEqual(classifyRegistration("zinc_ore", "block"), {
 		acceptanceId: "CONTENT-ZINC-ORE-BLOCK",
 		behaviorPath: null,
@@ -102,7 +102,7 @@ test("migration classification records the S3-8 foundation material slice as par
 		persistenceSchema: null,
 		phase: 3,
 		resourceStatus: "partial",
-		status: "implementation_in_progress"
+		status: "static_verified"
 	});
 });
 

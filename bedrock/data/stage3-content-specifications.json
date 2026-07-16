@@ -178,7 +178,7 @@
     {
       "acceptanceId": "CONTENT-BLAZE-HEATER-BLOCK_ENTITY",
       "assetConclusion": "persistent_block_visual_required",
-      "bedrockIdentifier": "createbedrock:blaze_burner",
+      "bedrockIdentifier": "createbedrock:blaze_heater",
       "behaviorRequirement": "machine_runtime",
       "implementationPackage": "S3-11",
       "implementationReason": "The Java registration needs fixed processing-machine state or a processing dependency.",
@@ -527,7 +527,7 @@
     {
       "acceptanceId": "CONTENT-CHASSIS-BLOCK_ENTITY",
       "assetConclusion": "persistent_block_visual_required",
-      "bedrockIdentifier": "createbedrock:linear_chassis",
+      "bedrockIdentifier": "createbedrock:chassis",
       "behaviorRequirement": "contraption_actor",
       "implementationPackage": "S4",
       "implementationReason": "The Java registration participates in movable contraptions or their attachments.",
@@ -779,7 +779,7 @@
     {
       "acceptanceId": "CONTENT-COPYCAT-BLOCK_ENTITY",
       "assetConclusion": "persistent_block_visual_required",
-      "bedrockIdentifier": "createbedrock:copycat_panel",
+      "bedrockIdentifier": "createbedrock:copycat",
       "behaviorRequirement": "persistent_block_runtime",
       "implementationPackage": "S3-10",
       "implementationReason": "The Java registration needs logistics or copycat-state behavior beyond a static block definition.",
@@ -859,7 +859,7 @@
     {
       "acceptanceId": "CONTENT-CRUSHED-RAW--ITEM",
       "assetConclusion": "source_model_not_found",
-      "bedrockIdentifier": "createbedrock:crushed_raw_zinc",
+      "bedrockIdentifier": "createbedrock:crushed_raw_",
       "behaviorRequirement": "registration_template",
       "implementationPackage": "S3-11",
       "implementationReason": "This Java helper is a dynamic registration template, not a concrete item identifier; expand it into concrete crushed-material items before emitting Bedrock content.",
@@ -922,7 +922,7 @@
     {
       "acceptanceId": "CONTENT-CURSED-BELL-BLOCK_ENTITY",
       "assetConclusion": "persistent_block_visual_required",
-      "bedrockIdentifier": "createbedrock:haunted_bell",
+      "bedrockIdentifier": "createbedrock:cursed_bell",
       "behaviorRequirement": "persistent_block_runtime",
       "implementationPackage": "S3-14",
       "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
@@ -1077,7 +1077,7 @@
     {
       "acceptanceId": "CONTENT-FLAP-DISPLAY-BLOCK_ENTITY",
       "assetConclusion": "persistent_block_visual_required",
-      "bedrockIdentifier": "createbedrock:display_board",
+      "bedrockIdentifier": "createbedrock:flap_display",
       "behaviorRequirement": "persistent_block_runtime",
       "implementationPackage": "S3-14",
       "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
@@ -1910,7 +1910,7 @@
     {
       "acceptanceId": "CONTENT-SLIDING-DOOR-BLOCK_ENTITY",
       "assetConclusion": "persistent_block_visual_required",
-      "bedrockIdentifier": "createbedrock:train_door",
+      "bedrockIdentifier": "createbedrock:sliding_door",
       "behaviorRequirement": "persistent_block_runtime",
       "implementationPackage": "S3-14",
       "implementationReason": "The Java registration exposes persistent display, timing, or redstone-facing state.",
@@ -2260,7 +2260,7 @@
     {
       "acceptanceId": "CONTENT-TABLE-CLOTH-BLOCK_ENTITY",
       "assetConclusion": "persistent_block_visual_required",
-      "bedrockIdentifier": "createbedrock:andesite_table_cloth",
+      "bedrockIdentifier": "createbedrock:table_cloth",
       "behaviorRequirement": "persistent_block_runtime",
       "implementationPackage": "S3-10",
       "implementationReason": "The Java table cloth persists optional shop/request data and participates in logistics interaction, so it belongs with the logistics runtime.",

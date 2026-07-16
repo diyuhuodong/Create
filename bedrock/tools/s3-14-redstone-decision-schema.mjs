@@ -16,7 +16,7 @@ const EXPECTED_PRODUCER_MINIMUM = "1.21.120";
 const S3_14_VALIDATION_REQUIREMENTS = [
 	"run static semantic, restart, failure, and concurrency validation for each redstone acceptance ID",
 	"do not enable experimental creator features in the production pack",
-	"record Windows, Realm, and PS acceptance before changing matrix status"
+	"record Windows, Realm, and PS acceptance before platform acceptance"
 ];
 const CODE_COMPLETE_PENDING_STATIC_VALIDATION = "implementation_complete_pending_static_validation";
 
@@ -73,20 +73,20 @@ export function validateStage3RedstoneDecisionDocument(decision) {
 	const expectedControls = COMPATIBILITY_REDSTONE_CONTROLS.map(([block, type]) => ({ block, type }));
 	if (!sameJson(decision.input.controls, expectedControls))
 		throw new Error("S3-14 decision controls do not match the compatibility runtime");
-	if (decision.output?.mode !== "native_components_with_code_complete_devices_pending_static_validation"
+	if (decision.output?.mode !== "native_components_static_verified_pending_platform_acceptance"
 		|| decision.output.producerMinimumFormatVersion !== EXPECTED_PRODUCER_MINIMUM
 		|| decision.output.consumerMinimumFormatVersion !== EXPECTED_CONSUMER_MINIMUM
 		|| decision.output.consumerStableFormatVersion !== EXPECTED_CONSUMER_STABLE
 		|| !sameJson(decision.output.nativeComponents, NATIVE_REDSTONE_COMPONENTS)
 		|| !sameJson(decision.output.reconsiderWhen, S3_14_VALIDATION_REQUIREMENTS))
-		throw new Error("S3-14 output policy does not preserve the code-complete validation gate");
+		throw new Error("S3-14 output policy does not preserve the static-verification and platform-acceptance gates");
 	if (!Array.isArray(decision.entries) || decision.entries.length === 0)
 		throw new Error("S3-14 decision must name every native-redstone implementation entry");
 	const entryIds = new Set();
 	for (const entry of decision.entries) {
 		assertString(entry?.acceptanceId, "entry acceptanceId");
 		if (entry.resolution !== CODE_COMPLETE_PENDING_STATIC_VALIDATION)
-			throw new Error(`S3-14 entry ${entry.acceptanceId} must remain code complete pending static validation`);
+			throw new Error(`S3-14 entry ${entry.acceptanceId} must retain its code-complete semantic evidence`);
 		if (entryIds.has(entry.acceptanceId))
 			throw new Error(`S3-14 decision contains duplicate entry ${entry.acceptanceId}`);
 		entryIds.add(entry.acceptanceId);
@@ -121,13 +121,13 @@ export async function validateStage3RedstoneDecision({ bedrockRoot = defaultBedr
 	if (matrixEntries.length !== decisionCoverage.entryIds.size || matrixEntries.length !== deviceContract.acceptanceIds)
 		throw new Error("S3-14 decision does not name every phase-3 redstone matrix entry");
 	for (const entry of matrixEntries) {
-		if (entry.status !== "implementation_in_progress" || entry.resourceStatus !== "partial" || entry.blockingReason !== null
+		if (entry.status !== "static_verified" || entry.resourceStatus !== "partial" || entry.blockingReason !== null
 			|| entry.behaviorPath !== "behavior_pack/scripts/redstone/redstone-device-runtime.js" || entry.persistenceSchema !== 1)
-			throw new Error(`S3-14 matrix entry ${entry.acceptanceId} must retain its formal pending-static-validation state`);
+			throw new Error(`S3-14 matrix entry ${entry.acceptanceId} must retain its static-verified state`);
 		if (!decisionCoverage.entryIds.has(entry.acceptanceId))
 			throw new Error(`S3-14 decision is missing matrix entry ${entry.acceptanceId}`);
 	}
-	const queuedEntries = queue.entries.filter(entry => entry.deliveryPackage === "S3-14");
+	const queuedEntries = queue.entries.filter(entry => entry.deliveryPackage === "completed:S3-14");
 	if (queuedEntries.length !== matrixEntries.length)
 		throw new Error("S3-14 work queue count does not match the native-redstone entries");
 	for (const entry of queuedEntries) {
@@ -159,8 +159,8 @@ export async function validateStage3RedstoneDecision({ bedrockRoot = defaultBedr
 	}
 	return {
 		controls: decisionCoverage.controls,
-		codeCompletePendingStaticValidation: semanticContract.devices,
-		matrixImplementationInProgress: matrixEntries.length,
+		staticVerifiedPendingPlatformAcceptance: semanticContract.devices,
+		matrixStaticVerified: matrixEntries.length,
 		target: REDSTONE_COMPATIBILITY_TARGET.id
 	};
 }

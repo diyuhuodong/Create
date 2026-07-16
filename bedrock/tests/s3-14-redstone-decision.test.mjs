@@ -13,12 +13,12 @@ async function decision() {
 	return JSON.parse(await readFile(resolve(bedrockRoot, "data", "s3-14-redstone-decision.json"), "utf8"));
 }
 
-test("S3-14 upgrades to the 1.26.0 native-redstone baseline and separates code completion from formal validation", async () => {
+test("S3-14 upgrades to the 1.26.0 native-redstone baseline and separates static verification from platform acceptance", async () => {
 	const coverage = await validateStage3RedstoneDecision();
 	assert.deepEqual(coverage, {
-		codeCompletePendingStaticValidation: 13,
+		staticVerifiedPendingPlatformAcceptance: 17,
 		controls: 6,
-		matrixImplementationInProgress: 29,
+		matrixStaticVerified: 29,
 		target: "realm-console-1.26.0"
 	});
 });
@@ -34,7 +34,7 @@ test("S3-14 rejects experimental targets, duplicate entries, and premature verif
 
 	const verified = await decision();
 	verified.entries[0].resolution = "static_verified";
-	assert.throws(() => validateStage3RedstoneDecisionDocument(verified), /code complete pending static validation/);
+	assert.throws(() => validateStage3RedstoneDecisionDocument(verified), /code-complete semantic evidence/);
 
 	const pollingOnly = await decision();
 	pollingOnly.input.nativeConsumer.status = "pending_implementation";
