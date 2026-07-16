@@ -1,0 +1,9 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "createbedrock:linear_chassis" },
+    "tags": ["crafting_table"], "pattern": [" P ", "LLL", " P "],
+    "key": { "L": { "tag": "minecraft:logs" }, "P": { "item": "createbedrock:andesite_alloy" } },
+    "result": { "item": "createbedrock:linear_chassis", "count": 3 }
+  }
+}

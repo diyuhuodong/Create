@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:secondary_linear_chassis",
+      "menu_category": { "category": "construction", "group": "itemGroup.name.misc" },
+      "properties": {
+        "createbedrock:range": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+        "createbedrock:sticky_positive": [0,1],
+        "createbedrock:sticky_negative": [0,1]
+      },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1.5 },
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:loot": "loot_tables/blocks/secondary_linear_chassis.json",
+      "minecraft:material_instances": { "*": { "texture": "createbedrock_secondary_linear_chassis", "render_method": "opaque" } }
+    }
+  }
+}

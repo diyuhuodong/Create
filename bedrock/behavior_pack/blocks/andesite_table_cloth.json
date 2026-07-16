@@ -1,0 +1,30 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:andesite_table_cloth",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
+      "properties": {
+        "createbedrock:display_count": [0, 1, 2, 3, 4],
+        "createbedrock:shop": [0, 1]
+      },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1.5 },
+      "minecraft:geometry": "geometry.createbedrock.andesite_table_cloth",
+      "minecraft:collision_box": false,
+      "minecraft:selection_box": { "origin": [-8, -8, -8], "size": [16, 9, 16] },
+      "minecraft:loot": "loot_tables/blocks/andesite_table_cloth.json",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.andesite_table_cloth" }, "material_instances": { "0": { "texture": "createbedrock_andesite_table_cloth", "render_method": "alpha_test" }, "*": { "texture": "createbedrock_andesite_table_cloth", "render_method": "alpha_test" } } },
+      "minecraft:material_instances": { "0": { "texture": "createbedrock_andesite_table_cloth", "render_method": "alpha_test" }, "*": { "texture": "createbedrock_andesite_table_cloth", "render_method": "alpha_test" } }
+    },
+    "permutations": [
+      { "condition": "query.block_state('minecraft:facing_direction') == 3", "components": { "minecraft:transformation": { "rotation": [0, 180, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 4", "components": { "minecraft:transformation": { "rotation": [0, 270, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 5", "components": { "minecraft:transformation": { "rotation": [0, 90, 0] } } },
+      { "condition": "query.block_state('createbedrock:shop') == 1", "components": { "minecraft:light_emission": 1 } }
+    ]
+  }
+}

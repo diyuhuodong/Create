@@ -55,6 +55,30 @@ test("KineticWorld exposes mechanical-pump speed as a static fluid consumer", ()
 	assert.equal(world.speedAt("minecraft:overworld", pump.location), 0);
 });
 
+test("KineticWorld projects immutable resolved network readings for gauge consumers", () => {
+	const world = new KineticWorld();
+	const motor = block("createbedrock:creative_motor", 0, 64, 0);
+	const gauge = stateBlock("createbedrock:stressometer", 0, 65, 0, { "createbedrock:axis": "y" });
+	world.trackPlacedBlock(motor);
+	world.trackPlacedBlock(gauge);
+	world.setGeneratedSpeed("minecraft:overworld", motor.location, 64);
+	world.tick();
+	assert.deepEqual(world.networkAt("minecraft:overworld", gauge.location), {
+		hasConflict: false,
+		overloaded: false,
+		speed: 64,
+		stressCapacity: 16384,
+		stressImpact: 0
+	});
+	assert.deepEqual(world.networkAt("minecraft:overworld", { x: 4, y: 64, z: 0 }), {
+		hasConflict: false,
+		overloaded: false,
+		speed: 0,
+		stressCapacity: 0,
+		stressImpact: 0
+	});
+});
+
 test("KineticWorld recovers a stalled consumer line after its excess load is removed", () => {
 	const world = new KineticWorld();
 	const crank = block("createbedrock:hand_crank", 0, 64, 0);

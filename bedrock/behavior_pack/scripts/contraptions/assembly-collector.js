@@ -13,9 +13,11 @@ function keyFor(location) {
 	return `${location.x}:${location.y}:${location.z}`;
 }
 
-export function collectConnectedBlocks({ start, readBlock, maxBlocks = MAX_DYNAMIC_ASSEMBLY_BLOCKS, canCollect = () => true }) {
+export function collectConnectedBlocks({ start, readBlock, maxBlocks = MAX_DYNAMIC_ASSEMBLY_BLOCKS, canCollect = () => true, linkedLocations = () => [] }) {
 	if (typeof readBlock !== "function")
 		throw new TypeError("Contraption collection requires readBlock()");
+	if (typeof linkedLocations !== "function")
+		throw new TypeError("Contraption collection linkedLocations must be a function");
 	if (!Number.isInteger(maxBlocks) || maxBlocks < 1 || maxBlocks > MAX_DYNAMIC_ASSEMBLY_BLOCKS)
 		throw new RangeError(`Contraption collection limit must be between one and ${MAX_DYNAMIC_ASSEMBLY_BLOCKS}`);
 
@@ -42,6 +44,13 @@ export function collectConnectedBlocks({ start, readBlock, maxBlocks = MAX_DYNAM
 			if (!visited.has(key)) {
 				visited.add(key);
 				pending.push(adjacent);
+			}
+		}
+		for (const adjacent of linkedLocations(location)) {
+			const key = keyFor(adjacent);
+			if (!visited.has(key)) {
+				visited.add(key);
+				pending.push({ ...adjacent });
 			}
 		}
 	}

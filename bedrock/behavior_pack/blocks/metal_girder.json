@@ -1,0 +1,38 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:metal_girder",
+      "menu_category": { "category": "construction", "group": "itemGroup.name.misc" },
+      "properties": { "createbedrock:girder_shape": ["pole", "x", "z", "cross"] }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 2 },
+      "minecraft:geometry": "geometry.createbedrock.metal_girder_pole",
+      "minecraft:collision_box": false,
+      "minecraft:selection_box": { "origin": [-6, 0, -6], "size": [12, 16, 12] },
+      "minecraft:loot": "loot_tables/blocks/metal_girder.json",
+      "minecraft:material_instances": {
+        "girder": { "texture": "createbedrock_girder", "render_method": "opaque" },
+        "girder_pole": { "texture": "createbedrock_girder_pole", "render_method": "opaque" },
+        "girder_pole_side": { "texture": "createbedrock_girder_pole_side", "render_method": "opaque" },
+        "*": { "texture": "createbedrock_girder", "render_method": "opaque" }
+      },
+      "minecraft:item_visual": {
+        "geometry": { "identifier": "geometry.createbedrock.metal_girder" },
+        "material_instances": {
+          "girder": { "texture": "createbedrock_girder", "render_method": "opaque" },
+          "girder_pole": { "texture": "createbedrock_girder_pole", "render_method": "opaque" },
+          "girder_pole_side": { "texture": "createbedrock_girder_pole_side", "render_method": "opaque" },
+          "*": { "texture": "createbedrock_girder", "render_method": "opaque" }
+        }
+      }
+    },
+    "permutations": [
+      { "condition": "query.block_state('createbedrock:girder_shape') == 'x'", "components": { "minecraft:geometry": "geometry.createbedrock.metal_girder_x" } },
+      { "condition": "query.block_state('createbedrock:girder_shape') == 'z'", "components": { "minecraft:geometry": "geometry.createbedrock.metal_girder_z" } },
+      { "condition": "query.block_state('createbedrock:girder_shape') == 'cross'", "components": { "minecraft:geometry": "geometry.createbedrock.metal_girder_cross" } }
+    ]
+  }
+}

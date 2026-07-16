@@ -31,6 +31,8 @@ test("S3-8A foundation blocks expose explicit drops and source-texture atlas ent
 
         assert.equal(definition.description.identifier, `createbedrock:${identifier}`);
         assert.equal(definition.description.menu_category.category, "items");
+		assert.equal(components["minecraft:geometry"], `geometry.createbedrock:${identifier}`.replace(":", "."));
+		assert.equal(components["minecraft:item_visual"].geometry.identifier, `geometry.createbedrock:${identifier}`.replace(":", "."));
         for (const material of Object.values(components["minecraft:material_instances"]))
             assert.ok(terrainAtlas.texture_data[material.texture]);
         assert.equal(loot.pools[0].entries[0].type, "item");

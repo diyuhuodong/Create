@@ -1,0 +1,9 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:sail_frame" },
+    "tags": ["crafting_table"],
+    "ingredients": [{ "item": "createbedrock:white_sail" }],
+    "result": { "item": "createbedrock:sail_frame" }
+  }
+}

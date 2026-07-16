@@ -1,0 +1,9 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:large_cogwheel" },
+    "tags": ["crafting_table"],
+    "ingredients": [{ "item": "createbedrock:shaft" }, { "tag": "minecraft:planks" }, { "tag": "minecraft:planks" }],
+    "result": { "item": "createbedrock:large_cogwheel" }
+  }
+}

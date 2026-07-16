@@ -15,12 +15,20 @@
       "minecraft:destructible_by_mining": {
         "seconds_to_destroy": 1.5
       },
-      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:geometry": "geometry.createbedrock.rose_quartz_block",
       "minecraft:item_visual": {
         "geometry": {
-          "identifier": "minecraft:geometry.full_block"
+          "identifier": "geometry.createbedrock.rose_quartz_block"
         },
         "material_instances": {
+		  "end": {
+			"texture": "createbedrock_rose_quartz_block_top",
+			"render_method": "opaque"
+		  },
+		  "side": {
+			"texture": "createbedrock_rose_quartz_block_side",
+			"render_method": "opaque"
+		  },
           "down": {
             "texture": "createbedrock_rose_quartz_block_top",
             "render_method": "opaque"
@@ -37,6 +45,14 @@
       },
       "minecraft:loot": "loot_tables/blocks/rose_quartz_block.json",
       "minecraft:material_instances": {
+		"end": {
+		  "texture": "createbedrock_rose_quartz_block_top",
+		  "render_method": "opaque"
+		},
+		"side": {
+		  "texture": "createbedrock_rose_quartz_block_side",
+		  "render_method": "opaque"
+		},
         "down": {
           "texture": "createbedrock_rose_quartz_block_top",
           "render_method": "opaque"

@@ -1,0 +1,10 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "createbedrock:cardboard_chestplate" },
+    "tags": ["crafting_table"],
+    "pattern": ["P P", "PPP", "PPP"],
+    "key": { "P": { "item": "createbedrock:cardboard" } },
+    "result": { "item": "createbedrock:cardboard_chestplate" }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:brass_scaffolding",
+      "menu_category": {
+        "category": "construction",
+        "group": "itemGroup.name.misc"
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 3
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 0.6
+      },
+      "minecraft:collision_box": false,
+      "minecraft:selection_box": true,
+      "minecraft:geometry": "geometry.createbedrock.brass_scaffolding",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.brass_scaffolding"
+        },
+        "material_instances": {
+          "brass_funnel_frame": {
+            "texture": "createbedrock_brass_funnel_frame",
+            "render_method": "alpha_test"
+          },
+          "brass_scaffold": {
+            "texture": "createbedrock_brass_scaffold",
+            "render_method": "alpha_test"
+          },
+          "brass_scaffold_inside": {
+            "texture": "createbedrock_brass_scaffold_inside",
+            "render_method": "alpha_test"
+          },
+          "*": {
+            "texture": "createbedrock_brass_scaffold",
+            "render_method": "alpha_test"
+          }
+        }
+      },
+      "minecraft:material_instances": {
+        "brass_funnel_frame": {
+          "texture": "createbedrock_brass_funnel_frame",
+          "render_method": "alpha_test"
+        },
+        "brass_scaffold": {
+          "texture": "createbedrock_brass_scaffold",
+          "render_method": "alpha_test"
+        },
+        "brass_scaffold_inside": {
+          "texture": "createbedrock_brass_scaffold_inside",
+          "render_method": "alpha_test"
+        },
+        "*": {
+          "texture": "createbedrock_brass_scaffold",
+          "render_method": "alpha_test"
+        }
+      },
+      "minecraft:loot": "loot_tables/blocks/brass_scaffolding.json"
+    }
+  }
+}

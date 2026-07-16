@@ -1,0 +1,9 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:copycat_step" },
+    "tags": ["crafting_table"],
+    "ingredients": [{ "item": "createbedrock:zinc_ingot" }],
+    "result": { "item": "createbedrock:copycat_step", "count": 4 }
+  }
+}

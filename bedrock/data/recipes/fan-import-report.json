@@ -3,8 +3,8 @@
 	"schemaVersion": 1,
 	"summary": {
 		"manual_specification": 22,
-		"migrated": 22,
-		"unsupported_dependency": 32
+		"migrated": 26,
+		"unsupported_dependency": 28
 	},
 	"records": [
 		{
@@ -186,24 +186,36 @@
 			"status": "manual_specification"
 		},
 		{
-			"reason": "unavailable_item",
+			"recipeId": "create:fan/splashing/crushed_raw_copper:0",
+			"recipeIds": [
+				"create:fan/splashing/crushed_raw_copper:0"
+			],
 			"source": "splashing/crushed_raw_copper",
-			"status": "unsupported_dependency"
+			"status": "migrated"
 		},
 		{
-			"reason": "unavailable_item",
+			"recipeId": "create:fan/splashing/crushed_raw_gold:0",
+			"recipeIds": [
+				"create:fan/splashing/crushed_raw_gold:0"
+			],
 			"source": "splashing/crushed_raw_gold",
-			"status": "unsupported_dependency"
+			"status": "migrated"
 		},
 		{
-			"reason": "unavailable_item",
+			"recipeId": "create:fan/splashing/crushed_raw_iron:0",
+			"recipeIds": [
+				"create:fan/splashing/crushed_raw_iron:0"
+			],
 			"source": "splashing/crushed_raw_iron",
-			"status": "unsupported_dependency"
+			"status": "migrated"
 		},
 		{
-			"reason": "unavailable_item",
+			"recipeId": "create:fan/splashing/crushed_raw_zinc:0",
+			"recipeIds": [
+				"create:fan/splashing/crushed_raw_zinc:0"
+			],
 			"source": "splashing/crushed_raw_zinc",
-			"status": "unsupported_dependency"
+			"status": "migrated"
 		},
 		{
 			"reason": "unsupported_recipe_shape",

@@ -15,12 +15,16 @@
       "minecraft:destructible_by_mining": {
         "seconds_to_destroy": 3
       },
-      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:geometry": "geometry.createbedrock.zinc_ore",
       "minecraft:item_visual": {
         "geometry": {
-          "identifier": "minecraft:geometry.full_block"
+          "identifier": "geometry.createbedrock.zinc_ore"
         },
         "material_instances": {
+		  "all": {
+			"texture": "createbedrock_zinc_ore",
+			"render_method": "opaque"
+		  },
           "*": {
             "texture": "createbedrock_zinc_ore",
             "render_method": "opaque"
@@ -29,6 +33,10 @@
       },
       "minecraft:loot": "loot_tables/blocks/zinc_ore.json",
       "minecraft:material_instances": {
+		"all": {
+		  "texture": "createbedrock_zinc_ore",
+		  "render_method": "opaque"
+		},
         "*": {
           "texture": "createbedrock_zinc_ore",
           "render_method": "opaque"

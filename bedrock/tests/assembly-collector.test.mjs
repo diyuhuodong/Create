@@ -16,6 +16,17 @@ test("collectConnectedBlocks returns one face-connected assembly", () => {
 	assert.equal(blocks.length, 3);
 });
 
+test("collectConnectedBlocks expands explicit Super Glue links without treating all empty space as structural", () => {
+	const blocks = collectConnectedBlocks({
+		start: { x: 0, y: 0, z: 0 },
+		linkedLocations(location) {
+			return location.x === 0 ? [{ x: 4, y: 0, z: 0 }] : [];
+		},
+		readBlock: worldWith({ x: 0, y: 0, z: 0 }, { x: 4, y: 0, z: 0 })
+	});
+	assert.deepEqual(blocks.map(block => block.location), [{ x: 0, y: 0, z: 0 }, { x: 4, y: 0, z: 0 }]);
+});
+
 test("collectConnectedBlocks enforces the dynamic-assembly safety limit without retaining the sixteen-block prototype", () => {
 	assert.throws(() => collectConnectedBlocks({
 		start: { x: 0, y: 0, z: 0 },

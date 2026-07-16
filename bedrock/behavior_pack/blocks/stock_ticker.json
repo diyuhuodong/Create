@@ -1,0 +1,121 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:stock_ticker",
+      "menu_category": {
+        "category": "items",
+        "group": "itemGroup.name.misc"
+      },
+      "properties": {
+        "createbedrock:request_status": [0, 1, 2, 3, 4]
+      },
+      "traits": {
+        "minecraft:placement_direction": {
+          "enabled_states": ["minecraft:facing_direction"]
+        }
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 6
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 2
+      },
+      "minecraft:geometry": "geometry.createbedrock.stock_ticker",
+      "minecraft:collision_box": {
+        "origin": [-7, -8, -7],
+        "size": [14, 11, 14]
+      },
+      "minecraft:selection_box": {
+        "origin": [-7, -8, -7],
+        "size": [14, 14, 14]
+      },
+      "minecraft:loot": "loot_tables/blocks/stock_ticker.json",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.stock_ticker"
+        },
+        "material_instances": {
+          "stock_ticker": {
+            "texture": "createbedrock_stock_ticker",
+            "render_method": "opaque"
+          },
+          "*": {
+            "texture": "createbedrock_stock_ticker",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:material_instances": {
+        "stock_ticker": {
+          "texture": "createbedrock_stock_ticker",
+          "render_method": "opaque"
+        },
+        "*": {
+          "texture": "createbedrock_stock_ticker",
+          "render_method": "opaque"
+        }
+      }
+    },
+    "permutations": [
+      {
+        "condition": "query.block_state('minecraft:facing_direction') == 2",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [0, 0, 0]
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('minecraft:facing_direction') == 3",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [0, 180, 0]
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('minecraft:facing_direction') == 4",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [0, 270, 0]
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('minecraft:facing_direction') == 5",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [0, 90, 0]
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:request_status') == 1",
+        "components": {
+          "minecraft:light_emission": 2
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:request_status') == 2",
+        "components": {
+          "minecraft:light_emission": 6
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:request_status') == 3",
+        "components": {
+          "minecraft:light_emission": 4
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:request_status') == 4",
+        "components": {
+          "minecraft:light_emission": 1
+        }
+      }
+    ]
+  }
+}

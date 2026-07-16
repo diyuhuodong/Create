@@ -123,7 +123,7 @@ export class DynamicAssemblyController {
 				x: active.snapshot.anchor.x + active.transform.translation.x / 4096,
 				y: active.snapshot.anchor.y + active.transform.translation.y / 4096,
 				z: active.snapshot.anchor.z + active.transform.translation.z / 4096
-			});
+			}, active.transform, active.snapshot.anchor);
 			this.#world.removeAssemblyProjection(active.projectionId);
 			this.#active.delete(id);
 			this.#releaseSources(id);
@@ -203,6 +203,39 @@ export class DynamicAssemblyController {
 		active.phase = "active";
 		active.transform = next;
 		return true;
+	}
+
+	/**
+	 * Update one moving block's authoritative attachment payload. Actor systems
+	 * use this for inventories and configuration while a contraption is away
+	 * from the world; rebuilding the sealed snapshot keeps restart validation.
+	 */
+	updateBlockData(id, relative, updater) {
+		const active = this.#requireActive(id);
+		if (![relative?.x, relative?.y, relative?.z].every(Number.isInteger))
+			throw new TypeError("Dynamic assembly block data updates require integer relative coordinates");
+		if (typeof updater !== "function")
+			throw new TypeError("Dynamic assembly block data updates require an updater");
+		const target = active.snapshot.blocks.find(block => block.relative.x === relative.x && block.relative.y === relative.y && block.relative.z === relative.z);
+		if (!target)
+			throw new Error(`Dynamic assembly ${id} has no block at ${relative.x}:${relative.y}:${relative.z}`);
+		const data = updater(clone(target.data), clone(target));
+		const blocks = active.snapshot.blocks.map(block => ({
+			data: block === target ? data : clone(block.data),
+			location: {
+				x: active.snapshot.anchor.x + block.relative.x,
+				y: active.snapshot.anchor.y + block.relative.y,
+				z: active.snapshot.anchor.z + block.relative.z
+			},
+			states: clone(block.states),
+			typeId: block.typeId
+		}));
+		active.snapshot = createDynamicAssemblySnapshot({
+			anchor: active.snapshot.anchor,
+			attachments: clone(active.snapshot.attachments),
+			blocks
+		});
+		return clone(active.snapshot.blocks.find(block => block.relative.x === relative.x && block.relative.y === relative.y && block.relative.z === relative.z)?.data);
 	}
 
 	snapshot() {

@@ -5,6 +5,39 @@
     "createbedrock_axis": {
       "textures": "textures/create_java/block/axis"
     },
+    "createbedrock_blaze_active": {
+      "textures": "textures/create_java/block/blaze_active"
+    },
+    "createbedrock_blaze_burner_flame": {
+      "textures": "textures/create_java/block/blaze_burner_flame"
+    },
+    "createbedrock_blaze_heater_brazier": {
+      "textures": "textures/create_java/block/blaze_heater_brazier"
+    },
+    "createbedrock_blaze_heater_brazier_soul": {
+      "textures": "textures/create_java/block/blaze_heater_brazier_soul"
+    },
+    "createbedrock_blaze_idle": {
+      "textures": "textures/create_java/block/blaze_idle"
+    },
+    "createbedrock_blaze_inert": {
+      "textures": "textures/create_java/block/blaze_inert"
+    },
+    "createbedrock_blaze_super": {
+      "textures": "textures/create_java/block/blaze_super"
+    },
+    "createbedrock_bracket_metal": {
+      "textures": "textures/create_java/block/bracket_metal"
+    },
+    "createbedrock_bracket_plate_metal": {
+      "textures": "textures/create_java/block/bracket_plate_metal"
+    },
+    "createbedrock_bracket_plate_wooden": {
+      "textures": "textures/create_java/block/bracket_plate_wooden"
+    },
+    "createbedrock_bracket_wooden": {
+      "textures": "textures/create_java/block/bracket_wooden"
+    },
     "createbedrock_axis_top": {
       "textures": "textures/create_java/block/axis_top"
     },
@@ -13,6 +46,9 @@
     },
     "createbedrock_andesite_casing_short": {
       "textures": "textures/create_java/block/andesite_casing_short"
+    },
+    "createbedrock_andesite_casing_very_short": {
+      "textures": "textures/create_java/block/andesite_casing_very_short"
     },
     "createbedrock_basin": {
       "textures": "textures/create_java/block/basin"
@@ -23,12 +59,66 @@
     "createbedrock_brass_casing": {
       "textures": "textures/create_java/block/brass_casing"
     },
+    "createbedrock_brass_block": {
+      "textures": "textures/create_java/block/brass_block"
+    },
+    "createbedrock_cardboard_block_front": {
+      "textures": "textures/create_java/block/cardboard_block_front"
+    },
+    "createbedrock_cardboard_block_side": {
+      "textures": "textures/create_java/block/cardboard_block_side"
+    },
+    "createbedrock_cardboard_block_top": {
+      "textures": "textures/create_java/block/cardboard_block_top"
+    },
+    "createbedrock_bound_cardboard_block_front": {
+      "textures": "textures/create_java/block/bound_cardboard_block_front"
+    },
+    "createbedrock_bound_cardboard_block_side": {
+      "textures": "textures/create_java/block/bound_cardboard_block_side"
+    },
+    "createbedrock_bound_cardboard_block_top": {
+      "textures": "textures/create_java/block/bound_cardboard_block_top"
+    },
+    "createbedrock_ladder_andesite": {
+      "textures": "textures/create_java/block/ladder_andesite"
+    },
+    "createbedrock_ladder_andesite_hoop": {
+      "textures": "textures/create_java/block/ladder_andesite_hoop"
+    },
+    "createbedrock_ladder_brass": {
+      "textures": "textures/create_java/block/ladder_brass"
+    },
+    "createbedrock_ladder_brass_hoop": {
+      "textures": "textures/create_java/block/ladder_brass_hoop"
+    },
+    "createbedrock_ladder_copper": {
+      "textures": "textures/create_java/block/ladder_copper"
+    },
+    "createbedrock_ladder_copper_hoop": {
+      "textures": "textures/create_java/block/ladder_copper_hoop"
+    },
     "createbedrock_cogwheel": {
       "textures": "textures/create_java/block/cogwheel"
     },
     "createbedrock_cogwheel_axis": {
       "textures": "textures/create_java/block/cogwheel_axis"
     },
+	"createbedrock_clockwork_bearing_side": {
+	  "textures": "textures/create_java/block/clockwork_bearing_side"
+	},
+	"createbedrock_controls": {
+	  "textures": "textures/create_java/block/controls"
+	},
+	"createbedrock_controls_frame": {
+	  "textures": "textures/create_java/block/controls_frame"
+	},
+	"createbedrock_crafter_side": {
+	  "textures": "textures/create_java/block/crafter_side"
+	},
+	"createbedrock_crafter_thingies": {
+	  "textures": "textures/create_java/block/crafter_thingies"
+	},
     "createbedrock_clutch_off": {
       "textures": "textures/create_java/block/clutch_off"
     },
@@ -47,6 +137,21 @@
     "createbedrock_encased_chain_drive": {
       "textures": "textures/create_java/block/encased_chain_drive"
     },
+    "createbedrock_experience_block": {
+      "textures": "textures/create_java/block/experience_block"
+    },
+    "createbedrock_glass_door_side": {
+      "textures": "textures/create_java/block/glass_door_side"
+    },
+    "createbedrock_girder": {
+      "textures": "textures/create_java/block/girder"
+    },
+    "createbedrock_girder_pole": {
+      "textures": "textures/create_java/block/girder_pole"
+    },
+    "createbedrock_girder_pole_side": {
+      "textures": "textures/create_java/block/girder_pole_side"
+    },
     "createbedrock_encased_pipe": {
       "textures": "textures/create_java/block/encased_pipe"
     },
@@ -59,6 +164,12 @@
     "createbedrock_depot_top": {
       "textures": "textures/create_java/block/depot_top"
     },
+    "createbedrock_desk_bell": {
+      "textures": "textures/create_java/block/desk_bell"
+    },
+    "createbedrock_dark_metal_block": {
+      "textures": "textures/create_java/block/dark_metal_block"
+    },
     "createbedrock_chute": {
       "textures": "textures/create_java/block/chute"
     },
@@ -70,6 +181,12 @@
     },
     "createbedrock_andesite_funnel_frame": {
       "textures": "textures/create_java/block/funnel/andesite_funnel_frame"
+    },
+    "createbedrock_brass_funnel_frame": {
+      "textures": "textures/create_java/block/funnel/brass_funnel_frame"
+    },
+    "createbedrock_copper_funnel_frame": {
+      "textures": "textures/create_java/block/funnel/copper_funnel_frame"
     },
     "createbedrock_andesite_funnel_pull": {
       "textures": "textures/create_java/block/funnel/andesite_funnel_pull"
@@ -104,6 +221,18 @@
     "createbedrock_fluid_valve": {
       "textures": "textures/create_java/block/fluid_valve"
     },
+    "createbedrock_flap_display_front": {
+      "textures": "textures/create_java/block/flap_display_front"
+    },
+    "createbedrock_flap_display_inside": {
+      "textures": "textures/create_java/block/flap_display_inside"
+    },
+    "createbedrock_flap_display_side": {
+      "textures": "textures/create_java/block/flap_display_side"
+    },
+    "createbedrock_flap_display_top": {
+      "textures": "textures/create_java/block/flap_display_top"
+    },
     "createbedrock_glass_fluid_pipe": {
       "textures": "textures/create_java/block/glass_fluid_pipe"
     },
@@ -128,6 +257,9 @@
     "createbedrock_gearbox_top": {
       "textures": "textures/create_java/block/gearbox_top"
     },
+    "createbedrock_gauge": {
+      "textures": "textures/create_java/block/gauge"
+    },
     "createbedrock_industrial_iron_block": {
       "textures": "textures/create_java/block/industrial_iron_block"
     },
@@ -145,6 +277,9 @@
     },
     "createbedrock_portable_fluid_interface": {
       "textures": "textures/create_java/block/portable_fluid_interface"
+    },
+    "createbedrock_placard": {
+      "textures": "textures/create_java/block/placard"
     },
     "createbedrock_pump": {
       "textures": "textures/create_java/block/pump"
@@ -164,8 +299,14 @@
     "createbedrock_spout_nozzle": {
       "textures": "textures/create_java/block/spout_nozzle"
     },
+    "createbedrock_stock_ticker": {
+      "textures": "textures/create_java/block/stock_ticker"
+    },
     "createbedrock_mechanical_bearing": {
       "textures": "textures/create_java/block/mechanical_bearing_side"
+    },
+    "createbedrock_mechanical_drill_top": {
+      "textures": "textures/create_java/block/mechanical_drill_top"
     },
     "createbedrock_mechanical_press_bottom": {
       "textures": "textures/create_java/block/mechanical_press_bottom"
@@ -176,6 +317,21 @@
     "createbedrock_mechanical_press_top": {
       "textures": "textures/create_java/block/mechanical_press_top"
     },
+	"createbedrock_pole_end": {
+	  "textures": "textures/create_java/block/pole_end"
+	},
+	"createbedrock_portable_storage_interface": {
+	  "textures": "textures/create_java/block/portable_storage_interface"
+	},
+	"createbedrock_roller_casing": {
+	  "textures": "textures/create_java/block/roller_casing"
+	},
+	"createbedrock_smooth_dark_log_top": {
+	  "textures": "textures/create_java/block/smooth_dark_log_top"
+	},
+	"createbedrock_train_controller_base": {
+	  "textures": "textures/create_java/block/train_controller_base"
+	},
     "createbedrock_mechanical_saw_top_no_slot": {
       "textures": "textures/create_java/block/mechanical_saw_top_no_slot"
     },
@@ -203,6 +359,9 @@
     "createbedrock_weathered_iron_block": {
       "textures": "textures/create_java/block/weathered_iron_block"
     },
+    "createbedrock_weathered_iron_block_top": {
+      "textures": "textures/create_java/block/weathered_iron_block_top"
+    },
     "createbedrock_valve_closed": {
       "textures": "textures/create_java/block/valve_closed"
     },
@@ -220,6 +379,108 @@
     },
     "createbedrock_rose_quartz_block_side": {
       "textures": "textures/create_java/block/palettes/rose_quartz_side"
+    },
+    "createbedrock_rose_quartz_tiles": {
+      "textures": "textures/create_java/block/palettes/rose_quartz_tiles"
+    },
+    "createbedrock_rose_quartz_lamp": {
+      "textures": "textures/create_java/block/rose_quartz_lamp"
+    },
+    "createbedrock_rose_quartz_lamp_powered": {
+      "textures": "textures/create_java/block/rose_quartz_lamp_powered"
+    },
+    "createbedrock_stockpile_switch_back": {
+      "textures": "textures/create_java/block/threshold_switch_back"
+    },
+    "createbedrock_stockpile_switch_front": {
+      "textures": "textures/create_java/block/threshold_switch_front"
+    },
+    "createbedrock_stockpile_switch_level_0": {
+      "textures": "textures/create_java/block/threshold_switch/level_0"
+    },
+    "createbedrock_stockpile_switch_level_1": {
+      "textures": "textures/create_java/block/threshold_switch/level_1"
+    },
+    "createbedrock_stockpile_switch_level_2": {
+      "textures": "textures/create_java/block/threshold_switch/level_2"
+    },
+    "createbedrock_stockpile_switch_level_3": {
+      "textures": "textures/create_java/block/threshold_switch/level_3"
+    },
+    "createbedrock_stockpile_switch_level_4": {
+      "textures": "textures/create_java/block/threshold_switch/level_4"
+    },
+    "createbedrock_stockpile_switch_level_5": {
+      "textures": "textures/create_java/block/threshold_switch/level_5"
+    },
+    "createbedrock_stockpile_switch_top": {
+      "textures": "textures/create_java/block/smart_observer_top"
+    },
+    "createbedrock_sail_frame": {
+      "textures": "textures/create_java/block/sail/frame"
+    },
+    "createbedrock_white_sail": {
+      "textures": "textures/create_java/block/sail/canvas_white"
+    },
+    "createbedrock_nozzle_net": {
+      "textures": "textures/create_java/block/net"
+    },
+    "createbedrock_linear_chassis": {
+      "textures": "textures/create_java/block/linear_chassis_side"
+    },
+    "createbedrock_secondary_linear_chassis": {
+      "textures": "textures/create_java/block/secondary_linear_chassis_side"
+    },
+    "createbedrock_radial_chassis": {
+      "textures": "textures/create_java/block/radial_chassis_side"
+    },
+    "createbedrock_andesite_table_cloth": {
+      "textures": "textures/create_java/block/table_cloth/andesite"
+    },
+    "createbedrock_brass_table_cloth": {
+      "textures": "textures/create_java/block/table_cloth/brass"
+    },
+    "createbedrock_copper_table_cloth": {
+      "textures": "textures/create_java/block/table_cloth/copper"
+    },
+    "createbedrock_stockpile_switch_tunnel_top": {
+      "textures": "textures/create_java/block/tunnel/brass_tunnel_top_connected"
+    },
+    "createbedrock_framed_glass": {
+      "textures": "textures/create_java/block/palettes/framed_glass"
+    },
+    "createbedrock_small_rose_quartz_tiles": {
+      "textures": "textures/create_java/block/palettes/small_rose_quartz_tiles"
+    },
+    "createbedrock_railway_casing": {
+      "textures": "textures/create_java/block/railway_casing"
+    },
+    "createbedrock_railway_casing_side": {
+      "textures": "textures/create_java/block/railway_casing_side"
+    },
+    "createbedrock_refined_radiance_casing": {
+      "textures": "textures/create_java/block/refined_radiance_casing"
+    },
+    "createbedrock_shadow_steel_casing": {
+      "textures": "textures/create_java/block/shadow_steel_casing"
+    },
+    "createbedrock_andesite_scaffold": {
+      "textures": "textures/create_java/block/scaffold/andesite_scaffold"
+    },
+    "createbedrock_andesite_scaffold_inside": {
+      "textures": "textures/create_java/block/scaffold/andesite_scaffold_inside"
+    },
+    "createbedrock_brass_scaffold": {
+      "textures": "textures/create_java/block/scaffold/brass_scaffold"
+    },
+    "createbedrock_brass_scaffold_inside": {
+      "textures": "textures/create_java/block/scaffold/brass_scaffold_inside"
+    },
+    "createbedrock_copper_scaffold": {
+      "textures": "textures/create_java/block/scaffold/copper_scaffold"
+    },
+    "createbedrock_copper_scaffold_inside": {
+      "textures": "textures/create_java/block/scaffold/copper_scaffold_inside"
     },
     "createbedrock_redstone_analog_lever": {
       "textures": "textures/create_java/block/analog_lever"
@@ -259,6 +520,30 @@
     },
     "createbedrock_redstone_stock_link": {
       "textures": "textures/create_java/block/stock_link"
+    },
+    "createbedrock_cuckoo_clock": {
+      "textures": "textures/create_java/block/cuckoo_clock"
+    },
+    "createbedrock_bell": {
+      "textures": "textures/create_java/block/bell"
+    },
+    "createbedrock_andesite_door_side": {
+      "textures": "textures/create_java/block/andesite_door_side"
+    },
+    "createbedrock_brass_door_side": {
+      "textures": "textures/create_java/block/brass_door_side"
+    },
+    "createbedrock_copper_door_side": {
+      "textures": "textures/create_java/block/copper_door_side"
+    },
+    "createbedrock_train_door_side": {
+      "textures": "textures/create_java/block/train_door_side"
+    },
+    "createbedrock_whistle": {
+      "textures": "textures/create_java/block/whistle"
+    },
+    "createbedrock_copycat_base": {
+      "textures": "textures/create_java/block/copycat_base"
     }
   }
 }

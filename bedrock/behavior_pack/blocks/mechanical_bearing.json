@@ -3,9 +3,11 @@
   "minecraft:block": {
     "description": {
       "identifier": "createbedrock:mechanical_bearing",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
       "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
     },
     "components": {
+      "minecraft:loot": "loot_tables/blocks/mechanical_bearing.json",
       "minecraft:destructible_by_explosion": {
         "explosion_resistance": 6
       },

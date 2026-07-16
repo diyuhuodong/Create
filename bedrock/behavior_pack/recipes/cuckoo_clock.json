@@ -1,0 +1,10 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "createbedrock:cuckoo_clock" },
+    "tags": ["crafting_table"],
+    "pattern": ["S", "C", "A"],
+    "key": { "S": { "item": "minecraft:oak_planks" }, "C": { "item": "createbedrock:andesite_casing" }, "A": { "item": "minecraft:clock" } },
+    "result": { "item": "createbedrock:cuckoo_clock" }
+  }
+}

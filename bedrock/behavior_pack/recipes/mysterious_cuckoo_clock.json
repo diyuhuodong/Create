@@ -1,0 +1,10 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "createbedrock:mysterious_cuckoo_clock" },
+    "tags": ["crafting_table"],
+    "pattern": [" G ", "GCG", " G "],
+    "key": { "G": { "item": "minecraft:gunpowder" }, "C": { "item": "createbedrock:cuckoo_clock" } },
+    "result": { "item": "createbedrock:mysterious_cuckoo_clock" }
+  }
+}

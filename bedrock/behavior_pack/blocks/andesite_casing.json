@@ -1,8 +1,12 @@
 {
   "format_version": "1.26.0",
   "minecraft:block": {
-    "description": { "identifier": "createbedrock:andesite_casing" },
+    "description": {
+      "identifier": "createbedrock:andesite_casing",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" }
+    },
     "components": {
+      "minecraft:loot": "loot_tables/blocks/andesite_casing.json",
       "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
       "minecraft:geometry": "minecraft:geometry.full_block",

@@ -1,0 +1,10 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "createbedrock:water_wheel" },
+    "tags": ["crafting_table"],
+    "pattern": ["PPP", "PSP", "PPP"],
+    "key": { "P": { "tag": "minecraft:planks" }, "S": { "item": "createbedrock:shaft" } },
+    "result": { "item": "createbedrock:water_wheel" }
+  }
+}

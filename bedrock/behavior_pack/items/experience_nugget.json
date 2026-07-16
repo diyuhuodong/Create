@@ -1,0 +1,18 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:item": {
+    "description": {
+      "identifier": "createbedrock:experience_nugget",
+      "menu_category": {
+        "category": "items",
+        "group": "itemGroup.name.misc"
+      }
+    },
+    "components": {
+      "minecraft:allow_off_hand": true,
+      "minecraft:icon": "createbedrock_experience_nugget",
+      "minecraft:interact_button": true,
+      "minecraft:max_stack_size": 64
+    }
+  }
+}

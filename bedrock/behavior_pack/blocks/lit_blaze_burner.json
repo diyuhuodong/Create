@@ -1,0 +1,38 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:lit_blaze_burner",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
+      "properties": { "createbedrock:flame_type": ["regular", "soul"] }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 2 },
+      "minecraft:geometry": "geometry.createbedrock.blaze_burner",
+      "minecraft:collision_box": { "origin": [-7, 0, -7], "size": [14, 15, 14] },
+      "minecraft:selection_box": { "origin": [-7, 0, -7], "size": [14, 15, 14] },
+      "minecraft:light_emission": 12,
+      "minecraft:loot": "loot_tables/blocks/lit_blaze_burner.json",
+      "minecraft:material_instances": {
+        "blaze_heater_brazier": { "texture": "createbedrock_blaze_heater_brazier", "render_method": "alpha_test" },
+        "blaze_face": { "texture": "createbedrock_blaze_burner_flame", "render_method": "alpha_test" },
+        "blaze_flame": { "texture": "createbedrock_blaze_burner_flame", "render_method": "alpha_test" },
+        "*": { "texture": "createbedrock_blaze_heater_brazier", "render_method": "alpha_test" }
+      },
+      "minecraft:item_visual": {
+        "geometry": { "identifier": "geometry.createbedrock.blaze_burner" },
+        "material_instances": {
+          "blaze_heater_brazier": { "texture": "createbedrock_blaze_heater_brazier", "render_method": "alpha_test" },
+          "blaze_face": { "texture": "createbedrock_blaze_burner_flame", "render_method": "alpha_test" },
+          "blaze_flame": { "texture": "createbedrock_blaze_burner_flame", "render_method": "alpha_test" },
+          "*": { "texture": "createbedrock_blaze_heater_brazier", "render_method": "alpha_test" }
+        }
+      },
+      "createbedrock:blaze_burner_runtime": {}
+    },
+    "permutations": [
+      { "condition": "query.block_state('createbedrock:flame_type') == 'soul'", "components": { "minecraft:light_emission": 9, "minecraft:material_instances": { "blaze_heater_brazier": { "texture": "createbedrock_blaze_heater_brazier_soul", "render_method": "alpha_test" } } } }
+    ]
+  }
+}

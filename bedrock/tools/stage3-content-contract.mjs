@@ -8,7 +8,11 @@ import { validateMigrationMatrix } from "./migration-matrix-schema.mjs";
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultBedrockRoot = resolve(toolDirectory, "..");
 
-export const STATIC_VISUAL_EXCEPTIONS = new Map();
+export const STATIC_VISUAL_EXCEPTIONS = new Map([
+	["createbedrock:linear_chassis", "Java chassis geometry is a cube; Bedrock retains its side texture while sticky-face overlays require a later render-controller upgrade."],
+	["createbedrock:secondary_linear_chassis", "Java chassis geometry is a cube; Bedrock retains its side texture while sticky-face overlays require a later render-controller upgrade."],
+	["createbedrock:radial_chassis", "Java chassis geometry is a cube; Bedrock retains its side texture while sticky-face overlays require a later render-controller upgrade."]
+]);
 
 async function fileExists(file) {
 	try {
@@ -132,25 +136,76 @@ async function assertStaticBlockContracts({ bedrockRoot, built }) {
 
 	const terrainAtlas = await readJson(resolve(resourcePackRoot, "textures", "terrain_texture.json"));
 	const terrainTextures = terrainAtlas.texture_data ?? {};
+	const itemAtlas = await readJson(resolve(resourcePackRoot, "textures", "item_texture.json"));
+	const itemTextures = itemAtlas.texture_data ?? {};
 	const languages = new Map(await Promise.all(["en_US", "zh_CN"].map(async locale => [
 		locale,
 		languageKeys(await readFile(resolve(resourcePackRoot, "texts", `${locale}.lang`), "utf8"))
 	])));
 	const convertedGeometry = plannedGeometryIdentifiers();
 	const builtGeometry = built ? await geometryIdentifiers(resourcePackRoot) : undefined;
-	const staticEntries = matrix.entries.filter(entry => entry.phase === 3 && entry.status === "static_verified");
+	const staticEntries = matrix.entries.filter(entry => entry.phase === 3
+		&& entry.domain === "content"
+		&& entry.status === "static_verified");
 	const foundationEntries = matrix.entries.filter(entry => entry.phase === 3
 		&& entry.domain === "content"
 		&& entry.status === "implementation_in_progress");
 	const deliverableEntries = [...staticEntries, ...foundationEntries];
 	const coveredStatic = new Set();
 	const coveredFoundation = new Set();
+	const coveredStaticEntities = new Set();
+	const coveredStaticItems = new Set();
 	const visualFallbacks = [];
 
 	for (const entry of deliverableEntries) {
 		const isStatic = entry.status === "static_verified";
 		if (isStatic && (typeof entry.behaviorPath !== "string" || !await fileExists(resolve(bedrockRoot, entry.behaviorPath))))
 			throw new Error(`Static migration entry ${entry.acceptanceId} is missing behaviorPath implementation.`);
+		if (entry.kind === "item") {
+			if (!isStatic)
+				throw new Error(`Foundation content entry ${entry.acceptanceId} cannot be an item without a static definition.`);
+			const itemName = entry.bedrockIdentifier.slice(entry.bedrockIdentifier.indexOf(":") + 1);
+			const item = await readJson(resolve(behaviorPackRoot, "items", `${itemName}.json`));
+			const definition = item["minecraft:item"];
+			const icon = definition?.components?.["minecraft:icon"];
+			if (definition?.description?.identifier !== entry.bedrockIdentifier || !definition.description.menu_category?.category
+				|| typeof icon !== "string")
+				throw new Error(`Static item ${entry.acceptanceId} is missing an identifier, creative category, or icon.`);
+			for (const locale of ["en_US", "zh_CN"]) {
+				if (!languages.get(locale).has(`item.${entry.bedrockIdentifier}.name`))
+					throw new Error(`Static item ${entry.acceptanceId} is missing ${locale} translation.`);
+			}
+			const texturePath = itemTextures[icon]?.textures;
+			if (typeof texturePath !== "string")
+				throw new Error(`Static item ${entry.acceptanceId} is missing icon ${icon} in item_texture.json.`);
+			const expectedFile = built
+				? resolve(resourcePackRoot, `${texturePath}.png`)
+				: sourceTexturePath(texturePath, repositoryRoot) ?? generatedTextureSource(texturePath, bedrockRoot);
+			if (!expectedFile || !await fileExists(expectedFile))
+				throw new Error(`Static item ${entry.acceptanceId} is missing staged icon ${icon}.`);
+			coveredStaticItems.add(entry.bedrockIdentifier);
+			continue;
+		}
+		if (entry.kind === "entity") {
+			if (!isStatic)
+				throw new Error(`Foundation content entry ${entry.acceptanceId} cannot be an entity without a static actor definition.`);
+			const entityName = entry.bedrockIdentifier.slice(entry.bedrockIdentifier.indexOf(":") + 1);
+			const [actor, client] = await Promise.all([
+				readJson(resolve(behaviorPackRoot, "entities", `${entityName}.json`)),
+				readJson(resolve(resourcePackRoot, "entity", `${entityName}.entity.json`))
+			]);
+			if (actor["minecraft:entity"]?.description?.identifier !== entry.bedrockIdentifier
+				|| client["minecraft:client_entity"]?.description?.identifier !== entry.bedrockIdentifier)
+				throw new Error(`Static entity ${entry.acceptanceId} is missing matching behavior and client definitions.`);
+			for (const locale of ["en_US", "zh_CN"]) {
+				if (!languages.get(locale).has(`entity.${entry.bedrockIdentifier}.name`))
+					throw new Error(`Static entity ${entry.acceptanceId} is missing ${locale} translation.`);
+			}
+			coveredStaticEntities.add(entry.bedrockIdentifier);
+			continue;
+		}
+		if (entry.kind !== "block" && entry.kind !== "block_entity")
+			throw new Error(`Stage-3 content contract does not yet support static ${entry.kind} entry ${entry.acceptanceId}.`);
 		const block = blocksByIdentifier.get(entry.bedrockIdentifier);
 		if (!block)
 			throw new Error(`Static migration entry ${entry.acceptanceId} is missing ${entry.bedrockIdentifier} block definition.`);
@@ -191,10 +246,10 @@ async function assertStaticBlockContracts({ bedrockRoot, built }) {
 			if (!expectedFile || !await fileExists(expectedFile))
 				throw new Error(`Static migration entry ${entry.acceptanceId} is missing staged texture for ${texture}.`);
 		}
+		const lootPath = block.definition["minecraft:block"].components?.["minecraft:loot"];
+		if (typeof lootPath !== "string" || !await fileExists(resolve(behaviorPackRoot, lootPath)))
+			throw new Error(`Content entry ${entry.acceptanceId} is missing an explicit loot table.`);
 		if (!isStatic) {
-			const lootPath = block.definition["minecraft:block"].components?.["minecraft:loot"];
-			if (typeof lootPath !== "string" || !await fileExists(resolve(behaviorPackRoot, lootPath)))
-				throw new Error(`Foundation content entry ${entry.acceptanceId} is missing an explicit loot table.`);
 			coveredFoundation.add(entry.bedrockIdentifier);
 		} else {
 			coveredStatic.add(entry.bedrockIdentifier);
@@ -204,10 +259,13 @@ async function assertStaticBlockContracts({ bedrockRoot, built }) {
 	return {
 		contentEntries: deliverableEntries.length,
 		contentBlocks: new Set([...coveredStatic, ...coveredFoundation]).size,
+		contentItems: coveredStaticItems.size,
 		foundationEntries: foundationEntries.length,
 		foundationBlocks: coveredFoundation.size,
 		staticEntries: staticEntries.length,
 		staticBlocks: coveredStatic.size,
+		staticEntities: coveredStaticEntities.size,
+		staticItems: coveredStaticItems.size,
 		visualFallbacks: [...new Map(visualFallbacks.map(entry => [entry.identifier, entry])).values()]
 	};
 }

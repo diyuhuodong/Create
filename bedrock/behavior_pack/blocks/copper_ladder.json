@@ -1,0 +1,91 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:copper_ladder",
+      "menu_category": {
+        "category": "construction",
+        "group": "itemGroup.name.misc"
+      },
+      "traits": {
+        "minecraft:placement_direction": {
+          "enabled_states": [
+            "minecraft:cardinal_direction"
+          ],
+          "y_rotation_offset": 180
+        }
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 2
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 0.4
+      },
+      "minecraft:collision_box": false,
+      "minecraft:selection_box": true,
+      "minecraft:geometry": "geometry.createbedrock.copper_ladder",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.copper_ladder"
+        },
+        "material_instances": {
+          "ladder_copper": {
+            "texture": "createbedrock_ladder_copper",
+            "render_method": "alpha_test"
+          },
+          "ladder_copper_hoop": {
+            "texture": "createbedrock_ladder_copper_hoop",
+            "render_method": "alpha_test"
+          },
+          "*": {
+            "texture": "createbedrock_ladder_copper",
+            "render_method": "alpha_test"
+          }
+        }
+      },
+      "minecraft:material_instances": {
+        "ladder_copper": {
+          "texture": "createbedrock_ladder_copper",
+          "render_method": "alpha_test"
+        },
+        "ladder_copper_hoop": {
+          "texture": "createbedrock_ladder_copper_hoop",
+          "render_method": "alpha_test"
+        },
+        "*": {
+          "texture": "createbedrock_ladder_copper",
+          "render_method": "alpha_test"
+        }
+      },
+      "minecraft:loot": "loot_tables/blocks/copper_ladder.json"
+    },
+    "permutations": [
+      {
+        "condition": "query.block_state('minecraft:cardinal_direction') == 'east'",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [0, 90, 0]
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('minecraft:cardinal_direction') == 'south'",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [0, 180, 0]
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('minecraft:cardinal_direction') == 'west'",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [0, 270, 0]
+          }
+        }
+      }
+    ]
+  }
+}

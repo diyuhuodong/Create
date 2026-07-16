@@ -71,5 +71,27 @@ export const BASIN_RECIPES = [
 			}
 		],
 		"processingTicks": 100
+	},
+	{
+		"id": "create:basin/mixing/brass_ingot:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:copper_ingot"
+			},
+			{
+				"count": 1,
+				"typeId": "createbedrock:zinc_ingot"
+			}
+		],
+		"mode": "mixing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 2,
+				"typeId": "createbedrock:brass_ingot"
+			}
+		],
+		"processingTicks": 100
 	}
 ];

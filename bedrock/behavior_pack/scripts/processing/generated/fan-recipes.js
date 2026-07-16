@@ -289,6 +289,98 @@ export const FAN_RECIPES = [
 		"processingTicks": 100
 	},
 	{
+		"id": "create:fan/splashing/crushed_raw_copper:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:crushed_raw_copper"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 9,
+				"typeId": "createbedrock:copper_nugget"
+			},
+			{
+				"chance": 0.5,
+				"count": 1,
+				"typeId": "minecraft:clay_ball"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/crushed_raw_gold:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:crushed_raw_gold"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 9,
+				"typeId": "minecraft:gold_nugget"
+			},
+			{
+				"chance": 0.5,
+				"count": 1,
+				"typeId": "minecraft:quartz"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/crushed_raw_iron:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:crushed_raw_iron"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 9,
+				"typeId": "minecraft:iron_nugget"
+			},
+			{
+				"chance": 0.75,
+				"count": 1,
+				"typeId": "minecraft:redstone"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/crushed_raw_zinc:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:crushed_raw_zinc"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 9,
+				"typeId": "createbedrock:zinc_nugget"
+			},
+			{
+				"chance": 0.25,
+				"count": 1,
+				"typeId": "minecraft:gunpowder"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
 		"id": "create:fan/splashing/gravel:0",
 		"ingredients": [
 			{

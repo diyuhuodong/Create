@@ -1,0 +1,30 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:copycat_step",
+      "menu_category": { "category": "construction", "group": "itemGroup.name.misc" },
+      "properties": { "createbedrock:has_material": [0, 1], "createbedrock:material_rotation": [0, 1, 2, 3] },
+      "traits": {
+        "minecraft:placement_direction": { "enabled_states": ["minecraft:cardinal_direction"] },
+        "minecraft:placement_position": { "enabled_states": ["minecraft:vertical_half"] }
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 3 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.copycat_step",
+      "minecraft:collision_box": { "origin": [-8, 0, -4], "size": [16, 8, 8] },
+      "minecraft:selection_box": { "origin": [-8, 0, -4], "size": [16, 8, 8] },
+      "minecraft:loot": "loot_tables/blocks/copycat_step.json",
+      "minecraft:material_instances": { "copycat_base": { "texture": "createbedrock_copycat_base", "render_method": "alpha_test" }, "*": { "texture": "createbedrock_copycat_base", "render_method": "alpha_test" } },
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.copycat_step" }, "material_instances": { "copycat_base": { "texture": "createbedrock_copycat_base", "render_method": "alpha_test" }, "*": { "texture": "createbedrock_copycat_base", "render_method": "alpha_test" } } }
+    },
+    "permutations": [
+      { "condition": "query.block_state('minecraft:cardinal_direction') == 'east'", "components": { "minecraft:transformation": { "rotation": [0, 90, 0] } } },
+      { "condition": "query.block_state('minecraft:cardinal_direction') == 'south'", "components": { "minecraft:transformation": { "rotation": [0, 180, 0] } } },
+      { "condition": "query.block_state('minecraft:cardinal_direction') == 'west'", "components": { "minecraft:transformation": { "rotation": [0, 270, 0] } } },
+      { "condition": "query.block_state('minecraft:vertical_half') == 'top'", "components": { "minecraft:transformation": { "rotation": [180, 0, 0] } } }
+    ]
+  }
+}

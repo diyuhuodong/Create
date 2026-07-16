@@ -1,0 +1,65 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:andesite_scaffolding",
+      "menu_category": {
+        "category": "construction",
+        "group": "itemGroup.name.misc"
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 3
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 0.6
+      },
+      "minecraft:collision_box": false,
+      "minecraft:selection_box": true,
+      "minecraft:geometry": "geometry.createbedrock.andesite_scaffolding",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.andesite_scaffolding"
+        },
+        "material_instances": {
+          "andesite_funnel_frame": {
+            "texture": "createbedrock_andesite_funnel_frame",
+            "render_method": "alpha_test"
+          },
+          "andesite_scaffold": {
+            "texture": "createbedrock_andesite_scaffold",
+            "render_method": "alpha_test"
+          },
+          "andesite_scaffold_inside": {
+            "texture": "createbedrock_andesite_scaffold_inside",
+            "render_method": "alpha_test"
+          },
+          "*": {
+            "texture": "createbedrock_andesite_scaffold",
+            "render_method": "alpha_test"
+          }
+        }
+      },
+      "minecraft:material_instances": {
+        "andesite_funnel_frame": {
+          "texture": "createbedrock_andesite_funnel_frame",
+          "render_method": "alpha_test"
+        },
+        "andesite_scaffold": {
+          "texture": "createbedrock_andesite_scaffold",
+          "render_method": "alpha_test"
+        },
+        "andesite_scaffold_inside": {
+          "texture": "createbedrock_andesite_scaffold_inside",
+          "render_method": "alpha_test"
+        },
+        "*": {
+          "texture": "createbedrock_andesite_scaffold",
+          "render_method": "alpha_test"
+        }
+      },
+      "minecraft:loot": "loot_tables/blocks/andesite_scaffolding.json"
+    }
+  }
+}

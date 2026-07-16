@@ -462,6 +462,10 @@ export function getKineticSpeedAt(dimensionId, location) {
 	return kineticWorld.speedAt(dimensionId, location);
 }
 
+export function getKineticNetworkAt(dimensionId, location) {
+	return kineticWorld.networkAt(dimensionId, location);
+}
+
 export function getKineticDiagnostics() {
 	return {
 		...kineticWorld.diagnostics(),

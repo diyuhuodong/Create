@@ -181,6 +181,31 @@ export const KINETIC_BLOCKS = {
 		kind: "consumer",
 		axis: "y",
 		stressImpact: 4
+	},
+	"createbedrock:turntable": {
+		kind: "consumer",
+		axis: "y",
+		stressImpact: 4
+	},
+	"createbedrock:speedometer": {
+		kind: "transmission",
+		axis: "y"
+	},
+	"createbedrock:stressometer": {
+		kind: "transmission",
+		axis: "y"
+	},
+	"createbedrock:display_board": {
+		kind: "transmission",
+		axis: "z"
+	},
+	"createbedrock:cuckoo_clock": {
+		kind: "transmission",
+		axis: "z"
+	},
+	"createbedrock:mysterious_cuckoo_clock": {
+		kind: "transmission",
+		axis: "z"
 	}
 };
 
@@ -845,6 +870,30 @@ export class KineticWorld {
 				return node.speed;
 		}
 		return 0;
+	}
+
+	/** Returns a primitive snapshot, keeping resolved kinetic graphs immutable to content runtimes. */
+	networkAt(dimensionId, location) {
+		const id = worldLocationKey(dimensionId, location);
+		for (const network of this.#resolvedByDimension.get(dimensionId) ?? []) {
+			const node = network.nodeStates.find(state => state.id === id);
+			if (!node)
+				continue;
+			return {
+				hasConflict: network.hasConflict,
+				overloaded: network.overloaded,
+				speed: node.speed,
+				stressCapacity: network.stressCapacity,
+				stressImpact: network.stressImpact
+			};
+		}
+		return {
+			hasConflict: false,
+			overloaded: false,
+			speed: 0,
+			stressCapacity: 0,
+			stressImpact: 0
+		};
 	}
 
 	#resolve(dimensionId) {

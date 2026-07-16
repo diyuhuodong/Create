@@ -1,0 +1,16 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:item": {
+    "description": {
+      "identifier": "createbedrock:super_glue",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" }
+    },
+    "components": {
+      "minecraft:allow_off_hand": true,
+      "minecraft:durability": { "damage_chance": { "min": 100, "max": 100 }, "max_durability": 99 },
+      "minecraft:hand_equipped": true,
+      "minecraft:icon": "createbedrock_super_glue",
+      "minecraft:max_stack_size": 1
+    }
+  }
+}

@@ -61,6 +61,336 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
+		"id": "create:crushing/coal_ore",
+		"input": {
+			"typeId": "minecraft:coal_ore",
+			"count": 1
+		},
+		"processingTicks": 150,
+		"outputs": [
+			{
+				"typeId": "minecraft:coal",
+				"count": 1,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:coal",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:cobblestone",
+				"count": 1,
+				"chance": 0.125
+			}
+		]
+	},
+	{
+		"id": "create:crushing/copper_ore",
+		"input": {
+			"typeId": "minecraft:copper_ore",
+			"count": 1
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 5,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:cobblestone",
+				"count": 1,
+				"chance": 0.125
+			}
+		]
+	},
+	{
+		"id": "create:crushing/deepslate_coal_ore",
+		"input": {
+			"typeId": "minecraft:deepslate_coal_ore",
+			"count": 1
+		},
+		"processingTicks": 300,
+		"outputs": [
+			{
+				"typeId": "minecraft:coal",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:coal",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:cobbled_deepslate",
+				"count": 1,
+				"chance": 0.125
+			}
+		]
+	},
+	{
+		"id": "create:crushing/deepslate_copper_ore",
+		"input": {
+			"typeId": "minecraft:deepslate_copper_ore",
+			"count": 1
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 7,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:cobbled_deepslate",
+				"count": 1,
+				"chance": 0.125
+			}
+		]
+	},
+	{
+		"id": "create:crushing/deepslate_diamond_ore",
+		"input": {
+			"typeId": "minecraft:deepslate_diamond_ore",
+			"count": 1
+		},
+		"processingTicks": 450,
+		"outputs": [
+			{
+				"typeId": "minecraft:diamond",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:diamond",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:cobbled_deepslate",
+				"count": 1,
+				"chance": 0.125
+			}
+		]
+	},
+	{
+		"id": "create:crushing/deepslate_emerald_ore",
+		"input": {
+			"typeId": "minecraft:deepslate_emerald_ore",
+			"count": 1
+		},
+		"processingTicks": 450,
+		"outputs": [
+			{
+				"typeId": "minecraft:emerald",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:emerald",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:cobbled_deepslate",
+				"count": 1,
+				"chance": 0.125
+			}
+		]
+	},
+	{
+		"id": "create:crushing/deepslate_gold_ore",
+		"input": {
+			"typeId": "minecraft:deepslate_gold_ore",
+			"count": 1
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 2,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:cobbled_deepslate",
+				"count": 1,
+				"chance": 0.125
+			}
+		]
+	},
+	{
+		"id": "create:crushing/deepslate_iron_ore",
+		"input": {
+			"typeId": "minecraft:deepslate_iron_ore",
+			"count": 1
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:cobbled_deepslate",
+				"count": 1,
+				"chance": 0.125
+			}
+		]
+	},
+	{
+		"id": "create:crushing/deepslate_lapis_ore",
+		"input": {
+			"typeId": "minecraft:deepslate_lapis_ore",
+			"count": 1
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:lapis_lazuli",
+				"count": 12,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:lapis_lazuli",
+				"count": 1,
+				"chance": 0.5
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:cobbled_deepslate",
+				"count": 1,
+				"chance": 0.125
+			}
+		]
+	},
+	{
+		"id": "create:crushing/deepslate_redstone_ore",
+		"input": {
+			"typeId": "minecraft:deepslate_redstone_ore",
+			"count": 1
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:redstone",
+				"count": 7,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:redstone",
+				"count": 1,
+				"chance": 0.5
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:cobbled_deepslate",
+				"count": 1,
+				"chance": 0.125
+			}
+		]
+	},
+	{
+		"id": "create:crushing/deepslate_zinc_ore",
+		"input": {
+			"typeId": "createbedrock:deepslate_zinc_ore",
+			"count": 1
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:cobbled_deepslate",
+				"count": 1,
+				"chance": 0.125
+			}
+		]
+	},
+	{
 		"id": "create:crushing/diamond_horse_armor",
 		"input": {
 			"typeId": "minecraft:diamond_horse_armor",
@@ -91,6 +421,36 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
+		"id": "create:crushing/diamond_ore",
+		"input": {
+			"typeId": "minecraft:diamond_ore",
+			"count": 1
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:diamond",
+				"count": 1,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:diamond",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:cobblestone",
+				"count": 1,
+				"chance": 0.125
+			}
+		]
+	},
+	{
 		"id": "create:crushing/diorite",
 		"input": {
 			"typeId": "minecraft:diorite",
@@ -102,6 +462,61 @@ export const CRUSHING_RECIPES = [
 				"typeId": "minecraft:quartz",
 				"count": 1,
 				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/emerald_ore",
+		"input": {
+			"typeId": "minecraft:emerald_ore",
+			"count": 1
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:emerald",
+				"count": 1,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:emerald",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:cobblestone",
+				"count": 1,
+				"chance": 0.125
+			}
+		]
+	},
+	{
+		"id": "create:crushing/gilded_blackstone",
+		"input": {
+			"typeId": "minecraft:gilded_blackstone",
+			"count": 1
+		},
+		"processingTicks": 400,
+		"outputs": [
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 18,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:blackstone",
+				"count": 1,
+				"chance": 0.125
 			}
 		]
 	},
@@ -122,6 +537,36 @@ export const CRUSHING_RECIPES = [
 				"typeId": "minecraft:glowstone_dust",
 				"count": 1,
 				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/gold_ore",
+		"input": {
+			"typeId": "minecraft:gold_ore",
+			"count": 1
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 2,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:cobblestone",
+				"count": 1,
+				"chance": 0.125
 			}
 		]
 	},
@@ -221,6 +666,66 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
+		"id": "create:crushing/iron_ore",
+		"input": {
+			"typeId": "minecraft:iron_ore",
+			"count": 1
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:cobblestone",
+				"count": 1,
+				"chance": 0.125
+			}
+		]
+	},
+	{
+		"id": "create:crushing/lapis_ore",
+		"input": {
+			"typeId": "minecraft:lapis_ore",
+			"count": 1
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "minecraft:lapis_lazuli",
+				"count": 10,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:lapis_lazuli",
+				"count": 1,
+				"chance": 0.5
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:cobblestone",
+				"count": 1,
+				"chance": 0.125
+			}
+		]
+	},
+	{
 		"id": "create:crushing/leather_horse_armor",
 		"input": {
 			"typeId": "minecraft:leather_horse_armor",
@@ -237,6 +742,61 @@ export const CRUSHING_RECIPES = [
 				"typeId": "minecraft:leather",
 				"count": 2,
 				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/nether_gold_ore",
+		"input": {
+			"typeId": "minecraft:nether_gold_ore",
+			"count": 1
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 18,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:netherrack",
+				"count": 1,
+				"chance": 0.125
+			}
+		]
+	},
+	{
+		"id": "create:crushing/nether_quartz_ore",
+		"input": {
+			"typeId": "minecraft:nether_quartz_ore",
+			"count": 1
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:quartz",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:quartz",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:netherrack",
+				"count": 1,
+				"chance": 0.125
 			}
 		]
 	},
@@ -277,6 +837,66 @@ export const CRUSHING_RECIPES = [
 				"typeId": "minecraft:glowstone_dust",
 				"count": 2,
 				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:crushing/redstone_ore",
+		"input": {
+			"typeId": "minecraft:redstone_ore",
+			"count": 1
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "minecraft:redstone",
+				"count": 6,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:redstone",
+				"count": 1,
+				"chance": 0.5
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:cobblestone",
+				"count": 1,
+				"chance": 0.125
+			}
+		]
+	},
+	{
+		"id": "create:crushing/zinc_ore",
+		"input": {
+			"typeId": "createbedrock:zinc_ore",
+			"count": 1
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			},
+			{
+				"typeId": "minecraft:cobblestone",
+				"count": 1,
+				"chance": 0.125
 			}
 		]
 	}

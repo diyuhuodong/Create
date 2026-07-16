@@ -1,0 +1,9 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:track_station" },
+    "tags": ["crafting_table"],
+    "ingredients": [{ "item": "createbedrock:railway_casing" }, { "item": "minecraft:compass" }],
+    "result": { "item": "createbedrock:track_station", "count": 2 }
+  }
+}

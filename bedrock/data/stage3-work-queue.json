@@ -15,2091 +15,2091 @@
   "entries": [
     {
       "acceptanceId": "CONTENT-ANDESITE-ALLOY-BLOCK-BLOCK",
-      "assetPlan": "Use the matching Java PNG as a build-time staged Bedrock texture.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:andesite_alloy_block",
       "blocker": null,
       "dependencies": [
-        "Vanilla Bedrock crafting and loot-table formats"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8A",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:andesite_alloy_block",
       "kind": "block",
-      "lootPlan": "Explicit self-drop loot table.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "World generation is deferred; creative and explicit loot acquisition are available.",
-      "resourcePlan": "Full-cube block, creative-menu entry, EN/ZH names, terrain-atlas mapping, and explicit loot.",
-      "testPlan": "Foundation resource/recipe contract, source validation, build validation, and pack inspection."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-ANDESITE-DOOR-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:andesite_door",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:andesite_door",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-ANDESITE-LADDER-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:andesite_ladder",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:andesite_ladder",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-ANDESITE-SCAFFOLDING-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:andesite_scaffolding",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:andesite_scaffolding",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-ANDESITE-TABLE-CLOTH-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:andesite_table_cloth",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:andesite_table_cloth",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-BAR-OF-CHOCOLATE-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:bar_of_chocolate",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:bar_of_chocolate",
       "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-BLAZE-BURNER-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:blaze_burner",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:blaze_burner",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-BLAZE-CAKE-BASE-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:blaze_cake_base",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:blaze_cake_base",
       "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-BLAZE-CAKE-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:blaze_cake",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:blaze_cake",
       "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-BLAZE-HEATER-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:blaze_heater",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:blaze_burner",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:blaze_heater",
       "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-BOUND-CARDBOARD-BLOCK-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:bound_cardboard_block",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:bound_cardboard_block",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-BRASS-BLOCK-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:brass_block",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:brass_block",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-BRASS-DOOR-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:brass_door",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:brass_door",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-BRASS-LADDER-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:brass_ladder",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:brass_ladder",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-BRASS-SCAFFOLDING-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:brass_scaffolding",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:brass_scaffolding",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-BRASS-TABLE-CLOTH-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:brass_table_cloth",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:brass_table_cloth",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-BUILDERS-TEA-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:builders_tea",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:builders_tea",
       "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-CARDBOARD-BLOCK-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:cardboard_block",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:cardboard_block",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-CARDBOARD-BOOTS-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:cardboard_boots",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:cardboard_boots",
       "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-CARDBOARD-CHESTPLATE-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:cardboard_chestplate",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:cardboard_chestplate",
       "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-CARDBOARD-HELMET-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:cardboard_helmet",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:cardboard_helmet",
       "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-CARDBOARD-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:cardboard",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:cardboard",
       "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-CARDBOARD-LEGGINGS-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:cardboard_leggings",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:cardboard_leggings",
       "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-CARDBOARD-SWORD-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:cardboard_sword",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:cardboard_sword",
       "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-CHASSIS-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:chassis",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:chassis",
-      "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-CHOCOLATE-GLAZED-BERRIES-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:chocolate_glazed_berries",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:chocolate_glazed_berries",
-      "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-CHROMATIC-COMPOUND-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:chromatic_compound",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:chromatic_compound",
-      "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-CLOCKWORK-BEARING-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:clockwork_bearing",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:clockwork_bearing",
-      "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-CLOCKWORK-BEARING-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:clockwork_bearing",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:clockwork_bearing",
-      "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-CONTROLS-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:controls",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:controls",
-      "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-COPPER-DOOR-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:copper_door",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:copper_door",
-      "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-COPPER-LADDER-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:copper_ladder",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:copper_ladder",
-      "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-COPPER-SCAFFOLDING-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:copper_scaffolding",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:copper_scaffolding",
-      "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-COPPER-TABLE-CLOTH-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:copper_table_cloth",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:copper_table_cloth",
-      "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-COPYCAT-BARS-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:copycat_bars",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:copycat_bars",
-      "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-COPYCAT-BASE-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:copycat_base",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:copycat_base",
-      "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-COPYCAT-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:copycat",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:copycat",
-      "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-COPYCAT-PANEL-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:copycat_panel",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:copycat_panel",
-      "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-COPYCAT-STEP-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:copycat_step",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:copycat_step",
-      "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-CREATIVE-BLAZE-CAKE-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:creative_blaze_cake",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:creative_blaze_cake",
-      "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-CRUSHED-RAW--ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:crushed_raw_",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:crushed_raw_",
-      "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-CUCKOO-CLOCK-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:cuckoo_clock",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:cuckoo_clock",
-      "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-CUCKOO-CLOCK-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:cuckoo_clock",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:cuckoo_clock",
-      "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-CURSED-BELL-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:cursed_bell",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:cursed_bell",
-      "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-DEEPSLATE-ZINC-ORE-BLOCK",
-      "assetPlan": "Use the matching Java PNG as a build-time staged Bedrock texture.",
-      "bedrockIdentifier": "createbedrock:deepslate_zinc_ore",
-      "blocker": null,
-      "dependencies": [
-        "Vanilla Bedrock crafting and loot-table formats"
-      ],
-      "deliveryPackage": "S3-8A",
-      "domain": "content",
-      "javaIdentifier": "create:deepslate_zinc_ore",
-      "kind": "block",
-      "lootPlan": "Explicit raw-zinc loot; silk-touch and fortune equivalence remain platform-test work.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "World generation is deferred; creative and explicit loot acquisition are available.",
-      "resourcePlan": "Full-cube block, creative-menu entry, EN/ZH names, terrain-atlas mapping, and explicit loot.",
-      "testPlan": "Foundation resource/recipe contract, source validation, build validation, and pack inspection."
-    },
-    {
-      "acceptanceId": "CONTENT-DESK-BELL-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:desk_bell",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:desk_bell",
-      "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-DESK-BELL-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:desk_bell",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:desk_bell",
-      "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-DISPLAY-BOARD-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:display_board",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:display_board",
-      "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-EMPTY-BLAZE-BURNER-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:empty_blaze_burner",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:empty_blaze_burner",
-      "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-EXPERIENCE-BLOCK-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:experience_block",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:experience_block",
-      "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-EXPERIENCE-NUGGET-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:experience_nugget",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:experience_nugget",
-      "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-FLAP-DISPLAY-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:flap_display",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:flap_display",
-      "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-FRAMED-GLASS-DOOR-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:framed_glass_door",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:framed_glass_door",
-      "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-FRAMED-GLASS-TRAPDOOR-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:framed_glass_trapdoor",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:framed_glass_trapdoor",
-      "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-HANDHELD-WORLDSHAPER-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:handheld_worldshaper",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:handheld_worldshaper",
-      "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-HAUNTED-BELL-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:haunted_bell",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:haunted_bell",
-      "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-HONEYED-APPLE-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:honeyed_apple",
-      "blocker": null,
-      "dependencies": [
-        "S3-8A foundation materials"
-      ],
-      "deliveryPackage": "S3-8B",
-      "domain": "content",
-      "javaIdentifier": "create:honeyed_apple",
-      "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
-    },
-    {
-      "acceptanceId": "CONTENT-LINEAR-CHASSIS-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:linear_chassis",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:chassis",
+      "kind": "block_entity",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-CHOCOLATE-GLAZED-BERRIES-ITEM",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:chocolate_glazed_berries",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:chocolate_glazed_berries",
+      "kind": "item",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-CHROMATIC-COMPOUND-ITEM",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:chromatic_compound",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:chromatic_compound",
+      "kind": "item",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-CLOCKWORK-BEARING-BLOCK",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:clockwork_bearing",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:clockwork_bearing",
+      "kind": "block",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-CLOCKWORK-BEARING-BLOCK_ENTITY",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:clockwork_bearing",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:clockwork_bearing",
+      "kind": "block_entity",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-CONTROLS-BLOCK",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:controls",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:controls",
+      "kind": "block",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-COPPER-DOOR-BLOCK",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:copper_door",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:copper_door",
+      "kind": "block",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-COPPER-LADDER-BLOCK",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:copper_ladder",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:copper_ladder",
+      "kind": "block",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-COPPER-SCAFFOLDING-BLOCK",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:copper_scaffolding",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:copper_scaffolding",
+      "kind": "block",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-COPPER-TABLE-CLOTH-BLOCK",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:copper_table_cloth",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:copper_table_cloth",
+      "kind": "block",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-COPYCAT-BARS-BLOCK",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:copycat_bars",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:copycat_bars",
+      "kind": "block",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-COPYCAT-BASE-BLOCK",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:copycat_base",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:copycat_base",
+      "kind": "block",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-COPYCAT-BLOCK_ENTITY",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:copycat_panel",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:copycat",
+      "kind": "block_entity",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-COPYCAT-PANEL-BLOCK",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:copycat_panel",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:copycat_panel",
+      "kind": "block",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-COPYCAT-STEP-BLOCK",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:copycat_step",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:copycat_step",
+      "kind": "block",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-CREATIVE-BLAZE-CAKE-ITEM",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:creative_blaze_cake",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:creative_blaze_cake",
+      "kind": "item",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-CRUSHED-RAW--ITEM",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:crushed_raw_zinc",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:crushed_raw_",
+      "kind": "item",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-CUCKOO-CLOCK-BLOCK",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:cuckoo_clock",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:cuckoo_clock",
+      "kind": "block",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-CUCKOO-CLOCK-BLOCK_ENTITY",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:cuckoo_clock",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:cuckoo_clock",
+      "kind": "block_entity",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-CURSED-BELL-BLOCK_ENTITY",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:haunted_bell",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:cursed_bell",
+      "kind": "block_entity",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-DEEPSLATE-ZINC-ORE-BLOCK",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:deepslate_zinc_ore",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:deepslate_zinc_ore",
+      "kind": "block",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-DESK-BELL-BLOCK",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:desk_bell",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:desk_bell",
+      "kind": "block",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-DESK-BELL-BLOCK_ENTITY",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:desk_bell",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:desk_bell",
+      "kind": "block_entity",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-DISPLAY-BOARD-BLOCK",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:display_board",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:display_board",
+      "kind": "block",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-EMPTY-BLAZE-BURNER-ITEM",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:empty_blaze_burner",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:empty_blaze_burner",
+      "kind": "item",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-EXPERIENCE-BLOCK-BLOCK",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:experience_block",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:experience_block",
+      "kind": "block",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-EXPERIENCE-NUGGET-ITEM",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:experience_nugget",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:experience_nugget",
+      "kind": "item",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-FLAP-DISPLAY-BLOCK_ENTITY",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:display_board",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:flap_display",
+      "kind": "block_entity",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-FRAMED-GLASS-DOOR-BLOCK",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:framed_glass_door",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:framed_glass_door",
+      "kind": "block",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-FRAMED-GLASS-TRAPDOOR-BLOCK",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:framed_glass_trapdoor",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:framed_glass_trapdoor",
+      "kind": "block",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-HANDHELD-WORLDSHAPER-ITEM",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:handheld_worldshaper",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:handheld_worldshaper",
+      "kind": "item",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-HAUNTED-BELL-BLOCK",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:haunted_bell",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:haunted_bell",
+      "kind": "block",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-HONEYED-APPLE-ITEM",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:honeyed_apple",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
+      "domain": "content",
+      "javaIdentifier": "create:honeyed_apple",
+      "kind": "item",
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
+    },
+    {
+      "acceptanceId": "CONTENT-LINEAR-CHASSIS-BLOCK",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:linear_chassis",
+      "blocker": null,
+      "dependencies": [
+        "S3-7 static content contract"
+      ],
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:linear_chassis",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-LIT-BLAZE-BURNER-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:lit_blaze_burner",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:lit_blaze_burner",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-MECHANICAL-CRAFTER-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:mechanical_crafter",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:mechanical_crafter",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-MECHANICAL-CRAFTER-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:mechanical_crafter",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:mechanical_crafter",
       "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-MECHANICAL-PLOUGH-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:mechanical_plough",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:mechanical_plough",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-MECHANICAL-ROLLER-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:mechanical_roller",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:mechanical_roller",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-MECHANICAL-ROLLER-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:mechanical_roller",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:mechanical_roller",
       "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-METAL-BRACKET-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:metal_bracket",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:metal_bracket",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-METAL-GIRDER-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:metal_girder",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:metal_girder",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-MYSTERIOUS-CUCKOO-CLOCK-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:mysterious_cuckoo_clock",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:mysterious_cuckoo_clock",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-NOZZLE-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:nozzle",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:nozzle",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-NOZZLE-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:nozzle",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:nozzle",
       "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-PECULIAR-BELL-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:peculiar_bell",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:peculiar_bell",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-PECULIAR-BELL-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:peculiar_bell",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:peculiar_bell",
       "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-PISTON-EXTENSION-POLE-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:piston_extension_pole",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:piston_extension_pole",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-PLACARD-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:placard",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:placard",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-PLACARD-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:placard",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:placard",
       "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-PORTABLE-STORAGE-INTERFACE-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:portable_storage_interface",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:portable_storage_interface",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-PORTABLE-STORAGE-INTERFACE-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:portable_storage_interface",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:portable_storage_interface",
       "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-POTATO-PROJECTILE-ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:potato_projectile",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:potato_projectile",
       "kind": "entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-RADIAL-CHASSIS-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:radial_chassis",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:radial_chassis",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-RAILWAY-CASING-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:railway_casing",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:railway_casing",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-RAW-ZINC-BLOCK-BLOCK",
-      "assetPlan": "Use the matching Java PNG as a build-time staged Bedrock texture.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:raw_zinc_block",
       "blocker": null,
       "dependencies": [
-        "Vanilla Bedrock crafting and loot-table formats"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8A",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:raw_zinc_block",
       "kind": "block",
-      "lootPlan": "Explicit self-drop loot table.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "Nine raw zinc pack into one raw zinc block; one raw zinc block unpacks into nine raw zinc.",
-      "resourcePlan": "Full-cube block, creative-menu entry, EN/ZH names, terrain-atlas mapping, and explicit loot.",
-      "testPlan": "Foundation resource/recipe contract, source validation, build validation, and pack inspection."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-RED-SAND-PAPER-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:red_sand_paper",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:red_sand_paper",
       "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-REFINED-RADIANCE-CASING-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:refined_radiance_casing",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:refined_radiance_casing",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-REFINED-RADIANCE-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:refined_radiance",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:refined_radiance",
       "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-ROSE-QUARTZ-BLOCK-BLOCK",
-      "assetPlan": "Use the matching Java PNG as a build-time staged Bedrock texture.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:rose_quartz_block",
       "blocker": null,
       "dependencies": [
-        "Vanilla Bedrock crafting and loot-table formats"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8A",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:rose_quartz_block",
       "kind": "block",
-      "lootPlan": "Explicit self-drop loot table.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "World generation is deferred; creative and explicit loot acquisition are available.",
-      "resourcePlan": "Full-cube block, creative-menu entry, EN/ZH names, terrain-atlas mapping, and explicit loot.",
-      "testPlan": "Foundation resource/recipe contract, source validation, build validation, and pack inspection."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-ROSE-QUARTZ-LAMP-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:rose_quartz_lamp",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:rose_quartz_lamp",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-ROSE-QUARTZ-TILES-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:rose_quartz_tiles",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:rose_quartz_tiles",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-SAIL-FRAME-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:sail_frame",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:sail_frame",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-SAND-PAPER-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:sand_paper",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:sand_paper",
       "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-SECONDARY-LINEAR-CHASSIS-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:secondary_linear_chassis",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:secondary_linear_chassis",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-SHADOW-STEEL-CASING-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:shadow_steel_casing",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:shadow_steel_casing",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-SHADOW-STEEL-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:shadow_steel",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:shadow_steel",
       "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-SHOPPING-LIST-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:shopping_list",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:shopping_list",
       "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-SLIDING-DOOR-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:sliding_door",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:train_door",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:sliding_door",
       "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-SMALL-ROSE-QUARTZ-TILES-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:small_rose_quartz_tiles",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:small_rose_quartz_tiles",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-SPEEDOMETER-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:speedometer",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:speedometer",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-SPEEDOMETER-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:speedometer",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:speedometer",
       "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-STEAM-WHISTLE-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:steam_whistle",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:steam_whistle",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-STEAM-WHISTLE-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:steam_whistle",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:steam_whistle",
       "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-STEAM-WHISTLE-EXTENSION-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:steam_whistle_extension",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:steam_whistle_extension",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-STOCK-TICKER-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:stock_ticker",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:stock_ticker",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-STOCK-TICKER-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:stock_ticker",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:stock_ticker",
       "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-STOCKPILE-SWITCH-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:stockpile_switch",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:stockpile_switch",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-STOCKPILE-SWITCH-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:stockpile_switch",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:stockpile_switch",
       "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-STRESSOMETER-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:stressometer",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:stressometer",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-STRESSOMETER-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:stressometer",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:stressometer",
       "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-SUPER-GLUE-ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:super_glue",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:super_glue",
       "kind": "entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-SUPER-GLUE-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:super_glue",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:super_glue",
       "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-SWEET-ROLL-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:sweet_roll",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:sweet_roll",
       "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-TABLE-CLOTH-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
-      "bedrockIdentifier": "createbedrock:table_cloth",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
+      "bedrockIdentifier": "createbedrock:andesite_table_cloth",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:table_cloth",
       "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-TREE-FERTILIZER-ITEM",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:tree_fertilizer",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:tree_fertilizer",
       "kind": "item",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-TURNTABLE-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:turntable",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:turntable",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-TURNTABLE-BLOCK_ENTITY",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:turntable",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:turntable",
       "kind": "block_entity",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-WEATHERED-IRON-BLOCK-BLOCK",
-      "assetPlan": "Use the matching Java PNG as a build-time staged Bedrock texture.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:weathered_iron_block",
       "blocker": null,
       "dependencies": [
-        "Vanilla Bedrock crafting and loot-table formats"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8A",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:weathered_iron_block",
       "kind": "block",
-      "lootPlan": "Explicit self-drop loot table.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "One iron ingot at a stonecutter creates two weathered iron blocks.",
-      "resourcePlan": "Full-cube block, creative-menu entry, EN/ZH names, terrain-atlas mapping, and explicit loot.",
-      "testPlan": "Foundation resource/recipe contract, source validation, build validation, and pack inspection."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-WHITE-SAIL-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:white_sail",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:white_sail",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-WOODEN-BRACKET-BLOCK",
-      "assetPlan": "Audit the Java model and texture before selecting a Bedrock representation.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:wooden_bracket",
       "blocker": null,
       "dependencies": [
-        "S3-8A foundation materials"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8B",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:wooden_bracket",
       "kind": "block",
-      "lootPlan": "Classify self-drop, transformed drop, or machine-only acquisition from Java data.",
-      "matrixStatus": "specification_pending",
-      "recipePlan": "Classify vanilla-table, machine, or unsupported recipe path from Java data.",
-      "resourcePlan": "Do not claim assets until geometry, atlas, language, and creative access are specified.",
-      "testPlan": "Add a focused resource/recipe contract and persistence test where stateful."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "CONTENT-ZINC-ORE-BLOCK",
-      "assetPlan": "Use the matching Java PNG as a build-time staged Bedrock texture.",
+      "assetPlan": "Tracked by the S3-7 source and built content contract.",
       "bedrockIdentifier": "createbedrock:zinc_ore",
       "blocker": null,
       "dependencies": [
-        "Vanilla Bedrock crafting and loot-table formats"
+        "S3-7 static content contract"
       ],
-      "deliveryPackage": "S3-8A",
+      "deliveryPackage": "completed:S3-7",
       "domain": "content",
       "javaIdentifier": "create:zinc_ore",
       "kind": "block",
-      "lootPlan": "Explicit raw-zinc loot; silk-touch and fortune equivalence remain platform-test work.",
-      "matrixStatus": "implementation_in_progress",
-      "recipePlan": "World generation is deferred; creative and explicit loot acquisition are available.",
-      "resourcePlan": "Full-cube block, creative-menu entry, EN/ZH names, terrain-atlas mapping, and explicit loot.",
-      "testPlan": "Foundation resource/recipe contract, source validation, build validation, and pack inspection."
+      "lootPlan": "Audit Java-equivalent drops in the owning system package.",
+      "matrixStatus": "static_verified",
+      "recipePlan": "Audit Java-equivalent recipes in the owning system package.",
+      "resourcePlan": "Static behavior, translations, geometry, and texture coverage are verified.",
+      "testPlan": "Existing focused Node suite plus source/build content-contract validation."
     },
     {
       "acceptanceId": "FLUIDS-COPPER-VALVE-HANDLE-BLOCK",

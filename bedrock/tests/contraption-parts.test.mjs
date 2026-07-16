@@ -36,12 +36,66 @@ test("Contraption part registry covers kinetic blocks and uses the generic proje
 	assert.equal(partTypeFor("createbedrock:elevator_contact"), "createbedrock:contraption_part");
 	assert.equal(isMovableBlockType("createbedrock:belt"), true);
 	assert.equal(partTypeFor("createbedrock:belt"), "createbedrock:contraption_part");
-	assert.equal(MOVABLE_BLOCK_TYPES.size, 38);
+	for (const typeId of [
+		"createbedrock:stockpile_switch",
+		"createbedrock:speedometer",
+		"createbedrock:stressometer",
+		"createbedrock:placard",
+		"createbedrock:display_board",
+		"createbedrock:stock_ticker",
+		"createbedrock:cuckoo_clock",
+		"createbedrock:mysterious_cuckoo_clock",
+		"createbedrock:peculiar_bell",
+		"createbedrock:haunted_bell",
+		"createbedrock:andesite_door",
+		"createbedrock:brass_door",
+		"createbedrock:copper_door",
+		"createbedrock:framed_glass_door",
+		"createbedrock:train_door",
+		"createbedrock:steam_whistle",
+		"createbedrock:steam_whistle_extension",
+		"createbedrock:sail_frame",
+		"createbedrock:white_sail"
+	]) {
+		assert.equal(isMovableBlockType(typeId), true);
+		assert.equal(partTypeFor(typeId), "createbedrock:contraption_part");
+	}
+	assert.equal(isMovableBlockType("createbedrock:nozzle"), true);
+	assert.equal(partTypeFor("createbedrock:nozzle"), "createbedrock:contraption_part");
+	assert.equal(isMovableBlockType("createbedrock:mechanical_crafter"), true);
+	assert.equal(partTypeFor("createbedrock:mechanical_crafter"), "createbedrock:contraption_part");
+	for (const typeId of [
+		"createbedrock:controls",
+		"createbedrock:mechanical_plough",
+		"createbedrock:mechanical_roller",
+		"createbedrock:mechanical_drill",
+		"createbedrock:piston_extension_pole",
+		"createbedrock:portable_storage_interface"
+	]) {
+		assert.equal(isMovableBlockType(typeId), true);
+		assert.equal(partTypeFor(typeId), "createbedrock:contraption_part");
+	}
+	for (const typeId of ["createbedrock:linear_chassis", "createbedrock:secondary_linear_chassis", "createbedrock:radial_chassis"]) {
+		assert.equal(isMovableBlockType(typeId), true);
+		assert.equal(partTypeFor(typeId), "createbedrock:contraption_part");
+	}
+	for (const typeId of ["createbedrock:copycat_panel", "createbedrock:copycat_step"]) {
+		assert.equal(isMovableBlockType(typeId), true);
+		assert.equal(partTypeFor(typeId), "createbedrock:contraption_part");
+	}
+	assert.equal(MOVABLE_BLOCK_TYPES.size, 70);
 	assert.deepEqual([...STATELESS_MOVABLE_BLOCK_TYPES].sort(), [
 		"createbedrock:andesite_casing",
 		"createbedrock:brass_casing",
 		"createbedrock:copper_casing",
 		"createbedrock:industrial_iron_block",
+		"createbedrock:linear_chassis",
+		"createbedrock:mechanical_drill",
+		"createbedrock:radial_chassis",
+		"createbedrock:sail_frame",
+		"createbedrock:secondary_linear_chassis",
+		"createbedrock:steam_whistle_extension",
+		"createbedrock:white_sail",
 		"createbedrock:zinc_block"
 	]);
 });

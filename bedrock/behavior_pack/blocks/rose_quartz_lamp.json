@@ -1,0 +1,1676 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:rose_quartz_lamp",
+      "menu_category": {
+        "category": "construction",
+        "group": "itemGroup.name.misc"
+      },
+      "properties": {
+        "createbedrock:activate": [
+          0,
+          1
+        ],
+        "createbedrock:powered": [
+          0,
+          1
+        ],
+        "createbedrock:powering": [
+          0,
+          1
+        ],
+        "createbedrock:output_mask": [
+          63,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62
+        ]
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 6
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1
+      },
+      "minecraft:geometry": "geometry.createbedrock.rose_quartz_lamp",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.rose_quartz_lamp"
+        },
+        "material_instances": {
+		  "all": {
+			"texture": "createbedrock_rose_quartz_lamp",
+			"render_method": "opaque"
+		  },
+          "*": {
+            "texture": "createbedrock_rose_quartz_lamp",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:material_instances": {
+		"all": {
+		  "texture": "createbedrock_rose_quartz_lamp",
+		  "render_method": "opaque"
+		},
+        "*": {
+          "texture": "createbedrock_rose_quartz_lamp",
+          "render_method": "opaque"
+        }
+      },
+      "minecraft:redstone_consumer": {
+        "min_power": 0,
+        "propagates_power": false
+      },
+      "minecraft:tick": {
+        "interval_range": [
+          1,
+          1
+        ],
+        "looping": true
+      },
+      "minecraft:loot": "loot_tables/blocks/rose_quartz_lamp.json",
+      "createbedrock:rose_quartz_lamp_runtime": {}
+    },
+    "permutations": [
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 63",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+			"all": {
+			  "texture": "createbedrock_rose_quartz_lamp_powered",
+			  "render_method": "opaque"
+			},
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "east",
+              "south",
+              "west",
+              "up",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 0",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+			"all": {
+			  "texture": "createbedrock_rose_quartz_lamp_powered",
+			  "render_method": "opaque"
+			},
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 1",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+			"all": {
+			  "texture": "createbedrock_rose_quartz_lamp_powered",
+			  "render_method": "opaque"
+			},
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 2",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+			"all": {
+			  "texture": "createbedrock_rose_quartz_lamp_powered",
+			  "render_method": "opaque"
+			},
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "east"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 3",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+			"all": {
+			  "texture": "createbedrock_rose_quartz_lamp_powered",
+			  "render_method": "opaque"
+			},
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "east"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 4",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+			"all": {
+			  "texture": "createbedrock_rose_quartz_lamp_powered",
+			  "render_method": "opaque"
+			},
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "south"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 5",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+			"all": {
+			  "texture": "createbedrock_rose_quartz_lamp_powered",
+			  "render_method": "opaque"
+			},
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "south"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 6",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "east",
+              "south"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 7",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "east",
+              "south"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 8",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "west"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 9",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "west"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 10",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "east",
+              "west"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 11",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "east",
+              "west"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 12",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "south",
+              "west"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 13",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "south",
+              "west"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 14",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "east",
+              "south",
+              "west"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 15",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "east",
+              "south",
+              "west"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 16",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "up"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 17",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "up"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 18",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "east",
+              "up"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 19",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "east",
+              "up"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 20",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "south",
+              "up"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 21",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "south",
+              "up"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 22",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "east",
+              "south",
+              "up"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 23",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "east",
+              "south",
+              "up"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 24",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "west",
+              "up"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 25",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "west",
+              "up"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 26",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "east",
+              "west",
+              "up"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 27",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "east",
+              "west",
+              "up"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 28",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "south",
+              "west",
+              "up"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 29",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "south",
+              "west",
+              "up"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 30",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "east",
+              "south",
+              "west",
+              "up"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 31",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "east",
+              "south",
+              "west",
+              "up"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 32",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 33",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 34",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "east",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 35",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "east",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 36",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "south",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 37",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "south",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 38",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "east",
+              "south",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 39",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "east",
+              "south",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 40",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "west",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 41",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "west",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 42",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "east",
+              "west",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 43",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "east",
+              "west",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 44",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "south",
+              "west",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 45",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "south",
+              "west",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 46",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "east",
+              "south",
+              "west",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 47",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "east",
+              "south",
+              "west",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 48",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "up",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 49",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "up",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 50",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "east",
+              "up",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 51",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "east",
+              "up",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 52",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "south",
+              "up",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 53",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "south",
+              "up",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 54",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "east",
+              "south",
+              "up",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 55",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "east",
+              "south",
+              "up",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 56",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "west",
+              "up",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 57",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "west",
+              "up",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 58",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "east",
+              "west",
+              "up",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 59",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "east",
+              "west",
+              "up",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 60",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "south",
+              "west",
+              "up",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 61",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "north",
+              "south",
+              "west",
+              "up",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powering') == 1 && query.block_state('createbedrock:output_mask') == 62",
+        "components": {
+          "minecraft:light_emission": 15,
+          "minecraft:material_instances": {
+            "all": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "createbedrock_rose_quartz_lamp_powered",
+              "render_method": "opaque"
+            }
+          },
+          "minecraft:redstone_producer": {
+            "connected_faces": [
+              "east",
+              "south",
+              "west",
+              "up",
+              "down"
+            ],
+            "power": 15
+          }
+        }
+      }
+    ]
+  }
+}

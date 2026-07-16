@@ -3,8 +3,8 @@
 	"schemaVersion": 1,
 	"summary": {
 		"manual_specification": 15,
-		"migrated": 2,
-		"unsupported_dependency": 4
+		"migrated": 3,
+		"unsupported_dependency": 3
 	},
 	"records": [
 		{
@@ -59,9 +59,12 @@
 			"status": "manual_specification"
 		},
 		{
-			"reason": "unavailable_item",
+			"recipeId": "create:basin/mixing/brass_ingot:0",
+			"recipeIds": [
+				"create:basin/mixing/brass_ingot:0"
+			],
 			"source": "mixing/brass_ingot",
-			"status": "unsupported_dependency"
+			"status": "migrated"
 		},
 		{
 			"reason": "unsupported_recipe_shape",

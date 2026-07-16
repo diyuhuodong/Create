@@ -1,0 +1,25 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:cuckoo_clock",
+      "menu_category": { "category": "construction", "group": "itemGroup.name.misc" },
+      "properties": {
+        "createbedrock:animation": [0, 1, 2, 3],
+        "createbedrock:hour_hand": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+        "createbedrock:minute_hand": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 2 },
+      "minecraft:geometry": "geometry.createbedrock.cuckoo_clock",
+      "minecraft:collision_box": { "origin": [-7, 0, -3], "size": [14, 16, 6] },
+      "minecraft:selection_box": { "origin": [-7, 0, -3], "size": [14, 16, 6] },
+      "minecraft:loot": "loot_tables/blocks/cuckoo_clock.json",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.cuckoo_clock" }, "material_instances": { "*": { "texture": "createbedrock_cuckoo_clock", "render_method": "opaque" } } },
+      "minecraft:material_instances": { "*": { "texture": "createbedrock_cuckoo_clock", "render_method": "opaque" } }
+    }
+  }
+}

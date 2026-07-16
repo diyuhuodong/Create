@@ -12,7 +12,7 @@ test("processing recipe import maps Create identifiers and records every source 
 	assert.equal(mapJavaProcessingIdentifier("create:wheat_flour"), "createbedrock:wheat_flour");
 	assert.equal(mapJavaProcessingIdentifier("minecraft:wheat"), "minecraft:wheat");
 	assert.equal(supportsProcessingRecipeItems(["minecraft:wheat", "createbedrock:wheat_flour"]), true);
-	assert.equal(supportsProcessingRecipeItems(["createbedrock:brass_ingot"]), false);
+	assert.equal(supportsProcessingRecipeItems(["createbedrock:brass_ingot"]), true);
 
 	assert.deepEqual(processingImportReport("milling", [
 		{ source: "unsupported", status: "unsupported_dependency", reason: "unavailable_item" },
@@ -59,6 +59,7 @@ test("S3-11 reports classify item-port recipes and explicitly retain unsupported
 		assert.equal(report.records.length, Object.values(report.summary).reduce((total, value) => total + value, 0));
 	}
 	const basin = JSON.parse(await readFile(new URL("../data/recipes/basin-import-report.json", import.meta.url), "utf8"));
+	assert.ok(basin.records.some(record => record.source === "mixing/brass_ingot" && record.status === "migrated"));
 	assert.ok(basin.records.some(record => record.source === "mixing/lava_from_cobble" && record.reason === "unsupported_recipe_shape"));
 	const fan = JSON.parse(await readFile(new URL("../data/recipes/fan-import-report.json", import.meta.url), "utf8"));
 	assert.ok(fan.records.some(record => record.source === "minecraft:blasting recipe registry" && record.reason === "runtime_recipe_registry_not_exported"));

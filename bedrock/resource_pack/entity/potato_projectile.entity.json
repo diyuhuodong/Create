@@ -1,0 +1,18 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "createbedrock:potato_projectile",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/items/potato"
+      },
+      "geometry": {
+        "default": "geometry.createbedrock.potato_projectile"
+      },
+      "render_controllers": ["controller.render.createbedrock.contraption"]
+    }
+  }
+}

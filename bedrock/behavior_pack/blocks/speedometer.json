@@ -1,0 +1,65 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:speedometer",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
+      "properties": {
+        "createbedrock:axis": ["x", "y", "z"],
+        "createbedrock:dial_level": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+        "createbedrock:gauge_color": [0, 1, 2, 3],
+        "createbedrock:signal": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+      },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.speedometer_gauge_0",
+      "minecraft:item_visual": {
+        "geometry": { "identifier": "geometry.createbedrock.speedometer_gauge_0" },
+        "material_instances": { "gauge": { "texture": "createbedrock_gauge", "render_method": "opaque" }, "*": { "texture": "createbedrock_gauge", "render_method": "opaque" } }
+      },
+      "minecraft:loot": "loot_tables/blocks/speedometer.json",
+      "minecraft:material_instances": { "gauge": { "texture": "createbedrock_gauge", "render_method": "opaque" }, "*": { "texture": "createbedrock_gauge", "render_method": "opaque" } }
+    },
+    "permutations": [
+      { "condition": "query.block_state('createbedrock:dial_level') == 0", "components": { "minecraft:geometry": "geometry.createbedrock.speedometer_gauge_0" } },
+      { "condition": "query.block_state('createbedrock:dial_level') == 1", "components": { "minecraft:geometry": "geometry.createbedrock.speedometer_gauge_1" } },
+      { "condition": "query.block_state('createbedrock:dial_level') == 2", "components": { "minecraft:geometry": "geometry.createbedrock.speedometer_gauge_2" } },
+      { "condition": "query.block_state('createbedrock:dial_level') == 3", "components": { "minecraft:geometry": "geometry.createbedrock.speedometer_gauge_3" } },
+      { "condition": "query.block_state('createbedrock:dial_level') == 4", "components": { "minecraft:geometry": "geometry.createbedrock.speedometer_gauge_4" } },
+      { "condition": "query.block_state('createbedrock:dial_level') == 5", "components": { "minecraft:geometry": "geometry.createbedrock.speedometer_gauge_5" } },
+      { "condition": "query.block_state('createbedrock:dial_level') == 6", "components": { "minecraft:geometry": "geometry.createbedrock.speedometer_gauge_6" } },
+      { "condition": "query.block_state('createbedrock:dial_level') == 7", "components": { "minecraft:geometry": "geometry.createbedrock.speedometer_gauge_7" } },
+      { "condition": "query.block_state('createbedrock:dial_level') == 8", "components": { "minecraft:geometry": "geometry.createbedrock.speedometer_gauge_8" } },
+      { "condition": "query.block_state('createbedrock:dial_level') == 9", "components": { "minecraft:geometry": "geometry.createbedrock.speedometer_gauge_9" } },
+      { "condition": "query.block_state('createbedrock:dial_level') == 10", "components": { "minecraft:geometry": "geometry.createbedrock.speedometer_gauge_10" } },
+      { "condition": "query.block_state('createbedrock:dial_level') == 11", "components": { "minecraft:geometry": "geometry.createbedrock.speedometer_gauge_11" } },
+      { "condition": "query.block_state('createbedrock:dial_level') == 12", "components": { "minecraft:geometry": "geometry.createbedrock.speedometer_gauge_12" } },
+      { "condition": "query.block_state('createbedrock:dial_level') == 13", "components": { "minecraft:geometry": "geometry.createbedrock.speedometer_gauge_13" } },
+      { "condition": "query.block_state('createbedrock:dial_level') == 14", "components": { "minecraft:geometry": "geometry.createbedrock.speedometer_gauge_14" } },
+      { "condition": "query.block_state('createbedrock:dial_level') == 15", "components": { "minecraft:geometry": "geometry.createbedrock.speedometer_gauge_15" } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 0", "components": { "minecraft:transformation": { "rotation": [180, 0, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 2", "components": { "minecraft:transformation": { "rotation": [90, 0, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 3", "components": { "minecraft:transformation": { "rotation": [90, 180, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 4", "components": { "minecraft:transformation": { "rotation": [90, 270, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 5", "components": { "minecraft:transformation": { "rotation": [90, 90, 0] } } },
+      { "condition": "query.block_state('createbedrock:signal') == 1", "components": { "minecraft:redstone_producer": { "connected_faces": ["north", "east", "south", "west", "up", "down"], "power": 1 } } },
+      { "condition": "query.block_state('createbedrock:signal') == 2", "components": { "minecraft:redstone_producer": { "connected_faces": ["north", "east", "south", "west", "up", "down"], "power": 2 } } },
+      { "condition": "query.block_state('createbedrock:signal') == 3", "components": { "minecraft:redstone_producer": { "connected_faces": ["north", "east", "south", "west", "up", "down"], "power": 3 } } },
+      { "condition": "query.block_state('createbedrock:signal') == 4", "components": { "minecraft:redstone_producer": { "connected_faces": ["north", "east", "south", "west", "up", "down"], "power": 4 } } },
+      { "condition": "query.block_state('createbedrock:signal') == 5", "components": { "minecraft:redstone_producer": { "connected_faces": ["north", "east", "south", "west", "up", "down"], "power": 5 } } },
+      { "condition": "query.block_state('createbedrock:signal') == 6", "components": { "minecraft:redstone_producer": { "connected_faces": ["north", "east", "south", "west", "up", "down"], "power": 6 } } },
+      { "condition": "query.block_state('createbedrock:signal') == 7", "components": { "minecraft:redstone_producer": { "connected_faces": ["north", "east", "south", "west", "up", "down"], "power": 7 } } },
+      { "condition": "query.block_state('createbedrock:signal') == 8", "components": { "minecraft:redstone_producer": { "connected_faces": ["north", "east", "south", "west", "up", "down"], "power": 8 } } },
+      { "condition": "query.block_state('createbedrock:signal') == 9", "components": { "minecraft:redstone_producer": { "connected_faces": ["north", "east", "south", "west", "up", "down"], "power": 9 } } },
+      { "condition": "query.block_state('createbedrock:signal') == 10", "components": { "minecraft:redstone_producer": { "connected_faces": ["north", "east", "south", "west", "up", "down"], "power": 10 } } },
+      { "condition": "query.block_state('createbedrock:signal') == 11", "components": { "minecraft:redstone_producer": { "connected_faces": ["north", "east", "south", "west", "up", "down"], "power": 11 } } },
+      { "condition": "query.block_state('createbedrock:signal') == 12", "components": { "minecraft:redstone_producer": { "connected_faces": ["north", "east", "south", "west", "up", "down"], "power": 12 } } },
+      { "condition": "query.block_state('createbedrock:signal') == 13", "components": { "minecraft:redstone_producer": { "connected_faces": ["north", "east", "south", "west", "up", "down"], "power": 13 } } },
+      { "condition": "query.block_state('createbedrock:signal') == 14", "components": { "minecraft:redstone_producer": { "connected_faces": ["north", "east", "south", "west", "up", "down"], "power": 14 } } },
+      { "condition": "query.block_state('createbedrock:signal') == 15", "components": { "minecraft:redstone_producer": { "connected_faces": ["north", "east", "south", "west", "up", "down"], "power": 15 } } }
+    ]
+  }
+}

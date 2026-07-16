@@ -1,0 +1,21 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:steam_whistle",
+      "menu_category": { "category": "construction", "group": "itemGroup.name.misc" },
+      "properties": { "createbedrock:powered": [0, 1], "createbedrock:size": [0, 1, 2], "createbedrock:pitch": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24] },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 }, "minecraft:destructible_by_mining": { "seconds_to_destroy": 2 },
+      "minecraft:geometry": "geometry.createbedrock.steam_whistle_medium_floor", "minecraft:collision_box": { "origin": [-5, 0, -5], "size": [10, 14, 10] }, "minecraft:selection_box": { "origin": [-5, 0, -5], "size": [10, 14, 10] },
+      "minecraft:loot": "loot_tables/blocks/steam_whistle.json", "minecraft:tick": { "interval_range": [8, 8], "looping": true }, "minecraft:redstone_consumer": { "min_power": 0, "propagates_power": false }, "createbedrock:steam_whistle_runtime": {},
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.steam_whistle_medium_floor" }, "material_instances": { "*": { "texture": "createbedrock_whistle", "render_method": "opaque" } } }, "minecraft:material_instances": { "*": { "texture": "createbedrock_whistle", "render_method": "opaque" } }
+    },
+    "permutations": [
+      { "condition": "query.block_state('createbedrock:size') == 0", "components": { "minecraft:geometry": "geometry.createbedrock.steam_whistle_small_floor" } },
+      { "condition": "query.block_state('createbedrock:size') == 2", "components": { "minecraft:geometry": "geometry.createbedrock.steam_whistle_large_floor" } }
+    ]
+  }
+}

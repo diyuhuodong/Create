@@ -1,0 +1,20 @@
+{
+  "format_version": "1.20.20",
+  "sound_definitions": {
+    "createbedrock:desk_bell": {
+      "__use_legacy_max_distance": true,
+      "category": "block",
+      "max_distance": 64,
+      "min_distance": null,
+      "sounds": [
+        "sounds/create/desk_bell"
+      ]
+    },
+    "createbedrock:haunted_bell_use": { "category": "block", "sounds": ["sounds/create/haunted_bell_use"] },
+    "createbedrock:haunted_bell_convert": { "category": "block", "sounds": ["sounds/create/haunted_bell_convert"] },
+    "createbedrock:whistle": { "category": "block", "sounds": ["sounds/create/whistle"] },
+    "createbedrock:whistle_low": { "category": "block", "sounds": ["sounds/create/whistle_low"] },
+    "createbedrock:whistle_high": { "category": "block", "sounds": ["sounds/create/whistle_high"] },
+    "createbedrock:cardboard_bonk": { "category": "player", "sounds": ["sounds/create/cardboard_bonk"] }
+  }
+}

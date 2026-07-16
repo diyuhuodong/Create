@@ -1,0 +1,27 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:white_sail",
+      "menu_category": { "category": "construction", "group": "itemGroup.name.misc" },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 3 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.white_sail",
+      "minecraft:collision_box": false,
+      "minecraft:selection_box": { "origin": [-8, 5, -8], "size": [16, 5, 16] },
+      "minecraft:loot": "loot_tables/blocks/white_sail.json",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.white_sail" }, "material_instances": { "canvas_white": { "texture": "createbedrock_white_sail", "render_method": "alpha_test" }, "frame": { "texture": "createbedrock_sail_frame", "render_method": "opaque" }, "*": { "texture": "createbedrock_white_sail", "render_method": "alpha_test" } } },
+      "minecraft:material_instances": { "canvas_white": { "texture": "createbedrock_white_sail", "render_method": "alpha_test" }, "frame": { "texture": "createbedrock_sail_frame", "render_method": "opaque" }, "*": { "texture": "createbedrock_white_sail", "render_method": "alpha_test" } }
+    },
+    "permutations": [
+      { "condition": "query.block_state('minecraft:facing_direction') == 0", "components": { "minecraft:transformation": { "rotation": [180, 0, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 2", "components": { "minecraft:transformation": { "rotation": [90, 0, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 3", "components": { "minecraft:transformation": { "rotation": [-90, 0, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 4", "components": { "minecraft:transformation": { "rotation": [0, 0, 90] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 5", "components": { "minecraft:transformation": { "rotation": [0, 0, -90] } } }
+    ]
+  }
+}

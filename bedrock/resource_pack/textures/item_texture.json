@@ -5,6 +5,9 @@
     "createbedrock_belt_connector": {
       "textures": "textures/create_java/item/belt_connector"
     },
+    "createbedrock_brass_ingot": {
+      "textures": "textures/create_java/item/brass_ingot"
+    },
     "createbedrock_filter": {
       "textures": "textures/create_java/item/filter"
     },
@@ -17,14 +20,110 @@
     "createbedrock_zinc_ingot": {
       "textures": "textures/create_java/item/zinc_ingot"
     },
+    "createbedrock_zinc_nugget": {
+      "textures": "textures/create_java/item/zinc_nugget"
+    },
+    "createbedrock_copper_nugget": {
+      "textures": "textures/create_java/item/copper_nugget"
+    },
     "createbedrock_andesite_alloy": {
       "textures": "textures/create_java/item/andesite_alloy"
     },
     "createbedrock_rose_quartz": {
       "textures": "textures/create_java/item/rose_quartz"
     },
+    "createbedrock_polished_rose_quartz": {
+      "textures": "textures/create_java/item/polished_rose_quartz"
+    },
+    "createbedrock_sand_paper": {
+      "textures": "textures/create_java/item/sand_paper"
+    },
+    "createbedrock_red_sand_paper": {
+      "textures": "textures/create_java/item/red_sand_paper"
+    },
+    "createbedrock_chromatic_compound": {
+      "textures": "textures/create_java/item/chromatic_compound_1"
+    },
+    "createbedrock_refined_radiance": {
+      "textures": "textures/create_java/item/refined_radiance"
+    },
+    "createbedrock_shadow_steel": {
+      "textures": "textures/create_java/item/shadow_steel"
+    },
+    "createbedrock_shopping_list": {
+      "textures": "textures/create_java/item/shopping_list"
+    },
+    "createbedrock_super_glue": {
+      "textures": "textures/create_java/item/super_glue"
+    },
+    "createbedrock_tree_fertilizer": {
+      "textures": "textures/create_java/item/tree_fertilizer"
+    },
+    "createbedrock_handheld_worldshaper": {
+      "textures": "textures/create_java/block/terrain_zapper_mesh"
+    },
     "createbedrock_linked_controller": {
       "textures": "textures/create_java/item/linked_controller"
+    },
+    "createbedrock_cardboard": {
+      "textures": "textures/create_java/item/cardboard"
+    },
+    "createbedrock_cardboard_boots": {
+      "textures": "textures/create_java/item/cardboard_boots"
+    },
+    "createbedrock_cardboard_chestplate": {
+      "textures": "textures/create_java/item/cardboard_chestplate"
+    },
+    "createbedrock_cardboard_helmet": {
+      "textures": "textures/create_java/item/cardboard_helmet"
+    },
+    "createbedrock_cardboard_leggings": {
+      "textures": "textures/create_java/item/cardboard_leggings"
+    },
+    "createbedrock_cardboard_sword": {
+      "textures": "textures/create_java/item/cardboard_sword"
+    },
+    "createbedrock_blaze_cake_base": {
+      "textures": "textures/create_java/item/blaze_cake_base"
+    },
+    "createbedrock_blaze_cake": {
+      "textures": "textures/create_java/item/blaze_cake"
+    },
+    "createbedrock_creative_blaze_cake": {
+      "textures": "textures/create_java/item/creative_blaze_cake"
+    },
+    "createbedrock_crushed_raw_copper": {
+      "textures": "textures/create_java/item/crushed_raw_copper"
+    },
+    "createbedrock_crushed_raw_gold": {
+      "textures": "textures/create_java/item/crushed_raw_gold"
+    },
+    "createbedrock_crushed_raw_iron": {
+      "textures": "textures/create_java/item/crushed_raw_iron"
+    },
+    "createbedrock_crushed_raw_zinc": {
+      "textures": "textures/create_java/item/crushed_raw_zinc"
+    },
+    "createbedrock_empty_blaze_burner": {
+      "textures": "textures/create_java/block/blaze_heater_brazier"
+    },
+    "createbedrock_bar_of_chocolate": {
+      "textures": "textures/create_java/item/bar_of_chocolate"
+    },
+    "createbedrock_sweet_roll": {
+      "textures": "textures/create_java/item/sweet_roll"
+    },
+    "createbedrock_chocolate_glazed_berries": {
+      "textures": "textures/create_java/item/chocolate_glazed_berries"
+    },
+    "createbedrock_honeyed_apple": {
+      "textures": "textures/create_java/item/honeyed_apple"
+    },
+    "createbedrock_builders_tea": {
+      "textures": "textures/create_java/item/builders_tea"
+    },
+    "createbedrock_experience_nugget": {
+      "textures": "textures/create_java/item/experience_nugget"
     }
   }
 }

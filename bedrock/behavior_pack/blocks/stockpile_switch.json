@@ -1,0 +1,254 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:stockpile_switch",
+      "menu_category": {
+        "category": "items",
+        "group": "itemGroup.name.misc"
+      },
+      "properties": {
+        "createbedrock:target_direction": [2, 3, 4, 5, 0, 1],
+        "createbedrock:display_level": [0, 1, 2, 3, 4, 5],
+        "createbedrock:powered": [0, 1]
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 6
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1
+      },
+      "minecraft:redstone_conductivity": {
+        "redstone_conductor": true
+      },
+      "minecraft:geometry": "geometry.createbedrock.stockpile_switch_wall",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.stockpile_switch_wall"
+        },
+        "material_instances": {
+          "threshold_switch_back": {
+            "texture": "createbedrock_stockpile_switch_back",
+            "render_method": "opaque"
+          },
+          "threshold_switch_front": {
+            "texture": "createbedrock_stockpile_switch_front",
+            "render_method": "opaque"
+          },
+          "level_0": {
+            "texture": "createbedrock_stockpile_switch_level_0",
+            "render_method": "opaque"
+          },
+          "smart_observer_top": {
+            "texture": "createbedrock_stockpile_switch_top",
+            "render_method": "opaque"
+          },
+          "brass_block": {
+            "texture": "createbedrock_brass_block",
+            "render_method": "opaque"
+          },
+          "brass_tunnel_top_connected": {
+            "texture": "createbedrock_stockpile_switch_tunnel_top",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:loot": "loot_tables/blocks/stockpile_switch.json",
+      "minecraft:material_instances": {
+        "threshold_switch_back": {
+          "texture": "createbedrock_stockpile_switch_back",
+          "render_method": "opaque"
+        },
+        "threshold_switch_front": {
+          "texture": "createbedrock_stockpile_switch_front",
+          "render_method": "opaque"
+        },
+        "level_0": {
+          "texture": "createbedrock_stockpile_switch_level_0",
+          "render_method": "opaque"
+        },
+        "smart_observer_top": {
+          "texture": "createbedrock_stockpile_switch_top",
+          "render_method": "opaque"
+        },
+        "brass_block": {
+          "texture": "createbedrock_brass_block",
+          "render_method": "opaque"
+        },
+        "brass_tunnel_top_connected": {
+          "texture": "createbedrock_stockpile_switch_tunnel_top",
+          "render_method": "opaque"
+        }
+      }
+    },
+    "permutations": [
+      {
+        "condition": "query.block_state('createbedrock:display_level') == 0",
+        "components": {
+          "minecraft:material_instances": {
+            "level_0": {
+              "texture": "createbedrock_stockpile_switch_level_0",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:display_level') == 1",
+        "components": {
+          "minecraft:material_instances": {
+            "level_0": {
+              "texture": "createbedrock_stockpile_switch_level_1",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:display_level') == 2",
+        "components": {
+          "minecraft:material_instances": {
+            "level_0": {
+              "texture": "createbedrock_stockpile_switch_level_2",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:display_level') == 3",
+        "components": {
+          "minecraft:material_instances": {
+            "level_0": {
+              "texture": "createbedrock_stockpile_switch_level_3",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:display_level') == 4",
+        "components": {
+          "minecraft:material_instances": {
+            "level_0": {
+              "texture": "createbedrock_stockpile_switch_level_4",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:display_level') == 5",
+        "components": {
+          "minecraft:material_instances": {
+            "level_0": {
+              "texture": "createbedrock_stockpile_switch_level_5",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:target_direction') == 0",
+        "components": {
+          "minecraft:geometry": "geometry.createbedrock.stockpile_switch_floor"
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:target_direction') == 1",
+        "components": {
+          "minecraft:geometry": "geometry.createbedrock.stockpile_switch_ceiling"
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:target_direction') == 2",
+        "components": {
+          "minecraft:geometry": "geometry.createbedrock.stockpile_switch_wall"
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:target_direction') == 3",
+        "components": {
+          "minecraft:geometry": "geometry.createbedrock.stockpile_switch_wall",
+          "minecraft:transformation": {
+            "rotation": [0, 180, 0]
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:target_direction') == 4",
+        "components": {
+          "minecraft:geometry": "geometry.createbedrock.stockpile_switch_wall",
+          "minecraft:transformation": {
+            "rotation": [0, 270, 0]
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:target_direction') == 5",
+        "components": {
+          "minecraft:geometry": "geometry.createbedrock.stockpile_switch_wall",
+          "minecraft:transformation": {
+            "rotation": [0, 90, 0]
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powered') == 1 && query.block_state('createbedrock:target_direction') == 0",
+        "components": {
+          "minecraft:redstone_producer": {
+            "connected_faces": ["north", "east", "south", "west", "down"],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powered') == 1 && query.block_state('createbedrock:target_direction') == 1",
+        "components": {
+          "minecraft:redstone_producer": {
+            "connected_faces": ["north", "east", "south", "west", "up"],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powered') == 1 && query.block_state('createbedrock:target_direction') == 2",
+        "components": {
+          "minecraft:redstone_producer": {
+            "connected_faces": ["north", "east", "west", "up", "down"],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powered') == 1 && query.block_state('createbedrock:target_direction') == 3",
+        "components": {
+          "minecraft:redstone_producer": {
+            "connected_faces": ["east", "south", "west", "up", "down"],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powered') == 1 && query.block_state('createbedrock:target_direction') == 4",
+        "components": {
+          "minecraft:redstone_producer": {
+            "connected_faces": ["north", "south", "west", "up", "down"],
+            "power": 15
+          }
+        }
+      },
+      {
+        "condition": "query.block_state('createbedrock:powered') == 1 && query.block_state('createbedrock:target_direction') == 5",
+        "components": {
+          "minecraft:redstone_producer": {
+            "connected_faces": ["north", "east", "south", "up", "down"],
+            "power": 15
+          }
+        }
+      }
+    ]
+  }
+}

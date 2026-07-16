@@ -1,0 +1,9 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:red_sand_paper" },
+    "tags": ["crafting_table"],
+    "ingredients": [{ "item": "minecraft:paper" }, { "item": "minecraft:red_sand" }],
+    "result": { "item": "createbedrock:red_sand_paper" }
+  }
+}

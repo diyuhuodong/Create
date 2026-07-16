@@ -83,6 +83,57 @@ const EQUIPMENT_IDENTIFIERS = new Set([
     "super_glue"
 ]);
 
+// These registrations are not plain full cubes. They can be built with native
+// Bedrock state components, but their placement, support, and interaction
+// rules must be specified before a definition is emitted.
+const BLOCK_STATE_IDENTIFIERS = new Set([
+    "andesite_ladder",
+    "andesite_scaffolding",
+    "bound_cardboard_block",
+    "brass_ladder",
+    "brass_scaffolding",
+    "cardboard_block",
+    "copper_ladder",
+    "copper_scaffolding",
+    "experience_block",
+    "framed_glass_trapdoor"
+]);
+
+const SLIDING_DOOR_IDENTIFIERS = new Set([
+    "andesite_door",
+    "brass_door",
+    "copper_door",
+    "framed_glass_door"
+]);
+
+const TABLE_CLOTH_IDENTIFIERS = new Set([
+    "andesite_table_cloth",
+    "brass_table_cloth",
+    "copper_table_cloth",
+    "table_cloth"
+]);
+
+const SIMPLE_FOOD_IDENTIFIERS = new Set([
+    "bar_of_chocolate",
+    "builders_tea",
+    "chocolate_glazed_berries",
+    "honeyed_apple",
+    "sweet_roll"
+]);
+
+const BLAZE_FUEL_IDENTIFIERS = new Set([
+    "blaze_cake",
+    "blaze_cake_base",
+    "creative_blaze_cake"
+]);
+
+const LEGACY_ITEM_IDENTIFIERS = new Set([
+    "chromatic_compound",
+    "refined_radiance",
+    "shadow_steel",
+    "tree_fertilizer"
+]);
+
 async function files(directory) {
     const result = [];
     for (const entry of await readdir(directory, { withFileTypes: true })) {
@@ -117,6 +168,13 @@ function recipeResultIdentifier(recipe) {
 }
 
 function implementationFor(identifier, kind) {
+	if (identifier === "crushed_raw_") {
+		return {
+			behaviorRequirement: "registration_template",
+			implementationPackage: "S3-11",
+			implementationReason: "This Java helper is a dynamic registration template, not a concrete item identifier; expand it into concrete crushed-material items before emitting Bedrock content."
+		};
+	}
     if (CONTRAPTION_IDENTIFIERS.has(identifier)) {
         return {
             behaviorRequirement: "contraption_actor",
@@ -145,13 +203,62 @@ function implementationFor(identifier, kind) {
             implementationReason: "The Java registration needs logistics or copycat-state behavior beyond a static block definition."
         };
     }
-    if (DISPLAY_IDENTIFIERS.has(identifier)) {
-        return {
-            behaviorRequirement: "persistent_block_runtime",
-            implementationPackage: "S3-14",
-            implementationReason: "The Java registration exposes persistent display, timing, or redstone-facing state."
-        };
-    }
+	if (SLIDING_DOOR_IDENTIFIERS.has(identifier)) {
+		return {
+			behaviorRequirement: "persistent_block_runtime",
+			implementationPackage: "S3-14",
+			implementationReason: "The Java sliding door synchronizes two block halves, redstone state, double-door state, and animation visibility through a block entity."
+		};
+	}
+	if (TABLE_CLOTH_IDENTIFIERS.has(identifier)) {
+		return {
+			behaviorRequirement: "persistent_block_runtime",
+			implementationPackage: "S3-10",
+			implementationReason: "The Java table cloth persists optional shop/request data and participates in logistics interaction, so it belongs with the logistics runtime."
+		};
+	}
+	if (DISPLAY_IDENTIFIERS.has(identifier)) {
+		return {
+			behaviorRequirement: "persistent_block_runtime",
+			implementationPackage: "S3-14",
+			implementationReason: "The Java registration exposes persistent display, timing, or redstone-facing state."
+		};
+	}
+	if (identifier === "rose_quartz_lamp") {
+		return {
+			behaviorRequirement: "persistent_block_runtime",
+			implementationPackage: "S3-14",
+			implementationReason: "The Java lamp propagates delayed redstone activation across a bounded cluster and exposes comparator output."
+		};
+	}
+	if (BLOCK_STATE_IDENTIFIERS.has(identifier)) {
+		return {
+			behaviorRequirement: "block_state_runtime",
+			implementationPackage: "S3-13",
+			implementationReason: "The Java block has placement, support, orientation, collision, or destruction rules beyond a stateless full-cube definition."
+		};
+	}
+	if (SIMPLE_FOOD_IDENTIFIERS.has(identifier) || identifier === "experience_nugget") {
+		return {
+			behaviorRequirement: "special_item_component",
+			implementationPackage: "S3-13",
+			implementationReason: "The Java item has consumption, return-container, effect, or experience semantics that must be represented by Bedrock item components and runtime hooks."
+		};
+	}
+	if (BLAZE_FUEL_IDENTIFIERS.has(identifier)) {
+		return {
+			behaviorRequirement: "machine_runtime",
+			implementationPackage: "S3-11",
+			implementationReason: "The Java item is Blaze Burner fuel or a processing intermediate and must be delivered with the processing-machine fuel contract."
+		};
+	}
+	if (LEGACY_ITEM_IDENTIFIERS.has(identifier)) {
+		return {
+			behaviorRequirement: "special_item_component",
+			implementationPackage: "S6",
+			implementationReason: "The Java item has world-interaction, movement, or transformation semantics that require the Stage-6 item component runtime."
+		};
+	}
     if (EQUIPMENT_IDENTIFIERS.has(identifier)) {
         return {
             behaviorRequirement: kind === "entity" ? "entity_runtime" : "special_item_component",
@@ -178,6 +285,18 @@ function implementationFor(identifier, kind) {
         implementationPackage: "S3-13",
         implementationReason: "The Java registration is static content, but its model and complete acquisition path require resource-equivalence work."
     };
+}
+
+function testPlanFor(behaviorRequirement) {
+	if (behaviorRequirement === "stateless_content")
+		return "Source and built resource/recipe contract before platform visual verification.";
+	if (behaviorRequirement === "block_state_runtime")
+		return "Focused placement, support, neighbor-state, loot, and reload tests before platform visual verification.";
+	if (behaviorRequirement === "special_item_component")
+		return "Focused item-use, inventory, effect, and acquisition tests in the owning content package.";
+	if (behaviorRequirement === "registration_template")
+		return "Source-registration audit must expand this template into concrete identifiers; no Bedrock definition may use the template identifier.";
+	return "Focused positive, failure, restart, and concurrency tests in the owning implementation package.";
 }
 
 function acquisitionFor(recipeSources, lootPath) {
@@ -262,9 +381,7 @@ for (const queued of workQueue.entries.filter(entry => entry.deliveryPackage ===
         sourceRecipeTypes: acquisition.sourceRecipeTypes,
         sourceTexturePaths,
         acquisitionConclusion: acquisition.acquisitionConclusion,
-        testPlan: implementation.behaviorRequirement === "stateless_content"
-            ? "Source and built resource/recipe contract before platform visual verification."
-            : "Focused positive, failure, restart, and concurrency tests in the owning implementation package."
+        testPlan: testPlanFor(implementation.behaviorRequirement)
     });
 }
 entries.sort((left, right) => left.acceptanceId.localeCompare(right.acceptanceId));

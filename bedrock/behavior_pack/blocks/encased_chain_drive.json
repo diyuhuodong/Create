@@ -3,9 +3,11 @@
   "minecraft:block": {
     "description": {
       "identifier": "createbedrock:encased_chain_drive",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
       "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
     },
     "components": {
+      "minecraft:loot": "loot_tables/blocks/encased_chain_drive.json",
       "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
       "minecraft:geometry": "minecraft:geometry.full_block",

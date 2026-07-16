@@ -1,0 +1,43 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:blaze_burner",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
+      "properties": {
+        "createbedrock:heat_level": [0, 1, 2, 3, 4]
+      },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:cardinal_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 2 },
+      "minecraft:geometry": "geometry.createbedrock.blaze_burner",
+      "minecraft:collision_box": { "origin": [-7, 0, -7], "size": [14, 15, 14] },
+      "minecraft:selection_box": { "origin": [-7, 0, -7], "size": [14, 15, 14] },
+      "minecraft:loot": "loot_tables/blocks/blaze_burner.json",
+      "minecraft:material_instances": {
+        "blaze_heater_brazier": { "texture": "createbedrock_blaze_heater_brazier", "render_method": "alpha_test" },
+        "blaze_face": { "texture": "createbedrock_blaze_inert", "render_method": "alpha_test" },
+        "blaze_flame": { "texture": "createbedrock_blaze_burner_flame", "render_method": "alpha_test" },
+        "*": { "texture": "createbedrock_blaze_heater_brazier", "render_method": "alpha_test" }
+      },
+      "minecraft:item_visual": {
+        "geometry": { "identifier": "geometry.createbedrock.blaze_burner" },
+        "material_instances": {
+          "blaze_heater_brazier": { "texture": "createbedrock_blaze_heater_brazier", "render_method": "alpha_test" },
+          "blaze_face": { "texture": "createbedrock_blaze_idle", "render_method": "alpha_test" },
+          "blaze_flame": { "texture": "createbedrock_blaze_burner_flame", "render_method": "alpha_test" },
+          "*": { "texture": "createbedrock_blaze_heater_brazier", "render_method": "alpha_test" }
+        }
+      },
+      "createbedrock:blaze_burner_runtime": {}
+    },
+    "permutations": [
+      { "condition": "query.block_state('createbedrock:heat_level') == 1", "components": { "minecraft:material_instances": { "blaze_face": { "texture": "createbedrock_blaze_idle", "render_method": "alpha_test" } } } },
+      { "condition": "query.block_state('createbedrock:heat_level') == 2", "components": { "minecraft:light_emission": 7, "minecraft:material_instances": { "blaze_face": { "texture": "createbedrock_blaze_active", "render_method": "alpha_test" } } } },
+      { "condition": "query.block_state('createbedrock:heat_level') == 3", "components": { "minecraft:light_emission": 12, "minecraft:material_instances": { "blaze_face": { "texture": "createbedrock_blaze_active", "render_method": "alpha_test" } } } },
+      { "condition": "query.block_state('createbedrock:heat_level') == 4", "components": { "minecraft:light_emission": 15, "minecraft:material_instances": { "blaze_face": { "texture": "createbedrock_blaze_super", "render_method": "alpha_test" } } } }
+    ]
+  }
+}

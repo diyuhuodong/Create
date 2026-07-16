@@ -1,0 +1,32 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:wooden_bracket",
+      "menu_category": { "category": "construction", "group": "itemGroup.name.misc" },
+      "properties": { "createbedrock:bracket_type": ["pipe", "cog", "shaft"] },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:cardinal_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 3 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.wooden_bracket",
+      "minecraft:collision_box": false,
+      "minecraft:selection_box": { "origin": [-7, 0, -7], "size": [14, 13, 14] },
+      "minecraft:loot": "loot_tables/blocks/wooden_bracket.json",
+      "minecraft:material_instances": {
+        "bracket_plate_wooden": { "texture": "createbedrock_bracket_plate_wooden", "render_method": "opaque" },
+        "bracket_wooden": { "texture": "createbedrock_bracket_wooden", "render_method": "opaque" },
+        "*": { "texture": "createbedrock_bracket_wooden", "render_method": "opaque" }
+      },
+      "minecraft:item_visual": {
+        "geometry": { "identifier": "geometry.createbedrock.wooden_bracket" },
+        "material_instances": {
+          "bracket_plate_wooden": { "texture": "createbedrock_bracket_plate_wooden", "render_method": "opaque" },
+          "bracket_wooden": { "texture": "createbedrock_bracket_wooden", "render_method": "opaque" },
+          "*": { "texture": "createbedrock_bracket_wooden", "render_method": "opaque" }
+        }
+      }
+    }
+  }
+}

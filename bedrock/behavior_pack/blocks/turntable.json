@@ -1,0 +1,35 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:turntable",
+      "menu_category": { "category": "construction", "group": "itemGroup.name.misc" }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1.5 },
+      "minecraft:geometry": "geometry.createbedrock.turntable",
+      "minecraft:item_visual": {
+        "geometry": { "identifier": "geometry.createbedrock.turntable" },
+        "material_instances": {
+          "axis": { "texture": "createbedrock_axis", "render_method": "opaque" },
+          "axis_top": { "texture": "createbedrock_axis_top", "render_method": "opaque" },
+          "gearbox_top": { "texture": "createbedrock_gearbox_top", "render_method": "opaque" },
+          "encased_chain_drive": { "texture": "createbedrock_encased_chain_drive", "render_method": "opaque" },
+          "stripped_spruce_log": { "texture": "stripped_spruce_log", "render_method": "opaque" },
+          "*": { "texture": "createbedrock_axis", "render_method": "opaque" }
+        }
+      },
+      "minecraft:material_instances": {
+        "axis": { "texture": "createbedrock_axis", "render_method": "opaque" },
+        "axis_top": { "texture": "createbedrock_axis_top", "render_method": "opaque" },
+        "gearbox_top": { "texture": "createbedrock_gearbox_top", "render_method": "opaque" },
+        "encased_chain_drive": { "texture": "createbedrock_encased_chain_drive", "render_method": "opaque" },
+        "stripped_spruce_log": { "texture": "stripped_spruce_log", "render_method": "opaque" },
+        "*": { "texture": "createbedrock_axis", "render_method": "opaque" }
+      },
+      "minecraft:loot": "loot_tables/blocks/turntable.json",
+      "createbedrock:turntable_runtime": {}
+    }
+  }
+}

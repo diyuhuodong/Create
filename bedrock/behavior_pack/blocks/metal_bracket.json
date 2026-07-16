@@ -1,0 +1,32 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:metal_bracket",
+      "menu_category": { "category": "construction", "group": "itemGroup.name.misc" },
+      "properties": { "createbedrock:bracket_type": ["pipe", "cog", "shaft"] },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:cardinal_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1.5 },
+      "minecraft:geometry": "geometry.createbedrock.metal_bracket",
+      "minecraft:collision_box": false,
+      "minecraft:selection_box": { "origin": [-7, 0, -7], "size": [14, 13, 14] },
+      "minecraft:loot": "loot_tables/blocks/metal_bracket.json",
+      "minecraft:material_instances": {
+        "bracket_plate_metal": { "texture": "createbedrock_bracket_plate_metal", "render_method": "opaque" },
+        "bracket_metal": { "texture": "createbedrock_bracket_metal", "render_method": "opaque" },
+        "*": { "texture": "createbedrock_bracket_metal", "render_method": "opaque" }
+      },
+      "minecraft:item_visual": {
+        "geometry": { "identifier": "geometry.createbedrock.metal_bracket" },
+        "material_instances": {
+          "bracket_plate_metal": { "texture": "createbedrock_bracket_plate_metal", "render_method": "opaque" },
+          "bracket_metal": { "texture": "createbedrock_bracket_metal", "render_method": "opaque" },
+          "*": { "texture": "createbedrock_bracket_metal", "render_method": "opaque" }
+        }
+      }
+    }
+  }
+}

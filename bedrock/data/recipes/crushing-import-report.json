@@ -3,8 +3,8 @@
 	"schemaVersion": 1,
 	"summary": {
 		"manual_specification": 42,
-		"migrated": 12,
-		"unsupported_dependency": 157
+		"migrated": 33,
+		"unsupported_dependency": 136
 	},
 	"records": [
 		{
@@ -39,8 +39,8 @@
 		},
 		{
 			"source": "coal_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/coal_ore"
 		},
 		{
 			"source": "compat/aether/ambrosium_ore",
@@ -689,8 +689,8 @@
 		},
 		{
 			"source": "copper_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/copper_ore"
 		},
 		{
 			"source": "crimsite",
@@ -704,48 +704,48 @@
 		},
 		{
 			"source": "deepslate_coal_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/deepslate_coal_ore"
 		},
 		{
 			"source": "deepslate_copper_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/deepslate_copper_ore"
 		},
 		{
 			"source": "deepslate_diamond_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/deepslate_diamond_ore"
 		},
 		{
 			"source": "deepslate_emerald_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/deepslate_emerald_ore"
 		},
 		{
 			"source": "deepslate_gold_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/deepslate_gold_ore"
 		},
 		{
 			"source": "deepslate_iron_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/deepslate_iron_ore"
 		},
 		{
 			"source": "deepslate_lapis_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/deepslate_lapis_ore"
 		},
 		{
 			"source": "deepslate_redstone_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/deepslate_redstone_ore"
 		},
 		{
 			"source": "deepslate_zinc_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/deepslate_zinc_ore"
 		},
 		{
 			"source": "diamond_horse_armor",
@@ -754,8 +754,8 @@
 		},
 		{
 			"source": "diamond_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/diamond_ore"
 		},
 		{
 			"source": "diorite",
@@ -769,13 +769,13 @@
 		},
 		{
 			"source": "emerald_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/emerald_ore"
 		},
 		{
 			"source": "gilded_blackstone",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/gilded_blackstone"
 		},
 		{
 			"source": "glowstone",
@@ -784,8 +784,8 @@
 		},
 		{
 			"source": "gold_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/gold_ore"
 		},
 		{
 			"source": "golden_horse_armor",
@@ -804,13 +804,13 @@
 		},
 		{
 			"source": "iron_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/iron_ore"
 		},
 		{
 			"source": "lapis_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/lapis_ore"
 		},
 		{
 			"source": "lead_ore",
@@ -824,13 +824,13 @@
 		},
 		{
 			"source": "nether_gold_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/nether_gold_ore"
 		},
 		{
 			"source": "nether_quartz_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/nether_quartz_ore"
 		},
 		{
 			"source": "nether_wart_block",
@@ -1014,8 +1014,8 @@
 		},
 		{
 			"source": "redstone_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/redstone_ore"
 		},
 		{
 			"source": "silver_ore",
@@ -1059,8 +1059,8 @@
 		},
 		{
 			"source": "zinc_ore",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/zinc_ore"
 		}
 	]
 }

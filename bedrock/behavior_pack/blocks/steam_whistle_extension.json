@@ -1,0 +1,15 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": { "identifier": "createbedrock:steam_whistle_extension", "menu_category": { "category": "construction", "group": "itemGroup.name.misc" }, "properties": { "createbedrock:size": [0, 1, 2], "createbedrock:extension_shape": [0, 1, 2] } },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 }, "minecraft:destructible_by_mining": { "seconds_to_destroy": 2 },
+      "minecraft:geometry": "geometry.createbedrock.steam_whistle_extension_medium", "minecraft:collision_box": { "origin": [-4, 0, -4], "size": [8, 16, 8] }, "minecraft:selection_box": { "origin": [-4, 0, -4], "size": [8, 16, 8] },
+      "minecraft:loot": "loot_tables/blocks/steam_whistle_extension.json", "minecraft:material_instances": { "*": { "texture": "createbedrock_whistle", "render_method": "opaque" } }
+    },
+    "permutations": [
+      { "condition": "query.block_state('createbedrock:size') == 0", "components": { "minecraft:geometry": "geometry.createbedrock.steam_whistle_extension_small" } },
+      { "condition": "query.block_state('createbedrock:size') == 2", "components": { "minecraft:geometry": "geometry.createbedrock.steam_whistle_extension_large" } }
+    ]
+  }
+}

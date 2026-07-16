@@ -1,0 +1,47 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:small_rose_quartz_tiles",
+      "menu_category": {
+        "category": "construction",
+        "group": "itemGroup.name.misc"
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 6
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 3
+      },
+      "minecraft:geometry": "geometry.createbedrock.small_rose_quartz_tiles",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.small_rose_quartz_tiles"
+        },
+        "material_instances": {
+		  "all": {
+			"texture": "createbedrock_small_rose_quartz_tiles",
+			"render_method": "opaque"
+		  },
+          "*": {
+            "texture": "createbedrock_small_rose_quartz_tiles",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:material_instances": {
+		"all": {
+		  "texture": "createbedrock_small_rose_quartz_tiles",
+		  "render_method": "opaque"
+		},
+        "*": {
+          "texture": "createbedrock_small_rose_quartz_tiles",
+          "render_method": "opaque"
+        }
+      },
+      "minecraft:loot": "loot_tables/blocks/small_rose_quartz_tiles.json"
+    }
+  }
+}

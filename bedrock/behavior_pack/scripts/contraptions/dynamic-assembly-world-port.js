@@ -16,12 +16,15 @@ const PART_RELATIVE_PROPERTY = "createbedrock:dynamic_assembly_relative";
 export class DynamicAssemblyWorldPort {
 	#dimensionId;
 	#capturePhysicalBeltRuns;
+	#captureSuperGlueVolumes;
 	#detachPhysicalBeltRuns;
+	#detachSuperGlueVolumes;
 	#kineticWorld;
 	#onKineticMutation;
 	#restorePhysicalBeltRuns;
+	#restoreSuperGlueVolumes;
 
-	constructor(dimensionId, { capturePhysicalBeltRuns, detachPhysicalBeltRuns, kineticWorld, onKineticMutation, restorePhysicalBeltRuns } = {}) {
+	constructor(dimensionId, { capturePhysicalBeltRuns, captureSuperGlueVolumes, detachPhysicalBeltRuns, detachSuperGlueVolumes, kineticWorld, onKineticMutation, restorePhysicalBeltRuns, restoreSuperGlueVolumes } = {}) {
 		if (typeof dimensionId !== "string" || dimensionId.length === 0)
 			throw new TypeError("Dynamic assembly world ports require a dimension id");
 		if (kineticWorld && (typeof kineticWorld.trackBrokenBlock !== "function" || typeof kineticWorld.trackPlacedBlock !== "function"))
@@ -31,16 +34,23 @@ export class DynamicAssemblyWorldPort {
 		if (![capturePhysicalBeltRuns, detachPhysicalBeltRuns, restorePhysicalBeltRuns].every(callback => callback === undefined)
 			&& ![capturePhysicalBeltRuns, detachPhysicalBeltRuns, restorePhysicalBeltRuns].every(callback => typeof callback === "function"))
 			throw new TypeError("Dynamic assembly physical belt callbacks must be paired functions");
+		if (![captureSuperGlueVolumes, detachSuperGlueVolumes, restoreSuperGlueVolumes].every(callback => callback === undefined)
+			&& ![captureSuperGlueVolumes, detachSuperGlueVolumes, restoreSuperGlueVolumes].every(callback => typeof callback === "function"))
+			throw new TypeError("Dynamic assembly Super Glue callbacks must be paired functions");
 		this.#dimensionId = dimensionId;
 		this.#capturePhysicalBeltRuns = capturePhysicalBeltRuns;
+		this.#captureSuperGlueVolumes = captureSuperGlueVolumes;
 		this.#detachPhysicalBeltRuns = detachPhysicalBeltRuns;
+		this.#detachSuperGlueVolumes = detachSuperGlueVolumes;
 		this.#kineticWorld = kineticWorld;
 		this.#onKineticMutation = onKineticMutation;
 		this.#restorePhysicalBeltRuns = restorePhysicalBeltRuns;
+		this.#restoreSuperGlueVolumes = restoreSuperGlueVolumes;
 	}
 
 	detachAssemblyData(attachments) {
 		this.#detachPhysicalBeltRuns?.(attachments?.physicalBeltRuns);
+		this.#detachSuperGlueVolumes?.(attachments?.superGlueVolumes);
 	}
 
 	readBlock(location) {
@@ -100,14 +110,18 @@ export class DynamicAssemblyWorldPort {
 		const physicalBeltRuns = this.#capturePhysicalBeltRuns?.(locations, anchor);
 		if (physicalBeltRuns?.length > 0)
 			attachments.physicalBeltRuns = physicalBeltRuns;
+		const superGlueVolumes = this.#captureSuperGlueVolumes?.(locations, anchor);
+		if (superGlueVolumes?.records?.length > 0)
+			attachments.superGlueVolumes = superGlueVolumes;
 		return Object.keys(attachments).length > 0 ? attachments : undefined;
 	}
 
-	restoreAssemblyData(attachments, origin) {
+	restoreAssemblyData(attachments, origin, transform, assemblyAnchor = origin) {
 		if (this.#kineticWorld?.restoreInternalBeltLinks && attachments?.kineticBeltLinks
 			&& this.#kineticWorld.restoreInternalBeltLinks(this.#dimensionId, origin, attachments.kineticBeltLinks) > 0)
 			this.#onKineticMutation?.();
 		this.#restorePhysicalBeltRuns?.(attachments?.physicalBeltRuns, origin);
+		this.#restoreSuperGlueVolumes?.(attachments?.superGlueVolumes, assemblyAnchor, transform);
 	}
 
 	spawnAssemblyProjection({ epoch, id, snapshot, transform }) {

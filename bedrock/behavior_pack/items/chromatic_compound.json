@@ -1,0 +1,7 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:item": {
+    "description": { "identifier": "createbedrock:chromatic_compound", "menu_category": { "category": "items", "group": "itemGroup.name.misc" } },
+    "components": { "minecraft:icon": "createbedrock_chromatic_compound", "minecraft:max_stack_size": 16 }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:cardboard_block",
+      "menu_category": {
+        "category": "construction",
+        "group": "itemGroup.name.misc"
+      },
+      "traits": {
+        "minecraft:placement_direction": {
+          "enabled_states": [
+            "minecraft:cardinal_direction"
+          ]
+        }
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 1
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 0.8
+      },
+      "minecraft:flammable": {
+        "catch_chance_modifier": 20,
+        "destroy_chance_modifier": 100,
+        "lava_flammable": true
+      },
+      "minecraft:geometry": "geometry.createbedrock.cardboard_block",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.cardboard_block"
+        },
+        "material_instances": {
+          "cardboard_block_front": {
+            "texture": "createbedrock_cardboard_block_front",
+            "render_method": "opaque"
+          },
+          "cardboard_block_side": {
+            "texture": "createbedrock_cardboard_block_side",
+            "render_method": "opaque"
+          },
+          "cardboard_block_top": {
+            "texture": "createbedrock_cardboard_block_top",
+            "render_method": "opaque"
+          },
+          "*": {
+            "texture": "createbedrock_cardboard_block_side",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:material_instances": {
+        "cardboard_block_front": {
+          "texture": "createbedrock_cardboard_block_front",
+          "render_method": "opaque"
+        },
+        "cardboard_block_side": {
+          "texture": "createbedrock_cardboard_block_side",
+          "render_method": "opaque"
+        },
+        "cardboard_block_top": {
+          "texture": "createbedrock_cardboard_block_top",
+          "render_method": "opaque"
+        },
+        "*": {
+          "texture": "createbedrock_cardboard_block_side",
+          "render_method": "opaque"
+        }
+      },
+      "minecraft:loot": "loot_tables/blocks/cardboard_block.json"
+    },
+    "permutations": [
+      {
+        "condition": "query.block_state('minecraft:cardinal_direction') == 'east' || query.block_state('minecraft:cardinal_direction') == 'west'",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [0, 90, 0]
+          }
+        }
+      }
+    ]
+  }
+}

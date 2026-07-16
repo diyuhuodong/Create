@@ -1,0 +1,10 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "createbedrock:hand_crank" },
+    "tags": ["crafting_table"],
+    "pattern": ["PPP", "  A"],
+    "key": { "P": { "tag": "minecraft:planks" }, "A": { "item": "createbedrock:andesite_alloy" } },
+    "result": { "item": "createbedrock:hand_crank" }
+  }
+}

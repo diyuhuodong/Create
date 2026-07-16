@@ -1,0 +1,9 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "createbedrock:secondary_linear_chassis" },
+    "tags": ["crafting_table"],
+    "ingredients": [{ "item": "createbedrock:linear_chassis" }],
+    "result": { "item": "createbedrock:secondary_linear_chassis", "count": 1 }
+  }
+}

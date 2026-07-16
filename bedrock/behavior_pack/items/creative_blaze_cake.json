@@ -1,0 +1,15 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:item": {
+    "description": {
+      "identifier": "createbedrock:creative_blaze_cake",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" }
+    },
+    "components": {
+      "minecraft:icon": "createbedrock_creative_blaze_cake",
+      "minecraft:max_stack_size": 64,
+      "minecraft:rarity": "epic",
+      "minecraft:fuel": { "duration": 2147483647 }
+    }
+  }
+}

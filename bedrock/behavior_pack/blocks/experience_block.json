@@ -1,0 +1,53 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:experience_block",
+      "menu_category": {
+        "category": "construction",
+        "group": "itemGroup.name.misc"
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 6
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1.5
+      },
+      "minecraft:light_emission": 15,
+      "minecraft:tick": {
+        "interval_range": [3, 7],
+        "looping": true
+      },
+      "createbedrock:experience_block_particle": {},
+      "minecraft:geometry": "geometry.createbedrock.experience_block",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.experience_block"
+        },
+        "material_instances": {
+          "experience_block": {
+            "texture": "createbedrock_experience_block",
+            "render_method": "opaque"
+          },
+          "*": {
+            "texture": "createbedrock_experience_block",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:material_instances": {
+        "experience_block": {
+          "texture": "createbedrock_experience_block",
+          "render_method": "opaque"
+        },
+        "*": {
+          "texture": "createbedrock_experience_block",
+          "render_method": "opaque"
+        }
+      },
+      "minecraft:loot": "loot_tables/blocks/experience_block.json"
+    }
+  }
+}

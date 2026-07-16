@@ -2,9 +2,11 @@
   "format_version": "1.26.0",
   "minecraft:block": {
     "description": {
-      "identifier": "createbedrock:track_station"
+      "identifier": "createbedrock:track_station",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" }
     },
     "components": {
+      "minecraft:loot": "loot_tables/blocks/track_station.json",
       "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
       "minecraft:geometry": "minecraft:geometry.full_block",

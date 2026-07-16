@@ -1,0 +1,13 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "createbedrock:empty_blaze_burner" },
+    "tags": ["crafting_table"],
+    "pattern": [" I ", "INI", " I "],
+    "key": {
+      "I": { "item": "createbedrock:iron_sheet" },
+      "N": { "item": "minecraft:netherrack" }
+    },
+    "result": { "item": "createbedrock:empty_blaze_burner" }
+  }
+}

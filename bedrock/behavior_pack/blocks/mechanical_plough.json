@@ -1,0 +1,23 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:mechanical_plough",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 4 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.mechanical_plough",
+      "minecraft:loot": "loot_tables/blocks/mechanical_plough.json",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.mechanical_plough" }, "material_instances": { "andesite_casing_short": { "texture": "createbedrock_andesite_casing_short", "render_method": "opaque" }, "anvil": { "texture": "anvil", "render_method": "opaque" }, "*": { "texture": "createbedrock_andesite_casing_short", "render_method": "opaque" } } },
+      "minecraft:material_instances": { "andesite_casing_short": { "texture": "createbedrock_andesite_casing_short", "render_method": "opaque" }, "anvil": { "texture": "anvil", "render_method": "opaque" }, "*": { "texture": "createbedrock_andesite_casing_short", "render_method": "opaque" } }
+    },
+    "permutations": [
+      { "condition": "query.block_state('minecraft:facing_direction') == 2", "components": { "minecraft:transformation": { "rotation": [0, 180, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 4", "components": { "minecraft:transformation": { "rotation": [0, 90, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 5", "components": { "minecraft:transformation": { "rotation": [0, -90, 0] } } }
+    ]
+  }
+}

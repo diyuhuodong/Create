@@ -9,6 +9,7 @@ import { getCrushingWheelControllerState } from "../processing/crushing-wheel-ru
 import { linkedControllerChannelForSlot, normalizeLinkedControllerBindings } from "./linked-controller-bindings.js";
 import { configureLinkedControllerChannel, configureLinkedControllerChannels, readLinkedControllerItemState, writeLinkedControllerItemState } from "./linked-controller-item-state.js";
 import { resolveDisplayLinkWrite } from "./display-target.js";
+import { writeDisplayBoardLine } from "../materials/display-board-runtime.js";
 import { collectNixieTubeGroup, composeNixieTubeDisplay, NIXIE_TUBE_BLOCK, nixieTubeGroupId } from "./nixie-display.js";
 import { beginLecternControllerUse, clearLecternControllerSession, createLecternControllerState, endLecternControllerUse, installLecternController, normalizeLecternControllerState, triggerLecternControllerChannel } from "./lectern-controller-state.js";
 import { fingerprintInventoryStacks } from "./redstone-inventory-fingerprint.js";
@@ -433,11 +434,19 @@ function refreshDisplayLink(record) {
 			return false;
 		}
 	}
-	if (target?.definition.id !== "nixie_tube")
+	if (target?.definition.id === "nixie_tube") {
+		if (write.line >= target.state.display.lines.length)
+			return false;
+		return updateRecord(target, { line: write.line, text: write.text, type: "set_display_text" }, { persistState: false });
+	}
+	try {
+		const targetBlock = world.getDimension(record.dimensionId).getBlock(write.target);
+		if (targetBlock?.typeId !== "createbedrock:display_board")
+			return false;
+		return writeDisplayBoardLine(record.dimensionId, write.target, { line: write.line, text: write.text }, getKineticWorldForTesting());
+	} catch {
 		return false;
-	if (write.line >= target.state.display.lines.length)
-		return false;
-	return updateRecord(target, { line: write.line, text: write.text, type: "set_display_text" }, { persistState: false });
+	}
 }
 
 function ensureDevice(block) {

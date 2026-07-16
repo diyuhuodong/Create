@@ -1,0 +1,39 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:clockwork_bearing",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
+      "properties": { "createbedrock:clock_mode": [0, 1, 2] },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1.5 },
+      "minecraft:geometry": "geometry.createbedrock.clockwork_bearing",
+      "minecraft:loot": "loot_tables/blocks/clockwork_bearing.json",
+      "minecraft:item_visual": {
+        "geometry": { "identifier": "geometry.createbedrock.clockwork_bearing" },
+        "material_instances": {
+          "gearbox": { "texture": "createbedrock_gearbox", "render_method": "opaque" },
+          "clockwork_bearing_side": { "texture": "createbedrock_clockwork_bearing_side", "render_method": "opaque" },
+          "*": { "texture": "createbedrock_clockwork_bearing_side", "render_method": "opaque" }
+        }
+      },
+      "minecraft:material_instances": {
+        "gearbox": { "texture": "createbedrock_gearbox", "render_method": "opaque" },
+        "clockwork_bearing_side": { "texture": "createbedrock_clockwork_bearing_side", "render_method": "opaque" },
+        "*": { "texture": "createbedrock_clockwork_bearing_side", "render_method": "opaque" }
+      }
+    },
+    "permutations": [
+      { "condition": "query.block_state('minecraft:facing_direction') == 0", "components": { "minecraft:transformation": { "rotation": [180, 0, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 2", "components": { "minecraft:transformation": { "rotation": [90, 0, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 3", "components": { "minecraft:transformation": { "rotation": [-90, 0, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 4", "components": { "minecraft:transformation": { "rotation": [0, 0, 90] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 5", "components": { "minecraft:transformation": { "rotation": [0, 0, -90] } } },
+      { "condition": "query.block_state('createbedrock:clock_mode') == 1", "components": { "minecraft:light_emission": 1 } },
+      { "condition": "query.block_state('createbedrock:clock_mode') == 2", "components": { "minecraft:light_emission": 2 } }
+    ]
+  }
+}

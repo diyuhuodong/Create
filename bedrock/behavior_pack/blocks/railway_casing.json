@@ -1,0 +1,71 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:railway_casing",
+      "menu_category": {
+        "category": "construction",
+        "group": "itemGroup.name.misc"
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 6
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 2
+      },
+      "minecraft:geometry": "geometry.createbedrock.railway_casing",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.railway_casing"
+        },
+        "material_instances": {
+		  "end": {
+			"texture": "createbedrock_railway_casing",
+			"render_method": "opaque"
+		  },
+		  "side": {
+			"texture": "createbedrock_railway_casing_side",
+			"render_method": "opaque"
+		  },
+          "down": {
+            "texture": "createbedrock_railway_casing",
+            "render_method": "opaque"
+          },
+          "up": {
+            "texture": "createbedrock_railway_casing",
+            "render_method": "opaque"
+          },
+          "*": {
+            "texture": "createbedrock_railway_casing_side",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:material_instances": {
+		"end": {
+		  "texture": "createbedrock_railway_casing",
+		  "render_method": "opaque"
+		},
+		"side": {
+		  "texture": "createbedrock_railway_casing_side",
+		  "render_method": "opaque"
+		},
+        "down": {
+          "texture": "createbedrock_railway_casing",
+          "render_method": "opaque"
+        },
+        "up": {
+          "texture": "createbedrock_railway_casing",
+          "render_method": "opaque"
+        },
+        "*": {
+          "texture": "createbedrock_railway_casing_side",
+          "render_method": "opaque"
+        }
+      },
+      "minecraft:loot": "loot_tables/blocks/railway_casing.json"
+    }
+  }
+}

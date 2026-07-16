@@ -1,0 +1,27 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:copycat_bars",
+      "menu_category": { "category": "construction", "group": "itemGroup.name.misc" },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 3 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.copycat_bars",
+      "minecraft:collision_box": false,
+      "minecraft:selection_box": { "origin": [-8, 0, -1], "size": [16, 16, 2] },
+      "minecraft:loot": "loot_tables/blocks/copycat_bars.json",
+      "minecraft:material_instances": { "copycat_base": { "texture": "createbedrock_copycat_base", "render_method": "alpha_test" }, "*": { "texture": "createbedrock_copycat_base", "render_method": "alpha_test" } },
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.copycat_bars" }, "material_instances": { "copycat_base": { "texture": "createbedrock_copycat_base", "render_method": "alpha_test" }, "*": { "texture": "createbedrock_copycat_base", "render_method": "alpha_test" } } }
+    },
+    "permutations": [
+      { "condition": "query.block_state('minecraft:facing_direction') == 0", "components": { "minecraft:geometry": "geometry.createbedrock.copycat_bars_vertical", "minecraft:transformation": { "rotation": [180, 0, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 1", "components": { "minecraft:geometry": "geometry.createbedrock.copycat_bars_vertical" } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 2", "components": { "minecraft:transformation": { "rotation": [0, 180, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 4", "components": { "minecraft:transformation": { "rotation": [0, 90, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 5", "components": { "minecraft:transformation": { "rotation": [0, -90, 0] } } }
+    ]
+  }
+}

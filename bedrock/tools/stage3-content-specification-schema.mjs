@@ -28,12 +28,14 @@ const ASSET_CONCLUSIONS = new Set([
 ]);
 
 const BEHAVIOR_REQUIREMENTS = new Set([
-    "contraption_actor",
-    "entity_runtime",
-    "machine_runtime",
-    "persistent_block_runtime",
-    "special_item_component",
-    "stateless_content"
+	"block_state_runtime",
+	"contraption_actor",
+	"entity_runtime",
+	"machine_runtime",
+	"persistent_block_runtime",
+	"registration_template",
+	"special_item_component",
+	"stateless_content"
 ]);
 
 const REQUIRED_FIELDS = [
@@ -67,8 +69,8 @@ export function validateStage3ContentSpecifications(specifications, workQueue) {
         throw new TypeError("Stage-3 content specifications must be an object");
     if (specifications.schemaVersion !== STAGE3_CONTENT_SPECIFICATION_SCHEMA_VERSION)
         throw new Error(`Stage-3 content specifications must use schema version ${STAGE3_CONTENT_SPECIFICATION_SCHEMA_VERSION}`);
-    if (!Array.isArray(specifications.entries) || specifications.entries.length === 0)
-        throw new Error("Stage-3 content specifications must contain entries");
+    if (!Array.isArray(specifications.entries))
+        throw new Error("Stage-3 content specifications must contain an entries array");
     if (!workQueue || !Array.isArray(workQueue.entries))
         throw new TypeError("Stage-3 content specifications require a work queue");
 

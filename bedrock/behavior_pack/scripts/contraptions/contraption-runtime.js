@@ -20,9 +20,14 @@ import { registerMovingBlockDataContributor, registerStatelessMovingBlockDataAda
 import { REDSTONE_BLOCK_DEVICES } from "../redstone/redstone-device-catalog.js";
 import { captureRedstoneDeviceMovingData, detachRedstoneDeviceMovingData, restoreRedstoneDeviceMovingData, setRedstoneContactFromAssembly } from "../redstone/redstone-device-runtime.js";
 import { captureDepotMovingData, captureInternalPhysicalBeltRuns, capturePhysicalBeltMovingData, DEPOT_PORT_MOVEMENT_DEFINITIONS, detachDepotMovingData, detachInternalPhysicalBeltRuns, detachPhysicalBeltMovingData, PHYSICAL_BELT_BLOCK, restoreDepotMovingData, restoreInternalPhysicalBeltRuns, restorePhysicalBeltMovingData } from "../logistics/depot-runtime.js";
+import { windmillSailCount, windmillSpeedForSailCount } from "./windmill-sails.js";
+import { captureSuperGlueAssemblyAttachments, detachSuperGlueAssemblyAttachments, gluedLocationsForAssembly, restoreSuperGlueAssemblyAttachments } from "./super-glue-runtime.js";
+import { chassisLinkedLocationsForAssembly } from "./chassis-runtime.js";
+import { clockworkTargetAngle, CLOCKWORK_BEARING_BLOCK, nextClockworkAngle } from "./clockwork-bearing.js";
 
 const MECHANICAL_BEARING_BLOCK = "createbedrock:mechanical_bearing";
 const WINDMILL_BEARING_BLOCK = "createbedrock:windmill_bearing";
+const CLOCKWORK_MODE_STATE = "createbedrock:clock_mode";
 const CONTRAPTION_TASK_BUDGET = 4;
 const LEGACY_PERSISTENCE_KEY = "createbedrock:contraptions_v1";
 const BLOCKS_PER_SNAPSHOT_SHARD = 32;
@@ -88,17 +93,26 @@ function controllerFor(dimensionId) {
 	let controller = controllers.get(dimensionId);
 	if (!controller) {
 		controller = new DynamicAssemblyController(new DynamicAssemblyWorldPort(dimensionId, {
-			capturePhysicalBeltRuns(locations, anchor) {
-				return captureInternalPhysicalBeltRuns(dimensionId, locations, anchor);
-			},
-			detachPhysicalBeltRuns(records) {
-				return detachInternalPhysicalBeltRuns(records);
-			},
+		capturePhysicalBeltRuns(locations, anchor) {
+			return captureInternalPhysicalBeltRuns(dimensionId, locations, anchor);
+		},
+		captureSuperGlueVolumes(locations, anchor) {
+			return captureSuperGlueAssemblyAttachments(dimensionId, locations, anchor);
+		},
+		detachPhysicalBeltRuns(records) {
+			return detachInternalPhysicalBeltRuns(records);
+		},
+		detachSuperGlueVolumes(attachments) {
+			return detachSuperGlueAssemblyAttachments(attachments);
+		},
 			kineticWorld,
 			onKineticMutation: persistKineticWorld,
-			restorePhysicalBeltRuns(records, origin) {
-				return restoreInternalPhysicalBeltRuns(dimensionId, origin, records);
-			}
+		restorePhysicalBeltRuns(records, origin) {
+			return restoreInternalPhysicalBeltRuns(dimensionId, origin, records);
+		},
+		restoreSuperGlueVolumes(attachments, origin, transform) {
+			return restoreSuperGlueAssemblyAttachments(dimensionId, origin, attachments, transform);
+		}
 		}));
 		controllers.set(dimensionId, controller);
 	}
@@ -248,7 +262,7 @@ function restoreShardedState() {
 				bearingLocation: { ...root.bearingLocation },
 				dimensionId: root.dimensionId,
 				id: root.id,
-				kind: root.bearingKind === "windmill" ? "windmill" : "mechanical"
+				kind: ["windmill", "clockwork"].includes(root.bearingKind) ? root.bearingKind : "mechanical"
 			});
 		} catch (error) {
 			console.warn(`[Create Bedrock] Ignored invalid dynamic assembly ${root?.id ?? "unknown"}: ${error}`);
@@ -292,7 +306,7 @@ function restoreLegacyState() {
 			controllerFor(record.dimensionId).restore([{
 				epoch: 1,
 				id: record.id,
-				owner: { bearingKey: record.bearingKey, kind: record.kind === "windmill" ? "windmill" : "mechanical" },
+				owner: { bearingKey: record.bearingKey, kind: ["windmill", "clockwork"].includes(record.kind) ? record.kind : "mechanical" },
 				phase: "active",
 				snapshot,
 				transform: createAssemblyTransform({ rotationMilliDegrees: Math.round((record.rotation ?? 0) * 1000) })
@@ -302,7 +316,7 @@ function restoreLegacyState() {
 				bearingLocation: { ...record.bearingLocation },
 				dimensionId: record.dimensionId,
 				id: record.id,
-				kind: record.kind === "windmill" ? "windmill" : "mechanical"
+				kind: ["windmill", "clockwork"].includes(record.kind) ? record.kind : "mechanical"
 			});
 		}
 		legacyStatePendingMigration = true;
@@ -333,6 +347,9 @@ function collectAboveBearing(block) {
 	})[facing] ?? { x: 0, y: 1, z: 0 };
 	return collectConnectedBlocks({
 		canCollect: blockData => isMovableBlockType(blockData.typeId),
+		linkedLocations(location) {
+			return [...gluedLocationsForAssembly(block.dimension.id, location), ...chassisLinkedLocationsForAssembly(block.dimension.id, location)];
+		},
 		maxBlocks: MAX_DYNAMIC_ASSEMBLY_BLOCKS,
 		readBlock(location) {
 			const source = dimension.getBlock(location);
@@ -353,11 +370,42 @@ function bearingKind(block) {
 		return "mechanical";
 	if (block?.typeId === WINDMILL_BEARING_BLOCK)
 		return "windmill";
+	if (block?.typeId === CLOCKWORK_BEARING_BLOCK)
+		return "clockwork";
 	return undefined;
 }
 
-function windmillSpeed(sailCount) {
-	return Math.min(16, Math.max(1, Math.ceil(sailCount / 8)));
+function clockMode(block) {
+	const mode = block?.permutation?.getAllStates?.()[CLOCKWORK_MODE_STATE];
+	return Number.isInteger(mode) && mode >= 0 && mode <= 2 ? mode : 0;
+}
+
+function clockFacingSign(block) {
+	const facing = block?.permutation?.getAllStates?.()["minecraft:facing_direction"];
+	return [0, 2, 4, "down", "north", "west"].includes(facing) ? -1 : 1;
+}
+
+function clockDayTime() {
+	try {
+		const dayTime = world.getTimeOfDay?.();
+		if (Number.isFinite(dayTime))
+			return dayTime;
+	} catch {}
+	return system.currentTick % 24000;
+}
+
+function cycleClockMode(block, player) {
+	if (block?.typeId !== CLOCKWORK_BEARING_BLOCK || typeof block.setPermutation !== "function")
+		return false;
+	try {
+		const mode = (clockMode(block) + 1) % 3;
+		block.setPermutation(block.permutation.withState(CLOCKWORK_MODE_STATE, mode));
+		player?.sendMessage?.(`Clockwork Bearing mode: ${["hour first", "minute first", "24-hour first"][mode]}.`);
+		return true;
+	} catch (error) {
+		console.warn(`[Create Bedrock] Could not set Clockwork Bearing mode: ${error}`);
+		return false;
+	}
 }
 
 function toggleBearing(block) {
@@ -406,7 +454,7 @@ function toggleBearing(block) {
 		kind
 	});
 	if (kind === "windmill")
-		kineticWorld.setGeneratedSpeed(block.dimension.id, block.location, windmillSpeed(blocks.length));
+		kineticWorld.setGeneratedSpeed(block.dimension.id, block.location, windmillSpeedForSailCount(windmillSailCount(blocks)));
 	requestPersist();
 }
 
@@ -421,11 +469,24 @@ function processBearing(bearingKey) {
 	}
 	const state = controller.getActive(active.id);
 	if (active.kind === "windmill")
-		kineticWorld.setGeneratedSpeed(active.dimensionId, active.bearingLocation, windmillSpeed(state.snapshot.blocks.length));
+		kineticWorld.setGeneratedSpeed(active.dimensionId, active.bearingLocation, windmillSpeedForSailCount(windmillSailCount(state.snapshot.blocks)));
 	const speed = kineticWorld.speedAt(active.dimensionId, active.bearingLocation);
 	if (speed === 0)
 		return;
-	const next = withAssemblyTransformDelta(state.transform, { rotationMilliDegrees: Math.round(speed * 1000) });
+	let next;
+	if (active.kind === "clockwork") {
+		let block;
+		try { block = world.getDimension(active.dimensionId).getBlock(active.bearingLocation); } catch { return; }
+		if (block?.typeId !== CLOCKWORK_BEARING_BLOCK)
+			return;
+		const target = clockworkTargetAngle(clockDayTime(), clockMode(block), clockFacingSign(block));
+		const current = state.transform.rotationMilliDegrees / 1000;
+		next = createAssemblyTransform({
+			rotationMilliDegrees: Math.round(nextClockworkAngle(current, target, speed) * 1000),
+			translation: state.transform.translation
+		});
+	} else
+		next = withAssemblyTransformDelta(state.transform, { rotationMilliDegrees: Math.round(speed * 1000) });
 	if (controller.setTransform(active.id, next))
 		sampleMotionContacts(active.dimensionId);
 	requestPersist();
@@ -503,6 +564,10 @@ export function registerContraptions(getKineticWorld) {
 		if (!bearingKind(event.block))
 			return;
 		try {
+			if (event.block.typeId === CLOCKWORK_BEARING_BLOCK && event.player?.isSneaking) {
+				cycleClockMode(event.block, event.player);
+				return;
+			}
 			toggleBearing(event.block);
 		} catch (error) {
 			console.warn(`[Create Bedrock] Dynamic bearing interaction failed: ${error}`);
@@ -538,4 +603,25 @@ export function getContraptionDiagnostics() {
 			sharded: stateStore.diagnostics()
 		}
 	};
+}
+
+/** Snapshot-only actor view. Callers must use the dedicated update helper for mutations. */
+export function getActiveDynamicAssemblies(dimensionId) {
+	if (dimensionId !== undefined && (typeof dimensionId !== "string" || dimensionId.length === 0))
+		throw new TypeError("Dynamic assembly lookups require a dimension id when provided");
+	const result = [];
+	for (const active of activeBearings.values()) {
+		if (dimensionId !== undefined && active.dimensionId !== dimensionId)
+			continue;
+		try { result.push({ ...controllerFor(active.dimensionId).getActive(active.id), dimensionId: active.dimensionId }); } catch {}
+	}
+	return result.sort((left, right) => left.id.localeCompare(right.id));
+}
+
+export function updateDynamicAssemblyBlockData(dimensionId, assemblyId, relative, updater) {
+	if (typeof dimensionId !== "string" || typeof assemblyId !== "string")
+		throw new TypeError("Dynamic assembly data updates require dimension and assembly identities");
+	const result = controllerFor(dimensionId).updateBlockData(assemblyId, relative, updater);
+	requestPersist();
+	return result;
 }

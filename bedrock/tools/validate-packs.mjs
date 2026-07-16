@@ -4,6 +4,7 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 import { validateMigrationMatrix } from "./migration-matrix-schema.mjs";
+import { validateStage2FoundationContract } from "./stage2-foundation-contract.mjs";
 import { validateStage3SourceContentContract } from "./stage3-content-contract.mjs";
 import { validateStage3ContentSpecifications } from "./stage3-content-specification-schema.mjs";
 import { validateStage3KineticSourceContract } from "./stage3-kinetic-contract.mjs";
@@ -14,6 +15,22 @@ import { validateStage3ProcessingSourceContract } from "./stage3-processing-cont
 import { validateStage3ProcessingSpecifications } from "./stage3-processing-specification-schema.mjs";
 import { validateStage3FluidSpecifications } from "./stage3-fluid-specification-schema.mjs";
 import { validateStage3FluidSourceContract } from "./stage3-fluid-contract.mjs";
+import { validateContentMaterialFoundation } from "./content-material-foundation-contract.mjs";
+import { validateContentMaterialC2Execution } from "./content-material-c2-execution-contract.mjs";
+import { validateCardboardEquipment } from "./content-material-cardboard-equipment-contract.mjs";
+import { validateCrushedRawMaterials } from "./content-material-crushed-raw-contract.mjs";
+import { validateBlazeBurnerContract } from "./content-material-blaze-burner-contract.mjs";
+import { validateSandpaperMaterials } from "./content-material-sandpaper-contract.mjs";
+import { validateSailMaterials } from "./content-material-sail-contract.mjs";
+import { validateLegacyMaterials } from "./content-material-legacy-contract.mjs";
+import { validateTableClothMaterials } from "./content-material-table-cloth-contract.mjs";
+import { validateNozzleMaterial } from "./content-material-nozzle-contract.mjs";
+import { validateContentMaterialDisplayPackage } from "./content-material-display-contract.mjs";
+import { validateContentMaterialGauges } from "./content-material-gauge-contract.mjs";
+import { validateContentMaterialPersistent } from "./content-material-persistent-contract.mjs";
+import { validateContentMaterialResources } from "./content-material-resource-contract.mjs";
+import { validateContentMaterialSpecialItems } from "./content-material-special-item-contract.mjs";
+import { validateContentMaterialStates } from "./content-material-state-contract.mjs";
 import { validateStage3RedstoneDecision } from "./s3-14-redstone-decision-schema.mjs";
 import { validateS314CapabilityPlan } from "./s3-14-capability-plan-schema.mjs";
 import { validateStage3PlatformAcceptance } from "./s3-15-platform-acceptance-schema.mjs";
@@ -81,6 +98,7 @@ const stage3ProcessingSpecifications = await readJson(resolve(bedrockRoot, "data
 const stage3FluidSpecifications = await readJson(resolve(bedrockRoot, "data", "stage3-fluid-specifications.json"));
 const stage3WorkQueue = await readJson(resolve(bedrockRoot, "data", "stage3-work-queue.json"));
 validateMigrationMatrix(migrationMatrix);
+const stage2Foundation = await validateStage2FoundationContract({ bedrockRoot });
 validateStage3WorkQueue(stage3WorkQueue, migrationMatrix);
 const contentSpecificationCoverage = validateStage3ContentSpecifications(stage3ContentSpecifications, stage3WorkQueue);
 const kineticSpecificationCoverage = validateStage3KineticSpecifications(stage3KineticSpecifications, stage3WorkQueue);
@@ -182,6 +200,22 @@ const kineticContract = await validateStage3KineticSourceContract();
 const logisticsContract = await validateStage3LogisticsSourceContract();
 const processingContract = await validateStage3ProcessingSourceContract();
 const fluidContract = await validateStage3FluidSourceContract();
+const contentMaterialFoundation = await validateContentMaterialFoundation();
+const contentMaterialC2Execution = await validateContentMaterialC2Execution();
+const cardboardEquipment = await validateCardboardEquipment();
+const crushedRawMaterials = await validateCrushedRawMaterials();
+const blazeBurner = await validateBlazeBurnerContract();
+const sandpaperMaterials = await validateSandpaperMaterials();
+const sailMaterials = await validateSailMaterials();
+const legacyMaterials = await validateLegacyMaterials();
+const tableClothMaterials = await validateTableClothMaterials();
+const nozzleMaterial = await validateNozzleMaterial();
+const contentMaterialDisplay = await validateContentMaterialDisplayPackage();
+const contentMaterialGauges = await validateContentMaterialGauges();
+const contentMaterialPersistent = await validateContentMaterialPersistent();
+const contentMaterialResources = await validateContentMaterialResources();
+const contentMaterialSpecialItems = await validateContentMaterialSpecialItems();
+const contentMaterialStates = await validateContentMaterialStates();
 const redstoneDecision = await validateStage3RedstoneDecision();
 const redstoneCapabilityPlan = await validateS314CapabilityPlan({
 	dataPath: resolve(bedrockRoot, "data", "s3-14-capability-plan.json"),
@@ -190,4 +224,4 @@ const redstoneCapabilityPlan = await validateS314CapabilityPlan({
 const platformAcceptance = await validateStage3PlatformAcceptance();
 const visualContract = await validateStage3VisualSourceContract();
 
-console.log(`Bedrock manifests, JSON files, JavaScript syntax, ${contentContract.contentBlocks} Stage-3 content blocks, ${kineticContract.blocks} S3-9 kinetic blocks, ${logisticsContract.blocks} S3-10 logistics blocks, ${processingContract.blocks} S3-11 processing blocks, ${fluidContract.blocks} S3-12 fluid blocks, ${visualContract.tankSegments} S3-13 Tank visual segments, ${redstoneDecision.codeCompletePendingStaticValidation} code-complete S3-14 redstone devices across ${redstoneDecision.matrixImplementationInProgress} acceptance records awaiting static validation, ${redstoneCapabilityPlan.devices} planned S3-14 semantic devices, ${platformAcceptance.pendingPlatforms}/${platformAcceptance.platforms} pending S3-15 platform records, the ${stage3WorkQueue.entries.length}-entry work queue, ${contentSpecificationCoverage.entries} S3-8B content specifications, ${kineticSpecificationCoverage.entries} S3-9 kinetic specifications, ${logisticsSpecificationCoverage.entries} S3-10 logistics specifications, ${processingSpecificationCoverage.entries} S3-11 processing specifications, and ${fluidSpecificationCoverage.entries} S3-12 fluid specifications are valid.`);
+console.log(`Bedrock manifests, JSON files, JavaScript syntax, ${stage2Foundation.entries} Stage-2 foundation records across ${stage2Foundation.blocks} blocks and ${stage2Foundation.directRecipes} direct recipes, ${contentContract.contentBlocks} Stage-3 content blocks, ${contentMaterialFoundation.oreFeatures} C0 zinc ore features, ${contentMaterialResources.contentBlocks} C1 resource blocks, ${contentMaterialStates.contentBlocks} C1 state blocks, ${contentMaterialPersistent.persistentBlocks + contentMaterialGauges.persistentBlocks + contentMaterialDisplay.persistentBlocks + contentMaterialC2Execution.blocks} C2 persistent blocks, ${cardboardEquipment.items} cardboard-equipment items, ${crushedRawMaterials.crushedItems} crushed-raw materials, ${blazeBurner.blocks} Blaze Burner blocks, ${sandpaperMaterials.papers} sand-paper items, ${sailMaterials.sailBlocks} windmill sail blocks, ${legacyMaterials.items} legacy materials, ${tableClothMaterials.blocks} Table Cloth shop blocks, ${nozzleMaterial.blocks} kinetic Nozzle block, and ${contentMaterialResources.contentItems + contentMaterialSpecialItems.contentItems} C1 content items with ${contentMaterialResources.deferredSurvivalAcquisitions.length + contentMaterialSpecialItems.deferredSurvivalAcquisitions.length + contentMaterialPersistent.deferredSurvivalAcquisitions.length + contentMaterialDisplay.deferredSurvivalAcquisitions.length} explicit deferred acquisition chains, ${kineticContract.blocks} S3-9 kinetic blocks, ${logisticsContract.blocks} S3-10 logistics blocks, ${processingContract.blocks} S3-11 processing blocks, ${fluidContract.blocks} S3-12 fluid blocks, ${visualContract.tankSegments} S3-13 Tank visual segments, ${redstoneDecision.codeCompletePendingStaticValidation} code-complete S3-14 redstone devices across ${redstoneDecision.matrixImplementationInProgress} acceptance records awaiting static validation, ${redstoneCapabilityPlan.devices} planned S3-14 semantic devices, ${platformAcceptance.pendingPlatforms}/${platformAcceptance.platforms} pending S3-15 platform records, the ${stage3WorkQueue.entries.length}-entry work queue, ${contentSpecificationCoverage.entries} S3-8B content specifications, ${kineticSpecificationCoverage.entries} S3-9 kinetic specifications, ${logisticsSpecificationCoverage.entries} S3-10 logistics specifications, ${processingSpecificationCoverage.entries} S3-11 processing specifications, and ${fluidSpecificationCoverage.entries} S3-12 fluid specifications are valid.`);

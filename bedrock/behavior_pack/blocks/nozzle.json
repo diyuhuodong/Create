@@ -1,0 +1,29 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:nozzle",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
+      "properties": { "createbedrock:active": [0, 1] },
+      "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 3 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:geometry": "geometry.createbedrock.nozzle",
+      "minecraft:collision_box": { "origin": [-7, -8, -7], "size": [14, 14, 14] },
+      "minecraft:selection_box": { "origin": [-7, -8, -7], "size": [14, 14, 14] },
+      "minecraft:loot": "loot_tables/blocks/nozzle.json",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.nozzle" }, "material_instances": { "3": { "texture": "createbedrock_nozzle_net", "render_method": "alpha_test" }, "back": { "texture": "createbedrock_gearbox", "render_method": "opaque" }, "*": { "texture": "createbedrock_nozzle_net", "render_method": "alpha_test" } } },
+      "minecraft:material_instances": { "3": { "texture": "createbedrock_nozzle_net", "render_method": "alpha_test" }, "back": { "texture": "createbedrock_gearbox", "render_method": "opaque" }, "*": { "texture": "createbedrock_nozzle_net", "render_method": "alpha_test" } }
+    },
+    "permutations": [
+      { "condition": "query.block_state('minecraft:facing_direction') == 0", "components": { "minecraft:transformation": { "rotation": [180, 0, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 2", "components": { "minecraft:transformation": { "rotation": [90, 0, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 3", "components": { "minecraft:transformation": { "rotation": [-90, 0, 0] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 4", "components": { "minecraft:transformation": { "rotation": [0, 0, 90] } } },
+      { "condition": "query.block_state('minecraft:facing_direction') == 5", "components": { "minecraft:transformation": { "rotation": [0, 0, -90] } } },
+      { "condition": "query.block_state('createbedrock:active') == 1", "components": { "minecraft:light_emission": 1 } }
+    ]
+  }
+}

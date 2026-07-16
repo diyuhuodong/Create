@@ -3,6 +3,7 @@
   "minecraft:block": {
     "description": {
       "identifier": "createbedrock:shaft",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
       "traits": {
         "minecraft:placement_direction": {
           "enabled_states": ["minecraft:facing_direction"]
@@ -10,6 +11,7 @@
       }
     },
     "components": {
+      "minecraft:loot": "loot_tables/blocks/shaft.json",
       "minecraft:destructible_by_explosion": {
         "explosion_resistance": 6
       },

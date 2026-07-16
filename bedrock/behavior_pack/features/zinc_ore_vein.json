@@ -1,0 +1,22 @@
+{
+  "format_version": "1.20.30",
+  "minecraft:ore_feature": {
+    "description": {
+      "identifier": "createbedrock:zinc_ore_vein"
+    },
+    "count": 8,
+    "discard_chance_on_air_exposure": 0.15,
+    "replace_rules": [
+      {
+        "places_block": "createbedrock:zinc_ore",
+        "may_replace": [
+          "minecraft:stone",
+          "minecraft:granite",
+          "minecraft:diorite",
+          "minecraft:andesite",
+          "minecraft:tuff"
+        ]
+      }
+    ]
+  }
+}

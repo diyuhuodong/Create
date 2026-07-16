@@ -17,6 +17,30 @@ function assertString(value, label) {
 	return value;
 }
 
+function catalogDevicesForPlanEntry(planDevice, expected) {
+	const id = assertString(planDevice?.id, "device id");
+	const acceptanceIds = assertArray(planDevice?.acceptanceIds, `device ${id} acceptance IDs`);
+	const direct = expected.get(id);
+	if (direct) {
+		if (JSON.stringify(acceptanceIds) !== JSON.stringify(direct.acceptanceIds))
+			throw new Error(`S3-14 device ${id} does not match the redstone catalog acceptance IDs`);
+		return [direct];
+	}
+	// The capability plan deliberately keeps tightly coupled diodes/latches in
+	// one semantic entry, whereas the runtime catalog models their independent
+	// placement and persistence IDs. Accept an aggregate only when it exactly
+	// partitions complete catalog acceptance sets.
+	const requested = new Set(acceptanceIds);
+	if (requested.size !== acceptanceIds.length)
+		throw new Error(`S3-14 semantic contract has duplicate acceptance IDs for ${id}`);
+	const grouped = [...expected.values()].filter(device => device.acceptanceIds.every(acceptanceId => requested.has(acceptanceId)));
+	const groupedAcceptanceIds = grouped.flatMap(device => device.acceptanceIds);
+	if (grouped.length === 0 || groupedAcceptanceIds.length !== acceptanceIds.length
+		|| groupedAcceptanceIds.some(acceptanceId => !requested.has(acceptanceId)))
+		throw new Error(`S3-14 semantic contract has an unknown or incomplete aggregate device ${id}`);
+	return grouped;
+}
+
 async function readJson(file) {
 	try {
 		return JSON.parse(await readFile(file, "utf8"));
@@ -43,14 +67,13 @@ export async function validateStage3RedstoneSemanticContract({ bedrockRoot, data
 	let evidenceFiles = 0;
 	for (const device of assertArray(plan.devices, "devices")) {
 		const id = assertString(device?.id, "device id");
-		const catalogDevice = expected.get(id);
-		if (!catalogDevice || observed.has(id))
+		const catalogDevices = catalogDevicesForPlanEntry(device, expected);
+		if (catalogDevices.some(catalogDevice => observed.has(catalogDevice.id)))
 			throw new Error(`S3-14 semantic contract has an unknown or duplicate device ${id}`);
-		observed.add(id);
+		for (const catalogDevice of catalogDevices)
+			observed.add(catalogDevice.id);
 		if (device.developmentStatus !== CONTRACT_STATUS)
 			throw new Error(`S3-14 device ${id} must retain code-complete, static-validation-pending status`);
-		if (JSON.stringify(device.acceptanceIds) !== JSON.stringify(catalogDevice.acceptanceIds))
-			throw new Error(`S3-14 device ${id} does not match the redstone catalog acceptance IDs`);
 		for (const evidence of assertArray(device.semanticEvidence, `device ${id} semantic evidence`)) {
 			const path = assertString(evidence?.path, `device ${id} evidence path`);
 			if (!path.startsWith("behavior_pack/scripts/") || path.includes(".."))

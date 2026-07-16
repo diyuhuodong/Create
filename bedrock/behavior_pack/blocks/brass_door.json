@@ -1,0 +1,8 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": { "identifier": "createbedrock:brass_door", "menu_category": { "category": "construction", "group": "itemGroup.name.misc" }, "properties": { "createbedrock:half": [0, 1], "createbedrock:hinge": [0, 1], "createbedrock:open": [0, 1], "createbedrock:powered": [0, 1] }, "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } } },
+    "components": { "minecraft:destructible_by_explosion": { "explosion_resistance": 6 }, "minecraft:destructible_by_mining": { "seconds_to_destroy": 3 }, "minecraft:geometry": "geometry.createbedrock.brass_door_bottom", "minecraft:collision_box": { "origin": [-8, 0, -2], "size": [16, 16, 4] }, "minecraft:selection_box": { "origin": [-8, 0, -2], "size": [16, 16, 4] }, "minecraft:loot": "loot_tables/blocks/brass_door.json", "minecraft:redstone_consumer": { "min_power": 0, "propagates_power": false }, "createbedrock:redstone_input": {}, "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.brass_door_bottom" }, "material_instances": { "*": { "texture": "createbedrock_brass_door_side", "render_method": "opaque" } } }, "minecraft:material_instances": { "*": { "texture": "createbedrock_brass_door_side", "render_method": "opaque" } } },
+    "permutations": [ { "condition": "query.block_state('createbedrock:half') == 1", "components": { "minecraft:geometry": "geometry.createbedrock.brass_door_top" } }, { "condition": "query.block_state('createbedrock:open') == 1", "components": { "minecraft:collision_box": false, "minecraft:transformation": { "translation": [8, 0, 0] } } } ]
+  }
+}

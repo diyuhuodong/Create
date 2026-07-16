@@ -3,9 +3,11 @@
   "minecraft:block": {
     "description": {
       "identifier": "createbedrock:gearbox",
+      "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
       "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
     },
     "components": {
+      "minecraft:loot": "loot_tables/blocks/gearbox.json",
       "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
       "minecraft:geometry": "minecraft:geometry.full_block",
