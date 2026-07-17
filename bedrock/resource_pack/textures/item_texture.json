@@ -151,6 +151,20 @@
     },
     "createbedrock_wand_of_symmetry": {
       "textures": "textures/create_java/block/symmetry_mirror"
-    }
+    },
+    "createbedrock_copper_backtank": {
+      "textures": "textures/create_java/block/copper_backtank"
+    },
+    "createbedrock_netherite_backtank": {
+      "textures": "textures/create_java/block/netherite_backtank"
+    },
+    "createbedrock_copper_diving_boots": { "textures": "textures/create_java/item/copper_diving_boots" },
+    "createbedrock_copper_diving_helmet": { "textures": "textures/create_java/item/copper_diving_helmet" },
+    "createbedrock_netherite_diving_boots": { "textures": "textures/create_java/item/netherite_diving_boots" },
+    "createbedrock_netherite_diving_helmet": { "textures": "textures/create_java/item/netherite_diving_helmet" },
+    "createbedrock_extendo_grip": { "textures": "textures/create_java/item/extendo_grip" },
+    "createbedrock_goggles": { "textures": "textures/create_java/item/goggles" },
+    "createbedrock_potato_cannon": { "textures": "textures/create_java/item/potato_cannon" },
+    "createbedrock_wrench": { "textures": "textures/create_java/item/wrench" }
   }
 }

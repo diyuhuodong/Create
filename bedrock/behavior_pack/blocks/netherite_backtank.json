@@ -1,0 +1,14 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": { "identifier": "createbedrock:netherite_backtank", "menu_category": { "category": "items", "group": "itemGroup.name.misc" } },
+    "components": {
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 1200 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 3 },
+      "minecraft:geometry": "geometry.createbedrock.netherite_backtank",
+      "minecraft:loot": "loot_tables/blocks/netherite_backtank.json",
+      "minecraft:item_visual": { "geometry": { "identifier": "geometry.createbedrock.netherite_backtank" }, "material_instances": { "netherite_backtank": { "texture": "createbedrock_netherite_backtank", "render_method": "opaque" }, "*": { "texture": "createbedrock_netherite_backtank", "render_method": "opaque" } } },
+      "minecraft:material_instances": { "netherite_backtank": { "texture": "createbedrock_netherite_backtank", "render_method": "opaque" }, "*": { "texture": "createbedrock_netherite_backtank", "render_method": "opaque" } }
+    }
+  }
+}

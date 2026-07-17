@@ -27,6 +27,7 @@
     "validate": "node tools/validate-packs.mjs",
     "stage4:queue": "node tools/generate-stage4-work-queue.mjs",
     "stage5:queue": "node tools/generate-stage5-work-queue.mjs",
-    "work-queue": "node tools/generate-stage3-work-queue.mjs && node tools/generate-stage4-work-queue.mjs && node tools/generate-stage5-work-queue.mjs"
+    "stage6:queue": "node tools/generate-stage6-work-queue.mjs",
+    "work-queue": "node tools/generate-stage3-work-queue.mjs && node tools/generate-stage4-work-queue.mjs && node tools/generate-stage5-work-queue.mjs && node tools/generate-stage6-work-queue.mjs"
   }
 }

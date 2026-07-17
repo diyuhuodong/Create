@@ -224,7 +224,25 @@ export const JAVA_BLOCK_TEXTURES = [
 	"table_cloth/brass.png",
 	"table_cloth/copper.png",
 	"copycat_base.png",
-	"terrain_zapper_mesh.png"
+	"terrain_zapper_mesh.png",
+	"copper_backtank.png",
+	"netherite_backtank.png",
+	"toolbox/white.png",
+	"toolbox/orange.png",
+	"toolbox/magenta.png",
+	"toolbox/light_blue.png",
+	"toolbox/yellow.png",
+	"toolbox/lime.png",
+	"toolbox/pink.png",
+	"toolbox/gray.png",
+	"toolbox/light_gray.png",
+	"toolbox/cyan.png",
+	"toolbox/purple.png",
+	"toolbox/blue.png",
+	"toolbox/brown.png",
+	"toolbox/green.png",
+	"toolbox/red.png",
+	"toolbox/black.png"
 	,"linear_chassis_side.png"
 	,"secondary_linear_chassis_side.png"
 	,"radial_chassis_side.png"
@@ -235,9 +253,9 @@ export const JAVA_BLOCK_TEXTURES = [
 	,"schematicannon.png"
 	,"symmetry_mirror.png"
 ];
-export const JAVA_ITEM_TEXTURES = ["belt_connector.png", "brass_ingot.png", "raw_zinc.png", "zinc_ingot.png", "zinc_nugget.png", "copper_nugget.png", "andesite_alloy.png", "rose_quartz.png", "polished_rose_quartz.png", "sand_paper.png", "red_sand_paper.png", "chromatic_compound_1.png", "refined_radiance.png", "shadow_steel.png", "shopping_list.png", "filter.png", "attribute_filter.png", "linked_controller.png", "cardboard.png", "cardboard_boots.png", "cardboard_chestplate.png", "cardboard_helmet.png", "cardboard_leggings.png", "cardboard_sword.png", "blaze_cake_base.png", "blaze_cake.png", "creative_blaze_cake.png", "crushed_raw_copper.png", "crushed_raw_gold.png", "crushed_raw_iron.png", "crushed_raw_zinc.png", "bar_of_chocolate.png", "sweet_roll.png", "chocolate_glazed_berries.png", "honeyed_apple.png", "builders_tea.png", "experience_nugget.png", "minecart_contraption.png", "chest_minecart_contraption.png", "furnace_minecart_contraption.png", "minecart_coupling.png", "super_glue.png", "tree_fertilizer.png", "crafting_blueprint.png", "empty_schematic.png", "schematic.png", "schematic_and_quill.png"];
+export const JAVA_ITEM_TEXTURES = ["belt_connector.png", "brass_ingot.png", "raw_zinc.png", "zinc_ingot.png", "zinc_nugget.png", "copper_nugget.png", "andesite_alloy.png", "rose_quartz.png", "polished_rose_quartz.png", "sand_paper.png", "red_sand_paper.png", "chromatic_compound_1.png", "refined_radiance.png", "shadow_steel.png", "shopping_list.png", "filter.png", "attribute_filter.png", "linked_controller.png", "cardboard.png", "cardboard_boots.png", "cardboard_chestplate.png", "cardboard_helmet.png", "cardboard_leggings.png", "cardboard_sword.png", "blaze_cake_base.png", "blaze_cake.png", "creative_blaze_cake.png", "crushed_raw_copper.png", "crushed_raw_gold.png", "crushed_raw_iron.png", "crushed_raw_zinc.png", "bar_of_chocolate.png", "sweet_roll.png", "chocolate_glazed_berries.png", "honeyed_apple.png", "builders_tea.png", "experience_nugget.png", "minecart_contraption.png", "chest_minecart_contraption.png", "furnace_minecart_contraption.png", "minecart_coupling.png", "super_glue.png", "tree_fertilizer.png", "crafting_blueprint.png", "empty_schematic.png", "schematic.png", "schematic_and_quill.png", "copper_diving_boots.png", "copper_diving_helmet.png", "netherite_diving_boots.png", "netherite_diving_helmet.png", "extendo_grip.png", "goggles.png", "goggles_model.png", "potato_cannon.png", "wrench.png"];
 export const JAVA_ENTITY_TEXTURES = ["blueprint_small.png"];
-export const JAVA_ARMOR_TEXTURES = ["models/armor/cardboard_layer_1.png", "models/armor/cardboard_layer_2.png"];
+export const JAVA_ARMOR_TEXTURES = ["models/armor/cardboard_layer_1.png", "models/armor/cardboard_layer_2.png", "models/armor/copper_diving_layer_1.png", "models/armor/netherite_diving_layer_1.png", "models/armor/netherite_diving_layer_2.png"];
 export const JAVA_SOUND_ASSETS = [
 	{ source: "desk_bell.ogg", target: "create/desk_bell.ogg" },
 	{ source: "haunted_bell_use.ogg", target: "create/haunted_bell_use.ogg" },

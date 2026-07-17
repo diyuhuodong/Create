@@ -13,6 +13,7 @@ import { getSchematicDiagnostics, registerSchematics } from "./schematics/schema
 import { getSymmetryDiagnostics, registerSymmetryWand } from "./schematics/symmetry-runtime.js";
 import { getElevatorContactDiagnostics, registerElevatorContacts } from "./contraptions/elevator-contact-runtime.js";
 import { getKineticDiagnostics, getKineticWorldForTesting, registerKinetics } from "./kinetics/kinetic-runtime.js";
+import { getEquipmentDiagnostics, registerEquipment } from "./equipment/equipment-runtime.js";
 import { getLogisticsDiagnostics, registerLogistics } from "./logistics/logistics-runtime.js";
 import { getExternalEscrowDiagnostics, registerExternalEscrowTransfers } from "./logistics/external-escrow-runtime.js";
 import { getDepotDiagnostics, registerDepots } from "./logistics/depot-runtime.js";
@@ -70,6 +71,7 @@ function storageDiagnostics() {
 }
 
 registerKinetics();
+registerEquipment();
 registerLogistics();
 registerExternalEscrowTransfers();
 registerDepots();
@@ -126,6 +128,7 @@ registerTreeFertilizer();
 registerVerticalMobility();
 registerWorldshaper();
 registerKernelDiagnosticProvider("kinetics", getKineticDiagnostics);
+registerKernelDiagnosticProvider("equipment", getEquipmentDiagnostics);
 registerKernelDiagnosticProvider("logistics", getLogisticsDiagnostics);
 registerKernelDiagnosticProvider("externalEscrow", getExternalEscrowDiagnostics);
 registerKernelDiagnosticProvider("depots", getDepotDiagnostics);

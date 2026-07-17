@@ -1,0 +1,327 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "deterministic",
+  "generatedFrom": "bedrock/data/migration-matrix.json",
+  "entries": [
+    {
+      "acceptanceId": "EQUIPMENT-BACKTANK-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Persist stationary Backtank air records, charge them from the kinetic network, and use chest/head/feet equipment ticks for diving air, movement, and Netherite heat protection.",
+      "bedrockIdentifier": "createbedrock:backtank",
+      "deliveryPackage": "completed:P6.1",
+      "domain": "equipment",
+      "javaIdentifier": "create:backtank",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Shard stationary Backtank air/timer records by chunk; store carried Backtank air only on the non-stackable ItemStack dynamic property.",
+      "platformScenarios": [
+        "backtank-kinetic-charge",
+        "diving-air-consumption",
+        "netherite-lava-protection"
+      ],
+      "resourcePlan": "Provide copper/netherite Backtank blocks and placeable/wearable items, diving armor, recipes, drops, language keys, texture provenance, and armor render coverage.",
+      "testPlan": "Test capacity, refill cadence, air consumption, waterlogged stops, armor eligibility, stationary persistence, item-state round trips, recipes, and definitions."
+    },
+    {
+      "acceptanceId": "EQUIPMENT-COPPER-BACKTANK-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Persist stationary Backtank air records, charge them from the kinetic network, and use chest/head/feet equipment ticks for diving air, movement, and Netherite heat protection.",
+      "bedrockIdentifier": "createbedrock:copper_backtank",
+      "deliveryPackage": "completed:P6.1",
+      "domain": "equipment",
+      "javaIdentifier": "create:copper_backtank",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Shard stationary Backtank air/timer records by chunk; store carried Backtank air only on the non-stackable ItemStack dynamic property.",
+      "platformScenarios": [
+        "backtank-kinetic-charge",
+        "diving-air-consumption",
+        "netherite-lava-protection"
+      ],
+      "resourcePlan": "Provide copper/netherite Backtank blocks and placeable/wearable items, diving armor, recipes, drops, language keys, texture provenance, and armor render coverage.",
+      "testPlan": "Test capacity, refill cadence, air consumption, waterlogged stops, armor eligibility, stationary persistence, item-state round trips, recipes, and definitions."
+    },
+    {
+      "acceptanceId": "EQUIPMENT-COPPER-BACKTANK-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Persist stationary Backtank air records, charge them from the kinetic network, and use chest/head/feet equipment ticks for diving air, movement, and Netherite heat protection.",
+      "bedrockIdentifier": "createbedrock:copper_backtank",
+      "deliveryPackage": "completed:P6.1",
+      "domain": "equipment",
+      "javaIdentifier": "create:copper_backtank",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Shard stationary Backtank air/timer records by chunk; store carried Backtank air only on the non-stackable ItemStack dynamic property.",
+      "platformScenarios": [
+        "backtank-kinetic-charge",
+        "diving-air-consumption",
+        "netherite-lava-protection"
+      ],
+      "resourcePlan": "Provide copper/netherite Backtank blocks and placeable/wearable items, diving armor, recipes, drops, language keys, texture provenance, and armor render coverage.",
+      "testPlan": "Test capacity, refill cadence, air consumption, waterlogged stops, armor eligibility, stationary persistence, item-state round trips, recipes, and definitions."
+    },
+    {
+      "acceptanceId": "EQUIPMENT-COPPER-BACKTANK-PLACEABLE-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Persist stationary Backtank air records, charge them from the kinetic network, and use chest/head/feet equipment ticks for diving air, movement, and Netherite heat protection.",
+      "bedrockIdentifier": "createbedrock:copper_backtank_placeable",
+      "deliveryPackage": "completed:P6.1",
+      "domain": "equipment",
+      "javaIdentifier": "create:copper_backtank_placeable",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Shard stationary Backtank air/timer records by chunk; store carried Backtank air only on the non-stackable ItemStack dynamic property.",
+      "platformScenarios": [
+        "backtank-kinetic-charge",
+        "diving-air-consumption",
+        "netherite-lava-protection"
+      ],
+      "resourcePlan": "Provide copper/netherite Backtank blocks and placeable/wearable items, diving armor, recipes, drops, language keys, texture provenance, and armor render coverage.",
+      "testPlan": "Test capacity, refill cadence, air consumption, waterlogged stops, armor eligibility, stationary persistence, item-state round trips, recipes, and definitions."
+    },
+    {
+      "acceptanceId": "EQUIPMENT-COPPER-DIVING-BOOTS-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Persist stationary Backtank air records, charge them from the kinetic network, and use chest/head/feet equipment ticks for diving air, movement, and Netherite heat protection.",
+      "bedrockIdentifier": "createbedrock:copper_diving_boots",
+      "deliveryPackage": "completed:P6.1",
+      "domain": "equipment",
+      "javaIdentifier": "create:copper_diving_boots",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Shard stationary Backtank air/timer records by chunk; store carried Backtank air only on the non-stackable ItemStack dynamic property.",
+      "platformScenarios": [
+        "backtank-kinetic-charge",
+        "diving-air-consumption",
+        "netherite-lava-protection"
+      ],
+      "resourcePlan": "Provide copper/netherite Backtank blocks and placeable/wearable items, diving armor, recipes, drops, language keys, texture provenance, and armor render coverage.",
+      "testPlan": "Test capacity, refill cadence, air consumption, waterlogged stops, armor eligibility, stationary persistence, item-state round trips, recipes, and definitions."
+    },
+    {
+      "acceptanceId": "EQUIPMENT-COPPER-DIVING-HELMET-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Persist stationary Backtank air records, charge them from the kinetic network, and use chest/head/feet equipment ticks for diving air, movement, and Netherite heat protection.",
+      "bedrockIdentifier": "createbedrock:copper_diving_helmet",
+      "deliveryPackage": "completed:P6.1",
+      "domain": "equipment",
+      "javaIdentifier": "create:copper_diving_helmet",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Shard stationary Backtank air/timer records by chunk; store carried Backtank air only on the non-stackable ItemStack dynamic property.",
+      "platformScenarios": [
+        "backtank-kinetic-charge",
+        "diving-air-consumption",
+        "netherite-lava-protection"
+      ],
+      "resourcePlan": "Provide copper/netherite Backtank blocks and placeable/wearable items, diving armor, recipes, drops, language keys, texture provenance, and armor render coverage.",
+      "testPlan": "Test capacity, refill cadence, air consumption, waterlogged stops, armor eligibility, stationary persistence, item-state round trips, recipes, and definitions."
+    },
+    {
+      "acceptanceId": "EQUIPMENT-EXTENDO-GRIP-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Provide goggles diagnostics, safe wrench rotations/disassembly, and a Create-only synthetic Extendo interaction path with Backtank-backed reach actions.",
+      "bedrockIdentifier": "createbedrock:extendo_grip",
+      "deliveryPackage": "completed:P6.2",
+      "domain": "equipment",
+      "javaIdentifier": "create:extendo_grip",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Keep tool settings transient; persist only Backtank air consumed by Extendo actions through the carried-item state codec.",
+      "platformScenarios": [
+        "goggles-network-overlay",
+        "wrench-rotate-disassemble",
+        "extendo-synthetic-reach"
+      ],
+      "resourcePlan": "Provide wearable goggles plus wrench and Extendo items, recipes, language keys, texture provenance, and explicit native-reach limitation coverage.",
+      "testPlan": "Test target selection, wrench state transitions, synthetic reach bounds, dual-grip range, Backtank fallback, and definitions."
+    },
+    {
+      "acceptanceId": "EQUIPMENT-GOGGLES-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Provide goggles diagnostics, safe wrench rotations/disassembly, and a Create-only synthetic Extendo interaction path with Backtank-backed reach actions.",
+      "bedrockIdentifier": "createbedrock:goggles",
+      "deliveryPackage": "completed:P6.2",
+      "domain": "equipment",
+      "javaIdentifier": "create:goggles",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Keep tool settings transient; persist only Backtank air consumed by Extendo actions through the carried-item state codec.",
+      "platformScenarios": [
+        "goggles-network-overlay",
+        "wrench-rotate-disassemble",
+        "extendo-synthetic-reach"
+      ],
+      "resourcePlan": "Provide wearable goggles plus wrench and Extendo items, recipes, language keys, texture provenance, and explicit native-reach limitation coverage.",
+      "testPlan": "Test target selection, wrench state transitions, synthetic reach bounds, dual-grip range, Backtank fallback, and definitions."
+    },
+    {
+      "acceptanceId": "EQUIPMENT-NETHERITE-BACKTANK-BLOCK",
+      "assetPlan": "Trace block resources to src/main/java/com/simibubi/create/AllBlocks.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Persist stationary Backtank air records, charge them from the kinetic network, and use chest/head/feet equipment ticks for diving air, movement, and Netherite heat protection.",
+      "bedrockIdentifier": "createbedrock:netherite_backtank",
+      "deliveryPackage": "completed:P6.1",
+      "domain": "equipment",
+      "javaIdentifier": "create:netherite_backtank",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlocks.java",
+      "kind": "block",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Shard stationary Backtank air/timer records by chunk; store carried Backtank air only on the non-stackable ItemStack dynamic property.",
+      "platformScenarios": [
+        "backtank-kinetic-charge",
+        "diving-air-consumption",
+        "netherite-lava-protection"
+      ],
+      "resourcePlan": "Provide copper/netherite Backtank blocks and placeable/wearable items, diving armor, recipes, drops, language keys, texture provenance, and armor render coverage.",
+      "testPlan": "Test capacity, refill cadence, air consumption, waterlogged stops, armor eligibility, stationary persistence, item-state round trips, recipes, and definitions."
+    },
+    {
+      "acceptanceId": "EQUIPMENT-NETHERITE-BACKTANK-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Persist stationary Backtank air records, charge them from the kinetic network, and use chest/head/feet equipment ticks for diving air, movement, and Netherite heat protection.",
+      "bedrockIdentifier": "createbedrock:netherite_backtank",
+      "deliveryPackage": "completed:P6.1",
+      "domain": "equipment",
+      "javaIdentifier": "create:netherite_backtank",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Shard stationary Backtank air/timer records by chunk; store carried Backtank air only on the non-stackable ItemStack dynamic property.",
+      "platformScenarios": [
+        "backtank-kinetic-charge",
+        "diving-air-consumption",
+        "netherite-lava-protection"
+      ],
+      "resourcePlan": "Provide copper/netherite Backtank blocks and placeable/wearable items, diving armor, recipes, drops, language keys, texture provenance, and armor render coverage.",
+      "testPlan": "Test capacity, refill cadence, air consumption, waterlogged stops, armor eligibility, stationary persistence, item-state round trips, recipes, and definitions."
+    },
+    {
+      "acceptanceId": "EQUIPMENT-NETHERITE-BACKTANK-PLACEABLE-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Persist stationary Backtank air records, charge them from the kinetic network, and use chest/head/feet equipment ticks for diving air, movement, and Netherite heat protection.",
+      "bedrockIdentifier": "createbedrock:netherite_backtank_placeable",
+      "deliveryPackage": "completed:P6.1",
+      "domain": "equipment",
+      "javaIdentifier": "create:netherite_backtank_placeable",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Shard stationary Backtank air/timer records by chunk; store carried Backtank air only on the non-stackable ItemStack dynamic property.",
+      "platformScenarios": [
+        "backtank-kinetic-charge",
+        "diving-air-consumption",
+        "netherite-lava-protection"
+      ],
+      "resourcePlan": "Provide copper/netherite Backtank blocks and placeable/wearable items, diving armor, recipes, drops, language keys, texture provenance, and armor render coverage.",
+      "testPlan": "Test capacity, refill cadence, air consumption, waterlogged stops, armor eligibility, stationary persistence, item-state round trips, recipes, and definitions."
+    },
+    {
+      "acceptanceId": "EQUIPMENT-NETHERITE-DIVING-BOOTS-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Persist stationary Backtank air records, charge them from the kinetic network, and use chest/head/feet equipment ticks for diving air, movement, and Netherite heat protection.",
+      "bedrockIdentifier": "createbedrock:netherite_diving_boots",
+      "deliveryPackage": "completed:P6.1",
+      "domain": "equipment",
+      "javaIdentifier": "create:netherite_diving_boots",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Shard stationary Backtank air/timer records by chunk; store carried Backtank air only on the non-stackable ItemStack dynamic property.",
+      "platformScenarios": [
+        "backtank-kinetic-charge",
+        "diving-air-consumption",
+        "netherite-lava-protection"
+      ],
+      "resourcePlan": "Provide copper/netherite Backtank blocks and placeable/wearable items, diving armor, recipes, drops, language keys, texture provenance, and armor render coverage.",
+      "testPlan": "Test capacity, refill cadence, air consumption, waterlogged stops, armor eligibility, stationary persistence, item-state round trips, recipes, and definitions."
+    },
+    {
+      "acceptanceId": "EQUIPMENT-NETHERITE-DIVING-HELMET-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Persist stationary Backtank air records, charge them from the kinetic network, and use chest/head/feet equipment ticks for diving air, movement, and Netherite heat protection.",
+      "bedrockIdentifier": "createbedrock:netherite_diving_helmet",
+      "deliveryPackage": "completed:P6.1",
+      "domain": "equipment",
+      "javaIdentifier": "create:netherite_diving_helmet",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Shard stationary Backtank air/timer records by chunk; store carried Backtank air only on the non-stackable ItemStack dynamic property.",
+      "platformScenarios": [
+        "backtank-kinetic-charge",
+        "diving-air-consumption",
+        "netherite-lava-protection"
+      ],
+      "resourcePlan": "Provide copper/netherite Backtank blocks and placeable/wearable items, diving armor, recipes, drops, language keys, texture provenance, and armor render coverage.",
+      "testPlan": "Test capacity, refill cadence, air consumption, waterlogged stops, armor eligibility, stationary persistence, item-state round trips, recipes, and definitions."
+    },
+    {
+      "acceptanceId": "EQUIPMENT-POTATO-CANNON-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Consume a compatible inventory item, apply a durable Cannon cooldown, launch the existing server-authoritative projectile entity, and use Backtank air before item durability.",
+      "bedrockIdentifier": "createbedrock:potato_cannon",
+      "deliveryPackage": "completed:P6.3",
+      "domain": "equipment",
+      "javaIdentifier": "create:potato_cannon",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Store Cannon cooldown on its non-stackable ItemStack dynamic property; projectile state remains entity dynamic properties owned by the existing projectile runtime.",
+      "platformScenarios": [
+        "potato-cannon-ammo",
+        "potato-cannon-backtank",
+        "potato-cannon-restart"
+      ],
+      "resourcePlan": "Provide Potato Cannon item, mechanical-crafting source mapping, language/texture provenance, and all recognized vanilla/Create ammunition coverage.",
+      "testPlan": "Test cooldown exclusion, ammo conservation, projectile profile handoff, air-or-durability cost, restart codec, and definition coverage."
+    },
+    {
+      "acceptanceId": "EQUIPMENT-TOOLBOX-BLOCK_ENTITY",
+      "assetPlan": "Trace block_entity resources to src/main/java/com/simibubi/create/AllBlockEntityTypes.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Persist 16-color Toolbox block records with eight filtered four-stack compartments, deterministic extraction, player-range attachment, and a form-based interaction surface.",
+      "bedrockIdentifier": "createbedrock:toolbox",
+      "deliveryPackage": "completed:P6.4",
+      "domain": "equipment",
+      "javaIdentifier": "create:toolbox",
+      "javaSource": "src/main/java/com/simibubi/create/AllBlockEntityTypes.java",
+      "kind": "block_entity",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Shard Toolbox block records by chunk; carried Toolboxes retain the same normalized record through their non-stackable ItemStack dynamic property.",
+      "platformScenarios": [
+        "toolbox-filtered-storage",
+        "toolbox-player-range",
+        "toolbox-restart"
+      ],
+      "resourcePlan": "Provide the 16-color Toolbox family, recipes, drops, language keys, texture provenance, and model/geometry coverage.",
+      "testPlan": "Test eight-compartment bounds, filter enforcement, deterministic transfers, block/item persistence, range attachment, concurrent edits, restart, and family definitions."
+    },
+    {
+      "acceptanceId": "EQUIPMENT-WRENCH-ITEM",
+      "assetPlan": "Trace item resources to src/main/java/com/simibubi/create/AllItems.java; Java visual parity remains pending until it is tested in a real Bedrock client.",
+      "behaviorPlan": "Provide goggles diagnostics, safe wrench rotations/disassembly, and a Create-only synthetic Extendo interaction path with Backtank-backed reach actions.",
+      "bedrockIdentifier": "createbedrock:wrench",
+      "deliveryPackage": "completed:P6.2",
+      "domain": "equipment",
+      "javaIdentifier": "create:wrench",
+      "javaSource": "src/main/java/com/simibubi/create/AllItems.java",
+      "kind": "item",
+      "matrixStatus": "static_verified",
+      "persistencePlan": "Keep tool settings transient; persist only Backtank air consumed by Extendo actions through the carried-item state codec.",
+      "platformScenarios": [
+        "goggles-network-overlay",
+        "wrench-rotate-disassemble",
+        "extendo-synthetic-reach"
+      ],
+      "resourcePlan": "Provide wearable goggles plus wrench and Extendo items, recipes, language keys, texture provenance, and explicit native-reach limitation coverage.",
+      "testPlan": "Test target selection, wrench state transitions, synthetic reach bounds, dual-grip range, Backtank fallback, and definitions."
+    }
+  ]
+}

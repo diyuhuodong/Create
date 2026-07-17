@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "backtank": {
+    "baseCapacity": 900,
+    "capacityPerEnchantmentLevel": 300,
+    "stationaryVariants": ["createbedrock:copper_backtank", "createbedrock:netherite_backtank"],
+    "wearableVariants": ["createbedrock:copper_backtank", "createbedrock:netherite_backtank"]
+  },
+  "diving": {
+    "copper": ["createbedrock:copper_diving_helmet", "createbedrock:copper_diving_boots"],
+    "netherite": ["createbedrock:netherite_diving_helmet", "createbedrock:netherite_diving_boots"],
+    "netheriteLavaSet": ["createbedrock:netherite_backtank", "createbedrock:netherite_diving_helmet", "minecraft:netherite_leggings", "createbedrock:netherite_diving_boots"]
+  },
+  "tools": {
+    "extendoNativeReachLimitation": "Bedrock does not expose a global mutable player reach attribute; the runtime extends only Create-owned synthetic interaction handlers.",
+    "goggles": "The worn goggles expose a server-authoritative target/network diagnostic message.",
+    "wrench": "Rotate supported block-state axes/facing; sneak-use performs controlled disassembly."
+  },
+  "potatoCannon": {
+    "cooldownTicks": 12,
+    "profileSource": "behavior_pack/scripts/materials/potato-projectile.js",
+    "usesBacktankAirBeforeDurability": true
+  },
+  "toolbox": {
+    "colors": ["white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"],
+    "compartments": 8,
+    "slotsPerCompartment": 4,
+    "range": 10
+  },
+  "platformAcceptance": {
+    "required": ["Windows Bedrock local world", "Bedrock Realm", "PlayStation Bedrock client"],
+    "status": "pending_real_platform_test"
+  }
+}

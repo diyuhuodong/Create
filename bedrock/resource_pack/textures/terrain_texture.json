@@ -622,6 +622,24 @@
     },
     "createbedrock_schematicannon": {
       "textures": "textures/create_java/block/schematicannon"
-    }
+    },
+    "createbedrock_copper_backtank": { "textures": "textures/create_java/block/copper_backtank" },
+    "createbedrock_netherite_backtank": { "textures": "textures/create_java/block/netherite_backtank" },
+    "createbedrock_toolbox_white": { "textures": "textures/create_java/block/toolbox/white" },
+    "createbedrock_toolbox_orange": { "textures": "textures/create_java/block/toolbox/orange" },
+    "createbedrock_toolbox_magenta": { "textures": "textures/create_java/block/toolbox/magenta" },
+    "createbedrock_toolbox_light_blue": { "textures": "textures/create_java/block/toolbox/light_blue" },
+    "createbedrock_toolbox_yellow": { "textures": "textures/create_java/block/toolbox/yellow" },
+    "createbedrock_toolbox_lime": { "textures": "textures/create_java/block/toolbox/lime" },
+    "createbedrock_toolbox_pink": { "textures": "textures/create_java/block/toolbox/pink" },
+    "createbedrock_toolbox_gray": { "textures": "textures/create_java/block/toolbox/gray" },
+    "createbedrock_toolbox_light_gray": { "textures": "textures/create_java/block/toolbox/light_gray" },
+    "createbedrock_toolbox_cyan": { "textures": "textures/create_java/block/toolbox/cyan" },
+    "createbedrock_toolbox_purple": { "textures": "textures/create_java/block/toolbox/purple" },
+    "createbedrock_toolbox_blue": { "textures": "textures/create_java/block/toolbox/blue" },
+    "createbedrock_toolbox_brown": { "textures": "textures/create_java/block/toolbox/brown" },
+    "createbedrock_toolbox_green": { "textures": "textures/create_java/block/toolbox/green" },
+    "createbedrock_toolbox_red": { "textures": "textures/create_java/block/toolbox/red" },
+    "createbedrock_toolbox_black": { "textures": "textures/create_java/block/toolbox/black" }
   }
 }

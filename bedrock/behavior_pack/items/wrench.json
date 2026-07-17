@@ -1,0 +1,13 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:item": {
+    "description": { "identifier": "createbedrock:wrench", "menu_category": { "category": "equipment", "group": "itemGroup.name.misc" } },
+    "components": {
+      "minecraft:allow_off_hand": true,
+      "minecraft:hand_equipped": true,
+      "minecraft:max_stack_size": 1,
+      "minecraft:icon": "createbedrock_wrench",
+      "minecraft:durability": { "damage_chance": { "min": 0, "max": 0 }, "max_durability": 1 }
+    }
+  }
+}

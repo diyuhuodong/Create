@@ -117,6 +117,19 @@ export const KINETIC_BLOCKS = {
 		axis: "y",
 		stressImpact: 8
 	},
+	"createbedrock:copper_backtank": {
+		// Stationary Backtanks charge only when connected to a real kinetic
+		// network. Their air logic is owned by equipment-runtime, while the
+		// network records this zero-stress kinetic attachment.
+		kind: "consumer",
+		axis: "y",
+		stressImpact: 0
+	},
+	"createbedrock:netherite_backtank": {
+		kind: "consumer",
+		axis: "y",
+		stressImpact: 0
+	},
 	"createbedrock:belt": {
 		kind: "consumer",
 		axis: "y",

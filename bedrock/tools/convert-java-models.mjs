@@ -7,6 +7,12 @@ const bedrockRoot = resolve(toolDirectory, "..");
 const repositoryRoot = resolve(bedrockRoot, "..");
 
 export const JAVA_MODELS = [
+	{ name: "copper_backtank", source: "copper_backtank/block.json" },
+	{ name: "netherite_backtank", source: "netherite_backtank/block.json" },
+	// Toolbox colors share the Java mesh. Each block supplies its own `toolbox`
+	// material instance, preserving the source silhouette without duplicating 16
+	// geometries in the generated Bedrock pack.
+	{ name: "toolbox", source: "toolbox/block.json", materialName: "toolbox" },
 	{ name: "hand_crank", source: "hand_crank/block.json" },
 	{ name: "shaft", source: "shaft.json" },
 	{ name: "cogwheel", source: "cogwheel.json" },

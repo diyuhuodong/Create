@@ -242,6 +242,29 @@ export const STAGE_FIVE_PACKAGE_FOUNDATION = new Map([
 for (const identifier of STAGE_FIVE_PACKAGE_FOUNDATION.keys())
 	BEHAVIOR_PATHS.set(identifier, "behavior_pack/scripts/logistics/package-runtime.js");
 
+// Stage 6 maps Java's item/block-entity equipment registrations to a single
+// server-authoritative equipment runtime. Backtank and Toolbox records are
+// versioned/sharded; carried Backtanks and the Potato Cannon use the supported
+// non-stackable ItemStack state boundary. Platform acceptance stays separate.
+export const STAGE_SIX_EQUIPMENT_FOUNDATION = new Map([
+	["backtank", { domain: "equipment", persistenceSchema: 1 }],
+	["copper_backtank", { domain: "equipment", persistenceSchema: 1 }],
+	["copper_backtank_placeable", { domain: "equipment", persistenceSchema: 1 }],
+	["copper_diving_boots", { domain: "equipment", persistenceSchema: 1 }],
+	["copper_diving_helmet", { domain: "equipment", persistenceSchema: 1 }],
+	["netherite_backtank", { domain: "equipment", persistenceSchema: 1 }],
+	["netherite_backtank_placeable", { domain: "equipment", persistenceSchema: 1 }],
+	["netherite_diving_boots", { domain: "equipment", persistenceSchema: 1 }],
+	["netherite_diving_helmet", { domain: "equipment", persistenceSchema: 1 }],
+	["extendo_grip", { domain: "equipment", persistenceSchema: 1 }],
+	["goggles", { domain: "equipment", persistenceSchema: 1 }],
+	["potato_cannon", { domain: "equipment", persistenceSchema: 1 }],
+	["toolbox", { domain: "equipment", persistenceSchema: 1 }],
+	["wrench", { domain: "equipment", persistenceSchema: 1 }]
+]);
+for (const identifier of STAGE_SIX_EQUIPMENT_FOUNDATION.keys())
+	BEHAVIOR_PATHS.set(identifier, "behavior_pack/scripts/equipment/equipment-runtime.js");
+
 for (const device of REDSTONE_DEVICE_CATALOG)
 	BEHAVIOR_PATHS.set(device.id, "behavior_pack/scripts/redstone/redstone-device-runtime.js");
 
@@ -409,6 +432,7 @@ export function classifyRegistration(identifier, kind) {
 		?? STAGE_FOUR_STICKER_FOUNDATION.get(identifier)
 		?? STAGE_FOUR_SCHEMATICS_FOUNDATION.get(identifier);
 	const stageFiveFoundation = STAGE_FIVE_RAILWAY_FOUNDATION.get(identifier) ?? STAGE_FIVE_PACKAGE_FOUNDATION.get(identifier);
+	const stageSixFoundation = STAGE_SIX_EQUIPMENT_FOUNDATION.get(identifier);
 	const staticSystem = processor ?? fluid ?? redstoneControl;
 	const rule = RULES.find(candidate => candidate.pattern.test(identifier));
 	const classification = staticSystem
@@ -429,6 +453,8 @@ export function classifyRegistration(identifier, kind) {
 		? { ...stageFourFoundation, phase: 4, status: "static_verified" }
 		: stageFiveFoundation
 			? { ...stageFiveFoundation, phase: 5, status: "static_verified" }
+			: stageSixFoundation
+				? { ...stageSixFoundation, phase: 6, status: "static_verified" }
 		: stageTwoFoundation
 		? { ...stageTwoFoundation, phase: 2, status: "static_verified" }
 		: rule ?? { domain: "content", phase: 3 };
@@ -439,9 +465,9 @@ export function classifyRegistration(identifier, kind) {
 		behaviorPath: BEHAVIOR_PATHS.get(identifier) ?? null,
 		blockingReason: null,
 		domain: classification.domain,
-		persistenceSchema: stageFiveFoundation?.persistenceSchema ?? stageFourFoundation?.persistenceSchema ?? (staticSystem || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation ? 2 : redstoneFoundation || stageTwoFoundation && BEHAVIOR_PATHS.has(identifier) ? 1 : null),
+		persistenceSchema: stageSixFoundation?.persistenceSchema ?? stageFiveFoundation?.persistenceSchema ?? stageFourFoundation?.persistenceSchema ?? (staticSystem || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation ? 2 : redstoneFoundation || stageTwoFoundation && BEHAVIOR_PATHS.has(identifier) ? 1 : null),
 		phase: classification.phase,
-		resourceStatus: stageTwoFoundation || staticSystem || foundationContent || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation || redstoneFoundation || stageFourFoundation || stageFiveFoundation || classification.status === "static_verified" ? "partial" : "pending",
+		resourceStatus: stageTwoFoundation || staticSystem || foundationContent || processingFoundation || kineticFoundation || logisticsFoundation || fluidFoundation || redstoneFoundation || stageFourFoundation || stageFiveFoundation || stageSixFoundation || classification.status === "static_verified" ? "partial" : "pending",
 		status: classification.status ?? "specification_pending"
 	};
 }

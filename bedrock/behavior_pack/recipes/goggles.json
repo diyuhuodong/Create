@@ -1,0 +1,1 @@
+{ "format_version": "1.26.0", "minecraft:recipe_shaped": { "description": { "identifier": "createbedrock:goggles" }, "tags": ["crafting_table"], "pattern": [" S ", "GIG"], "key": { "G": { "item": "minecraft:glass" }, "I": { "item": "minecraft:gold_ingot" }, "S": { "item": "minecraft:string" } }, "result": { "item": "createbedrock:goggles" } } }
