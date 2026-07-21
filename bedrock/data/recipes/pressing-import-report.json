@@ -2,8 +2,8 @@
 	"processor": "pressing",
 	"schemaVersion": 1,
 	"summary": {
-		"manual_specification": 8,
-		"migrated": 6,
+		"manual_specification": 7,
+		"migrated": 7,
 		"unsupported_dependency": 29
 	},
 	"records": [
@@ -19,8 +19,11 @@
 		},
 		{
 			"source": "brass_ingot",
-			"status": "manual_specification",
-			"reason": "unmapped_ingredient"
+			"status": "migrated",
+			"recipeId": "create:pressing/brass_ingot:createbedrock:brass_ingot",
+			"recipeIds": [
+				"create:pressing/brass_ingot:createbedrock:brass_ingot"
+			]
 		},
 		{
 			"source": "cardboard",

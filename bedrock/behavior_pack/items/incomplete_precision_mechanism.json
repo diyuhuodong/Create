@@ -1,0 +1,10 @@
+{
+	"format_version": "1.26.0",
+	"minecraft:item": {
+		"description": { "identifier": "createbedrock:incomplete_precision_mechanism" },
+		"components": {
+			"minecraft:icon": "createbedrock_incomplete_precision_mechanism",
+			"minecraft:max_stack_size": 64
+		}
+	}
+}

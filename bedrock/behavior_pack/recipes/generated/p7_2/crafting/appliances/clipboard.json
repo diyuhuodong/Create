@@ -1,0 +1,30 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/appliances/clipboard"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "A",
+      "P",
+      "G"
+    ],
+    "key": {
+      "A": {
+        "item": "createbedrock:andesite_alloy"
+      },
+      "G": {
+        "tag": "minecraft:planks"
+      },
+      "P": {
+        "item": "minecraft:paper"
+      }
+    },
+    "result": {
+      "item": "createbedrock:clipboard"
+    }
+  }
+}

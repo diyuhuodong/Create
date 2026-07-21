@@ -1,0 +1,26 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/rotation_speed_controller"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "B",
+      "C"
+    ],
+    "key": {
+      "B": {
+        "item": "createbedrock:precision_mechanism"
+      },
+      "C": {
+        "item": "createbedrock:brass_casing"
+      }
+    },
+    "result": {
+      "item": "createbedrock:rotation_speed_controller"
+    }
+  }
+}

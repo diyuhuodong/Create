@@ -1,9 +1,22 @@
 import { readdir, readFile, stat } from "node:fs/promises";
-import { dirname, extname, resolve } from "node:path";
+import { dirname, extname, relative, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
+import { buildDomainInventory } from "./domain-inventory.mjs";
+import { buildJavaRegistrationCatalog } from "./java-registration-catalog.mjs";
+import { buildMigrationLedger } from "./migration-ledger.mjs";
 import { validateMigrationMatrix } from "./migration-matrix-schema.mjs";
+import { validateJavaRegistrationCatalog } from "./java-registration-catalog-schema.mjs";
+import { validateMigrationLedger, validateMigrationOverrides } from "./migration-ledger-schema.mjs";
+import { validateCoreMaterialChain } from "./core-material-chain-contract.mjs";
+import { validateCinderFlourChain } from "./cinder-flour-contract.mjs";
+import { buildRecipeIr, validateRecipeIr } from "./recipe-ir.mjs";
+import { buildNativeRecipes, renderNativeRecipeFiles, validateNativeRecipes } from "./native-recipes.mjs";
+import { buildInteractionRecipes, renderInteractionRecipes, validateInteractionRecipes } from "./interaction-recipes.mjs";
+import { buildMechanicalCraftingRecipes, renderMechanicalCraftingRecipes, validateMechanicalCraftingRecipes } from "./mechanical-crafting-recipes.mjs";
+import { validateSequencedAssemblyContent } from "./sequenced-assembly-content-contract.mjs";
+import { buildSequencedAssemblyRecipes, renderSequencedAssemblyRecipes, validateSequencedAssemblyRecipes } from "./sequenced-assembly-recipes.mjs";
 import { validateStage2FoundationContract } from "./stage2-foundation-contract.mjs";
 import { validateStage3SourceContentContract } from "./stage3-content-contract.mjs";
 import { validateStage3ContentSpecifications } from "./stage3-content-specification-schema.mjs";
@@ -95,6 +108,11 @@ async function readJson(file) {
 	}
 }
 
+function assertFreshGeneratedData(name, actual, expected) {
+	if (JSON.stringify(actual) !== JSON.stringify(expected))
+		throw new Error(`${name} is stale; run the matching generator before validation.`);
+}
+
 for (const directory of ["behavior_pack", "resource_pack"]) {
 	for (const file of await jsonFiles(resolve(bedrockRoot, directory)))
 		await readJson(file);
@@ -105,6 +123,15 @@ const resourceManifest = await readJson(resolve(bedrockRoot, "resource_pack", "m
 const terrainAtlas = await readJson(resolve(bedrockRoot, "resource_pack", "textures", "terrain_texture.json"));
 const itemAtlas = await readJson(resolve(bedrockRoot, "resource_pack", "textures", "item_texture.json"));
 const migrationMatrix = await readJson(resolve(bedrockRoot, "data", "migration-matrix.json"));
+const javaRegistrationCatalog = await readJson(resolve(bedrockRoot, "data", "java-registration-catalog.json"));
+const migrationLedger = await readJson(resolve(bedrockRoot, "data", "migration-ledger.json"));
+const migrationOverrides = await readJson(resolve(bedrockRoot, "data", "migration-overrides.json"));
+const interactionRecipes = await readJson(resolve(bedrockRoot, "data", "recipes", "interactions.json"));
+const mechanicalCraftingRecipes = await readJson(resolve(bedrockRoot, "data", "recipes", "mechanical-crafting.json"));
+const recipeIr = await readJson(resolve(bedrockRoot, "data", "recipes", "recipe-ir.json"));
+const nativeRecipes = await readJson(resolve(bedrockRoot, "data", "recipes", "native.json"));
+const sequencedAssemblyRecipes = await readJson(resolve(bedrockRoot, "data", "recipes", "sequenced-assembly.json"));
+const domainInventory = await readJson(resolve(bedrockRoot, "data", "domain-inventory.json"));
 const stage3ContentSpecifications = await readJson(resolve(bedrockRoot, "data", "stage3-content-specifications.json"));
 const stage3KineticSpecifications = await readJson(resolve(bedrockRoot, "data", "stage3-kinetic-specifications.json"));
 const stage3LogisticsSpecifications = await readJson(resolve(bedrockRoot, "data", "stage3-logistics-specifications.json"));
@@ -115,6 +142,58 @@ const stage4WorkQueue = await readJson(resolve(bedrockRoot, "data", "stage4-work
 const stage5WorkQueue = await readJson(resolve(bedrockRoot, "data", "stage5-work-queue.json"));
 const stage6WorkQueue = await readJson(resolve(bedrockRoot, "data", "stage6-work-queue.json"));
 validateMigrationMatrix(migrationMatrix);
+const javaRegistrationCoverage = validateJavaRegistrationCatalog(javaRegistrationCatalog);
+validateMigrationOverrides(migrationOverrides, javaRegistrationCatalog);
+const migrationLedgerCoverage = validateMigrationLedger(migrationLedger, javaRegistrationCatalog, domainInventory);
+const expectedDomainInventory = await buildDomainInventory({ repositoryRoot });
+assertFreshGeneratedData("bedrock/data/domain-inventory.json", domainInventory, expectedDomainInventory);
+const expectedJavaRegistrationCatalog = await buildJavaRegistrationCatalog({ repositoryRoot });
+assertFreshGeneratedData("bedrock/data/java-registration-catalog.json", javaRegistrationCatalog, expectedJavaRegistrationCatalog);
+const { ledger: expectedMigrationLedger } = await buildMigrationLedger({
+	bedrockRoot,
+	catalog: expectedJavaRegistrationCatalog,
+	domainInventory: expectedDomainInventory,
+	matrix: migrationMatrix,
+	overrides: migrationOverrides
+});
+assertFreshGeneratedData("bedrock/data/migration-ledger.json", migrationLedger, expectedMigrationLedger);
+const coreMaterialChain = await validateCoreMaterialChain({ bedrockRoot });
+await validateCinderFlourChain({ bedrockRoot });
+validateInteractionRecipes(interactionRecipes);
+const expectedInteractionRecipes = await buildInteractionRecipes({ repositoryRoot });
+assertFreshGeneratedData("bedrock/data/recipes/interactions.json", interactionRecipes, expectedInteractionRecipes);
+const generatedInteractionRuntime = await readFile(resolve(bedrockRoot, "behavior_pack", "scripts", "processing", "generated", "interaction-recipes.js"), "utf8");
+if (generatedInteractionRuntime !== renderInteractionRecipes(expectedInteractionRecipes.recipes))
+	throw new Error("bedrock/behavior_pack/scripts/processing/generated/interaction-recipes.js is stale; run recipes:interactions before validation.");
+validateMechanicalCraftingRecipes(mechanicalCraftingRecipes);
+const expectedMechanicalCraftingRecipes = await buildMechanicalCraftingRecipes({ repositoryRoot });
+assertFreshGeneratedData("bedrock/data/recipes/mechanical-crafting.json", mechanicalCraftingRecipes, expectedMechanicalCraftingRecipes);
+const generatedMechanicalCraftingRuntime = await readFile(resolve(bedrockRoot, "behavior_pack", "scripts", "processing", "generated", "mechanical-crafting-recipes.js"), "utf8");
+if (generatedMechanicalCraftingRuntime !== renderMechanicalCraftingRecipes(expectedMechanicalCraftingRecipes.recipes))
+	throw new Error("bedrock/behavior_pack/scripts/processing/generated/mechanical-crafting-recipes.js is stale; run recipes:mechanical-crafting before validation.");
+validateRecipeIr(recipeIr);
+const expectedRecipeIr = await buildRecipeIr({ repositoryRoot });
+assertFreshGeneratedData("bedrock/data/recipes/recipe-ir.json", recipeIr, expectedRecipeIr);
+validateNativeRecipes(nativeRecipes);
+const expectedNativeRecipes = await buildNativeRecipes({ bedrockRoot, repositoryRoot });
+assertFreshGeneratedData("bedrock/data/recipes/native.json", nativeRecipes, expectedNativeRecipes);
+const nativeRecipeDirectory = resolve(bedrockRoot, "behavior_pack", "recipes", "generated");
+const expectedNativeFiles = renderNativeRecipeFiles(expectedNativeRecipes);
+const actualNativeFiles = new Map(await Promise.all((await jsonFiles(nativeRecipeDirectory))
+	.map(async file => [relative(nativeRecipeDirectory, file), await readFile(file, "utf8")])));
+if (actualNativeFiles.size !== expectedNativeFiles.size)
+	throw new Error("Generated native Bedrock recipe file count is stale; run npm run recipes:native before validation.");
+for (const [file, expected] of expectedNativeFiles) {
+	if (actualNativeFiles.get(file) !== expected)
+		throw new Error(`Generated native Bedrock recipe ${file} is stale; run npm run recipes:native before validation.`);
+}
+validateSequencedAssemblyRecipes(sequencedAssemblyRecipes);
+const expectedSequencedAssemblyRecipes = await buildSequencedAssemblyRecipes({ repositoryRoot });
+assertFreshGeneratedData("bedrock/data/recipes/sequenced-assembly.json", sequencedAssemblyRecipes, expectedSequencedAssemblyRecipes);
+await validateSequencedAssemblyContent({ bedrockRoot });
+const generatedSequencedAssemblyRuntime = await readFile(resolve(bedrockRoot, "behavior_pack", "scripts", "processing", "generated", "sequenced-assembly-recipes.js"), "utf8");
+if (generatedSequencedAssemblyRuntime !== renderSequencedAssemblyRecipes(expectedSequencedAssemblyRecipes.recipes))
+	throw new Error("bedrock/behavior_pack/scripts/processing/generated/sequenced-assembly-recipes.js is stale; run recipes:sequenced-assembly before validation.");
 const stage2Foundation = await validateStage2FoundationContract({ bedrockRoot });
 validateStage3WorkQueue(stage3WorkQueue, migrationMatrix);
 const stage4WorkQueueCoverage = validateStage4WorkQueue(stage4WorkQueue, migrationMatrix);
@@ -255,4 +334,4 @@ const stage4P45MinecartContraptions = await validateStage4P45MinecartContraption
 const stage4P46Stickers = await validateStage4P46Stickers({ bedrockRoot, repositoryRoot });
 const stage4P47Schematics = await validateStage4P47Schematics({ bedrockRoot, repositoryRoot });
 
-console.log(`Bedrock manifests, JSON files, JavaScript syntax, ${stage2Foundation.entries} Stage-2 foundation records across ${stage2Foundation.blocks} blocks and ${stage2Foundation.directRecipes} direct recipes, ${contentContract.contentBlocks} Stage-3 content blocks, ${contentMaterialFoundation.oreFeatures} C0 zinc ore features, ${contentMaterialResources.contentBlocks} C1 resource blocks, ${contentMaterialStates.contentBlocks} C1 state blocks, ${contentMaterialPersistent.persistentBlocks + contentMaterialGauges.persistentBlocks + contentMaterialDisplay.persistentBlocks + contentMaterialC2Execution.blocks} C2 persistent blocks, ${cardboardEquipment.items} cardboard-equipment items, ${crushedRawMaterials.crushedItems} crushed-raw materials, ${blazeBurner.blocks} Blaze Burner blocks, ${sandpaperMaterials.papers} sand-paper items, ${sailMaterials.sailBlocks} windmill sail blocks, ${legacyMaterials.items} legacy materials, ${tableClothMaterials.blocks} Table Cloth shop blocks, ${nozzleMaterial.blocks} kinetic Nozzle block, and ${contentMaterialResources.contentItems + contentMaterialSpecialItems.contentItems} C1 content items with ${contentMaterialResources.deferredSurvivalAcquisitions.length + contentMaterialSpecialItems.deferredSurvivalAcquisitions.length + contentMaterialPersistent.deferredSurvivalAcquisitions.length + contentMaterialDisplay.deferredSurvivalAcquisitions.length} explicit deferred acquisition chains, ${kineticContract.blocks} S3-9 kinetic blocks, ${logisticsContract.blocks} S3-10 logistics blocks, ${processingContract.blocks} S3-11 processing blocks, ${fluidContract.blocks} S3-12 fluid blocks, ${visualContract.tankSegments} S3-13 Tank visual segments, ${redstoneDecision.staticVerifiedPendingPlatformAcceptance} static-verified S3-14 redstone devices across ${redstoneDecision.matrixStaticVerified} acceptance records, ${redstoneCapabilityPlan.devices} planned S3-14 semantic devices, ${platformAcceptance.pendingPlatforms}/${platformAcceptance.platforms} pending S3-15 platform records, the ${staticClosure.entries}-entry static closure, ${stage3WorkQueue.entries.length}-entry Stage-3 work queue, ${stage4WorkQueueCoverage.entries}-entry Stage-4 work queue, ${stage5WorkQueueCoverage.entries}-entry Stage-5 work queue, ${stage6WorkQueueCoverage.entries}-entry Stage-6 work queue, ${stage5StaticContract.entries}-entry Stage-5 static contract with ${stage5StaticContract.postboxColors} Postbox colors, ${stage6StaticContract.entries}-entry Stage-6 static contract with ${stage6StaticContract.toolboxColors} Toolbox colors, ${stage4DynamicFoundation.dynamicBlocks}-block Stage-4 dynamic foundation, ${stage4P41Foundation.entries} static-verified P4.1 entries with ${stage4P41Foundation.deferredSurvivalAcquisition} acquisition deferred, ${stage4P47Schematics.entries} static-verified P4.7 schematic entries, ${contentSpecificationCoverage.entries} S3-8B content specifications, ${kineticSpecificationCoverage.entries} S3-9 kinetic specifications, ${logisticsSpecificationCoverage.entries} S3-10 logistics specifications, ${processingSpecificationCoverage.entries} S3-11 processing specifications, and ${fluidSpecificationCoverage.entries} S3-12 fluid specifications are valid.`);
+console.log(`Bedrock manifests, JSON files, JavaScript syntax, ${javaRegistrationCoverage.entries} Java registration catalog records, ${migrationLedgerCoverage.registrations} migration-ledger registrations linked to ${migrationLedgerCoverage.domains} domain records, ${coreMaterialChain.items} P7.1A core-material items, ${stage2Foundation.entries} Stage-2 foundation records across ${stage2Foundation.blocks} blocks and ${stage2Foundation.directRecipes} direct recipes, ${contentContract.contentBlocks} Stage-3 content blocks, ${contentMaterialFoundation.oreFeatures} C0 zinc ore features, ${contentMaterialResources.contentBlocks} C1 resource blocks, ${contentMaterialStates.contentBlocks} C1 state blocks, ${contentMaterialPersistent.persistentBlocks + contentMaterialGauges.persistentBlocks + contentMaterialDisplay.persistentBlocks + contentMaterialC2Execution.blocks} C2 persistent blocks, ${cardboardEquipment.items} cardboard-equipment items, ${crushedRawMaterials.crushedItems} crushed-raw materials, ${blazeBurner.blocks} Blaze Burner blocks, ${sandpaperMaterials.papers} sand-paper items, ${sailMaterials.sailBlocks} windmill sail blocks, ${legacyMaterials.items} legacy materials, ${tableClothMaterials.blocks} Table Cloth shop blocks, ${nozzleMaterial.blocks} kinetic Nozzle block, and ${contentMaterialResources.contentItems + contentMaterialSpecialItems.contentItems} C1 content items with ${contentMaterialResources.deferredSurvivalAcquisitions.length + contentMaterialSpecialItems.deferredSurvivalAcquisitions.length + contentMaterialPersistent.deferredSurvivalAcquisitions.length + contentMaterialDisplay.deferredSurvivalAcquisitions.length} explicit deferred acquisition chains, ${kineticContract.blocks} S3-9 kinetic blocks, ${logisticsContract.blocks} S3-10 logistics blocks, ${processingContract.blocks} S3-11 processing blocks, ${fluidContract.blocks} S3-12 fluid blocks, ${visualContract.tankSegments} S3-13 Tank visual segments, ${redstoneDecision.staticVerifiedPendingPlatformAcceptance} static-verified S3-14 redstone devices across ${redstoneDecision.matrixStaticVerified} acceptance records, ${redstoneCapabilityPlan.devices} planned S3-14 semantic devices, ${platformAcceptance.pendingPlatforms}/${platformAcceptance.platforms} pending S3-15 platform records, the ${staticClosure.entries}-entry static closure, ${stage3WorkQueue.entries.length}-entry Stage-3 work queue, ${stage4WorkQueueCoverage.entries}-entry Stage-4 work queue, ${stage5WorkQueueCoverage.entries}-entry Stage-5 work queue, ${stage6WorkQueueCoverage.entries}-entry Stage-6 work queue, ${stage5StaticContract.entries}-entry Stage-5 static contract with ${stage5StaticContract.postboxColors} Postbox colors, ${stage4DynamicFoundation.dynamicBlocks}-block Stage-4 dynamic foundation, ${stage4P41Foundation.entries} static-verified P4.1 entries with ${stage4P41Foundation.deferredSurvivalAcquisition} acquisition deferred, ${stage4P47Schematics.entries} static-verified P4.7 schematic entries, ${contentSpecificationCoverage.entries} S3-8B content specifications, ${kineticSpecificationCoverage.entries} S3-9 kinetic specifications, ${logisticsSpecificationCoverage.entries} S3-10 logistics specifications, ${processingSpecificationCoverage.entries} S3-11 processing specifications, and ${fluidSpecificationCoverage.entries} S3-12 fluid specifications are valid.`);

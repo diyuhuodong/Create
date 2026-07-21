@@ -816,6 +816,46 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
+		"id": "create:crushing/netherrack",
+		"input": {
+			"typeId": "minecraft:netherrack",
+			"count": 1
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:cinder_flour",
+				"count": 1,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:cinder_flour",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/obsidian",
+		"input": {
+			"typeId": "minecraft:obsidian",
+			"count": 1
+		},
+		"processingTicks": 500,
+		"outputs": [
+			{
+				"typeId": "createbedrock:powdered_obsidian",
+				"count": 1,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:obsidian",
+				"count": 1,
+				"chance": 0.75
+			}
+		]
+	},
+	{
 		"id": "create:crushing/prismarine_crystals",
 		"input": {
 			"typeId": "minecraft:prismarine_crystals",
@@ -867,6 +907,41 @@ export const CRUSHING_RECIPES = [
 				"typeId": "minecraft:cobblestone",
 				"count": 1,
 				"chance": 0.125
+			}
+		]
+	},
+	{
+		"id": "create:crushing/tuff",
+		"input": {
+			"typeId": "minecraft:tuff",
+			"count": 1
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:flint",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.1
 			}
 		]
 	},

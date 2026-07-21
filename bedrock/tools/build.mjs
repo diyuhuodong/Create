@@ -1,4 +1,4 @@
-import { cp, mkdir, rm } from "node:fs/promises";
+import { cp, mkdir, readFile, rm } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -38,9 +38,17 @@ import { validateStage4P45MinecartContraptions } from "./stage4-p45-minecart-con
 import { validateStage4P46Stickers } from "./stage4-p46-sticker-contract.mjs";
 import { validateStage4P47Schematics } from "./stage4-p47-schematics-contract.mjs";
 import { validateStage6StaticContract } from "./stage6-static-contract.mjs";
+import { validateCoreMaterialChain } from "./core-material-chain-contract.mjs";
+import { validateCinderFlourChain } from "./cinder-flour-contract.mjs";
+import { buildRecipeIr, validateRecipeIr } from "./recipe-ir.mjs";
+import { buildNativeRecipes, validateNativeRecipes } from "./native-recipes.mjs";
+import { buildInteractionRecipes, validateInteractionRecipes } from "./interaction-recipes.mjs";
+import { buildMechanicalCraftingRecipes, validateMechanicalCraftingRecipes } from "./mechanical-crafting-recipes.mjs";
+import { validateSequencedAssemblyContent } from "./sequenced-assembly-content-contract.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(toolDirectory, "..");
+const repositoryRoot = resolve(bedrockRoot, "..");
 const buildRoot = resolve(bedrockRoot, "build");
 const packs = ["behavior_pack", "resource_pack"];
 
@@ -78,6 +86,29 @@ const contentMaterialPersistent = await validateContentMaterialPersistent({ bedr
 const contentMaterialResources = await validateContentMaterialResources({ bedrockRoot: buildRoot, built: true });
 const contentMaterialSpecialItems = await validateContentMaterialSpecialItems({ bedrockRoot: buildRoot, built: true });
 const contentMaterialStates = await validateContentMaterialStates({ bedrockRoot: buildRoot, built: true });
+const coreMaterialChain = await validateCoreMaterialChain({ bedrockRoot: buildRoot, dataRoot: bedrockRoot, built: true });
+await validateCinderFlourChain({ bedrockRoot: buildRoot, dataRoot: bedrockRoot, built: true });
+await validateSequencedAssemblyContent({ bedrockRoot: buildRoot, dataRoot: bedrockRoot, built: true });
+const interactionRecipes = JSON.parse(await readFile(resolve(bedrockRoot, "data", "recipes", "interactions.json"), "utf8"));
+const expectedInteractionRecipes = await buildInteractionRecipes({ repositoryRoot });
+validateInteractionRecipes(interactionRecipes);
+if (JSON.stringify(interactionRecipes) !== JSON.stringify(expectedInteractionRecipes))
+	throw new Error("bedrock/data/recipes/interactions.json is stale; run npm run recipes:interactions before building.");
+const mechanicalCraftingRecipes = JSON.parse(await readFile(resolve(bedrockRoot, "data", "recipes", "mechanical-crafting.json"), "utf8"));
+const expectedMechanicalCraftingRecipes = await buildMechanicalCraftingRecipes({ repositoryRoot });
+validateMechanicalCraftingRecipes(mechanicalCraftingRecipes);
+if (JSON.stringify(mechanicalCraftingRecipes) !== JSON.stringify(expectedMechanicalCraftingRecipes))
+	throw new Error("bedrock/data/recipes/mechanical-crafting.json is stale; run npm run recipes:mechanical-crafting before building.");
+const recipeIr = JSON.parse(await readFile(resolve(bedrockRoot, "data", "recipes", "recipe-ir.json"), "utf8"));
+const expectedRecipeIr = await buildRecipeIr({ repositoryRoot });
+validateRecipeIr(recipeIr);
+if (JSON.stringify(recipeIr) !== JSON.stringify(expectedRecipeIr))
+	throw new Error("bedrock/data/recipes/recipe-ir.json is stale; run npm run recipes:ir before building.");
+const nativeRecipes = JSON.parse(await readFile(resolve(bedrockRoot, "data", "recipes", "native.json"), "utf8"));
+const expectedNativeRecipes = await buildNativeRecipes({ bedrockRoot, repositoryRoot });
+validateNativeRecipes(nativeRecipes);
+if (JSON.stringify(nativeRecipes) !== JSON.stringify(expectedNativeRecipes))
+	throw new Error("bedrock/data/recipes/native.json is stale; run npm run recipes:native before building.");
 const redstoneDecision = await validateStage3RedstoneDecision({ bedrockRoot: buildRoot });
 const redstoneContract = await validateStage3RedstoneBuiltContract({ buildRoot });
 const platformAcceptance = await validateStage3PlatformAcceptance({ bedrockRoot: buildRoot });
@@ -90,4 +121,4 @@ const stage4P45MinecartContraptions = await validateStage4P45MinecartContraption
 const stage4P46Stickers = await validateStage4P46Stickers({ bedrockRoot: buildRoot, built: true, trackingRoot: bedrockRoot });
 const stage4P47Schematics = await validateStage4P47Schematics({ bedrockRoot: buildRoot, built: true, trackingRoot: bedrockRoot });
 const stage6StaticContract = await validateStage6StaticContract({ root: buildRoot, built: true, trackingRoot: bedrockRoot });
-console.log(`Built Bedrock packs in ${buildRoot}; generated ${generatedTextureCount} S3-13 fluid textures, staged ${importedTextureCount} Java assets, converted ${convertedModelCount} Java models, and verified ${contentContract.contentBlocks} Stage-3 content blocks, ${contentMaterialFoundation.oreFeatures} C0 zinc ore features, ${contentMaterialResources.contentBlocks} C1 resource blocks, ${contentMaterialStates.contentBlocks} C1 state blocks, ${contentMaterialPersistent.persistentBlocks + contentMaterialGauges.persistentBlocks + contentMaterialDisplay.persistentBlocks + contentMaterialC2Execution.blocks} C2 persistent blocks, ${cardboardEquipment.items} cardboard-equipment items, ${crushedRawMaterials.crushedItems} crushed-raw materials, ${blazeBurner.blocks} Blaze Burner blocks, ${sandpaperMaterials.papers} sand-paper items, ${sailMaterials.sailBlocks} windmill sail blocks, ${legacyMaterials.items} legacy materials, ${tableClothMaterials.blocks} Table Cloth shop blocks, ${nozzleMaterial.blocks} kinetic Nozzle block, and ${contentMaterialResources.contentItems + contentMaterialSpecialItems.contentItems} C1 content items with ${contentMaterialResources.deferredSurvivalAcquisitions.length + contentMaterialSpecialItems.deferredSurvivalAcquisitions.length + contentMaterialPersistent.deferredSurvivalAcquisitions.length + contentMaterialDisplay.deferredSurvivalAcquisitions.length} explicit deferred acquisition chains, ${kineticContract.blocks} S3-9 kinetic blocks, ${logisticsContract.blocks} S3-10 logistics blocks, ${processingContract.blocks} S3-11 processing blocks, ${fluidContract.blocks} S3-12 fluid blocks, ${visualContract.tankSegments} S3-13 Tank visual segments, ${redstoneDecision.staticVerifiedPendingPlatformAcceptance} static-verified S3-14 redstone devices across ${redstoneDecision.matrixStaticVerified} acceptance records (${redstoneContract.blocks} blocks and ${redstoneContract.items} item), ${stage4P41Foundation.entries} static-verified P4.1 entries, ${stage4P47Schematics.entries} static-verified P4.7 schematic entries, ${stage6StaticContract.entries} static-verified Stage-6 equipment records with ${stage6StaticContract.toolboxColors} Toolbox colors, and ${platformAcceptance.pendingPlatforms}/${platformAcceptance.platforms} pending S3-15 platform records.`);
+console.log(`Built Bedrock packs in ${buildRoot}; generated ${generatedTextureCount} S3-13 fluid textures, staged ${importedTextureCount} Java assets, converted ${convertedModelCount} Java models, and verified ${coreMaterialChain.items} P7.1A core-material items, ${contentContract.contentBlocks} Stage-3 content blocks, ${contentMaterialFoundation.oreFeatures} C0 zinc ore features, ${contentMaterialResources.contentBlocks} C1 resource blocks, ${contentMaterialStates.contentBlocks} C1 state blocks, ${contentMaterialPersistent.persistentBlocks + contentMaterialGauges.persistentBlocks + contentMaterialDisplay.persistentBlocks + contentMaterialC2Execution.blocks} C2 persistent blocks, ${cardboardEquipment.items} cardboard-equipment items, ${crushedRawMaterials.crushedItems} crushed-raw materials, ${blazeBurner.blocks} Blaze Burner blocks, ${sandpaperMaterials.papers} sand-paper items, ${sailMaterials.sailBlocks} windmill sail blocks, ${legacyMaterials.items} legacy materials, ${tableClothMaterials.blocks} Table Cloth shop blocks, ${nozzleMaterial.blocks} kinetic Nozzle block, and ${contentMaterialResources.contentItems + contentMaterialSpecialItems.contentItems} C1 content items with ${contentMaterialResources.deferredSurvivalAcquisitions.length + contentMaterialSpecialItems.deferredSurvivalAcquisitions.length + contentMaterialPersistent.deferredSurvivalAcquisitions.length + contentMaterialDisplay.deferredSurvivalAcquisitions.length} explicit deferred acquisition chains, ${kineticContract.blocks} S3-9 kinetic blocks, ${logisticsContract.blocks} S3-10 logistics blocks, ${processingContract.blocks} S3-11 processing blocks, ${fluidContract.blocks} S3-12 fluid blocks, ${visualContract.tankSegments} S3-13 Tank visual segments, ${redstoneDecision.staticVerifiedPendingPlatformAcceptance} static-verified S3-14 redstone devices across ${redstoneDecision.matrixStaticVerified} acceptance records (${redstoneContract.blocks} blocks and ${redstoneContract.items} item), ${stage4P41Foundation.entries} static-verified P4.1 entries, ${stage4P47Schematics.entries} static-verified P4.7 schematic entries, ${stage6StaticContract.entries} static-verified Stage-6 equipment records with ${stage6StaticContract.toolboxColors} Toolbox colors, and ${platformAcceptance.pendingPlatforms}/${platformAcceptance.platforms} pending S3-15 platform records.`);

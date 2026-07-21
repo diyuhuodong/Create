@@ -1,6 +1,21 @@
 // Generated from src/generated/resources/data/create/recipe/pressing.
 export const PRESSING_RECIPES = [
 	{
+		"id": "create:pressing/brass_ingot:createbedrock:brass_ingot",
+		"input": {
+			"typeId": "createbedrock:brass_ingot",
+			"count": 1
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "createbedrock:brass_sheet",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
 		"id": "create:pressing/copper_ingot:minecraft:copper_ingot",
 		"input": {
 			"typeId": "minecraft:copper_ingot",

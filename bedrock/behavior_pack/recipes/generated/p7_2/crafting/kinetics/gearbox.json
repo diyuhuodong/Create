@@ -1,0 +1,27 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/gearbox"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      " C ",
+      "CBC",
+      " C "
+    ],
+    "key": {
+      "B": {
+        "item": "createbedrock:andesite_casing"
+      },
+      "C": {
+        "item": "createbedrock:cogwheel"
+      }
+    },
+    "result": {
+      "item": "createbedrock:gearbox"
+    }
+  }
+}

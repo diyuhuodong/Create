@@ -1,0 +1,27 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/logistics/redstone_link"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "C",
+      "S"
+    ],
+    "key": {
+      "C": {
+        "item": "createbedrock:transmitter"
+      },
+      "S": {
+        "item": "createbedrock:andesite_casing"
+      }
+    },
+    "result": {
+      "count": 2,
+      "item": "createbedrock:redstone_link"
+    }
+  }
+}

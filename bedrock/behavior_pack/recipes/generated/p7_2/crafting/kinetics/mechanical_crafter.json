@@ -1,0 +1,31 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/mechanical_crafter"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "B",
+      "C",
+      "R"
+    ],
+    "key": {
+      "B": {
+        "item": "createbedrock:electron_tube"
+      },
+      "C": {
+        "item": "createbedrock:brass_casing"
+      },
+      "R": {
+        "item": "minecraft:crafting_table"
+      }
+    },
+    "result": {
+      "count": 3,
+      "item": "createbedrock:mechanical_crafter"
+    }
+  }
+}

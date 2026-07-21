@@ -1,0 +1,27 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/appliances/cardboard_sword"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "P",
+      "P",
+      "S"
+    ],
+    "key": {
+      "P": {
+        "item": "createbedrock:cardboard"
+      },
+      "S": {
+        "item": "minecraft:stick"
+      }
+    },
+    "result": {
+      "item": "createbedrock:cardboard_sword"
+    }
+  }
+}

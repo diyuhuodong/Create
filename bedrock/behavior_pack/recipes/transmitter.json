@@ -1,0 +1,14 @@
+{
+	"format_version": "1.26.0",
+	"minecraft:recipe_shaped": {
+		"description": { "identifier": "createbedrock:transmitter" },
+		"tags": ["crafting_table"],
+		"pattern": [" N ", "LLL", " R "],
+		"key": {
+			"L": { "item": "createbedrock:copper_sheet" },
+			"N": { "item": "minecraft:lightning_rod" },
+			"R": { "item": "minecraft:redstone" }
+		},
+		"result": { "item": "createbedrock:transmitter" }
+	}
+}

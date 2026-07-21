@@ -1,0 +1,13 @@
+{
+	"format_version": "1.26.0",
+	"minecraft:item": {
+		"description": {
+			"identifier": "createbedrock:powdered_obsidian",
+			"menu_category": { "category": "items", "group": "itemGroup.name.misc" }
+		},
+		"components": {
+			"minecraft:icon": "createbedrock_powdered_obsidian",
+			"minecraft:max_stack_size": 64
+		}
+	}
+}

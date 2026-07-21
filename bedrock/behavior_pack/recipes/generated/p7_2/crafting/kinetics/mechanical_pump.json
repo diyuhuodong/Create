@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/mechanical_pump"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:cogwheel"
+      },
+      {
+        "item": "createbedrock:fluid_pipe"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:mechanical_pump"
+    }
+  }
+}

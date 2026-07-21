@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/speedometer_from_conversion"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:stressometer"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:speedometer"
+    }
+  }
+}

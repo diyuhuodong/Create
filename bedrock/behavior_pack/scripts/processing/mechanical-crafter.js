@@ -1,54 +1,7 @@
-export const MECHANICAL_CRAFTER_BLOCK = "createbedrock:mechanical_crafter";
+import { MECHANICAL_CRAFTING_RECIPES } from "./generated/mechanical-crafting-recipes.js";
 
-// Create's four data-driven mechanical-crafting recipes. The matcher keeps the
-// recipe language independent of Bedrock's unavailable vanilla recipe registry
-// so more recipes (including a world's configured recipes) can be appended.
-export const MECHANICAL_CRAFTING_RECIPES = Object.freeze([
-	{
-		id: "create:mechanical_crafting/crushing_wheel",
-		key: {
-			A: { item: "createbedrock:andesite_alloy" },
-			P: { tag: "minecraft:planks" },
-			S: { tag: "c:stones" }
-		},
-		output: { count: 2, typeId: "createbedrock:crushing_wheel" },
-		pattern: [" AAA ", "AAPAA", "APSPA", "AAPAA", " AAA "]
-	},
-	{
-		id: "create:mechanical_crafting/extendo_grip",
-		key: {
-			H: { item: "createbedrock:brass_hand" },
-			L: { tag: "c:ingots/brass" },
-			R: { item: "createbedrock:precision_mechanism" },
-			S: { tag: "c:rods/wooden" }
-		},
-		output: { count: 1, typeId: "createbedrock:extendo_grip" },
-		pattern: [" L ", " R ", "SSS", "SSS", " H "]
-	},
-	{
-		id: "create:mechanical_crafting/potato_cannon",
-		key: {
-			C: { tag: "c:ingots/copper" },
-			L: { item: "createbedrock:andesite_alloy" },
-			R: { item: "createbedrock:precision_mechanism" },
-			S: { item: "createbedrock:fluid_pipe" }
-		},
-		output: { count: 1, typeId: "createbedrock:potato_cannon" },
-		pattern: ["LRSSS", "CC   "]
-	},
-	{
-		id: "create:mechanical_crafting/wand_of_symmetry",
-		key: {
-			B: { tag: "c:ingots/brass" },
-			E: { tag: "c:ender_pearls" },
-			G: { tag: "c:glass_blocks" },
-			O: { tag: "c:obsidians" },
-			P: { item: "createbedrock:precision_mechanism" }
-		},
-		output: { count: 1, typeId: "createbedrock:wand_of_symmetry" },
-		pattern: [" G ", "GEG", " P ", " B ", " O "]
-	}
-]);
+export const MECHANICAL_CRAFTER_BLOCK = "createbedrock:mechanical_crafter";
+export { MECHANICAL_CRAFTING_RECIPES };
 
 const STONE_TYPES = new Set([
 	"minecraft:stone", "minecraft:cobblestone", "minecraft:deepslate", "minecraft:cobbled_deepslate",
@@ -61,7 +14,7 @@ function typeIdFor(cell) {
 }
 
 function validateRecipe(recipe) {
-	if (typeof recipe?.id !== "string" || !Array.isArray(recipe.pattern) || recipe.pattern.length === 0 || !recipe.pattern.every(row => typeof row === "string"))
+	if (typeof recipe?.id !== "string" || typeof recipe.acceptMirrored !== "boolean" || !Array.isArray(recipe.pattern) || recipe.pattern.length === 0 || !recipe.pattern.every(row => typeof row === "string"))
 		throw new TypeError("Mechanical crafting recipes require an id and non-empty string pattern");
 	const width = recipe.pattern[0].length;
 	if (width === 0 || !recipe.pattern.every(row => row.length === width))
@@ -110,19 +63,11 @@ export function matchMechanicalCraftingRecipe(grid, recipes = MECHANICAL_CRAFTIN
 		validateRecipe(recipe);
 		if (recipe.pattern.length !== grid.length || recipe.pattern[0].length !== grid[0].length)
 			continue;
-		let matched = true;
-		for (let row = 0; row < grid.length && matched; row++)
-			for (let column = 0; column < grid[row].length; column++) {
-				const symbol = recipe.pattern[row][column];
-				const typeId = typeIdFor(grid[row][column]);
-				if (symbol === " ") {
-					if (typeId !== undefined)
-						matched = false;
-				} else if (!mechanicalCrafterIngredientMatches(recipe.key[symbol], typeId)) {
-					matched = false;
-				}
-			}
-		if (matched)
+		const matches = mirrored => recipe.pattern.every((row, rowIndex) => [...row].every((symbol, column) => {
+			const typeId = typeIdFor(grid[rowIndex][mirrored ? row.length - 1 - column : column]);
+			return symbol === " " ? typeId === undefined : mechanicalCrafterIngredientMatches(recipe.key[symbol], typeId);
+		}));
+		if (matches(false) || recipe.acceptMirrored && matches(true))
 			return { id: recipe.id, output: { ...recipe.output } };
 	}
 	return undefined;

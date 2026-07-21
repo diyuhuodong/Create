@@ -1,0 +1,30 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/logistics/content_observer"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "R",
+      "B",
+      "I"
+    ],
+    "key": {
+      "B": {
+        "item": "createbedrock:brass_casing"
+      },
+      "I": {
+        "item": "minecraft:observer"
+      },
+      "R": {
+        "item": "createbedrock:electron_tube"
+      }
+    },
+    "result": {
+      "item": "createbedrock:content_observer"
+    }
+  }
+}

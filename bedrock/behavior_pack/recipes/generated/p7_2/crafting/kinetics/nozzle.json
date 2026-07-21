@@ -1,0 +1,27 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/nozzle"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      " S ",
+      " C ",
+      "SSS"
+    ],
+    "key": {
+      "C": {
+        "tag": "minecraft:wool"
+      },
+      "S": {
+        "item": "createbedrock:andesite_alloy"
+      }
+    },
+    "result": {
+      "item": "createbedrock:nozzle"
+    }
+  }
+}

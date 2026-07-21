@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/train_trapdoor"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "tag": "minecraft:wooden_trapdoors"
+      },
+      {
+        "item": "createbedrock:railway_casing"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:train_trapdoor"
+    }
+  }
+}

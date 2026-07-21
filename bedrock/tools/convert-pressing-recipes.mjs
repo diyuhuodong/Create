@@ -13,6 +13,7 @@ const repositoryRoot = resolve(bedrockRoot, "..");
 const sourceRoot = resolve(repositoryRoot, "src/generated/resources/data/create/recipe/pressing");
 const outputRoot = resolve(bedrockRoot, "behavior_pack/scripts/processing/generated");
 const TAG_ITEMS = {
+	"c:ingots/brass": ["createbedrock:brass_ingot"],
 	"c:ingots/copper": ["minecraft:copper_ingot"],
 	"c:ingots/gold": ["minecraft:gold_ingot"],
 	"c:ingots/iron": ["minecraft:iron_ingot"]

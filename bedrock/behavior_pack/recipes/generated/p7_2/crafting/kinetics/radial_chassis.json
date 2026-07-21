@@ -1,0 +1,28 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/radial_chassis"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      " L ",
+      "PLP",
+      " L "
+    ],
+    "key": {
+      "L": {
+        "tag": "minecraft:logs"
+      },
+      "P": {
+        "item": "createbedrock:andesite_alloy"
+      }
+    },
+    "result": {
+      "count": 3,
+      "item": "createbedrock:radial_chassis"
+    }
+  }
+}

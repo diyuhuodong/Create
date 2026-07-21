@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/large_cogwheel_from_little"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:cogwheel"
+      },
+      {
+        "tag": "minecraft:planks"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:large_cogwheel"
+    }
+  }
+}

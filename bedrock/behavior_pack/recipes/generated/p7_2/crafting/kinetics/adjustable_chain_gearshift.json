@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/adjustable_chain_gearshift"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:encased_chain_drive"
+      },
+      {
+        "item": "createbedrock:electron_tube"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:adjustable_chain_gearshift"
+    }
+  }
+}

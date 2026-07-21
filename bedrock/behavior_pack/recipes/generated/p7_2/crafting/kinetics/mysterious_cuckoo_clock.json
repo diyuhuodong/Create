@@ -1,0 +1,27 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/mysterious_cuckoo_clock"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      " C ",
+      "CBC",
+      " C "
+    ],
+    "key": {
+      "B": {
+        "item": "createbedrock:cuckoo_clock"
+      },
+      "C": {
+        "item": "minecraft:gunpowder"
+      }
+    },
+    "result": {
+      "item": "createbedrock:mysterious_cuckoo_clock"
+    }
+  }
+}

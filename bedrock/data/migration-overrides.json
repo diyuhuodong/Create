@@ -1,0 +1,86 @@
+{
+	"schemaVersion": 1,
+	"entries": [
+		{
+			"sourceKey": "item:create:cinder_flour",
+			"family": "core_materials",
+			"status": "implemented",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"resources": "verified",
+			"mapping": { "relation": "one_to_one", "targets": ["createbedrock:cinder_flour"] }
+		},
+		{
+			"sourceKey": "item:create:brass_sheet",
+			"family": "core_materials",
+			"status": "implemented",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"resources": "verified",
+			"mapping": { "relation": "one_to_one", "targets": ["createbedrock:brass_sheet"] }
+		},
+		{
+			"sourceKey": "item:create:brass_nugget",
+			"family": "core_materials",
+			"status": "implemented",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"resources": "verified",
+			"mapping": { "relation": "one_to_one", "targets": ["createbedrock:brass_nugget"] }
+		},
+		{
+			"sourceKey": "item:create:brass_hand",
+			"family": "core_components",
+			"status": "implemented",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"resources": "verified",
+			"mapping": { "relation": "one_to_one", "targets": ["createbedrock:brass_hand"] }
+		},
+		{
+			"sourceKey": "item:create:crafter_slot_cover",
+			"family": "core_components",
+			"status": "implemented",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"resources": "verified",
+			"mapping": { "relation": "one_to_one", "targets": ["createbedrock:crafter_slot_cover"] }
+		},
+		{
+			"sourceKey": "item:create:electron_tube",
+			"family": "core_components",
+			"status": "implemented",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"resources": "verified",
+			"mapping": { "relation": "one_to_one", "targets": ["createbedrock:electron_tube"] }
+		},
+		{
+			"sourceKey": "item:create:propeller",
+			"family": "core_components",
+			"status": "implemented",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"resources": "verified",
+			"mapping": { "relation": "one_to_one", "targets": ["createbedrock:propeller"] }
+		},
+		{
+			"sourceKey": "item:create:transmitter",
+			"family": "core_components",
+			"status": "implemented",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"resources": "verified",
+			"mapping": { "relation": "one_to_one", "targets": ["createbedrock:transmitter"] }
+		},
+		{
+			"sourceKey": "item:create:whisk",
+			"family": "core_components",
+			"status": "implemented",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"resources": "verified",
+			"mapping": { "relation": "one_to_one", "targets": ["createbedrock:whisk"] }
+		}
+	]
+}

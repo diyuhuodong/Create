@@ -1,0 +1,15 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_smithing_transform": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/appliances/netherite_backtank"
+    },
+    "tags": [
+      "smithing_table"
+    ],
+    "template": "minecraft:netherite_upgrade_smithing_template",
+    "base": "createbedrock:copper_backtank",
+    "addition": "minecraft:netherite_ingot",
+    "result": "createbedrock:netherite_backtank"
+  }
+}

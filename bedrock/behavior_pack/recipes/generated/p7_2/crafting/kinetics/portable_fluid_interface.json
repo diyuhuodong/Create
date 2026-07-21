@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/portable_fluid_interface"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:copper_casing"
+      },
+      {
+        "item": "createbedrock:chute"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:portable_fluid_interface"
+    }
+  }
+}

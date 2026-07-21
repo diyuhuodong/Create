@@ -1,0 +1,13 @@
+{
+	"format_version": "1.26.0",
+	"minecraft:item": {
+		"description": {
+			"identifier": "createbedrock:electron_tube",
+			"menu_category": { "category": "items", "group": "itemGroup.name.misc" }
+		},
+		"components": {
+			"minecraft:icon": "createbedrock_electron_tube",
+			"minecraft:max_stack_size": 64
+		}
+	}
+}

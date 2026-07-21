@@ -1,0 +1,30 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/logistics/redstone_requester"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "C",
+      "A",
+      "B"
+    ],
+    "key": {
+      "A": {
+        "item": "createbedrock:stock_link"
+      },
+      "B": {
+        "item": "minecraft:iron_ingot"
+      },
+      "C": {
+        "item": "minecraft:redstone"
+      }
+    },
+    "result": {
+      "item": "createbedrock:redstone_requester"
+    }
+  }
+}

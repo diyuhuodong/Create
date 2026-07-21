@@ -74,7 +74,7 @@ export async function validateStage6StaticContract({ root = bedrockRoot, built =
 		json(root, "resource_pack/textures/item_texture.json"),
 		json(root, "resource_pack/textures/terrain_texture.json"),
 		json(trackingRoot, "data/stage6-manual-coverage.json"),
-		readFile(resolve(root, "behavior_pack/scripts/processing/mechanical-crafter.js"), "utf8")
+		json(trackingRoot, "data/recipes/mechanical-crafting.json")
 	]);
 	for (const icon of ["copper_backtank", "netherite_backtank", "copper_diving_helmet", "copper_diving_boots", "netherite_diving_helmet", "netherite_diving_boots", "goggles", "extendo_grip", "potato_cannon", "wrench"])
 		if (!itemAtlas.texture_data?.[`createbedrock_${icon}`])
@@ -82,7 +82,8 @@ export async function validateStage6StaticContract({ root = bedrockRoot, built =
 	for (const texture of ["copper_backtank", "netherite_backtank", ...TOOLBOX_COLORS.map(color => `toolbox_${color}`)])
 		if (!terrainAtlas.texture_data?.[`createbedrock_${texture}`])
 			throw new Error(`Stage 6 terrain atlas lacks ${texture}`);
-	if (!mechanicalRecipes.includes('id: "create:mechanical_crafting/extendo_grip"') || !mechanicalRecipes.includes('id: "create:mechanical_crafting/potato_cannon"'))
+	const mechanicalRecipeIds = new Set(mechanicalRecipes.recipes?.map(recipe => recipe.id));
+	if (!mechanicalRecipeIds.has("create:mechanical_crafting/extendo_grip") || !mechanicalRecipeIds.has("create:mechanical_crafting/potato_cannon"))
 		throw new Error("Stage 6 requires the Extendo Grip and Potato Cannon mechanical-crafting mappings");
 	if (manual.schemaVersion !== 1 || manual.backtank?.baseCapacity !== 900 || manual.backtank?.capacityPerEnchantmentLevel !== 300
 		|| manual.toolbox?.colors?.length !== 16 || manual.toolbox?.compartments !== 8 || manual.toolbox?.slotsPerCompartment !== 4

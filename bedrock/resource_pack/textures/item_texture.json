@@ -8,6 +8,51 @@
     "createbedrock_brass_ingot": {
       "textures": "textures/create_java/item/brass_ingot"
     },
+    "createbedrock_brass_hand": {
+      "textures": "textures/create_java/item/brass_hand"
+    },
+    "createbedrock_brass_nugget": {
+      "textures": "textures/create_java/item/brass_nugget"
+    },
+    "createbedrock_brass_sheet": {
+      "textures": "textures/create_java/item/brass_sheet"
+    },
+    "createbedrock_crafter_slot_cover": {
+      "textures": "textures/create_java/item/crafter_slot_cover"
+    },
+    "createbedrock_cinder_flour": {
+      "textures": "textures/create_java/item/cinder_flour"
+    },
+    "createbedrock_powdered_obsidian": {
+      "textures": "textures/create_java/item/powdered_obsidian"
+    },
+    "createbedrock_precision_mechanism": {
+      "textures": "textures/create_java/item/precision_mechanism"
+    },
+    "createbedrock_sturdy_sheet": {
+      "textures": "textures/create_java/item/sturdy_sheet"
+    },
+    "createbedrock_incomplete_precision_mechanism": {
+      "textures": "textures/create_java/item/incomplete_precision_mechanism"
+    },
+    "createbedrock_unprocessed_obsidian_sheet": {
+      "textures": "textures/create_java/item/unprocessed_obsidian_sheet"
+    },
+    "createbedrock_incomplete_track": {
+      "textures": "textures/create_java/item/incomplete_track"
+    },
+    "createbedrock_electron_tube": {
+      "textures": "textures/create_java/item/electron_tube"
+    },
+    "createbedrock_propeller": {
+      "textures": "textures/create_java/item/propeller"
+    },
+    "createbedrock_transmitter": {
+      "textures": "textures/create_java/item/transmitter"
+    },
+    "createbedrock_whisk": {
+      "textures": "textures/create_java/item/whisk"
+    },
     "createbedrock_filter": {
       "textures": "textures/create_java/item/filter"
     },

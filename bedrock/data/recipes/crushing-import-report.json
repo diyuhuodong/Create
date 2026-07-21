@@ -3,8 +3,8 @@
 	"schemaVersion": 1,
 	"summary": {
 		"manual_specification": 42,
-		"migrated": 33,
-		"unsupported_dependency": 136
+		"migrated": 36,
+		"unsupported_dependency": 133
 	},
 	"records": [
 		{
@@ -839,8 +839,8 @@
 		},
 		{
 			"source": "netherrack",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/netherrack"
 		},
 		{
 			"source": "nickel_ore",
@@ -849,8 +849,8 @@
 		},
 		{
 			"source": "obsidian",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/obsidian"
 		},
 		{
 			"source": "ochrum",
@@ -1029,8 +1029,8 @@
 		},
 		{
 			"source": "tuff",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/tuff"
 		},
 		{
 			"source": "tuff_recycling",

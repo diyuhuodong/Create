@@ -1,0 +1,31 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/controller_rail"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "A A",
+      "ASA",
+      "AEA"
+    ],
+    "key": {
+      "A": {
+        "item": "minecraft:gold_ingot"
+      },
+      "E": {
+        "item": "createbedrock:electron_tube"
+      },
+      "S": {
+        "item": "minecraft:stick"
+      }
+    },
+    "result": {
+      "count": 6,
+      "item": "createbedrock:controller_rail"
+    }
+  }
+}

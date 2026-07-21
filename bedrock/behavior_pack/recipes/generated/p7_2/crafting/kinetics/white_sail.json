@@ -1,0 +1,30 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/white_sail"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "WS",
+      "SA"
+    ],
+    "key": {
+      "A": {
+        "item": "createbedrock:andesite_alloy"
+      },
+      "S": {
+        "item": "minecraft:stick"
+      },
+      "W": {
+        "tag": "minecraft:wool"
+      }
+    },
+    "result": {
+      "count": 2,
+      "item": "createbedrock:white_sail"
+    }
+  }
+}

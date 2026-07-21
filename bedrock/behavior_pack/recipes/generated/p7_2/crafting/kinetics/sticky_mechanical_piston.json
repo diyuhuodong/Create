@@ -1,0 +1,26 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/sticky_mechanical_piston"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "S",
+      "P"
+    ],
+    "key": {
+      "P": {
+        "item": "createbedrock:mechanical_piston"
+      },
+      "S": {
+        "item": "minecraft:slime_ball"
+      }
+    },
+    "result": {
+      "item": "createbedrock:sticky_mechanical_piston"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/copper_door"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "tag": "minecraft:wooden_doors"
+      },
+      {
+        "item": "createbedrock:copper_casing"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:copper_door"
+    }
+  }
+}
