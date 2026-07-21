@@ -4,7 +4,7 @@
     "description": {
       "identifier": "createbedrock:smart_fluid_pipe",
       "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
-      "properties": { "createbedrock:fluid_filter": ["any", "water", "lava"] },
+      "properties": { "createbedrock:fluid_filter": ["any", "water", "lava", "honey", "chocolate", "tea", "milk"] },
       "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
     },
     "components": {

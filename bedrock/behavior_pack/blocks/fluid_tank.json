@@ -6,7 +6,7 @@
       "properties": {
         "createbedrock:tank_segment": ["single", "bottom", "middle", "top"],
         "createbedrock:fluid_level": [0, 1, 2, 3, 4],
-        "createbedrock:fluid_kind": ["empty", "water", "lava"]
+        "createbedrock:fluid_kind": ["empty", "water", "lava", "honey", "chocolate", "tea", "milk"]
       },
       "menu_category": {
         "category": "items",
@@ -101,7 +101,10 @@
       { "condition": "query.block_state('createbedrock:tank_segment') == 'top' && query.block_state('createbedrock:fluid_level') == 2", "components": { "minecraft:geometry": "geometry.createbedrock.fluid_tank_top_level_2" } },
       { "condition": "query.block_state('createbedrock:tank_segment') == 'top' && query.block_state('createbedrock:fluid_level') == 3", "components": { "minecraft:geometry": "geometry.createbedrock.fluid_tank_top_level_3" } },
       { "condition": "query.block_state('createbedrock:tank_segment') == 'top' && query.block_state('createbedrock:fluid_level') == 4", "components": { "minecraft:geometry": "geometry.createbedrock.fluid_tank_top_level_4" } },
-      { "condition": "query.block_state('createbedrock:fluid_kind') == 'lava'", "components": { "minecraft:material_instances": { "fluid_fill": { "texture": "createbedrock_fluid_lava", "render_method": "alpha_blend" } } } }
+      { "condition": "query.block_state('createbedrock:fluid_kind') == 'lava'", "components": { "minecraft:material_instances": { "fluid_fill": { "texture": "createbedrock_fluid_lava", "render_method": "alpha_blend" } } } },
+      { "condition": "query.block_state('createbedrock:fluid_kind') == 'honey'", "components": { "minecraft:material_instances": { "fluid_fill": { "texture": "createbedrock_fluid_honey", "render_method": "alpha_blend" } } } },
+      { "condition": "query.block_state('createbedrock:fluid_kind') == 'chocolate'", "components": { "minecraft:material_instances": { "fluid_fill": { "texture": "createbedrock_fluid_chocolate", "render_method": "alpha_blend" } } } },
+      { "condition": "query.block_state('createbedrock:fluid_kind') == 'tea'", "components": { "minecraft:material_instances": { "fluid_fill": { "texture": "createbedrock_fluid_tea", "render_method": "alpha_blend" } } } }
     ]
   }
 }

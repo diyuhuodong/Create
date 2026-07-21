@@ -1,0 +1,16 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:chocolate",
+      "menu_category": { "category": "nature", "group": "itemGroup.name.misc" }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": false,
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.6 },
+      "minecraft:material_instances": {
+        "*": { "texture": "createbedrock_fluid_chocolate", "render_method": "alpha_blend" }
+      }
+    }
+  }
+}

@@ -210,6 +210,8 @@
     "createbedrock_extendo_grip": { "textures": "textures/create_java/item/extendo_grip" },
     "createbedrock_goggles": { "textures": "textures/create_java/item/goggles" },
     "createbedrock_potato_cannon": { "textures": "textures/create_java/item/potato_cannon" },
-    "createbedrock_wrench": { "textures": "textures/create_java/item/wrench" }
+    "createbedrock_wrench": { "textures": "textures/create_java/item/wrench" },
+    "createbedrock_honey_bucket": { "textures": "textures/create_java/item/honey_bucket" },
+    "createbedrock_chocolate_bucket": { "textures": "textures/create_java/item/chocolate_bucket" }
   }
 }

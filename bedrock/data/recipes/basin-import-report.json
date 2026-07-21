@@ -2,40 +2,58 @@
 	"processor": "basin",
 	"schemaVersion": 1,
 	"summary": {
-		"manual_specification": 15,
-		"migrated": 3,
+		"manual_specification": 0,
+		"migrated": 18,
 		"unsupported_dependency": 3
 	},
 	"records": [
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:basin/compacting/andesite_from_flint:0",
+			"recipeIds": [
+				"create:basin/compacting/andesite_from_flint:0"
+			],
 			"source": "compacting/andesite_from_flint",
-			"status": "manual_specification"
+			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:basin/compacting/blaze_cake:0",
+			"recipeIds": [
+				"create:basin/compacting/blaze_cake:0"
+			],
 			"source": "compacting/blaze_cake",
-			"status": "manual_specification"
+			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:basin/compacting/chocolate:0",
+			"recipeIds": [
+				"create:basin/compacting/chocolate:0"
+			],
 			"source": "compacting/chocolate",
-			"status": "manual_specification"
+			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:basin/compacting/diorite_from_flint:0",
+			"recipeIds": [
+				"create:basin/compacting/diorite_from_flint:0"
+			],
 			"source": "compacting/diorite_from_flint",
-			"status": "manual_specification"
+			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:basin/compacting/granite_from_flint:0",
+			"recipeIds": [
+				"create:basin/compacting/granite_from_flint:0"
+			],
 			"source": "compacting/granite_from_flint",
-			"status": "manual_specification"
+			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:basin/compacting/honey:0",
+			"recipeIds": [
+				"create:basin/compacting/honey:0"
+			],
 			"source": "compacting/honey",
-			"status": "manual_specification"
+			"status": "migrated"
 		},
 		{
 			"recipeId": "create:basin/compacting/ice:0",
@@ -54,9 +72,12 @@
 			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:basin/mixing/andesite_alloy_from_zinc:0",
+			"recipeIds": [
+				"create:basin/mixing/andesite_alloy_from_zinc:0"
+			],
 			"source": "mixing/andesite_alloy_from_zinc",
-			"status": "manual_specification"
+			"status": "migrated"
 		},
 		{
 			"recipeId": "create:basin/mixing/brass_ingot:0",
@@ -67,19 +88,28 @@
 			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:basin/mixing/cardboard_pulp:0",
+			"recipeIds": [
+				"create:basin/mixing/cardboard_pulp:0"
+			],
 			"source": "mixing/cardboard_pulp",
-			"status": "manual_specification"
+			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:basin/mixing/chocolate:0",
+			"recipeIds": [
+				"create:basin/mixing/chocolate:0"
+			],
 			"source": "mixing/chocolate",
-			"status": "manual_specification"
+			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:basin/mixing/chocolate_melting:0",
+			"recipeIds": [
+				"create:basin/mixing/chocolate_melting:0"
+			],
 			"source": "mixing/chocolate_melting",
-			"status": "manual_specification"
+			"status": "migrated"
 		},
 		{
 			"reason": "compatibility_recipe",
@@ -97,29 +127,44 @@
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:basin/mixing/dough_by_mixing:0",
+			"recipeIds": [
+				"create:basin/mixing/dough_by_mixing:0"
+			],
 			"source": "mixing/dough_by_mixing",
-			"status": "manual_specification"
+			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:basin/mixing/honey:0",
+			"recipeIds": [
+				"create:basin/mixing/honey:0"
+			],
 			"source": "mixing/honey",
-			"status": "manual_specification"
+			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:basin/mixing/lava_from_cobble:0",
+			"recipeIds": [
+				"create:basin/mixing/lava_from_cobble:0"
+			],
 			"source": "mixing/lava_from_cobble",
-			"status": "manual_specification"
+			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:basin/mixing/mud_by_mixing:0",
+			"recipeIds": [
+				"create:basin/mixing/mud_by_mixing:0"
+			],
 			"source": "mixing/mud_by_mixing",
-			"status": "manual_specification"
+			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:basin/mixing/tea:0",
+			"recipeIds": [
+				"create:basin/mixing/tea:0"
+			],
 			"source": "mixing/tea",
-			"status": "manual_specification"
+			"status": "migrated"
 		}
 	]
 }

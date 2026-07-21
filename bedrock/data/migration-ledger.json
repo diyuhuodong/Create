@@ -1313,7 +1313,9 @@
 		{
 			"acquisition": "unreviewed",
 			"behavior": "unreviewed",
-			"candidateTargets": [],
+			"candidateTargets": [
+				"createbedrock:chocolate"
+			],
 			"family": "unclassified",
 			"javaIdentifier": "create:chocolate",
 			"kind": "block",
@@ -5029,7 +5031,9 @@
 		{
 			"acquisition": "unreviewed",
 			"behavior": "unreviewed",
-			"candidateTargets": [],
+			"candidateTargets": [
+				"createbedrock:honey"
+			],
 			"family": "unclassified",
 			"javaIdentifier": "create:honey",
 			"kind": "block",
@@ -11897,7 +11901,9 @@
 		{
 			"acquisition": "unreviewed",
 			"behavior": "unreviewed",
-			"candidateTargets": [],
+			"candidateTargets": [
+				"createbedrock:chocolate_bucket"
+			],
 			"family": "unclassified",
 			"javaIdentifier": "create:chocolate_bucket",
 			"kind": "item",
@@ -12611,7 +12617,9 @@
 		{
 			"acquisition": "unreviewed",
 			"behavior": "unreviewed",
-			"candidateTargets": [],
+			"candidateTargets": [
+				"createbedrock:honey_bucket"
+			],
 			"family": "unclassified",
 			"javaIdentifier": "create:honey_bucket",
 			"kind": "item",

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { fluidFromVanillaSource, VANILLA_SOURCE_FLUID_AMOUNT, VanillaWorldFluidPort, vanillaSourceForFluid } from "../behavior_pack/scripts/fluids/world-fluid-port.js";
+import { fluidFromVanillaSource, fluidFromWorldSource, VANILLA_SOURCE_FLUID_AMOUNT, VanillaWorldFluidPort, vanillaSourceForFluid, worldSourceForFluid } from "../behavior_pack/scripts/fluids/world-fluid-port.js";
 
 function clone(value) {
 	return value && JSON.parse(JSON.stringify(value));
@@ -78,6 +78,12 @@ function escrowAdapter() {
 		fluids
 	};
 }
+
+test("generic world source projection supports static Honey and Chocolate without claiming liquid simulation", () => {
+	assert.deepEqual(fluidFromWorldSource({ states: {}, typeId: "createbedrock:honey" }), { amount: 1_000, typeId: "createbedrock:honey" });
+	assert.deepEqual(worldSourceForFluid({ amount: 1_000, typeId: "createbedrock:chocolate" }), { states: {}, typeId: "createbedrock:chocolate" });
+	assert.equal(worldSourceForFluid({ amount: 250, typeId: "createbedrock:tea" }), undefined);
+});
 
 test("world fluid source conversion accepts only still, non-waterlogged water and lava", () => {
 	assert.equal(VANILLA_SOURCE_FLUID_AMOUNT, 1_000);

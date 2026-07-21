@@ -94,6 +94,63 @@ function outputStacks(results) {
 	}));
 }
 
+function mapFluidIdentifier(identifier) {
+	return mapJavaProcessingIdentifier(identifier);
+}
+
+function basinRecipe(source, sourceDefinition, sourcePath) {
+	const ingredients = [];
+	const fluidIngredients = [];
+	for (const ingredient of source.ingredients ?? []) {
+		const count = ingredient.count ?? 1;
+		if (typeof ingredient?.fluid === "string") {
+			fluidIngredients.push({ amount: ingredient.amount, typeId: mapFluidIdentifier(ingredient.fluid) });
+			continue;
+		}
+		if (ingredient?.type === "neoforge:tag" && typeof ingredient.tag === "string") {
+			fluidIngredients.push({ amount: ingredient.amount, tag: ingredient.tag });
+			continue;
+		}
+		if (typeof ingredient?.item === "string") {
+			ingredients.push({ count, typeId: mapJavaProcessingIdentifier(ingredient.item) });
+			continue;
+		}
+		if (typeof ingredient?.tag === "string") {
+			ingredients.push({ count, tag: ingredient.tag });
+			continue;
+		}
+		return undefined;
+	}
+	const outputs = [];
+	const fluidOutputs = [];
+	for (const result of source.results ?? []) {
+		if (typeof result?.id !== "string")
+			return undefined;
+		if (result.amount !== undefined) {
+			fluidOutputs.push({ amount: result.amount, typeId: mapFluidIdentifier(result.id) });
+			continue;
+		}
+		outputs.push({
+			chance: result.chance ?? 1,
+			count: result.count ?? 1,
+			typeId: mapJavaProcessingIdentifier(result.id)
+		});
+	}
+	if ((ingredients.length === 0 && fluidIngredients.length === 0) || (outputs.length === 0 && fluidOutputs.length === 0))
+		return undefined;
+	return {
+		fluidIngredients,
+		fluidOutputs,
+		heatRequirement: source.heat_requirement ?? "none",
+		id: `create:basin/${sourcePath}:0`,
+		ingredients,
+		mode: sourceDefinition.mode,
+		outputs,
+		processingTicks: source.processing_time ?? 100,
+		source: sourcePath
+	};
+}
+
 function generatedConstant(name) {
 	return `${name.toUpperCase()}_RECIPES`;
 }
@@ -108,6 +165,16 @@ async function convertProcessor(processor) {
 			const sourcePath = `${sourceDefinition.directory}/${relative(sourceRoot, file).replace(/\\/g, "/").replace(/\.json$/, "")}`;
 			if (sourcePath.includes("/compat/")) {
 				records.push({ reason: "compatibility_recipe", source: sourcePath, status: "unsupported_dependency" });
+				continue;
+			}
+			if (processor.name === "basin") {
+				const recipe = source.type === sourceDefinition.type && basinRecipe(source, sourceDefinition, sourcePath);
+				if (!recipe) {
+					records.push({ reason: "unsupported_recipe_shape", source: sourcePath, status: "manual_specification" });
+					continue;
+				}
+				recipes.push(recipe);
+				records.push({ recipeId: recipe.id, recipeIds: [recipe.id], source: sourcePath, status: "migrated" });
 				continue;
 			}
 			const combinations = ingredientCombinations(source.ingredients);

@@ -4,7 +4,7 @@
     "description": {
       "identifier": "createbedrock:creative_fluid_tank",
       "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
-      "properties": { "createbedrock:fluid_type": ["water", "lava"] }
+      "properties": { "createbedrock:fluid_type": ["water", "lava", "honey", "chocolate", "tea", "milk"] }
     },
     "components": {
       "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },

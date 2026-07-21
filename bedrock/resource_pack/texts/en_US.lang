@@ -293,3 +293,7 @@ tile.createbedrock:brown_toolbox.name=Brown Toolbox
 tile.createbedrock:green_toolbox.name=Green Toolbox
 tile.createbedrock:red_toolbox.name=Red Toolbox
 tile.createbedrock:black_toolbox.name=Black Toolbox
+tile.createbedrock:honey.name=Honey
+tile.createbedrock:chocolate.name=Chocolate
+item.createbedrock:honey_bucket.name=Honey Bucket
+item.createbedrock:chocolate_bucket.name=Chocolate Bucket

@@ -11,6 +11,14 @@ export function fluidVisualKind(contents) {
 		return "water";
 	if (contents?.typeId === "minecraft:lava")
 		return "lava";
+	if (contents?.typeId === "createbedrock:honey")
+		return "honey";
+	if (contents?.typeId === "createbedrock:chocolate")
+		return "chocolate";
+	if (contents?.typeId === "createbedrock:tea")
+		return "tea";
+	if (contents?.typeId === "createbedrock:milk")
+		return "milk";
 	return "empty";
 }
 

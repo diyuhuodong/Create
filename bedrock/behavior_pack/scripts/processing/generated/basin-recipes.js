@@ -1,6 +1,188 @@
 // Generated from Create basin recipe sources.
 export const BASIN_RECIPES = [
 	{
+		"fluidIngredients": [
+			{
+				"amount": 100,
+				"typeId": "minecraft:lava"
+			}
+		],
+		"fluidOutputs": [],
+		"heatRequirement": "none",
+		"id": "create:basin/compacting/andesite_from_flint:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:flint"
+			},
+			{
+				"count": 1,
+				"typeId": "minecraft:flint"
+			},
+			{
+				"count": 1,
+				"typeId": "minecraft:gravel"
+			}
+		],
+		"mode": "compacting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:andesite"
+			}
+		],
+		"processingTicks": 100,
+		"source": "compacting/andesite_from_flint"
+	},
+	{
+		"fluidIngredients": [],
+		"fluidOutputs": [],
+		"heatRequirement": "none",
+		"id": "create:basin/compacting/blaze_cake:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"tag": "c:eggs"
+			},
+			{
+				"count": 1,
+				"typeId": "minecraft:sugar"
+			},
+			{
+				"count": 1,
+				"typeId": "createbedrock:cinder_flour"
+			}
+		],
+		"mode": "compacting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "createbedrock:blaze_cake_base"
+			}
+		],
+		"processingTicks": 100,
+		"source": "compacting/blaze_cake"
+	},
+	{
+		"fluidIngredients": [
+			{
+				"amount": 250,
+				"typeId": "createbedrock:chocolate"
+			}
+		],
+		"fluidOutputs": [],
+		"heatRequirement": "none",
+		"id": "create:basin/compacting/chocolate:0",
+		"ingredients": [],
+		"mode": "compacting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "createbedrock:bar_of_chocolate"
+			}
+		],
+		"processingTicks": 100,
+		"source": "compacting/chocolate"
+	},
+	{
+		"fluidIngredients": [
+			{
+				"amount": 100,
+				"typeId": "minecraft:lava"
+			}
+		],
+		"fluidOutputs": [],
+		"heatRequirement": "none",
+		"id": "create:basin/compacting/diorite_from_flint:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:flint"
+			},
+			{
+				"count": 1,
+				"typeId": "minecraft:flint"
+			},
+			{
+				"count": 1,
+				"typeId": "minecraft:calcite"
+			}
+		],
+		"mode": "compacting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:diorite"
+			}
+		],
+		"processingTicks": 100,
+		"source": "compacting/diorite_from_flint"
+	},
+	{
+		"fluidIngredients": [
+			{
+				"amount": 100,
+				"typeId": "minecraft:lava"
+			}
+		],
+		"fluidOutputs": [],
+		"heatRequirement": "none",
+		"id": "create:basin/compacting/granite_from_flint:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:flint"
+			},
+			{
+				"count": 1,
+				"typeId": "minecraft:flint"
+			},
+			{
+				"count": 1,
+				"typeId": "minecraft:red_sand"
+			}
+		],
+		"mode": "compacting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:granite"
+			}
+		],
+		"processingTicks": 100,
+		"source": "compacting/granite_from_flint"
+	},
+	{
+		"fluidIngredients": [
+			{
+				"amount": 1000,
+				"tag": "c:honey"
+			}
+		],
+		"fluidOutputs": [],
+		"heatRequirement": "none",
+		"id": "create:basin/compacting/honey:0",
+		"ingredients": [],
+		"mode": "compacting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:honey_block"
+			}
+		],
+		"processingTicks": 100,
+		"source": "compacting/honey"
+	},
+	{
+		"fluidIngredients": [],
+		"fluidOutputs": [],
+		"heatRequirement": "none",
 		"id": "create:basin/compacting/ice:0",
 		"ingredients": [
 			{
@@ -48,10 +230,14 @@ export const BASIN_RECIPES = [
 				"typeId": "minecraft:ice"
 			}
 		],
-		"processingTicks": 100
+		"processingTicks": 100,
+		"source": "compacting/ice"
 	},
 	{
-		"id": "create:basin/mixing/andesite_alloy:0",
+		"fluidIngredients": [],
+		"fluidOutputs": [],
+		"heatRequirement": "none",
+		"id": "create:basin/mixing/andesite_alloy_from_zinc:0",
 		"ingredients": [
 			{
 				"count": 1,
@@ -59,7 +245,7 @@ export const BASIN_RECIPES = [
 			},
 			{
 				"count": 1,
-				"typeId": "minecraft:iron_nugget"
+				"tag": "c:nuggets/zinc"
 			}
 		],
 		"mode": "mixing",
@@ -70,18 +256,48 @@ export const BASIN_RECIPES = [
 				"typeId": "createbedrock:andesite_alloy"
 			}
 		],
-		"processingTicks": 100
+		"processingTicks": 100,
+		"source": "mixing/andesite_alloy_from_zinc"
 	},
 	{
+		"fluidIngredients": [],
+		"fluidOutputs": [],
+		"heatRequirement": "none",
+		"id": "create:basin/mixing/andesite_alloy:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:andesite"
+			},
+			{
+				"count": 1,
+				"tag": "c:nuggets/iron"
+			}
+		],
+		"mode": "mixing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "createbedrock:andesite_alloy"
+			}
+		],
+		"processingTicks": 100,
+		"source": "mixing/andesite_alloy"
+	},
+	{
+		"fluidIngredients": [],
+		"fluidOutputs": [],
+		"heatRequirement": "heated",
 		"id": "create:basin/mixing/brass_ingot:0",
 		"ingredients": [
 			{
 				"count": 1,
-				"typeId": "minecraft:copper_ingot"
+				"tag": "c:ingots/copper"
 			},
 			{
 				"count": 1,
-				"typeId": "createbedrock:zinc_ingot"
+				"tag": "c:ingots/zinc"
 			}
 		],
 		"mode": "mixing",
@@ -92,6 +308,223 @@ export const BASIN_RECIPES = [
 				"typeId": "createbedrock:brass_ingot"
 			}
 		],
-		"processingTicks": 100
+		"processingTicks": 100,
+		"source": "mixing/brass_ingot"
+	},
+	{
+		"fluidIngredients": [
+			{
+				"amount": 250,
+				"typeId": "minecraft:water"
+			}
+		],
+		"fluidOutputs": [],
+		"heatRequirement": "none",
+		"id": "create:basin/mixing/cardboard_pulp:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"tag": "create:pulpifiable"
+			},
+			{
+				"count": 1,
+				"tag": "create:pulpifiable"
+			},
+			{
+				"count": 1,
+				"tag": "create:pulpifiable"
+			},
+			{
+				"count": 1,
+				"tag": "create:pulpifiable"
+			}
+		],
+		"mode": "mixing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "createbedrock:pulp"
+			}
+		],
+		"processingTicks": 100,
+		"source": "mixing/cardboard_pulp"
+	},
+	{
+		"fluidIngredients": [],
+		"fluidOutputs": [
+			{
+				"amount": 250,
+				"typeId": "createbedrock:chocolate"
+			}
+		],
+		"heatRequirement": "heated",
+		"id": "create:basin/mixing/chocolate_melting:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:bar_of_chocolate"
+			}
+		],
+		"mode": "mixing",
+		"outputs": [],
+		"processingTicks": 100,
+		"source": "mixing/chocolate_melting"
+	},
+	{
+		"fluidIngredients": [
+			{
+				"amount": 250,
+				"tag": "c:milk"
+			}
+		],
+		"fluidOutputs": [
+			{
+				"amount": 250,
+				"typeId": "createbedrock:chocolate"
+			}
+		],
+		"heatRequirement": "heated",
+		"id": "create:basin/mixing/chocolate:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:sugar"
+			},
+			{
+				"count": 1,
+				"typeId": "minecraft:cocoa_beans"
+			}
+		],
+		"mode": "mixing",
+		"outputs": [],
+		"processingTicks": 100,
+		"source": "mixing/chocolate"
+	},
+	{
+		"fluidIngredients": [
+			{
+				"amount": 1000,
+				"typeId": "minecraft:water"
+			}
+		],
+		"fluidOutputs": [],
+		"heatRequirement": "none",
+		"id": "create:basin/mixing/dough_by_mixing:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"tag": "c:flours/wheat"
+			}
+		],
+		"mode": "mixing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "createbedrock:dough"
+			}
+		],
+		"processingTicks": 100,
+		"source": "mixing/dough_by_mixing"
+	},
+	{
+		"fluidIngredients": [],
+		"fluidOutputs": [
+			{
+				"amount": 1000,
+				"typeId": "createbedrock:honey"
+			}
+		],
+		"heatRequirement": "heated",
+		"id": "create:basin/mixing/honey:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:honey_block"
+			}
+		],
+		"mode": "mixing",
+		"outputs": [],
+		"processingTicks": 100,
+		"source": "mixing/honey"
+	},
+	{
+		"fluidIngredients": [],
+		"fluidOutputs": [
+			{
+				"amount": 50,
+				"typeId": "minecraft:lava"
+			}
+		],
+		"heatRequirement": "superheated",
+		"id": "create:basin/mixing/lava_from_cobble:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"tag": "c:cobblestones"
+			}
+		],
+		"mode": "mixing",
+		"outputs": [],
+		"processingTicks": 100,
+		"source": "mixing/lava_from_cobble"
+	},
+	{
+		"fluidIngredients": [
+			{
+				"amount": 250,
+				"typeId": "minecraft:water"
+			}
+		],
+		"fluidOutputs": [],
+		"heatRequirement": "none",
+		"id": "create:basin/mixing/mud_by_mixing:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"tag": "minecraft:convertable_to_mud"
+			}
+		],
+		"mode": "mixing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:mud"
+			}
+		],
+		"processingTicks": 100,
+		"source": "mixing/mud_by_mixing"
+	},
+	{
+		"fluidIngredients": [
+			{
+				"amount": 250,
+				"typeId": "minecraft:water"
+			},
+			{
+				"amount": 250,
+				"tag": "c:milk"
+			}
+		],
+		"fluidOutputs": [
+			{
+				"amount": 500,
+				"typeId": "createbedrock:tea"
+			}
+		],
+		"heatRequirement": "heated",
+		"id": "create:basin/mixing/tea:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"tag": "minecraft:leaves"
+			}
+		],
+		"mode": "mixing",
+		"outputs": [],
+		"processingTicks": 100,
+		"source": "mixing/tea"
 	}
 ];

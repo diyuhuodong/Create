@@ -48,7 +48,7 @@ test("generated processor reports classify every Java recipe without silent skip
 	}
 });
 
-test("S3-11 reports classify item-port recipes and explicitly retain unsupported shapes", async () => {
+test("S3-11 reports classify processors and retain core Basin fluid/heat recipes", async () => {
 	for (const processor of ["basin", "cutting", "fan"]) {
 		const file = new URL(`../data/recipes/${processor}-import-report.json`, import.meta.url);
 		const report = JSON.parse(await readFile(file, "utf8"));
@@ -60,7 +60,10 @@ test("S3-11 reports classify item-port recipes and explicitly retain unsupported
 	}
 	const basin = JSON.parse(await readFile(new URL("../data/recipes/basin-import-report.json", import.meta.url), "utf8"));
 	assert.ok(basin.records.some(record => record.source === "mixing/brass_ingot" && record.status === "migrated"));
-	assert.ok(basin.records.some(record => record.source === "mixing/lava_from_cobble" && record.reason === "unsupported_recipe_shape"));
+	assert.ok(basin.records.some(record => record.source === "mixing/lava_from_cobble" && record.status === "migrated"));
+	const basinRecipes = JSON.parse(await readFile(new URL("../data/recipes/basin.json", import.meta.url), "utf8"));
+	assert.deepEqual(basinRecipes.find(recipe => recipe.source === "mixing/lava_from_cobble")?.fluidOutputs, [{ amount: 50, typeId: "minecraft:lava" }]);
+	assert.equal(basinRecipes.find(recipe => recipe.source === "mixing/lava_from_cobble")?.heatRequirement, "superheated");
 	const fan = JSON.parse(await readFile(new URL("../data/recipes/fan-import-report.json", import.meta.url), "utf8"));
 	assert.ok(fan.records.some(record => record.source === "minecraft:blasting recipe registry" && record.reason === "runtime_recipe_registry_not_exported"));
 	assert.ok(fan.records.some(record => record.source === "minecraft:smoking recipe registry" && record.reason === "runtime_recipe_registry_not_exported"));

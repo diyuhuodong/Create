@@ -253,7 +253,8 @@ export const JAVA_BLOCK_TEXTURES = [
 	,"schematicannon.png"
 	,"symmetry_mirror.png"
 ];
-export const JAVA_ITEM_TEXTURES = ["belt_connector.png", "brass_hand.png", "brass_ingot.png", "brass_nugget.png", "brass_sheet.png", "raw_zinc.png", "zinc_ingot.png", "zinc_nugget.png", "copper_nugget.png", "cinder_flour.png", "powdered_obsidian.png", "precision_mechanism.png", "sturdy_sheet.png", "incomplete_precision_mechanism.png", "unprocessed_obsidian_sheet.png", "incomplete_track.png", "andesite_alloy.png", "rose_quartz.png", "polished_rose_quartz.png", "crafter_slot_cover.png", "electron_tube.png", "propeller.png", "transmitter.png", "whisk.png", "sand_paper.png", "red_sand_paper.png", "chromatic_compound_1.png", "refined_radiance.png", "shadow_steel.png", "shopping_list.png", "filter.png", "attribute_filter.png", "linked_controller.png", "cardboard.png", "cardboard_boots.png", "cardboard_chestplate.png", "cardboard_helmet.png", "cardboard_leggings.png", "cardboard_sword.png", "blaze_cake_base.png", "blaze_cake.png", "creative_blaze_cake.png", "crushed_raw_copper.png", "crushed_raw_gold.png", "crushed_raw_iron.png", "crushed_raw_zinc.png", "bar_of_chocolate.png", "sweet_roll.png", "chocolate_glazed_berries.png", "honeyed_apple.png", "builders_tea.png", "experience_nugget.png", "minecart_contraption.png", "chest_minecart_contraption.png", "furnace_minecart_contraption.png", "minecart_coupling.png", "super_glue.png", "tree_fertilizer.png", "crafting_blueprint.png", "empty_schematic.png", "schematic.png", "schematic_and_quill.png", "copper_diving_boots.png", "copper_diving_helmet.png", "netherite_diving_boots.png", "netherite_diving_helmet.png", "extendo_grip.png", "goggles.png", "goggles_model.png", "potato_cannon.png", "wrench.png"];
+export const JAVA_ITEM_TEXTURES = ["belt_connector.png", "brass_hand.png", "brass_ingot.png", "brass_nugget.png", "brass_sheet.png", "raw_zinc.png", "zinc_ingot.png", "zinc_nugget.png", "copper_nugget.png", "cinder_flour.png", "powdered_obsidian.png", "precision_mechanism.png", "sturdy_sheet.png", "incomplete_precision_mechanism.png", "unprocessed_obsidian_sheet.png", "incomplete_track.png", "andesite_alloy.png", "rose_quartz.png", "polished_rose_quartz.png", "crafter_slot_cover.png", "electron_tube.png", "propeller.png", "transmitter.png", "whisk.png", "sand_paper.png", "red_sand_paper.png", "chromatic_compound_1.png", "refined_radiance.png", "shadow_steel.png", "shopping_list.png", "filter.png", "attribute_filter.png", "linked_controller.png", "cardboard.png", "cardboard_boots.png", "cardboard_chestplate.png", "cardboard_helmet.png", "cardboard_leggings.png", "cardboard_sword.png", "blaze_cake_base.png", "blaze_cake.png", "creative_blaze_cake.png", "crushed_raw_copper.png", "crushed_raw_gold.png", "crushed_raw_iron.png", "crushed_raw_zinc.png", "bar_of_chocolate.png", "sweet_roll.png", "chocolate_glazed_berries.png", "honeyed_apple.png", "builders_tea.png", "honey_bucket.png", "chocolate_bucket.png", "experience_nugget.png", "minecart_contraption.png", "chest_minecart_contraption.png", "furnace_minecart_contraption.png", "minecart_coupling.png", "super_glue.png", "tree_fertilizer.png", "crafting_blueprint.png", "empty_schematic.png", "schematic.png", "schematic_and_quill.png", "copper_diving_boots.png", "copper_diving_helmet.png", "netherite_diving_boots.png", "netherite_diving_helmet.png", "extendo_grip.png", "goggles.png", "goggles_model.png", "potato_cannon.png", "wrench.png"];
+export const JAVA_FLUID_TEXTURES = ["chocolate_still.png", "honey_still.png", "tea_still.png"];
 export const JAVA_ENTITY_TEXTURES = ["blueprint_small.png"];
 export const JAVA_ARMOR_TEXTURES = ["models/armor/cardboard_layer_1.png", "models/armor/cardboard_layer_2.png", "models/armor/copper_diving_layer_1.png", "models/armor/netherite_diving_layer_1.png", "models/armor/netherite_diving_layer_2.png"];
 export const JAVA_SOUND_ASSETS = [
@@ -271,12 +272,15 @@ export async function importJavaAssets(resourcePackRoot) {
 	const targetDirectory = resolve(resourcePackRoot, "textures/create_java/block");
 	const itemSourceDirectory = resolve(repositoryRoot, "src/main/resources/assets/create/textures/item");
 	const itemTargetDirectory = resolve(resourcePackRoot, "textures/create_java/item");
+	const fluidSourceDirectory = resolve(repositoryRoot, "src/main/resources/assets/create/textures/fluid");
+	const fluidTargetDirectory = resolve(resourcePackRoot, "textures/create_java/fluid");
 	const entitySourceDirectory = resolve(repositoryRoot, "src/main/resources/assets/create/textures/entity");
 	const entityTargetDirectory = resolve(resourcePackRoot, "textures/create_java/entity");
 	const soundSourceDirectory = resolve(repositoryRoot, "src/main/resources/assets/create/sounds");
 	const soundTargetDirectory = resolve(resourcePackRoot, "sounds");
 	await mkdir(targetDirectory, { recursive: true });
 	await mkdir(itemTargetDirectory, { recursive: true });
+	await mkdir(fluidTargetDirectory, { recursive: true });
 	await mkdir(entityTargetDirectory, { recursive: true });
 	await mkdir(soundTargetDirectory, { recursive: true });
 
@@ -284,6 +288,8 @@ export async function importJavaAssets(resourcePackRoot) {
 		await mkdir(dirname(resolve(targetDirectory, texture)), { recursive: true }).then(() => cp(resolve(sourceDirectory, texture), resolve(targetDirectory, texture)));
 	for (const texture of JAVA_ITEM_TEXTURES)
 		await cp(resolve(itemSourceDirectory, texture), resolve(itemTargetDirectory, texture));
+	for (const texture of JAVA_FLUID_TEXTURES)
+		await cp(resolve(fluidSourceDirectory, texture), resolve(fluidTargetDirectory, texture));
 	for (const texture of JAVA_ENTITY_TEXTURES)
 		await cp(resolve(entitySourceDirectory, texture), resolve(entityTargetDirectory, texture));
 	for (const texture of JAVA_ARMOR_TEXTURES)
@@ -298,11 +304,12 @@ export async function importJavaAssets(resourcePackRoot) {
 			sources: {
 				block: { directory: "src/main/resources/assets/create/textures/block", files: JAVA_BLOCK_TEXTURES },
 				item: { directory: "src/main/resources/assets/create/textures/item", files: JAVA_ITEM_TEXTURES },
+				fluid: { directory: "src/main/resources/assets/create/textures/fluid", files: JAVA_FLUID_TEXTURES },
 				entity: { directory: "src/main/resources/assets/create/textures/entity", files: JAVA_ENTITY_TEXTURES },
 				armor: { directory: "src/main/resources/assets/create/textures", files: JAVA_ARMOR_TEXTURES },
 				sound: { directory: "src/main/resources/assets/create/sounds", files: JAVA_SOUND_ASSETS }
 		},
 		note: "Build-time copies only. Java models require explicit Bedrock geometry conversion."
 	}, null, 2)}\n`);
-	return JAVA_BLOCK_TEXTURES.length + JAVA_ITEM_TEXTURES.length + JAVA_ENTITY_TEXTURES.length + JAVA_SOUND_ASSETS.length;
+	return JAVA_BLOCK_TEXTURES.length + JAVA_ITEM_TEXTURES.length + JAVA_FLUID_TEXTURES.length + JAVA_ENTITY_TEXTURES.length + JAVA_SOUND_ASSETS.length;
 }

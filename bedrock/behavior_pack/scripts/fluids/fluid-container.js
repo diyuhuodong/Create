@@ -1,22 +1,34 @@
 import { cloneFluidStack } from "./fluid-stack.js";
+import { containerForFluid, FLUID_BUCKET_AMOUNT as REGISTRY_BUCKET_AMOUNT, fluidFromContainer } from "./fluid-registry.js";
 
-export const FLUID_BUCKET_AMOUNT = 1_000;
-
-const FLUID_TO_BUCKET = new Map([
-	["minecraft:lava", "minecraft:lava_bucket"],
-	["minecraft:water", "minecraft:water_bucket"]
-]);
-const BUCKET_TO_FLUID = new Map([...FLUID_TO_BUCKET].map(([fluidTypeId, bucketTypeId]) => [bucketTypeId, fluidTypeId]));
+export const FLUID_BUCKET_AMOUNT = REGISTRY_BUCKET_AMOUNT;
 const EMPTY_BUCKET = "minecraft:bucket";
+const EMPTY_BOTTLE = "minecraft:glass_bottle";
 
 function canonicalFluid(typeId) {
 	return { amount: FLUID_BUCKET_AMOUNT, typeId };
 }
 
 function canonicalFluidType(fluid) {
-	if (!fluid || typeof fluid.typeId !== "string" || fluid.temperature !== undefined || (fluid.tags?.length ?? 0) !== 0)
+	if (!fluid || typeof fluid.typeId !== "string" || fluid.temperature !== undefined || (fluid.tags?.length ?? 0) !== 0 || fluid.components !== undefined)
 		return undefined;
-	return FLUID_TO_BUCKET.has(fluid.typeId) ? fluid.typeId : undefined;
+	return containerForFluid({ ...fluid, amount: FLUID_BUCKET_AMOUNT })?.item.typeId || containerForFluid({ ...fluid, amount: 250 })?.item.typeId
+		? fluid.typeId
+		: undefined;
+}
+
+function containedFluidForEmptyContainer(contents, emptyContainer) {
+	if (!contents)
+		return undefined;
+	for (const amount of [FLUID_BUCKET_AMOUNT, 250]) {
+		if (contents.amount < amount)
+			continue;
+		const fluid = { ...contents, amount };
+		const container = containerForFluid(fluid);
+		if (container?.emptyContainer === emptyContainer)
+			return { container, fluid };
+	}
+	return undefined;
 }
 
 function normalizeItem(item) {
@@ -46,40 +58,44 @@ function rollback(extractFluid, insertFluid, direction, fluid) {
 }
 
 /**
- * Plans an all-or-nothing vanilla bucket exchange. Fluid metadata that a vanilla
- * bucket cannot represent is intentionally rejected instead of being discarded.
+ * Plans an all-or-nothing bucket or bottle exchange. Metadata unavailable to a
+ * physical container is deliberately rejected instead of being discarded.
  */
 export function planFluidBucketInteraction({ capacity, contents, item }) {
-	if (!Number.isSafeInteger(capacity) || capacity < FLUID_BUCKET_AMOUNT)
-		throw new RangeError("Fluid bucket interactions require a tank capacity of at least one bucket");
+	if (!Number.isSafeInteger(capacity) || capacity < 250)
+		throw new RangeError("Fluid container interactions require a tank capacity of at least one bottle");
 	const heldItem = normalizeItem(item);
 	if (!heldItem || heldItem.amount !== 1)
 		return undefined;
 
-	if (heldItem.typeId === EMPTY_BUCKET) {
-		const fluidTypeId = canonicalFluidType(contents);
-		if (!fluidTypeId || contents.amount < FLUID_BUCKET_AMOUNT)
+	if (heldItem.typeId === EMPTY_BUCKET || heldItem.typeId === EMPTY_BOTTLE) {
+		const contained = containedFluidForEmptyContainer(contents, heldItem.typeId);
+		if (!contained)
 			return undefined;
 		return {
 			direction: "fill",
 			expectedItem: heldItem,
-			fluid: canonicalFluid(fluidTypeId),
-			replacementItem: { amount: 1, typeId: FLUID_TO_BUCKET.get(fluidTypeId) }
+			fluid: cloneFluidStack(contained.fluid),
+			replacementItem: contained.container.item
 		};
 	}
 
-	const fluidTypeId = BUCKET_TO_FLUID.get(heldItem.typeId);
-	if (!fluidTypeId)
+	const containerFluid = fluidFromContainer(heldItem);
+	if (!containerFluid)
 		return undefined;
+	const fluidTypeId = containerFluid.typeId;
 	if (contents !== undefined) {
-		if (canonicalFluidType(contents) !== fluidTypeId || contents.amount > capacity - FLUID_BUCKET_AMOUNT)
+		if (canonicalFluidType(contents) !== fluidTypeId || contents.amount > capacity - containerFluid.amount)
 			return undefined;
 	}
+	const container = containerForFluid(containerFluid);
+	if (!container)
+		return undefined;
 	return {
 		direction: "drain",
 		expectedItem: heldItem,
-		fluid: canonicalFluid(fluidTypeId),
-		replacementItem: { amount: 1, typeId: EMPTY_BUCKET }
+		fluid: containerFluid,
+		replacementItem: { amount: 1, typeId: container.emptyContainer }
 	};
 }
 
@@ -101,15 +117,15 @@ export function settleFluidBucketInteraction({ extractFluid, getHeldItem, insert
 		let fluid;
 		try {
 			fluid = extractFluid({
-				maxAmount: FLUID_BUCKET_AMOUNT,
-				predicate: candidate => canonicalFluidType(candidate) === plan.fluid.typeId
+			maxAmount: plan.fluid.amount,
+			predicate: candidate => canonicalFluidType(candidate) === plan.fluid.typeId
 			});
 		} catch (error) {
 			return { error, ok: false, reason: "tank_error" };
 		}
 		if (!fluid)
 			return { ok: false, reason: "tank_changed" };
-		if (fluid.amount !== FLUID_BUCKET_AMOUNT || canonicalFluidType(fluid) !== plan.fluid.typeId)
+		if (fluid.amount !== plan.fluid.amount || canonicalFluidType(fluid) !== plan.fluid.typeId)
 			return {
 				ok: false,
 				reason: rollback(extractFluid, insertFluid, "fill", fluid) ? "tank_changed_rolled_back" : "rollback_failed"
@@ -128,7 +144,7 @@ export function settleFluidBucketInteraction({ extractFluid, getHeldItem, insert
 	} catch (error) {
 		return { error, ok: false, reason: "tank_error" };
 	}
-	if (insertion.accepted?.amount !== FLUID_BUCKET_AMOUNT || insertion.remainder !== undefined) {
+	if (insertion.accepted?.amount !== plan.fluid.amount || insertion.remainder !== undefined) {
 		const accepted = insertion.accepted;
 		if (!accepted)
 			return { ok: false, reason: "tank_changed" };

@@ -84,12 +84,14 @@ export async function validateStage3VisualSourceContract({ bedrockRoot = default
 	const tank = block(tankDefinition, "Fluid Tank");
 	for (const [property, values] of Object.entries({
 		"createbedrock:tank_segment": ["single", "bottom", "middle", "top"],
-		"createbedrock:fluid_level": [0, 1, 2, 3, 4],
-		"createbedrock:fluid_kind": ["empty", "water", "lava"]
+		"createbedrock:fluid_level": [0, 1, 2, 3, 4]
 	})) {
 		if (JSON.stringify(tank.description?.properties?.[property]) !== JSON.stringify(values))
 			throw new Error(`S3-13 Fluid Tank is missing ${property}`);
 	}
+	const fluidKinds = tank.description?.properties?.["createbedrock:fluid_kind"];
+	if (!Array.isArray(fluidKinds) || !["empty", "water", "lava"].every(kind => fluidKinds.includes(kind)))
+		throw new Error("S3-13 Fluid Tank is missing its baseline fluid kinds");
 	for (const geometry of ["geometry.createbedrock.fluid_tank_bottom", "geometry.createbedrock.fluid_tank_middle", "geometry.createbedrock.fluid_tank_top", "geometry.createbedrock.fluid_tank_level_4"])
 		if (!geometryReferences(tank).includes(geometry))
 			throw new Error(`S3-13 Fluid Tank is missing ${geometry}`);

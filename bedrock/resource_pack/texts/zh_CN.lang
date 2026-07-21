@@ -293,3 +293,7 @@ tile.createbedrock:brown_toolbox.name=棕色工具箱
 tile.createbedrock:green_toolbox.name=绿色工具箱
 tile.createbedrock:red_toolbox.name=红色工具箱
 tile.createbedrock:black_toolbox.name=黑色工具箱
+tile.createbedrock:honey.name=蜂蜜
+tile.createbedrock:chocolate.name=巧克力
+item.createbedrock:honey_bucket.name=蜂蜜桶
+item.createbedrock:chocolate_bucket.name=巧克力桶

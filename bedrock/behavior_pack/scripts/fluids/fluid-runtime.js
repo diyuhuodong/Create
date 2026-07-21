@@ -7,13 +7,16 @@ import { registerEscrowProtection } from "../logistics/external-escrow-runtime.j
 import { createBedrockWorldFluidEscrows } from "./bedrock-world-fluid-escrow.js";
 import { CreativeFluidPort } from "./creative-fluid-port.js";
 import { planFluidBucketInteraction, settleFluidBucketInteraction } from "./fluid-container.js";
+import { fluidFromContainer } from "./fluid-registry.js";
 import { fluidTankId, FluidNetworkState } from "./fluid-network-state.js";
 import { configureFluidRun, FLUID_FACING_OFFSETS, fluidDeviceId, fluidDeviceLocation, offsetFluidLocation } from "./fluid-topology.js";
-import { fluidFromVanillaSource, VanillaWorldFluidPort } from "./world-fluid-port.js";
+import { fluidFromWorldSource, VanillaWorldFluidPort, worldSourceForFluid } from "./world-fluid-port.js";
 import { fluidFillLevel, fluidVisualKind, tankSegmentForNeighbors } from "./fluid-tank-visuals.js";
 import { steamEngineOutput } from "../kinetics/steam-engine.js";
+import { blazeHeatAt } from "../materials/blaze-burner-runtime.js";
 
 const COPPER_VALVE_HANDLE_BLOCK = "createbedrock:copper_valve_handle";
+const BASIN_BLOCK = "createbedrock:basin";
 const CREATIVE_FLUID_TANK_BLOCK = "createbedrock:creative_fluid_tank";
 const ENCASED_FLUID_PIPE_BLOCK = "createbedrock:encased_fluid_pipe";
 const FLUID_TASK_BUDGET = 8;
@@ -37,6 +40,7 @@ const FLUID_PIPE_BLOCKS = new Set([
 ]);
 const FLUID_ENDPOINT_CAPACITIES = new Map([
 	[FLUID_TANK_BLOCK, 8_000],
+	[BASIN_BLOCK, 1_000],
 	[ITEM_DRAIN_BLOCK, 1_000],
 	[PORTABLE_FLUID_INTERFACE_BLOCK, 1_000],
 	[SPOUT_BLOCK, 1_000]
@@ -102,7 +106,14 @@ function creativeFluidPortId(dimensionId, location) {
 
 function creativeFluidType(block) {
 	const configured = block?.permutation?.getAllStates?.()["createbedrock:fluid_type"];
-	return configured === "lava" ? "minecraft:lava" : "minecraft:water";
+	return {
+		chocolate: "createbedrock:chocolate",
+		honey: "createbedrock:honey",
+		milk: "createbedrock:milk",
+		lava: "minecraft:lava",
+		tea: "createbedrock:tea",
+		water: "minecraft:water"
+	}[configured] ?? "minecraft:water";
 }
 
 function creativeFluidDescriptor(dimensionId, location, fluidType) {
@@ -137,14 +148,16 @@ function createWorldFluidPort(descriptor, id) {
 		creativePorts.set(id, port);
 		return port;
 	}
-	if ((descriptor?.kind !== "vanilla_world_source" && descriptor?.kind !== "vanilla_world_sink") || typeof descriptor.dimensionId !== "string" || !descriptor.location || !Number.isInteger(descriptor.location.x) || !Number.isInteger(descriptor.location.y) || !Number.isInteger(descriptor.location.z))
+	if ((descriptor?.kind !== "vanilla_world_source" && descriptor?.kind !== "vanilla_world_sink" && descriptor?.kind !== "world_source" && descriptor?.kind !== "world_sink") || typeof descriptor.dimensionId !== "string" || !descriptor.location || !Number.isInteger(descriptor.location.x) || !Number.isInteger(descriptor.location.y) || !Number.isInteger(descriptor.location.z))
 		throw new TypeError("Invalid persisted world-fluid endpoint descriptor");
 	if (id !== worldFluidPortId(descriptor.dimensionId, descriptor.location))
 		throw new Error("World-fluid endpoint identifier does not match its descriptor");
 	const dimension = world.getDimension(descriptor.dimensionId);
 	const location = { ...descriptor.location };
 	return new VanillaWorldFluidPort({
+		blockForFluid: worldSourceForFluid,
 		escrows: createBedrockWorldFluidEscrows({ anchor: location, dimension, registry: worldFluidEscrows }),
+		fluidFromBlock: fluidFromWorldSource,
 		id,
 		readBlock() {
 			return snapshotBlock(dimension.getBlock(location));
@@ -186,9 +199,9 @@ function creativePortAt(dimension, location) {
 
 function worldSourceAt(dimension, location) {
 	const block = dimension.getBlock(location);
-	if (!fluidFromVanillaSource(snapshotBlock(block)))
+	if (!fluidFromWorldSource(snapshotBlock(block)))
 		return undefined;
-	const descriptor = worldFluidDescriptor(dimension.id, "vanilla_world_source", location);
+	const descriptor = worldFluidDescriptor(dimension.id, "world_source", location);
 	const id = worldFluidPortId(dimension.id, location);
 	state.registerExternalPort({
 		descriptor,
@@ -203,7 +216,7 @@ function worldSinkAt(dimension, location) {
 	const snapshot = snapshotBlock(block);
 	if (!snapshot || snapshot.typeId !== "minecraft:air" || snapshot.isWaterlogged)
 		return undefined;
-	const descriptor = worldFluidDescriptor(dimension.id, "vanilla_world_sink", location);
+	const descriptor = worldFluidDescriptor(dimension.id, "world_sink", location);
 	const id = worldFluidPortId(dimension.id, location);
 	state.registerExternalPort({
 		descriptor,
@@ -312,7 +325,14 @@ function pipeRunConfiguration(dimension, members) {
 		if (block?.typeId !== SMART_FLUID_PIPE_BLOCK)
 			continue;
 		const selected = block.permutation.getAllStates()["createbedrock:fluid_filter"];
-		const next = selected === "water" ? "minecraft:water" : selected === "lava" ? "minecraft:lava" : undefined;
+		const next = {
+			chocolate: "createbedrock:chocolate",
+			honey: "createbedrock:honey",
+			lava: "minecraft:lava",
+			milk: "createbedrock:milk",
+			tea: "createbedrock:tea",
+			water: "minecraft:water"
+		}[selected];
 		if (!next)
 			continue;
 		if (filter && filter !== next)
@@ -449,16 +469,20 @@ function setBlockState(block, property, value) {
 }
 
 function fluidTypeForBucket(item) {
-	if (item?.typeId === "minecraft:water_bucket")
-		return "water";
-	if (item?.typeId === "minecraft:lava_bucket")
-		return "lava";
-	return undefined;
+	const fluid = fluidFromContainer(item);
+	return {
+		"createbedrock:chocolate": "chocolate",
+		"createbedrock:honey": "honey",
+		"createbedrock:milk": "milk",
+		"minecraft:lava": "lava",
+		"minecraft:water": "water"
+	}[fluid?.typeId];
 }
 
 function cycleSmartPipeFilter(block) {
 	const current = block.permutation.getAllStates()["createbedrock:fluid_filter"];
-	const next = current === "any" ? "water" : current === "water" ? "lava" : "any";
+	const filters = ["any", "water", "lava", "honey", "chocolate", "tea", "milk"];
+	const next = filters[(filters.indexOf(current) + 1) % filters.length];
 	return setBlockState(block, "createbedrock:fluid_filter", next);
 }
 
@@ -527,6 +551,14 @@ function adjacentPoweredShafts(block) {
 		.filter(candidate => candidate?.typeId === POWERED_SHAFT_BLOCK);
 }
 
+function heatForSteamTank(tank) {
+	if (!tank)
+		return 0;
+	// P7.3 establishes the common heat contract. P7.4's boiler controller can
+	// later replace this local search without changing engine semantics.
+	return Math.max(...[{ x: 0, y: -1, z: 0 }, ...NEIGHBOR_OFFSETS].map(offset => blazeHeatAt(tank.dimension.id, offsetFluidLocation(tank.location, offset))));
+}
+
 function syncSteamEngines(kineticWorld) {
 	if (!kineticWorld || typeof kineticWorld.getNodesByType !== "function" || typeof kineticWorld.setExternalSource !== "function")
 		return false;
@@ -546,7 +578,7 @@ function syncSteamEngines(kineticWorld) {
 			if (!shaft)
 				continue;
 			const inspection = tank && state.hasTank(tankIdentifier(tank)) ? state.inspectTank(tankIdentifier(tank)) : undefined;
-			const output = steamEngineOutput(inspection?.contents);
+			const output = steamEngineOutput(inspection?.contents, { heatLevel: heatForSteamTank(tank) });
 			if (output.consume > 0 && tank)
 				state.extract(tankIdentifier(tank), {
 					maxAmount: output.consume,
@@ -577,6 +609,12 @@ export function inspectFluidTank(block) {
 
 export function getFluidTankId(block) {
 	return tankIdentifier(block);
+}
+
+export function fluidPortForBlock(block) {
+	if (!isFluidEndpoint(block) || !state.hasTank(tankIdentifier(block)))
+		return undefined;
+	return state.tankPort(tankIdentifier(block));
 }
 
 export function insertFluidTank(block, fluid, options) {

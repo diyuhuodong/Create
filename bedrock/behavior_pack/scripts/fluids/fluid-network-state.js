@@ -81,6 +81,16 @@ export class FluidNetworkState {
 		return this.#requireTank(id).tank.inspect();
 	}
 
+	/**
+	 * Exposes the transactional port, not a mutable fluid stack. Machine
+	 * runtimes use this for receipt-based ledgers while the network remains the
+	 * sole persistence owner.
+	 */
+	tankPort(id) {
+		this.#assertActive();
+		return this.#requireTank(id).tank;
+	}
+
 	tankEntries() {
 		return [...this.#tanks.values()].map(entry => ({
 			dimensionId: entry.dimensionId,

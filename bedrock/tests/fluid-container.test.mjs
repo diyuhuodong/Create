@@ -111,3 +111,19 @@ test("bucket interaction compensates tank mutation when the inventory write fail
 	assert.equal(drain.settle(drain.plan()).reason, "inventory_error_rolled_back");
 	assert.equal(drain.tank.inspect().contents, undefined);
 });
+
+test("container interaction exchanges Honey and Builder's Tea without losing fluid identity", () => {
+	const honey = fixture({
+		capacity: 1_000,
+		contents: { amount: 250, typeId: "createbedrock:honey" },
+		heldItem: { amount: 1, typeId: "minecraft:glass_bottle" }
+	});
+	assert.equal(honey.settle(honey.plan()).ok, true);
+	assert.deepEqual(honey.held, { amount: 1, typeId: "minecraft:honey_bottle" });
+	assert.equal(honey.tank.inspect().contents, undefined);
+
+	const tea = fixture({ capacity: 1_000, heldItem: { amount: 1, typeId: "createbedrock:builders_tea" } });
+	assert.equal(tea.settle(tea.plan()).ok, true);
+	assert.deepEqual(tea.held, { amount: 1, typeId: "minecraft:glass_bottle" });
+	assert.deepEqual(tea.tank.inspect().contents, { amount: 250, typeId: "createbedrock:tea" });
+});

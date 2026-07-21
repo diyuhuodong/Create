@@ -640,6 +640,9 @@
     "createbedrock_toolbox_brown": { "textures": "textures/create_java/block/toolbox/brown" },
     "createbedrock_toolbox_green": { "textures": "textures/create_java/block/toolbox/green" },
     "createbedrock_toolbox_red": { "textures": "textures/create_java/block/toolbox/red" },
-    "createbedrock_toolbox_black": { "textures": "textures/create_java/block/toolbox/black" }
+    "createbedrock_toolbox_black": { "textures": "textures/create_java/block/toolbox/black" },
+    "createbedrock_fluid_honey": { "textures": "textures/create_java/fluid/honey_still" },
+    "createbedrock_fluid_chocolate": { "textures": "textures/create_java/fluid/chocolate_still" },
+    "createbedrock_fluid_tea": { "textures": "textures/create_java/fluid/tea_still" }
   }
 }

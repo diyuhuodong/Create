@@ -1,4 +1,5 @@
 import { cloneFluidStack } from "./fluid-stack.js";
+import { fluidFromWorldBlock, worldBlockForFluid } from "./fluid-registry.js";
 
 export const VANILLA_SOURCE_FLUID_AMOUNT = 1_000;
 
@@ -94,6 +95,20 @@ export function vanillaSourceForFluid(fluid) {
 }
 
 /**
+ * The general world projection includes Create's static Honey and Chocolate
+ * source blocks. It intentionally does not claim to implement vanilla-style
+ * flowing-liquid physics; only full source blocks participate in the pipe
+ * transaction boundary.
+ */
+export function fluidFromWorldSource(block) {
+	return fluidFromWorldBlock(block);
+}
+
+export function worldSourceForFluid(fluid) {
+	return worldBlockForFluid(fluid);
+}
+
+/**
  * Adapter contract for one world location. When supplied with a private
  * escrow adapter it moves a source into that physical escrow before reporting
  * an in-memory fluid transfer as extracted, so restart recovery can identify
@@ -102,17 +117,23 @@ export function vanillaSourceForFluid(fluid) {
 export class VanillaWorldFluidPort {
 	#escrows;
 	#extractionReceipts = new Map();
+	#fluidFromBlock;
 	#id;
 	#insertionReceipts = new Map();
+	#blockForFluid;
 	#readBlock;
 	#writeBlock;
 
-	constructor({ escrows, id, readBlock, writeBlock }) {
+	constructor({ blockForFluid = vanillaSourceForFluid, escrows, fluidFromBlock = fluidFromVanillaSource, id, readBlock, writeBlock }) {
 		if (typeof id !== "string" || id.length === 0)
 			throw new TypeError("World fluid ports require an identifier");
 		if (typeof readBlock !== "function" || typeof writeBlock !== "function")
 			throw new TypeError("World fluid ports require block read and write callbacks");
 		this.#id = id;
+		if (typeof blockForFluid !== "function" || typeof fluidFromBlock !== "function")
+			throw new TypeError("World fluid ports require fluid/block conversion functions");
+		this.#blockForFluid = blockForFluid;
+		this.#fluidFromBlock = fluidFromBlock;
 		this.#escrows = escrows === undefined ? undefined : validateEscrowAdapter(escrows);
 		this.#readBlock = readBlock;
 		this.#writeBlock = writeBlock;
@@ -124,7 +145,7 @@ export class VanillaWorldFluidPort {
 
 	inspect() {
 		const block = this.#read();
-		return { block, fluid: fluidFromVanillaSource(block), id: this.#id };
+		return { block, fluid: this.#fluidFromBlock(block), id: this.#id };
 	}
 
 	insert(fluid, { delivery, receiptId, sourceReservation, transactionId } = {}) {
@@ -146,7 +167,7 @@ export class VanillaWorldFluidPort {
 				this.#insertionReceipts.set(receiptId, { fluid: requested, result: clone(result) });
 			return result;
 		}
-		const replacement = vanillaSourceForFluid(requested);
+		const replacement = this.#blockForFluid(requested);
 		if (!replacement)
 			return { accepted: undefined, remainder: requested };
 		const before = this.#read();
@@ -160,7 +181,7 @@ export class VanillaWorldFluidPort {
 	}
 
 	prepareDelivery({ fluid, sourceReservation, transactionId }) {
-		if (!this.#escrows || sourceReservation?.escrowId !== undefined || !vanillaSourceForFluid(fluid))
+		if (!this.#escrows || sourceReservation?.escrowId !== undefined || !this.#blockForFluid(fluid))
 			return undefined;
 		if (typeof transactionId !== "string" || transactionId.length === 0)
 			throw new TypeError("Durable world fluid deliveries require transaction identifiers");
@@ -179,7 +200,7 @@ export class VanillaWorldFluidPort {
 		if (typeof predicate !== "function")
 			throw new TypeError("World fluid reservation predicates must be functions");
 		const block = this.#read();
-		const fluid = fluidFromVanillaSource(block);
+		const fluid = this.#fluidFromBlock(block);
 		if (!fluid || fluid.amount > maxAmount || !predicate(cloneFluidStack(fluid)))
 			return undefined;
 		const reservation = {
@@ -211,7 +232,7 @@ export class VanillaWorldFluidPort {
 		if (reservation.escrowId !== undefined)
 			return this.#extractThroughEscrow(reservation);
 		const before = this.#read();
-		const fluid = fluidFromVanillaSource(before);
+		const fluid = this.#fluidFromBlock(before);
 		if (!fluid || stableStringify(before) !== reservation.revision || !sameReservation(fluid, reservation.fluid))
 			throw new Error("World fluid reservation is stale");
 		this.#writeAndConfirm(before, AIR_BLOCK);
@@ -242,7 +263,7 @@ export class VanillaWorldFluidPort {
 		if (!escrow)
 			throw retryWorldTransaction("World fluid escrow is temporarily unavailable");
 		const before = this.#read();
-		const sourceFluid = fluidFromVanillaSource(before);
+		const sourceFluid = this.#fluidFromBlock(before);
 		const escrowFluid = this.#readEscrow(escrow);
 		if (sameFluid(sourceFluid, expected) && escrowFluid === undefined) {
 			this.#writeEscrow(escrow, expected);
@@ -270,7 +291,7 @@ export class VanillaWorldFluidPort {
 	}
 
 	#insertThroughEscrow(fluid, reservation) {
-		const replacement = vanillaSourceForFluid(fluid);
+		const replacement = this.#blockForFluid(fluid);
 		if (!replacement)
 			return { accepted: undefined, remainder: fluid };
 		const escrow = this.#resolveEscrow(reservation);

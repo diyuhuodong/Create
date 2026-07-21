@@ -2,7 +2,10 @@ import { ItemStack, system, world } from "@minecraft/server";
 
 import { DeferredPersistence } from "../kernel/deferred-persistence.js";
 import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
+import { fluidPortForBlock } from "../fluids/fluid-runtime.js";
+import { blazeHeatAt } from "../materials/blaze-burner-runtime.js";
 import { BatchProcessingMachine } from "./batch-processing-machine.js";
+import { BasinProcessingMachine } from "./basin-processing-machine.js";
 import { BASIN_RECIPES } from "./generated/basin-recipes.js";
 import { CUTTING_RECIPES } from "./generated/cutting-recipes.js";
 import { FAN_RECIPES } from "./generated/fan-recipes.js";
@@ -74,7 +77,8 @@ function definitionFor(blockType) {
 
 function createMachine(blockType, dimensionId, location) {
 	const definition = definitionFor(blockType);
-	return new BatchProcessingMachine(definition.recipes, {
+	const Processor = blockType === BASIN_BLOCK ? BasinProcessingMachine : BatchProcessingMachine;
+	return new Processor(definition.recipes, {
 		id: `${blockType}:${keyFor(dimensionId, location)}`,
 		inputSlots: definition.inputSlots,
 		outputSlots: definition.outputSlots
@@ -197,6 +201,14 @@ function basinController(machine, getKineticWorld) {
 	return undefined;
 }
 
+function basinHeatLevel(machine) {
+	return blazeHeatAt(machine.dimensionId, {
+		x: machine.location.x,
+		y: machine.location.y - 1,
+		z: machine.location.z
+	});
+}
+
 function fanMode(machine, speed) {
 	const dimension = world.getDimension(machine.dimensionId);
 	const fan = dimension.getBlock(machine.location);
@@ -245,13 +257,18 @@ function processMachine(key, getKineticWorld) {
 		controller = mode && { mode, speed };
 	} else
 		controller = { mode: "cutting", speed: getKineticWorld().speedAt(machine.dimensionId, machine.location) };
+	const basin = machine.blockType === BASIN_BLOCK;
+	const basinBlock = basin ? world.getDimension(machine.dimensionId).getBlock(machine.location) : undefined;
+	const fluidPort = basinBlock && fluidPortForBlock(basinBlock);
+	const heatLevel = basin ? basinHeatLevel(machine) : undefined;
 	if (!controller) {
-		const update = machine.processor.tick();
+		const update = basin ? machine.processor.tick({ fluidPort, heatLevel }) : machine.processor.tick();
 		if (update)
 			persist();
 		return;
 	}
 	const update = machine.processor.tick({
+		...(basin ? { fluidPort, heatLevel } : {}),
 		mode: controller.mode,
 		powered: controller.speed !== 0,
 		workUnits: workUnits(controller.speed)
