@@ -1,0 +1,47 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:red_sail",
+      "menu_category": {
+        "category": "construction",
+        "group": "itemGroup.name.misc"
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 6
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1.5
+      },
+      "minecraft:geometry": "geometry.createbedrock.p7_1_red_sail",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.p7_1_red_sail"
+        },
+        "material_instances": {
+          "all": {
+            "texture": "createbedrock_p7_1_red_sail",
+            "render_method": "opaque"
+          },
+          "*": {
+            "texture": "createbedrock_p7_1_red_sail",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:loot": "loot_tables/blocks/generated/p7_1/red_sail.json",
+      "minecraft:material_instances": {
+        "all": {
+          "texture": "createbedrock_p7_1_red_sail",
+          "render_method": "opaque"
+        },
+        "*": {
+          "texture": "createbedrock_p7_1_red_sail",
+          "render_method": "opaque"
+        }
+      }
+    }
+  }
+}

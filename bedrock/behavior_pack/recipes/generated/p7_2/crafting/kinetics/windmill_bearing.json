@@ -1,0 +1,30 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/windmill_bearing"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "B",
+      "C",
+      "I"
+    ],
+    "key": {
+      "B": {
+        "tag": "minecraft:wooden_slabs"
+      },
+      "C": {
+        "item": "minecraft:andesite"
+      },
+      "I": {
+        "item": "createbedrock:shaft"
+      }
+    },
+    "result": {
+      "item": "createbedrock:windmill_bearing"
+    }
+  }
+}

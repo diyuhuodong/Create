@@ -1,0 +1,20 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/materials/zinc_nugget_from_decompacting"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:zinc_ingot"
+      }
+    ],
+    "result": {
+      "count": 9,
+      "item": "createbedrock:zinc_nugget"
+    }
+  }
+}

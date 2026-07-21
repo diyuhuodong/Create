@@ -1,10 +1,10 @@
 // Generated from src/generated/resources/data/create/recipe/milling.
 export const MILLING_RECIPES = [
 	{
-		"id": "create:milling/allium",
+		"id": "create:milling/allium:0",
 		"input": {
-			"typeId": "minecraft:allium",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:allium"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -26,10 +26,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/andesite",
+		"id": "create:milling/andesite:0",
 		"input": {
-			"typeId": "minecraft:andesite",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:andesite"
 		},
 		"processingTicks": 200,
 		"outputs": [
@@ -41,10 +41,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/azure_bluet",
+		"id": "create:milling/azure_bluet:0",
 		"input": {
-			"typeId": "minecraft:azure_bluet",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:azure_bluet"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -61,10 +61,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/beetroot",
+		"id": "create:milling/beetroot:0",
 		"input": {
-			"typeId": "minecraft:beetroot",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:beetroot"
 		},
 		"processingTicks": 70,
 		"outputs": [
@@ -81,10 +81,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/blue_orchid",
+		"id": "create:milling/blue_orchid:0",
 		"input": {
-			"typeId": "minecraft:blue_orchid",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:blue_orchid"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -101,35 +101,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/bone",
+		"id": "create:milling/bone_meal:0",
 		"input": {
-			"typeId": "minecraft:bone",
-			"count": 1
-		},
-		"processingTicks": 100,
-		"outputs": [
-			{
-				"typeId": "minecraft:bone_meal",
-				"count": 3,
-				"chance": 1
-			},
-			{
-				"typeId": "minecraft:white_dye",
-				"count": 1,
-				"chance": 0.25
-			},
-			{
-				"typeId": "minecraft:bone_meal",
-				"count": 3,
-				"chance": 0.25
-			}
-		]
-	},
-	{
-		"id": "create:milling/bone_meal",
-		"input": {
-			"typeId": "minecraft:bone_meal",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:bone_meal"
 		},
 		"processingTicks": 70,
 		"outputs": [
@@ -146,10 +121,35 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/cactus",
+		"id": "create:milling/bone:0",
 		"input": {
-			"typeId": "minecraft:cactus",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:bone"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:bone_meal",
+				"count": 3,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:white_dye",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:bone_meal",
+				"count": 3,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:milling/cactus:0",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:cactus"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -166,10 +166,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/calcite",
+		"id": "create:milling/calcite:0",
 		"input": {
-			"typeId": "minecraft:calcite",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:calcite"
 		},
 		"processingTicks": 250,
 		"outputs": [
@@ -181,10 +181,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/charcoal",
+		"id": "create:milling/charcoal:0",
 		"input": {
-			"typeId": "minecraft:charcoal",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:charcoal"
 		},
 		"processingTicks": 100,
 		"outputs": [
@@ -201,10 +201,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/clay",
+		"id": "create:milling/clay:0",
 		"input": {
-			"typeId": "minecraft:clay",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:clay"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -216,10 +216,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/coal",
+		"id": "create:milling/coal:0",
 		"input": {
-			"typeId": "minecraft:coal",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:coal"
 		},
 		"processingTicks": 100,
 		"outputs": [
@@ -236,10 +236,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/cobblestone",
+		"id": "create:milling/cobblestone:0",
 		"input": {
-			"typeId": "minecraft:cobblestone",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:cobblestone"
 		},
 		"processingTicks": 250,
 		"outputs": [
@@ -251,10 +251,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/cocoa_beans",
+		"id": "create:milling/cocoa_beans:0",
 		"input": {
-			"typeId": "minecraft:cocoa_beans",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:cocoa_beans"
 		},
 		"processingTicks": 70,
 		"outputs": [
@@ -271,10 +271,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/cornflower",
+		"id": "create:milling/cornflower:0",
 		"input": {
-			"typeId": "minecraft:cornflower",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:cornflower"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -286,10 +286,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/dandelion",
+		"id": "create:milling/dandelion:0",
 		"input": {
-			"typeId": "minecraft:dandelion",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:dandelion"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -306,10 +306,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/dripstone_block",
+		"id": "create:milling/dripstone_block:0",
 		"input": {
-			"typeId": "minecraft:dripstone_block",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:dripstone_block"
 		},
 		"processingTicks": 250,
 		"outputs": [
@@ -321,10 +321,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/fern",
+		"id": "create:milling/fern:0",
 		"input": {
-			"typeId": "minecraft:fern",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:fern"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -341,10 +341,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/granite",
+		"id": "create:milling/granite:0",
 		"input": {
-			"typeId": "minecraft:granite",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:granite"
 		},
 		"processingTicks": 200,
 		"outputs": [
@@ -356,10 +356,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/gravel",
+		"id": "create:milling/gravel:0",
 		"input": {
-			"typeId": "minecraft:gravel",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:gravel"
 		},
 		"processingTicks": 250,
 		"outputs": [
@@ -371,10 +371,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/ink_sac",
+		"id": "create:milling/ink_sac:0",
 		"input": {
-			"typeId": "minecraft:ink_sac",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:ink_sac"
 		},
 		"processingTicks": 100,
 		"outputs": [
@@ -391,10 +391,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/lapis_lazuli",
+		"id": "create:milling/lapis_lazuli:0",
 		"input": {
-			"typeId": "minecraft:lapis_lazuli",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:lapis_lazuli"
 		},
 		"processingTicks": 100,
 		"outputs": [
@@ -411,10 +411,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/large_fern",
+		"id": "create:milling/large_fern:0",
 		"input": {
-			"typeId": "minecraft:large_fern",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:large_fern"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -436,10 +436,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/lilac",
+		"id": "create:milling/lilac:0",
 		"input": {
-			"typeId": "minecraft:lilac",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:lilac"
 		},
 		"processingTicks": 100,
 		"outputs": [
@@ -461,10 +461,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/lily_of_the_valley",
+		"id": "create:milling/lily_of_the_valley:0",
 		"input": {
-			"typeId": "minecraft:lily_of_the_valley",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:lily_of_the_valley"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -486,10 +486,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/orange_tulip",
+		"id": "create:milling/orange_tulip:0",
 		"input": {
-			"typeId": "minecraft:orange_tulip",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:orange_tulip"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -506,10 +506,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/oxeye_daisy",
+		"id": "create:milling/oxeye_daisy:0",
 		"input": {
-			"typeId": "minecraft:oxeye_daisy",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:oxeye_daisy"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -531,10 +531,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/peony",
+		"id": "create:milling/peony:0",
 		"input": {
-			"typeId": "minecraft:peony",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:peony"
 		},
 		"processingTicks": 100,
 		"outputs": [
@@ -556,10 +556,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/pink_petals",
+		"id": "create:milling/pink_petals:0",
 		"input": {
-			"typeId": "minecraft:pink_petals",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:pink_petals"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -576,10 +576,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/pink_tulip",
+		"id": "create:milling/pink_tulip:0",
 		"input": {
-			"typeId": "minecraft:pink_tulip",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:pink_tulip"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -596,10 +596,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/pitcher_plant",
+		"id": "create:milling/pitcher_plant:0",
 		"input": {
-			"typeId": "minecraft:pitcher_plant",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:pitcher_plant"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -616,10 +616,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/poppy",
+		"id": "create:milling/poppy:0",
 		"input": {
-			"typeId": "minecraft:poppy",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:poppy"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -636,10 +636,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/red_tulip",
+		"id": "create:milling/red_tulip:0",
 		"input": {
-			"typeId": "minecraft:red_tulip",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:red_tulip"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -656,10 +656,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/rose_bush",
+		"id": "create:milling/rose_bush:0",
 		"input": {
-			"typeId": "minecraft:rose_bush",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:rose_bush"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -681,10 +681,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/saddle",
+		"id": "create:milling/saddle:0",
 		"input": {
-			"typeId": "minecraft:saddle",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:saddle"
 		},
 		"processingTicks": 200,
 		"outputs": [
@@ -701,10 +701,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/sandstone",
+		"id": "create:milling/sandstone:0",
 		"input": {
-			"typeId": "minecraft:sandstone",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:sandstone"
 		},
 		"processingTicks": 150,
 		"outputs": [
@@ -716,10 +716,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/sea_pickle",
+		"id": "create:milling/sea_pickle:0",
 		"input": {
-			"typeId": "minecraft:sea_pickle",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:sea_pickle"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -736,10 +736,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/short_grass",
+		"id": "create:milling/short_grass:0",
 		"input": {
-			"typeId": "minecraft:short_grass",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:short_grass"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -751,10 +751,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/sugar_cane",
+		"id": "create:milling/sugar_cane:0",
 		"input": {
-			"typeId": "minecraft:sugar_cane",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:sugar_cane"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -771,10 +771,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/sunflower",
+		"id": "create:milling/sunflower:0",
 		"input": {
-			"typeId": "minecraft:sunflower",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:sunflower"
 		},
 		"processingTicks": 100,
 		"outputs": [
@@ -796,10 +796,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/tall_grass",
+		"id": "create:milling/tall_grass:0",
 		"input": {
-			"typeId": "minecraft:tall_grass",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:tall_grass"
 		},
 		"processingTicks": 100,
 		"outputs": [
@@ -811,10 +811,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/terracotta",
+		"id": "create:milling/terracotta:0",
 		"input": {
-			"typeId": "minecraft:terracotta",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:terracotta"
 		},
 		"processingTicks": 200,
 		"outputs": [
@@ -826,10 +826,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/torchflower",
+		"id": "create:milling/torchflower:0",
 		"input": {
-			"typeId": "minecraft:torchflower",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:torchflower"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -846,10 +846,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/wheat",
+		"id": "create:milling/wheat:0",
 		"input": {
-			"typeId": "minecraft:wheat",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:wheat"
 		},
 		"processingTicks": 150,
 		"outputs": [
@@ -871,10 +871,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/white_tulip",
+		"id": "create:milling/white_tulip:0",
 		"input": {
-			"typeId": "minecraft:white_tulip",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:white_tulip"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -891,10 +891,10 @@ export const MILLING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:milling/wither_rose",
+		"id": "create:milling/wither_rose:0",
 		"input": {
-			"typeId": "minecraft:wither_rose",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:wither_rose"
 		},
 		"processingTicks": 50,
 		"outputs": [
@@ -907,6 +907,246 @@ export const MILLING_RECIPES = [
 				"typeId": "minecraft:black_dye",
 				"count": 1,
 				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:milling/wool:0",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:black_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/wool:1",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:blue_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/wool:10",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:orange_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/wool:11",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:pink_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/wool:12",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:purple_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/wool:13",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:red_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/wool:14",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:white_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/wool:15",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:yellow_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/wool:2",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:brown_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/wool:3",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:cyan_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/wool:4",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:gray_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/wool:5",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:green_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/wool:6",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:light_blue_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/wool:7",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:light_gray_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/wool:8",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:lime_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 1
+			}
+		]
+	},
+	{
+		"id": "create:milling/wool:9",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:magenta_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 1
 			}
 		]
 	}

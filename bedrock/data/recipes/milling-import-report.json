@@ -2,80 +2,122 @@
 	"processor": "milling",
 	"schemaVersion": 1,
 	"summary": {
-		"manual_specification": 1,
-		"migrated": 46,
+		"manual_specification": 0,
+		"migrated": 47,
 		"unsupported_dependency": 199
 	},
 	"records": [
 		{
 			"source": "allium",
 			"status": "migrated",
-			"recipeId": "create:milling/allium"
+			"recipeId": "create:milling/allium:0",
+			"recipeIds": [
+				"create:milling/allium:0"
+			]
 		},
 		{
 			"source": "andesite",
 			"status": "migrated",
-			"recipeId": "create:milling/andesite"
+			"recipeId": "create:milling/andesite:0",
+			"recipeIds": [
+				"create:milling/andesite:0"
+			]
 		},
 		{
 			"source": "azure_bluet",
 			"status": "migrated",
-			"recipeId": "create:milling/azure_bluet"
+			"recipeId": "create:milling/azure_bluet:0",
+			"recipeIds": [
+				"create:milling/azure_bluet:0"
+			]
 		},
 		{
 			"source": "beetroot",
 			"status": "migrated",
-			"recipeId": "create:milling/beetroot"
+			"recipeId": "create:milling/beetroot:0",
+			"recipeIds": [
+				"create:milling/beetroot:0"
+			]
 		},
 		{
 			"source": "blue_orchid",
 			"status": "migrated",
-			"recipeId": "create:milling/blue_orchid"
+			"recipeId": "create:milling/blue_orchid:0",
+			"recipeIds": [
+				"create:milling/blue_orchid:0"
+			]
 		},
 		{
 			"source": "bone",
 			"status": "migrated",
-			"recipeId": "create:milling/bone"
+			"recipeId": "create:milling/bone:0",
+			"recipeIds": [
+				"create:milling/bone:0"
+			]
 		},
 		{
 			"source": "bone_meal",
 			"status": "migrated",
-			"recipeId": "create:milling/bone_meal"
+			"recipeId": "create:milling/bone_meal:0",
+			"recipeIds": [
+				"create:milling/bone_meal:0"
+			]
 		},
 		{
 			"source": "cactus",
 			"status": "migrated",
-			"recipeId": "create:milling/cactus"
+			"recipeId": "create:milling/cactus:0",
+			"recipeIds": [
+				"create:milling/cactus:0"
+			]
 		},
 		{
 			"source": "calcite",
 			"status": "migrated",
-			"recipeId": "create:milling/calcite"
+			"recipeId": "create:milling/calcite:0",
+			"recipeIds": [
+				"create:milling/calcite:0"
+			]
 		},
 		{
 			"source": "charcoal",
 			"status": "migrated",
-			"recipeId": "create:milling/charcoal"
+			"recipeId": "create:milling/charcoal:0",
+			"recipeIds": [
+				"create:milling/charcoal:0"
+			]
 		},
 		{
 			"source": "clay",
 			"status": "migrated",
-			"recipeId": "create:milling/clay"
+			"recipeId": "create:milling/clay:0",
+			"recipeIds": [
+				"create:milling/clay:0"
+			]
 		},
 		{
 			"source": "coal",
 			"status": "migrated",
-			"recipeId": "create:milling/coal"
+			"recipeId": "create:milling/coal:0",
+			"recipeIds": [
+				"create:milling/coal:0"
+			]
 		},
 		{
 			"source": "cobblestone",
 			"status": "migrated",
-			"recipeId": "create:milling/cobblestone"
+			"recipeId": "create:milling/cobblestone:0",
+			"recipeIds": [
+				"create:milling/cobblestone:0"
+			]
 		},
 		{
 			"source": "cocoa_beans",
 			"status": "migrated",
-			"recipeId": "create:milling/cocoa_beans"
+			"recipeId": "create:milling/cocoa_beans:0",
+			"recipeIds": [
+				"create:milling/cocoa_beans:0"
+			]
 		},
 		{
 			"source": "compat/ae2/certus_quartz",
@@ -1075,167 +1117,281 @@
 		{
 			"source": "cornflower",
 			"status": "migrated",
-			"recipeId": "create:milling/cornflower"
+			"recipeId": "create:milling/cornflower:0",
+			"recipeIds": [
+				"create:milling/cornflower:0"
+			]
 		},
 		{
 			"source": "dandelion",
 			"status": "migrated",
-			"recipeId": "create:milling/dandelion"
+			"recipeId": "create:milling/dandelion:0",
+			"recipeIds": [
+				"create:milling/dandelion:0"
+			]
 		},
 		{
 			"source": "dripstone_block",
 			"status": "migrated",
-			"recipeId": "create:milling/dripstone_block"
+			"recipeId": "create:milling/dripstone_block:0",
+			"recipeIds": [
+				"create:milling/dripstone_block:0"
+			]
 		},
 		{
 			"source": "fern",
 			"status": "migrated",
-			"recipeId": "create:milling/fern"
+			"recipeId": "create:milling/fern:0",
+			"recipeIds": [
+				"create:milling/fern:0"
+			]
 		},
 		{
 			"source": "granite",
 			"status": "migrated",
-			"recipeId": "create:milling/granite"
+			"recipeId": "create:milling/granite:0",
+			"recipeIds": [
+				"create:milling/granite:0"
+			]
 		},
 		{
 			"source": "gravel",
 			"status": "migrated",
-			"recipeId": "create:milling/gravel"
+			"recipeId": "create:milling/gravel:0",
+			"recipeIds": [
+				"create:milling/gravel:0"
+			]
 		},
 		{
 			"source": "ink_sac",
 			"status": "migrated",
-			"recipeId": "create:milling/ink_sac"
+			"recipeId": "create:milling/ink_sac:0",
+			"recipeIds": [
+				"create:milling/ink_sac:0"
+			]
 		},
 		{
 			"source": "lapis_lazuli",
 			"status": "migrated",
-			"recipeId": "create:milling/lapis_lazuli"
+			"recipeId": "create:milling/lapis_lazuli:0",
+			"recipeIds": [
+				"create:milling/lapis_lazuli:0"
+			]
 		},
 		{
 			"source": "large_fern",
 			"status": "migrated",
-			"recipeId": "create:milling/large_fern"
+			"recipeId": "create:milling/large_fern:0",
+			"recipeIds": [
+				"create:milling/large_fern:0"
+			]
 		},
 		{
 			"source": "lilac",
 			"status": "migrated",
-			"recipeId": "create:milling/lilac"
+			"recipeId": "create:milling/lilac:0",
+			"recipeIds": [
+				"create:milling/lilac:0"
+			]
 		},
 		{
 			"source": "lily_of_the_valley",
 			"status": "migrated",
-			"recipeId": "create:milling/lily_of_the_valley"
+			"recipeId": "create:milling/lily_of_the_valley:0",
+			"recipeIds": [
+				"create:milling/lily_of_the_valley:0"
+			]
 		},
 		{
 			"source": "orange_tulip",
 			"status": "migrated",
-			"recipeId": "create:milling/orange_tulip"
+			"recipeId": "create:milling/orange_tulip:0",
+			"recipeIds": [
+				"create:milling/orange_tulip:0"
+			]
 		},
 		{
 			"source": "oxeye_daisy",
 			"status": "migrated",
-			"recipeId": "create:milling/oxeye_daisy"
+			"recipeId": "create:milling/oxeye_daisy:0",
+			"recipeIds": [
+				"create:milling/oxeye_daisy:0"
+			]
 		},
 		{
 			"source": "peony",
 			"status": "migrated",
-			"recipeId": "create:milling/peony"
+			"recipeId": "create:milling/peony:0",
+			"recipeIds": [
+				"create:milling/peony:0"
+			]
 		},
 		{
 			"source": "pink_petals",
 			"status": "migrated",
-			"recipeId": "create:milling/pink_petals"
+			"recipeId": "create:milling/pink_petals:0",
+			"recipeIds": [
+				"create:milling/pink_petals:0"
+			]
 		},
 		{
 			"source": "pink_tulip",
 			"status": "migrated",
-			"recipeId": "create:milling/pink_tulip"
+			"recipeId": "create:milling/pink_tulip:0",
+			"recipeIds": [
+				"create:milling/pink_tulip:0"
+			]
 		},
 		{
 			"source": "pitcher_plant",
 			"status": "migrated",
-			"recipeId": "create:milling/pitcher_plant"
+			"recipeId": "create:milling/pitcher_plant:0",
+			"recipeIds": [
+				"create:milling/pitcher_plant:0"
+			]
 		},
 		{
 			"source": "poppy",
 			"status": "migrated",
-			"recipeId": "create:milling/poppy"
+			"recipeId": "create:milling/poppy:0",
+			"recipeIds": [
+				"create:milling/poppy:0"
+			]
 		},
 		{
 			"source": "red_tulip",
 			"status": "migrated",
-			"recipeId": "create:milling/red_tulip"
+			"recipeId": "create:milling/red_tulip:0",
+			"recipeIds": [
+				"create:milling/red_tulip:0"
+			]
 		},
 		{
 			"source": "rose_bush",
 			"status": "migrated",
-			"recipeId": "create:milling/rose_bush"
+			"recipeId": "create:milling/rose_bush:0",
+			"recipeIds": [
+				"create:milling/rose_bush:0"
+			]
 		},
 		{
 			"source": "saddle",
 			"status": "migrated",
-			"recipeId": "create:milling/saddle"
+			"recipeId": "create:milling/saddle:0",
+			"recipeIds": [
+				"create:milling/saddle:0"
+			]
 		},
 		{
 			"source": "sandstone",
 			"status": "migrated",
-			"recipeId": "create:milling/sandstone"
+			"recipeId": "create:milling/sandstone:0",
+			"recipeIds": [
+				"create:milling/sandstone:0"
+			]
 		},
 		{
 			"source": "sea_pickle",
 			"status": "migrated",
-			"recipeId": "create:milling/sea_pickle"
+			"recipeId": "create:milling/sea_pickle:0",
+			"recipeIds": [
+				"create:milling/sea_pickle:0"
+			]
 		},
 		{
 			"source": "short_grass",
 			"status": "migrated",
-			"recipeId": "create:milling/short_grass"
+			"recipeId": "create:milling/short_grass:0",
+			"recipeIds": [
+				"create:milling/short_grass:0"
+			]
 		},
 		{
 			"source": "sugar_cane",
 			"status": "migrated",
-			"recipeId": "create:milling/sugar_cane"
+			"recipeId": "create:milling/sugar_cane:0",
+			"recipeIds": [
+				"create:milling/sugar_cane:0"
+			]
 		},
 		{
 			"source": "sunflower",
 			"status": "migrated",
-			"recipeId": "create:milling/sunflower"
+			"recipeId": "create:milling/sunflower:0",
+			"recipeIds": [
+				"create:milling/sunflower:0"
+			]
 		},
 		{
 			"source": "tall_grass",
 			"status": "migrated",
-			"recipeId": "create:milling/tall_grass"
+			"recipeId": "create:milling/tall_grass:0",
+			"recipeIds": [
+				"create:milling/tall_grass:0"
+			]
 		},
 		{
 			"source": "terracotta",
 			"status": "migrated",
-			"recipeId": "create:milling/terracotta"
+			"recipeId": "create:milling/terracotta:0",
+			"recipeIds": [
+				"create:milling/terracotta:0"
+			]
 		},
 		{
 			"source": "torchflower",
 			"status": "migrated",
-			"recipeId": "create:milling/torchflower"
+			"recipeId": "create:milling/torchflower:0",
+			"recipeIds": [
+				"create:milling/torchflower:0"
+			]
 		},
 		{
 			"source": "wheat",
 			"status": "migrated",
-			"recipeId": "create:milling/wheat"
+			"recipeId": "create:milling/wheat:0",
+			"recipeIds": [
+				"create:milling/wheat:0"
+			]
 		},
 		{
 			"source": "white_tulip",
 			"status": "migrated",
-			"recipeId": "create:milling/white_tulip"
+			"recipeId": "create:milling/white_tulip:0",
+			"recipeIds": [
+				"create:milling/white_tulip:0"
+			]
 		},
 		{
 			"source": "wither_rose",
 			"status": "migrated",
-			"recipeId": "create:milling/wither_rose"
+			"recipeId": "create:milling/wither_rose:0",
+			"recipeIds": [
+				"create:milling/wither_rose:0"
+			]
 		},
 		{
 			"source": "wool",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "migrated",
+			"recipeId": "create:milling/wool:0",
+			"recipeIds": [
+				"create:milling/wool:0",
+				"create:milling/wool:1",
+				"create:milling/wool:2",
+				"create:milling/wool:3",
+				"create:milling/wool:4",
+				"create:milling/wool:5",
+				"create:milling/wool:6",
+				"create:milling/wool:7",
+				"create:milling/wool:8",
+				"create:milling/wool:9",
+				"create:milling/wool:10",
+				"create:milling/wool:11",
+				"create:milling/wool:12",
+				"create:milling/wool:13",
+				"create:milling/wool:14",
+				"create:milling/wool:15"
+			]
 		}
 	]
 }

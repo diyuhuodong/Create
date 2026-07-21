@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/cut_granite_brick_wall_from_stone_types_granite_stonecutting_tag_12"
+    },
+    "tags": [
+      "stonecutter"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:small_granite_brick_wall"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:cut_granite_brick_wall"
+    }
+  }
+}

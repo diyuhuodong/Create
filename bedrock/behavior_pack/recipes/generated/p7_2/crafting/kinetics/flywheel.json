@@ -1,0 +1,27 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/flywheel"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "CCC",
+      "CAC",
+      "CCC"
+    ],
+    "key": {
+      "A": {
+        "item": "createbedrock:shaft"
+      },
+      "C": {
+        "item": "createbedrock:brass_ingot"
+      }
+    },
+    "result": {
+      "item": "createbedrock:flywheel"
+    }
+  }
+}

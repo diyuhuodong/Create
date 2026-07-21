@@ -1,10 +1,12 @@
 import { readdir, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
+import { buildItemTagProjections, projectionMap, validateItemTagProjections } from "./item-tag-projections.mjs";
 import { buildRecipeIr } from "./recipe-ir.mjs";
 
-export const NATIVE_RECIPE_SCHEMA_VERSION = 1;
+export const NATIVE_RECIPE_SCHEMA_VERSION = 2;
 export const NATIVE_RECIPE_FORMAT_VERSION = "1.26.0";
+const MAX_TAG_EXPANSIONS = 4_096;
 
 const NATIVE_TYPES = new Set([
 	"minecraft:blasting",
@@ -68,7 +70,24 @@ function issue(kind, value) {
 	return { kind, value };
 }
 
-function ingredient(value, issues, tagProjections) {
+function ingredient(value, issues, tagProjections, projections) {
+	if (Array.isArray(value)) {
+		const alternatives = [];
+		for (const entry of value) {
+			const converted = ingredient(entry, issues, tagProjections, projections);
+			if (!converted)
+				return undefined;
+			if (Array.isArray(converted.__p7Alternatives))
+				alternatives.push(...converted.__p7Alternatives);
+			else if (typeof converted.item === "string")
+				alternatives.push(converted.item);
+			else {
+				issues.push(issue("unsupported_ingredient_alternative", entry));
+				return undefined;
+			}
+		}
+		return alternatives.length > 0 ? { __p7Alternatives: [...new Set(alternatives)].sort((left, right) => left.localeCompare(right)) } : undefined;
+	}
 	if (!value || typeof value !== "object" || Array.isArray(value)) {
 		issues.push(issue("unsupported_ingredient_shape", value));
 		return undefined;
@@ -78,12 +97,20 @@ function ingredient(value, issues, tagProjections) {
 	if (typeof value.tag === "string") {
 		if (value.tag.startsWith("minecraft:"))
 			return { tag: value.tag };
+		const projection = projections.get(value.tag);
+		if (projection?.status === "emittable") {
+			tagProjections.push({ projectedItems: projection.items, sourceTag: value.tag });
+			return projection.items.length === 1 ? { item: projection.items[0] } : { __p7Alternatives: projection.items };
+		}
 		const canonical = CANONICAL_TAG_ITEMS.get(value.tag);
 		if (canonical) {
 			tagProjections.push({ canonicalItem: canonical, sourceTag: value.tag });
 			return { item: canonical };
 		}
-		issues.push(issue("pending_tag_projection", value.tag));
+		issues.push(issue("pending_tag_projection", {
+			issues: projection?.issues ?? [{ kind: "missing_projection", value: value.tag }],
+			tag: value.tag
+		}));
 		return undefined;
 	}
 	issues.push(issue("unsupported_ingredient_shape", value));
@@ -103,10 +130,12 @@ function result(value, issues) {
 	return count === 1 ? { item: mapIdentifier(value.id) } : { count, item: mapIdentifier(value.id) };
 }
 
-function singleItemIngredient(value, issues, tagProjections) {
-	const converted = ingredient(value, issues, tagProjections);
+function singleItemIngredient(value, issues, tagProjections, projections) {
+	const converted = ingredient(value, issues, tagProjections, projections);
 	if (!converted)
 		return undefined;
+	if (Array.isArray(converted.__p7Alternatives))
+		return { ...converted, __p7AlternativeResult: "string" };
 	if (typeof converted.item !== "string") {
 		issues.push(issue("native_station_does_not_accept_tag", value.tag));
 		return undefined;
@@ -123,7 +152,7 @@ function cookingTags(type) {
 	]).get(type);
 }
 
-function convertDefinition(recipe, issues, tagProjections) {
+function convertDefinition(recipe, issues, tagProjections, projections) {
 	const source = recipe.sourceRecipe;
 	const description = { identifier: nativeRecipeId(recipe.id) };
 	if (source.type === "minecraft:crafting_shaped") {
@@ -134,7 +163,7 @@ function convertDefinition(recipe, issues, tagProjections) {
 		}
 		const key = {};
 		for (const [symbol, sourceIngredient] of Object.entries(source.key ?? {})) {
-			const converted = ingredient(sourceIngredient, issues, tagProjections);
+			const converted = ingredient(sourceIngredient, issues, tagProjections, projections);
 			if (converted)
 				key[symbol] = converted;
 		}
@@ -159,7 +188,7 @@ function convertDefinition(recipe, issues, tagProjections) {
 			issues.push(issue("bedrock_shapeless_ingredient_limit", sourceIngredients));
 			return undefined;
 		}
-		const ingredients = sourceIngredients.map(entry => ingredient(entry, issues, tagProjections));
+		const ingredients = sourceIngredients.map(entry => ingredient(entry, issues, tagProjections, projections));
 		const convertedResult = result(source.result, issues);
 		if (!convertedResult || ingredients.some(entry => !entry))
 			return undefined;
@@ -175,7 +204,7 @@ function convertDefinition(recipe, issues, tagProjections) {
 		};
 	}
 	if (["minecraft:blasting", "minecraft:campfire_cooking", "minecraft:smelting", "minecraft:smoking"].includes(source.type)) {
-		const input = singleItemIngredient(source.ingredient, issues, tagProjections);
+		const input = singleItemIngredient(source.ingredient, issues, tagProjections, projections);
 		const convertedResult = result(source.result, issues);
 		if (!input || !convertedResult)
 			return undefined;
@@ -196,9 +225,9 @@ function convertDefinition(recipe, issues, tagProjections) {
 		};
 	}
 	if (source.type === "minecraft:smithing_transform") {
-		const template = singleItemIngredient(source.template, issues, tagProjections);
-		const base = singleItemIngredient(source.base, issues, tagProjections);
-		const addition = singleItemIngredient(source.addition, issues, tagProjections);
+		const template = singleItemIngredient(source.template, issues, tagProjections, projections);
+		const base = singleItemIngredient(source.base, issues, tagProjections, projections);
+		const addition = singleItemIngredient(source.addition, issues, tagProjections, projections);
 		const convertedResult = result(source.result, issues);
 		if (!template || !base || !addition || !convertedResult)
 			return undefined;
@@ -235,6 +264,49 @@ function identifiersInDefinition(value, identifiers = new Set()) {
 			identifiersInDefinition(entry, identifiers);
 	}
 	return identifiers;
+}
+
+function cartesianProduct(values) {
+	return values.reduce((products, entries) => products.flatMap(product => entries.map(entry => [...product, entry])), [[]]);
+}
+
+function expandTagAlternatives(value) {
+	if (Array.isArray(value)) {
+		const alternatives = value.map(expandTagAlternatives);
+		return cartesianProduct(alternatives).map(entries => entries);
+	}
+	if (!value || typeof value !== "object")
+		return [value];
+	if (Array.isArray(value.__p7Alternatives))
+		return value.__p7Alternatives.map(item => value.__p7AlternativeResult === "string" ? item : { item });
+	const keys = Object.keys(value);
+	const alternatives = keys.map(key => expandTagAlternatives(value[key]));
+	return cartesianProduct(alternatives).map(entries => Object.fromEntries(keys.map((key, index) => [key, entries[index]])));
+}
+
+function recipeDefinition(definition) {
+	return definition["minecraft:recipe_shaped"]
+		?? definition["minecraft:recipe_shapeless"]
+		?? definition["minecraft:recipe_furnace"]
+		?? definition["minecraft:recipe_smithing_transform"];
+}
+
+function assignNativeIdentifier(definition, identifier) {
+	const converted = structuredClone(definition);
+	const description = recipeDefinition(converted)?.description;
+	if (!description)
+		throw new Error("Native recipe definition is missing its description");
+	description.identifier = identifier;
+	return converted;
+}
+
+function expandRecipeDefinitions(definition, issues, nativeId) {
+	const definitions = expandTagAlternatives(definition);
+	if (definitions.length > MAX_TAG_EXPANSIONS) {
+		issues.push(issue("tag_projection_expansion_limit", { limit: MAX_TAG_EXPANSIONS, variants: definitions.length }));
+		return [];
+	}
+	return definitions.map((candidate, index) => assignNativeIdentifier(candidate, index === 0 ? nativeId : `${nativeId}_tag_${index}`));
 }
 
 async function definedContentIds(bedrockRoot) {
@@ -277,21 +349,31 @@ function recordStatus(issues) {
 export async function buildNativeRecipes({ bedrockRoot, repositoryRoot }) {
 	if (!bedrockRoot || !repositoryRoot)
 		throw new TypeError("Native recipe compilation requires Bedrock and repository roots");
-	const contentIds = await definedContentIds(bedrockRoot);
 	const ir = await buildRecipeIr({ repositoryRoot });
+	const tagProjectionDocument = await buildItemTagProjections({
+		repositoryRoot,
+		// Runtime processors (fans, crushing, pressing, interaction recipes and
+		// sequenced assembly) share this projection with native recipes.  Limiting
+		// it to crafting recipes left valid base-game tags unresolved at runtime.
+		tags: new Set(ir.recipes
+			.flatMap(recipe => recipe.ingredients.filter(ingredient => ingredient.kind === "tag").map(ingredient => ingredient.tag)))
+	});
+	const projections = projectionMap(tagProjectionDocument);
+	const contentIds = await definedContentIds(bedrockRoot);
 	const records = ir.recipes.filter(recipe => recipe.strategy === "vanilla_recipe").map(recipe => {
 		if (!NATIVE_TYPES.has(recipe.source.type))
 			throw new Error(`Recipe ${recipe.id} has an unexpected native strategy type`);
 		const issues = [];
 		const tagProjections = [];
-		const definition = convertDefinition(recipe, issues, tagProjections);
+		const definition = convertDefinition(recipe, issues, tagProjections, projections);
+		const definitions = definition ? expandRecipeDefinitions(definition, issues, nativeRecipeId(recipe.id)) : [];
 		if (definition) {
-			for (const identifier of identifiersInDefinition(definition))
+			for (const identifier of definitions.flatMap(candidate => [...identifiersInDefinition(candidate)]))
 				if (identifier.startsWith("createbedrock:") && !contentIds.has(identifier))
 					issues.push(issue("missing_content", identifier));
 		}
 		return {
-			...(definition ? { definition } : {}),
+			...(definitions.length > 0 ? { definition: definitions[0], definitions } : {}),
 			id: recipe.id,
 			issues,
 			nativeId: nativeRecipeId(recipe.id),
@@ -307,6 +389,7 @@ export async function buildNativeRecipes({ bedrockRoot, repositoryRoot }) {
 		generatedFrom: "src/generated/resources/data/create/recipe",
 		records,
 		schemaVersion: NATIVE_RECIPE_SCHEMA_VERSION,
+		tagProjectionDocument,
 		summary: {
 			recipes: records.length,
 			status: Object.fromEntries(statuses.map(status => [status, records.filter(record => record.status === status).length]))
@@ -317,8 +400,11 @@ export async function buildNativeRecipes({ bedrockRoot, repositoryRoot }) {
 export function renderNativeRecipeFiles(document) {
 	validateNativeRecipes(document);
 	return new Map(document.records
-		.filter(record => record.status === "emittable" && record.definition)
-		.map(record => [`${record.nativeId.slice("createbedrock:".length)}.json`, `${JSON.stringify(record.definition, null, 2)}\n`]));
+		.filter(record => record.status === "emittable" && Array.isArray(record.definitions))
+		.flatMap(record => record.definitions.map(definition => {
+			const identifier = recipeDefinition(definition)?.description?.identifier;
+			return [`${identifier.slice("createbedrock:".length)}.json`, `${JSON.stringify(definition, null, 2)}\n`];
+		})));
 }
 
 export function validateNativeRecipes(document) {
@@ -326,6 +412,7 @@ export function validateNativeRecipes(document) {
 		|| document.schemaVersion !== NATIVE_RECIPE_SCHEMA_VERSION || document.generatedAt !== "deterministic"
 		|| document.generatedFrom !== "src/generated/resources/data/create/recipe" || !Array.isArray(document.records))
 		throw new TypeError("Native recipe compilation has an invalid header");
+	validateItemTagProjections(document.tagProjectionDocument);
 	const sourceIds = new Set();
 	const nativeIds = new Set();
 	for (const record of document.records) {
@@ -333,10 +420,15 @@ export function validateNativeRecipes(document) {
 			|| !NATIVE_TYPES.has(record.source?.type) || !Array.isArray(record.issues) || !Array.isArray(record.tagProjections)
 			|| !["emittable", "blocked_missing_content", "blocked_platform_semantics", "blocked_tag_projection"].includes(record.status))
 			throw new Error("Native recipe compilation contains an invalid record");
-		if (record.status === "emittable" && !record.definition)
+		if (record.status === "emittable" && (!record.definition || !Array.isArray(record.definitions) || record.definitions.length === 0))
 			throw new Error(`Emittable native recipe ${record.id} has no Bedrock definition`);
-		if (record.definition && record.definition.format_version !== NATIVE_RECIPE_FORMAT_VERSION)
-			throw new Error(`Native recipe ${record.id} has the wrong Bedrock format version`);
+		for (const definition of (record.definitions ?? (record.definition ? [record.definition] : []))) {
+			if (definition?.format_version !== NATIVE_RECIPE_FORMAT_VERSION)
+				throw new Error(`Native recipe ${record.id} has the wrong Bedrock format version`);
+			const identifier = recipeDefinition(definition)?.description?.identifier;
+			if (typeof identifier !== "string" || !identifier.startsWith(record.nativeId))
+				throw new Error(`Native recipe ${record.id} has an invalid generated identifier`);
+		}
 		sourceIds.add(record.id);
 		nativeIds.add(record.nativeId);
 	}

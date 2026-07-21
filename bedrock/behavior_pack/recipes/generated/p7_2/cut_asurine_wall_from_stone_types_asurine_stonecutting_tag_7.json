@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/cut_asurine_wall_from_stone_types_asurine_stonecutting_tag_7"
+    },
+    "tags": [
+      "stonecutter"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:cut_asurine_wall"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:cut_asurine_wall"
+    }
+  }
+}

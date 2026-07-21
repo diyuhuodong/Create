@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/logistics/pink_table_cloth_clear"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:pink_table_cloth"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:pink_table_cloth"
+    }
+  }
+}

@@ -116,27 +116,27 @@
     "createbedrock_cogwheel_axis": {
       "textures": "textures/create_java/block/cogwheel_axis"
     },
-	"createbedrock_clockwork_bearing_side": {
-	  "textures": "textures/create_java/block/clockwork_bearing_side"
-	},
-	"createbedrock_contraption_controls": {
-	  "textures": "textures/create_java/block/contraption_controls"
-	},
-	"createbedrock_contraption_controls_frame": {
-	  "textures": "textures/create_java/block/contraption_controls_frame"
-	},
-	"createbedrock_controls": {
-	  "textures": "textures/create_java/block/controls"
-	},
-	"createbedrock_controls_frame": {
-	  "textures": "textures/create_java/block/controls_frame"
-	},
-	"createbedrock_crafter_side": {
-	  "textures": "textures/create_java/block/crafter_side"
-	},
-	"createbedrock_crafter_thingies": {
-	  "textures": "textures/create_java/block/crafter_thingies"
-	},
+    "createbedrock_clockwork_bearing_side": {
+      "textures": "textures/create_java/block/clockwork_bearing_side"
+    },
+    "createbedrock_contraption_controls": {
+      "textures": "textures/create_java/block/contraption_controls"
+    },
+    "createbedrock_contraption_controls_frame": {
+      "textures": "textures/create_java/block/contraption_controls_frame"
+    },
+    "createbedrock_controls": {
+      "textures": "textures/create_java/block/controls"
+    },
+    "createbedrock_controls_frame": {
+      "textures": "textures/create_java/block/controls_frame"
+    },
+    "createbedrock_crafter_side": {
+      "textures": "textures/create_java/block/crafter_side"
+    },
+    "createbedrock_crafter_thingies": {
+      "textures": "textures/create_java/block/crafter_thingies"
+    },
     "createbedrock_clutch_off": {
       "textures": "textures/create_java/block/clutch_off"
     },
@@ -353,21 +353,21 @@
     "createbedrock_mechanical_press_top": {
       "textures": "textures/create_java/block/mechanical_press_top"
     },
-	"createbedrock_pole_end": {
-	  "textures": "textures/create_java/block/pole_end"
-	},
-	"createbedrock_portable_storage_interface": {
-	  "textures": "textures/create_java/block/portable_storage_interface"
-	},
-	"createbedrock_roller_casing": {
-	  "textures": "textures/create_java/block/roller_casing"
-	},
-	"createbedrock_smooth_dark_log_top": {
-	  "textures": "textures/create_java/block/smooth_dark_log_top"
-	},
-	"createbedrock_train_controller_base": {
-	  "textures": "textures/create_java/block/train_controller_base"
-	},
+    "createbedrock_pole_end": {
+      "textures": "textures/create_java/block/pole_end"
+    },
+    "createbedrock_portable_storage_interface": {
+      "textures": "textures/create_java/block/portable_storage_interface"
+    },
+    "createbedrock_roller_casing": {
+      "textures": "textures/create_java/block/roller_casing"
+    },
+    "createbedrock_smooth_dark_log_top": {
+      "textures": "textures/create_java/block/smooth_dark_log_top"
+    },
+    "createbedrock_train_controller_base": {
+      "textures": "textures/create_java/block/train_controller_base"
+    },
     "createbedrock_mechanical_saw_top_no_slot": {
       "textures": "textures/create_java/block/mechanical_saw_top_no_slot"
     },
@@ -623,26 +623,1391 @@
     "createbedrock_schematicannon": {
       "textures": "textures/create_java/block/schematicannon"
     },
-    "createbedrock_copper_backtank": { "textures": "textures/create_java/block/copper_backtank" },
-    "createbedrock_netherite_backtank": { "textures": "textures/create_java/block/netherite_backtank" },
-    "createbedrock_toolbox_white": { "textures": "textures/create_java/block/toolbox/white" },
-    "createbedrock_toolbox_orange": { "textures": "textures/create_java/block/toolbox/orange" },
-    "createbedrock_toolbox_magenta": { "textures": "textures/create_java/block/toolbox/magenta" },
-    "createbedrock_toolbox_light_blue": { "textures": "textures/create_java/block/toolbox/light_blue" },
-    "createbedrock_toolbox_yellow": { "textures": "textures/create_java/block/toolbox/yellow" },
-    "createbedrock_toolbox_lime": { "textures": "textures/create_java/block/toolbox/lime" },
-    "createbedrock_toolbox_pink": { "textures": "textures/create_java/block/toolbox/pink" },
-    "createbedrock_toolbox_gray": { "textures": "textures/create_java/block/toolbox/gray" },
-    "createbedrock_toolbox_light_gray": { "textures": "textures/create_java/block/toolbox/light_gray" },
-    "createbedrock_toolbox_cyan": { "textures": "textures/create_java/block/toolbox/cyan" },
-    "createbedrock_toolbox_purple": { "textures": "textures/create_java/block/toolbox/purple" },
-    "createbedrock_toolbox_blue": { "textures": "textures/create_java/block/toolbox/blue" },
-    "createbedrock_toolbox_brown": { "textures": "textures/create_java/block/toolbox/brown" },
-    "createbedrock_toolbox_green": { "textures": "textures/create_java/block/toolbox/green" },
-    "createbedrock_toolbox_red": { "textures": "textures/create_java/block/toolbox/red" },
-    "createbedrock_toolbox_black": { "textures": "textures/create_java/block/toolbox/black" },
-    "createbedrock_fluid_honey": { "textures": "textures/create_java/fluid/honey_still" },
-    "createbedrock_fluid_chocolate": { "textures": "textures/create_java/fluid/chocolate_still" },
-    "createbedrock_fluid_tea": { "textures": "textures/create_java/fluid/tea_still" }
+    "createbedrock_copper_backtank": {
+      "textures": "textures/create_java/block/copper_backtank"
+    },
+    "createbedrock_netherite_backtank": {
+      "textures": "textures/create_java/block/netherite_backtank"
+    },
+    "createbedrock_toolbox_white": {
+      "textures": "textures/create_java/block/toolbox/white"
+    },
+    "createbedrock_toolbox_orange": {
+      "textures": "textures/create_java/block/toolbox/orange"
+    },
+    "createbedrock_toolbox_magenta": {
+      "textures": "textures/create_java/block/toolbox/magenta"
+    },
+    "createbedrock_toolbox_light_blue": {
+      "textures": "textures/create_java/block/toolbox/light_blue"
+    },
+    "createbedrock_toolbox_yellow": {
+      "textures": "textures/create_java/block/toolbox/yellow"
+    },
+    "createbedrock_toolbox_lime": {
+      "textures": "textures/create_java/block/toolbox/lime"
+    },
+    "createbedrock_toolbox_pink": {
+      "textures": "textures/create_java/block/toolbox/pink"
+    },
+    "createbedrock_toolbox_gray": {
+      "textures": "textures/create_java/block/toolbox/gray"
+    },
+    "createbedrock_toolbox_light_gray": {
+      "textures": "textures/create_java/block/toolbox/light_gray"
+    },
+    "createbedrock_toolbox_cyan": {
+      "textures": "textures/create_java/block/toolbox/cyan"
+    },
+    "createbedrock_toolbox_purple": {
+      "textures": "textures/create_java/block/toolbox/purple"
+    },
+    "createbedrock_toolbox_blue": {
+      "textures": "textures/create_java/block/toolbox/blue"
+    },
+    "createbedrock_toolbox_brown": {
+      "textures": "textures/create_java/block/toolbox/brown"
+    },
+    "createbedrock_toolbox_green": {
+      "textures": "textures/create_java/block/toolbox/green"
+    },
+    "createbedrock_toolbox_red": {
+      "textures": "textures/create_java/block/toolbox/red"
+    },
+    "createbedrock_toolbox_black": {
+      "textures": "textures/create_java/block/toolbox/black"
+    },
+    "createbedrock_fluid_honey": {
+      "textures": "textures/create_java/fluid/honey_still"
+    },
+    "createbedrock_fluid_chocolate": {
+      "textures": "textures/create_java/fluid/chocolate_still"
+    },
+    "createbedrock_fluid_tea": {
+      "textures": "textures/create_java/fluid/tea_still"
+    },
+    "createbedrock_p7_1_acacia_window": {
+      "textures": "textures/create_java/block/palettes/acacia_window"
+    },
+    "createbedrock_p7_1_acacia_window_pane": {
+      "textures": "textures/create_java/block/palettes/acacia_window"
+    },
+    "createbedrock_p7_1_andesite_bars": {
+      "textures": "textures/create_java/block/bars/andesite_bars"
+    },
+    "createbedrock_p7_1_andesite_pillar": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/andesite_cut_cap"
+    },
+    "createbedrock_p7_1_asurine": {
+      "textures": "textures/create_java/block/palettes/stone_types/natural/asurine_0"
+    },
+    "createbedrock_p7_1_asurine_pillar": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/asurine_cut_cap"
+    },
+    "createbedrock_p7_1_bamboo_window": {
+      "textures": "textures/create_java/block/palettes/bamboo_window"
+    },
+    "createbedrock_p7_1_bamboo_window_pane": {
+      "textures": "textures/create_java/block/palettes/bamboo_window"
+    },
+    "createbedrock_p7_1_birch_window": {
+      "textures": "textures/create_java/block/palettes/birch_window"
+    },
+    "createbedrock_p7_1_birch_window_pane": {
+      "textures": "textures/create_java/block/palettes/birch_window"
+    },
+    "createbedrock_p7_1_black_nixie_tube": {
+      "textures": "textures/create_java/block/nixie_tube"
+    },
+    "createbedrock_p7_1_black_postbox": {
+      "textures": "textures/create_java/block/post_box/post_box_black"
+    },
+    "createbedrock_p7_1_black_sail": {
+      "textures": "textures/create_java/block/sail/canvas_black"
+    },
+    "createbedrock_p7_1_black_seat": {
+      "textures": "textures/create_java/block/seat/bottom"
+    },
+    "createbedrock_p7_1_black_table_cloth": {
+      "textures": "textures/create_java/block/table_cloth/black"
+    },
+    "createbedrock_p7_1_black_valve_handle": {
+      "textures": "textures/create_java/block/valve_handle/valve_handle_black"
+    },
+    "createbedrock_p7_1_blue_nixie_tube": {
+      "textures": "textures/create_java/block/nixie_tube"
+    },
+    "createbedrock_p7_1_blue_postbox": {
+      "textures": "textures/create_java/block/post_box/post_box_blue"
+    },
+    "createbedrock_p7_1_blue_sail": {
+      "textures": "textures/create_java/block/sail/canvas_blue"
+    },
+    "createbedrock_p7_1_blue_seat": {
+      "textures": "textures/create_java/block/seat/bottom"
+    },
+    "createbedrock_p7_1_blue_table_cloth": {
+      "textures": "textures/create_java/block/table_cloth/blue"
+    },
+    "createbedrock_p7_1_blue_valve_handle": {
+      "textures": "textures/create_java/block/valve_handle/valve_handle_blue"
+    },
+    "createbedrock_p7_1_brass_bars": {
+      "textures": "textures/create_java/block/bars/brass_bars"
+    },
+    "createbedrock_p7_1_brown_nixie_tube": {
+      "textures": "textures/create_java/block/nixie_tube"
+    },
+    "createbedrock_p7_1_brown_postbox": {
+      "textures": "textures/create_java/block/post_box/post_box_brown"
+    },
+    "createbedrock_p7_1_brown_sail": {
+      "textures": "textures/create_java/block/sail/canvas_brown"
+    },
+    "createbedrock_p7_1_brown_seat": {
+      "textures": "textures/create_java/block/seat/bottom"
+    },
+    "createbedrock_p7_1_brown_table_cloth": {
+      "textures": "textures/create_java/block/table_cloth/brown"
+    },
+    "createbedrock_p7_1_brown_valve_handle": {
+      "textures": "textures/create_java/block/valve_handle/valve_handle_brown"
+    },
+    "createbedrock_p7_1_calcite_pillar": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/calcite_cut_cap"
+    },
+    "createbedrock_p7_1_cherry_window": {
+      "textures": "textures/create_java/block/palettes/cherry_window"
+    },
+    "createbedrock_p7_1_cherry_window_pane": {
+      "textures": "textures/create_java/block/palettes/cherry_window"
+    },
+    "createbedrock_p7_1_copper_bars": {
+      "textures": "textures/create_java/block/bars/copper_bars"
+    },
+    "createbedrock_p7_1_copper_shingle_slab": {
+      "textures": "textures/create_java/block/copper/copper_roof_top"
+    },
+    "createbedrock_p7_1_copper_shingle_stairs": {
+      "textures": "textures/create_java/block/copper/copper_roof_top"
+    },
+    "createbedrock_p7_1_copper_shingles": {
+      "textures": "textures/create_java/block/copper/copper_roof_top"
+    },
+    "createbedrock_p7_1_copper_tile_slab": {
+      "textures": "textures/create_java/block/copper/copper_roof_top"
+    },
+    "createbedrock_p7_1_copper_tile_stairs": {
+      "textures": "textures/create_java/block/copper/copper_roof_top"
+    },
+    "createbedrock_p7_1_copper_tiles": {
+      "textures": "textures/create_java/block/copper/copper_roof_top"
+    },
+    "createbedrock_p7_1_crimsite": {
+      "textures": "textures/create_java/block/palettes/stone_types/natural/crimsite_0"
+    },
+    "createbedrock_p7_1_crimsite_pillar": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/crimsite_cut_cap"
+    },
+    "createbedrock_p7_1_crimson_window": {
+      "textures": "textures/create_java/block/palettes/crimson_window"
+    },
+    "createbedrock_p7_1_crimson_window_pane": {
+      "textures": "textures/create_java/block/palettes/crimson_window"
+    },
+    "createbedrock_p7_1_cut_andesite": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/andesite_cut"
+    },
+    "createbedrock_p7_1_cut_andesite_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/andesite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_andesite_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/andesite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_andesite_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/andesite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_andesite_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/andesite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_andesite_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/andesite_cut"
+    },
+    "createbedrock_p7_1_cut_andesite_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/andesite_cut"
+    },
+    "createbedrock_p7_1_cut_andesite_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/andesite_cut"
+    },
+    "createbedrock_p7_1_cut_asurine": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/asurine_cut"
+    },
+    "createbedrock_p7_1_cut_asurine_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/asurine_cut_brick"
+    },
+    "createbedrock_p7_1_cut_asurine_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/asurine_cut_brick"
+    },
+    "createbedrock_p7_1_cut_asurine_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/asurine_cut_brick"
+    },
+    "createbedrock_p7_1_cut_asurine_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/asurine_cut_brick"
+    },
+    "createbedrock_p7_1_cut_asurine_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/asurine_cut"
+    },
+    "createbedrock_p7_1_cut_asurine_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/asurine_cut"
+    },
+    "createbedrock_p7_1_cut_asurine_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/asurine_cut"
+    },
+    "createbedrock_p7_1_cut_calcite": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/calcite_cut"
+    },
+    "createbedrock_p7_1_cut_calcite_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/calcite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_calcite_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/calcite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_calcite_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/calcite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_calcite_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/calcite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_calcite_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/calcite_cut"
+    },
+    "createbedrock_p7_1_cut_calcite_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/calcite_cut"
+    },
+    "createbedrock_p7_1_cut_calcite_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/calcite_cut"
+    },
+    "createbedrock_p7_1_cut_crimsite": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/crimsite_cut"
+    },
+    "createbedrock_p7_1_cut_crimsite_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/crimsite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_crimsite_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/crimsite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_crimsite_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/crimsite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_crimsite_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/crimsite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_crimsite_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/crimsite_cut"
+    },
+    "createbedrock_p7_1_cut_crimsite_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/crimsite_cut"
+    },
+    "createbedrock_p7_1_cut_crimsite_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/crimsite_cut"
+    },
+    "createbedrock_p7_1_cut_deepslate": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/deepslate_cut"
+    },
+    "createbedrock_p7_1_cut_deepslate_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/deepslate_cut_brick"
+    },
+    "createbedrock_p7_1_cut_deepslate_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/deepslate_cut_brick"
+    },
+    "createbedrock_p7_1_cut_deepslate_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/deepslate_cut_brick"
+    },
+    "createbedrock_p7_1_cut_deepslate_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/deepslate_cut_brick"
+    },
+    "createbedrock_p7_1_cut_deepslate_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/deepslate_cut"
+    },
+    "createbedrock_p7_1_cut_deepslate_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/deepslate_cut"
+    },
+    "createbedrock_p7_1_cut_deepslate_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/deepslate_cut"
+    },
+    "createbedrock_p7_1_cut_diorite": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/diorite_cut"
+    },
+    "createbedrock_p7_1_cut_diorite_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/diorite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_diorite_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/diorite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_diorite_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/diorite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_diorite_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/diorite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_diorite_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/diorite_cut"
+    },
+    "createbedrock_p7_1_cut_diorite_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/diorite_cut"
+    },
+    "createbedrock_p7_1_cut_diorite_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/diorite_cut"
+    },
+    "createbedrock_p7_1_cut_dripstone": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/dripstone_cut"
+    },
+    "createbedrock_p7_1_cut_dripstone_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/dripstone_cut_brick"
+    },
+    "createbedrock_p7_1_cut_dripstone_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/dripstone_cut_brick"
+    },
+    "createbedrock_p7_1_cut_dripstone_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/dripstone_cut_brick"
+    },
+    "createbedrock_p7_1_cut_dripstone_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/dripstone_cut_brick"
+    },
+    "createbedrock_p7_1_cut_dripstone_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/dripstone_cut"
+    },
+    "createbedrock_p7_1_cut_dripstone_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/dripstone_cut"
+    },
+    "createbedrock_p7_1_cut_dripstone_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/dripstone_cut"
+    },
+    "createbedrock_p7_1_cut_granite": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/granite_cut"
+    },
+    "createbedrock_p7_1_cut_granite_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/granite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_granite_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/granite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_granite_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/granite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_granite_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/granite_cut_brick"
+    },
+    "createbedrock_p7_1_cut_granite_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/granite_cut"
+    },
+    "createbedrock_p7_1_cut_granite_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/granite_cut"
+    },
+    "createbedrock_p7_1_cut_granite_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/granite_cut"
+    },
+    "createbedrock_p7_1_cut_limestone": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/limestone_cut"
+    },
+    "createbedrock_p7_1_cut_limestone_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/limestone_cut_brick"
+    },
+    "createbedrock_p7_1_cut_limestone_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/limestone_cut_brick"
+    },
+    "createbedrock_p7_1_cut_limestone_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/limestone_cut_brick"
+    },
+    "createbedrock_p7_1_cut_limestone_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/limestone_cut_brick"
+    },
+    "createbedrock_p7_1_cut_limestone_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/limestone_cut"
+    },
+    "createbedrock_p7_1_cut_limestone_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/limestone_cut"
+    },
+    "createbedrock_p7_1_cut_limestone_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/limestone_cut"
+    },
+    "createbedrock_p7_1_cut_ochrum": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/ochrum_cut"
+    },
+    "createbedrock_p7_1_cut_ochrum_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/ochrum_cut_brick"
+    },
+    "createbedrock_p7_1_cut_ochrum_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/ochrum_cut_brick"
+    },
+    "createbedrock_p7_1_cut_ochrum_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/ochrum_cut_brick"
+    },
+    "createbedrock_p7_1_cut_ochrum_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/ochrum_cut_brick"
+    },
+    "createbedrock_p7_1_cut_ochrum_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/ochrum_cut"
+    },
+    "createbedrock_p7_1_cut_ochrum_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/ochrum_cut"
+    },
+    "createbedrock_p7_1_cut_ochrum_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/ochrum_cut"
+    },
+    "createbedrock_p7_1_cut_scorchia": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/scorchia_cut"
+    },
+    "createbedrock_p7_1_cut_scorchia_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/scorchia_cut_brick"
+    },
+    "createbedrock_p7_1_cut_scorchia_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/scorchia_cut_brick"
+    },
+    "createbedrock_p7_1_cut_scorchia_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/scorchia_cut_brick"
+    },
+    "createbedrock_p7_1_cut_scorchia_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/scorchia_cut_brick"
+    },
+    "createbedrock_p7_1_cut_scorchia_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/scorchia_cut"
+    },
+    "createbedrock_p7_1_cut_scorchia_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/scorchia_cut"
+    },
+    "createbedrock_p7_1_cut_scorchia_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/scorchia_cut"
+    },
+    "createbedrock_p7_1_cut_scoria": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/scoria_cut"
+    },
+    "createbedrock_p7_1_cut_scoria_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/scoria_cut_brick"
+    },
+    "createbedrock_p7_1_cut_scoria_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/scoria_cut_brick"
+    },
+    "createbedrock_p7_1_cut_scoria_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/scoria_cut_brick"
+    },
+    "createbedrock_p7_1_cut_scoria_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/scoria_cut_brick"
+    },
+    "createbedrock_p7_1_cut_scoria_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/scoria_cut"
+    },
+    "createbedrock_p7_1_cut_scoria_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/scoria_cut"
+    },
+    "createbedrock_p7_1_cut_scoria_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/scoria_cut"
+    },
+    "createbedrock_p7_1_cut_tuff": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/tuff_cut"
+    },
+    "createbedrock_p7_1_cut_tuff_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/tuff_cut_brick"
+    },
+    "createbedrock_p7_1_cut_tuff_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/tuff_cut_brick"
+    },
+    "createbedrock_p7_1_cut_tuff_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/tuff_cut_brick"
+    },
+    "createbedrock_p7_1_cut_tuff_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/tuff_cut_brick"
+    },
+    "createbedrock_p7_1_cut_tuff_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/tuff_cut"
+    },
+    "createbedrock_p7_1_cut_tuff_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/tuff_cut"
+    },
+    "createbedrock_p7_1_cut_tuff_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/tuff_cut"
+    },
+    "createbedrock_p7_1_cut_veridium": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/veridium_cut"
+    },
+    "createbedrock_p7_1_cut_veridium_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/veridium_cut_brick"
+    },
+    "createbedrock_p7_1_cut_veridium_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/veridium_cut_brick"
+    },
+    "createbedrock_p7_1_cut_veridium_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/veridium_cut_brick"
+    },
+    "createbedrock_p7_1_cut_veridium_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/brick/veridium_cut_brick"
+    },
+    "createbedrock_p7_1_cut_veridium_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/veridium_cut"
+    },
+    "createbedrock_p7_1_cut_veridium_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/veridium_cut"
+    },
+    "createbedrock_p7_1_cut_veridium_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/cut/veridium_cut"
+    },
+    "createbedrock_p7_1_cyan_nixie_tube": {
+      "textures": "textures/create_java/block/nixie_tube"
+    },
+    "createbedrock_p7_1_cyan_postbox": {
+      "textures": "textures/create_java/block/post_box/post_box_cyan"
+    },
+    "createbedrock_p7_1_cyan_sail": {
+      "textures": "textures/create_java/block/sail/canvas_cyan"
+    },
+    "createbedrock_p7_1_cyan_seat": {
+      "textures": "textures/create_java/block/seat/bottom"
+    },
+    "createbedrock_p7_1_cyan_table_cloth": {
+      "textures": "textures/create_java/block/table_cloth/cyan"
+    },
+    "createbedrock_p7_1_cyan_valve_handle": {
+      "textures": "textures/create_java/block/valve_handle/valve_handle_cyan"
+    },
+    "createbedrock_p7_1_dark_oak_window": {
+      "textures": "textures/create_java/block/palettes/dark_oak_window"
+    },
+    "createbedrock_p7_1_dark_oak_window_pane": {
+      "textures": "textures/create_java/block/palettes/dark_oak_window"
+    },
+    "createbedrock_p7_1_deepslate_pillar": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/deepslate_cut_cap"
+    },
+    "createbedrock_p7_1_diorite_pillar": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/diorite_cut_cap"
+    },
+    "createbedrock_p7_1_dripstone_pillar": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/dripstone_cut_cap"
+    },
+    "createbedrock_p7_1_exposed_copper_shingle_slab": {
+      "textures": "textures/create_java/block/copper/exposed_copper_roof_top"
+    },
+    "createbedrock_p7_1_exposed_copper_shingle_stairs": {
+      "textures": "textures/create_java/block/copper/exposed_copper_roof_top"
+    },
+    "createbedrock_p7_1_exposed_copper_shingles": {
+      "textures": "textures/create_java/block/copper/exposed_copper_roof_top"
+    },
+    "createbedrock_p7_1_exposed_copper_tile_slab": {
+      "textures": "textures/create_java/block/copper/exposed_copper_roof_top"
+    },
+    "createbedrock_p7_1_exposed_copper_tile_stairs": {
+      "textures": "textures/create_java/block/copper/exposed_copper_roof_top"
+    },
+    "createbedrock_p7_1_exposed_copper_tiles": {
+      "textures": "textures/create_java/block/copper/exposed_copper_roof_top"
+    },
+    "createbedrock_p7_1_framed_glass": {
+      "textures": "textures/create_java/block/palettes/framed_glass"
+    },
+    "createbedrock_p7_1_framed_glass_pane": {
+      "textures": "textures/create_java/block/palettes/framed_glass"
+    },
+    "createbedrock_p7_1_granite_pillar": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/granite_cut_cap"
+    },
+    "createbedrock_p7_1_gray_nixie_tube": {
+      "textures": "textures/create_java/block/nixie_tube"
+    },
+    "createbedrock_p7_1_gray_postbox": {
+      "textures": "textures/create_java/block/post_box/post_box_gray"
+    },
+    "createbedrock_p7_1_gray_sail": {
+      "textures": "textures/create_java/block/sail/canvas_gray"
+    },
+    "createbedrock_p7_1_gray_seat": {
+      "textures": "textures/create_java/block/seat/bottom"
+    },
+    "createbedrock_p7_1_gray_table_cloth": {
+      "textures": "textures/create_java/block/table_cloth/gray"
+    },
+    "createbedrock_p7_1_gray_valve_handle": {
+      "textures": "textures/create_java/block/valve_handle/valve_handle_gray"
+    },
+    "createbedrock_p7_1_green_nixie_tube": {
+      "textures": "textures/create_java/block/nixie_tube"
+    },
+    "createbedrock_p7_1_green_postbox": {
+      "textures": "textures/create_java/block/post_box/post_box_green"
+    },
+    "createbedrock_p7_1_green_sail": {
+      "textures": "textures/create_java/block/sail/canvas_green"
+    },
+    "createbedrock_p7_1_green_seat": {
+      "textures": "textures/create_java/block/seat/bottom"
+    },
+    "createbedrock_p7_1_green_table_cloth": {
+      "textures": "textures/create_java/block/table_cloth/green"
+    },
+    "createbedrock_p7_1_green_valve_handle": {
+      "textures": "textures/create_java/block/valve_handle/valve_handle_green"
+    },
+    "createbedrock_p7_1_horizontal_framed_glass": {
+      "textures": "textures/create_java/block/palettes/framed_glass"
+    },
+    "createbedrock_p7_1_horizontal_framed_glass_pane": {
+      "textures": "textures/create_java/block/palettes/horizontal_framed_glass"
+    },
+    "createbedrock_p7_1_industrial_iron_window": {
+      "textures": "textures/create_java/block/palettes/industrial_iron_window_end"
+    },
+    "createbedrock_p7_1_industrial_iron_window_pane": {
+      "textures": "textures/create_java/block/palettes/industrial_iron_window"
+    },
+    "createbedrock_p7_1_jungle_window": {
+      "textures": "textures/create_java/block/palettes/jungle_window"
+    },
+    "createbedrock_p7_1_jungle_window_pane": {
+      "textures": "textures/create_java/block/palettes/jungle_window"
+    },
+    "createbedrock_p7_1_layered_andesite": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/andesite_cut_cap"
+    },
+    "createbedrock_p7_1_layered_asurine": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/asurine_cut_cap"
+    },
+    "createbedrock_p7_1_layered_calcite": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/calcite_cut_cap"
+    },
+    "createbedrock_p7_1_layered_crimsite": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/crimsite_cut_cap"
+    },
+    "createbedrock_p7_1_layered_deepslate": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/deepslate_cut_cap"
+    },
+    "createbedrock_p7_1_layered_diorite": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/diorite_cut_cap"
+    },
+    "createbedrock_p7_1_layered_dripstone": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/dripstone_cut_cap"
+    },
+    "createbedrock_p7_1_layered_granite": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/granite_cut_cap"
+    },
+    "createbedrock_p7_1_layered_limestone": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/limestone_cut_cap"
+    },
+    "createbedrock_p7_1_layered_ochrum": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/ochrum_cut_cap"
+    },
+    "createbedrock_p7_1_layered_scorchia": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/scorchia_cut_cap"
+    },
+    "createbedrock_p7_1_layered_scoria": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/scoria_cut_cap"
+    },
+    "createbedrock_p7_1_layered_tuff": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/tuff_cut_cap"
+    },
+    "createbedrock_p7_1_layered_veridium": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/veridium_cut_cap"
+    },
+    "createbedrock_p7_1_light_blue_nixie_tube": {
+      "textures": "textures/create_java/block/nixie_tube"
+    },
+    "createbedrock_p7_1_light_blue_postbox": {
+      "textures": "textures/create_java/block/post_box/post_box_light_blue"
+    },
+    "createbedrock_p7_1_light_blue_sail": {
+      "textures": "textures/create_java/block/sail/canvas_light_blue"
+    },
+    "createbedrock_p7_1_light_blue_seat": {
+      "textures": "textures/create_java/block/seat/bottom"
+    },
+    "createbedrock_p7_1_light_blue_table_cloth": {
+      "textures": "textures/create_java/block/table_cloth/light_blue"
+    },
+    "createbedrock_p7_1_light_blue_valve_handle": {
+      "textures": "textures/create_java/block/valve_handle/valve_handle_light_blue"
+    },
+    "createbedrock_p7_1_light_gray_nixie_tube": {
+      "textures": "textures/create_java/block/nixie_tube"
+    },
+    "createbedrock_p7_1_light_gray_postbox": {
+      "textures": "textures/create_java/block/post_box/post_box_light_gray"
+    },
+    "createbedrock_p7_1_light_gray_sail": {
+      "textures": "textures/create_java/block/sail/canvas_light_gray"
+    },
+    "createbedrock_p7_1_light_gray_seat": {
+      "textures": "textures/create_java/block/seat/bottom"
+    },
+    "createbedrock_p7_1_light_gray_table_cloth": {
+      "textures": "textures/create_java/block/table_cloth/light_gray"
+    },
+    "createbedrock_p7_1_light_gray_valve_handle": {
+      "textures": "textures/create_java/block/valve_handle/valve_handle_light_gray"
+    },
+    "createbedrock_p7_1_lime_nixie_tube": {
+      "textures": "textures/create_java/block/nixie_tube"
+    },
+    "createbedrock_p7_1_lime_postbox": {
+      "textures": "textures/create_java/block/post_box/post_box_lime"
+    },
+    "createbedrock_p7_1_lime_sail": {
+      "textures": "textures/create_java/block/sail/canvas_lime"
+    },
+    "createbedrock_p7_1_lime_seat": {
+      "textures": "textures/create_java/block/seat/bottom"
+    },
+    "createbedrock_p7_1_lime_table_cloth": {
+      "textures": "textures/create_java/block/table_cloth/lime"
+    },
+    "createbedrock_p7_1_lime_valve_handle": {
+      "textures": "textures/create_java/block/valve_handle/valve_handle_lime"
+    },
+    "createbedrock_p7_1_limestone": {
+      "textures": "textures/create_java/block/palettes/stone_types/limestone"
+    },
+    "createbedrock_p7_1_limestone_pillar": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/limestone_cut_cap"
+    },
+    "createbedrock_p7_1_magenta_nixie_tube": {
+      "textures": "textures/create_java/block/nixie_tube"
+    },
+    "createbedrock_p7_1_magenta_postbox": {
+      "textures": "textures/create_java/block/post_box/post_box_magenta"
+    },
+    "createbedrock_p7_1_magenta_sail": {
+      "textures": "textures/create_java/block/sail/canvas_magenta"
+    },
+    "createbedrock_p7_1_magenta_seat": {
+      "textures": "textures/create_java/block/seat/bottom"
+    },
+    "createbedrock_p7_1_magenta_table_cloth": {
+      "textures": "textures/create_java/block/table_cloth/magenta"
+    },
+    "createbedrock_p7_1_magenta_valve_handle": {
+      "textures": "textures/create_java/block/valve_handle/valve_handle_magenta"
+    },
+    "createbedrock_p7_1_mangrove_window": {
+      "textures": "textures/create_java/block/palettes/mangrove_window"
+    },
+    "createbedrock_p7_1_mangrove_window_pane": {
+      "textures": "textures/create_java/block/palettes/mangrove_window"
+    },
+    "createbedrock_p7_1_oak_window": {
+      "textures": "textures/create_java/block/palettes/oak_window"
+    },
+    "createbedrock_p7_1_oak_window_pane": {
+      "textures": "textures/create_java/block/palettes/oak_window"
+    },
+    "createbedrock_p7_1_ochrum": {
+      "textures": "textures/create_java/block/palettes/stone_types/natural/ochrum_0"
+    },
+    "createbedrock_p7_1_ochrum_pillar": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/ochrum_cut_cap"
+    },
+    "createbedrock_p7_1_orange_postbox": {
+      "textures": "textures/create_java/block/post_box/post_box_orange"
+    },
+    "createbedrock_p7_1_orange_sail": {
+      "textures": "textures/create_java/block/sail/canvas_orange"
+    },
+    "createbedrock_p7_1_orange_seat": {
+      "textures": "textures/create_java/block/seat/bottom"
+    },
+    "createbedrock_p7_1_orange_table_cloth": {
+      "textures": "textures/create_java/block/table_cloth/orange"
+    },
+    "createbedrock_p7_1_orange_valve_handle": {
+      "textures": "textures/create_java/block/valve_handle/valve_handle_orange"
+    },
+    "createbedrock_p7_1_ornate_iron_window": {
+      "textures": "textures/create_java/block/palettes/ornate_iron_window_end"
+    },
+    "createbedrock_p7_1_ornate_iron_window_pane": {
+      "textures": "textures/create_java/block/palettes/ornate_iron_window"
+    },
+    "createbedrock_p7_1_oxidized_copper_shingle_slab": {
+      "textures": "textures/create_java/block/copper/oxidized_copper_roof_top"
+    },
+    "createbedrock_p7_1_oxidized_copper_shingle_stairs": {
+      "textures": "textures/create_java/block/copper/oxidized_copper_roof_top"
+    },
+    "createbedrock_p7_1_oxidized_copper_shingles": {
+      "textures": "textures/create_java/block/copper/oxidized_copper_roof_top"
+    },
+    "createbedrock_p7_1_oxidized_copper_tile_slab": {
+      "textures": "textures/create_java/block/copper/oxidized_copper_roof_top"
+    },
+    "createbedrock_p7_1_oxidized_copper_tile_stairs": {
+      "textures": "textures/create_java/block/copper/oxidized_copper_roof_top"
+    },
+    "createbedrock_p7_1_oxidized_copper_tiles": {
+      "textures": "textures/create_java/block/copper/oxidized_copper_roof_top"
+    },
+    "createbedrock_p7_1_pink_nixie_tube": {
+      "textures": "textures/create_java/block/nixie_tube"
+    },
+    "createbedrock_p7_1_pink_postbox": {
+      "textures": "textures/create_java/block/post_box/post_box_pink"
+    },
+    "createbedrock_p7_1_pink_sail": {
+      "textures": "textures/create_java/block/sail/canvas_pink"
+    },
+    "createbedrock_p7_1_pink_seat": {
+      "textures": "textures/create_java/block/seat/bottom"
+    },
+    "createbedrock_p7_1_pink_table_cloth": {
+      "textures": "textures/create_java/block/table_cloth/pink"
+    },
+    "createbedrock_p7_1_pink_valve_handle": {
+      "textures": "textures/create_java/block/valve_handle/valve_handle_pink"
+    },
+    "createbedrock_p7_1_polished_cut_andesite": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/andesite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_andesite_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/andesite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_andesite_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/andesite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_andesite_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/andesite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_asurine": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/asurine_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_asurine_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/asurine_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_asurine_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/asurine_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_asurine_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/asurine_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_calcite": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/calcite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_calcite_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/calcite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_calcite_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/calcite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_calcite_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/calcite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_crimsite": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/crimsite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_crimsite_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/crimsite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_crimsite_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/crimsite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_crimsite_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/crimsite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_deepslate": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/deepslate_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_deepslate_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/deepslate_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_deepslate_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/deepslate_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_deepslate_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/deepslate_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_diorite": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/diorite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_diorite_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/diorite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_diorite_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/diorite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_diorite_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/diorite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_dripstone": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/dripstone_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_dripstone_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/dripstone_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_dripstone_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/dripstone_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_dripstone_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/dripstone_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_granite": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/granite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_granite_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/granite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_granite_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/granite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_granite_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/granite_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_limestone": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/limestone_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_limestone_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/limestone_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_limestone_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/limestone_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_limestone_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/limestone_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_ochrum": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/ochrum_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_ochrum_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/ochrum_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_ochrum_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/ochrum_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_ochrum_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/ochrum_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_scorchia": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/scorchia_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_scorchia_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/scorchia_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_scorchia_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/scorchia_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_scorchia_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/scorchia_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_scoria": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/scoria_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_scoria_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/scoria_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_scoria_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/scoria_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_scoria_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/scoria_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_tuff": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/tuff_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_tuff_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/tuff_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_tuff_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/tuff_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_tuff_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/tuff_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_veridium": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/veridium_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_veridium_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/veridium_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_veridium_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/veridium_cut_polished"
+    },
+    "createbedrock_p7_1_polished_cut_veridium_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/polished/veridium_cut_polished"
+    },
+    "createbedrock_p7_1_purple_nixie_tube": {
+      "textures": "textures/create_java/block/nixie_tube"
+    },
+    "createbedrock_p7_1_purple_postbox": {
+      "textures": "textures/create_java/block/post_box/post_box_purple"
+    },
+    "createbedrock_p7_1_purple_sail": {
+      "textures": "textures/create_java/block/sail/canvas_purple"
+    },
+    "createbedrock_p7_1_purple_seat": {
+      "textures": "textures/create_java/block/seat/bottom"
+    },
+    "createbedrock_p7_1_purple_table_cloth": {
+      "textures": "textures/create_java/block/table_cloth/purple"
+    },
+    "createbedrock_p7_1_purple_valve_handle": {
+      "textures": "textures/create_java/block/valve_handle/valve_handle_purple"
+    },
+    "createbedrock_p7_1_red_nixie_tube": {
+      "textures": "textures/create_java/block/nixie_tube"
+    },
+    "createbedrock_p7_1_red_postbox": {
+      "textures": "textures/create_java/block/post_box/post_box_red"
+    },
+    "createbedrock_p7_1_red_sail": {
+      "textures": "textures/create_java/block/sail/canvas_red"
+    },
+    "createbedrock_p7_1_red_seat": {
+      "textures": "textures/create_java/block/seat/bottom"
+    },
+    "createbedrock_p7_1_red_table_cloth": {
+      "textures": "textures/create_java/block/table_cloth/red"
+    },
+    "createbedrock_p7_1_red_valve_handle": {
+      "textures": "textures/create_java/block/valve_handle/valve_handle_red"
+    },
+    "createbedrock_p7_1_scorchia": {
+      "textures": "textures/create_java/block/palettes/stone_types/scorchia"
+    },
+    "createbedrock_p7_1_scorchia_pillar": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/scorchia_cut_cap"
+    },
+    "createbedrock_p7_1_scoria": {
+      "textures": "textures/create_java/block/palettes/stone_types/scoria"
+    },
+    "createbedrock_p7_1_scoria_pillar": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/scoria_cut_cap"
+    },
+    "createbedrock_p7_1_small_andesite_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/andesite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_andesite_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/andesite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_andesite_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/andesite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_andesite_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/andesite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_asurine_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/asurine_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_asurine_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/asurine_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_asurine_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/asurine_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_asurine_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/asurine_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_calcite_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/calcite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_calcite_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/calcite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_calcite_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/calcite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_calcite_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/calcite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_crimsite_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/crimsite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_crimsite_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/crimsite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_crimsite_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/crimsite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_crimsite_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/crimsite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_deepslate_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/deepslate_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_deepslate_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/deepslate_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_deepslate_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/deepslate_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_deepslate_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/deepslate_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_diorite_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/diorite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_diorite_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/diorite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_diorite_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/diorite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_diorite_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/diorite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_dripstone_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/dripstone_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_dripstone_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/dripstone_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_dripstone_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/dripstone_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_dripstone_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/dripstone_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_granite_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/granite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_granite_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/granite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_granite_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/granite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_granite_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/granite_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_limestone_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/limestone_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_limestone_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/limestone_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_limestone_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/limestone_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_limestone_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/limestone_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_ochrum_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/ochrum_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_ochrum_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/ochrum_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_ochrum_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/ochrum_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_ochrum_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/ochrum_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_scorchia_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/scorchia_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_scorchia_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/scorchia_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_scorchia_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/scorchia_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_scorchia_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/scorchia_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_scoria_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/scoria_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_scoria_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/scoria_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_scoria_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/scoria_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_scoria_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/scoria_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_tuff_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/tuff_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_tuff_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/tuff_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_tuff_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/tuff_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_tuff_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/tuff_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_veridium_brick_slab": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/veridium_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_veridium_brick_stairs": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/veridium_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_veridium_brick_wall": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/veridium_cut_small_brick"
+    },
+    "createbedrock_p7_1_small_veridium_bricks": {
+      "textures": "textures/create_java/block/palettes/stone_types/small_brick/veridium_cut_small_brick"
+    },
+    "createbedrock_p7_1_spruce_window": {
+      "textures": "textures/create_java/block/palettes/spruce_window"
+    },
+    "createbedrock_p7_1_spruce_window_pane": {
+      "textures": "textures/create_java/block/palettes/spruce_window"
+    },
+    "createbedrock_p7_1_tiled_glass": {
+      "textures": "textures/create_java/block/palettes/tiled_glass"
+    },
+    "createbedrock_p7_1_tiled_glass_pane": {
+      "textures": "textures/create_java/block/palettes/tiled_glass"
+    },
+    "createbedrock_p7_1_tuff_pillar": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/tuff_cut_cap"
+    },
+    "createbedrock_p7_1_veridium": {
+      "textures": "textures/create_java/block/palettes/stone_types/natural/veridium_0"
+    },
+    "createbedrock_p7_1_veridium_pillar": {
+      "textures": "textures/create_java/block/palettes/stone_types/cap/veridium_cut_cap"
+    },
+    "createbedrock_p7_1_vertical_framed_glass": {
+      "textures": "textures/create_java/block/palettes/framed_glass"
+    },
+    "createbedrock_p7_1_vertical_framed_glass_pane": {
+      "textures": "textures/create_java/block/palettes/vertical_framed_glass"
+    },
+    "createbedrock_p7_1_vertical_gearbox": {
+      "textures": "textures/create_java/block/gearbox"
+    },
+    "createbedrock_p7_1_warped_window": {
+      "textures": "textures/create_java/block/palettes/warped_window"
+    },
+    "createbedrock_p7_1_warped_window_pane": {
+      "textures": "textures/create_java/block/palettes/warped_window"
+    },
+    "createbedrock_p7_1_waxed_copper_shingle_slab": {
+      "textures": "textures/create_java/block/copper/copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_copper_shingle_stairs": {
+      "textures": "textures/create_java/block/copper/copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_copper_shingles": {
+      "textures": "textures/create_java/block/copper/copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_copper_tile_slab": {
+      "textures": "textures/create_java/block/copper/copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_copper_tile_stairs": {
+      "textures": "textures/create_java/block/copper/copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_copper_tiles": {
+      "textures": "textures/create_java/block/copper/copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_exposed_copper_shingle_slab": {
+      "textures": "textures/create_java/block/copper/exposed_copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_exposed_copper_shingle_stairs": {
+      "textures": "textures/create_java/block/copper/exposed_copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_exposed_copper_shingles": {
+      "textures": "textures/create_java/block/copper/exposed_copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_exposed_copper_tile_slab": {
+      "textures": "textures/create_java/block/copper/exposed_copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_exposed_copper_tile_stairs": {
+      "textures": "textures/create_java/block/copper/exposed_copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_exposed_copper_tiles": {
+      "textures": "textures/create_java/block/copper/exposed_copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_oxidized_copper_shingle_slab": {
+      "textures": "textures/create_java/block/copper/oxidized_copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_oxidized_copper_shingle_stairs": {
+      "textures": "textures/create_java/block/copper/oxidized_copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_oxidized_copper_shingles": {
+      "textures": "textures/create_java/block/copper/oxidized_copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_oxidized_copper_tile_slab": {
+      "textures": "textures/create_java/block/copper/oxidized_copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_oxidized_copper_tile_stairs": {
+      "textures": "textures/create_java/block/copper/oxidized_copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_oxidized_copper_tiles": {
+      "textures": "textures/create_java/block/copper/oxidized_copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_weathered_copper_shingle_slab": {
+      "textures": "textures/create_java/block/copper/weathered_copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_weathered_copper_shingle_stairs": {
+      "textures": "textures/create_java/block/copper/weathered_copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_weathered_copper_shingles": {
+      "textures": "textures/create_java/block/copper/weathered_copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_weathered_copper_tile_slab": {
+      "textures": "textures/create_java/block/copper/weathered_copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_weathered_copper_tile_stairs": {
+      "textures": "textures/create_java/block/copper/weathered_copper_roof_top"
+    },
+    "createbedrock_p7_1_waxed_weathered_copper_tiles": {
+      "textures": "textures/create_java/block/copper/weathered_copper_roof_top"
+    },
+    "createbedrock_p7_1_weathered_copper_shingle_slab": {
+      "textures": "textures/create_java/block/copper/weathered_copper_roof_top"
+    },
+    "createbedrock_p7_1_weathered_copper_shingle_stairs": {
+      "textures": "textures/create_java/block/copper/weathered_copper_roof_top"
+    },
+    "createbedrock_p7_1_weathered_copper_shingles": {
+      "textures": "textures/create_java/block/copper/weathered_copper_roof_top"
+    },
+    "createbedrock_p7_1_weathered_copper_tile_slab": {
+      "textures": "textures/create_java/block/copper/weathered_copper_roof_top"
+    },
+    "createbedrock_p7_1_weathered_copper_tile_stairs": {
+      "textures": "textures/create_java/block/copper/weathered_copper_roof_top"
+    },
+    "createbedrock_p7_1_weathered_copper_tiles": {
+      "textures": "textures/create_java/block/copper/weathered_copper_roof_top"
+    },
+    "createbedrock_p7_1_weathered_iron_window": {
+      "textures": "textures/create_java/block/palettes/weathered_iron_window"
+    },
+    "createbedrock_p7_1_weathered_iron_window_pane": {
+      "textures": "textures/create_java/block/palettes/weathered_iron_window"
+    },
+    "createbedrock_p7_1_white_nixie_tube": {
+      "textures": "textures/create_java/block/nixie_tube"
+    },
+    "createbedrock_p7_1_white_postbox": {
+      "textures": "textures/create_java/block/post_box/post_box_white"
+    },
+    "createbedrock_p7_1_white_seat": {
+      "textures": "textures/create_java/block/seat/bottom"
+    },
+    "createbedrock_p7_1_white_table_cloth": {
+      "textures": "textures/create_java/block/table_cloth/white"
+    },
+    "createbedrock_p7_1_white_valve_handle": {
+      "textures": "textures/create_java/block/valve_handle/valve_handle_white"
+    },
+    "createbedrock_p7_1_yellow_nixie_tube": {
+      "textures": "textures/create_java/block/nixie_tube"
+    },
+    "createbedrock_p7_1_yellow_postbox": {
+      "textures": "textures/create_java/block/post_box/post_box_yellow"
+    },
+    "createbedrock_p7_1_yellow_sail": {
+      "textures": "textures/create_java/block/sail/canvas_yellow"
+    },
+    "createbedrock_p7_1_yellow_seat": {
+      "textures": "textures/create_java/block/seat/bottom"
+    },
+    "createbedrock_p7_1_yellow_table_cloth": {
+      "textures": "textures/create_java/block/table_cloth/yellow"
+    },
+    "createbedrock_p7_1_yellow_valve_handle": {
+      "textures": "textures/create_java/block/valve_handle/valve_handle_yellow"
+    }
   }
 }

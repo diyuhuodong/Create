@@ -17,6 +17,8 @@
     "deploy:win": "node tools/deploy-win.mjs",
     "inventory": "node tools/generate-domain-inventory.mjs",
     "catalog": "node tools/generate-java-registration-catalog.mjs",
+    "content:p7-1": "node tools/generate-p7-1-content-families.mjs",
+    "p7:compile": "node tools/generate-p7-1-content-families.mjs && node tools/convert-recipe-ir.mjs && node tools/convert-native-recipes.mjs && node tools/convert-stage3-processing-recipes.mjs && node tools/convert-milling-recipes.mjs && node tools/convert-crushing-recipes.mjs && node tools/convert-pressing-recipes.mjs && node tools/convert-interaction-recipes.mjs && node tools/convert-sequenced-assembly-recipes.mjs",
     "ledger": "node tools/generate-domain-inventory.mjs && node tools/generate-java-registration-catalog.mjs && node tools/generate-migration-ledger.mjs",
     "matrix": "node tools/generate-migration-matrix.mjs",
     "pack": "node tools/pack.mjs",

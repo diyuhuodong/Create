@@ -1,0 +1,71 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:gray_table_cloth",
+      "menu_category": {
+        "category": "construction",
+        "group": "itemGroup.name.misc"
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 6
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1.5
+      },
+      "minecraft:geometry": "geometry.createbedrock.p7_1_gray_table_cloth",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.p7_1_gray_table_cloth"
+        },
+        "material_instances": {
+          "all": {
+            "texture": "createbedrock_p7_1_gray_table_cloth",
+            "render_method": "opaque"
+          },
+          "*": {
+            "texture": "createbedrock_p7_1_gray_table_cloth",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:loot": "loot_tables/blocks/generated/p7_1/gray_table_cloth.json",
+      "minecraft:material_instances": {
+        "all": {
+          "texture": "createbedrock_p7_1_gray_table_cloth",
+          "render_method": "opaque"
+        },
+        "*": {
+          "texture": "createbedrock_p7_1_gray_table_cloth",
+          "render_method": "opaque"
+        }
+      },
+      "minecraft:collision_box": {
+        "origin": [
+          -8,
+          0,
+          -8
+        ],
+        "size": [
+          16,
+          4,
+          16
+        ]
+      },
+      "minecraft:selection_box": {
+        "origin": [
+          -8,
+          0,
+          -8
+        ],
+        "size": [
+          16,
+          4,
+          16
+        ]
+      }
+    }
+  }
+}

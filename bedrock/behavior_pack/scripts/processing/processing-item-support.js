@@ -1,32 +1,9 @@
-const REGISTERED_CREATE_ITEMS = new Set([
-	"createbedrock:andesite_alloy",
-	"createbedrock:andesite_alloy_block",
-	"createbedrock:brass_ingot",
-	"createbedrock:brass_sheet",
-	"createbedrock:copper_sheet",
-	"createbedrock:copper_nugget",
-	"createbedrock:cinder_flour",
-	"createbedrock:crushed_raw_copper",
-	"createbedrock:crushed_raw_gold",
-	"createbedrock:crushed_raw_iron",
-	"createbedrock:crushed_raw_zinc",
-	"createbedrock:deepslate_zinc_ore",
-	"createbedrock:experience_nugget",
-	"createbedrock:golden_sheet",
-	"createbedrock:iron_sheet",
-	"createbedrock:powdered_obsidian",
-	"createbedrock:raw_zinc",
-	"createbedrock:raw_zinc_block",
-	"createbedrock:rose_quartz",
-	"createbedrock:shaft",
-	"createbedrock:wheat_flour",
-	"createbedrock:zinc_ingot",
-	"createbedrock:zinc_nugget",
-	"createbedrock:zinc_ore"
-]);
-
 export function isSupportedProcessingItem(typeId) {
-	return typeof typeId === "string" && (!typeId.startsWith("createbedrock:") || REGISTERED_CREATE_ITEMS.has(typeId));
+	// P7.1 generates every Java Create registration as a concrete Bedrock
+	// block-item or standalone item. Keep this guard namespace-based rather
+	// than duplicating a stale hand-maintained allowlist that silently rejects
+	// newly generated palette, material and recipe-chain content.
+	return typeof typeId === "string" && (typeId.startsWith("minecraft:") || typeId.startsWith("createbedrock:"));
 }
 
 export function supportedProcessingRecipes(recipes) {

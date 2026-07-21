@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/layered_scoria_from_stone_types_scoria_stonecutting_tag_4"
+    },
+    "tags": [
+      "stonecutter"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:cut_scoria_stairs"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:layered_scoria"
+    }
+  }
+}

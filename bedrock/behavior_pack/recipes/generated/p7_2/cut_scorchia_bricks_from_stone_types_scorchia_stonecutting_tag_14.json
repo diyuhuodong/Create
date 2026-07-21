@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/cut_scorchia_bricks_from_stone_types_scorchia_stonecutting_tag_14"
+    },
+    "tags": [
+      "stonecutter"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:small_scorchia_bricks"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:cut_scorchia_bricks"
+    }
+  }
+}

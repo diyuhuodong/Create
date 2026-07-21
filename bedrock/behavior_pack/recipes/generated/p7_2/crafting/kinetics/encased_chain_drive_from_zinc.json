@@ -1,0 +1,28 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/encased_chain_drive_from_zinc"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:andesite_casing"
+      },
+      {
+        "item": "createbedrock:zinc_nugget"
+      },
+      {
+        "item": "createbedrock:zinc_nugget"
+      },
+      {
+        "item": "createbedrock:zinc_nugget"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:encased_chain_drive"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/small_scorchia_brick_slab_recycling"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:small_scorchia_brick_slab"
+      },
+      {
+        "item": "createbedrock:small_scorchia_brick_slab"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:small_scorchia_bricks"
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:brass_bars",
+      "menu_category": {
+        "category": "construction",
+        "group": "itemGroup.name.misc"
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 1.5
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 0.3
+      },
+      "minecraft:geometry": "geometry.createbedrock.p7_1_pane",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.p7_1_pane"
+        },
+        "material_instances": {
+          "all": {
+            "texture": "createbedrock_p7_1_brass_bars",
+            "render_method": "alpha_test"
+          },
+          "*": {
+            "texture": "createbedrock_p7_1_brass_bars",
+            "render_method": "alpha_test"
+          }
+        }
+      },
+      "minecraft:loot": "loot_tables/blocks/generated/p7_1/brass_bars.json",
+      "minecraft:material_instances": {
+        "all": {
+          "texture": "createbedrock_p7_1_brass_bars",
+          "render_method": "alpha_test"
+        },
+        "*": {
+          "texture": "createbedrock_p7_1_brass_bars",
+          "render_method": "alpha_test"
+        }
+      },
+      "minecraft:collision_box": {
+        "origin": [
+          -1,
+          0,
+          -8
+        ],
+        "size": [
+          2,
+          16,
+          16
+        ]
+      },
+      "minecraft:selection_box": {
+        "origin": [
+          -1,
+          0,
+          -8
+        ],
+        "size": [
+          2,
+          16,
+          16
+        ]
+      }
+    }
+  }
+}

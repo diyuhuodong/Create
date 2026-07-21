@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/logistics/lime_postbox_from_other_postbox_tag_10"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:lime_dye"
+      },
+      {
+        "item": "createbedrock:orange_postbox"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:lime_postbox"
+    }
+  }
+}

@@ -1,4 +1,5 @@
 import { MECHANICAL_CRAFTING_RECIPES } from "./generated/mechanical-crafting-recipes.js";
+import { PROJECTED_ITEM_TAGS } from "./generated/p7-2-item-tags.js";
 
 export const MECHANICAL_CRAFTER_BLOCK = "createbedrock:mechanical_crafter";
 export { MECHANICAL_CRAFTING_RECIPES };
@@ -42,6 +43,8 @@ export function mechanicalCrafterIngredientMatches(ingredient, typeId) {
 		return ingredient.item === typeId;
 	if (Array.isArray(ingredient.items))
 		return ingredient.items.includes(typeId);
+	if (PROJECTED_ITEM_TAGS.get(ingredient.tag)?.has(typeId))
+		return true;
 	switch (ingredient.tag) {
 		case "minecraft:planks": return PLANK_SUFFIX.test(typeId);
 		case "c:stones": return STONE_TYPES.has(typeId);

@@ -1,0 +1,23 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/weathered_copper_shingle_slab"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "XXX"
+    ],
+    "key": {
+      "X": {
+        "item": "createbedrock:weathered_copper_shingles"
+      }
+    },
+    "result": {
+      "count": 6,
+      "item": "createbedrock:weathered_copper_shingle_slab"
+    }
+  }
+}

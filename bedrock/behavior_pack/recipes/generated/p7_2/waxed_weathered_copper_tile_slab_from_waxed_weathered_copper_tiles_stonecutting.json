@@ -1,0 +1,20 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/waxed_weathered_copper_tile_slab_from_waxed_weathered_copper_tiles_stonecutting"
+    },
+    "tags": [
+      "stonecutter"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:waxed_weathered_copper_tiles"
+      }
+    ],
+    "result": {
+      "count": 2,
+      "item": "createbedrock:waxed_weathered_copper_tile_slab"
+    }
+  }
+}

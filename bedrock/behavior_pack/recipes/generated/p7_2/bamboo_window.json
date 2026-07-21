@@ -1,0 +1,27 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/bamboo_window"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      " # ",
+      "#X#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:bamboo_planks"
+      },
+      "X": {
+        "item": "minecraft:glass"
+      }
+    },
+    "result": {
+      "count": 2,
+      "item": "createbedrock:bamboo_window"
+    }
+  }
+}

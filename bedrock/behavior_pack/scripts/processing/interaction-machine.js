@@ -117,4 +117,18 @@ export class InteractionMachine {
 		}
 		return { accepted: true, consumed, keepHeldItem: recipe.keepHeldItem, outputs, recipeId: recipe.id };
 	}
+
+	/**
+	 * World adapters normally only know the supplied input and the deployed
+	 * tool/fluid. Resolve the same deterministic first match used by Create's
+	 * recipe manager without exposing this machine's mutable recipe map.
+	 */
+	planFirst(options = {}) {
+		for (const recipeId of [...this.#recipes.keys()].sort((left, right) => left.localeCompare(right))) {
+			const plan = this.plan(recipeId, options);
+			if (plan.accepted)
+				return plan;
+		}
+		return { accepted: false, reason: "no_matching_recipe" };
+	}
 }

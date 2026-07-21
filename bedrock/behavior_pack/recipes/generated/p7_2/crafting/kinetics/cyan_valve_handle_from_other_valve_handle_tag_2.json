@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/cyan_valve_handle_from_other_valve_handle_tag_2"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:cyan_dye"
+      },
+      {
+        "item": "createbedrock:brown_valve_handle"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:cyan_valve_handle"
+    }
+  }
+}

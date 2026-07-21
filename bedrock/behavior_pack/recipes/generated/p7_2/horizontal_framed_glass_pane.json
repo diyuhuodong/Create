@@ -1,0 +1,24 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/horizontal_framed_glass_pane"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "###",
+      "###"
+    ],
+    "key": {
+      "#": {
+        "item": "createbedrock:horizontal_framed_glass"
+      }
+    },
+    "result": {
+      "count": 16,
+      "item": "createbedrock:horizontal_framed_glass_pane"
+    }
+  }
+}

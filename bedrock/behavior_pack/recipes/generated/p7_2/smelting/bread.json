@@ -1,0 +1,13 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_furnace": {
+    "description": {
+      "identifier": "createbedrock:p7_2/smelting/bread"
+    },
+    "tags": [
+      "furnace"
+    ],
+    "input": "createbedrock:dough",
+    "output": "minecraft:bread"
+  }
+}

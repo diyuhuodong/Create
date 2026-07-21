@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/logistics/green_table_cloth_clear"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:green_table_cloth"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:green_table_cloth"
+    }
+  }
+}

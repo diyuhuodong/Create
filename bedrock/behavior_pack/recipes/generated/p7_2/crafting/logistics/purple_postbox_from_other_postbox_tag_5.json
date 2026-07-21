@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/logistics/purple_postbox_from_other_postbox_tag_5"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:purple_dye"
+      },
+      {
+        "item": "createbedrock:green_postbox"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:purple_postbox"
+    }
+  }
+}

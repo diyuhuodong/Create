@@ -16,6 +16,32 @@ export function supportsProcessingRecipeItems(items) {
 	return items.every(isSupportedProcessingItem);
 }
 
+/**
+ * Java's conditional compat recipes stay in Create's generated output even
+ * when their dependency is absent.  A Bedrock base pack must not turn one of
+ * those dormant recipes into a permanent "manual" migration gap.
+ */
+export function optionalMissingTagDependency(source, tagItems) {
+	const conditions = source?.["neoforge:conditions"];
+	if (!Array.isArray(conditions))
+		return undefined;
+	for (const condition of conditions) {
+		const candidate = condition?.type === "neoforge:not" ? condition.value : undefined;
+		if (candidate?.type !== "neoforge:tag_empty" || typeof candidate.tag !== "string")
+			continue;
+		if ((tagItems.get(candidate.tag) ?? []).length === 0)
+			return candidate.tag;
+	}
+	return undefined;
+}
+
+export function optionalMissingModDependency(source) {
+	const conditions = source?.["neoforge:conditions"];
+	if (!Array.isArray(conditions))
+		return undefined;
+	return conditions.find(condition => condition?.type === "neoforge:mod_loaded" && typeof condition.modid === "string")?.modid;
+}
+
 export function processingImportReport(processor, records) {
 	if (typeof processor !== "string" || processor.length === 0)
 		throw new TypeError("Processing import reports require a processor name");

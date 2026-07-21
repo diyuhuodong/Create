@@ -74,11 +74,15 @@ function identifierReferences(value, references = new Set()) {
 
 function externalNamespaces(recipe) {
 	const ignored = new Set(["c", "create", "minecraft", "neoforge"]);
-	return [...identifierReferences(recipe)]
+	const namespaces = [...identifierReferences(recipe)]
 		.map(namespaceOf)
 		.filter(namespace => namespace && !ignored.has(namespace))
-		.filter((namespace, index, namespaces) => namespaces.indexOf(namespace) === index)
-		.sort((left, right) => left.localeCompare(right));
+		.filter((namespace, index, values) => values.indexOf(namespace) === index);
+	for (const identifier of identifierReferences(recipe)) {
+		if (identifier.startsWith("create:upgrade_aquatic/"))
+			namespaces.push("upgrade_aquatic");
+	}
+	return [...new Set(namespaces)].sort((left, right) => left.localeCompare(right));
 }
 
 function normalizeIngredient(value, path, ingredients) {

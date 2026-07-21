@@ -1,86 +1,6655 @@
 {
-	"schemaVersion": 1,
-	"entries": [
-		{
-			"sourceKey": "item:create:cinder_flour",
-			"family": "core_materials",
-			"status": "implemented",
-			"acquisition": "verified",
-			"behavior": "not_required",
-			"resources": "verified",
-			"mapping": { "relation": "one_to_one", "targets": ["createbedrock:cinder_flour"] }
-		},
-		{
-			"sourceKey": "item:create:brass_sheet",
-			"family": "core_materials",
-			"status": "implemented",
-			"acquisition": "verified",
-			"behavior": "not_required",
-			"resources": "verified",
-			"mapping": { "relation": "one_to_one", "targets": ["createbedrock:brass_sheet"] }
-		},
-		{
-			"sourceKey": "item:create:brass_nugget",
-			"family": "core_materials",
-			"status": "implemented",
-			"acquisition": "verified",
-			"behavior": "not_required",
-			"resources": "verified",
-			"mapping": { "relation": "one_to_one", "targets": ["createbedrock:brass_nugget"] }
-		},
-		{
-			"sourceKey": "item:create:brass_hand",
-			"family": "core_components",
-			"status": "implemented",
-			"acquisition": "verified",
-			"behavior": "not_required",
-			"resources": "verified",
-			"mapping": { "relation": "one_to_one", "targets": ["createbedrock:brass_hand"] }
-		},
-		{
-			"sourceKey": "item:create:crafter_slot_cover",
-			"family": "core_components",
-			"status": "implemented",
-			"acquisition": "verified",
-			"behavior": "not_required",
-			"resources": "verified",
-			"mapping": { "relation": "one_to_one", "targets": ["createbedrock:crafter_slot_cover"] }
-		},
-		{
-			"sourceKey": "item:create:electron_tube",
-			"family": "core_components",
-			"status": "implemented",
-			"acquisition": "verified",
-			"behavior": "not_required",
-			"resources": "verified",
-			"mapping": { "relation": "one_to_one", "targets": ["createbedrock:electron_tube"] }
-		},
-		{
-			"sourceKey": "item:create:propeller",
-			"family": "core_components",
-			"status": "implemented",
-			"acquisition": "verified",
-			"behavior": "not_required",
-			"resources": "verified",
-			"mapping": { "relation": "one_to_one", "targets": ["createbedrock:propeller"] }
-		},
-		{
-			"sourceKey": "item:create:transmitter",
-			"family": "core_components",
-			"status": "implemented",
-			"acquisition": "verified",
-			"behavior": "not_required",
-			"resources": "verified",
-			"mapping": { "relation": "one_to_one", "targets": ["createbedrock:transmitter"] }
-		},
-		{
-			"sourceKey": "item:create:whisk",
-			"family": "core_components",
-			"status": "implemented",
-			"acquisition": "verified",
-			"behavior": "not_required",
-			"resources": "verified",
-			"mapping": { "relation": "one_to_one", "targets": ["createbedrock:whisk"] }
-		}
-	]
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/window",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:acacia_window"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:acacia_window",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:acacia_window_pane"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:acacia_window_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:andesite_bars"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:andesite_bars",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:andesite_pillar"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:andesite_pillar",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:asurine"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:asurine",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:asurine_pillar"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:asurine_pillar",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/window",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:bamboo_window"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:bamboo_window",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:bamboo_window_pane"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:bamboo_window_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/window",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:birch_window"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:birch_window",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:birch_window_pane"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:birch_window_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/nixie",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:black_nixie_tube"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:black_nixie_tube",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/postbox",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:black_postbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:black_postbox",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/sail",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:black_sail"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:black_sail",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/seat",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:black_seat"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:black_seat",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/table_cloth",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:black_table_cloth"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:black_table_cloth",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/valve_handle",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:black_valve_handle"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:black_valve_handle",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/nixie",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:blue_nixie_tube"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:blue_nixie_tube",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/postbox",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:blue_postbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:blue_postbox",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/sail",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:blue_sail"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:blue_sail",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/seat",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:blue_seat"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:blue_seat",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/table_cloth",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:blue_table_cloth"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:blue_table_cloth",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/valve_handle",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:blue_valve_handle"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:blue_valve_handle",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:brass_bars"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:brass_bars",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/nixie",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:brown_nixie_tube"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:brown_nixie_tube",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/postbox",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:brown_postbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:brown_postbox",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/sail",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:brown_sail"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:brown_sail",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/seat",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:brown_seat"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:brown_seat",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/table_cloth",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:brown_table_cloth"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:brown_table_cloth",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/valve_handle",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:brown_valve_handle"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:brown_valve_handle",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:calcite_pillar"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:calcite_pillar",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/window",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cherry_window"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cherry_window",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cherry_window_pane"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cherry_window_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:copper_bars"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:copper_bars",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:copper_shingle_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:copper_shingle_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:copper_shingle_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:copper_shingle_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:copper_shingles"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:copper_shingles",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:copper_tile_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:copper_tile_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:copper_tile_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:copper_tile_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:copper_tiles"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:copper_tiles",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:crimsite"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:crimsite",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:crimsite_pillar"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:crimsite_pillar",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/window",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:crimson_window"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:crimson_window",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:crimson_window_pane"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:crimson_window_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_andesite"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_andesite",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_andesite_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_andesite_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_andesite_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_andesite_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_andesite_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_andesite_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_andesite_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_andesite_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_andesite_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_andesite_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_andesite_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_andesite_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_andesite_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_andesite_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_asurine"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_asurine",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_asurine_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_asurine_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_asurine_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_asurine_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_asurine_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_asurine_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_asurine_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_asurine_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_asurine_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_asurine_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_asurine_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_asurine_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_asurine_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_asurine_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_calcite"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_calcite",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_calcite_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_calcite_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_calcite_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_calcite_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_calcite_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_calcite_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_calcite_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_calcite_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_calcite_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_calcite_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_calcite_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_calcite_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_calcite_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_calcite_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_crimsite"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_crimsite",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_crimsite_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_crimsite_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_crimsite_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_crimsite_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_crimsite_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_crimsite_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_crimsite_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_crimsite_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_crimsite_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_crimsite_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_crimsite_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_crimsite_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_crimsite_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_crimsite_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_deepslate"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_deepslate",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_deepslate_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_deepslate_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_deepslate_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_deepslate_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_deepslate_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_deepslate_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_deepslate_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_deepslate_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_deepslate_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_deepslate_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_deepslate_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_deepslate_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_deepslate_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_deepslate_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_diorite"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_diorite",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_diorite_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_diorite_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_diorite_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_diorite_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_diorite_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_diorite_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_diorite_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_diorite_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_diorite_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_diorite_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_diorite_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_diorite_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_diorite_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_diorite_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_dripstone"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_dripstone",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_dripstone_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_dripstone_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_dripstone_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_dripstone_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_dripstone_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_dripstone_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_dripstone_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_dripstone_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_dripstone_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_dripstone_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_dripstone_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_dripstone_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_dripstone_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_dripstone_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_granite"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_granite",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_granite_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_granite_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_granite_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_granite_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_granite_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_granite_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_granite_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_granite_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_granite_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_granite_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_granite_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_granite_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_granite_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_granite_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_limestone"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_limestone",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_limestone_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_limestone_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_limestone_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_limestone_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_limestone_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_limestone_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_limestone_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_limestone_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_limestone_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_limestone_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_limestone_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_limestone_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_limestone_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_limestone_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_ochrum"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_ochrum",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_ochrum_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_ochrum_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_ochrum_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_ochrum_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_ochrum_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_ochrum_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_ochrum_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_ochrum_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_ochrum_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_ochrum_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_ochrum_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_ochrum_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_ochrum_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_ochrum_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_scorchia"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_scorchia",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_scorchia_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_scorchia_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_scorchia_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_scorchia_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_scorchia_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_scorchia_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_scorchia_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_scorchia_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_scorchia_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_scorchia_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_scorchia_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_scorchia_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_scorchia_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_scorchia_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_scoria"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_scoria",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_scoria_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_scoria_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_scoria_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_scoria_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_scoria_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_scoria_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_scoria_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_scoria_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_scoria_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_scoria_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_scoria_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_scoria_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_scoria_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_scoria_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_tuff"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_tuff",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_tuff_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_tuff_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_tuff_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_tuff_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_tuff_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_tuff_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_tuff_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_tuff_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_tuff_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_tuff_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_tuff_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_tuff_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_tuff_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_tuff_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_veridium"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_veridium",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_veridium_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_veridium_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_veridium_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_veridium_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_veridium_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_veridium_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_veridium_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_veridium_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_veridium_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_veridium_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_veridium_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_veridium_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cut_veridium_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cut_veridium_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/nixie",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cyan_nixie_tube"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cyan_nixie_tube",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/postbox",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cyan_postbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cyan_postbox",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/sail",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cyan_sail"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cyan_sail",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/seat",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cyan_seat"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cyan_seat",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/table_cloth",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cyan_table_cloth"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cyan_table_cloth",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/valve_handle",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cyan_valve_handle"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cyan_valve_handle",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/window",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:dark_oak_window"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:dark_oak_window",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:dark_oak_window_pane"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:dark_oak_window_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:deepslate_pillar"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:deepslate_pillar",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:diorite_pillar"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:diorite_pillar",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:dripstone_pillar"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:dripstone_pillar",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:exposed_copper_shingle_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:exposed_copper_shingle_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:exposed_copper_shingle_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:exposed_copper_shingle_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:exposed_copper_shingles"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:exposed_copper_shingles",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:exposed_copper_tile_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:exposed_copper_tile_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:exposed_copper_tile_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:exposed_copper_tile_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:exposed_copper_tiles"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:exposed_copper_tiles",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:framed_glass"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:framed_glass",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:framed_glass_pane"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:framed_glass_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:granite_pillar"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:granite_pillar",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/nixie",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:gray_nixie_tube"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:gray_nixie_tube",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/postbox",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:gray_postbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:gray_postbox",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/sail",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:gray_sail"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:gray_sail",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/seat",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:gray_seat"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:gray_seat",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/table_cloth",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:gray_table_cloth"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:gray_table_cloth",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/valve_handle",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:gray_valve_handle"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:gray_valve_handle",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/nixie",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:green_nixie_tube"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:green_nixie_tube",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/postbox",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:green_postbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:green_postbox",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/sail",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:green_sail"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:green_sail",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/seat",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:green_seat"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:green_seat",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/table_cloth",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:green_table_cloth"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:green_table_cloth",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/valve_handle",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:green_valve_handle"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:green_valve_handle",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:horizontal_framed_glass"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:horizontal_framed_glass",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:horizontal_framed_glass_pane"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:horizontal_framed_glass_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/window",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:industrial_iron_window"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:industrial_iron_window",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:industrial_iron_window_pane"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:industrial_iron_window_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/window",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:jungle_window"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:jungle_window",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:jungle_window_pane"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:jungle_window_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:layered_andesite"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:layered_andesite",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:layered_asurine"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:layered_asurine",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:layered_calcite"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:layered_calcite",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:layered_crimsite"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:layered_crimsite",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:layered_deepslate"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:layered_deepslate",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:layered_diorite"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:layered_diorite",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:layered_dripstone"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:layered_dripstone",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:layered_granite"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:layered_granite",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:layered_limestone"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:layered_limestone",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:layered_ochrum"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:layered_ochrum",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:layered_scorchia"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:layered_scorchia",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:layered_scoria"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:layered_scoria",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:layered_tuff"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:layered_tuff",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:layered_veridium"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:layered_veridium",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/nixie",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:light_blue_nixie_tube"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:light_blue_nixie_tube",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/postbox",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:light_blue_postbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:light_blue_postbox",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/sail",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:light_blue_sail"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:light_blue_sail",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/seat",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:light_blue_seat"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:light_blue_seat",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/table_cloth",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:light_blue_table_cloth"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:light_blue_table_cloth",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/valve_handle",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:light_blue_valve_handle"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:light_blue_valve_handle",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/nixie",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:light_gray_nixie_tube"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:light_gray_nixie_tube",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/postbox",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:light_gray_postbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:light_gray_postbox",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/sail",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:light_gray_sail"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:light_gray_sail",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/seat",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:light_gray_seat"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:light_gray_seat",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/table_cloth",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:light_gray_table_cloth"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:light_gray_table_cloth",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/valve_handle",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:light_gray_valve_handle"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:light_gray_valve_handle",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/nixie",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:lime_nixie_tube"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:lime_nixie_tube",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/postbox",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:lime_postbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:lime_postbox",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/sail",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:lime_sail"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:lime_sail",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/seat",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:lime_seat"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:lime_seat",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/table_cloth",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:lime_table_cloth"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:lime_table_cloth",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/valve_handle",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:lime_valve_handle"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:lime_valve_handle",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:limestone"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:limestone",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:limestone_pillar"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:limestone_pillar",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/nixie",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:magenta_nixie_tube"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:magenta_nixie_tube",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/postbox",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:magenta_postbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:magenta_postbox",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/sail",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:magenta_sail"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:magenta_sail",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/seat",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:magenta_seat"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:magenta_seat",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/table_cloth",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:magenta_table_cloth"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:magenta_table_cloth",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/valve_handle",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:magenta_valve_handle"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:magenta_valve_handle",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/window",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:mangrove_window"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:mangrove_window",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:mangrove_window_pane"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:mangrove_window_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/window",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:oak_window"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:oak_window",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:oak_window_pane"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:oak_window_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:ochrum"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:ochrum",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:ochrum_pillar"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:ochrum_pillar",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/postbox",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:orange_postbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:orange_postbox",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/sail",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:orange_sail"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:orange_sail",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/seat",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:orange_seat"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:orange_seat",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/table_cloth",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:orange_table_cloth"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:orange_table_cloth",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/valve_handle",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:orange_valve_handle"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:orange_valve_handle",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/window",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:ornate_iron_window"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:ornate_iron_window",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:ornate_iron_window_pane"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:ornate_iron_window_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:oxidized_copper_shingle_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:oxidized_copper_shingle_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:oxidized_copper_shingle_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:oxidized_copper_shingle_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:oxidized_copper_shingles"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:oxidized_copper_shingles",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:oxidized_copper_tile_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:oxidized_copper_tile_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:oxidized_copper_tile_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:oxidized_copper_tile_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:oxidized_copper_tiles"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:oxidized_copper_tiles",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/nixie",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:pink_nixie_tube"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:pink_nixie_tube",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/postbox",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:pink_postbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:pink_postbox",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/sail",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:pink_sail"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:pink_sail",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/seat",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:pink_seat"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:pink_seat",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/table_cloth",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:pink_table_cloth"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:pink_table_cloth",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/valve_handle",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:pink_valve_handle"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:pink_valve_handle",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_andesite"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_andesite",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_andesite_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_andesite_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_andesite_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_andesite_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_andesite_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_andesite_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_asurine"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_asurine",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_asurine_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_asurine_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_asurine_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_asurine_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_asurine_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_asurine_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_calcite"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_calcite",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_calcite_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_calcite_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_calcite_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_calcite_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_calcite_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_calcite_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_crimsite"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_crimsite",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_crimsite_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_crimsite_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_crimsite_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_crimsite_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_crimsite_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_crimsite_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_deepslate"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_deepslate",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_deepslate_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_deepslate_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_deepslate_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_deepslate_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_deepslate_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_deepslate_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_diorite"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_diorite",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_diorite_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_diorite_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_diorite_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_diorite_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_diorite_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_diorite_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_dripstone"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_dripstone",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_dripstone_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_dripstone_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_dripstone_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_dripstone_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_dripstone_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_dripstone_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_granite"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_granite",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_granite_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_granite_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_granite_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_granite_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_granite_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_granite_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_limestone"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_limestone",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_limestone_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_limestone_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_limestone_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_limestone_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_limestone_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_limestone_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_ochrum"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_ochrum",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_ochrum_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_ochrum_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_ochrum_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_ochrum_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_ochrum_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_ochrum_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_scorchia"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_scorchia",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_scorchia_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_scorchia_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_scorchia_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_scorchia_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_scorchia_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_scorchia_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_scoria"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_scoria",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_scoria_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_scoria_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_scoria_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_scoria_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_scoria_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_scoria_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_tuff"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_tuff",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_tuff_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_tuff_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_tuff_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_tuff_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_tuff_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_tuff_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_veridium"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_veridium",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_veridium_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_veridium_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_veridium_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_veridium_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:polished_cut_veridium_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:polished_cut_veridium_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/nixie",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:purple_nixie_tube"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:purple_nixie_tube",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/postbox",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:purple_postbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:purple_postbox",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/sail",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:purple_sail"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:purple_sail",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/seat",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:purple_seat"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:purple_seat",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/table_cloth",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:purple_table_cloth"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:purple_table_cloth",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/valve_handle",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:purple_valve_handle"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:purple_valve_handle",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/nixie",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:red_nixie_tube"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:red_nixie_tube",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/postbox",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:red_postbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:red_postbox",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/sail",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:red_sail"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:red_sail",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/seat",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:red_seat"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:red_seat",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/table_cloth",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:red_table_cloth"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:red_table_cloth",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/valve_handle",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:red_valve_handle"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:red_valve_handle",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:scorchia"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:scorchia",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:scorchia_pillar"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:scorchia_pillar",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:scoria"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:scoria",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:scoria_pillar"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:scoria_pillar",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_andesite_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_andesite_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_andesite_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_andesite_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_andesite_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_andesite_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_andesite_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_andesite_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_asurine_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_asurine_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_asurine_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_asurine_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_asurine_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_asurine_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_asurine_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_asurine_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_calcite_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_calcite_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_calcite_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_calcite_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_calcite_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_calcite_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_calcite_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_calcite_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_crimsite_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_crimsite_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_crimsite_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_crimsite_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_crimsite_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_crimsite_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_crimsite_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_crimsite_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_deepslate_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_deepslate_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_deepslate_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_deepslate_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_deepslate_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_deepslate_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_deepslate_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_deepslate_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_diorite_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_diorite_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_diorite_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_diorite_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_diorite_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_diorite_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_diorite_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_diorite_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_dripstone_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_dripstone_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_dripstone_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_dripstone_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_dripstone_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_dripstone_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_dripstone_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_dripstone_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_granite_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_granite_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_granite_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_granite_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_granite_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_granite_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_granite_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_granite_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_limestone_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_limestone_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_limestone_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_limestone_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_limestone_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_limestone_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_limestone_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_limestone_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_ochrum_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_ochrum_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_ochrum_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_ochrum_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_ochrum_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_ochrum_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_ochrum_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_ochrum_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_scorchia_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_scorchia_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_scorchia_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_scorchia_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_scorchia_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_scorchia_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_scorchia_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_scorchia_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_scoria_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_scoria_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_scoria_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_scoria_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_scoria_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_scoria_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_scoria_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_scoria_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_tuff_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_tuff_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_tuff_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_tuff_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_tuff_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_tuff_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_tuff_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_tuff_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_veridium_brick_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_veridium_brick_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_veridium_brick_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_veridium_brick_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/wall",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_veridium_brick_wall"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_veridium_brick_wall",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:small_veridium_bricks"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:small_veridium_bricks",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/window",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:spruce_window"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:spruce_window",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:spruce_window_pane"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:spruce_window_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:tiled_glass"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:tiled_glass",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:tiled_glass_pane"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:tiled_glass_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:tuff_pillar"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:tuff_pillar",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:veridium"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:veridium",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:veridium_pillar"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:veridium_pillar",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/full_cube",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:vertical_framed_glass"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:vertical_framed_glass",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:vertical_framed_glass_pane"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:vertical_framed_glass_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/window",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:warped_window"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:warped_window",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:warped_window_pane"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:warped_window_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_copper_shingle_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_copper_shingle_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_copper_shingle_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_copper_shingle_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_copper_shingles"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_copper_shingles",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_copper_tile_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_copper_tile_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_copper_tile_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_copper_tile_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_copper_tiles"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_copper_tiles",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_exposed_copper_shingle_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_exposed_copper_shingle_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_exposed_copper_shingle_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_exposed_copper_shingle_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_exposed_copper_shingles"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_exposed_copper_shingles",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_exposed_copper_tile_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_exposed_copper_tile_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_exposed_copper_tile_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_exposed_copper_tile_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_exposed_copper_tiles"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_exposed_copper_tiles",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_oxidized_copper_shingle_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_oxidized_copper_shingle_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_oxidized_copper_shingle_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_oxidized_copper_shingle_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_oxidized_copper_shingles"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_oxidized_copper_shingles",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_oxidized_copper_tile_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_oxidized_copper_tile_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_oxidized_copper_tile_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_oxidized_copper_tile_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_oxidized_copper_tiles"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_oxidized_copper_tiles",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_weathered_copper_shingle_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_weathered_copper_shingle_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_weathered_copper_shingle_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_weathered_copper_shingle_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_weathered_copper_shingles"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_weathered_copper_shingles",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_weathered_copper_tile_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_weathered_copper_tile_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_weathered_copper_tile_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_weathered_copper_tile_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:waxed_weathered_copper_tiles"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:waxed_weathered_copper_tiles",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:weathered_copper_shingle_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:weathered_copper_shingle_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:weathered_copper_shingle_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:weathered_copper_shingle_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:weathered_copper_shingles"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:weathered_copper_shingles",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/slab",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:weathered_copper_tile_slab"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:weathered_copper_tile_slab",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/stairs",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:weathered_copper_tile_stairs"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:weathered_copper_tile_stairs",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/column",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:weathered_copper_tiles"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:weathered_copper_tiles",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/window",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:weathered_iron_window"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:weathered_iron_window",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/pane",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:weathered_iron_window_pane"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:weathered_iron_window_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/nixie",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:white_nixie_tube"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:white_nixie_tube",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/postbox",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:white_postbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:white_postbox",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/seat",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:white_seat"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:white_seat",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/table_cloth",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:white_table_cloth"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:white_table_cloth",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/valve_handle",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:white_valve_handle"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:white_valve_handle",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/nixie",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:yellow_nixie_tube"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:yellow_nixie_tube",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/postbox",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:yellow_postbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:yellow_postbox",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/sail",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:yellow_sail"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:yellow_sail",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/seat",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:yellow_seat"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:yellow_seat",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/table_cloth",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:yellow_table_cloth"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:yellow_table_cloth",
+      "status": "partial"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/valve_handle",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:yellow_valve_handle"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:yellow_valve_handle",
+      "status": "partial"
+    },
+    {
+      "sourceKey": "item:create:brass_hand",
+      "family": "core_components",
+      "status": "implemented",
+      "acquisition": "verified",
+      "behavior": "not_required",
+      "resources": "verified",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:brass_hand"
+        ]
+      }
+    },
+    {
+      "sourceKey": "item:create:brass_nugget",
+      "family": "core_materials",
+      "status": "implemented",
+      "acquisition": "verified",
+      "behavior": "not_required",
+      "resources": "verified",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:brass_nugget"
+        ]
+      }
+    },
+    {
+      "sourceKey": "item:create:brass_sheet",
+      "family": "core_materials",
+      "status": "implemented",
+      "acquisition": "verified",
+      "behavior": "not_required",
+      "resources": "verified",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:brass_sheet"
+        ]
+      }
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cardboard_package_10x12"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:cardboard_package_10x12",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cardboard_package_10x8"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:cardboard_package_10x8",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cardboard_package_12x10"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:cardboard_package_12x10",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cardboard_package_12x12"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:cardboard_package_12x12",
+      "status": "implemented"
+    },
+    {
+      "sourceKey": "item:create:cinder_flour",
+      "family": "core_materials",
+      "status": "implemented",
+      "acquisition": "verified",
+      "behavior": "not_required",
+      "resources": "verified",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cinder_flour"
+        ]
+      }
+    },
+    {
+      "sourceKey": "item:create:crafter_slot_cover",
+      "family": "core_components",
+      "status": "implemented",
+      "acquisition": "verified",
+      "behavior": "not_required",
+      "resources": "verified",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:crafter_slot_cover"
+        ]
+      }
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:crushed_raw_aluminum"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:crushed_raw_aluminum",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:crushed_raw_lead"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:crushed_raw_lead",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:crushed_raw_nickel"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:crushed_raw_nickel",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:crushed_raw_osmium"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:crushed_raw_osmium",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:crushed_raw_platinum"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:crushed_raw_platinum",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:crushed_raw_quicksilver"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:crushed_raw_quicksilver",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:crushed_raw_silver"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:crushed_raw_silver",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:crushed_raw_tin"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:crushed_raw_tin",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:crushed_raw_uranium"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:crushed_raw_uranium",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:dough"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:dough",
+      "status": "implemented"
+    },
+    {
+      "sourceKey": "item:create:electron_tube",
+      "family": "core_components",
+      "status": "implemented",
+      "acquisition": "verified",
+      "behavior": "not_required",
+      "resources": "verified",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:electron_tube"
+        ]
+      }
+    },
+    {
+      "sourceKey": "item:create:propeller",
+      "family": "core_components",
+      "status": "implemented",
+      "acquisition": "verified",
+      "behavior": "not_required",
+      "resources": "verified",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:propeller"
+        ]
+      }
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:pulp"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:pulp",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:rare_creeper_package"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:rare_creeper_package",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:rare_darcy_package"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:rare_darcy_package",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:rare_evan_package"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:rare_evan_package",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:rare_jinx_package"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:rare_jinx_package",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:rare_kryppers_package"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:rare_kryppers_package",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:rare_simi_package"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:rare_simi_package",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:rare_starlotte_package"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:rare_starlotte_package",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:rare_thunder_package"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:rare_thunder_package",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:rare_up_package"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:rare_up_package",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "not_required",
+      "family": "p7_1/item",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:rare_vector_package"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:rare_vector_package",
+      "status": "implemented"
+    },
+    {
+      "sourceKey": "item:create:transmitter",
+      "family": "core_components",
+      "status": "implemented",
+      "acquisition": "verified",
+      "behavior": "not_required",
+      "resources": "verified",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:transmitter"
+        ]
+      }
+    },
+    {
+      "acquisition": "partial",
+      "behavior": "partial",
+      "family": "p7_1/vertical_gearbox",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:vertical_gearbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:vertical_gearbox",
+      "status": "partial"
+    },
+    {
+      "sourceKey": "item:create:whisk",
+      "family": "core_components",
+      "status": "implemented",
+      "acquisition": "verified",
+      "behavior": "not_required",
+      "resources": "verified",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:whisk"
+        ]
+      }
+    }
+  ]
 }

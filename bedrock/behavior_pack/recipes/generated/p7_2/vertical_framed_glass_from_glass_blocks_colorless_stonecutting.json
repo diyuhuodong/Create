@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/vertical_framed_glass_from_glass_blocks_colorless_stonecutting"
+    },
+    "tags": [
+      "stonecutter"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:glass"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:vertical_framed_glass"
+    }
+  }
+}

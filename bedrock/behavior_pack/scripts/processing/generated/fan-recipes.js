@@ -1,11 +1,479 @@
 // Generated from Create fan recipe sources.
 export const FAN_RECIPES = [
 	{
+		"id": "create:fan/0_native/create:smelting/bread:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:dough"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:bread"
+			}
+		],
+		"processingTicks": 200
+	},
+	{
+		"id": "create:fan/0_native/create:smelting/copper_ingot_from_crushed:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:crushed_raw_copper"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:copper_ingot"
+			}
+		],
+		"processingTicks": 200
+	},
+	{
+		"id": "create:fan/0_native/create:smelting/glass_from_framed_glass:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:framed_glass"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:glass"
+			}
+		],
+		"processingTicks": 50
+	},
+	{
+		"id": "create:fan/0_native/create:smelting/glass_from_horizontal_framed_glass:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:horizontal_framed_glass"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:glass"
+			}
+		],
+		"processingTicks": 50
+	},
+	{
+		"id": "create:fan/0_native/create:smelting/glass_from_tiled_glass:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:tiled_glass"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:glass"
+			}
+		],
+		"processingTicks": 50
+	},
+	{
+		"id": "create:fan/0_native/create:smelting/glass_from_vertical_framed_glass:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:vertical_framed_glass"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:glass"
+			}
+		],
+		"processingTicks": 50
+	},
+	{
+		"id": "create:fan/0_native/create:smelting/glass_pane_from_framed_glass_pane:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:framed_glass_pane"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:glass_pane"
+			}
+		],
+		"processingTicks": 50
+	},
+	{
+		"id": "create:fan/0_native/create:smelting/glass_pane_from_horizontal_framed_glass_pane:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:horizontal_framed_glass_pane"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:glass_pane"
+			}
+		],
+		"processingTicks": 50
+	},
+	{
+		"id": "create:fan/0_native/create:smelting/glass_pane_from_tiled_glass_pane:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:tiled_glass_pane"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:glass_pane"
+			}
+		],
+		"processingTicks": 50
+	},
+	{
+		"id": "create:fan/0_native/create:smelting/glass_pane_from_vertical_framed_glass_pane:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:vertical_framed_glass_pane"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:glass_pane"
+			}
+		],
+		"processingTicks": 50
+	},
+	{
+		"id": "create:fan/0_native/create:smelting/gold_ingot_from_crushed:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:crushed_raw_gold"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:gold_ingot"
+			}
+		],
+		"processingTicks": 200
+	},
+	{
+		"id": "create:fan/0_native/create:smelting/iron_ingot_from_crushed:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:crushed_raw_iron"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:iron_ingot"
+			}
+		],
+		"processingTicks": 200
+	},
+	{
+		"id": "create:fan/0_native/create:smelting/scoria:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:soul_sand"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "createbedrock:scoria"
+			}
+		],
+		"processingTicks": 200
+	},
+	{
+		"id": "create:fan/0_native/create:smelting/zinc_ingot_from_crushed:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:crushed_raw_zinc"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "createbedrock:zinc_ingot"
+			}
+		],
+		"processingTicks": 200
+	},
+	{
+		"id": "create:fan/0_native/create:smelting/zinc_ingot_from_ore:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:deepslate_zinc_ore"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "createbedrock:zinc_ingot"
+			}
+		],
+		"processingTicks": 200
+	},
+	{
+		"id": "create:fan/0_native/create:smelting/zinc_ingot_from_ore:1",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:zinc_ore"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "createbedrock:zinc_ingot"
+			}
+		],
+		"processingTicks": 200
+	},
+	{
+		"id": "create:fan/0_native/create:smelting/zinc_ingot_from_raw_ore:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:raw_zinc"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "createbedrock:zinc_ingot"
+			}
+		],
+		"processingTicks": 200
+	},
+	{
+		"id": "create:fan/1_native/create:blasting/copper_ingot_from_crushed:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:crushed_raw_copper"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:copper_ingot"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/1_native/create:blasting/gold_ingot_from_crushed:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:crushed_raw_gold"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:gold_ingot"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/1_native/create:blasting/iron_ingot_from_crushed:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:crushed_raw_iron"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:iron_ingot"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/1_native/create:blasting/zinc_ingot_from_crushed:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:crushed_raw_zinc"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "createbedrock:zinc_ingot"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/1_native/create:blasting/zinc_ingot_from_ore:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:deepslate_zinc_ore"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "createbedrock:zinc_ingot"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/1_native/create:blasting/zinc_ingot_from_ore:1",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:zinc_ore"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "createbedrock:zinc_ingot"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/1_native/create:blasting/zinc_ingot_from_raw_ore:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:raw_zinc"
+			}
+		],
+		"mode": "blasting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "createbedrock:zinc_ingot"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/2_native/create:smoking/bread:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:dough"
+			}
+		],
+		"mode": "smoking",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:bread"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
 		"id": "create:fan/haunting/blackstone:0",
 		"ingredients": [
 			{
 				"count": 1,
 				"typeId": "minecraft:cobblestone"
+			}
+		],
+		"mode": "haunting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:blackstone"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/haunting/blackstone:1",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:mossy_cobblestone"
 			}
 		],
 		"mode": "haunting",
@@ -68,6 +536,24 @@ export const FAN_RECIPES = [
 				"chance": 1,
 				"count": 1,
 				"typeId": "minecraft:glow_ink_sac"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/haunting/haunted_bell:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:peculiar_bell"
+			}
+		],
+		"mode": "haunting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "createbedrock:haunted_bell"
 			}
 		],
 		"processingTicks": 100
@@ -181,6 +667,29 @@ export const FAN_RECIPES = [
 		"processingTicks": 100
 	},
 	{
+		"id": "create:fan/haunting/lapis_recycling:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:lapis_lazuli"
+			}
+		],
+		"mode": "haunting",
+		"outputs": [
+			{
+				"chance": 0.75,
+				"count": 1,
+				"typeId": "minecraft:prismarine_shard"
+			},
+			{
+				"chance": 0.125,
+				"count": 1,
+				"typeId": "minecraft:prismarine_crystals"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
 		"id": "create:fan/haunting/nether_brick:0",
 		"ingredients": [
 			{
@@ -248,6 +757,150 @@ export const FAN_RECIPES = [
 				"chance": 1,
 				"count": 1,
 				"typeId": "minecraft:soul_lantern"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/haunting/soul_sand:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:red_sand"
+			}
+		],
+		"mode": "haunting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:soul_sand"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/haunting/soul_sand:1",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:sand"
+			}
+		],
+		"mode": "haunting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:soul_sand"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/haunting/soul_soil:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:coarse_dirt"
+			}
+		],
+		"mode": "haunting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:soul_soil"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/haunting/soul_soil:1",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:dirt"
+			}
+		],
+		"mode": "haunting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:soul_soil"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/haunting/soul_soil:2",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:grass_block"
+			}
+		],
+		"mode": "haunting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:soul_soil"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/haunting/soul_soil:3",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:mycelium"
+			}
+		],
+		"mode": "haunting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:soul_soil"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/haunting/soul_soil:4",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:podzol"
+			}
+		],
+		"mode": "haunting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:soul_soil"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/haunting/soul_soil:5",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:rooted_dirt"
+			}
+		],
+		"mode": "haunting",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:soul_soil"
 			}
 		],
 		"processingTicks": 100
@@ -422,6 +1075,60 @@ export const FAN_RECIPES = [
 		"processingTicks": 100
 	},
 	{
+		"id": "create:fan/splashing/industrial_iron_block:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:industrial_iron_block"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "createbedrock:weathered_iron_block"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/industrial_iron_window_pane:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:industrial_iron_window_pane"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "createbedrock:weathered_iron_window_pane"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/industrial_iron_window:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:industrial_iron_window"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "createbedrock:weathered_iron_window"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
 		"id": "create:fan/splashing/magma_block:0",
 		"ingredients": [
 			{
@@ -499,6 +1206,348 @@ export const FAN_RECIPES = [
 				"chance": 0.02,
 				"count": 1,
 				"typeId": "minecraft:gold_nugget"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/stained_glass_pane:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:glass_pane"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:glass_pane"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/stained_glass:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:glass"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:glass"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/wheat_flour:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "createbedrock:wheat_flour"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "createbedrock:dough"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/wool:0",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:black_wool"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:white_wool"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/wool:1",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:blue_wool"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:white_wool"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/wool:10",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:orange_wool"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:white_wool"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/wool:11",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:pink_wool"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:white_wool"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/wool:12",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:purple_wool"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:white_wool"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/wool:13",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:red_wool"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:white_wool"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/wool:14",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:white_wool"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:white_wool"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/wool:15",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:yellow_wool"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:white_wool"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/wool:2",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:brown_wool"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:white_wool"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/wool:3",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:cyan_wool"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:white_wool"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/wool:4",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:gray_wool"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:white_wool"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/wool:5",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:green_wool"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:white_wool"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/wool:6",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:light_blue_wool"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:white_wool"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/wool:7",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:light_gray_wool"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:white_wool"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/wool:8",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:lime_wool"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:white_wool"
+			}
+		],
+		"processingTicks": 100
+	},
+	{
+		"id": "create:fan/splashing/wool:9",
+		"ingredients": [
+			{
+				"count": 1,
+				"typeId": "minecraft:magenta_wool"
+			}
+		],
+		"mode": "splashing",
+		"outputs": [
+			{
+				"chance": 1,
+				"count": 1,
+				"typeId": "minecraft:white_wool"
 			}
 		],
 		"processingTicks": 100

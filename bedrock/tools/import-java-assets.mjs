@@ -1,6 +1,8 @@
-import { cp, mkdir, writeFile } from "node:fs/promises";
+import { cp, mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+
+import { importP71Textures, validateP71ContentCatalog } from "./p7-1-content-families.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(toolDirectory, "..");
@@ -300,6 +302,10 @@ export async function importJavaAssets(resourcePackRoot) {
 		await cp(resolve(soundSourceDirectory, sound.source), target);
 	}
 
+	const p71Catalog = JSON.parse(await readFile(resolve(bedrockRoot, "data/p7-1-content-families.json"), "utf8"));
+	validateP71ContentCatalog(p71Catalog);
+	const p71TextureCount = await importP71Textures({ resourcePackRoot, repositoryRoot, document: p71Catalog });
+
 	await writeFile(resolve(resourcePackRoot, "create-java-asset-provenance.json"), `${JSON.stringify({
 			sources: {
 				block: { directory: "src/main/resources/assets/create/textures/block", files: JAVA_BLOCK_TEXTURES },
@@ -311,5 +317,5 @@ export async function importJavaAssets(resourcePackRoot) {
 		},
 		note: "Build-time copies only. Java models require explicit Bedrock geometry conversion."
 	}, null, 2)}\n`);
-	return JAVA_BLOCK_TEXTURES.length + JAVA_ITEM_TEXTURES.length + JAVA_FLUID_TEXTURES.length + JAVA_ENTITY_TEXTURES.length + JAVA_SOUND_ASSETS.length;
+	return JAVA_BLOCK_TEXTURES.length + JAVA_ITEM_TEXTURES.length + JAVA_FLUID_TEXTURES.length + JAVA_ENTITY_TEXTURES.length + JAVA_SOUND_ASSETS.length + p71TextureCount;
 }

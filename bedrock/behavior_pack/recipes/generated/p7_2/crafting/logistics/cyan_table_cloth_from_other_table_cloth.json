@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/logistics/cyan_table_cloth_from_other_table_cloth"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:cyan_dye"
+      },
+      {
+        "item": "createbedrock:black_table_cloth"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:cyan_table_cloth"
+    }
+  }
+}

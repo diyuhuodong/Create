@@ -1,0 +1,23 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/logistics/white_table_cloth"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:white_wool"
+      },
+      {
+        "item": "createbedrock:andesite_alloy"
+      }
+    ],
+    "result": {
+      "count": 2,
+      "item": "createbedrock:white_table_cloth"
+    }
+  }
+}

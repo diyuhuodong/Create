@@ -1,0 +1,33 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/appliances/copper_backtank"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "AGA",
+      "PBP",
+      " P "
+    ],
+    "key": {
+      "A": {
+        "item": "createbedrock:andesite_alloy"
+      },
+      "B": {
+        "item": "minecraft:copper_block"
+      },
+      "G": {
+        "item": "createbedrock:shaft"
+      },
+      "P": {
+        "item": "minecraft:copper_ingot"
+      }
+    },
+    "result": {
+      "item": "createbedrock:copper_backtank"
+    }
+  }
+}

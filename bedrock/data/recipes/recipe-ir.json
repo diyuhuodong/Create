@@ -24671,8 +24671,17 @@
 			}
 		},
 		{
-			"execution": "pending_native_recipe",
-			"strategy": "vanilla_recipe",
+			"compatibility": {
+				"decisionRef": [
+					"P7.0:compatibility/upgrade_aquatic"
+				],
+				"externalNamespaces": [
+					"upgrade_aquatic"
+				],
+				"status": "decision_required"
+			},
+			"execution": "blocked_compatibility_decision",
+			"strategy": "external_compat",
 			"conditions": [
 				{
 					"type": "neoforge:mod_loaded",
@@ -114352,17 +114361,17 @@
 	"schemaVersion": 1,
 	"summary": {
 		"execution": {
-			"blocked_compatibility_decision": 486,
+			"blocked_compatibility_decision": 487,
 			"pending_interaction_adapter": 193,
 			"pending_machine_adapter": 199,
-			"pending_native_recipe": 1006
+			"pending_native_recipe": 1005
 		},
 		"recipes": 1884,
 		"strategies": {
-			"external_compat": 486,
+			"external_compat": 487,
 			"runtime_machine": 199,
 			"scripted_interaction": 193,
-			"vanilla_recipe": 1006
+			"vanilla_recipe": 1005
 		}
 	}
 }

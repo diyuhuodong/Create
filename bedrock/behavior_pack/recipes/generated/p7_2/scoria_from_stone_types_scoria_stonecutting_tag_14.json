@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/scoria_from_stone_types_scoria_stonecutting_tag_14"
+    },
+    "tags": [
+      "stonecutter"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:small_scoria_bricks"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:scoria"
+    }
+  }
+}

@@ -203,15 +203,110 @@
     "createbedrock_netherite_backtank": {
       "textures": "textures/create_java/block/netherite_backtank"
     },
-    "createbedrock_copper_diving_boots": { "textures": "textures/create_java/item/copper_diving_boots" },
-    "createbedrock_copper_diving_helmet": { "textures": "textures/create_java/item/copper_diving_helmet" },
-    "createbedrock_netherite_diving_boots": { "textures": "textures/create_java/item/netherite_diving_boots" },
-    "createbedrock_netherite_diving_helmet": { "textures": "textures/create_java/item/netherite_diving_helmet" },
-    "createbedrock_extendo_grip": { "textures": "textures/create_java/item/extendo_grip" },
-    "createbedrock_goggles": { "textures": "textures/create_java/item/goggles" },
-    "createbedrock_potato_cannon": { "textures": "textures/create_java/item/potato_cannon" },
-    "createbedrock_wrench": { "textures": "textures/create_java/item/wrench" },
-    "createbedrock_honey_bucket": { "textures": "textures/create_java/item/honey_bucket" },
-    "createbedrock_chocolate_bucket": { "textures": "textures/create_java/item/chocolate_bucket" }
+    "createbedrock_copper_diving_boots": {
+      "textures": "textures/create_java/item/copper_diving_boots"
+    },
+    "createbedrock_copper_diving_helmet": {
+      "textures": "textures/create_java/item/copper_diving_helmet"
+    },
+    "createbedrock_netherite_diving_boots": {
+      "textures": "textures/create_java/item/netherite_diving_boots"
+    },
+    "createbedrock_netherite_diving_helmet": {
+      "textures": "textures/create_java/item/netherite_diving_helmet"
+    },
+    "createbedrock_extendo_grip": {
+      "textures": "textures/create_java/item/extendo_grip"
+    },
+    "createbedrock_goggles": {
+      "textures": "textures/create_java/item/goggles"
+    },
+    "createbedrock_potato_cannon": {
+      "textures": "textures/create_java/item/potato_cannon"
+    },
+    "createbedrock_wrench": {
+      "textures": "textures/create_java/item/wrench"
+    },
+    "createbedrock_honey_bucket": {
+      "textures": "textures/create_java/item/honey_bucket"
+    },
+    "createbedrock_chocolate_bucket": {
+      "textures": "textures/create_java/item/chocolate_bucket"
+    },
+    "createbedrock_p7_1_cardboard_package_10x12": {
+      "textures": "textures/create_java/item/package/cardboard"
+    },
+    "createbedrock_p7_1_cardboard_package_10x8": {
+      "textures": "textures/create_java/item/package/cardboard"
+    },
+    "createbedrock_p7_1_cardboard_package_12x10": {
+      "textures": "textures/create_java/item/package/cardboard"
+    },
+    "createbedrock_p7_1_cardboard_package_12x12": {
+      "textures": "textures/create_java/item/package/cardboard"
+    },
+    "createbedrock_p7_1_crushed_raw_aluminum": {
+      "textures": "textures/create_java/item/crushed_raw_aluminum"
+    },
+    "createbedrock_p7_1_crushed_raw_lead": {
+      "textures": "textures/create_java/item/crushed_raw_lead"
+    },
+    "createbedrock_p7_1_crushed_raw_nickel": {
+      "textures": "textures/create_java/item/crushed_raw_nickel"
+    },
+    "createbedrock_p7_1_crushed_raw_osmium": {
+      "textures": "textures/create_java/item/crushed_raw_osmium"
+    },
+    "createbedrock_p7_1_crushed_raw_platinum": {
+      "textures": "textures/create_java/item/crushed_raw_platinum"
+    },
+    "createbedrock_p7_1_crushed_raw_quicksilver": {
+      "textures": "textures/create_java/item/crushed_raw_quicksilver"
+    },
+    "createbedrock_p7_1_crushed_raw_silver": {
+      "textures": "textures/create_java/item/crushed_raw_silver"
+    },
+    "createbedrock_p7_1_crushed_raw_tin": {
+      "textures": "textures/create_java/item/crushed_raw_tin"
+    },
+    "createbedrock_p7_1_crushed_raw_uranium": {
+      "textures": "textures/create_java/item/crushed_raw_uranium"
+    },
+    "createbedrock_p7_1_dough": {
+      "textures": "textures/create_java/item/dough"
+    },
+    "createbedrock_p7_1_pulp": {
+      "textures": "textures/create_java/item/pulp"
+    },
+    "createbedrock_p7_1_rare_creeper_package": {
+      "textures": "textures/create_java/item/package/rare_creeper"
+    },
+    "createbedrock_p7_1_rare_darcy_package": {
+      "textures": "textures/create_java/item/package/rare_darcy"
+    },
+    "createbedrock_p7_1_rare_evan_package": {
+      "textures": "textures/create_java/item/package/rare_evan"
+    },
+    "createbedrock_p7_1_rare_jinx_package": {
+      "textures": "textures/create_java/item/package/rare_jinx"
+    },
+    "createbedrock_p7_1_rare_kryppers_package": {
+      "textures": "textures/create_java/item/package/rare_kryppers"
+    },
+    "createbedrock_p7_1_rare_simi_package": {
+      "textures": "textures/create_java/item/package/rare_simi"
+    },
+    "createbedrock_p7_1_rare_starlotte_package": {
+      "textures": "textures/create_java/item/package/rare_starlotte"
+    },
+    "createbedrock_p7_1_rare_thunder_package": {
+      "textures": "textures/create_java/item/package/rare_thunder"
+    },
+    "createbedrock_p7_1_rare_up_package": {
+      "textures": "textures/create_java/item/package/rare_up"
+    },
+    "createbedrock_p7_1_rare_vector_package": {
+      "textures": "textures/create_java/item/package/rare_vector"
+    }
   }
 }

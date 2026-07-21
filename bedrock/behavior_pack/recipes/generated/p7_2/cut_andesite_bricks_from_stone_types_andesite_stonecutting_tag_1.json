@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/cut_andesite_bricks_from_stone_types_andesite_stonecutting_tag_1"
+    },
+    "tags": [
+      "stonecutter"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:cut_andesite"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:cut_andesite_bricks"
+    }
+  }
+}

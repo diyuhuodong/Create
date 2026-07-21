@@ -362,6 +362,18 @@ test("KineticWorld uses a gearbox to redirect power across rotation axes", () =>
 	assert.equal(world.speedAt("minecraft:overworld", { x: 1, y: 65, z: 0 }), 16);
 });
 
+test("KineticWorld projects the Java Vertical Gearbox item as a three-axis transmission", () => {
+	const world = new KineticWorld();
+	const crank = block("createbedrock:hand_crank", 0, 64, 0);
+	world.trackPlacedBlock(crank);
+	world.trackPlacedBlock(block("createbedrock:vertical_gearbox", 0, 65, 0));
+	world.trackPlacedBlock(facedBlock("createbedrock:shaft", 1, 65, 0, 4));
+	world.activateHandCrank(crank);
+	world.tick();
+
+	assert.equal(world.speedAt("minecraft:overworld", { x: 1, y: 65, z: 0 }), 16);
+});
+
 test("KineticWorld lets an enabled clutch pass power and a disabled clutch isolate it", () => {
 	const world = new KineticWorld();
 	const crank = block("createbedrock:hand_crank", 0, 64, 0);

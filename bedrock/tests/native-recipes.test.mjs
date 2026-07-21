@@ -12,12 +12,13 @@ const repositoryRoot = resolve(bedrockRoot, "..");
 
 test("P7.2 native compiler classifies every Java-native recipe without losing its source identity", async () => {
 	const generated = await buildNativeRecipes({ bedrockRoot, repositoryRoot });
-	assert.equal(generated.summary.recipes, 1_006);
-	assert.deepEqual(validateNativeRecipes(generated).recipes, 1_006);
+	assert.equal(generated.summary.recipes, 1_005);
+	assert.deepEqual(validateNativeRecipes(generated).recipes, 1_005);
 	const persisted = await readFile(resolve(bedrockRoot, "data", "recipes", "native.json"), "utf8").then(JSON.parse);
 	assert.deepEqual(persisted, generated);
-	assert.equal(generated.summary.status.blocked_missing_content > 0, true);
-	assert.equal(generated.summary.status.blocked_tag_projection > 0, true);
+	assert.equal(generated.summary.status.blocked_missing_content, 0);
+	assert.equal(generated.summary.status.blocked_tag_projection, 0);
+	assert.equal(generated.summary.status.blocked_platform_semantics > 0, true);
 });
 
 test("P7.2 native compiler emits only executable Bedrock definitions and retains generated identifiers", async () => {
@@ -32,5 +33,9 @@ test("P7.2 native compiler emits only executable Bedrock definitions and retains
 		assert.match(file, /^p7_2\//);
 		assert.doesNotThrow(() => JSON.parse(contents));
 	}
-	assert.equal(files.size, generated.summary.status.emittable);
+	const definitionCount = generated.records
+		.filter(record => record.status === "emittable")
+		.reduce((count, record) => count + record.definitions.length, 0);
+	assert.equal(files.size, definitionCount);
+	assert.ok(files.size > generated.summary.status.emittable);
 });

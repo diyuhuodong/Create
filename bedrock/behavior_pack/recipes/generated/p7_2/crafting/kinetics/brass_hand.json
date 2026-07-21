@@ -1,0 +1,27 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/brass_hand"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      " A ",
+      "BBB",
+      " B "
+    ],
+    "key": {
+      "A": {
+        "item": "createbedrock:andesite_alloy"
+      },
+      "B": {
+        "item": "createbedrock:brass_sheet"
+      }
+    },
+    "result": {
+      "item": "createbedrock:brass_hand"
+    }
+  }
+}

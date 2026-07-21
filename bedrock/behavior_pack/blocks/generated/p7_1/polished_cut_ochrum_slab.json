@@ -1,0 +1,110 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:polished_cut_ochrum_slab",
+      "menu_category": {
+        "category": "construction",
+        "group": "itemGroup.name.misc"
+      },
+      "traits": {
+        "minecraft:placement_position": {
+          "enabled_states": [
+            "minecraft:vertical_half"
+          ]
+        }
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 6
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1.5
+      },
+      "minecraft:geometry": "geometry.createbedrock.p7_1_slab_bottom",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.p7_1_slab_bottom"
+        },
+        "material_instances": {
+          "all": {
+            "texture": "createbedrock_p7_1_polished_cut_ochrum_slab",
+            "render_method": "opaque"
+          },
+          "*": {
+            "texture": "createbedrock_p7_1_polished_cut_ochrum_slab",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:loot": "loot_tables/blocks/generated/p7_1/polished_cut_ochrum_slab.json",
+      "minecraft:material_instances": {
+        "all": {
+          "texture": "createbedrock_p7_1_polished_cut_ochrum_slab",
+          "render_method": "opaque"
+        },
+        "*": {
+          "texture": "createbedrock_p7_1_polished_cut_ochrum_slab",
+          "render_method": "opaque"
+        }
+      },
+      "minecraft:collision_box": {
+        "origin": [
+          -8,
+          0,
+          -8
+        ],
+        "size": [
+          16,
+          8,
+          16
+        ]
+      },
+      "minecraft:selection_box": {
+        "origin": [
+          -8,
+          0,
+          -8
+        ],
+        "size": [
+          16,
+          8,
+          16
+        ]
+      }
+    },
+    "permutations": [
+      {
+        "condition": "query.block_state('minecraft:vertical_half') == 'top'",
+        "components": {
+          "minecraft:geometry": "geometry.createbedrock.p7_1_slab_top",
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              8,
+              -8
+            ],
+            "size": [
+              16,
+              8,
+              16
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              8,
+              -8
+            ],
+            "size": [
+              16,
+              8,
+              16
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

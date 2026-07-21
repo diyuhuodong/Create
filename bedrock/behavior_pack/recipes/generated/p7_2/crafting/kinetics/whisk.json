@@ -1,0 +1,27 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/whisk"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      " C ",
+      "SCS",
+      "SSS"
+    ],
+    "key": {
+      "C": {
+        "item": "createbedrock:andesite_alloy"
+      },
+      "S": {
+        "item": "createbedrock:iron_sheet"
+      }
+    },
+    "result": {
+      "item": "createbedrock:whisk"
+    }
+  }
+}

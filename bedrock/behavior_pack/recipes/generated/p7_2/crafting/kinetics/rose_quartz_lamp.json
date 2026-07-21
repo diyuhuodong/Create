@@ -1,0 +1,25 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/rose_quartz_lamp"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:polished_rose_quartz"
+      },
+      {
+        "item": "minecraft:redstone"
+      },
+      {
+        "item": "createbedrock:zinc_ingot"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:rose_quartz_lamp"
+    }
+  }
+}

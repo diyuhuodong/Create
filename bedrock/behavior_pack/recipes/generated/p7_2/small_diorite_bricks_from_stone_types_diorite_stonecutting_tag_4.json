@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/small_diorite_bricks_from_stone_types_diorite_stonecutting_tag_4"
+    },
+    "tags": [
+      "stonecutter"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:cut_diorite_stairs"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:small_diorite_bricks"
+    }
+  }
+}

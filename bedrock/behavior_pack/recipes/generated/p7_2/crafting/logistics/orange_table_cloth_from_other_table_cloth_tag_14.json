@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/logistics/orange_table_cloth_from_other_table_cloth_tag_14"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:orange_dye"
+      },
+      {
+        "item": "createbedrock:white_table_cloth"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:orange_table_cloth"
+    }
+  }
+}

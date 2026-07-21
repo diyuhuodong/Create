@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/black_seat"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:black_wool"
+      },
+      {
+        "tag": "minecraft:wooden_slabs"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:black_seat"
+    }
+  }
+}

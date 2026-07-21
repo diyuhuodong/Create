@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/framed_glass_trapdoor"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "tag": "minecraft:wooden_trapdoors"
+      },
+      {
+        "item": "createbedrock:framed_glass"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:framed_glass_trapdoor"
+    }
+  }
+}

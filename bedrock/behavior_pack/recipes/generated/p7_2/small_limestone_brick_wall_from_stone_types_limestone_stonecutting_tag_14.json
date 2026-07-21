@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/small_limestone_brick_wall_from_stone_types_limestone_stonecutting_tag_14"
+    },
+    "tags": [
+      "stonecutter"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:small_limestone_bricks"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:small_limestone_brick_wall"
+    }
+  }
+}

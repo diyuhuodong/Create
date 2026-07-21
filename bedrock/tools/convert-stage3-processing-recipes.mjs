@@ -4,9 +4,11 @@ import { fileURLToPath } from "node:url";
 
 import {
 	mapJavaProcessingIdentifier,
+	optionalMissingModDependency,
 	processingImportReport,
 	supportsProcessingRecipeItems
 } from "./processing-recipe-import.js";
+import { expandProcessingIngredient, processingTagProjections } from "./processing-tag-projections.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(toolDirectory, "..");
@@ -14,14 +16,7 @@ const repositoryRoot = resolve(bedrockRoot, "..");
 const recipeRoot = resolve(repositoryRoot, "src/generated/resources/data/create/recipe");
 const outputRoot = resolve(bedrockRoot, "behavior_pack/scripts/processing/generated");
 
-const TAG_ITEMS = {
-	"c:cobblestones": ["minecraft:cobblestone"],
-	"c:flours/wheat": ["createbedrock:wheat_flour"],
-	"c:ingots/copper": ["minecraft:copper_ingot"],
-	"c:ingots/iron": ["minecraft:iron_ingot"],
-	"c:ingots/zinc": ["createbedrock:zinc_ingot"],
-	"c:nuggets/iron": ["minecraft:iron_nugget"]
-};
+const TAG_ITEMS = await processingTagProjections(bedrockRoot);
 
 const PROCESSORS = [
 	{
@@ -40,8 +35,7 @@ const PROCESSORS = [
 		sources: [
 			{ directory: "haunting", mode: "haunting", type: "create:haunting" },
 			{ directory: "splashing", mode: "splashing", type: "create:splashing" }
-		],
-		unavailableSources: ["minecraft:blasting recipe registry", "minecraft:smoking recipe registry"]
+		]
 	}
 ];
 
@@ -58,14 +52,8 @@ async function findJsonFiles(directory) {
 }
 
 function ingredientAlternatives(ingredient) {
-	const count = ingredient?.count ?? 1;
-	if (!Number.isInteger(count) || count < 1)
-		return undefined;
-	if (typeof ingredient?.item === "string")
-		return [{ count, typeId: mapJavaProcessingIdentifier(ingredient.item) }];
-	if (typeof ingredient?.tag === "string")
-		return TAG_ITEMS[ingredient.tag]?.map(typeId => ({ count, typeId }));
-	return undefined;
+	const alternatives = expandProcessingIngredient(ingredient, TAG_ITEMS);
+	return alternatives.length > 0 ? alternatives : undefined;
 }
 
 function ingredientCombinations(ingredients) {
@@ -155,6 +143,39 @@ function generatedConstant(name) {
 	return `${name.toUpperCase()}_RECIPES`;
 }
 
+async function nativeFanCookingRecipes() {
+	const document = JSON.parse(await readFile(resolve(bedrockRoot, "data", "recipes", "recipe-ir.json"), "utf8"));
+	const recipes = [];
+	const records = [];
+	const sources = document.recipes
+		.filter(recipe => recipe.strategy === "vanilla_recipe" && ["minecraft:blasting", "minecraft:smelting", "minecraft:smoking"].includes(recipe.source?.type))
+		.sort((left, right) => left.id.localeCompare(right.id));
+	for (const source of sources) {
+		const sourceRecipe = source.sourceRecipe;
+		const alternatives = ingredientAlternatives(sourceRecipe.ingredient);
+		const outputs = outputStacks([sourceRecipe.result]);
+		const mode = source.source.type === "minecraft:smoking" ? "smoking" : "blasting";
+		if (!alternatives || !outputs || !supportsProcessingRecipeItems([...alternatives.map(ingredient => ingredient.typeId), ...outputs.map(output => output.typeId)])) {
+			records.push({ reason: "unavailable_item", source: source.id, status: "unsupported_dependency" });
+			continue;
+		}
+		const recipeIds = alternatives.map((input, index) => {
+			const priority = source.source.type === "minecraft:smelting" ? "0" : source.source.type === "minecraft:blasting" ? "1" : "2";
+			const recipe = {
+				id: `create:fan/${priority}_native/${source.id.slice("create:" )}:${index}`,
+				ingredients: [input],
+				mode,
+				outputs,
+				processingTicks: sourceRecipe.cookingtime ?? 100
+			};
+			recipes.push(recipe);
+			return recipe.id;
+		});
+		records.push({ recipeId: recipeIds[0], recipeIds, source: source.id, status: "migrated" });
+	}
+	return { recipes, records };
+}
+
 async function convertProcessor(processor) {
 	const recipes = [];
 	const records = [];
@@ -165,6 +186,11 @@ async function convertProcessor(processor) {
 			const sourcePath = `${sourceDefinition.directory}/${relative(sourceRoot, file).replace(/\\/g, "/").replace(/\.json$/, "")}`;
 			if (sourcePath.includes("/compat/")) {
 				records.push({ reason: "compatibility_recipe", source: sourcePath, status: "unsupported_dependency" });
+				continue;
+			}
+			const optionalMod = optionalMissingModDependency(source);
+			if (optionalMod) {
+				records.push({ reason: `optional_missing_mod:${optionalMod}`, source: sourcePath, status: "unsupported_dependency" });
 				continue;
 			}
 			if (processor.name === "basin") {
@@ -201,8 +227,11 @@ async function convertProcessor(processor) {
 			records.push({ recipeId: recipeIds[0], recipeIds, source: sourcePath, status: "migrated" });
 		}
 	}
-	for (const source of processor.unavailableSources ?? [])
-		records.push({ reason: "runtime_recipe_registry_not_exported", source, status: "manual_specification" });
+	if (processor.name === "fan") {
+		const nativeCooking = await nativeFanCookingRecipes();
+		recipes.push(...nativeCooking.recipes);
+		records.push(...nativeCooking.records);
+	}
 	recipes.sort((left, right) => left.id.localeCompare(right.id));
 	const report = processingImportReport(processor.name, records);
 	await writeFile(resolve(outputRoot, `${processor.name}-recipes.js`), `// Generated from Create ${processor.name} recipe sources.\nexport const ${generatedConstant(processor.name)} = ${JSON.stringify(recipes, null, "\t")};\n`);

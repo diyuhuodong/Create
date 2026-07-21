@@ -1,0 +1,26 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/copper_valve_handle"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "CCC",
+      " S "
+    ],
+    "key": {
+      "C": {
+        "item": "createbedrock:copper_sheet"
+      },
+      "S": {
+        "item": "createbedrock:andesite_alloy"
+      }
+    },
+    "result": {
+      "item": "createbedrock:copper_valve_handle"
+    }
+  }
+}

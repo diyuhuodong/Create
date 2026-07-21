@@ -1,0 +1,33 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/mechanical_arm"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "LLA",
+      "L  ",
+      "IC "
+    ],
+    "key": {
+      "A": {
+        "item": "createbedrock:andesite_alloy"
+      },
+      "C": {
+        "item": "createbedrock:brass_casing"
+      },
+      "I": {
+        "item": "createbedrock:precision_mechanism"
+      },
+      "L": {
+        "item": "createbedrock:brass_sheet"
+      }
+    },
+    "result": {
+      "item": "createbedrock:mechanical_arm"
+    }
+  }
+}

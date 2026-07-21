@@ -1,0 +1,20 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/copycat_panel_from_ingots_zinc_stonecutting"
+    },
+    "tags": [
+      "stonecutter"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:zinc_ingot"
+      }
+    ],
+    "result": {
+      "count": 4,
+      "item": "createbedrock:copycat_panel"
+    }
+  }
+}

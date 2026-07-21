@@ -6,12 +6,14 @@ import {
 	processingImportReport,
 	supportsProcessingRecipeItems
 } from "./processing-recipe-import.js";
+import { expandProcessingIngredient, processingTagProjections } from "./processing-tag-projections.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(toolDirectory, "..");
 const repositoryRoot = resolve(bedrockRoot, "..");
 const sourceRoot = resolve(repositoryRoot, "src/generated/resources/data/create/recipe/milling");
 const outputRoot = resolve(bedrockRoot, "behavior_pack/scripts/processing/generated");
+const TAG_ITEMS = await processingTagProjections(bedrockRoot);
 
 async function findJsonFiles(directory) {
 	const files = [];
@@ -30,33 +32,32 @@ const records = [];
 for (const file of await findJsonFiles(sourceRoot)) {
 	const source = JSON.parse(await readFile(file, "utf8"));
 	const sourcePath = relative(sourceRoot, file).replace(/\\/g, "/").replace(/\.json$/, "");
-	const input = source.ingredients?.length === 1 ? source.ingredients[0] : undefined;
+	const inputs = source.ingredients?.length === 1 ? expandProcessingIngredient(source.ingredients[0], TAG_ITEMS) : [];
 	const output = source.results?.every(result => typeof result.id === "string");
 	if (sourcePath.startsWith("compat/")) {
 		records.push({ source: sourcePath, status: "unsupported_dependency", reason: "compatibility_recipe" });
 		continue;
 	}
-	if (source.type !== "create:milling" || typeof input?.item !== "string" || !output) {
+	if (source.type !== "create:milling" || inputs.length === 0 || !output) {
 		records.push({ source: sourcePath, status: "manual_specification", reason: "unsupported_recipe_shape" });
 		continue;
 	}
 
-	const recipe = {
-		id: `create:milling/${sourcePath}`,
-		input: { typeId: mapJavaProcessingIdentifier(input.item), count: input.count ?? 1 },
-		processingTicks: source.processing_time ?? 100,
-		outputs: source.results.map(result => ({
-			typeId: mapJavaProcessingIdentifier(result.id),
-			count: result.count ?? 1,
-			chance: result.chance ?? 1
-		}))
-	};
-	if (!supportsProcessingRecipeItems([recipe.input.typeId, ...recipe.outputs.map(result => result.typeId)])) {
+	const outputs = source.results.map(result => ({
+		typeId: mapJavaProcessingIdentifier(result.id),
+		count: result.count ?? 1,
+		chance: result.chance ?? 1
+	}));
+	if (!supportsProcessingRecipeItems([...inputs.map(input => input.typeId), ...outputs.map(result => result.typeId)])) {
 		records.push({ source: sourcePath, status: "unsupported_dependency", reason: "unavailable_item" });
 		continue;
 	}
-	recipes.push(recipe);
-	records.push({ source: sourcePath, status: "migrated", recipeId: recipe.id });
+	const recipeIds = inputs.map((input, index) => {
+		const recipe = { id: `create:milling/${sourcePath}:${index}`, input, processingTicks: source.processing_time ?? 100, outputs };
+		recipes.push(recipe);
+		return recipe.id;
+	});
+	records.push({ source: sourcePath, status: "migrated", recipeId: recipeIds[0], recipeIds });
 }
 
 recipes.sort((left, right) => left.id.localeCompare(right.id));

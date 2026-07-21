@@ -1,0 +1,30 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/logistics/purple_postbox"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "D",
+      "B",
+      "A"
+    ],
+    "key": {
+      "A": {
+        "item": "createbedrock:andesite_alloy"
+      },
+      "B": {
+        "item": "minecraft:barrel"
+      },
+      "D": {
+        "item": "minecraft:purple_dye"
+      }
+    },
+    "result": {
+      "item": "createbedrock:purple_postbox"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/ochrum_pillar_from_stone_types_ochrum_stonecutting_tag_3"
+    },
+    "tags": [
+      "stonecutter"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:cut_ochrum_bricks"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:ochrum_pillar"
+    }
+  }
+}

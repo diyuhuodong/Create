@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/polished_cut_ochrum_slab_recycling"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:polished_cut_ochrum_slab"
+      },
+      {
+        "item": "createbedrock:polished_cut_ochrum_slab"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:polished_cut_ochrum"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/steam_whistle"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "P",
+      "C"
+    ],
+    "key": {
+      "C": {
+        "item": "minecraft:copper_ingot"
+      },
+      "P": {
+        "item": "createbedrock:golden_sheet"
+      }
+    },
+    "result": {
+      "item": "createbedrock:steam_whistle"
+    }
+  }
+}

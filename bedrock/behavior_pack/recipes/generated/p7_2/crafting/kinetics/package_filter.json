@@ -1,0 +1,25 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/package_filter"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "ASA"
+    ],
+    "key": {
+      "A": {
+        "item": "createbedrock:zinc_nugget"
+      },
+      "S": {
+        "tag": "minecraft:wool"
+      }
+    },
+    "result": {
+      "item": "createbedrock:package_filter"
+    }
+  }
+}

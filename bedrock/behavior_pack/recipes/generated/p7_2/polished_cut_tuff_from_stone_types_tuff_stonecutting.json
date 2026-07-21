@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/polished_cut_tuff_from_stone_types_tuff_stonecutting"
+    },
+    "tags": [
+      "stonecutter"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:cut_tuff"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:polished_cut_tuff"
+    }
+  }
+}

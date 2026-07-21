@@ -1,0 +1,26 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/polished_cut_scorchia_stairs"
+    },
+    "group": "polished_cut_scorchia_stairs",
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "X  ",
+      "XX ",
+      "XXX"
+    ],
+    "key": {
+      "X": {
+        "item": "createbedrock:polished_cut_scorchia"
+      }
+    },
+    "result": {
+      "count": 4,
+      "item": "createbedrock:polished_cut_scorchia_stairs"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/appliances/chain_from_zinc"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "S",
+      "C",
+      "S"
+    ],
+    "key": {
+      "C": {
+        "item": "createbedrock:zinc_ingot"
+      },
+      "S": {
+        "item": "createbedrock:zinc_nugget"
+      }
+    },
+    "result": {
+      "item": "minecraft:chain"
+    }
+  }
+}

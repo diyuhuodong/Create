@@ -1,0 +1,20 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/small_calcite_brick_slab_from_stone_types_calcite_stonecutting_tag_1"
+    },
+    "tags": [
+      "stonecutter"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:cut_calcite"
+      }
+    ],
+    "result": {
+      "count": 2,
+      "item": "createbedrock:small_calcite_brick_slab"
+    }
+  }
+}

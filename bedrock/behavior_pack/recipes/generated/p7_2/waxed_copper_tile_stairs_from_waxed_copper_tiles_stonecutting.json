@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/waxed_copper_tile_stairs_from_waxed_copper_tiles_stonecutting"
+    },
+    "tags": [
+      "stonecutter"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:waxed_copper_tiles"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:waxed_copper_tile_stairs"
+    }
+  }
+}

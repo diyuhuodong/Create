@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/magenta_seat_from_other_seat_tag_1"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:magenta_dye"
+      },
+      {
+        "item": "createbedrock:blue_seat"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:magenta_seat"
+    }
+  }
+}

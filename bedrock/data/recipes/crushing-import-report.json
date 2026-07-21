@@ -2,45 +2,77 @@
 	"processor": "crushing",
 	"schemaVersion": 1,
 	"summary": {
-		"manual_specification": 42,
-		"migrated": 36,
-		"unsupported_dependency": 133
+		"manual_specification": 0,
+		"migrated": 55,
+		"unsupported_dependency": 156
 	},
 	"records": [
 		{
 			"source": "aluminum_ore",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:ores/aluminum"
 		},
 		{
 			"source": "amethyst_block",
 			"status": "migrated",
-			"recipeId": "create:crushing/amethyst_block"
+			"recipeId": "create:crushing/amethyst_block:0",
+			"recipeIds": [
+				"create:crushing/amethyst_block:0"
+			]
 		},
 		{
 			"source": "amethyst_cluster",
 			"status": "migrated",
-			"recipeId": "create:crushing/amethyst_cluster"
+			"recipeId": "create:crushing/amethyst_cluster:0",
+			"recipeIds": [
+				"create:crushing/amethyst_cluster:0"
+			]
 		},
 		{
 			"source": "asurine",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/asurine:0",
+			"recipeIds": [
+				"create:crushing/asurine:0"
+			]
 		},
 		{
 			"source": "asurine_recycling",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "migrated",
+			"recipeId": "create:crushing/asurine_recycling:0",
+			"recipeIds": [
+				"create:crushing/asurine_recycling:0",
+				"create:crushing/asurine_recycling:1",
+				"create:crushing/asurine_recycling:2",
+				"create:crushing/asurine_recycling:3",
+				"create:crushing/asurine_recycling:4",
+				"create:crushing/asurine_recycling:5",
+				"create:crushing/asurine_recycling:6",
+				"create:crushing/asurine_recycling:7",
+				"create:crushing/asurine_recycling:8",
+				"create:crushing/asurine_recycling:9",
+				"create:crushing/asurine_recycling:10",
+				"create:crushing/asurine_recycling:11",
+				"create:crushing/asurine_recycling:12",
+				"create:crushing/asurine_recycling:13",
+				"create:crushing/asurine_recycling:14"
+			]
 		},
 		{
 			"source": "blaze_rod",
 			"status": "migrated",
-			"recipeId": "create:crushing/blaze_rod"
+			"recipeId": "create:crushing/blaze_rod:0",
+			"recipeIds": [
+				"create:crushing/blaze_rod:0"
+			]
 		},
 		{
 			"source": "coal_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/coal_ore"
+			"recipeId": "create:crushing/coal_ore:0",
+			"recipeIds": [
+				"create:crushing/coal_ore:0"
+			]
 		},
 		{
 			"source": "compat/aether/ambrosium_ore",
@@ -690,377 +722,609 @@
 		{
 			"source": "copper_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/copper_ore"
+			"recipeId": "create:crushing/copper_ore:0",
+			"recipeIds": [
+				"create:crushing/copper_ore:0"
+			]
 		},
 		{
 			"source": "crimsite",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/crimsite:0",
+			"recipeIds": [
+				"create:crushing/crimsite:0"
+			]
 		},
 		{
 			"source": "crimsite_recycling",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "migrated",
+			"recipeId": "create:crushing/crimsite_recycling:0",
+			"recipeIds": [
+				"create:crushing/crimsite_recycling:0",
+				"create:crushing/crimsite_recycling:1",
+				"create:crushing/crimsite_recycling:2",
+				"create:crushing/crimsite_recycling:3",
+				"create:crushing/crimsite_recycling:4",
+				"create:crushing/crimsite_recycling:5",
+				"create:crushing/crimsite_recycling:6",
+				"create:crushing/crimsite_recycling:7",
+				"create:crushing/crimsite_recycling:8",
+				"create:crushing/crimsite_recycling:9",
+				"create:crushing/crimsite_recycling:10",
+				"create:crushing/crimsite_recycling:11",
+				"create:crushing/crimsite_recycling:12",
+				"create:crushing/crimsite_recycling:13",
+				"create:crushing/crimsite_recycling:14"
+			]
 		},
 		{
 			"source": "deepslate_coal_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/deepslate_coal_ore"
+			"recipeId": "create:crushing/deepslate_coal_ore:0",
+			"recipeIds": [
+				"create:crushing/deepslate_coal_ore:0"
+			]
 		},
 		{
 			"source": "deepslate_copper_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/deepslate_copper_ore"
+			"recipeId": "create:crushing/deepslate_copper_ore:0",
+			"recipeIds": [
+				"create:crushing/deepslate_copper_ore:0"
+			]
 		},
 		{
 			"source": "deepslate_diamond_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/deepslate_diamond_ore"
+			"recipeId": "create:crushing/deepslate_diamond_ore:0",
+			"recipeIds": [
+				"create:crushing/deepslate_diamond_ore:0"
+			]
 		},
 		{
 			"source": "deepslate_emerald_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/deepslate_emerald_ore"
+			"recipeId": "create:crushing/deepslate_emerald_ore:0",
+			"recipeIds": [
+				"create:crushing/deepslate_emerald_ore:0"
+			]
 		},
 		{
 			"source": "deepslate_gold_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/deepslate_gold_ore"
+			"recipeId": "create:crushing/deepslate_gold_ore:0",
+			"recipeIds": [
+				"create:crushing/deepslate_gold_ore:0"
+			]
 		},
 		{
 			"source": "deepslate_iron_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/deepslate_iron_ore"
+			"recipeId": "create:crushing/deepslate_iron_ore:0",
+			"recipeIds": [
+				"create:crushing/deepslate_iron_ore:0"
+			]
 		},
 		{
 			"source": "deepslate_lapis_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/deepslate_lapis_ore"
+			"recipeId": "create:crushing/deepslate_lapis_ore:0",
+			"recipeIds": [
+				"create:crushing/deepslate_lapis_ore:0"
+			]
 		},
 		{
 			"source": "deepslate_redstone_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/deepslate_redstone_ore"
+			"recipeId": "create:crushing/deepslate_redstone_ore:0",
+			"recipeIds": [
+				"create:crushing/deepslate_redstone_ore:0"
+			]
 		},
 		{
 			"source": "deepslate_zinc_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/deepslate_zinc_ore"
+			"recipeId": "create:crushing/deepslate_zinc_ore:0",
+			"recipeIds": [
+				"create:crushing/deepslate_zinc_ore:0"
+			]
 		},
 		{
 			"source": "diamond_horse_armor",
 			"status": "migrated",
-			"recipeId": "create:crushing/diamond_horse_armor"
+			"recipeId": "create:crushing/diamond_horse_armor:0",
+			"recipeIds": [
+				"create:crushing/diamond_horse_armor:0"
+			]
 		},
 		{
 			"source": "diamond_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/diamond_ore"
+			"recipeId": "create:crushing/diamond_ore:0",
+			"recipeIds": [
+				"create:crushing/diamond_ore:0"
+			]
 		},
 		{
 			"source": "diorite",
 			"status": "migrated",
-			"recipeId": "create:crushing/diorite"
+			"recipeId": "create:crushing/diorite:0",
+			"recipeIds": [
+				"create:crushing/diorite:0"
+			]
 		},
 		{
 			"source": "diorite_recycling",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "migrated",
+			"recipeId": "create:crushing/diorite_recycling:0",
+			"recipeIds": [
+				"create:crushing/diorite_recycling:0",
+				"create:crushing/diorite_recycling:1",
+				"create:crushing/diorite_recycling:2",
+				"create:crushing/diorite_recycling:3",
+				"create:crushing/diorite_recycling:4",
+				"create:crushing/diorite_recycling:5",
+				"create:crushing/diorite_recycling:6",
+				"create:crushing/diorite_recycling:7",
+				"create:crushing/diorite_recycling:8",
+				"create:crushing/diorite_recycling:9",
+				"create:crushing/diorite_recycling:10",
+				"create:crushing/diorite_recycling:11",
+				"create:crushing/diorite_recycling:12",
+				"create:crushing/diorite_recycling:13",
+				"create:crushing/diorite_recycling:14"
+			]
 		},
 		{
 			"source": "emerald_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/emerald_ore"
+			"recipeId": "create:crushing/emerald_ore:0",
+			"recipeIds": [
+				"create:crushing/emerald_ore:0"
+			]
 		},
 		{
 			"source": "gilded_blackstone",
 			"status": "migrated",
-			"recipeId": "create:crushing/gilded_blackstone"
+			"recipeId": "create:crushing/gilded_blackstone:0",
+			"recipeIds": [
+				"create:crushing/gilded_blackstone:0"
+			]
 		},
 		{
 			"source": "glowstone",
 			"status": "migrated",
-			"recipeId": "create:crushing/glowstone"
+			"recipeId": "create:crushing/glowstone:0",
+			"recipeIds": [
+				"create:crushing/glowstone:0"
+			]
 		},
 		{
 			"source": "gold_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/gold_ore"
+			"recipeId": "create:crushing/gold_ore:0",
+			"recipeIds": [
+				"create:crushing/gold_ore:0"
+			]
 		},
 		{
 			"source": "golden_horse_armor",
 			"status": "migrated",
-			"recipeId": "create:crushing/golden_horse_armor"
+			"recipeId": "create:crushing/golden_horse_armor:0",
+			"recipeIds": [
+				"create:crushing/golden_horse_armor:0"
+			]
 		},
 		{
 			"source": "gravel",
 			"status": "migrated",
-			"recipeId": "create:crushing/gravel"
+			"recipeId": "create:crushing/gravel:0",
+			"recipeIds": [
+				"create:crushing/gravel:0"
+			]
 		},
 		{
 			"source": "iron_horse_armor",
 			"status": "migrated",
-			"recipeId": "create:crushing/iron_horse_armor"
+			"recipeId": "create:crushing/iron_horse_armor:0",
+			"recipeIds": [
+				"create:crushing/iron_horse_armor:0"
+			]
 		},
 		{
 			"source": "iron_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/iron_ore"
+			"recipeId": "create:crushing/iron_ore:0",
+			"recipeIds": [
+				"create:crushing/iron_ore:0"
+			]
 		},
 		{
 			"source": "lapis_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/lapis_ore"
+			"recipeId": "create:crushing/lapis_ore:0",
+			"recipeIds": [
+				"create:crushing/lapis_ore:0"
+			]
 		},
 		{
 			"source": "lead_ore",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:ores/lead"
 		},
 		{
 			"source": "leather_horse_armor",
 			"status": "migrated",
-			"recipeId": "create:crushing/leather_horse_armor"
+			"recipeId": "create:crushing/leather_horse_armor:0",
+			"recipeIds": [
+				"create:crushing/leather_horse_armor:0"
+			]
 		},
 		{
 			"source": "nether_gold_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/nether_gold_ore"
+			"recipeId": "create:crushing/nether_gold_ore:0",
+			"recipeIds": [
+				"create:crushing/nether_gold_ore:0"
+			]
 		},
 		{
 			"source": "nether_quartz_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/nether_quartz_ore"
+			"recipeId": "create:crushing/nether_quartz_ore:0",
+			"recipeIds": [
+				"create:crushing/nether_quartz_ore:0"
+			]
 		},
 		{
 			"source": "nether_wart_block",
 			"status": "migrated",
-			"recipeId": "create:crushing/nether_wart_block"
+			"recipeId": "create:crushing/nether_wart_block:0",
+			"recipeIds": [
+				"create:crushing/nether_wart_block:0"
+			]
 		},
 		{
 			"source": "netherrack",
 			"status": "migrated",
-			"recipeId": "create:crushing/netherrack"
+			"recipeId": "create:crushing/netherrack:0",
+			"recipeIds": [
+				"create:crushing/netherrack:0"
+			]
 		},
 		{
 			"source": "nickel_ore",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:ores/nickel"
 		},
 		{
 			"source": "obsidian",
 			"status": "migrated",
-			"recipeId": "create:crushing/obsidian"
+			"recipeId": "create:crushing/obsidian:0",
+			"recipeIds": [
+				"create:crushing/obsidian:0"
+			]
 		},
 		{
 			"source": "ochrum",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/ochrum:0",
+			"recipeIds": [
+				"create:crushing/ochrum:0"
+			]
 		},
 		{
 			"source": "ochrum_recycling",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "migrated",
+			"recipeId": "create:crushing/ochrum_recycling:0",
+			"recipeIds": [
+				"create:crushing/ochrum_recycling:0",
+				"create:crushing/ochrum_recycling:1",
+				"create:crushing/ochrum_recycling:2",
+				"create:crushing/ochrum_recycling:3",
+				"create:crushing/ochrum_recycling:4",
+				"create:crushing/ochrum_recycling:5",
+				"create:crushing/ochrum_recycling:6",
+				"create:crushing/ochrum_recycling:7",
+				"create:crushing/ochrum_recycling:8",
+				"create:crushing/ochrum_recycling:9",
+				"create:crushing/ochrum_recycling:10",
+				"create:crushing/ochrum_recycling:11",
+				"create:crushing/ochrum_recycling:12",
+				"create:crushing/ochrum_recycling:13",
+				"create:crushing/ochrum_recycling:14"
+			]
 		},
 		{
 			"source": "osmium_ore",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:ores/osmium"
 		},
 		{
 			"source": "platinum_ore",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:ores/platinum"
 		},
 		{
 			"source": "prismarine_crystals",
 			"status": "migrated",
-			"recipeId": "create:crushing/prismarine_crystals"
+			"recipeId": "create:crushing/prismarine_crystals:0",
+			"recipeIds": [
+				"create:crushing/prismarine_crystals:0"
+			]
 		},
 		{
 			"source": "quicksilver_ore",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:ores/quicksilver"
 		},
 		{
 			"source": "raw_aluminum",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:raw_materials/aluminum"
 		},
 		{
 			"source": "raw_aluminum_block",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:storage_blocks/raw_aluminum"
 		},
 		{
 			"source": "raw_copper",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "migrated",
+			"recipeId": "create:crushing/raw_copper:0",
+			"recipeIds": [
+				"create:crushing/raw_copper:0"
+			]
 		},
 		{
 			"source": "raw_copper_block",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "migrated",
+			"recipeId": "create:crushing/raw_copper_block:0",
+			"recipeIds": [
+				"create:crushing/raw_copper_block:0"
+			]
 		},
 		{
 			"source": "raw_gold",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "migrated",
+			"recipeId": "create:crushing/raw_gold:0",
+			"recipeIds": [
+				"create:crushing/raw_gold:0"
+			]
 		},
 		{
 			"source": "raw_gold_block",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "migrated",
+			"recipeId": "create:crushing/raw_gold_block:0",
+			"recipeIds": [
+				"create:crushing/raw_gold_block:0"
+			]
 		},
 		{
 			"source": "raw_iron",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "migrated",
+			"recipeId": "create:crushing/raw_iron:0",
+			"recipeIds": [
+				"create:crushing/raw_iron:0"
+			]
 		},
 		{
 			"source": "raw_iron_block",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "migrated",
+			"recipeId": "create:crushing/raw_iron_block:0",
+			"recipeIds": [
+				"create:crushing/raw_iron_block:0"
+			]
 		},
 		{
 			"source": "raw_lead",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:raw_materials/lead"
 		},
 		{
 			"source": "raw_lead_block",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:storage_blocks/raw_lead"
 		},
 		{
 			"source": "raw_nickel",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:raw_materials/nickel"
 		},
 		{
 			"source": "raw_nickel_block",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:storage_blocks/raw_nickel"
 		},
 		{
 			"source": "raw_osmium",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:raw_materials/osmium"
 		},
 		{
 			"source": "raw_osmium_block",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:storage_blocks/raw_osmium"
 		},
 		{
 			"source": "raw_platinum",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:raw_materials/platinum"
 		},
 		{
 			"source": "raw_platinum_block",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:storage_blocks/raw_platinum"
 		},
 		{
 			"source": "raw_quicksilver",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:raw_materials/quicksilver"
 		},
 		{
 			"source": "raw_quicksilver_block",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:storage_blocks/raw_quicksilver"
 		},
 		{
 			"source": "raw_silver",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:raw_materials/silver"
 		},
 		{
 			"source": "raw_silver_block",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:storage_blocks/raw_silver"
 		},
 		{
 			"source": "raw_tin",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:raw_materials/tin"
 		},
 		{
 			"source": "raw_tin_block",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:storage_blocks/raw_tin"
 		},
 		{
 			"source": "raw_uranium",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:raw_materials/uranium"
 		},
 		{
 			"source": "raw_uranium_block",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:storage_blocks/raw_uranium"
 		},
 		{
 			"source": "raw_zinc",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "migrated",
+			"recipeId": "create:crushing/raw_zinc:0",
+			"recipeIds": [
+				"create:crushing/raw_zinc:0"
+			]
 		},
 		{
 			"source": "raw_zinc_block",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "migrated",
+			"recipeId": "create:crushing/raw_zinc_block:0",
+			"recipeIds": [
+				"create:crushing/raw_zinc_block:0"
+			]
 		},
 		{
 			"source": "redstone_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/redstone_ore"
+			"recipeId": "create:crushing/redstone_ore:0",
+			"recipeIds": [
+				"create:crushing/redstone_ore:0"
+			]
 		},
 		{
 			"source": "silver_ore",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:ores/silver"
 		},
 		{
 			"source": "tin_ore",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:ores/tin"
 		},
 		{
 			"source": "tuff",
 			"status": "migrated",
-			"recipeId": "create:crushing/tuff"
+			"recipeId": "create:crushing/tuff:0",
+			"recipeIds": [
+				"create:crushing/tuff:0"
+			]
 		},
 		{
 			"source": "tuff_recycling",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "migrated",
+			"recipeId": "create:crushing/tuff_recycling:0",
+			"recipeIds": [
+				"create:crushing/tuff_recycling:0",
+				"create:crushing/tuff_recycling:1",
+				"create:crushing/tuff_recycling:2",
+				"create:crushing/tuff_recycling:3",
+				"create:crushing/tuff_recycling:4",
+				"create:crushing/tuff_recycling:5",
+				"create:crushing/tuff_recycling:6",
+				"create:crushing/tuff_recycling:7",
+				"create:crushing/tuff_recycling:8",
+				"create:crushing/tuff_recycling:9",
+				"create:crushing/tuff_recycling:10",
+				"create:crushing/tuff_recycling:11",
+				"create:crushing/tuff_recycling:12",
+				"create:crushing/tuff_recycling:13",
+				"create:crushing/tuff_recycling:14"
+			]
 		},
 		{
 			"source": "uranium_ore",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_tag:c:ores/uranium"
 		},
 		{
 			"source": "veridium",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:crushing/veridium:0",
+			"recipeIds": [
+				"create:crushing/veridium:0"
+			]
 		},
 		{
 			"source": "veridium_recycling",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "migrated",
+			"recipeId": "create:crushing/veridium_recycling:0",
+			"recipeIds": [
+				"create:crushing/veridium_recycling:0",
+				"create:crushing/veridium_recycling:1",
+				"create:crushing/veridium_recycling:2",
+				"create:crushing/veridium_recycling:3",
+				"create:crushing/veridium_recycling:4",
+				"create:crushing/veridium_recycling:5",
+				"create:crushing/veridium_recycling:6",
+				"create:crushing/veridium_recycling:7",
+				"create:crushing/veridium_recycling:8",
+				"create:crushing/veridium_recycling:9",
+				"create:crushing/veridium_recycling:10",
+				"create:crushing/veridium_recycling:11",
+				"create:crushing/veridium_recycling:12",
+				"create:crushing/veridium_recycling:13",
+				"create:crushing/veridium_recycling:14"
+			]
 		},
 		{
 			"source": "wool",
-			"status": "manual_specification",
-			"reason": "unsupported_recipe_shape"
+			"status": "migrated",
+			"recipeId": "create:crushing/wool:0",
+			"recipeIds": [
+				"create:crushing/wool:0",
+				"create:crushing/wool:1",
+				"create:crushing/wool:2",
+				"create:crushing/wool:3",
+				"create:crushing/wool:4",
+				"create:crushing/wool:5",
+				"create:crushing/wool:6",
+				"create:crushing/wool:7",
+				"create:crushing/wool:8",
+				"create:crushing/wool:9",
+				"create:crushing/wool:10",
+				"create:crushing/wool:11",
+				"create:crushing/wool:12",
+				"create:crushing/wool:13",
+				"create:crushing/wool:14",
+				"create:crushing/wool:15"
+			]
 		},
 		{
 			"source": "zinc_ore",
 			"status": "migrated",
-			"recipeId": "create:crushing/zinc_ore"
+			"recipeId": "create:crushing/zinc_ore:0",
+			"recipeIds": [
+				"create:crushing/zinc_ore:0"
+			]
 		}
 	]
 }

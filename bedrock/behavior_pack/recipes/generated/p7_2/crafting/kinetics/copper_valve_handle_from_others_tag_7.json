@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/copper_valve_handle_from_others_tag_7"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:light_blue_valve_handle"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:copper_valve_handle"
+    }
+  }
+}

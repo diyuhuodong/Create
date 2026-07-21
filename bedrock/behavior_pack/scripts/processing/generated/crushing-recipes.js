@@ -1,10 +1,10 @@
 // Generated from src/generated/resources/data/create/recipe/crushing.
 export const CRUSHING_RECIPES = [
 	{
-		"id": "create:crushing/amethyst_block",
+		"id": "create:crushing/amethyst_block:0",
 		"input": {
-			"typeId": "minecraft:amethyst_block",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:amethyst_block"
 		},
 		"processingTicks": 150,
 		"outputs": [
@@ -21,10 +21,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/amethyst_cluster",
+		"id": "create:crushing/amethyst_cluster:0",
 		"input": {
-			"typeId": "minecraft:amethyst_cluster",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:amethyst_cluster"
 		},
 		"processingTicks": 150,
 		"outputs": [
@@ -41,10 +41,330 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/blaze_rod",
+		"id": "create:crushing/asurine_recycling:0",
 		"input": {
-			"typeId": "minecraft:blaze_rod",
-			"count": 1
+			"count": 1,
+			"typeId": "createbedrock:asurine"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 0.3
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.3
+			}
+		]
+	},
+	{
+		"id": "create:crushing/asurine_recycling:1",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:asurine_pillar"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 0.3
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.3
+			}
+		]
+	},
+	{
+		"id": "create:crushing/asurine_recycling:10",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:polished_cut_asurine_stairs"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 0.3
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.3
+			}
+		]
+	},
+	{
+		"id": "create:crushing/asurine_recycling:11",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:polished_cut_asurine_wall"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 0.3
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.3
+			}
+		]
+	},
+	{
+		"id": "create:crushing/asurine_recycling:12",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:small_asurine_brick_stairs"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 0.3
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.3
+			}
+		]
+	},
+	{
+		"id": "create:crushing/asurine_recycling:13",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:small_asurine_brick_wall"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 0.3
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.3
+			}
+		]
+	},
+	{
+		"id": "create:crushing/asurine_recycling:14",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:small_asurine_bricks"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 0.3
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.3
+			}
+		]
+	},
+	{
+		"id": "create:crushing/asurine_recycling:2",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_asurine"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 0.3
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.3
+			}
+		]
+	},
+	{
+		"id": "create:crushing/asurine_recycling:3",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_asurine_brick_stairs"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 0.3
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.3
+			}
+		]
+	},
+	{
+		"id": "create:crushing/asurine_recycling:4",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_asurine_brick_wall"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 0.3
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.3
+			}
+		]
+	},
+	{
+		"id": "create:crushing/asurine_recycling:5",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_asurine_bricks"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 0.3
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.3
+			}
+		]
+	},
+	{
+		"id": "create:crushing/asurine_recycling:6",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_asurine_stairs"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 0.3
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.3
+			}
+		]
+	},
+	{
+		"id": "create:crushing/asurine_recycling:7",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_asurine_wall"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 0.3
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.3
+			}
+		]
+	},
+	{
+		"id": "create:crushing/asurine_recycling:8",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:layered_asurine"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 0.3
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.3
+			}
+		]
+	},
+	{
+		"id": "create:crushing/asurine_recycling:9",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:polished_cut_asurine"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 0.3
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.3
+			}
+		]
+	},
+	{
+		"id": "create:crushing/asurine:0",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:asurine"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 0.3
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.3
+			}
+		]
+	},
+	{
+		"id": "create:crushing/blaze_rod:0",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:blaze_rod"
 		},
 		"processingTicks": 100,
 		"outputs": [
@@ -61,10 +381,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/coal_ore",
+		"id": "create:crushing/coal_ore:0",
 		"input": {
-			"typeId": "minecraft:coal_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:coal_ore"
 		},
 		"processingTicks": 150,
 		"outputs": [
@@ -91,10 +411,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/copper_ore",
+		"id": "create:crushing/copper_ore:0",
 		"input": {
-			"typeId": "minecraft:copper_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:copper_ore"
 		},
 		"processingTicks": 250,
 		"outputs": [
@@ -121,10 +441,330 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/deepslate_coal_ore",
+		"id": "create:crushing/crimsite_recycling:0",
 		"input": {
-			"typeId": "minecraft:deepslate_coal_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "createbedrock:crimsite"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 0.4
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.4
+			}
+		]
+	},
+	{
+		"id": "create:crushing/crimsite_recycling:1",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:crimsite_pillar"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 0.4
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.4
+			}
+		]
+	},
+	{
+		"id": "create:crushing/crimsite_recycling:10",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:polished_cut_crimsite_stairs"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 0.4
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.4
+			}
+		]
+	},
+	{
+		"id": "create:crushing/crimsite_recycling:11",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:polished_cut_crimsite_wall"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 0.4
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.4
+			}
+		]
+	},
+	{
+		"id": "create:crushing/crimsite_recycling:12",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:small_crimsite_brick_stairs"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 0.4
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.4
+			}
+		]
+	},
+	{
+		"id": "create:crushing/crimsite_recycling:13",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:small_crimsite_brick_wall"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 0.4
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.4
+			}
+		]
+	},
+	{
+		"id": "create:crushing/crimsite_recycling:14",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:small_crimsite_bricks"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 0.4
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.4
+			}
+		]
+	},
+	{
+		"id": "create:crushing/crimsite_recycling:2",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_crimsite"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 0.4
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.4
+			}
+		]
+	},
+	{
+		"id": "create:crushing/crimsite_recycling:3",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_crimsite_brick_stairs"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 0.4
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.4
+			}
+		]
+	},
+	{
+		"id": "create:crushing/crimsite_recycling:4",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_crimsite_brick_wall"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 0.4
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.4
+			}
+		]
+	},
+	{
+		"id": "create:crushing/crimsite_recycling:5",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_crimsite_bricks"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 0.4
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.4
+			}
+		]
+	},
+	{
+		"id": "create:crushing/crimsite_recycling:6",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_crimsite_stairs"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 0.4
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.4
+			}
+		]
+	},
+	{
+		"id": "create:crushing/crimsite_recycling:7",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_crimsite_wall"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 0.4
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.4
+			}
+		]
+	},
+	{
+		"id": "create:crushing/crimsite_recycling:8",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:layered_crimsite"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 0.4
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.4
+			}
+		]
+	},
+	{
+		"id": "create:crushing/crimsite_recycling:9",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:polished_cut_crimsite"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 0.4
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.4
+			}
+		]
+	},
+	{
+		"id": "create:crushing/crimsite:0",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:crimsite"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 0.4
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.4
+			}
+		]
+	},
+	{
+		"id": "create:crushing/deepslate_coal_ore:0",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:deepslate_coal_ore"
 		},
 		"processingTicks": 300,
 		"outputs": [
@@ -151,10 +791,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/deepslate_copper_ore",
+		"id": "create:crushing/deepslate_copper_ore:0",
 		"input": {
-			"typeId": "minecraft:deepslate_copper_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:deepslate_copper_ore"
 		},
 		"processingTicks": 350,
 		"outputs": [
@@ -181,10 +821,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/deepslate_diamond_ore",
+		"id": "create:crushing/deepslate_diamond_ore:0",
 		"input": {
-			"typeId": "minecraft:deepslate_diamond_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:deepslate_diamond_ore"
 		},
 		"processingTicks": 450,
 		"outputs": [
@@ -211,10 +851,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/deepslate_emerald_ore",
+		"id": "create:crushing/deepslate_emerald_ore:0",
 		"input": {
-			"typeId": "minecraft:deepslate_emerald_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:deepslate_emerald_ore"
 		},
 		"processingTicks": 450,
 		"outputs": [
@@ -241,10 +881,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/deepslate_gold_ore",
+		"id": "create:crushing/deepslate_gold_ore:0",
 		"input": {
-			"typeId": "minecraft:deepslate_gold_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:deepslate_gold_ore"
 		},
 		"processingTicks": 350,
 		"outputs": [
@@ -271,10 +911,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/deepslate_iron_ore",
+		"id": "create:crushing/deepslate_iron_ore:0",
 		"input": {
-			"typeId": "minecraft:deepslate_iron_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:deepslate_iron_ore"
 		},
 		"processingTicks": 350,
 		"outputs": [
@@ -301,10 +941,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/deepslate_lapis_ore",
+		"id": "create:crushing/deepslate_lapis_ore:0",
 		"input": {
-			"typeId": "minecraft:deepslate_lapis_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:deepslate_lapis_ore"
 		},
 		"processingTicks": 350,
 		"outputs": [
@@ -331,10 +971,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/deepslate_redstone_ore",
+		"id": "create:crushing/deepslate_redstone_ore:0",
 		"input": {
-			"typeId": "minecraft:deepslate_redstone_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:deepslate_redstone_ore"
 		},
 		"processingTicks": 350,
 		"outputs": [
@@ -361,10 +1001,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/deepslate_zinc_ore",
+		"id": "create:crushing/deepslate_zinc_ore:0",
 		"input": {
-			"typeId": "createbedrock:deepslate_zinc_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "createbedrock:deepslate_zinc_ore"
 		},
 		"processingTicks": 350,
 		"outputs": [
@@ -391,10 +1031,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/diamond_horse_armor",
+		"id": "create:crushing/diamond_horse_armor:0",
 		"input": {
-			"typeId": "minecraft:diamond_horse_armor",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:diamond_horse_armor"
 		},
 		"processingTicks": 200,
 		"outputs": [
@@ -421,10 +1061,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/diamond_ore",
+		"id": "create:crushing/diamond_ore:0",
 		"input": {
-			"typeId": "minecraft:diamond_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:diamond_ore"
 		},
 		"processingTicks": 350,
 		"outputs": [
@@ -451,10 +1091,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/diorite",
+		"id": "create:crushing/diorite_recycling:0",
 		"input": {
-			"typeId": "minecraft:diorite",
-			"count": 1
+			"count": 1,
+			"typeId": "createbedrock:cut_diorite"
 		},
 		"processingTicks": 350,
 		"outputs": [
@@ -466,10 +1106,235 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/emerald_ore",
+		"id": "create:crushing/diorite_recycling:1",
 		"input": {
-			"typeId": "minecraft:emerald_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "createbedrock:cut_diorite_brick_stairs"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:quartz",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/diorite_recycling:10",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:polished_cut_diorite_wall"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:quartz",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/diorite_recycling:11",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:small_diorite_brick_stairs"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:quartz",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/diorite_recycling:12",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:small_diorite_brick_wall"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:quartz",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/diorite_recycling:13",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:small_diorite_bricks"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:quartz",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/diorite_recycling:14",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:diorite"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:quartz",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/diorite_recycling:2",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_diorite_brick_wall"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:quartz",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/diorite_recycling:3",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_diorite_bricks"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:quartz",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/diorite_recycling:4",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_diorite_stairs"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:quartz",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/diorite_recycling:5",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_diorite_wall"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:quartz",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/diorite_recycling:6",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:diorite_pillar"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:quartz",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/diorite_recycling:7",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:layered_diorite"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:quartz",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/diorite_recycling:8",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:polished_cut_diorite"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:quartz",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/diorite_recycling:9",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:polished_cut_diorite_stairs"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:quartz",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/diorite:0",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:diorite"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:quartz",
+				"count": 1,
+				"chance": 0.25
+			}
+		]
+	},
+	{
+		"id": "create:crushing/emerald_ore:0",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:emerald_ore"
 		},
 		"processingTicks": 350,
 		"outputs": [
@@ -496,10 +1361,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/gilded_blackstone",
+		"id": "create:crushing/gilded_blackstone:0",
 		"input": {
-			"typeId": "minecraft:gilded_blackstone",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:gilded_blackstone"
 		},
 		"processingTicks": 400,
 		"outputs": [
@@ -521,10 +1386,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/glowstone",
+		"id": "create:crushing/glowstone:0",
 		"input": {
-			"typeId": "minecraft:glowstone",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:glowstone"
 		},
 		"processingTicks": 150,
 		"outputs": [
@@ -541,10 +1406,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/gold_ore",
+		"id": "create:crushing/gold_ore:0",
 		"input": {
-			"typeId": "minecraft:gold_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:gold_ore"
 		},
 		"processingTicks": 250,
 		"outputs": [
@@ -571,10 +1436,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/golden_horse_armor",
+		"id": "create:crushing/golden_horse_armor:0",
 		"input": {
-			"typeId": "minecraft:golden_horse_armor",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:golden_horse_armor"
 		},
 		"processingTicks": 200,
 		"outputs": [
@@ -606,10 +1471,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/gravel",
+		"id": "create:crushing/gravel:0",
 		"input": {
-			"typeId": "minecraft:gravel",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:gravel"
 		},
 		"processingTicks": 250,
 		"outputs": [
@@ -631,10 +1496,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/iron_horse_armor",
+		"id": "create:crushing/iron_horse_armor:0",
 		"input": {
-			"typeId": "minecraft:iron_horse_armor",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:iron_horse_armor"
 		},
 		"processingTicks": 200,
 		"outputs": [
@@ -666,10 +1531,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/iron_ore",
+		"id": "create:crushing/iron_ore:0",
 		"input": {
-			"typeId": "minecraft:iron_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:iron_ore"
 		},
 		"processingTicks": 250,
 		"outputs": [
@@ -696,10 +1561,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/lapis_ore",
+		"id": "create:crushing/lapis_ore:0",
 		"input": {
-			"typeId": "minecraft:lapis_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:lapis_ore"
 		},
 		"processingTicks": 250,
 		"outputs": [
@@ -726,10 +1591,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/leather_horse_armor",
+		"id": "create:crushing/leather_horse_armor:0",
 		"input": {
-			"typeId": "minecraft:leather_horse_armor",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:leather_horse_armor"
 		},
 		"processingTicks": 200,
 		"outputs": [
@@ -746,10 +1611,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/nether_gold_ore",
+		"id": "create:crushing/nether_gold_ore:0",
 		"input": {
-			"typeId": "minecraft:nether_gold_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:nether_gold_ore"
 		},
 		"processingTicks": 350,
 		"outputs": [
@@ -771,10 +1636,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/nether_quartz_ore",
+		"id": "create:crushing/nether_quartz_ore:0",
 		"input": {
-			"typeId": "minecraft:nether_quartz_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:nether_quartz_ore"
 		},
 		"processingTicks": 350,
 		"outputs": [
@@ -801,10 +1666,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/nether_wart_block",
+		"id": "create:crushing/nether_wart_block:0",
 		"input": {
-			"typeId": "minecraft:nether_wart_block",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:nether_wart_block"
 		},
 		"processingTicks": 150,
 		"outputs": [
@@ -816,10 +1681,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/netherrack",
+		"id": "create:crushing/netherrack:0",
 		"input": {
-			"typeId": "minecraft:netherrack",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:netherrack"
 		},
 		"processingTicks": 250,
 		"outputs": [
@@ -836,10 +1701,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/obsidian",
+		"id": "create:crushing/obsidian:0",
 		"input": {
-			"typeId": "minecraft:obsidian",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:obsidian"
 		},
 		"processingTicks": 500,
 		"outputs": [
@@ -856,10 +1721,330 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/prismarine_crystals",
+		"id": "create:crushing/ochrum_recycling:0",
 		"input": {
-			"typeId": "minecraft:prismarine_crystals",
-			"count": 1
+			"count": 1,
+			"typeId": "createbedrock:cut_ochrum"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 0.2
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.2
+			}
+		]
+	},
+	{
+		"id": "create:crushing/ochrum_recycling:1",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_ochrum_brick_stairs"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 0.2
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.2
+			}
+		]
+	},
+	{
+		"id": "create:crushing/ochrum_recycling:10",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:polished_cut_ochrum_stairs"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 0.2
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.2
+			}
+		]
+	},
+	{
+		"id": "create:crushing/ochrum_recycling:11",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:polished_cut_ochrum_wall"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 0.2
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.2
+			}
+		]
+	},
+	{
+		"id": "create:crushing/ochrum_recycling:12",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:small_ochrum_brick_stairs"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 0.2
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.2
+			}
+		]
+	},
+	{
+		"id": "create:crushing/ochrum_recycling:13",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:small_ochrum_brick_wall"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 0.2
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.2
+			}
+		]
+	},
+	{
+		"id": "create:crushing/ochrum_recycling:14",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:small_ochrum_bricks"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 0.2
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.2
+			}
+		]
+	},
+	{
+		"id": "create:crushing/ochrum_recycling:2",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_ochrum_brick_wall"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 0.2
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.2
+			}
+		]
+	},
+	{
+		"id": "create:crushing/ochrum_recycling:3",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_ochrum_bricks"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 0.2
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.2
+			}
+		]
+	},
+	{
+		"id": "create:crushing/ochrum_recycling:4",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_ochrum_stairs"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 0.2
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.2
+			}
+		]
+	},
+	{
+		"id": "create:crushing/ochrum_recycling:5",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_ochrum_wall"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 0.2
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.2
+			}
+		]
+	},
+	{
+		"id": "create:crushing/ochrum_recycling:6",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:layered_ochrum"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 0.2
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.2
+			}
+		]
+	},
+	{
+		"id": "create:crushing/ochrum_recycling:7",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:ochrum"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 0.2
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.2
+			}
+		]
+	},
+	{
+		"id": "create:crushing/ochrum_recycling:8",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:ochrum_pillar"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 0.2
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.2
+			}
+		]
+	},
+	{
+		"id": "create:crushing/ochrum_recycling:9",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:polished_cut_ochrum"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 0.2
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.2
+			}
+		]
+	},
+	{
+		"id": "create:crushing/ochrum:0",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:ochrum"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 0.2
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.2
+			}
+		]
+	},
+	{
+		"id": "create:crushing/prismarine_crystals:0",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:prismarine_crystals"
 		},
 		"processingTicks": 150,
 		"outputs": [
@@ -881,10 +2066,170 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/redstone_ore",
+		"id": "create:crushing/raw_copper_block:0",
 		"input": {
-			"typeId": "minecraft:redstone_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "minecraft:raw_copper_block"
+		},
+		"processingTicks": 400,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 9,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 9,
+				"chance": 0.75
+			}
+		]
+	},
+	{
+		"id": "create:crushing/raw_copper:0",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:raw_copper"
+		},
+		"processingTicks": 400,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 1,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			}
+		]
+	},
+	{
+		"id": "create:crushing/raw_gold_block:0",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:raw_gold_block"
+		},
+		"processingTicks": 400,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 9,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 18,
+				"chance": 0.75
+			}
+		]
+	},
+	{
+		"id": "create:crushing/raw_gold:0",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:raw_gold"
+		},
+		"processingTicks": 400,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_gold",
+				"count": 1,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 2,
+				"chance": 0.75
+			}
+		]
+	},
+	{
+		"id": "create:crushing/raw_iron_block:0",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:raw_iron_block"
+		},
+		"processingTicks": 400,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 9,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 9,
+				"chance": 0.75
+			}
+		]
+	},
+	{
+		"id": "create:crushing/raw_iron:0",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:raw_iron"
+		},
+		"processingTicks": 400,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_iron",
+				"count": 1,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			}
+		]
+	},
+	{
+		"id": "create:crushing/raw_zinc_block:0",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:raw_zinc_block"
+		},
+		"processingTicks": 400,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 9,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 9,
+				"chance": 0.75
+			}
+		]
+	},
+	{
+		"id": "create:crushing/raw_zinc:0",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:raw_zinc"
+		},
+		"processingTicks": 400,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_zinc",
+				"count": 1,
+				"chance": 1
+			},
+			{
+				"typeId": "createbedrock:experience_nugget",
+				"count": 1,
+				"chance": 0.75
+			}
+		]
+	},
+	{
+		"id": "create:crushing/redstone_ore:0",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:redstone_ore"
 		},
 		"processingTicks": 250,
 		"outputs": [
@@ -911,10 +2256,10 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/tuff",
+		"id": "create:crushing/tuff_recycling:0",
 		"input": {
-			"typeId": "minecraft:tuff",
-			"count": 1
+			"count": 1,
+			"typeId": "createbedrock:cut_tuff"
 		},
 		"processingTicks": 350,
 		"outputs": [
@@ -946,10 +2291,1175 @@ export const CRUSHING_RECIPES = [
 		]
 	},
 	{
-		"id": "create:crushing/zinc_ore",
+		"id": "create:crushing/tuff_recycling:1",
 		"input": {
-			"typeId": "createbedrock:zinc_ore",
-			"count": 1
+			"count": 1,
+			"typeId": "createbedrock:cut_tuff_brick_stairs"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:flint",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:crushing/tuff_recycling:10",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:small_tuff_brick_stairs"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:flint",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:crushing/tuff_recycling:11",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:small_tuff_brick_wall"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:flint",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:crushing/tuff_recycling:12",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:small_tuff_bricks"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:flint",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:crushing/tuff_recycling:13",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:tuff_pillar"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:flint",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:crushing/tuff_recycling:14",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:tuff"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:flint",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:crushing/tuff_recycling:2",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_tuff_brick_wall"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:flint",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:crushing/tuff_recycling:3",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_tuff_bricks"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:flint",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:crushing/tuff_recycling:4",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_tuff_stairs"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:flint",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:crushing/tuff_recycling:5",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_tuff_wall"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:flint",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:crushing/tuff_recycling:6",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:layered_tuff"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:flint",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:crushing/tuff_recycling:7",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:polished_cut_tuff"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:flint",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:crushing/tuff_recycling:8",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:polished_cut_tuff_stairs"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:flint",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:crushing/tuff_recycling:9",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:polished_cut_tuff_wall"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:flint",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:crushing/tuff:0",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:tuff"
+		},
+		"processingTicks": 350,
+		"outputs": [
+			{
+				"typeId": "minecraft:flint",
+				"count": 1,
+				"chance": 0.25
+			},
+			{
+				"typeId": "minecraft:gold_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "createbedrock:zinc_nugget",
+				"count": 1,
+				"chance": 0.1
+			},
+			{
+				"typeId": "minecraft:iron_nugget",
+				"count": 1,
+				"chance": 0.1
+			}
+		]
+	},
+	{
+		"id": "create:crushing/veridium_recycling:0",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_veridium"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 1,
+				"chance": 0.8
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.8
+			}
+		]
+	},
+	{
+		"id": "create:crushing/veridium_recycling:1",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_veridium_brick_stairs"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 1,
+				"chance": 0.8
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.8
+			}
+		]
+	},
+	{
+		"id": "create:crushing/veridium_recycling:10",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:small_veridium_brick_stairs"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 1,
+				"chance": 0.8
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.8
+			}
+		]
+	},
+	{
+		"id": "create:crushing/veridium_recycling:11",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:small_veridium_brick_wall"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 1,
+				"chance": 0.8
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.8
+			}
+		]
+	},
+	{
+		"id": "create:crushing/veridium_recycling:12",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:small_veridium_bricks"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 1,
+				"chance": 0.8
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.8
+			}
+		]
+	},
+	{
+		"id": "create:crushing/veridium_recycling:13",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:veridium"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 1,
+				"chance": 0.8
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.8
+			}
+		]
+	},
+	{
+		"id": "create:crushing/veridium_recycling:14",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:veridium_pillar"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 1,
+				"chance": 0.8
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.8
+			}
+		]
+	},
+	{
+		"id": "create:crushing/veridium_recycling:2",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_veridium_brick_wall"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 1,
+				"chance": 0.8
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.8
+			}
+		]
+	},
+	{
+		"id": "create:crushing/veridium_recycling:3",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_veridium_bricks"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 1,
+				"chance": 0.8
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.8
+			}
+		]
+	},
+	{
+		"id": "create:crushing/veridium_recycling:4",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_veridium_stairs"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 1,
+				"chance": 0.8
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.8
+			}
+		]
+	},
+	{
+		"id": "create:crushing/veridium_recycling:5",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:cut_veridium_wall"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 1,
+				"chance": 0.8
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.8
+			}
+		]
+	},
+	{
+		"id": "create:crushing/veridium_recycling:6",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:layered_veridium"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 1,
+				"chance": 0.8
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.8
+			}
+		]
+	},
+	{
+		"id": "create:crushing/veridium_recycling:7",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:polished_cut_veridium"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 1,
+				"chance": 0.8
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.8
+			}
+		]
+	},
+	{
+		"id": "create:crushing/veridium_recycling:8",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:polished_cut_veridium_stairs"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 1,
+				"chance": 0.8
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.8
+			}
+		]
+	},
+	{
+		"id": "create:crushing/veridium_recycling:9",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:polished_cut_veridium_wall"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 1,
+				"chance": 0.8
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.8
+			}
+		]
+	},
+	{
+		"id": "create:crushing/veridium:0",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:veridium"
+		},
+		"processingTicks": 250,
+		"outputs": [
+			{
+				"typeId": "createbedrock:crushed_raw_copper",
+				"count": 1,
+				"chance": 0.8
+			},
+			{
+				"typeId": "createbedrock:copper_nugget",
+				"count": 1,
+				"chance": 0.8
+			}
+		]
+	},
+	{
+		"id": "create:crushing/wool:0",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:black_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/wool:1",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:blue_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/wool:10",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:orange_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/wool:11",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:pink_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/wool:12",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:purple_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/wool:13",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:red_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/wool:14",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:white_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/wool:15",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:yellow_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/wool:2",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:brown_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/wool:3",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:cyan_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/wool:4",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:gray_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/wool:5",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:green_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/wool:6",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:light_blue_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/wool:7",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:light_gray_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/wool:8",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:lime_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/wool:9",
+		"input": {
+			"count": 1,
+			"typeId": "minecraft:magenta_wool"
+		},
+		"processingTicks": 100,
+		"outputs": [
+			{
+				"typeId": "minecraft:string",
+				"count": 2,
+				"chance": 1
+			},
+			{
+				"typeId": "minecraft:string",
+				"count": 1,
+				"chance": 0.5
+			}
+		]
+	},
+	{
+		"id": "create:crushing/zinc_ore:0",
+		"input": {
+			"count": 1,
+			"typeId": "createbedrock:zinc_ore"
 		},
 		"processingTicks": 250,
 		"outputs": [

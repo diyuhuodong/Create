@@ -96,6 +96,14 @@ export const KINETIC_BLOCKS = {
 		axes: ["x", "y", "z"],
 		axis: "y"
 	},
+	// Java registers Vertical Gearbox as the item form of a distinct gearbox
+	// variant. The Bedrock pack projects it as a placeable block while keeping
+	// the same three-axis transmission contract and persistent network node.
+	"createbedrock:vertical_gearbox": {
+		kind: "gearbox",
+		axes: ["x", "y", "z"],
+		axis: "y"
+	},
 	"createbedrock:clutch": {
 		kind: "clutch",
 		axis: "y"

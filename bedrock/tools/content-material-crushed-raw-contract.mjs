@@ -3,6 +3,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { JAVA_ITEM_TEXTURES } from "./import-java-assets.mjs";
+import { isSupportedProcessingItem } from "../behavior_pack/scripts/processing/processing-item-support.js";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultBedrockRoot = resolve(toolDirectory, "..");
@@ -20,11 +21,10 @@ async function fileExists(file) {
 export async function validateCrushedRawMaterials({ bedrockRoot = defaultBedrockRoot, built = false } = {}) {
 	const behaviorRoot = resolve(bedrockRoot, "behavior_pack");
 	const resourceRoot = resolve(bedrockRoot, "resource_pack");
-	const [atlas, crushing, fan, support] = await Promise.all([
+	const [atlas, crushing, fan] = await Promise.all([
 		readJson(resolve(resourceRoot, "textures", "item_texture.json")),
 		readFile(resolve(behaviorRoot, "scripts", "processing", "generated", "crushing-recipes.js"), "utf8"),
-		readFile(resolve(behaviorRoot, "scripts", "processing", "generated", "fan-recipes.js"), "utf8"),
-		readFile(resolve(behaviorRoot, "scripts", "processing", "processing-item-support.js"), "utf8")
+		readFile(resolve(behaviorRoot, "scripts", "processing", "generated", "fan-recipes.js"), "utf8")
 	]);
 	for (const metal of CRUSHED) {
 		const identifier = `createbedrock:crushed_raw_${metal}`;
@@ -39,8 +39,8 @@ export async function validateCrushedRawMaterials({ bedrockRoot = defaultBedrock
 			: resolve(repositoryRoot, `src/main/resources/assets/create/textures/item/crushed_raw_${metal}.png`);
 		if (!await fileExists(texture))
 			throw new Error(`Crushed ${metal} source or staged texture is missing`);
-		if (!support.includes(`"${identifier}"`))
-			throw new Error(`Crushed ${metal} is not admitted to the processing import whitelist`);
+		if (!isSupportedProcessingItem(identifier))
+			throw new Error(`Crushed ${metal} is not admitted to processing runtimes`);
 	}
 	for (const recipe of ["zinc_ore", "iron_ore", "copper_ore", "gold_ore"]) {
 		if (!crushing.includes(`create:crushing/${recipe}`))

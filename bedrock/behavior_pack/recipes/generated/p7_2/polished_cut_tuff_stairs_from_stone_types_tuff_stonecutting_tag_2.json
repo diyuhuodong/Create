@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/polished_cut_tuff_stairs_from_stone_types_tuff_stonecutting_tag_2"
+    },
+    "tags": [
+      "stonecutter"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:cut_tuff_brick_wall"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:polished_cut_tuff_stairs"
+    }
+  }
+}

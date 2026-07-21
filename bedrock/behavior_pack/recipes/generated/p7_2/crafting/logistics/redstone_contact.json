@@ -1,0 +1,31 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/logistics/redstone_contact"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      " S ",
+      "CWC",
+      "CCC"
+    ],
+    "key": {
+      "C": {
+        "item": "minecraft:cobblestone"
+      },
+      "S": {
+        "item": "createbedrock:iron_sheet"
+      },
+      "W": {
+        "item": "minecraft:redstone"
+      }
+    },
+    "result": {
+      "count": 2,
+      "item": "createbedrock:redstone_contact"
+    }
+  }
+}

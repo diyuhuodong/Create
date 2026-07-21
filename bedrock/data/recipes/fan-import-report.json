@@ -2,15 +2,202 @@
 	"processor": "fan",
 	"schemaVersion": 1,
 	"summary": {
-		"manual_specification": 22,
-		"migrated": 26,
-		"unsupported_dependency": 28
+		"manual_specification": 0,
+		"migrated": 60,
+		"unsupported_dependency": 37
 	},
 	"records": [
 		{
+			"recipeId": "create:fan/1_native/create:blasting/copper_ingot_from_crushed:0",
+			"recipeIds": [
+				"create:fan/1_native/create:blasting/copper_ingot_from_crushed:0"
+			],
+			"source": "create:blasting/copper_ingot_from_crushed",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/1_native/create:blasting/gold_ingot_from_crushed:0",
+			"recipeIds": [
+				"create:fan/1_native/create:blasting/gold_ingot_from_crushed:0"
+			],
+			"source": "create:blasting/gold_ingot_from_crushed",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/1_native/create:blasting/iron_ingot_from_crushed:0",
+			"recipeIds": [
+				"create:fan/1_native/create:blasting/iron_ingot_from_crushed:0"
+			],
+			"source": "create:blasting/iron_ingot_from_crushed",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/1_native/create:blasting/zinc_ingot_from_crushed:0",
+			"recipeIds": [
+				"create:fan/1_native/create:blasting/zinc_ingot_from_crushed:0"
+			],
+			"source": "create:blasting/zinc_ingot_from_crushed",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/1_native/create:blasting/zinc_ingot_from_ore:0",
+			"recipeIds": [
+				"create:fan/1_native/create:blasting/zinc_ingot_from_ore:0",
+				"create:fan/1_native/create:blasting/zinc_ingot_from_ore:1"
+			],
+			"source": "create:blasting/zinc_ingot_from_ore",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/1_native/create:blasting/zinc_ingot_from_raw_ore:0",
+			"recipeIds": [
+				"create:fan/1_native/create:blasting/zinc_ingot_from_raw_ore:0"
+			],
+			"source": "create:blasting/zinc_ingot_from_raw_ore",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/0_native/create:smelting/bread:0",
+			"recipeIds": [
+				"create:fan/0_native/create:smelting/bread:0"
+			],
+			"source": "create:smelting/bread",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/0_native/create:smelting/copper_ingot_from_crushed:0",
+			"recipeIds": [
+				"create:fan/0_native/create:smelting/copper_ingot_from_crushed:0"
+			],
+			"source": "create:smelting/copper_ingot_from_crushed",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/0_native/create:smelting/glass_from_framed_glass:0",
+			"recipeIds": [
+				"create:fan/0_native/create:smelting/glass_from_framed_glass:0"
+			],
+			"source": "create:smelting/glass_from_framed_glass",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/0_native/create:smelting/glass_from_horizontal_framed_glass:0",
+			"recipeIds": [
+				"create:fan/0_native/create:smelting/glass_from_horizontal_framed_glass:0"
+			],
+			"source": "create:smelting/glass_from_horizontal_framed_glass",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/0_native/create:smelting/glass_from_tiled_glass:0",
+			"recipeIds": [
+				"create:fan/0_native/create:smelting/glass_from_tiled_glass:0"
+			],
+			"source": "create:smelting/glass_from_tiled_glass",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/0_native/create:smelting/glass_from_vertical_framed_glass:0",
+			"recipeIds": [
+				"create:fan/0_native/create:smelting/glass_from_vertical_framed_glass:0"
+			],
+			"source": "create:smelting/glass_from_vertical_framed_glass",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/0_native/create:smelting/glass_pane_from_framed_glass_pane:0",
+			"recipeIds": [
+				"create:fan/0_native/create:smelting/glass_pane_from_framed_glass_pane:0"
+			],
+			"source": "create:smelting/glass_pane_from_framed_glass_pane",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/0_native/create:smelting/glass_pane_from_horizontal_framed_glass_pane:0",
+			"recipeIds": [
+				"create:fan/0_native/create:smelting/glass_pane_from_horizontal_framed_glass_pane:0"
+			],
+			"source": "create:smelting/glass_pane_from_horizontal_framed_glass_pane",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/0_native/create:smelting/glass_pane_from_tiled_glass_pane:0",
+			"recipeIds": [
+				"create:fan/0_native/create:smelting/glass_pane_from_tiled_glass_pane:0"
+			],
+			"source": "create:smelting/glass_pane_from_tiled_glass_pane",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/0_native/create:smelting/glass_pane_from_vertical_framed_glass_pane:0",
+			"recipeIds": [
+				"create:fan/0_native/create:smelting/glass_pane_from_vertical_framed_glass_pane:0"
+			],
+			"source": "create:smelting/glass_pane_from_vertical_framed_glass_pane",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/0_native/create:smelting/gold_ingot_from_crushed:0",
+			"recipeIds": [
+				"create:fan/0_native/create:smelting/gold_ingot_from_crushed:0"
+			],
+			"source": "create:smelting/gold_ingot_from_crushed",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/0_native/create:smelting/iron_ingot_from_crushed:0",
+			"recipeIds": [
+				"create:fan/0_native/create:smelting/iron_ingot_from_crushed:0"
+			],
+			"source": "create:smelting/iron_ingot_from_crushed",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/0_native/create:smelting/scoria:0",
+			"recipeIds": [
+				"create:fan/0_native/create:smelting/scoria:0"
+			],
+			"source": "create:smelting/scoria",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/0_native/create:smelting/zinc_ingot_from_crushed:0",
+			"recipeIds": [
+				"create:fan/0_native/create:smelting/zinc_ingot_from_crushed:0"
+			],
+			"source": "create:smelting/zinc_ingot_from_crushed",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/0_native/create:smelting/zinc_ingot_from_ore:0",
+			"recipeIds": [
+				"create:fan/0_native/create:smelting/zinc_ingot_from_ore:0",
+				"create:fan/0_native/create:smelting/zinc_ingot_from_ore:1"
+			],
+			"source": "create:smelting/zinc_ingot_from_ore",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/0_native/create:smelting/zinc_ingot_from_raw_ore:0",
+			"recipeIds": [
+				"create:fan/0_native/create:smelting/zinc_ingot_from_raw_ore:0"
+			],
+			"source": "create:smelting/zinc_ingot_from_raw_ore",
+			"status": "migrated"
+		},
+		{
+			"recipeId": "create:fan/2_native/create:smoking/bread:0",
+			"recipeIds": [
+				"create:fan/2_native/create:smoking/bread:0"
+			],
+			"source": "create:smoking/bread",
+			"status": "migrated"
+		},
+		{
 			"recipeId": "create:fan/haunting/blackstone:0",
 			"recipeIds": [
-				"create:fan/haunting/blackstone:0"
+				"create:fan/haunting/blackstone:0",
+				"create:fan/haunting/blackstone:1"
 			],
 			"source": "haunting/blackstone",
 			"status": "migrated"
@@ -50,9 +237,12 @@
 			"status": "migrated"
 		},
 		{
-			"reason": "unavailable_item",
+			"recipeId": "create:fan/haunting/haunted_bell:0",
+			"recipeIds": [
+				"create:fan/haunting/haunted_bell:0"
+			],
 			"source": "haunting/haunted_bell",
-			"status": "unsupported_dependency"
+			"status": "migrated"
 		},
 		{
 			"recipeId": "create:fan/haunting/infested_chiseled_stone_bricks:0",
@@ -103,9 +293,12 @@
 			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:fan/haunting/lapis_recycling:0",
+			"recipeIds": [
+				"create:fan/haunting/lapis_recycling:0"
+			],
 			"source": "haunting/lapis_recycling",
-			"status": "manual_specification"
+			"status": "migrated"
 		},
 		{
 			"recipeId": "create:fan/haunting/nether_brick:0",
@@ -140,14 +333,26 @@
 			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:fan/haunting/soul_sand:0",
+			"recipeIds": [
+				"create:fan/haunting/soul_sand:0",
+				"create:fan/haunting/soul_sand:1"
+			],
 			"source": "haunting/soul_sand",
-			"status": "manual_specification"
+			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:fan/haunting/soul_soil:0",
+			"recipeIds": [
+				"create:fan/haunting/soul_soil:0",
+				"create:fan/haunting/soul_soil:1",
+				"create:fan/haunting/soul_soil:2",
+				"create:fan/haunting/soul_soil:3",
+				"create:fan/haunting/soul_soil:4",
+				"create:fan/haunting/soul_soil:5"
+			],
 			"source": "haunting/soul_soil",
-			"status": "manual_specification"
+			"status": "migrated"
 		},
 		{
 			"recipeId": "create:fan/haunting/soul_torch:0",
@@ -166,24 +371,14 @@
 			"status": "migrated"
 		},
 		{
-			"reason": "runtime_recipe_registry_not_exported",
-			"source": "minecraft:blasting recipe registry",
-			"status": "manual_specification"
-		},
-		{
-			"reason": "runtime_recipe_registry_not_exported",
-			"source": "minecraft:smoking recipe registry",
-			"status": "manual_specification"
-		},
-		{
-			"reason": "unsupported_recipe_shape",
+			"reason": "optional_missing_mod:atmospheric",
 			"source": "splashing/atmospheric/arid_sand",
-			"status": "manual_specification"
+			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"reason": "optional_missing_mod:atmospheric",
 			"source": "splashing/atmospheric/red_arid_sand",
-			"status": "manual_specification"
+			"status": "unsupported_dependency"
 		},
 		{
 			"recipeId": "create:fan/splashing/crushed_raw_copper:0",
@@ -218,52 +413,52 @@
 			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"reason": "optional_missing_mod:endergetic",
 			"source": "splashing/endergetic/petrified_end_corrock",
-			"status": "manual_specification"
+			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"reason": "optional_missing_mod:endergetic",
 			"source": "splashing/endergetic/petrified_end_corrock_block",
-			"status": "manual_specification"
+			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"reason": "optional_missing_mod:endergetic",
 			"source": "splashing/endergetic/petrified_end_corrock_crown",
-			"status": "manual_specification"
+			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"reason": "optional_missing_mod:endergetic",
 			"source": "splashing/endergetic/petrified_nether_corrock",
-			"status": "manual_specification"
+			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"reason": "optional_missing_mod:endergetic",
 			"source": "splashing/endergetic/petrified_nether_corrock_block",
-			"status": "manual_specification"
+			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"reason": "optional_missing_mod:endergetic",
 			"source": "splashing/endergetic/petrified_nether_corrock_crown",
-			"status": "manual_specification"
+			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"reason": "optional_missing_mod:endergetic",
 			"source": "splashing/endergetic/petrified_overworld_corrock",
-			"status": "manual_specification"
+			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"reason": "optional_missing_mod:endergetic",
 			"source": "splashing/endergetic/petrified_overworld_corrock_block",
-			"status": "manual_specification"
+			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"reason": "optional_missing_mod:endergetic",
 			"source": "splashing/endergetic/petrified_overworld_corrock_crown",
-			"status": "manual_specification"
+			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:galosphere",
 			"source": "splashing/galosphere/crushed_raw_silver",
 			"status": "unsupported_dependency"
 		},
@@ -276,22 +471,22 @@
 			"status": "migrated"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:ic2",
 			"source": "splashing/ic2/crushed_raw_aluminum",
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:ic2",
 			"source": "splashing/ic2/crushed_raw_silver",
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:ic2",
 			"source": "splashing/ic2/crushed_raw_tin",
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:ic2",
 			"source": "splashing/ic2/crushed_raw_uranium",
 			"status": "unsupported_dependency"
 		},
@@ -304,49 +499,58 @@
 			"status": "migrated"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:iceandfire",
 			"source": "splashing/iceandfire/crushed_raw_silver",
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:immersiveengineering",
 			"source": "splashing/immersiveengineering/crushed_raw_aluminum",
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:immersiveengineering",
 			"source": "splashing/immersiveengineering/crushed_raw_lead",
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:immersiveengineering",
 			"source": "splashing/immersiveengineering/crushed_raw_nickel",
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:immersiveengineering",
 			"source": "splashing/immersiveengineering/crushed_raw_silver",
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:immersiveengineering",
 			"source": "splashing/immersiveengineering/crushed_raw_uranium",
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"recipeId": "create:fan/splashing/industrial_iron_block:0",
+			"recipeIds": [
+				"create:fan/splashing/industrial_iron_block:0"
+			],
 			"source": "splashing/industrial_iron_block",
-			"status": "unsupported_dependency"
+			"status": "migrated"
 		},
 		{
-			"reason": "unavailable_item",
+			"recipeId": "create:fan/splashing/industrial_iron_window:0",
+			"recipeIds": [
+				"create:fan/splashing/industrial_iron_window:0"
+			],
 			"source": "splashing/industrial_iron_window",
-			"status": "unsupported_dependency"
+			"status": "migrated"
 		},
 		{
-			"reason": "unavailable_item",
+			"recipeId": "create:fan/splashing/industrial_iron_window_pane:0",
+			"recipeIds": [
+				"create:fan/splashing/industrial_iron_window_pane:0"
+			],
 			"source": "splashing/industrial_iron_window_pane",
-			"status": "unsupported_dependency"
+			"status": "migrated"
 		},
 		{
 			"recipeId": "create:fan/splashing/magma_block:0",
@@ -357,39 +561,39 @@
 			"status": "migrated"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:mekanism",
 			"source": "splashing/mekanism/crushed_raw_lead",
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:mekanism",
 			"source": "splashing/mekanism/crushed_raw_osmium",
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:mekanism",
 			"source": "splashing/mekanism/crushed_raw_tin",
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:mekanism",
 			"source": "splashing/mekanism/crushed_raw_uranium",
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:oreganized",
 			"source": "splashing/oreganized/crushed_raw_lead",
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:oreganized",
 			"source": "splashing/oreganized/crushed_raw_silver",
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"reason": "optional_missing_mod:quark",
 			"source": "splashing/quark/rusty_iron_plate",
-			"status": "manual_specification"
+			"status": "unsupported_dependency"
 		},
 		{
 			"recipeId": "create:fan/splashing/red_sand:0",
@@ -416,54 +620,81 @@
 			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:fan/splashing/stained_glass:0",
+			"recipeIds": [
+				"create:fan/splashing/stained_glass:0"
+			],
 			"source": "splashing/stained_glass",
-			"status": "manual_specification"
+			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:fan/splashing/stained_glass_pane:0",
+			"recipeIds": [
+				"create:fan/splashing/stained_glass_pane:0"
+			],
 			"source": "splashing/stained_glass_pane",
-			"status": "manual_specification"
+			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"reason": "optional_missing_mod:supplementaries",
 			"source": "splashing/supplementaries/blackboard",
-			"status": "manual_specification"
+			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"reason": "optional_missing_mod:the_vault",
 			"source": "splashing/the_vault/ornate_chain_rusty",
-			"status": "manual_specification"
+			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:thermal",
 			"source": "splashing/thermal/crushed_raw_lead",
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:thermal",
 			"source": "splashing/thermal/crushed_raw_nickel",
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:thermal",
 			"source": "splashing/thermal/crushed_raw_silver",
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"reason": "optional_missing_mod:thermal",
 			"source": "splashing/thermal/crushed_raw_tin",
 			"status": "unsupported_dependency"
 		},
 		{
-			"reason": "unavailable_item",
+			"recipeId": "create:fan/splashing/wheat_flour:0",
+			"recipeIds": [
+				"create:fan/splashing/wheat_flour:0"
+			],
 			"source": "splashing/wheat_flour",
-			"status": "unsupported_dependency"
+			"status": "migrated"
 		},
 		{
-			"reason": "unsupported_recipe_shape",
+			"recipeId": "create:fan/splashing/wool:0",
+			"recipeIds": [
+				"create:fan/splashing/wool:0",
+				"create:fan/splashing/wool:1",
+				"create:fan/splashing/wool:2",
+				"create:fan/splashing/wool:3",
+				"create:fan/splashing/wool:4",
+				"create:fan/splashing/wool:5",
+				"create:fan/splashing/wool:6",
+				"create:fan/splashing/wool:7",
+				"create:fan/splashing/wool:8",
+				"create:fan/splashing/wool:9",
+				"create:fan/splashing/wool:10",
+				"create:fan/splashing/wool:11",
+				"create:fan/splashing/wool:12",
+				"create:fan/splashing/wool:13",
+				"create:fan/splashing/wool:14",
+				"create:fan/splashing/wool:15"
+			],
 			"source": "splashing/wool",
-			"status": "manual_specification"
+			"status": "migrated"
 		}
 	]
 }

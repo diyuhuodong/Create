@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/veridium_from_stone_types_veridium_stonecutting_tag_7"
+    },
+    "tags": [
+      "stonecutter"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:polished_cut_veridium"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:veridium"
+    }
+  }
+}

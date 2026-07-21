@@ -1,0 +1,20 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/polished_cut_veridium_slab_from_stone_types_veridium_stonecutting_tag_9"
+    },
+    "tags": [
+      "stonecutter"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:polished_cut_veridium_wall"
+      }
+    ],
+    "result": {
+      "count": 2,
+      "item": "createbedrock:polished_cut_veridium_slab"
+    }
+  }
+}

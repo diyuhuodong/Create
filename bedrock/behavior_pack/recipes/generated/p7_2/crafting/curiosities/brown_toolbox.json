@@ -1,0 +1,33 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/curiosities/brown_toolbox"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      " C ",
+      "SWS",
+      " L "
+    ],
+    "key": {
+      "C": {
+        "item": "createbedrock:cogwheel"
+      },
+      "L": {
+        "item": "minecraft:leather"
+      },
+      "S": {
+        "item": "createbedrock:golden_sheet"
+      },
+      "W": {
+        "item": "minecraft:chest"
+      }
+    },
+    "result": {
+      "item": "createbedrock:brown_toolbox"
+    }
+  }
+}

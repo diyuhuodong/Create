@@ -2,6 +2,7 @@ import { readFile, stat } from "node:fs/promises";
 import { resolve } from "node:path";
 
 import { JAVA_ITEM_TEXTURES } from "./import-java-assets.mjs";
+import { isSupportedProcessingItem } from "../behavior_pack/scripts/processing/processing-item-support.js";
 
 const CORE_ITEMS = [
 	"brass_sheet",
@@ -119,8 +120,7 @@ export async function validateCoreMaterialChain({ bedrockRoot, dataRoot = bedroc
 		&& recipe.input?.typeId === "createbedrock:brass_ingot"
 		&& recipe.outputs?.length === 1
 		&& recipe.outputs[0]?.typeId === "createbedrock:brass_sheet"), "brass-sheet mechanical-press recipe is missing");
-	const supportedItems = await readFile(resolve(behaviorRoot, "scripts", "processing", "processing-item-support.js"), "utf8");
-	assert(supportedItems.includes('"createbedrock:brass_sheet"'), "brass sheet is not accepted by processing runtimes");
+	assert(isSupportedProcessingItem("createbedrock:brass_sheet"), "brass sheet is not accepted by processing runtimes");
 
 	return { items: CORE_ITEMS.length, directRecipes: Object.keys(DIRECT_RECIPES).length + 1, pressingRecipes: 1 };
 }

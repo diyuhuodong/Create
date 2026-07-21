@@ -1,0 +1,13 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "createbedrock:industrial_iron_window_pane"
+        }
+      ]
+    }
+  ]
+}

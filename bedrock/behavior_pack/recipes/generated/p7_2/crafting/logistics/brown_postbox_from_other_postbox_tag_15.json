@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/logistics/brown_postbox_from_other_postbox_tag_15"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:brown_dye"
+      },
+      {
+        "item": "createbedrock:yellow_postbox"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:brown_postbox"
+    }
+  }
+}

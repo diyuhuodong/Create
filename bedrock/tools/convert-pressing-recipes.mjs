@@ -3,21 +3,19 @@ import { dirname, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
 	mapJavaProcessingIdentifier,
+	optionalMissingModDependency,
+	optionalMissingTagDependency,
 	processingImportReport,
 	supportsProcessingRecipeItems
 } from "./processing-recipe-import.js";
+import { expandProcessingIngredient, processingTagProjections } from "./processing-tag-projections.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(toolDirectory, "..");
 const repositoryRoot = resolve(bedrockRoot, "..");
 const sourceRoot = resolve(repositoryRoot, "src/generated/resources/data/create/recipe/pressing");
 const outputRoot = resolve(bedrockRoot, "behavior_pack/scripts/processing/generated");
-const TAG_ITEMS = {
-	"c:ingots/brass": ["createbedrock:brass_ingot"],
-	"c:ingots/copper": ["minecraft:copper_ingot"],
-	"c:ingots/gold": ["minecraft:gold_ingot"],
-	"c:ingots/iron": ["minecraft:iron_ingot"]
-};
+const TAG_ITEMS = await processingTagProjections(bedrockRoot);
 
 async function findJsonFiles(directory) {
 	const files = [];
@@ -34,11 +32,7 @@ async function findJsonFiles(directory) {
 function expandIngredient(ingredient) {
 	if (Array.isArray(ingredient))
 		return ingredient.flatMap(expandIngredient);
-	if (typeof ingredient?.item === "string")
-		return [mapJavaProcessingIdentifier(ingredient.item)];
-	if (typeof ingredient?.tag === "string")
-		return TAG_ITEMS[ingredient.tag] ?? [];
-	return [];
+	return expandProcessingIngredient(ingredient, TAG_ITEMS).map(entry => entry.typeId);
 }
 
 const recipes = [];
@@ -52,6 +46,16 @@ for (const file of await findJsonFiles(sourceRoot)) {
 		: undefined;
 	if (sourcePath.startsWith("compat/")) {
 		records.push({ source: sourcePath, status: "unsupported_dependency", reason: "compatibility_recipe" });
+		continue;
+	}
+	const optionalMod = optionalMissingModDependency(source);
+	if (optionalMod) {
+		records.push({ source: sourcePath, status: "unsupported_dependency", reason: `optional_missing_mod:${optionalMod}` });
+		continue;
+	}
+	const optionalDependency = optionalMissingTagDependency(source, TAG_ITEMS);
+	if (optionalDependency) {
+		records.push({ source: sourcePath, status: "unsupported_dependency", reason: `optional_missing_tag:${optionalDependency}` });
 		continue;
 	}
 	if (source.type !== "create:pressing" || !outputs || source.ingredients?.length !== 1) {

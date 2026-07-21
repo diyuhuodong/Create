@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/placard"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:item_frame"
+      },
+      {
+        "item": "createbedrock:brass_sheet"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:placard"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/kinetics/fluid_tank"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "B",
+      "C",
+      "B"
+    ],
+    "key": {
+      "B": {
+        "item": "createbedrock:copper_sheet"
+      },
+      "C": {
+        "item": "minecraft:barrel"
+      }
+    },
+    "result": {
+      "item": "createbedrock:fluid_tank"
+    }
+  }
+}

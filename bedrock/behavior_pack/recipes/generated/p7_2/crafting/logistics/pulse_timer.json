@@ -1,0 +1,32 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "createbedrock:p7_2/crafting/logistics/pulse_timer"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "RCT",
+      "SSS"
+    ],
+    "key": {
+      "C": {
+        "item": "createbedrock:brass_sheet"
+      },
+      "R": {
+        "item": "minecraft:amethyst_shard"
+      },
+      "S": {
+        "item": "minecraft:andesite"
+      },
+      "T": {
+        "item": "minecraft:redstone_torch"
+      }
+    },
+    "result": {
+      "item": "createbedrock:pulse_timer"
+    }
+  }
+}

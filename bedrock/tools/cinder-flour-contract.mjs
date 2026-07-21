@@ -2,6 +2,7 @@ import { readFile, stat } from "node:fs/promises";
 import { resolve } from "node:path";
 
 import { JAVA_ITEM_TEXTURES } from "./import-java-assets.mjs";
+import { isSupportedProcessingItem } from "../behavior_pack/scripts/processing/processing-item-support.js";
 
 async function readJson(file) {
 	return JSON.parse(await readFile(file, "utf8"));
@@ -29,12 +30,11 @@ export async function validateCinderFlourChain({ bedrockRoot, dataRoot = bedrock
 		throw new TypeError("P7.1B cinder-flour validation requires a Bedrock root");
 	const behaviorRoot = resolve(bedrockRoot, "behavior_pack");
 	const resourceRoot = resolve(bedrockRoot, "resource_pack");
-	const [item, atlas, english, chinese, supportedItems, crushingRecipes] = await Promise.all([
+	const [item, atlas, english, chinese, crushingRecipes] = await Promise.all([
 		readJson(resolve(behaviorRoot, "items", "cinder_flour.json")),
 		readJson(resolve(resourceRoot, "textures", "item_texture.json")),
 		readFile(resolve(resourceRoot, "texts", "en_US.lang"), "utf8"),
 		readFile(resolve(resourceRoot, "texts", "zh_CN.lang"), "utf8"),
-		readFile(resolve(behaviorRoot, "scripts", "processing", "processing-item-support.js"), "utf8"),
 		readJson(resolve(dataRoot, "data", "recipes", "crushing.json"))
 	]);
 	const createItem = item["minecraft:item"];
@@ -47,9 +47,9 @@ export async function validateCinderFlourChain({ bedrockRoot, dataRoot = bedrock
 	assert(JAVA_ITEM_TEXTURES.includes("cinder_flour.png"), "Java cinder-flour texture is not staged");
 	if (built)
 		assert(await fileExists(resolve(resourceRoot, "textures", "create_java", "item", "cinder_flour.png")), "Java cinder-flour texture was not staged in the build");
-	assert(supportedItems.includes('"createbedrock:cinder_flour"'), "cinder flour is not accepted by processing runtimes");
+	assert(isSupportedProcessingItem("createbedrock:cinder_flour"), "cinder flour is not accepted by processing runtimes");
 
-	const recipe = crushingRecipes.find(candidate => candidate.id === "create:crushing/netherrack");
+	const recipe = crushingRecipes.find(candidate => candidate.id === "create:crushing/netherrack:0");
 	assert(recipe?.input?.typeId === "minecraft:netherrack" && recipe.input?.count === 1, "netherrack crushing input is wrong");
 	assert(recipe?.processingTicks === 250, "netherrack crushing duration differs from Java");
 	assert(recipe?.outputs?.length === 2

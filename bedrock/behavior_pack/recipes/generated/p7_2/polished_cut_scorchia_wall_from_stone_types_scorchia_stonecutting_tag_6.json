@@ -1,0 +1,19 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p7_2/polished_cut_scorchia_wall_from_stone_types_scorchia_stonecutting_tag_6"
+    },
+    "tags": [
+      "stonecutter"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:layered_scorchia"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:polished_cut_scorchia_wall"
+    }
+  }
+}

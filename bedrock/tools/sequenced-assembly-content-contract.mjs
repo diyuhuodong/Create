@@ -2,6 +2,7 @@ import { readFile, stat } from "node:fs/promises";
 import { resolve } from "node:path";
 
 import { JAVA_ITEM_TEXTURES } from "./import-java-assets.mjs";
+import { isSupportedProcessingItem } from "../behavior_pack/scripts/processing/processing-item-support.js";
 
 const ITEM_CONTENT = [
 	{ id: "createbedrock:powdered_obsidian", name: "powdered_obsidian", visible: true },
@@ -38,11 +39,10 @@ export async function validateSequencedAssemblyContent({ bedrockRoot, dataRoot =
 		throw new TypeError("P7.2 sequenced-assembly content validation requires a Bedrock root");
 	const behaviorRoot = resolve(bedrockRoot, "behavior_pack");
 	const resourceRoot = resolve(bedrockRoot, "resource_pack");
-	const [atlas, english, chinese, supportedItems, crushingRecipes, sequenceRecipes] = await Promise.all([
+	const [atlas, english, chinese, crushingRecipes, sequenceRecipes] = await Promise.all([
 		readJson(resolve(resourceRoot, "textures", "item_texture.json")),
 		readFile(resolve(resourceRoot, "texts", "en_US.lang"), "utf8"),
 		readFile(resolve(resourceRoot, "texts", "zh_CN.lang"), "utf8"),
-		readFile(resolve(behaviorRoot, "scripts", "processing", "processing-item-support.js"), "utf8"),
 		readJson(resolve(dataRoot, "data", "recipes", "crushing.json")),
 		readJson(resolve(dataRoot, "data", "recipes", "sequenced-assembly.json"))
 	]);
@@ -61,8 +61,8 @@ export async function validateSequencedAssemblyContent({ bedrockRoot, dataRoot =
 		if (built)
 			assert(await fileExists(resolve(resourceRoot, "textures", "create_java", "item", `${entry.name}.png`)), `${entry.name} texture is missing from the build`);
 	}
-	assert(supportedItems.includes('"createbedrock:powdered_obsidian"'), "Powdered Obsidian is not accepted by processing runtimes");
-	const obsidian = crushingRecipes.find(recipe => recipe.id === "create:crushing/obsidian");
+	assert(isSupportedProcessingItem("createbedrock:powdered_obsidian"), "Powdered Obsidian is not accepted by processing runtimes");
+	const obsidian = crushingRecipes.find(recipe => recipe.id === "create:crushing/obsidian:0");
 	assert(obsidian?.input?.typeId === "minecraft:obsidian" && obsidian.input?.count === 1, "Obsidian crushing input differs from Java");
 	assert(obsidian?.processingTicks === 500, "Obsidian crushing duration differs from Java");
 	assert(obsidian.outputs?.length === 2 && obsidian.outputs[0]?.typeId === "createbedrock:powdered_obsidian"

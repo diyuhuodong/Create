@@ -2,20 +2,20 @@
 	"processor": "pressing",
 	"schemaVersion": 1,
 	"summary": {
-		"manual_specification": 7,
-		"migrated": 7,
-		"unsupported_dependency": 29
+		"manual_specification": 0,
+		"migrated": 8,
+		"unsupported_dependency": 35
 	},
 	"records": [
 		{
 			"source": "aether_dirt_path",
-			"status": "manual_specification",
-			"reason": "unmapped_ingredient"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_mod:aether"
 		},
 		{
 			"source": "aether_dirt_path_from_grass",
-			"status": "manual_specification",
-			"reason": "unmapped_ingredient"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_mod:aether"
 		},
 		{
 			"source": "brass_ingot",
@@ -27,8 +27,11 @@
 		},
 		{
 			"source": "cardboard",
-			"status": "unsupported_dependency",
-			"reason": "unavailable_item"
+			"status": "migrated",
+			"recipeId": "create:pressing/cardboard:createbedrock:pulp",
+			"recipeIds": [
+				"create:pressing/cardboard:createbedrock:pulp"
+			]
 		},
 		{
 			"source": "compat/atmospheric/crustose_path",
@@ -180,8 +183,8 @@
 		},
 		{
 			"source": "cursed_earth_path_from_grass",
-			"status": "manual_specification",
-			"reason": "unmapped_ingredient"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_mod:vampirism"
 		},
 		{
 			"source": "gold_ingot",
@@ -221,23 +224,23 @@
 		},
 		{
 			"source": "peat_dirt_path",
-			"status": "manual_specification",
-			"reason": "unmapped_ingredient"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_mod:regions_unexplored"
 		},
 		{
 			"source": "peat_dirt_path_from_grass",
-			"status": "manual_specification",
-			"reason": "unmapped_ingredient"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_mod:regions_unexplored"
 		},
 		{
 			"source": "silt_dirt_path",
-			"status": "manual_specification",
-			"reason": "unmapped_ingredient"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_mod:regions_unexplored"
 		},
 		{
 			"source": "silt_dirt_path_from_grass",
-			"status": "manual_specification",
-			"reason": "unmapped_ingredient"
+			"status": "unsupported_dependency",
+			"reason": "optional_missing_mod:regions_unexplored"
 		},
 		{
 			"source": "sugar_cane",

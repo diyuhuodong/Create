@@ -3,15 +3,18 @@ import { dirname, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
 	mapJavaProcessingIdentifier,
+	optionalMissingTagDependency,
 	processingImportReport,
 	supportsProcessingRecipeItems
 } from "./processing-recipe-import.js";
+import { expandProcessingIngredient, processingTagProjections } from "./processing-tag-projections.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(toolDirectory, "..");
 const repositoryRoot = resolve(bedrockRoot, "..");
 const sourceRoot = resolve(repositoryRoot, "src/generated/resources/data/create/recipe/crushing");
 const outputRoot = resolve(bedrockRoot, "behavior_pack/scripts/processing/generated");
+const TAG_ITEMS = await processingTagProjections(bedrockRoot);
 
 async function findJsonFiles(directory) {
 	const files = [];
@@ -30,33 +33,37 @@ const records = [];
 for (const file of await findJsonFiles(sourceRoot)) {
 	const source = JSON.parse(await readFile(file, "utf8"));
 	const sourcePath = relative(sourceRoot, file).replace(/\\/g, "/").replace(/\.json$/, "");
-	const input = source.ingredients?.length === 1 ? source.ingredients[0] : undefined;
-	const outputs = source.results?.every(result => typeof result.id === "string");
+	const inputs = source.ingredients?.length === 1 ? expandProcessingIngredient(source.ingredients[0], TAG_ITEMS) : [];
+	const hasOutputs = source.results?.every(result => typeof result.id === "string");
 	if (sourcePath.startsWith("compat/")) {
 		records.push({ source: sourcePath, status: "unsupported_dependency", reason: "compatibility_recipe" });
 		continue;
 	}
-	if (source.type !== "create:crushing" || typeof input?.item !== "string" || !outputs) {
+	const optionalDependency = optionalMissingTagDependency(source, TAG_ITEMS);
+	if (optionalDependency) {
+		records.push({ source: sourcePath, status: "unsupported_dependency", reason: `optional_missing_tag:${optionalDependency}` });
+		continue;
+	}
+	if (source.type !== "create:crushing" || inputs.length === 0 || !hasOutputs) {
 		records.push({ source: sourcePath, status: "manual_specification", reason: "unsupported_recipe_shape" });
 		continue;
 	}
 
-	const recipe = {
-		id: `create:crushing/${sourcePath}`,
-		input: { typeId: mapJavaProcessingIdentifier(input.item), count: input.count ?? 1 },
-		processingTicks: source.processing_time ?? 100,
-		outputs: source.results.map(result => ({
-			typeId: mapJavaProcessingIdentifier(result.id),
-			count: result.count ?? 1,
-			chance: result.chance ?? 1
-		}))
-	};
-	if (!supportsProcessingRecipeItems([recipe.input.typeId, ...recipe.outputs.map(result => result.typeId)])) {
+	const outputs = source.results.map(result => ({
+		typeId: mapJavaProcessingIdentifier(result.id),
+		count: result.count ?? 1,
+		chance: result.chance ?? 1
+	}));
+	if (!supportsProcessingRecipeItems([...inputs.map(input => input.typeId), ...outputs.map(result => result.typeId)])) {
 		records.push({ source: sourcePath, status: "unsupported_dependency", reason: "unavailable_item" });
 		continue;
 	}
-	recipes.push(recipe);
-	records.push({ source: sourcePath, status: "migrated", recipeId: recipe.id });
+	const recipeIds = inputs.map((input, index) => {
+		const recipe = { id: `create:crushing/${sourcePath}:${index}`, input, processingTicks: source.processing_time ?? 100, outputs };
+		recipes.push(recipe);
+		return recipe.id;
+	});
+	records.push({ source: sourcePath, status: "migrated", recipeId: recipeIds[0], recipeIds });
 }
 
 recipes.sort((left, right) => left.id.localeCompare(right.id));

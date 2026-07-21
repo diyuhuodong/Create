@@ -1,0 +1,71 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "createbedrock:yellow_valve_handle",
+      "menu_category": {
+        "category": "construction",
+        "group": "itemGroup.name.misc"
+      }
+    },
+    "components": {
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 6
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 1.5
+      },
+      "minecraft:geometry": "geometry.createbedrock.p7_1_low_profile",
+      "minecraft:item_visual": {
+        "geometry": {
+          "identifier": "geometry.createbedrock.p7_1_low_profile"
+        },
+        "material_instances": {
+          "all": {
+            "texture": "createbedrock_p7_1_yellow_valve_handle",
+            "render_method": "opaque"
+          },
+          "*": {
+            "texture": "createbedrock_p7_1_yellow_valve_handle",
+            "render_method": "opaque"
+          }
+        }
+      },
+      "minecraft:loot": "loot_tables/blocks/generated/p7_1/yellow_valve_handle.json",
+      "minecraft:material_instances": {
+        "all": {
+          "texture": "createbedrock_p7_1_yellow_valve_handle",
+          "render_method": "opaque"
+        },
+        "*": {
+          "texture": "createbedrock_p7_1_yellow_valve_handle",
+          "render_method": "opaque"
+        }
+      },
+      "minecraft:collision_box": {
+        "origin": [
+          -8,
+          0,
+          -8
+        ],
+        "size": [
+          16,
+          4,
+          16
+        ]
+      },
+      "minecraft:selection_box": {
+        "origin": [
+          -8,
+          0,
+          -8
+        ],
+        "size": [
+          16,
+          4,
+          16
+        ]
+      }
+    }
+  }
+}
