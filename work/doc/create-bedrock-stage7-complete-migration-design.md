@@ -146,6 +146,8 @@ P7.5 复用阶段 4、5 的权威状态，但替换目前的近似边界。
 
 ## P7.6：装备、资源、客户端与引导内容
 
+详细执行方案见 `work/doc/create-bedrock-p7-6-equipment-resources-guidance-design.md`，按 `P7.6.0 → A → B → C → D → E → F → G` 八个只向前依赖的子包推进。
+
 装备补齐 Backtank Capacity、Potato Recovery、不同土豆弹药的冷却/效果、护目镜完整诊断、Toolbox 热栏绑定，以及 Extendo Grip 的明确受限边界。若 Bedrock API 无法扩展原版触及距离，必须在物品说明、台账和平台验收中声明仅支持 Create 方块的射线操作。
 
 资源收口按“玩法可见性优先”处理：先是移动结构、机器状态、液面、皮带和装备；再是其余方块/物品模型。79 个 Java 声音、13 类粒子、语言、动画和 52 个 Ponder 场景分别进入台账。Ponder 可以采用 Bedrock 教程/表单替代，但每个场景都要记录对应交互或明确的发布豁免；不能因非核心运行时而从范围中消失。
