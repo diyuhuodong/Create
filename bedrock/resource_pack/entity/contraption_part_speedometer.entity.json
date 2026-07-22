@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "geometry": {
+        "default": "geometry.createbedrock.speedometer_gauge_0"
+      },
+      "identifier": "createbedrock:contraption_part_speedometer",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "render_controllers": [
+        "controller.render.createbedrock.contraption"
+      ],
+      "textures": {
+        "default": "textures/create_java/block/gauge"
+      }
+    }
+  }
+}

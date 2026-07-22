@@ -1,0 +1,10 @@
+[
+  {
+    "destination": { "dimensionId": "minecraft:nether", "location": { "x": 0, "y": 64, "z": 0 }, "nodeId": "b" },
+    "id": "portal:legacy",
+    "phase": "frozen",
+    "schemaVersion": 1,
+    "source": { "dimensionId": "minecraft:overworld", "location": { "x": 0, "y": 64, "z": 0 }, "nodeId": "a" },
+    "trainId": "train:legacy"
+  }
+]

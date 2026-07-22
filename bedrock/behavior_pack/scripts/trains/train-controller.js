@@ -1,33 +1,49 @@
+import { bindFormationPassenger, createTrainFormation, normalizeTrainFormation, releaseFormationPassenger, setFormationDoors, trainCarriageLeadOffsets } from "./train-formation.js";
+import { TrainOccupancyAuthority } from "./train-occupancy.js";
+import { legacyScheduleView, migrateLegacySchedule, normalizeScheduleAst } from "./schedule-ast.js";
+import { ScheduleRuntime, SCHEDULE_RUNTIME_STATE } from "./schedule-runtime.js";
+
 export class TrainController {
 	#graph;
+	#occupancy;
+	#scheduleEnvironment;
 	#trains = new Map();
 
-	constructor(trackGraph) {
+	constructor(trackGraph, { scheduleEnvironment = {} } = {}) {
 		for (const method of ["findRoute", "getEdge", "getNode", "isEdgeAvailable", "releaseEdge", "releaseReservations", "sampleEdge", "tryReserve"]) {
 			if (typeof trackGraph?.[method] !== "function")
 				throw new TypeError(`TrainController track graph requires ${method}()`);
 		}
 		this.#graph = trackGraph;
+		this.#occupancy = new TrainOccupancyAuthority({ graphRevision: trackGraph.getRevision?.() ?? 0 });
+		this.#scheduleEnvironment = scheduleEnvironment;
 	}
 
-	registerTrain({ id, nodeId, carriageCount = 1, carriageSpacing = 2, speed = 0.1 }) {
+	registerTrain({ formation, id, nodeId, carriageCount = 1, carriageSpacing = 2, speed = 0.1 }) {
 		if (!id || this.#trains.has(id))
 			throw new Error("Train ids must be unique");
 		if (!Number.isInteger(carriageCount) || carriageCount < 1 || !Number.isFinite(carriageSpacing) || carriageSpacing <= 0)
 			throw new RangeError("Trains require at least one carriage and positive carriage spacing");
 		if (!Number.isFinite(speed) || speed <= 0)
 			throw new RangeError("Trains require a positive cruising speed");
+		formation = formation ? normalizeTrainFormation(formation) : createTrainFormation({ carriageCount, carriageSpacing });
+		carriageCount = formation.carriages.length;
+		carriageSpacing = formation.carriages[0].length;
 		this.#trains.set(id, {
 			blockedReason: undefined,
 			carriageCount,
 			carriageSpacing,
 			direction: 0,
+			formation,
 			id,
+			name: id,
 			nodeId,
 			route: undefined,
 			schedule: undefined,
+			scheduleRuntime: undefined,
 			edgeIndex: 0,
 			distanceOnEdge: 0,
+			cruisingSpeed: speed,
 			speed: 0,
 			stopped: false,
 			targetSpeed: speed
@@ -42,26 +58,12 @@ export class TrainController {
 		const train = this.#requireTrain(id);
 		if (train.route)
 			return { ok: false, reason: "already_moving" };
-		if (train.schedule)
+		if (train.schedule || train.scheduleRuntime)
 			return { ok: false, reason: "scheduled" };
 		if (!this.#graph.getNode(destinationId))
 			return { ok: false, reason: "unknown_destination" };
 
-		const route = this.#graph.findRoute(train.nodeId, destinationId);
-		if (!route)
-			return { ok: false, reason: "route_unavailable" };
-		if (!this.#graph.tryReserve(id, route.edgeIds))
-			return { ok: false, reason: "route_reserved" };
-
-		train.route = {
-			...route,
-			reservedEdgeIds: new Set(route.edgeIds),
-			settlingDistance: 0
-		};
-		train.edgeIndex = 0;
-		train.distanceOnEdge = 0;
-		train.direction = this.#routeDirection(train);
-		return { ok: true, route };
+		return this.#startRoute(train, destinationId);
 	}
 
 	setSchedule(id, { cyclic = true, stopIds, dwellTicks = 20 }) {
@@ -84,16 +86,47 @@ export class TrainController {
 			nextStopIndex: 0,
 			stopIds: [...stopIds]
 		};
+		train.scheduleRuntime = undefined;
 		this.#advanceSchedule(train);
 		return { ok: true, state: train.route ? "moving" : "waiting" };
+	}
+
+	setScheduleAst(id, schedule) {
+		return this.setScheduleAstWithReason(id, schedule).ok;
+	}
+
+	setScheduleAstWithReason(id, schedule) {
+		const train = this.#requireTrain(id);
+		if (train.route)
+			return { ok: false, reason: "already_moving" };
+		try {
+			schedule = normalizeScheduleAst(schedule?.schedule ?? schedule);
+		} catch {
+			return { ok: false, reason: "invalid_schedule" };
+		}
+		if (schedule.entries.length === 0)
+			return { ok: false, reason: "invalid_schedule" };
+		if (schedule.entries.some(entry => entry.instruction.type === "destination" && entry.instruction.exact && !this.#graph.getNode(entry.instruction.filter)))
+			return { ok: false, reason: "unknown_station" };
+
+		train.schedule = undefined;
+		train.scheduleRuntime = new ScheduleRuntime(schedule);
+		this.#advanceScheduleAst(train);
+		return { ok: true, state: train.route ? "moving" : "waiting" };
+	}
+
+	setSchedulePaused(id, paused) {
+		const train = this.#requireTrain(id);
+		return train.scheduleRuntime?.setPaused(paused) ?? false;
 	}
 
 	clearSchedule(id) {
 		const train = this.#requireTrain(id);
 		if (train.route)
 			return false;
-		const hadSchedule = !!train.schedule;
+		const hadSchedule = !!train.schedule || !!train.scheduleRuntime;
 		train.schedule = undefined;
+		train.scheduleRuntime = undefined;
 		return hadSchedule;
 	}
 
@@ -107,14 +140,34 @@ export class TrainController {
 			train.speed = 0;
 			return this.getTrain(id);
 		}
+		if (train.route && train.route.graphRevision !== (this.#graph.getRevision?.() ?? train.route.graphRevision)) {
+			train.blockedReason = "graph_revision_changed";
+			train.speed = 0;
+			this.#occupancy.release(train.id);
+			return this.getTrain(id);
+		}
 		if (!train.route) {
-			this.#advanceSchedule(train);
+			if (train.scheduleRuntime)
+				this.#advanceScheduleAst(train);
+			else
+				this.#advanceSchedule(train);
 			if (!train.route || distance === 0) {
 				train.speed = 0;
 				return this.getTrain(id);
 			}
 		}
 		if (distance === 0) {
+			train.speed = 0;
+			return this.getTrain(id);
+		}
+		const graphRevision = train.route.graphRevision;
+		const projected = this.#projectTrain(train, distance);
+		const claim = this.#occupancy.replace(train.id, this.#occupiedIntervalsFor(projected), {
+			graphRevision,
+			tokenId: `${train.id}:${graphRevision}:${train.edgeIndex}`
+		});
+		if (!claim.ok) {
+			train.blockedReason = `occupancy_${claim.reason}`;
 			train.speed = 0;
 			return this.getTrain(id);
 		}
@@ -132,6 +185,11 @@ export class TrainController {
 				break;
 			}
 			const edgeId = train.route.edgeIds[train.edgeIndex];
+			if (!train.route.reservedEdgeIds.has(edgeId)) {
+				if (!this.#graph.tryReserve(train.id, [edgeId]))
+					break;
+				train.route.reservedEdgeIds.add(edgeId);
+			}
 			if (!this.#graph.isEdgeAvailable(edgeId))
 				break;
 			const edge = this.#graph.getEdge(edgeId);
@@ -157,6 +215,10 @@ export class TrainController {
 		}
 		if (train.route)
 			this.#releaseClearedEdges(train);
+		if (train.route)
+			this.#occupancy.replace(train.id, this.#occupiedIntervalsFor(train), { graphRevision: train.route.graphRevision, tokenId: `${train.id}:${train.route.graphRevision}:${train.edgeIndex}` });
+		else
+			this.#occupancy.release(train.id);
 		train.speed = train.route ? movedDistance : 0;
 
 		return this.getTrain(id);
@@ -180,6 +242,7 @@ export class TrainController {
 		if (train.targetSpeed === speed)
 			return false;
 		train.targetSpeed = speed;
+		train.cruisingSpeed = speed;
 		return true;
 	}
 
@@ -199,8 +262,13 @@ export class TrainController {
 		const train = this.#requireTrain(id);
 		if (train.route)
 			this.#graph.releaseReservations(id);
+		this.#occupancy.release(id);
 		this.#trains.delete(id);
 		return true;
+	}
+
+	hasTrain(id) {
+		return this.#trains.has(id);
 	}
 
 	getMotionState(id) {
@@ -223,6 +291,8 @@ export class TrainController {
 			distanceOnEdge: train.distanceOnEdge,
 			destinationId: train.route?.nodeIds.at(-1)
 		};
+		if (train.name !== train.id)
+			state.name = train.name;
 		if (train.schedule) {
 			state.schedule = {
 				cyclic: train.schedule.cyclic,
@@ -231,6 +301,19 @@ export class TrainController {
 				nextStopIndex: train.schedule.nextStopIndex,
 				stopIds: [...train.schedule.stopIds]
 			};
+		}
+		if (train.scheduleRuntime) {
+			const runtime = train.scheduleRuntime.snapshot();
+			state.scheduleAst = runtime.schedule;
+			state.scheduleRuntime = {
+				completed: runtime.completed,
+				currentEntry: runtime.currentEntry,
+				currentTitle: runtime.currentTitle,
+				paused: runtime.paused,
+				predictionTicks: runtime.predictionTicks,
+				state: runtime.state
+			};
+			state.schedule = legacyScheduleView(runtime.schedule);
 		}
 		if (!train.route)
 			return state;
@@ -264,6 +347,53 @@ export class TrainController {
 		return this.#carriagePlacementsFor(this.#requireTrain(id));
 	}
 
+	getFormation(id) {
+		return normalizeTrainFormation(this.#requireTrain(id).formation);
+	}
+
+	bindPassenger(id, { carriageId, passengerId, seatId }) {
+		const train = this.#requireTrain(id);
+		train.formation = bindFormationPassenger(train.formation, { carriageId, passengerId, seatId });
+		return this.getFormation(id);
+	}
+
+	releasePassenger(id, passengerId) {
+		const train = this.#requireTrain(id);
+		const result = releaseFormationPassenger(train.formation, passengerId);
+		train.formation = result.formation;
+		return result.changed;
+	}
+
+	setPlatformDoors(id, alignedSide = undefined) {
+		const train = this.#requireTrain(id);
+		const next = setFormationDoors(train.formation, { alignedSide, speed: train.speed });
+		const changed = JSON.stringify(next) !== JSON.stringify(train.formation);
+		train.formation = next;
+		return changed;
+	}
+
+	getScheduleRuntime(id) {
+		return this.#requireTrain(id).scheduleRuntime?.snapshot();
+	}
+
+	getOccupancy(id) {
+		this.#requireTrain(id);
+		return this.#occupancy.claimsFor(id);
+	}
+
+	getCarriageFrames(id) {
+		const train = this.#requireTrain(id);
+		const formation = normalizeTrainFormation(train.formation);
+		return this.#carriagePlacementsFor(train).map((placement, index) => {
+			let frame = { location: placement.location, normal: { x: 0, y: 1, z: 0 }, tangent: { x: 1, y: 0, z: 0 } };
+			if (placement.fromNodeId) {
+				const edgeId = [placement.fromNodeId, placement.toNodeId].sort().join("<->");
+				frame = this.#graph.sampleEdgeFrame(edgeId, placement.fromNodeId, placement.progress);
+			}
+			return { ...placement, carriage: formation.carriages[index], ...frame };
+		});
+	}
+
 	#carriagesFor(train) {
 		if (!train.route) {
 			return Array.from({ length: train.carriageCount }, (_, index) => ({
@@ -277,8 +407,8 @@ export class TrainController {
 			leadDistance += this.#graph.getEdge(train.route.edgeIds[index]).length;
 		leadDistance += train.route.settlingDistance;
 
-		return Array.from({ length: train.carriageCount }, (_, index) => {
-			let remaining = Math.max(0, leadDistance - index * train.carriageSpacing);
+		return trainCarriageLeadOffsets(train.formation).map(({ leadOffset }, index) => {
+			let remaining = Math.max(0, leadDistance - leadOffset);
 			for (let edgeIndex = 0; edgeIndex < train.route.edgeIds.length; edgeIndex++) {
 				const edge = this.#graph.getEdge(train.route.edgeIds[edgeIndex]);
 				if (remaining <= edge.length || edgeIndex === train.route.edgeIds.length - 1) {
@@ -319,12 +449,15 @@ export class TrainController {
 			carriageCount: train.carriageCount,
 			carriageSpacing: train.carriageSpacing,
 			direction: train.direction,
+			formation: normalizeTrainFormation(train.formation),
 			id: train.id,
+			name: train.name,
 			nodeId: train.nodeId,
 			route: train.route && {
 				nodeIds: [...train.route.nodeIds],
 				edgeIds: [...train.route.edgeIds],
 				length: train.route.length,
+				graphRevision: train.route.graphRevision,
 				reservedEdgeIds: [...train.route.reservedEdgeIds],
 				settlingDistance: train.route.settlingDistance
 			},
@@ -335,8 +468,10 @@ export class TrainController {
 				nextStopIndex: train.schedule.nextStopIndex,
 				stopIds: [...train.schedule.stopIds]
 			},
+			scheduleRuntime: train.scheduleRuntime?.snapshot(),
 			edgeIndex: train.edgeIndex,
 			distanceOnEdge: train.distanceOnEdge,
+			cruisingSpeed: train.cruisingSpeed,
 			speed: train.speed,
 			stopped: train.stopped,
 			targetSpeed: train.targetSpeed
@@ -350,6 +485,7 @@ export class TrainController {
 		const ids = new Set(this.#trains.keys());
 		const restored = records.map(record => this.#normalizeRestoredTrain(record, ids));
 		const reserved = [];
+		const occupied = [];
 		try {
 			for (const train of restored) {
 				if (!train.route)
@@ -357,10 +493,16 @@ export class TrainController {
 				if (!this.#graph.tryReserve(train.id, [...train.route.reservedEdgeIds]))
 					throw new Error(`Unable to restore reserved route for ${train.id}`);
 				reserved.push(train.id);
+				const claim = this.#occupancy.replace(train.id, this.#occupiedIntervalsFor(train), { graphRevision: train.route.graphRevision, tokenId: `${train.id}:${train.route.graphRevision}:${train.edgeIndex}` });
+				if (!claim.ok)
+					throw new Error(`Unable to restore occupancy for ${train.id}: ${claim.reason}`);
+				occupied.push(train.id);
 			}
 		} catch (error) {
 			for (const id of reserved)
 				this.#graph.releaseReservations(id);
+			for (const id of occupied)
+				this.#occupancy.release(id);
 			throw error;
 		}
 		for (const train of restored)
@@ -440,17 +582,26 @@ export class TrainController {
 		}
 
 		const schedule = this.#normalizeRestoredSchedule(record.id, record.schedule);
+		const scheduleRuntime = this.#normalizeRestoredScheduleRuntime(record.id, record.scheduleRuntime);
+		if (schedule && scheduleRuntime)
+			throw new TypeError(`Train ${record.id} cannot restore two Schedule authorities`);
+		const carriageCount = Number.isInteger(record.carriageCount) && record.carriageCount > 0 ? record.carriageCount : 1;
+		const carriageSpacing = Number.isFinite(record.carriageSpacing) && record.carriageSpacing > 0 ? record.carriageSpacing : 2;
 		const restored = {
 			blockedReason: typeof record.blockedReason === "string" && record.blockedReason.length > 0 ? record.blockedReason : undefined,
-			carriageCount: Number.isInteger(record.carriageCount) && record.carriageCount > 0 ? record.carriageCount : 1,
-			carriageSpacing: Number.isFinite(record.carriageSpacing) && record.carriageSpacing > 0 ? record.carriageSpacing : 2,
+			carriageCount,
+			carriageSpacing,
 			direction: 0,
+			formation: record.formation ? normalizeTrainFormation(record.formation) : createTrainFormation({ carriageCount, carriageSpacing }),
 			id: record.id,
+			name: typeof record.name === "string" && record.name.length > 0 && record.name.length <= 64 ? record.name : record.id,
 			nodeId: record.nodeId,
 			route,
 			schedule,
+			scheduleRuntime,
 			edgeIndex,
 			distanceOnEdge,
+			cruisingSpeed: Number.isFinite(record.cruisingSpeed) && record.cruisingSpeed > 0 ? record.cruisingSpeed : Number.isFinite(record.targetSpeed) && record.targetSpeed > 0 ? record.targetSpeed : 0.1,
 			speed: Number.isFinite(record.speed) && record.speed >= 0 ? record.speed : 0,
 			stopped: !!record.stopped,
 			targetSpeed: Number.isFinite(record.targetSpeed) && record.targetSpeed > 0 ? record.targetSpeed : 0.1
@@ -492,6 +643,7 @@ export class TrainController {
 		return {
 			nodeIds: [...nodeIds],
 			edgeIds: [...edgeIds],
+			graphRevision: Number.isInteger(record.route.graphRevision) ? record.route.graphRevision : this.#graph.getRevision?.() ?? 0,
 			length: edgeIds.reduce((total, edgeId) => total + this.#graph.getEdge(edgeId).length, 0),
 			reservedEdgeIds: new Set(reservedEdgeIds),
 			settlingDistance
@@ -519,6 +671,70 @@ export class TrainController {
 		};
 	}
 
+	#normalizeRestoredScheduleRuntime(id, snapshot) {
+		if (!snapshot)
+			return undefined;
+		let runtime;
+		try {
+			runtime = new ScheduleRuntime();
+			runtime.restore(snapshot);
+		} catch (error) {
+			throw new TypeError(`Invalid Schedule runtime for ${id}: ${error}`);
+		}
+		if (runtime.schedule.entries.some(entry => entry.instruction.type === "destination" && entry.instruction.exact && !this.#graph.getNode(entry.instruction.filter)))
+			throw new TypeError(`Unknown Schedule destination for ${id}`);
+		return runtime;
+	}
+
+	#advanceScheduleAst(train) {
+		if (!train.scheduleRuntime || train.route)
+			return false;
+		const before = train.scheduleRuntime.snapshot();
+		const result = train.scheduleRuntime.tick(this.#scheduleEnvironmentFor(train));
+		return result.changed || before.state !== train.scheduleRuntime.state;
+	}
+
+	#scheduleEnvironmentFor(train) {
+		const external = this.#scheduleEnvironment;
+		const invoke = (name, fallback, ...args) => typeof external?.[name] === "function" ? external[name](train.id, ...args) : fallback;
+		const payloads = train.formation.carriages.map(carriage => carriage.payload).filter(Boolean);
+		const itemCount = filter => payloads.flatMap(payload => payload.items ?? []).filter(stack => stack.typeId === filter || stack.tags?.includes?.(filter)).reduce((total, stack) => total + (stack.count ?? stack.amount ?? 0), 0);
+		const fluidAmount = fluidId => payloads.flatMap(payload => payload.fluids ?? []).filter(stack => stack.typeId === fluidId).reduce((total, stack) => total + (stack.amount ?? 0), 0);
+		const passengerCount = train.formation.carriages.flatMap(carriage => carriage.seats).filter(seat => seat.passengerId).length;
+		const formationCargoEmpty = payloads.every(payload => (payload.items ?? []).length === 0 && (payload.fluids ?? []).length === 0);
+		return {
+			atDestination: destination => train.nodeId === destination,
+			cargoEmpty: () => formationCargoEmpty && invoke("cargoEmpty", true),
+			cargoIdleTicks: () => invoke("cargoIdleTicks", 0),
+			deliverPackages: address => invoke("deliverPackages", false, address),
+			fluidAmount: fluidId => fluidAmount(fluidId) + invoke("fluidAmount", 0, fluidId),
+			itemCount: filter => itemCount(filter) + invoke("itemCount", 0, filter),
+			navigationActive: () => !!train.route,
+			passengerCount: () => passengerCount + invoke("passengerCount", 0),
+			redstoneLinkPowered: (frequencyA, frequencyB) => invoke("redstoneLinkPowered", false, frequencyA, frequencyB),
+			renameTrain: title => {
+				train.name = title || train.id;
+				return invoke("renameTrain", true, title);
+			},
+			resolveDestination: (filter, exact) => {
+				const resolved = invoke("resolveDestination", undefined, filter, exact);
+				if (resolved !== undefined)
+					return resolved;
+				if (exact)
+					return this.#graph.getNode(filter) ? filter : undefined;
+				return this.#graph.getNodes().map(node => node.id).filter(id => id.includes(filter)).sort()[0];
+			},
+			retrievePackages: address => invoke("retrievePackages", false, address),
+			setThrottle: percent => {
+				train.targetSpeed = train.cruisingSpeed * percent / 100;
+				return invoke("setThrottle", true, percent);
+			},
+			startNavigation: destination => this.#startRoute(train, destination).ok,
+			stationPowered: () => invoke("stationPowered", false),
+			timeOfDay: () => invoke("timeOfDay", 0)
+		};
+	}
+
 	#advanceSchedule(train) {
 		const schedule = train.schedule;
 		if (!schedule || train.route)
@@ -541,17 +757,44 @@ export class TrainController {
 		}
 
 		const route = this.#graph.findRoute(train.nodeId, destinationId);
-		if (!route || !this.#graph.tryReserve(train.id, route.edgeIds))
+		if (!route || !this.#graph.tryReserve(train.id, [route.edgeIds[0]]))
 			return false;
+		this.#occupancy.setGraphRevision(this.#graph.getRevision?.() ?? 0);
 		train.route = {
 			...route,
-			reservedEdgeIds: new Set(route.edgeIds),
+			graphRevision: this.#graph.getRevision?.() ?? 0,
+			reservedEdgeIds: new Set([route.edgeIds[0]]),
 			settlingDistance: 0
 		};
 		train.edgeIndex = 0;
 		train.distanceOnEdge = 0;
 		train.direction = this.#routeDirection(train);
 		return true;
+	}
+
+	#startRoute(train, destinationId) {
+		if (train.route)
+			return { ok: false, reason: "already_moving" };
+		if (!this.#graph.getNode(destinationId))
+			return { ok: false, reason: "unknown_destination" };
+		if (destinationId === train.nodeId)
+			return { ok: true, route: { edgeIds: [], length: 0, nodeIds: [train.nodeId] } };
+		const route = this.#graph.findRoute(train.nodeId, destinationId);
+		if (!route)
+			return { ok: false, reason: "route_unavailable" };
+		if (!this.#graph.tryReserve(train.id, [route.edgeIds[0]]))
+			return { ok: false, reason: "route_reserved" };
+		this.#occupancy.setGraphRevision(this.#graph.getRevision?.() ?? 0);
+		train.route = {
+			...route,
+			graphRevision: this.#graph.getRevision?.() ?? 0,
+			reservedEdgeIds: new Set([route.edgeIds[0]]),
+			settlingDistance: 0
+		};
+		train.edgeIndex = 0;
+		train.distanceOnEdge = 0;
+		train.direction = this.#routeDirection(train);
+		return { ok: true, route };
 	}
 
 	#routeDirection(train) {
@@ -566,7 +809,7 @@ export class TrainController {
 		for (let index = 0; index < train.edgeIndex; index++)
 			leadDistance += this.#graph.getEdge(train.route.edgeIds[index]).length;
 		leadDistance += train.route.settlingDistance;
-		const tailDistance = leadDistance - (train.carriageCount - 1) * train.carriageSpacing;
+		const tailDistance = leadDistance - this.#tailDistance(train);
 		if (tailDistance < 0)
 			return;
 
@@ -581,14 +824,41 @@ export class TrainController {
 	}
 
 	#tailDistance(train) {
-		return (train.carriageCount - 1) * train.carriageSpacing;
+		return trainCarriageLeadOffsets(train.formation).at(-1)?.leadOffset ?? 0;
+	}
+
+	#occupiedIntervalsFor(train) {
+		if (!train.route)
+			return [];
+		let lead = train.route.settlingDistance + train.distanceOnEdge;
+		for (let index = 0; index < train.edgeIndex; index++)
+			lead += this.#graph.getEdge(train.route.edgeIds[index]).length;
+		const tail = Math.max(0, lead - this.#tailDistance(train));
+		const claims = [];
+		let cursor = 0;
+		for (const edgeId of train.route.edgeIds) {
+			const edge = this.#graph.getEdge(edgeId);
+			const start = Math.max(0, tail - cursor);
+			const end = Math.min(edge.length, lead - cursor);
+			if (end > start)
+				claims.push({ edgeId, end, start });
+			cursor += edge.length;
+		}
+		if (claims.length === 0 && train.edgeIndex < train.route.edgeIds.length) {
+			const edgeId = train.route.edgeIds[train.edgeIndex];
+			claims.push({ edgeId, end: Math.min(this.#graph.getEdge(edgeId).length, .001), start: 0 });
+		}
+		return claims;
 	}
 
 	#completeRoute(train) {
 		this.#graph.releaseReservations(train.id);
+		this.#occupancy.release(train.id);
 		train.route = undefined;
 		train.direction = 0;
-		if (train.schedule)
+		if (train.scheduleRuntime?.state === SCHEDULE_RUNTIME_STATE.IN_TRANSIT)
+			train.scheduleRuntime.destinationReached();
+		else if (train.schedule)
 			train.schedule.dwellRemaining = train.schedule.dwellTicks;
 	}
 }

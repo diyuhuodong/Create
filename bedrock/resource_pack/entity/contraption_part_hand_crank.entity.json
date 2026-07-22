@@ -2,11 +2,19 @@
   "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
+      "geometry": {
+        "default": "geometry.createbedrock.hand_crank"
+      },
       "identifier": "createbedrock:contraption_part_hand_crank",
-      "materials": { "default": "entity_alphatest" },
-      "textures": { "default": "textures/create_java/block/axis" },
-      "geometry": { "default": "geometry.createbedrock.hand_crank" },
-      "render_controllers": ["controller.render.createbedrock.contraption"]
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "render_controllers": [
+        "controller.render.createbedrock.contraption"
+      ],
+      "textures": {
+        "default": "textures/create_java/block/axis"
+      }
     }
   }
 }

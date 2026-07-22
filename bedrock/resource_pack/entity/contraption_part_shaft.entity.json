@@ -2,11 +2,19 @@
   "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
+      "geometry": {
+        "default": "geometry.createbedrock.shaft"
+      },
       "identifier": "createbedrock:contraption_part_shaft",
-      "materials": { "default": "entity_alphatest" },
-      "textures": { "default": "textures/create_java/block/axis" },
-      "geometry": { "default": "geometry.createbedrock.shaft" },
-      "render_controllers": ["controller.render.createbedrock.contraption"]
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "render_controllers": [
+        "controller.render.createbedrock.contraption"
+      ],
+      "textures": {
+        "default": "textures/create_java/block/axis"
+      }
     }
   }
 }

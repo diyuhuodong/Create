@@ -1,5 +1,6 @@
-import { assemblyTransformToRuntime, createAssemblyTransform } from "./assembly-transform.js";
+import { assemblyTransformToPose, createAssemblyTransform, transformAssemblyPoint } from "./assembly-transform.js";
 import { normalizeDynamicAssemblySnapshot } from "./dynamic-assembly-snapshot.js";
+import { assemblyPoseAngularDistanceMilliDegrees, interpolateAssemblyPoses } from "./pose-transform.js";
 
 const MAX_ROTATION_STEP = 15000;
 const MAX_TRANSLATION_STEP = 1024;
@@ -24,6 +25,8 @@ function squaredDistance(left, right) {
 }
 
 function interpolate(start, end, ratio) {
+	if (start.poseSchemaVersion !== undefined || end.poseSchemaVersion !== undefined)
+		return interpolateAssemblyPoses(assemblyTransformToPose(start), assemblyTransformToPose(end), ratio);
 	return createAssemblyTransform({
 		rotationMilliDegrees: Math.round(start.rotationMilliDegrees + shortestRotationDelta(start.rotationMilliDegrees, end.rotationMilliDegrees) * ratio),
 		translation: {
@@ -35,15 +38,12 @@ function interpolate(start, end, ratio) {
 }
 
 function footprintAt(snapshot, transform) {
-	const runtime = assemblyTransformToRuntime(transform);
-	const radians = runtime.rotation * Math.PI / 180;
-	const cosine = Math.cos(radians);
-	const sine = Math.sin(radians);
 	const occupied = new Map();
 	for (const block of snapshot.blocks) {
-		const x = snapshot.anchor.x + runtime.translation.x + block.relative.x * cosine - block.relative.z * sine;
-		const y = snapshot.anchor.y + runtime.translation.y + block.relative.y;
-		const z = snapshot.anchor.z + runtime.translation.z + block.relative.x * sine + block.relative.z * cosine;
+		const point = transformAssemblyPoint(transform, block.relative);
+		const x = snapshot.anchor.x + point.x;
+		const y = snapshot.anchor.y + point.y;
+		const z = snapshot.anchor.z + point.z;
 		for (const blockX of occupiedRange(x, x + 1)) {
 			for (const blockY of occupiedRange(y, y + 1)) {
 				for (const blockZ of occupiedRange(z, z + 1)) {
@@ -63,7 +63,10 @@ export function findDynamicAssemblyCollision({ endTransform, readBlock, snapshot
 	const normalizedSnapshot = normalizeDynamicAssemblySnapshot(snapshot);
 	const start = createAssemblyTransform(startTransform);
 	const end = createAssemblyTransform(endTransform);
-	const rotationSteps = Math.ceil(Math.abs(shortestRotationDelta(start.rotationMilliDegrees, end.rotationMilliDegrees)) / MAX_ROTATION_STEP);
+	const rotationDistance = start.poseSchemaVersion !== undefined || end.poseSchemaVersion !== undefined
+		? assemblyPoseAngularDistanceMilliDegrees(assemblyTransformToPose(start), assemblyTransformToPose(end))
+		: Math.abs(shortestRotationDelta(start.rotationMilliDegrees, end.rotationMilliDegrees));
+	const rotationSteps = Math.ceil(rotationDistance / MAX_ROTATION_STEP);
 	const translationSteps = Math.ceil(Math.sqrt(squaredDistance(start.translation, end.translation)) / MAX_TRANSLATION_STEP);
 	const steps = Math.max(1, rotationSteps, translationSteps);
 	for (let step = 0; step <= steps; step++) {

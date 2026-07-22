@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "geometry": {
+        "default": "geometry.createbedrock.redstone_pulse_timer"
+      },
+      "identifier": "createbedrock:contraption_part_pulse_timer",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "render_controllers": [
+        "controller.render.createbedrock.contraption"
+      ],
+      "textures": {
+        "default": "textures/create_java/block/diodes/pulse_timer/idle"
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+[
+  { "kind": "train_authority_meta", "nextTrainId": 2, "schemaVersion": 2 },
+  {
+    "dimensionId": "minecraft:overworld",
+    "graph": { "schemaVersion": 1, "chunks": [] },
+    "kind": "train_authority_dimension",
+    "schemaVersion": 2,
+    "trains": []
+  }
+]

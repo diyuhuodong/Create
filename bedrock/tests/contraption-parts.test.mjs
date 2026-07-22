@@ -3,8 +3,9 @@ import test from "node:test";
 
 import { partTypeFor } from "../behavior_pack/scripts/contraptions/contraption-parts.js";
 import { isMovableBlockType, MAX_CONTRAPTION_BLOCKS, MOVABLE_BLOCK_TYPES, STATELESS_MOVABLE_BLOCK_TYPES } from "../behavior_pack/scripts/contraptions/movable-blocks.js";
+import { defaultProjectionEntityType } from "../behavior_pack/scripts/contraptions/projection-registry.js";
 
-test("Contraption part registry covers kinetic blocks and uses the generic projection for newly movable redstone devices", () => {
+test("Contraption part registry gives every movable family a dedicated projection", () => {
 	assert.equal(MAX_CONTRAPTION_BLOCKS, 16);
 	for (const typeId of [
 		"createbedrock:hand_crank",
@@ -31,11 +32,11 @@ test("Contraption part registry covers kinetic blocks and uses the generic proje
 	assert.equal(isMovableBlockType("createbedrock:track"), false);
 	assert.equal(partTypeFor("createbedrock:track"), undefined);
 	assert.equal(isMovableBlockType("createbedrock:redstone_contact"), true);
-	assert.equal(partTypeFor("createbedrock:redstone_contact"), "createbedrock:contraption_part");
+	assert.equal(partTypeFor("createbedrock:redstone_contact"), "createbedrock:contraption_part_redstone_contact");
 	assert.equal(isMovableBlockType("createbedrock:elevator_contact"), true);
-	assert.equal(partTypeFor("createbedrock:elevator_contact"), "createbedrock:contraption_part");
+	assert.equal(partTypeFor("createbedrock:elevator_contact"), "createbedrock:contraption_part_elevator_contact");
 	assert.equal(isMovableBlockType("createbedrock:belt"), true);
-	assert.equal(partTypeFor("createbedrock:belt"), "createbedrock:contraption_part");
+	assert.equal(partTypeFor("createbedrock:belt"), "createbedrock:contraption_part_belt");
 	for (const typeId of [
 		"createbedrock:stockpile_switch",
 		"createbedrock:speedometer",
@@ -58,12 +59,12 @@ test("Contraption part registry covers kinetic blocks and uses the generic proje
 		"createbedrock:white_sail"
 	]) {
 		assert.equal(isMovableBlockType(typeId), true);
-		assert.equal(partTypeFor(typeId), "createbedrock:contraption_part");
+		assert.equal(partTypeFor(typeId), defaultProjectionEntityType(typeId));
 	}
 	assert.equal(isMovableBlockType("createbedrock:nozzle"), true);
-	assert.equal(partTypeFor("createbedrock:nozzle"), "createbedrock:contraption_part");
+	assert.equal(partTypeFor("createbedrock:nozzle"), "createbedrock:contraption_part_nozzle");
 	assert.equal(isMovableBlockType("createbedrock:mechanical_crafter"), true);
-	assert.equal(partTypeFor("createbedrock:mechanical_crafter"), "createbedrock:contraption_part");
+	assert.equal(partTypeFor("createbedrock:mechanical_crafter"), "createbedrock:contraption_part_mechanical_crafter");
 	for (const typeId of [
 		"createbedrock:controls",
 		"createbedrock:deployer",
@@ -76,15 +77,15 @@ test("Contraption part registry covers kinetic blocks and uses the generic proje
 		"createbedrock:portable_storage_interface"
 	]) {
 		assert.equal(isMovableBlockType(typeId), true);
-		assert.equal(partTypeFor(typeId), "createbedrock:contraption_part");
+		assert.equal(partTypeFor(typeId), defaultProjectionEntityType(typeId));
 	}
 	for (const typeId of ["createbedrock:linear_chassis", "createbedrock:secondary_linear_chassis", "createbedrock:radial_chassis"]) {
 		assert.equal(isMovableBlockType(typeId), true);
-		assert.equal(partTypeFor(typeId), "createbedrock:contraption_part");
+		assert.equal(partTypeFor(typeId), defaultProjectionEntityType(typeId));
 	}
 	for (const typeId of ["createbedrock:copycat_panel", "createbedrock:copycat_step"]) {
 		assert.equal(isMovableBlockType(typeId), true);
-		assert.equal(partTypeFor(typeId), "createbedrock:contraption_part");
+		assert.equal(partTypeFor(typeId), defaultProjectionEntityType(typeId));
 	}
 	for (const typeId of [
 		"createbedrock:mechanical_piston",
@@ -99,7 +100,7 @@ test("Contraption part registry covers kinetic blocks and uses the generic proje
 		"createbedrock:gantry_shaft"
 	]) {
 		assert.equal(isMovableBlockType(typeId), true);
-		assert.equal(partTypeFor(typeId), "createbedrock:contraption_part");
+		assert.equal(partTypeFor(typeId), defaultProjectionEntityType(typeId));
 	}
 	assert.equal(MOVABLE_BLOCK_TYPES.size, 84);
 	assert.deepEqual([...STATELESS_MOVABLE_BLOCK_TYPES].sort(), [

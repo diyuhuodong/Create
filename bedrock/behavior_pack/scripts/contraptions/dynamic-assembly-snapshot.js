@@ -1,7 +1,9 @@
 import { ASSEMBLY_QUARTER_TURN, ASSEMBLY_SUBBLOCK_UNITS, createAssemblyTransform, isBlockAlignedAssemblyTransform } from "./assembly-transform.js";
+import { transformAssemblyBlockStates } from "./block-state-transform.js";
 import { isMovableBlockType } from "./movable-blocks.js";
+import { ASSEMBLY_POSE_SCHEMA_VERSION, assemblyPoseFromAxisAngle, transformBlockAlignedVector } from "./pose-transform.js";
 
-export const DYNAMIC_ASSEMBLY_SNAPSHOT_SCHEMA = 1;
+export const DYNAMIC_ASSEMBLY_SNAPSHOT_SCHEMA = 2;
 export const MAX_DYNAMIC_ASSEMBLY_BLOCKS = 512;
 
 const NEIGHBOR_OFFSETS = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
@@ -110,7 +112,7 @@ export function createDynamicAssemblySnapshot({ anchor, attachments, blocks }) {
 }
 
 export function normalizeDynamicAssemblySnapshot(snapshot) {
-	if (snapshot?.schemaVersion !== DYNAMIC_ASSEMBLY_SNAPSHOT_SCHEMA)
+	if (![1, DYNAMIC_ASSEMBLY_SNAPSHOT_SCHEMA].includes(snapshot?.schemaVersion))
 		throw new TypeError("Unsupported dynamic assembly snapshot schema");
 	const payload = normalizedPayload(snapshot);
 	if (snapshot.checksum !== checksumFor(payload))
@@ -133,11 +135,14 @@ export function materializeDynamicAssembly(snapshot, transform) {
 	const normalizedTransform = createAssemblyTransform(transform);
 	if (!isBlockAlignedAssemblyTransform(normalizedTransform))
 		throw new Error("Dynamic assemblies can only disassemble at a block-aligned transform");
-	const quarterTurns = normalizedTransform.rotationMilliDegrees / ASSEMBLY_QUARTER_TURN;
+	const pose = normalizedTransform.poseSchemaVersion === ASSEMBLY_POSE_SCHEMA_VERSION
+		? normalizedTransform
+		: assemblyPoseFromAxisAngle({ rotationMilliDegrees: normalizedTransform.rotationMilliDegrees, translation: normalizedTransform.translation });
+	const quarterTurns = normalizedTransform.rotationMilliDegrees === undefined ? undefined : normalizedTransform.rotationMilliDegrees / ASSEMBLY_QUARTER_TURN;
 	const translation = Object.fromEntries(Object.entries(normalizedTransform.translation)
 		.map(([axis, value]) => [axis, value / ASSEMBLY_SUBBLOCK_UNITS]));
 	return normalized.blocks.map(block => {
-		const relative = rotateCardinal(block.relative, quarterTurns);
+		const relative = quarterTurns === undefined ? transformBlockAlignedVector(pose, block.relative) : rotateCardinal(block.relative, quarterTurns);
 		return {
 			data: clone(block.data),
 			location: {
@@ -145,8 +150,12 @@ export function materializeDynamicAssembly(snapshot, transform) {
 				y: normalized.anchor.y + translation.y + relative.y,
 				z: normalized.anchor.z + translation.z + relative.z
 			},
-			states: clone(block.states),
+			states: transformAssemblyBlockStates(block.states, pose),
 			typeId: block.typeId
 		};
 	});
+}
+
+export function migrateDynamicAssemblySnapshot(snapshot) {
+	return normalizeDynamicAssemblySnapshot(snapshot);
 }

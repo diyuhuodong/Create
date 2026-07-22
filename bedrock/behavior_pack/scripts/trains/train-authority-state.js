@@ -1,4 +1,5 @@
-export const TRAIN_AUTHORITY_SCHEMA_VERSION = 2;
+export const TRAIN_AUTHORITY_SCHEMA_VERSION = 3;
+export const TRAIN_AUTHORITY_READABLE_SCHEMAS = Object.freeze([2, TRAIN_AUTHORITY_SCHEMA_VERSION]);
 
 function clone(value) {
 	return JSON.parse(JSON.stringify(value));
@@ -30,7 +31,7 @@ export function trainAuthorityPartition(record) {
 	throw new TypeError("Unknown train authority record kind");
 }
 
-export function createTrainAuthorityRecords({ dimensions, nextTrainId }) {
+export function createTrainAuthorityRecords({ dimensions, nextTrainId, portalTransfers = [] }) {
 	assertPositiveInteger(nextTrainId, "Train authority next id");
 	if (!Array.isArray(dimensions))
 		throw new TypeError("Train authority dimensions must be an array");
@@ -38,6 +39,7 @@ export function createTrainAuthorityRecords({ dimensions, nextTrainId }) {
 	const records = [{
 		kind: "train_authority_meta",
 		nextTrainId,
+		portalTransfers: assertRecordArray(portalTransfers, "Train authority Portal transfers"),
 		schemaVersion: TRAIN_AUTHORITY_SCHEMA_VERSION
 	}];
 	for (const dimension of dimensions) {
@@ -52,6 +54,7 @@ export function createTrainAuthorityRecords({ dimensions, nextTrainId }) {
 			graph: clone(dimension.graph),
 			kind: "train_authority_dimension",
 			schemaVersion: TRAIN_AUTHORITY_SCHEMA_VERSION,
+			stations: assertRecordArray(dimension.stations ?? [], `Train authority stations for ${dimensionId}`),
 			trains: assertRecordArray(dimension.trains, `Train authority trains for ${dimensionId}`)
 		});
 	}
@@ -62,15 +65,21 @@ export function readTrainAuthorityRecords(records) {
 	if (!Array.isArray(records))
 		throw new TypeError("Train authority records must be an array");
 	let nextTrainId;
+	let portalTransfers = [];
+	let storedSchema;
 	const dimensions = [];
 	const ids = new Set();
 	for (const record of records) {
-		if (record?.schemaVersion !== TRAIN_AUTHORITY_SCHEMA_VERSION)
+		if (!TRAIN_AUTHORITY_READABLE_SCHEMAS.includes(record?.schemaVersion))
 			throw new TypeError("Unsupported train authority record schema");
+		storedSchema ??= record.schemaVersion;
+		if (storedSchema !== record.schemaVersion)
+			throw new TypeError("Train authority storage mixes record schemas");
 		if (record.kind === "train_authority_meta") {
 			if (nextTrainId !== undefined)
 				throw new TypeError("Train authority storage contains duplicate meta records");
 			nextTrainId = assertPositiveInteger(record.nextTrainId, "Train authority next id");
+			portalTransfers = record.schemaVersion >= 3 ? assertRecordArray(record.portalTransfers ?? [], "Train authority Portal transfers") : [];
 			continue;
 		}
 		if (record.kind !== "train_authority_dimension")
@@ -81,11 +90,16 @@ export function readTrainAuthorityRecords(records) {
 		ids.add(dimensionId);
 		if (!record.graph || typeof record.graph !== "object" || Array.isArray(record.graph))
 			throw new TypeError(`Train authority graph for ${dimensionId} must be an object`);
-		dimensions.push({ dimensionId, graph: clone(record.graph), trains: assertRecordArray(record.trains, `Train authority trains for ${dimensionId}`) });
+		dimensions.push({
+			dimensionId,
+			graph: clone(record.graph),
+			stations: record.schemaVersion >= 3 ? assertRecordArray(record.stations ?? [], `Train authority stations for ${dimensionId}`) : [],
+			trains: assertRecordArray(record.trains, `Train authority trains for ${dimensionId}`)
+		});
 	}
 	if (nextTrainId === undefined)
 		throw new TypeError("Train authority storage is missing its meta record");
-	return { dimensions: dimensions.sort((left, right) => left.dimensionId.localeCompare(right.dimensionId)), nextTrainId };
+	return { dimensions: dimensions.sort((left, right) => left.dimensionId.localeCompare(right.dimensionId)), nextTrainId, portalTransfers };
 }
 
 export function migrateLegacyTrainSnapshot(snapshot) {
@@ -95,8 +109,10 @@ export function migrateLegacyTrainSnapshot(snapshot) {
 		dimensions: (snapshot.dimensions ?? []).map(dimension => ({
 			dimensionId: dimension?.dimensionId,
 			graph: dimension?.graph,
+			stations: dimension?.stations ?? [],
 			trains: dimension?.trains
 		})),
-		nextTrainId: snapshot.nextTrainId ?? 1
+		nextTrainId: snapshot.nextTrainId ?? 1,
+		portalTransfers: snapshot.portalTransfers ?? []
 	};
 }

@@ -1,8 +1,8 @@
 import { BlockPermutation, world } from "@minecraft/server";
 
-import { assemblyTransformToRuntime } from "./assembly-transform.js";
+import { assemblyTransformToRuntime, transformAssemblyPoint } from "./assembly-transform.js";
 import { findDynamicAssemblyCollision } from "./dynamic-assembly-collision.js";
-import { captureMovingBlockData, detachMovingBlockData, restoreMovingBlockData } from "./moving-block-data.js";
+import { captureMovingBlockPayload, detachMovingBlockData, quiesceMovingBlockData, restoreMovingBlockData, verifyMovingBlockData } from "./moving-block-data.js";
 import { ALL_CONTRAPTION_PART_TYPES, partTypeFor } from "./contraption-parts.js";
 
 const CONTRAPTION_ENTITY = "createbedrock:contraption";
@@ -13,6 +13,7 @@ const ASSEMBLY_ID_PROPERTY = "createbedrock:dynamic_assembly_id";
 const LEGACY_ASSEMBLY_ID_PROPERTY = "createbedrock:contraption_id";
 const PART_EPOCH_PROPERTY = "createbedrock:dynamic_assembly_epoch";
 const PART_RELATIVE_PROPERTY = "createbedrock:dynamic_assembly_relative";
+const PART_ROLL_PROPERTY = "createbedrock:dynamic_assembly_roll";
 
 /** Bedrock API adapter for DynamicAssemblyController; no authority is stored on entities. */
 export class DynamicAssemblyWorldPort {
@@ -23,16 +24,19 @@ export class DynamicAssemblyWorldPort {
 	#detachSuperGlueVolumes;
 	#kineticWorld;
 	#onKineticMutation;
+	#onAuthorityCheckpoint;
 	#restorePhysicalBeltRuns;
 	#restoreSuperGlueVolumes;
 
-	constructor(dimensionId, { capturePhysicalBeltRuns, captureSuperGlueVolumes, detachPhysicalBeltRuns, detachSuperGlueVolumes, kineticWorld, onKineticMutation, restorePhysicalBeltRuns, restoreSuperGlueVolumes } = {}) {
+	constructor(dimensionId, { capturePhysicalBeltRuns, captureSuperGlueVolumes, detachPhysicalBeltRuns, detachSuperGlueVolumes, kineticWorld, onAuthorityCheckpoint, onKineticMutation, restorePhysicalBeltRuns, restoreSuperGlueVolumes } = {}) {
 		if (typeof dimensionId !== "string" || dimensionId.length === 0)
 			throw new TypeError("Dynamic assembly world ports require a dimension id");
 		if (kineticWorld && (typeof kineticWorld.trackBrokenBlock !== "function" || typeof kineticWorld.trackPlacedBlock !== "function"))
 			throw new TypeError("Dynamic assembly world ports require KineticWorld tracking methods");
 		if (onKineticMutation && typeof onKineticMutation !== "function")
 			throw new TypeError("Dynamic assembly kinetic mutation callbacks must be functions");
+		if (onAuthorityCheckpoint && typeof onAuthorityCheckpoint !== "function")
+			throw new TypeError("Dynamic assembly authority checkpoint callbacks must be functions");
 		if (![capturePhysicalBeltRuns, detachPhysicalBeltRuns, restorePhysicalBeltRuns].every(callback => callback === undefined)
 			&& ![capturePhysicalBeltRuns, detachPhysicalBeltRuns, restorePhysicalBeltRuns].every(callback => typeof callback === "function"))
 			throw new TypeError("Dynamic assembly physical belt callbacks must be paired functions");
@@ -46,8 +50,13 @@ export class DynamicAssemblyWorldPort {
 		this.#detachSuperGlueVolumes = detachSuperGlueVolumes;
 		this.#kineticWorld = kineticWorld;
 		this.#onKineticMutation = onKineticMutation;
+		this.#onAuthorityCheckpoint = onAuthorityCheckpoint;
 		this.#restorePhysicalBeltRuns = restorePhysicalBeltRuns;
 		this.#restoreSuperGlueVolumes = restoreSuperGlueVolumes;
+	}
+
+	checkpointAssemblyAuthority(record) {
+		this.#onAuthorityCheckpoint?.(record);
 	}
 
 	detachAssemblyData(attachments) {
@@ -60,10 +69,14 @@ export class DynamicAssemblyWorldPort {
 		if (!block || block.typeId === "minecraft:air")
 			return undefined;
 		return {
-			data: captureMovingBlockData(block.typeId, this.#dimensionId, location),
+			data: captureMovingBlockPayload(block.typeId, this.#dimensionId, location),
 			states: block.permutation.getAllStates(),
 			typeId: block.typeId
 		};
+	}
+
+	quiesceBlock(blockData) {
+		return quiesceMovingBlockData(blockData.typeId, this.#dimensionId, blockData.location);
 	}
 
 	removeBlock(location) {
@@ -80,6 +93,10 @@ export class DynamicAssemblyWorldPort {
 		restoreMovingBlockData(blockData.typeId, this.#dimensionId, blockData.location, blockData.data);
 		if (this.#kineticWorld?.trackPlacedBlock(block))
 			this.#onKineticMutation?.();
+	}
+
+	verifyBlockRestore(blockData) {
+		return verifyMovingBlockData(blockData.typeId, this.#dimensionId, blockData.location, blockData.data);
 	}
 
 	canPlace(location) {
@@ -185,14 +202,17 @@ export class DynamicAssemblyWorldPort {
 		if (!anchor)
 			throw new Error("Dynamic assembly marker is missing its authoritative anchor");
 		marker.teleport(this.#markerLocation({ anchor }, transform));
-		marker.setRotation({ x: 0, y: runtime.rotation });
+		const rotation = typeof runtime.rotation === "number" ? { x: 0, y: runtime.rotation, z: 0 } : runtime.rotation;
+		marker.setRotation({ x: rotation.x, y: rotation.y });
+		marker.setDynamicProperty(PART_ROLL_PROPERTY, rotation.z);
 		const id = marker.getDynamicProperty(ASSEMBLY_ID_PROPERTY);
 		for (const part of this.#parts(id)) {
 			const relative = this.#readRelative(part);
 			if (!relative)
 				continue;
 			part.teleport(this.#partLocation(marker.location, relative, transform));
-			part.setRotation({ x: 0, y: runtime.rotation });
+			part.setRotation({ x: rotation.x, y: rotation.y });
+			part.setDynamicProperty(PART_ROLL_PROPERTY, rotation.z);
 		}
 	}
 
@@ -210,12 +230,11 @@ export class DynamicAssemblyWorldPort {
 	}
 
 	#partLocation(markerLocation, relative, transform) {
-		const runtime = assemblyTransformToRuntime(transform);
-		const radians = runtime.rotation * Math.PI / 180;
+		const point = transformAssemblyPoint(transform, relative);
 		return {
-			x: markerLocation.x + relative.x * Math.cos(radians) - relative.z * Math.sin(radians),
-			y: markerLocation.y + relative.y,
-			z: markerLocation.z + relative.x * Math.sin(radians) + relative.z * Math.cos(radians)
+			x: markerLocation.x + point.x - transform.translation.x / 4096,
+			y: markerLocation.y + point.y - transform.translation.y / 4096,
+			z: markerLocation.z + point.z - transform.translation.z / 4096
 		};
 	}
 

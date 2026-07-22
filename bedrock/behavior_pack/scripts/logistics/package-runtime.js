@@ -6,7 +6,8 @@ import { registerTickHandler } from "../kernel/index.js";
 import { ShardedStateStore } from "../kernel/sharded-state-store.js";
 import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-property-storage.js";
 import { PackageLedger } from "./package-ledger.js";
-import { createPackageEndpoint, packageEndpointAccepts, routePackage } from "./package-network-state.js";
+import { createPackageEndpoint, routePackage } from "./package-network-state.js";
+import { beginTrainPackageDelivery, beginTrainPackageRetrieval, settleTrainPackageTransfer, trainPackageCargo } from "../trains/train-package-exchange.js";
 
 export const FACTORY_GAUGE_BLOCK = "createbedrock:factory_gauge";
 export const PACKAGE_ENTITY = "createbedrock:package";
@@ -21,6 +22,7 @@ const PACKAGE_ID_PROPERTY = "createbedrock:package_id";
 const PACKAGE_ITEM_PROPERTY = "createbedrock:package_id";
 const endpoints = new Map();
 const ledger = new PackageLedger();
+const trainPackageMutationTicks = new Map();
 let commitReady = false;
 let registered = false;
 
@@ -164,16 +166,15 @@ function completeCommittedTransfers() {
 	const occupied = endpointOccupancy({ includeTransfers: false });
 	for (const record of ledger.snapshot().records) {
 		if (!record.transfer) continue;
-		const target = endpoints.get(record.transfer.to.id);
-		if (!target || !packageEndpointAccepts(target, record, { occupied: occupied.get(target?.id) ?? 0 })) {
-			const aborted = ledger.abortTransfer(record.id, { receiptId: record.transfer.receiptId });
-			changed = aborted.ok || changed;
-			continue;
-		}
-		const result = ledger.completeTransfer(record.id, { receiptId: record.transfer.receiptId });
-		if (result.ok && !result.replay) {
-			occupied.set(target.id, (occupied.get(target.id) ?? 0) + 1);
-			spawnProjection(result.record, target);
+		const result = settleTrainPackageTransfer(ledger, record, endpoints.values());
+		if (result.changed) {
+			if (result.target) {
+				occupied.set(result.target.id, (occupied.get(result.target.id) ?? 0) + 1);
+				spawnProjection(result.record, result.target);
+			}
+			for (const owner of [record.transfer.from, record.transfer.to])
+				if (owner.kind === "projection" && owner.id.startsWith("train:"))
+					trainPackageMutationTicks.set(owner.id.slice("train:".length), system.currentTick);
 			changed = true;
 		}
 	}
@@ -206,6 +207,42 @@ export function registerPackages() {
 	registerTickHandler(tick); system.run(restore); return true;
 }
 export function getPackageDiagnostics() { return { endpoints: endpoints.size, packages: ledger.snapshot().records.length, storage: store.diagnostics() }; }
+
+function scheduleEndpoints(dimensionId) {
+	return [...endpoints.values()].filter(endpoint => endpoint.dimensionId === dimensionId && endpoint.enabled && endpoint.connected);
+}
+
+export function deliverTrainPackages(trainId, dimensionId, address = "") {
+	const result = beginTrainPackageDelivery({ address, endpoints: scheduleEndpoints(dimensionId), ledger, trainId });
+	if (result.changed) {
+		trainPackageMutationTicks.set(trainId, system.currentTick);
+		persist();
+	}
+	return result.complete;
+}
+
+export function retrieveTrainPackages(trainId, dimensionId, address = "") {
+	const result = beginTrainPackageRetrieval({ address, endpoints: scheduleEndpoints(dimensionId), ledger, trainId });
+	if (result.changed) {
+		trainPackageMutationTicks.set(trainId, system.currentTick);
+		persist();
+	}
+	return result.complete;
+}
+
+export function getTrainPackageCargoState(trainId) {
+	const packages = trainPackageCargo(ledger, trainId);
+	const itemCounts = {};
+	for (const record of packages)
+		for (const stack of record.contents)
+			itemCounts[stack.typeId] = (itemCounts[stack.typeId] ?? 0) + stack.count;
+	return {
+		empty: packages.length === 0,
+		idleTicks: Math.max(0, system.currentTick - (trainPackageMutationTicks.get(trainId) ?? system.currentTick)),
+		itemCounts,
+		packages: packages.length
+	};
+}
 
 export function getPackageDisplayState(dimensionId, location) {
 	const endpoint = [...endpoints.values()].find(candidate => candidate.dimensionId === dimensionId

@@ -179,6 +179,8 @@ function ensureRecord(block) {
 
 function actorDataState(typeId, data) {
 	let payload = data;
+	if (data?.movingPayloadSchema === 2)
+		payload = data.contributors?.[actorContributorName(typeId)]?.data;
 	if (data?.assemblyDataSchema === 1)
 		payload = data.contributors?.[actorContributorName(typeId)];
 	if (payload?.adapterSchemaVersion !== undefined)
@@ -199,6 +201,18 @@ function actorContributorName(typeId) {
 
 function replaceActorDataState(typeId, data, state) {
 	const normalized = normalizeStateFor(typeId, state);
+	if (data?.movingPayloadSchema === 2) {
+		const name = actorContributorName(typeId);
+		const contributors = { ...data.contributors };
+		const current = contributors[name] ?? { category: name };
+		contributors[name] = {
+			...current,
+			data: current.data?.adapterSchemaVersion !== undefined
+				? { ...current.data, payload: normalized }
+				: normalized
+		};
+		return { ...data, contributors };
+	}
 	if (data?.assemblyDataSchema === 1) {
 		const name = actorContributorName(typeId);
 		const contributors = { ...data.contributors };

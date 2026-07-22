@@ -2,11 +2,19 @@
   "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
+      "geometry": {
+        "default": "geometry.createbedrock.crushing_wheel"
+      },
       "identifier": "createbedrock:contraption_part_crushing_wheel_controller",
-      "materials": { "default": "entity_alphatest" },
-      "textures": { "default": "textures/create_java/block/crushing_wheel_plates" },
-      "geometry": { "default": "geometry.createbedrock.crushing_wheel" },
-      "render_controllers": ["controller.render.createbedrock.contraption"]
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "render_controllers": [
+        "controller.render.createbedrock.contraption"
+      ],
+      "textures": {
+        "default": "textures/create_java/block/crushing_wheel_plates"
+      }
     }
   }
 }

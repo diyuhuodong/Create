@@ -2,11 +2,19 @@
   "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
+      "geometry": {
+        "default": "geometry.createbedrock.contraption_marker"
+      },
       "identifier": "createbedrock:contraption_part_brass_casing",
-      "materials": { "default": "entity_alphatest" },
-      "textures": { "default": "textures/create_java/block/brass_casing" },
-      "geometry": { "default": "geometry.createbedrock.contraption_marker" },
-      "render_controllers": ["controller.render.createbedrock.contraption"]
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "render_controllers": [
+        "controller.render.createbedrock.contraption"
+      ],
+      "textures": {
+        "default": "textures/create_java/block/brass_casing"
+      }
     }
   }
 }

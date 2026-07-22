@@ -36,7 +36,7 @@ export async function validateP74StaticContract() {
 	requires(redstone, ["writeDisplayBoardLine", "writeWorldDisplayTarget", '"minecraft:sign"', '"minecraft:lectern"', "worldDisplayTargets"], "Display Targets");
 	requires(filters, ["packages", "tags", "typeIds", "filterExpressionMatches"], "filter expressions");
 	requires(packageLedger, ["beginTransfer", "completeTransfer", "abortTransfer", "receiptId"], "package ownership ledger");
-	requires(packages, ["packageEndpointAccepts", "endpointOccupancy", "submitVersionedConfigurationForm", "commitReady = packageRecords.some"], "package runtime");
+	requires(packages, ["routePackage", "settleTrainPackageTransfer", "endpointOccupancy", "submitVersionedConfigurationForm", "commitReady = packageRecords.some"], "package runtime");
 	requires(boiler, ["gatheredSupply", "memberWater", "waterSamples", "BOILER_SAMPLE_INTERVAL_TICKS"], "Boiler controller");
 	requires(fluid, ["collectBoilerMembers", "boilerWaterSnapshot", "receiptId: `boiler:", "setExternalSource", "boilerStore"], "Boiler runtime");
 	requires(configuration, ["openConfigurationFormSession", "submitVersionedConfigurationForm", "applyVersionedConfiguration"], "configuration protocol");

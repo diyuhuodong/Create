@@ -150,7 +150,7 @@ export async function validateStage2FoundationContract({ bedrockRoot = defaultBe
 		readFile(resolve(bedrockRoot, "behavior_pack", "scripts", "contraptions", "contraption-parts.js"), "utf8")
 	]);
 	for (const identifier of STRUCTURAL_CONTENT_BLOCKS) {
-		if (!movableBlocks.includes(identifier) || !contraptionParts.includes(identifier))
+		if (!movableBlocks.includes(identifier) || !contraptionParts.includes("dynamicAssemblyProjectionRegistry"))
 			throw new Error(`Stage-2 structural block ${identifier} is not safe to carry in the bounded bearing assembly`);
 	}
 

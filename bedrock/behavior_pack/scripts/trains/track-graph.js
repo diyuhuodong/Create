@@ -1,13 +1,13 @@
+import { normalizeTrackGeometry, persistedTrackGeometry, sampleTrackGeometry } from "./track-geometry.js";
+
+export const TRACK_GRAPH_SCHEMA_VERSION = 2;
+
 function edgeId(leftId, rightId) {
 	return [leftId, rightId].sort().join("<->");
 }
 
 function chunkId(location) {
 	return `${Math.floor(location.x / 16)}:${Math.floor(location.z / 16)}`;
-}
-
-function distance(left, right) {
-	return Math.hypot(right.x - left.x, right.y - left.y, right.z - left.z);
 }
 
 function validatePoint(point) {
@@ -18,15 +18,34 @@ export class TrackGraph {
 	#chunks = new Map();
 	#nodes = new Map();
 	#edges = new Map();
+	#graphId;
+	#revision = 0;
 
-	addNode({ id, location }) {
+	constructor({ graphId = "default" } = {}) {
+		if (typeof graphId !== "string" || graphId.length === 0)
+			throw new TypeError("Track graphs require a stable id");
+		this.#graphId = graphId;
+	}
+
+	addNode({ dimensionId, direction, id, location, normal }) {
 		if (!id || !location)
 			throw new TypeError("Track nodes require an id and location");
 		if (this.#nodes.has(id))
 			throw new Error(`Track node ${id} already exists`);
 
-		const node = { chunkAvailable: true, id, location: { ...location }, trackAvailable: true };
+		const node = {
+			chunkAvailable: true,
+			...(dimensionId ? { dimensionId } : {}),
+			...(direction ? { direction: validatePoint(direction) && { ...direction } } : {}),
+			id,
+			location: { ...location },
+			...(normal ? { normal: validatePoint(normal) && { ...normal } } : {}),
+			trackAvailable: true
+		};
+		if (node.direction === false || node.normal === false)
+			throw new TypeError("Track node direction and normal vectors must be finite");
 		this.#nodes.set(id, node);
+		this.#revision++;
 		const chunk = chunkId(location);
 		let nodes = this.#chunks.get(chunk);
 		if (!nodes) {
@@ -42,22 +61,22 @@ export class TrackGraph {
 		if (leftId === rightId)
 			throw new RangeError("Track connections require a positive length between different nodes");
 
-		let geometry;
-		if (points !== undefined) {
-			if (!Array.isArray(points) || points.length < 2 || points.some(point => !validatePoint(point)))
-				throw new TypeError("Track geometry requires at least two finite points");
-			geometry = points.map(point => ({ ...point }));
-			length = geometry.slice(1).reduce((total, point, index) => total + distance(geometry[index], point), 0);
-		}
-		if (!Number.isFinite(length) || length <= 0)
-			throw new RangeError("Track connections require a positive length between different nodes");
+		const left = this.#nodes.get(leftId);
+		const right = this.#nodes.get(rightId);
+		const geometry = normalizeTrackGeometry(points, { end: right.location, legacyLength: length, start: left.location });
+		length = geometry.length;
 
 		const id = edgeId(leftId, rightId);
 		if (this.#edges.has(id))
 			throw new Error(`Track edge ${id} already exists`);
 
-		this.#edges.set(id, { id, leftId, rightId, length, points: geometry, reservedBy: undefined });
+		this.#edges.set(id, { geometry, id, leftId, rightId, length, points: geometry.kind === "legacy_polyline" ? geometry.points : undefined, reservedBy: undefined });
+		this.#revision++;
 		return id;
+	}
+
+	connectGeometry(leftId, rightId, geometry) {
+		return this.connect(leftId, rightId, undefined, geometry);
 	}
 
 	removeNode(id) {
@@ -70,6 +89,7 @@ export class TrackGraph {
 		}
 		const node = this.#nodes.get(id);
 		this.#nodes.delete(id);
+		this.#revision++;
 		const chunk = chunkId(node.location);
 		const nodes = this.#chunks.get(chunk);
 		nodes?.delete(id);
@@ -183,38 +203,30 @@ export class TrackGraph {
 		const edge = this.#edges.get(id);
 		return edge && {
 			...edge,
+			geometry: persistedTrackGeometry(edge.geometry),
 			points: edge.points?.map(point => ({ ...point }))
 		};
 	}
 
 	sampleEdge(id, fromNodeId, progress) {
+		return this.sampleEdgeFrame(id, fromNodeId, progress).location;
+	}
+
+	sampleEdgeFrame(id, fromNodeId, progress) {
 		const edge = this.#edges.get(id);
 		if (!edge || (fromNodeId !== edge.leftId && fromNodeId !== edge.rightId))
 			throw new Error(`Track edge ${id} is not connected to ${fromNodeId}`);
 		if (!Number.isFinite(progress) || progress < 0 || progress > 1)
 			throw new RangeError("Track sampling progress must be between zero and one");
 
-		const normalizedProgress = fromNodeId === edge.leftId ? progress : 1 - progress;
-		const points = edge.points ?? [this.#nodes.get(edge.leftId).location, this.#nodes.get(edge.rightId).location];
-		let remaining = normalizedProgress * edge.length;
-		for (let index = 1; index < points.length; index++) {
-			const segmentLength = distance(points[index - 1], points[index]);
-			if (remaining <= segmentLength || index === points.length - 1) {
-				const ratio = segmentLength === 0 ? 0 : Math.min(1, remaining / segmentLength);
-				return {
-					x: points[index - 1].x + (points[index].x - points[index - 1].x) * ratio,
-					y: points[index - 1].y + (points[index].y - points[index - 1].y) * ratio,
-					z: points[index - 1].z + (points[index].z - points[index - 1].z) * ratio
-				};
-			}
-			remaining -= segmentLength;
-		}
-		return { ...points.at(-1) };
+		const forward = fromNodeId === edge.leftId;
+		const frame = sampleTrackGeometry(edge.geometry, (forward ? progress : 1 - progress) * edge.length);
+		return forward ? frame : { ...frame, tangent: { x: -frame.tangent.x, y: -frame.tangent.y, z: -frame.tangent.z } };
 	}
 
 	getNode(id) {
 		const node = this.#nodes.get(id);
-		return node && { available: this.#isNodeAvailable(node), id: node.id, location: { ...node.location } };
+		return node && { available: this.#isNodeAvailable(node), ...(node.dimensionId ? { dimensionId: node.dimensionId } : {}), ...(node.direction ? { direction: { ...node.direction } } : {}), id: node.id, location: { ...node.location }, ...(node.normal ? { normal: { ...node.normal } } : {}) };
 	}
 
 	getNodes() {
@@ -231,6 +243,10 @@ export class TrackGraph {
 			loadedChunks: [...this.#chunks.entries()]
 				.filter(([, nodeIds]) => [...nodeIds].some(id => this.#nodes.get(id).chunkAvailable)).length
 		};
+	}
+
+	getRevision() {
+		return this.#revision;
 	}
 
 	setNodeAvailable(id, available) {
@@ -270,7 +286,7 @@ export class TrackGraph {
 	snapshot() {
 		const chunks = new Map([...this.#chunks.keys()].map(id => [id, { edges: [], id, nodes: [] }]));
 		for (const node of this.#nodes.values())
-			chunks.get(chunkId(node.location)).nodes.push({ id: node.id, location: { ...node.location } });
+			chunks.get(chunkId(node.location)).nodes.push({ ...(node.dimensionId ? { dimensionId: node.dimensionId } : {}), ...(node.direction ? { direction: { ...node.direction } } : {}), id: node.id, location: { ...node.location }, ...(node.normal ? { normal: { ...node.normal } } : {}) });
 		for (const edge of this.#edges.values()) {
 			const owner = chunks.get(chunkId(this.#nodes.get(edge.leftId).location));
 			owner.edges.push({
@@ -278,11 +294,15 @@ export class TrackGraph {
 				leftId: edge.leftId,
 				rightId: edge.rightId,
 				length: edge.length,
+				geometry: persistedTrackGeometry(edge.geometry),
 				points: edge.points?.map(point => ({ ...point }))
 			});
 		}
 		return {
-			chunks: [...chunks.values()]
+			chunks: [...chunks.values()],
+			graphId: this.#graphId,
+			revision: this.#revision,
+			schemaVersion: TRACK_GRAPH_SCHEMA_VERSION
 		};
 	}
 
@@ -296,7 +316,9 @@ export class TrackGraph {
 
 		// Rebuild before replacing the live graph so a malformed persisted edge
 		// cannot leave a dimension with only part of its track topology.
-		const restored = new TrackGraph();
+		if (snapshot?.schemaVersion !== undefined && ![1, TRACK_GRAPH_SCHEMA_VERSION].includes(snapshot.schemaVersion))
+			throw new TypeError("Unsupported track graph schema");
+		const restored = new TrackGraph({ graphId: snapshot?.graphId ?? this.#graphId });
 		const chunkIds = new Set();
 		const edges = [];
 		for (const chunk of legacy) {
@@ -308,10 +330,12 @@ export class TrackGraph {
 			edges.push(...chunk.edges);
 		}
 		for (const edge of edges)
-			restored.connect(edge.leftId, edge.rightId, edge.length, edge.points);
+			restored.connect(edge.leftId, edge.rightId, edge.length, edge.geometry ?? edge.points);
 		this.#chunks = restored.#chunks;
 		this.#nodes = restored.#nodes;
 		this.#edges = restored.#edges;
+		this.#graphId = restored.#graphId;
+		this.#revision = Number.isInteger(snapshot?.revision) && snapshot.revision >= 0 ? snapshot.revision : restored.#revision;
 	}
 
 	#isNodeAvailable(node) {

@@ -14,7 +14,7 @@ import { createDisplayTargetState, normalizeDisplayTargetState, resolveDisplayLi
 import { resolveDisplaySource } from "./display-source.js";
 import { registerWorldDisplaySourceProviders } from "./display-world-sources.js";
 import { writeDisplayBoardLine } from "../materials/display-board-runtime.js";
-import { getTrainDisplayState } from "../trains/train-runtime.js";
+import { getTrainDisplayState, setTrainRedstoneLinkResolver } from "../trains/train-runtime.js";
 import { collectNixieTubeGroup, composeNixieTubeDisplay, NIXIE_TUBE_BLOCK, nixieTubeGroupId } from "./nixie-display.js";
 import { beginLecternControllerUse, clearLecternControllerSession, createLecternControllerState, endLecternControllerUse, installLecternController, normalizeLecternControllerState, triggerLecternControllerChannel } from "./lectern-controller-state.js";
 import { fingerprintInventoryStacks } from "./redstone-inventory-fingerprint.js";
@@ -1083,6 +1083,17 @@ export function getRedstoneDeviceDiagnostics() {
 
 export function registerRedstoneDevices() {
 	registerDisplaySourceProviders();
+	setTrainRedstoneLinkResolver((dimensionId, frequency, location) => {
+		const key = redstoneLinkFrequencyKey(frequency);
+		const transmitters = [...devices.values()]
+			.filter(record => record.dimensionId === dimensionId && record.definition.id === "redstone_link"
+				&& record.state.mode === "transmitter" && redstoneLinkFrequencyKey(record.state.frequency) === key)
+			.map(record => ({ key, location: record.location, power: nativeOutputPower(record.state) }))
+			.concat([...controllerSignals.values()]
+				.filter(signal => signal.dimensionId === dimensionId && signal.expiresAt > deviceTick && redstoneLinkFrequencyKey(signal.frequency) === key)
+				.map(signal => ({ key, location: signal.location, power: 15 })));
+		return location ? receivedRedstoneLinkPower({ frequency, receiver: location, transmitters }) : transmitters.reduce((power, transmitter) => Math.max(power, transmitter.power), 0);
+	});
 	registerKernelTaskGroup(DEVICE_TASK_GROUP, DEVICE_TASK_BUDGET);
 	registerNativeRedstoneEventHandler(handleNativeDeviceInput);
 	world.afterEvents.playerPlaceBlock.subscribe(event => ensureDevice(event.block));

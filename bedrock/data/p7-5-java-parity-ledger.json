@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "baseline": {
+    "commit": "0bb26790f",
+    "javaVersion": "Create 6.0.11 / Minecraft 1.21.1"
+  },
+  "packages": [
+    {
+      "id": "P7.5.0",
+      "name": "Baseline and migration gate",
+      "javaEvidence": ["src/main/java/com/simibubi/create/content/contraptions/Contraption.java", "src/main/java/com/simibubi/create/content/trains/schedule/Schedule.java"],
+      "implementation": ["bedrock/tests/p7-5-migration-gate.test.mjs", "bedrock/tests/fixtures/p7-5/train-authority-v2.json"],
+      "status": "static_verified"
+    },
+    {
+      "id": "P7.5A",
+      "name": "Pose and assembly authority",
+      "javaEvidence": ["src/main/java/com/simibubi/create/content/contraptions/StructureTransform.java", "src/main/java/com/simibubi/create/content/contraptions/AbstractContraptionEntity.java"],
+      "implementation": ["bedrock/behavior_pack/scripts/contraptions/pose-transform.js", "bedrock/behavior_pack/scripts/contraptions/dynamic-assembly-authority-state.js", "bedrock/tests/pose-transform.test.mjs"],
+      "status": "static_verified"
+    },
+    {
+      "id": "P7.5B",
+      "name": "Payload actors and projections",
+      "javaEvidence": ["src/main/java/com/simibubi/create/api/behaviour/movement/MovementBehaviour.java"],
+      "implementation": ["bedrock/behavior_pack/scripts/contraptions/moving-block-data.js", "bedrock/behavior_pack/scripts/contraptions/projection-registry.js", "bedrock/p7-5-projection-catalog.json", "bedrock/tests/projection-registry.test.mjs"],
+      "status": "static_verified"
+    },
+    {
+      "id": "P7.5C",
+      "name": "Track geometry",
+      "javaEvidence": ["src/main/java/com/simibubi/create/content/trains/graph/TrackGraph.java", "src/main/java/com/simibubi/create/content/trains/track/BezierConnection.java"],
+      "implementation": ["bedrock/behavior_pack/scripts/trains/track-geometry.js", "bedrock/behavior_pack/scripts/trains/track-graph.js", "bedrock/tests/track-geometry.test.mjs"],
+      "status": "static_verified"
+    },
+    {
+      "id": "P7.5D",
+      "name": "Formation occupancy signals and Portal",
+      "javaEvidence": ["src/main/java/com/simibubi/create/content/trains/entity/Carriage.java", "src/main/java/com/simibubi/create/content/trains/entity/TravellingPoint.java"],
+      "implementation": ["bedrock/behavior_pack/scripts/trains/train-formation.js", "bedrock/behavior_pack/scripts/trains/train-occupancy.js", "bedrock/behavior_pack/scripts/trains/portal-track-transfer.js", "bedrock/tests/train-formation-occupancy.test.mjs", "bedrock/tests/portal-track-transfer.test.mjs"],
+      "status": "static_verified"
+    },
+    {
+      "id": "P7.5E",
+      "name": "Schedule AST",
+      "javaEvidence": ["src/main/java/com/simibubi/create/content/trains/schedule/ScheduleRuntime.java", "src/main/java/com/simibubi/create/content/trains/schedule/ScheduleEntry.java"],
+      "implementation": ["bedrock/behavior_pack/scripts/trains/schedule-ast.js", "bedrock/behavior_pack/scripts/trains/schedule-runtime.js", "bedrock/behavior_pack/scripts/trains/schedule-form-runtime.js", "bedrock/tests/schedule-ast-runtime.test.mjs", "bedrock/tests/schedule-form-runtime.test.mjs"],
+      "status": "static_verified"
+    },
+    {
+      "id": "P7.5F",
+      "name": "Integration and recovery",
+      "javaEvidence": ["src/main/java/com/simibubi/create/content/trains/schedule/destination/DeliverPackagesInstruction.java", "src/main/java/com/simibubi/create/content/trains/schedule/destination/FetchPackagesInstruction.java"],
+      "implementation": ["bedrock/behavior_pack/scripts/trains/train-station-registry.js", "bedrock/behavior_pack/scripts/trains/train-package-exchange.js", "bedrock/behavior_pack/scripts/trains/train-recovery.js", "bedrock/tests/train-recovery.test.mjs"],
+      "status": "static_verified"
+    },
+    {
+      "id": "P7.5G",
+      "name": "Static release closure",
+      "javaEvidence": ["src/main/java/com/simibubi/create/content/trains/schedule/Schedule.java"],
+      "implementation": ["bedrock/tools/p7-5-static-contract.mjs", "bedrock/tests/p7-5-static-contract.test.mjs", "work/doc/create-bedrock-p7-5-static-completion.md"],
+      "status": "static_verified"
+    }
+  ],
+  "platform": {
+    "windows": "pending",
+    "realm": "pending",
+    "playstation": "pending"
+  }
+}

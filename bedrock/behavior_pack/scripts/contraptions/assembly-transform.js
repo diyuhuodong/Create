@@ -1,3 +1,15 @@
+import {
+	ASSEMBLY_POSE_SCHEMA_VERSION,
+	assemblyPoseFromAxisAngle,
+	assemblyPoseToEuler,
+	createAssemblyPose,
+	isBlockAlignedAssemblyPose,
+	normalizeAssemblyPose,
+	POSE_SUBBLOCK_UNITS,
+	transformAssemblyPosePoint,
+	withAssemblyPoseDelta
+} from "./pose-transform.js";
+
 export const ASSEMBLY_SUBBLOCK_UNITS = 4096;
 export const ASSEMBLY_FULL_ROTATION = 360000;
 export const ASSEMBLY_QUARTER_TURN = 90000;
@@ -15,6 +27,15 @@ function normalizeRotation(value) {
 }
 
 export function createAssemblyTransform({ rotationMilliDegrees = 0, translation = { x: 0, y: 0, z: 0 } } = {}) {
+	const value = arguments[0] ?? {};
+	if (value.poseSchemaVersion === ASSEMBLY_POSE_SCHEMA_VERSION || value.quaternion)
+		return createAssemblyPose(value);
+	if (value.rotationAxis !== undefined) {
+		const axis = typeof value.rotationAxis === "string"
+			? { x: value.rotationAxis === "x" ? 1 : 0, y: value.rotationAxis === "y" ? 1 : 0, z: value.rotationAxis === "z" ? 1 : 0 }
+			: value.rotationAxis;
+		return assemblyPoseFromAxisAngle({ axis, rotationMilliDegrees, translation });
+	}
 	return {
 		rotationMilliDegrees: normalizeRotation(rotationMilliDegrees),
 		translation: assertIntegerVector(translation, "Assembly translation")
@@ -23,6 +44,15 @@ export function createAssemblyTransform({ rotationMilliDegrees = 0, translation 
 
 export function assemblyTransformToRuntime(transform) {
 	const normalized = createAssemblyTransform(transform);
+	if (normalized.poseSchemaVersion === ASSEMBLY_POSE_SCHEMA_VERSION)
+		return {
+			rotation: assemblyPoseToEuler(normalized),
+			translation: {
+				x: normalized.translation.x / POSE_SUBBLOCK_UNITS,
+				y: normalized.translation.y / POSE_SUBBLOCK_UNITS,
+				z: normalized.translation.z / POSE_SUBBLOCK_UNITS
+			}
+		};
 	return {
 		rotation: normalized.rotationMilliDegrees / 1000,
 		translation: {
@@ -33,8 +63,17 @@ export function assemblyTransformToRuntime(transform) {
 	};
 }
 
+export function assemblyTransformToPose(transform) {
+	const normalized = createAssemblyTransform(transform);
+	return normalized.poseSchemaVersion === ASSEMBLY_POSE_SCHEMA_VERSION
+		? normalized
+		: assemblyPoseFromAxisAngle({ rotationMilliDegrees: normalized.rotationMilliDegrees, translation: normalized.translation });
+}
+
 export function isBlockAlignedAssemblyTransform(transform) {
 	const normalized = createAssemblyTransform(transform);
+	if (normalized.poseSchemaVersion === ASSEMBLY_POSE_SCHEMA_VERSION)
+		return isBlockAlignedAssemblyPose(normalized);
 	return normalized.rotationMilliDegrees % ASSEMBLY_QUARTER_TURN === 0
 		&& Object.values(normalized.translation).every(value => value % ASSEMBLY_SUBBLOCK_UNITS === 0);
 }
@@ -44,6 +83,8 @@ export function transformAssemblyPoint(transform, point) {
 	if (![point?.x, point?.y, point?.z].every(Number.isFinite))
 		throw new TypeError("Assembly local points require finite x, y, and z coordinates");
 	const runtime = assemblyTransformToRuntime(transform);
+	if (transform?.poseSchemaVersion === ASSEMBLY_POSE_SCHEMA_VERSION || transform?.quaternion)
+		return transformAssemblyPosePoint(normalizeAssemblyPose(transform), point);
 	const radians = runtime.rotation * Math.PI / 180;
 	return {
 		x: runtime.translation.x + point.x * Math.cos(radians) - point.z * Math.sin(radians),
@@ -54,6 +95,16 @@ export function transformAssemblyPoint(transform, point) {
 
 export function withAssemblyTransformDelta(transform, { rotationMilliDegrees = 0, translation = { x: 0, y: 0, z: 0 } } = {}) {
 	const current = createAssemblyTransform(transform);
+	const deltaValue = arguments[1] ?? {};
+	if (current.poseSchemaVersion === ASSEMBLY_POSE_SCHEMA_VERSION || deltaValue.rotationAxis !== undefined) {
+		const pose = current.poseSchemaVersion === ASSEMBLY_POSE_SCHEMA_VERSION
+			? current
+			: assemblyPoseFromAxisAngle({ rotationMilliDegrees: current.rotationMilliDegrees, translation: current.translation });
+		const axis = typeof deltaValue.rotationAxis === "string"
+			? { x: deltaValue.rotationAxis === "x" ? 1 : 0, y: deltaValue.rotationAxis === "y" ? 1 : 0, z: deltaValue.rotationAxis === "z" ? 1 : 0 }
+			: deltaValue.rotationAxis ?? { x: 0, y: 1, z: 0 };
+		return withAssemblyPoseDelta(pose, { axis, local: !!deltaValue.local, rotationMilliDegrees, translation });
+	}
 	const delta = assertIntegerVector(translation, "Assembly translation delta");
 	if (!Number.isInteger(rotationMilliDegrees))
 		throw new TypeError("Assembly rotation delta must use integer millidegrees");

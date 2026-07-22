@@ -2,11 +2,19 @@
   "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
+      "geometry": {
+        "default": "geometry.createbedrock.cogwheel"
+      },
       "identifier": "createbedrock:contraption_part_cogwheel",
-      "materials": { "default": "entity_alphatest" },
-      "textures": { "default": "textures/create_java/block/cogwheel" },
-      "geometry": { "default": "geometry.createbedrock.cogwheel" },
-      "render_controllers": ["controller.render.createbedrock.contraption"]
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "render_controllers": [
+        "controller.render.createbedrock.contraption"
+      ],
+      "textures": {
+        "default": "textures/create_java/block/cogwheel_axis"
+      }
     }
   }
 }

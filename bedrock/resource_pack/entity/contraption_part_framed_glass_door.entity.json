@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "geometry": {
+        "default": "geometry.createbedrock.framed_glass_door_bottom"
+      },
+      "identifier": "createbedrock:contraption_part_framed_glass_door",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "render_controllers": [
+        "controller.render.createbedrock.contraption"
+      ],
+      "textures": {
+        "default": "textures/create_java/block/glass_door_side"
+      }
+    }
+  }
+}

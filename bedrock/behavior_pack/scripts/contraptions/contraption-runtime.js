@@ -1,7 +1,8 @@
 import { system, world } from "@minecraft/server";
 
 import { collectConnectedBlocks } from "./assembly-collector.js";
-import { ASSEMBLY_QUARTER_TURN, createAssemblyTransform, withAssemblyTransformDelta } from "./assembly-transform.js";
+import { ASSEMBLY_QUARTER_TURN, createAssemblyTransform } from "./assembly-transform.js";
+import { assemblyPoseFromAxisAngle } from "./pose-transform.js";
 import { DynamicAssemblyController } from "./dynamic-assembly-controller.js";
 import { createDynamicAssemblySnapshot, MAX_DYNAMIC_ASSEMBLY_BLOCKS } from "./dynamic-assembly-snapshot.js";
 import { DynamicAssemblyWorldPort } from "./dynamic-assembly-world-port.js";
@@ -126,6 +127,7 @@ function controllerFor(dimensionId) {
 			return detachSuperGlueAssemblyAttachments(attachments);
 		},
 			kineticWorld,
+			onAuthorityCheckpoint: requestPersist,
 			onKineticMutation: persistKineticWorld,
 		restorePhysicalBeltRuns(records, origin) {
 			return restoreInternalPhysicalBeltRuns(dimensionId, origin, records);
@@ -207,26 +209,33 @@ function persistentRecords() {
 		const { snapshot } = assembly;
 		records.push({
 			blockCount: snapshot.blocks.length,
+			destinationClaims: clone(assembly.destinationClaims),
 			dimensionId: active.dimensionId,
 			epoch: assembly.epoch,
 			...(assembly.frozenReason ? { frozenReason: assembly.frozenReason } : {}),
 			id: active.id,
+			...(assembly.journal ? { journal: clone(assembly.journal) } : {}),
 			kind: "assembly_root",
+			motionKind: assembly.motionKind,
 			...(assembly.owner === undefined ? {} : { owner: clone(assembly.owner) }),
 			phase: assembly.phase,
+			schemaVersion: assembly.schemaVersion,
 			snapshot: {
 				anchor: { ...snapshot.anchor },
 				...(snapshot.attachments === undefined ? {} : { attachments: clone(snapshot.attachments) }),
 				checksum: snapshot.checksum,
 				schemaVersion: snapshot.schemaVersion
 			},
+			sourceClaims: clone(assembly.sourceClaims),
 			transform: clone(assembly.transform),
 			...(active.bearingKey === undefined
 				? { host: clone(active.host) }
 				: {
 					bearingKey: active.bearingKey,
 					bearingKind: active.kind,
-					bearingLocation: { ...active.bearingLocation }
+					bearingLocation: { ...active.bearingLocation },
+					rotationAxis: clone(active.rotationAxis),
+					rotationMilliDegrees: active.rotationMilliDegrees ?? 0
 				})
 		});
 		const bySection = new Map();
@@ -277,12 +286,17 @@ function restoreShardedState() {
 				throw new Error(`expected ${root.blockCount} snapshot blocks, found ${blocks.length}`);
 			const snapshot = { ...root.snapshot, blocks };
 			controllerFor(root.dimensionId).restore([{
+				destinationClaims: root.destinationClaims,
 				epoch: root.epoch,
 				frozenReason: root.frozenReason,
 				id: root.id,
+				journal: root.journal,
+				motionKind: root.motionKind,
 				owner: root.owner,
 				phase: root.phase,
+				schemaVersion: root.schemaVersion,
 				snapshot,
+				sourceClaims: root.sourceClaims,
 				transform: root.transform
 			}]);
 			if (root.host) {
@@ -303,7 +317,9 @@ function restoreShardedState() {
 					bearingLocation: { ...root.bearingLocation },
 					dimensionId: root.dimensionId,
 					id: root.id,
-					kind: ["windmill", "clockwork"].includes(root.bearingKind) ? root.bearingKind : "mechanical"
+					kind: ["windmill", "clockwork"].includes(root.bearingKind) ? root.bearingKind : "mechanical",
+					rotationAxis: normalizeRotationAxis(root.rotationAxis),
+					rotationMilliDegrees: Number.isInteger(root.rotationMilliDegrees) ? root.rotationMilliDegrees : 0
 				});
 			}
 		} catch (error) {
@@ -358,7 +374,9 @@ function restoreLegacyState() {
 				bearingLocation: { ...record.bearingLocation },
 				dimensionId: record.dimensionId,
 				id: record.id,
-				kind: ["windmill", "clockwork"].includes(record.kind) ? record.kind : "mechanical"
+				kind: ["windmill", "clockwork"].includes(record.kind) ? record.kind : "mechanical",
+				rotationAxis: { x: 0, y: 1, z: 0 },
+				rotationMilliDegrees: Math.round((record.rotation ?? 0) * 1000)
 			});
 		}
 		legacyStatePendingMigration = true;
@@ -378,15 +396,25 @@ function restore() {
 	restoreLegacyState();
 }
 
-function collectAboveBearing(block) {
-	const dimension = block.dimension;
+function bearingFacingVector(block) {
 	const facing = block.permutation?.getAllStates?.()["minecraft:facing_direction"];
-	const direction = ({
+	return ({
 		0: { x: 0, y: -1, z: 0 }, 1: { x: 0, y: 1, z: 0 }, 2: { x: 0, y: 0, z: -1 },
 		3: { x: 0, y: 0, z: 1 }, 4: { x: -1, y: 0, z: 0 }, 5: { x: 1, y: 0, z: 0 },
 		down: { x: 0, y: -1, z: 0 }, east: { x: 1, y: 0, z: 0 }, north: { x: 0, y: 0, z: -1 },
 		south: { x: 0, y: 0, z: 1 }, up: { x: 0, y: 1, z: 0 }, west: { x: -1, y: 0, z: 0 }
 	})[facing] ?? { x: 0, y: 1, z: 0 };
+}
+
+function normalizeRotationAxis(value) {
+	if (![value?.x, value?.y, value?.z].every(Number.isInteger) || Math.abs(value.x) + Math.abs(value.y) + Math.abs(value.z) !== 1)
+		return { x: 0, y: 1, z: 0 };
+	return { x: value.x, y: value.y, z: value.z };
+}
+
+function collectAboveBearing(block) {
+	const dimension = block.dimension;
+	const direction = bearingFacingVector(block);
 	return collectConnectedBlocks({
 		canCollect: blockData => isMovableBlockType(blockData.typeId),
 		linkedLocations(location) {
@@ -459,8 +487,10 @@ function toggleBearing(block) {
 	const controller = controllerFor(block.dimension.id);
 	if (active) {
 		const state = controller.getActive(active.id);
-		const snappedTransform = createAssemblyTransform({
-			rotationMilliDegrees: Math.round(state.transform.rotationMilliDegrees / ASSEMBLY_QUARTER_TURN) * ASSEMBLY_QUARTER_TURN,
+		const snappedAngle = Math.round((active.rotationMilliDegrees ?? 0) / ASSEMBLY_QUARTER_TURN) * ASSEMBLY_QUARTER_TURN;
+		const snappedTransform = assemblyPoseFromAxisAngle({
+			axis: active.rotationAxis,
+			rotationMilliDegrees: snappedAngle,
 			translation: state.transform.translation
 		});
 		if (!controller.setTransform(active.id, snappedTransform))
@@ -493,7 +523,9 @@ function toggleBearing(block) {
 		bearingLocation: { ...block.location },
 		dimensionId: block.dimension.id,
 		id,
-		kind
+		kind,
+		rotationAxis: bearingFacingVector(block),
+		rotationMilliDegrees: 0
 	});
 	if (kind === "windmill")
 		kineticWorld.setGeneratedSpeed(block.dimension.id, block.location, windmillSpeedForSailCount(windmillSailCount(blocks)));
@@ -516,21 +548,22 @@ function processBearing(bearingKey) {
 	if (speed === 0)
 		return;
 	let next;
+	let nextAngle;
 	if (active.kind === "clockwork") {
 		let block;
 		try { block = world.getDimension(active.dimensionId).getBlock(active.bearingLocation); } catch { return; }
 		if (block?.typeId !== CLOCKWORK_BEARING_BLOCK)
 			return;
 		const target = clockworkTargetAngle(clockDayTime(), clockMode(block), clockFacingSign(block));
-		const current = state.transform.rotationMilliDegrees / 1000;
-		next = createAssemblyTransform({
-			rotationMilliDegrees: Math.round(nextClockworkAngle(current, target, speed) * 1000),
-			translation: state.transform.translation
-		});
+		const current = (active.rotationMilliDegrees ?? 0) / 1000;
+		nextAngle = Math.round(nextClockworkAngle(current, target, speed) * 1000);
 	} else
-		next = withAssemblyTransformDelta(state.transform, { rotationMilliDegrees: Math.round(speed * 1000) });
-	if (controller.setTransform(active.id, next))
+		nextAngle = (active.rotationMilliDegrees ?? 0) + Math.round(speed * 1000);
+	next = assemblyPoseFromAxisAngle({ axis: active.rotationAxis, rotationMilliDegrees: nextAngle, translation: state.transform.translation });
+	if (controller.setTransform(active.id, next)) {
+		active.rotationMilliDegrees = nextAngle;
 		sampleMotionContacts(active.dimensionId);
+	}
 	requestPersist();
 }
 

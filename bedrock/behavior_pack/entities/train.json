@@ -24,6 +24,15 @@
         "is_pushable": false,
         "is_pushable_by_piston": false
       },
+      "minecraft:rideable": {
+        "seat_count": 2,
+        "family_types": ["player"],
+        "interact_text": "action.interact.ride",
+        "seats": [
+          { "position": [-0.25, 0.5, 0] },
+          { "position": [0.25, 0.5, 0] }
+        ]
+      },
       "minecraft:type_family": {
         "family": [
           "createbedrock_train"

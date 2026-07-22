@@ -3,6 +3,7 @@ import test from "node:test";
 
 import { TrackGraph } from "../behavior_pack/scripts/trains/track-graph.js";
 import { TrainController } from "../behavior_pack/scripts/trains/train-controller.js";
+import { createScheduleAst } from "../behavior_pack/scripts/trains/schedule-ast.js";
 
 function createController({ registerTrain = true } = {}) {
 	const graph = new TrackGraph();
@@ -195,6 +196,36 @@ test("TrainController arms an unavailable station loop in a waiting state", () =
 	assert.deepEqual(controller.getTrain("train_one").schedule.stopIds, ["b", "a"]);
 });
 
+test("TrainController executes and restores the schema-2 Schedule authority", () => {
+	const graph = new TrackGraph();
+	graph.addNode({ id: "a", location: { x: 0, y: 64, z: 0 } });
+	graph.addNode({ id: "b", location: { x: 1, y: 64, z: 0 } });
+	graph.connect("a", "b", 1);
+	const schedule = createScheduleAst({
+		cyclic: false,
+		entries: [
+			{ conditionBranches: [[{ ticks: 1, type: "delay" }]], instruction: { exact: true, filter: "b", type: "destination" } },
+			{ conditionBranches: [], instruction: { title: "Copper Comet", type: "rename" } },
+			{ conditionBranches: [], instruction: { percent: 50, type: "throttle" } }
+		]
+	});
+	const controller = new TrainController(graph);
+	controller.registerTrain({ id: "train-ast", nodeId: "a", speed: 0.2 });
+	assert.deepEqual(controller.setScheduleAstWithReason("train-ast", schedule), { ok: true, state: "moving" });
+	controller.tick("train-ast", 1);
+	assert.equal(controller.getScheduleRuntime("train-ast").state, "POST_TRANSIT");
+
+	const restored = new TrainController(graph);
+	restored.restore(controller.snapshot());
+	restored.tick("train-ast", 0);
+	restored.tick("train-ast", 0);
+	restored.tick("train-ast", 0);
+	restored.tick("train-ast", 0);
+	assert.equal(restored.getTrain("train-ast").name, "Copper Comet");
+	assert.equal(restored.getMotionState("train-ast").targetSpeed, 0.1);
+	assert.equal(restored.getScheduleRuntime("train-ast").completed, true);
+});
+
 test("TrainController keeps carriage positions ordered along the reserved route", () => {
 	const { controller } = createController({ registerTrain: false });
 	controller.registerTrain({ carriageCount: 3, carriageSpacing: 2, id: "train_one", nodeId: "a" });
@@ -237,6 +268,17 @@ test("TrainController keeps an edge reserved until the last carriage clears it",
 	assert.equal(graph.tryReserve("train_two", ["a<->b"]), false);
 	controller.tick("train_one", 2);
 	assert.equal(graph.tryReserve("train_two", ["a<->b"]), true);
+});
+
+test("TrainController reserves signal sections on demand instead of locking the full route", () => {
+	const { controller, graph } = createController();
+	assert.equal(controller.dispatch("train_one", "c"), true);
+	assert.equal(graph.tryReserve("train_two", ["b<->c"]), true);
+	controller.tick("train_one", 4);
+	assert.equal(controller.getTrain("train_one").edgeId, "b<->c");
+	assert.equal(controller.tick("train_one", 1).distanceOnEdge, 0);
+	graph.releaseReservations("train_two");
+	assert.equal(controller.tick("train_one", 1).distanceOnEdge, 1);
 });
 
 test("TrainController keeps the destination edge reserved while the trailing carriage settles", () => {

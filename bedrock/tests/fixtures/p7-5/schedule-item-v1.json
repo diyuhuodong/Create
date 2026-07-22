@@ -1,0 +1,7 @@
+{
+  "cyclic": true,
+  "dwellTicks": 40,
+  "revision": 7,
+  "schemaVersion": 1,
+  "stopIds": ["a", "b"]
+}

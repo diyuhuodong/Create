@@ -1,0 +1,12 @@
+{
+  "checksum": "b159732a",
+  "schemaVersion": 1,
+  "anchor": { "x": 0, "y": 64, "z": 0 },
+  "blocks": [
+    {
+      "relative": { "x": 0, "y": 0, "z": 0 },
+      "typeId": "createbedrock:shaft",
+      "states": { "minecraft:pillar_axis": "x" }
+    }
+  ]
+}

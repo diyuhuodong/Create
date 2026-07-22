@@ -64,6 +64,7 @@ import { validateStage5StaticContract } from "./stage5-static-contract.mjs";
 import { validateStage6StaticContract } from "./stage6-static-contract.mjs";
 import { validateStage6WorkQueue } from "./stage6-work-queue-schema.mjs";
 import { validateP74StaticContract } from "./p7-4-static-contract.mjs";
+import { validateP75StaticContract } from "./p7-5-static-contract.mjs";
 import { buildDeliveryDependencyGraph, validateDeliveryDependencyGraph } from "./delivery-dependency-graph.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
@@ -207,6 +208,7 @@ const stage6WorkQueueCoverage = validateStage6WorkQueue(stage6WorkQueue, migrati
 const stage5StaticContract = await validateStage5StaticContract();
 const stage6StaticContract = await validateStage6StaticContract();
 const p74StaticContract = await validateP74StaticContract();
+const p75StaticContract = await validateP75StaticContract();
 const contentSpecificationCoverage = validateStage3ContentSpecifications(stage3ContentSpecifications, stage3WorkQueue);
 const kineticSpecificationCoverage = validateStage3KineticSpecifications(stage3KineticSpecifications, stage3WorkQueue);
 const logisticsSpecificationCoverage = validateStage3LogisticsSpecifications(stage3LogisticsSpecifications, stage3WorkQueue);

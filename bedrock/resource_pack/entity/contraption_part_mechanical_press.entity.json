@@ -2,11 +2,19 @@
   "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
+      "geometry": {
+        "default": "geometry.createbedrock.mechanical_press"
+      },
       "identifier": "createbedrock:contraption_part_mechanical_press",
-      "materials": { "default": "entity_alphatest" },
-      "textures": { "default": "textures/create_java/block/mechanical_press_side" },
-      "geometry": { "default": "geometry.createbedrock.mechanical_press" },
-      "render_controllers": ["controller.render.createbedrock.contraption"]
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "render_controllers": [
+        "controller.render.createbedrock.contraption"
+      ],
+      "textures": {
+        "default": "textures/create_java/block/gearbox"
+      }
     }
   }
 }

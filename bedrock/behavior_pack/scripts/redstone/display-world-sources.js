@@ -84,8 +84,11 @@ export function registerWorldDisplaySourceProviders({ getBoiler, getFluid, getPa
 		kinetic_stress: ({ context, location }) => {
 			const network = kineticNetwork?.(context.record.dimensionId, location); return [`${network?.stressImpact ?? 0} / ${network?.stressCapacity ?? 0}`];
 		},
-		station_summary: ({ context }) => [`${getTrain?.(context.record.dimensionId)?.trains.length ?? 0} trains`],
-		train_status: ({ context }) => nonEmpty(getTrain?.(context.record.dimensionId)?.trains.map(train => `${train.name}: ${train.blockedReason || (train.stopped ? "stopped" : "running")}`), "No trains"),
+		station_summary: ({ context }) => nonEmpty(getTrain?.(context.record.dimensionId)?.trains.map(train => `${train.name}: ${train.station || "between stations"}`), "No trains"),
+		train_status: ({ context }) => nonEmpty(getTrain?.(context.record.dimensionId)?.trains.map(train => {
+			const status = train.blockedReason || (train.stopped ? "stopped" : train.scheduleState === "POST_TRANSIT" ? `departs ${train.nextDepartureTicks >= 0 ? `~${train.nextDepartureTicks}t` : "on condition"}` : train.destination ? `to ${train.destination}` : "idle");
+			return `${train.name}: ${status}`;
+		}), "No trains"),
 		observed_train_name: ({ context }) => [getTrain?.(context.record.dimensionId)?.trains[0]?.name ?? ""],
 		accumulate_items: ({ context, location }) => [String(inventoryStacks(blockAt(world, context.record.dimensionId, location)).reduce((total, stack) => total + stack.amount, 0))],
 		item_throughput: ({ context, location }) => [String(blockState(blockAt(world, context.record.dimensionId, location), ["createbedrock:throughput", "createbedrock:signal"]))],

@@ -1,0 +1,593 @@
+{
+  "entries": [
+    {
+      "blockTypeId": "createbedrock:analog_lever",
+      "entityTypeId": "createbedrock:contraption_part_analog_lever",
+      "geometry": "geometry.createbedrock.redstone_analog_lever",
+      "texture": "textures/create_java/block/analog_lever",
+      "textureAlias": "createbedrock_redstone_analog_lever"
+    },
+    {
+      "blockTypeId": "createbedrock:andesite_casing",
+      "entityTypeId": "createbedrock:contraption_part_andesite_casing",
+      "geometry": "geometry.createbedrock.contraption_marker",
+      "texture": "textures/create_java/block/andesite_casing",
+      "textureAlias": "createbedrock_andesite_casing"
+    },
+    {
+      "blockTypeId": "createbedrock:andesite_door",
+      "entityTypeId": "createbedrock:contraption_part_andesite_door",
+      "geometry": "geometry.createbedrock.andesite_door_bottom",
+      "texture": "textures/create_java/block/andesite_door_side",
+      "textureAlias": "createbedrock_andesite_door_side"
+    },
+    {
+      "blockTypeId": "createbedrock:belt",
+      "entityTypeId": "createbedrock:contraption_part_belt",
+      "geometry": "geometry.createbedrock.belt",
+      "texture": "textures/create_java/block/belt",
+      "textureAlias": "createbedrock_belt"
+    },
+    {
+      "blockTypeId": "createbedrock:brass_casing",
+      "entityTypeId": "createbedrock:contraption_part_brass_casing",
+      "geometry": "geometry.createbedrock.contraption_marker",
+      "texture": "textures/create_java/block/brass_casing",
+      "textureAlias": "createbedrock_brass_casing"
+    },
+    {
+      "blockTypeId": "createbedrock:brass_door",
+      "entityTypeId": "createbedrock:contraption_part_brass_door",
+      "geometry": "geometry.createbedrock.brass_door_bottom",
+      "texture": "textures/create_java/block/brass_door_side",
+      "textureAlias": "createbedrock_brass_door_side"
+    },
+    {
+      "blockTypeId": "createbedrock:clutch",
+      "entityTypeId": "createbedrock:contraption_part_clutch",
+      "geometry": "geometry.createbedrock.shaft",
+      "texture": "textures/create_java/block/clutch_on",
+      "textureAlias": "createbedrock_clutch_on"
+    },
+    {
+      "blockTypeId": "createbedrock:cogwheel",
+      "entityTypeId": "createbedrock:contraption_part_cogwheel",
+      "geometry": "geometry.createbedrock.cogwheel",
+      "texture": "textures/create_java/block/cogwheel_axis",
+      "textureAlias": "createbedrock_cogwheel_axis"
+    },
+    {
+      "blockTypeId": "createbedrock:content_observer",
+      "entityTypeId": "createbedrock:contraption_part_content_observer",
+      "geometry": "geometry.createbedrock.redstone_content_observer",
+      "texture": "textures/create_java/block/smart_observer",
+      "textureAlias": "createbedrock_redstone_content_observer"
+    },
+    {
+      "blockTypeId": "createbedrock:contraption_controls",
+      "entityTypeId": "createbedrock:contraption_part_contraption_controls",
+      "geometry": "geometry.createbedrock.contraption_controls",
+      "texture": "textures/create_java/block/contraption_controls",
+      "textureAlias": "createbedrock_contraption_controls"
+    },
+    {
+      "blockTypeId": "createbedrock:controls",
+      "entityTypeId": "createbedrock:contraption_part_controls",
+      "geometry": "geometry.createbedrock.controls",
+      "texture": "textures/create_java/block/controls",
+      "textureAlias": "createbedrock_controls"
+    },
+    {
+      "blockTypeId": "createbedrock:copper_casing",
+      "entityTypeId": "createbedrock:contraption_part_copper_casing",
+      "geometry": "geometry.createbedrock.contraption_marker",
+      "texture": "textures/create_java/block/copper_casing",
+      "textureAlias": "createbedrock_copper_casing"
+    },
+    {
+      "blockTypeId": "createbedrock:copper_door",
+      "entityTypeId": "createbedrock:contraption_part_copper_door",
+      "geometry": "geometry.createbedrock.copper_door_bottom",
+      "texture": "textures/create_java/block/copper_door_side",
+      "textureAlias": "createbedrock_copper_door_side"
+    },
+    {
+      "blockTypeId": "createbedrock:copycat_panel",
+      "entityTypeId": "createbedrock:contraption_part_copycat_panel",
+      "geometry": "geometry.createbedrock.copycat_panel",
+      "texture": "textures/create_java/block/copycat_base",
+      "textureAlias": "createbedrock_copycat_base"
+    },
+    {
+      "blockTypeId": "createbedrock:copycat_step",
+      "entityTypeId": "createbedrock:contraption_part_copycat_step",
+      "geometry": "geometry.createbedrock.copycat_step",
+      "texture": "textures/create_java/block/copycat_base",
+      "textureAlias": "createbedrock_copycat_base"
+    },
+    {
+      "blockTypeId": "createbedrock:creative_crate",
+      "entityTypeId": "createbedrock:contraption_part_creative_crate",
+      "geometry": "geometry.createbedrock.contraption_marker",
+      "texture": "textures/create_java/block/brass_casing",
+      "textureAlias": "createbedrock_brass_casing"
+    },
+    {
+      "blockTypeId": "createbedrock:crushing_wheel",
+      "entityTypeId": "createbedrock:contraption_part_crushing_wheel",
+      "geometry": "geometry.createbedrock.crushing_wheel",
+      "texture": "textures/create_java/block/axis",
+      "textureAlias": "createbedrock_axis"
+    },
+    {
+      "blockTypeId": "createbedrock:crushing_wheel_controller",
+      "entityTypeId": "createbedrock:contraption_part_crushing_wheel_controller",
+      "geometry": "geometry.createbedrock.crushing_wheel",
+      "texture": "textures/create_java/block/crushing_wheel_plates",
+      "textureAlias": "createbedrock_crushing_wheel"
+    },
+    {
+      "blockTypeId": "createbedrock:cuckoo_clock",
+      "entityTypeId": "createbedrock:contraption_part_cuckoo_clock",
+      "geometry": "geometry.createbedrock.cuckoo_clock",
+      "texture": "textures/create_java/block/cuckoo_clock",
+      "textureAlias": "createbedrock_cuckoo_clock"
+    },
+    {
+      "blockTypeId": "createbedrock:deployer",
+      "entityTypeId": "createbedrock:contraption_part_deployer",
+      "geometry": "geometry.createbedrock.deployer",
+      "texture": "textures/create_java/block/deployer",
+      "textureAlias": "createbedrock_deployer"
+    },
+    {
+      "blockTypeId": "createbedrock:depot",
+      "entityTypeId": "createbedrock:contraption_part_depot",
+      "geometry": "geometry.createbedrock.depot",
+      "texture": "textures/create_java/block/andesite_casing",
+      "textureAlias": "createbedrock_andesite_casing"
+    },
+    {
+      "blockTypeId": "createbedrock:display_board",
+      "entityTypeId": "createbedrock:contraption_part_display_board",
+      "geometry": "geometry.createbedrock.display_board",
+      "texture": "textures/create_java/block/flap_display_front",
+      "textureAlias": "createbedrock_flap_display_front"
+    },
+    {
+      "blockTypeId": "createbedrock:display_link",
+      "entityTypeId": "createbedrock:contraption_part_display_link",
+      "geometry": "geometry.createbedrock.redstone_display_link",
+      "texture": "textures/create_java/block/link_base_unpowered",
+      "textureAlias": "createbedrock_redstone_display_link"
+    },
+    {
+      "blockTypeId": "createbedrock:elevator_contact",
+      "entityTypeId": "createbedrock:contraption_part_elevator_contact",
+      "geometry": "geometry.createbedrock.elevator_contact",
+      "texture": "textures/create_java/block/elevator_contact_side",
+      "textureAlias": "createbedrock_elevator_contact"
+    },
+    {
+      "blockTypeId": "createbedrock:encased_chain_drive",
+      "entityTypeId": "createbedrock:contraption_part_encased_chain_drive",
+      "geometry": "geometry.createbedrock.contraption_marker",
+      "texture": "textures/create_java/block/encased_chain_drive",
+      "textureAlias": "createbedrock_encased_chain_drive"
+    },
+    {
+      "blockTypeId": "createbedrock:framed_glass_door",
+      "entityTypeId": "createbedrock:contraption_part_framed_glass_door",
+      "geometry": "geometry.createbedrock.framed_glass_door_bottom",
+      "texture": "textures/create_java/block/glass_door_side",
+      "textureAlias": "createbedrock_glass_door_side"
+    },
+    {
+      "blockTypeId": "createbedrock:gantry_carriage",
+      "entityTypeId": "createbedrock:contraption_part_gantry_carriage",
+      "geometry": "geometry.createbedrock.gantry_carriage",
+      "texture": "textures/create_java/block/gearbox",
+      "textureAlias": "createbedrock_gearbox"
+    },
+    {
+      "blockTypeId": "createbedrock:gantry_shaft",
+      "entityTypeId": "createbedrock:contraption_part_gantry_shaft",
+      "geometry": "geometry.createbedrock.gantry_shaft",
+      "texture": "textures/create_java/block/gantry_shaft",
+      "textureAlias": "createbedrock_gantry_shaft"
+    },
+    {
+      "blockTypeId": "createbedrock:gearbox",
+      "entityTypeId": "createbedrock:contraption_part_gearbox",
+      "geometry": "geometry.createbedrock.contraption_marker",
+      "texture": "textures/create_java/block/gearbox",
+      "textureAlias": "createbedrock_gearbox"
+    },
+    {
+      "blockTypeId": "createbedrock:hand_crank",
+      "entityTypeId": "createbedrock:contraption_part_hand_crank",
+      "geometry": "geometry.createbedrock.hand_crank",
+      "texture": "textures/create_java/block/axis",
+      "textureAlias": "createbedrock_axis"
+    },
+    {
+      "blockTypeId": "createbedrock:haunted_bell",
+      "entityTypeId": "createbedrock:contraption_part_haunted_bell",
+      "geometry": "geometry.createbedrock.haunted_bell",
+      "texture": "textures/create_java/block/bell",
+      "textureAlias": "createbedrock_bell"
+    },
+    {
+      "blockTypeId": "createbedrock:hose_pulley",
+      "entityTypeId": "createbedrock:contraption_part_hose_pulley",
+      "geometry": "geometry.createbedrock.hose_pulley",
+      "texture": "textures/create_java/block/hose_pulley",
+      "textureAlias": "createbedrock_hose_pulley"
+    },
+    {
+      "blockTypeId": "createbedrock:industrial_iron_block",
+      "entityTypeId": "createbedrock:contraption_part_industrial_iron_block",
+      "geometry": "geometry.createbedrock.contraption_marker",
+      "texture": "textures/create_java/block/industrial_iron_block",
+      "textureAlias": "createbedrock_industrial_iron_block"
+    },
+    {
+      "blockTypeId": "createbedrock:item_hatch",
+      "entityTypeId": "createbedrock:contraption_part_item_hatch",
+      "geometry": "geometry.createbedrock.contraption_marker",
+      "texture": "textures/create_java/block/andesite_casing",
+      "textureAlias": "createbedrock_andesite_casing"
+    },
+    {
+      "blockTypeId": "createbedrock:item_vault",
+      "entityTypeId": "createbedrock:contraption_part_item_vault",
+      "geometry": "geometry.createbedrock.contraption_marker",
+      "texture": "textures/create_java/block/industrial_iron_block",
+      "textureAlias": "createbedrock_industrial_iron_block"
+    },
+    {
+      "blockTypeId": "createbedrock:large_cogwheel",
+      "entityTypeId": "createbedrock:contraption_part_large_cogwheel",
+      "geometry": "geometry.createbedrock.large_cogwheel",
+      "texture": "textures/create_java/block/cogwheel_axis",
+      "textureAlias": "createbedrock_cogwheel_axis"
+    },
+    {
+      "blockTypeId": "createbedrock:lectern_controller",
+      "entityTypeId": "createbedrock:contraption_part_lectern_controller",
+      "geometry": "geometry.createbedrock.redstone_lectern_controller",
+      "texture": "textures/create_java/block/brass_casing",
+      "textureAlias": "createbedrock_brass_casing"
+    },
+    {
+      "blockTypeId": "createbedrock:linear_chassis",
+      "entityTypeId": "createbedrock:contraption_part_linear_chassis",
+      "geometry": "geometry.createbedrock.contraption_marker",
+      "texture": "textures/create_java/block/linear_chassis_side",
+      "textureAlias": "createbedrock_linear_chassis"
+    },
+    {
+      "blockTypeId": "createbedrock:mechanical_arm",
+      "entityTypeId": "createbedrock:contraption_part_mechanical_arm",
+      "geometry": "geometry.createbedrock.mechanical_arm",
+      "texture": "textures/create_java/block/mechanical_arm",
+      "textureAlias": "createbedrock_mechanical_arm"
+    },
+    {
+      "blockTypeId": "createbedrock:mechanical_crafter",
+      "entityTypeId": "createbedrock:contraption_part_mechanical_crafter",
+      "geometry": "geometry.createbedrock.mechanical_crafter",
+      "texture": "textures/create_java/block/crafter_thingies",
+      "textureAlias": "createbedrock_crafter_thingies"
+    },
+    {
+      "blockTypeId": "createbedrock:mechanical_drill",
+      "entityTypeId": "createbedrock:contraption_part_mechanical_drill",
+      "geometry": "geometry.createbedrock.mechanical_drill",
+      "texture": "textures/create_java/block/mechanical_drill_top",
+      "textureAlias": "createbedrock_mechanical_drill_top"
+    },
+    {
+      "blockTypeId": "createbedrock:mechanical_harvester",
+      "entityTypeId": "createbedrock:contraption_part_mechanical_harvester",
+      "geometry": "geometry.createbedrock.mechanical_harvester",
+      "texture": "textures/create_java/block/harvester",
+      "textureAlias": "createbedrock_harvester"
+    },
+    {
+      "blockTypeId": "createbedrock:mechanical_piston",
+      "entityTypeId": "createbedrock:contraption_part_mechanical_piston",
+      "geometry": "geometry.createbedrock.mechanical_piston",
+      "texture": "textures/create_java/block/andesite_casing_piston",
+      "textureAlias": "createbedrock_andesite_casing_piston"
+    },
+    {
+      "blockTypeId": "createbedrock:mechanical_piston_head",
+      "entityTypeId": "createbedrock:contraption_part_mechanical_piston_head",
+      "geometry": "geometry.createbedrock.mechanical_piston_head",
+      "texture": "textures/create_java/block/piston_bottom",
+      "textureAlias": "createbedrock_piston_bottom"
+    },
+    {
+      "blockTypeId": "createbedrock:mechanical_plough",
+      "entityTypeId": "createbedrock:contraption_part_mechanical_plough",
+      "geometry": "geometry.createbedrock.mechanical_plough",
+      "texture": "textures/create_java/block/andesite_casing_short",
+      "textureAlias": "createbedrock_andesite_casing_short"
+    },
+    {
+      "blockTypeId": "createbedrock:mechanical_press",
+      "entityTypeId": "createbedrock:contraption_part_mechanical_press",
+      "geometry": "geometry.createbedrock.mechanical_press",
+      "texture": "textures/create_java/block/gearbox",
+      "textureAlias": "createbedrock_gearbox"
+    },
+    {
+      "blockTypeId": "createbedrock:mechanical_roller",
+      "entityTypeId": "createbedrock:contraption_part_mechanical_roller",
+      "geometry": "geometry.createbedrock.mechanical_roller",
+      "texture": "textures/create_java/block/roller_casing",
+      "textureAlias": "createbedrock_roller_casing"
+    },
+    {
+      "blockTypeId": "createbedrock:millstone",
+      "entityTypeId": "createbedrock:contraption_part_millstone",
+      "geometry": "geometry.createbedrock.millstone",
+      "texture": "textures/create_java/block/gearbox",
+      "textureAlias": "createbedrock_gearbox"
+    },
+    {
+      "blockTypeId": "createbedrock:mysterious_cuckoo_clock",
+      "entityTypeId": "createbedrock:contraption_part_mysterious_cuckoo_clock",
+      "geometry": "geometry.createbedrock.cuckoo_clock",
+      "texture": "textures/create_java/block/cuckoo_clock",
+      "textureAlias": "createbedrock_cuckoo_clock"
+    },
+    {
+      "blockTypeId": "createbedrock:nixie_tube",
+      "entityTypeId": "createbedrock:contraption_part_nixie_tube",
+      "geometry": "geometry.createbedrock.redstone_nixie_tube",
+      "texture": "textures/create_java/block/nixie_tube",
+      "textureAlias": "createbedrock_redstone_nixie_tube"
+    },
+    {
+      "blockTypeId": "createbedrock:nozzle",
+      "entityTypeId": "createbedrock:contraption_part_nozzle",
+      "geometry": "geometry.createbedrock.nozzle",
+      "texture": "textures/create_java/block/net",
+      "textureAlias": "createbedrock_nozzle_net"
+    },
+    {
+      "blockTypeId": "createbedrock:peculiar_bell",
+      "entityTypeId": "createbedrock:contraption_part_peculiar_bell",
+      "geometry": "geometry.createbedrock.peculiar_bell",
+      "texture": "textures/create_java/block/bell",
+      "textureAlias": "createbedrock_bell"
+    },
+    {
+      "blockTypeId": "createbedrock:piston_extension_pole",
+      "entityTypeId": "createbedrock:contraption_part_piston_extension_pole",
+      "geometry": "geometry.createbedrock.piston_extension_pole",
+      "texture": "textures/create_java/block/pole_end",
+      "textureAlias": "createbedrock_pole_end"
+    },
+    {
+      "blockTypeId": "createbedrock:placard",
+      "entityTypeId": "createbedrock:contraption_part_placard",
+      "geometry": "geometry.createbedrock.placard",
+      "texture": "textures/create_java/block/placard",
+      "textureAlias": "createbedrock_placard"
+    },
+    {
+      "blockTypeId": "createbedrock:portable_storage_interface",
+      "entityTypeId": "createbedrock:contraption_part_portable_storage_interface",
+      "geometry": "geometry.createbedrock.portable_storage_interface",
+      "texture": "textures/create_java/block/portable_storage_interface",
+      "textureAlias": "createbedrock_portable_storage_interface"
+    },
+    {
+      "blockTypeId": "createbedrock:powered_latch",
+      "entityTypeId": "createbedrock:contraption_part_powered_latch",
+      "geometry": "geometry.createbedrock.redstone_powered_latch",
+      "texture": "textures/create_java/block/diodes/brass_diode_base",
+      "textureAlias": "createbedrock_redstone_diode"
+    },
+    {
+      "blockTypeId": "createbedrock:powered_toggle_latch",
+      "entityTypeId": "createbedrock:contraption_part_powered_toggle_latch",
+      "geometry": "geometry.createbedrock.redstone_powered_latch",
+      "texture": "textures/create_java/block/diodes/brass_diode_base",
+      "textureAlias": "createbedrock_redstone_diode"
+    },
+    {
+      "blockTypeId": "createbedrock:pulley_magnet",
+      "entityTypeId": "createbedrock:contraption_part_pulley_magnet",
+      "geometry": "geometry.createbedrock.pulley_magnet",
+      "texture": "textures/create_java/block/pulley_magnet",
+      "textureAlias": "createbedrock_pulley_magnet"
+    },
+    {
+      "blockTypeId": "createbedrock:pulse_extender",
+      "entityTypeId": "createbedrock:contraption_part_pulse_extender",
+      "geometry": "geometry.createbedrock.redstone_pulse_extender",
+      "texture": "textures/create_java/block/diodes/pulse_extender/idle",
+      "textureAlias": "createbedrock_redstone_pulse_extender"
+    },
+    {
+      "blockTypeId": "createbedrock:pulse_repeater",
+      "entityTypeId": "createbedrock:contraption_part_pulse_repeater",
+      "geometry": "geometry.createbedrock.redstone_pulse_repeater",
+      "texture": "textures/create_java/block/diodes/pulse_repeater/idle",
+      "textureAlias": "createbedrock_redstone_pulse_repeater"
+    },
+    {
+      "blockTypeId": "createbedrock:pulse_timer",
+      "entityTypeId": "createbedrock:contraption_part_pulse_timer",
+      "geometry": "geometry.createbedrock.redstone_pulse_timer",
+      "texture": "textures/create_java/block/diodes/pulse_timer/idle",
+      "textureAlias": "createbedrock_redstone_pulse_timer"
+    },
+    {
+      "blockTypeId": "createbedrock:radial_chassis",
+      "entityTypeId": "createbedrock:contraption_part_radial_chassis",
+      "geometry": "geometry.createbedrock.contraption_marker",
+      "texture": "textures/create_java/block/radial_chassis_side",
+      "textureAlias": "createbedrock_radial_chassis"
+    },
+    {
+      "blockTypeId": "createbedrock:redstone_contact",
+      "entityTypeId": "createbedrock:contraption_part_redstone_contact",
+      "geometry": "geometry.createbedrock.redstone_contact",
+      "texture": "textures/create_java/block/contact_front",
+      "textureAlias": "createbedrock_redstone_contact"
+    },
+    {
+      "blockTypeId": "createbedrock:redstone_link",
+      "entityTypeId": "createbedrock:contraption_part_redstone_link",
+      "geometry": "geometry.createbedrock.redstone_link",
+      "texture": "textures/create_java/block/redstone_antenna",
+      "textureAlias": "createbedrock_redstone_link"
+    },
+    {
+      "blockTypeId": "createbedrock:redstone_requester",
+      "entityTypeId": "createbedrock:contraption_part_redstone_requester",
+      "geometry": "geometry.createbedrock.redstone_requester",
+      "texture": "textures/create_java/block/redstone_requester",
+      "textureAlias": "createbedrock_redstone_requester"
+    },
+    {
+      "blockTypeId": "createbedrock:rope",
+      "entityTypeId": "createbedrock:contraption_part_rope",
+      "geometry": "geometry.createbedrock.rope",
+      "texture": "textures/create_java/block/pulley_rope",
+      "textureAlias": "createbedrock_pulley_rope"
+    },
+    {
+      "blockTypeId": "createbedrock:rope_pulley",
+      "entityTypeId": "createbedrock:contraption_part_rope_pulley",
+      "geometry": "geometry.createbedrock.rope_pulley",
+      "texture": "textures/create_java/block/rope_pulley",
+      "textureAlias": "createbedrock_rope_pulley"
+    },
+    {
+      "blockTypeId": "createbedrock:rotation_speed_controller",
+      "entityTypeId": "createbedrock:contraption_part_rotation_speed_controller",
+      "geometry": "geometry.createbedrock.redstone_rotation_speed_controller",
+      "texture": "textures/create_java/block/rotation_speed_controller",
+      "textureAlias": "createbedrock_redstone_rotation_speed_controller"
+    },
+    {
+      "blockTypeId": "createbedrock:sail_frame",
+      "entityTypeId": "createbedrock:contraption_part_sail_frame",
+      "geometry": "geometry.createbedrock.sail_frame",
+      "texture": "textures/create_java/block/sail/frame",
+      "textureAlias": "createbedrock_sail_frame"
+    },
+    {
+      "blockTypeId": "createbedrock:secondary_linear_chassis",
+      "entityTypeId": "createbedrock:contraption_part_secondary_linear_chassis",
+      "geometry": "geometry.createbedrock.contraption_marker",
+      "texture": "textures/create_java/block/secondary_linear_chassis_side",
+      "textureAlias": "createbedrock_secondary_linear_chassis"
+    },
+    {
+      "blockTypeId": "createbedrock:shaft",
+      "entityTypeId": "createbedrock:contraption_part_shaft",
+      "geometry": "geometry.createbedrock.shaft",
+      "texture": "textures/create_java/block/axis",
+      "textureAlias": "createbedrock_axis"
+    },
+    {
+      "blockTypeId": "createbedrock:speedometer",
+      "entityTypeId": "createbedrock:contraption_part_speedometer",
+      "geometry": "geometry.createbedrock.speedometer_gauge_0",
+      "texture": "textures/create_java/block/gauge",
+      "textureAlias": "createbedrock_gauge"
+    },
+    {
+      "blockTypeId": "createbedrock:steam_whistle",
+      "entityTypeId": "createbedrock:contraption_part_steam_whistle",
+      "geometry": "geometry.createbedrock.steam_whistle_medium_floor",
+      "texture": "textures/create_java/block/whistle",
+      "textureAlias": "createbedrock_whistle"
+    },
+    {
+      "blockTypeId": "createbedrock:steam_whistle_extension",
+      "entityTypeId": "createbedrock:contraption_part_steam_whistle_extension",
+      "geometry": "geometry.createbedrock.steam_whistle_extension_medium",
+      "texture": "textures/create_java/block/whistle",
+      "textureAlias": "createbedrock_whistle"
+    },
+    {
+      "blockTypeId": "createbedrock:sticker",
+      "entityTypeId": "createbedrock:contraption_part_sticker",
+      "geometry": "geometry.createbedrock.sticker",
+      "texture": "textures/create_java/block/sticker",
+      "textureAlias": "createbedrock_sticker"
+    },
+    {
+      "blockTypeId": "createbedrock:sticky_mechanical_piston",
+      "entityTypeId": "createbedrock:contraption_part_sticky_mechanical_piston",
+      "geometry": "geometry.createbedrock.mechanical_piston",
+      "texture": "textures/create_java/block/andesite_casing_piston",
+      "textureAlias": "createbedrock_andesite_casing_piston"
+    },
+    {
+      "blockTypeId": "createbedrock:stock_link",
+      "entityTypeId": "createbedrock:contraption_part_stock_link",
+      "geometry": "geometry.createbedrock.redstone_stock_link",
+      "texture": "textures/create_java/block/stock_link",
+      "textureAlias": "createbedrock_redstone_stock_link"
+    },
+    {
+      "blockTypeId": "createbedrock:stock_ticker",
+      "entityTypeId": "createbedrock:contraption_part_stock_ticker",
+      "geometry": "geometry.createbedrock.stock_ticker",
+      "texture": "textures/create_java/block/stock_ticker",
+      "textureAlias": "createbedrock_stock_ticker"
+    },
+    {
+      "blockTypeId": "createbedrock:stockpile_switch",
+      "entityTypeId": "createbedrock:contraption_part_stockpile_switch",
+      "geometry": "geometry.createbedrock.stockpile_switch_wall",
+      "texture": "textures/create_java/block/threshold_switch_back",
+      "textureAlias": "createbedrock_stockpile_switch_back"
+    },
+    {
+      "blockTypeId": "createbedrock:stressometer",
+      "entityTypeId": "createbedrock:contraption_part_stressometer",
+      "geometry": "geometry.createbedrock.stressometer_gauge_0",
+      "texture": "textures/create_java/block/gauge",
+      "textureAlias": "createbedrock_gauge"
+    },
+    {
+      "blockTypeId": "createbedrock:train_door",
+      "entityTypeId": "createbedrock:contraption_part_train_door",
+      "geometry": "geometry.createbedrock.train_door_bottom",
+      "texture": "textures/create_java/block/train_door_side",
+      "textureAlias": "createbedrock_train_door_side"
+    },
+    {
+      "blockTypeId": "createbedrock:water_wheel",
+      "entityTypeId": "createbedrock:contraption_part_water_wheel",
+      "geometry": "geometry.createbedrock.water_wheel",
+      "texture": "textures/create_java/block/gearbox",
+      "textureAlias": "createbedrock_gearbox"
+    },
+    {
+      "blockTypeId": "createbedrock:white_sail",
+      "entityTypeId": "createbedrock:contraption_part_white_sail",
+      "geometry": "geometry.createbedrock.white_sail",
+      "texture": "textures/create_java/block/sail/canvas_white",
+      "textureAlias": "createbedrock_white_sail"
+    },
+    {
+      "blockTypeId": "createbedrock:zinc_block",
+      "entityTypeId": "createbedrock:contraption_part_zinc_block",
+      "geometry": "geometry.createbedrock.contraption_marker",
+      "texture": "textures/create_java/block/zinc_block",
+      "textureAlias": "createbedrock_zinc_block"
+    }
+  ],
+  "schemaVersion": 1
+}

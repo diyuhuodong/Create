@@ -1,4 +1,5 @@
 import { createAssemblyTransform } from "./assembly-transform.js";
+import { advanceAssemblyJournal, createAssemblyJournal, DYNAMIC_ASSEMBLY_AUTHORITY_SCHEMA, normalizeDynamicAssemblyAuthorityRecord, recoveryDisposition } from "./dynamic-assembly-authority-state.js";
 import { createDynamicAssemblySnapshot, materializeDynamicAssembly, normalizeDynamicAssemblySnapshot } from "./dynamic-assembly-snapshot.js";
 
 function clone(value) {
@@ -30,6 +31,7 @@ function freezeReason(collision) {
  */
 export class DynamicAssemblyController {
 	#active = new Map();
+	#claimedDestinations = new Map();
 	#claimedSources = new Map();
 	#world;
 
@@ -66,28 +68,47 @@ export class DynamicAssemblyController {
 			blocks
 		});
 		const active = {
+			destinationClaims: [],
 			epoch: 1,
 			frozenReason: undefined,
 			id,
 			owner: clone(owner),
-			phase: "assembling",
+			journal: advanceAssemblyJournal(advanceAssemblyJournal(createAssemblyJournal("assemble", `${id}:assemble:1`), "collected"), "snapshot_written"),
+			motionKind: owner?.kind ?? "generic",
+			phase: "capturing",
 			projectionId: undefined,
+			schemaVersion: DYNAMIC_ASSEMBLY_AUTHORITY_SCHEMA,
 			snapshot,
+			sourceClaims: [...sourceKeys].sort(),
 			transform: createAssemblyTransform()
 		};
 		const removed = [];
+		this.#active.set(id, active);
+		for (const sourceKey of sourceKeys)
+			this.#claimedSources.set(sourceKey, id);
 		try {
+			active.journal = advanceAssemblyJournal(active.journal, "sources_claimed");
+			this.#checkpoint(active);
+			for (const block of blocks)
+				if (this.#world.quiesceBlock?.(block) === false)
+					throw new Error(`Dynamic assembly block ${keyFor(block.location)} could not quiesce`);
 			this.#world.detachAssemblyData?.(snapshot.attachments);
+			active.journal = advanceAssemblyJournal(active.journal, "adapters_detached");
+			active.phase = "detached";
+			this.#checkpoint(active);
 			for (const block of blocks) {
 				this.#world.removeBlock(block.location);
 				removed.push(block);
 			}
+			active.journal = advanceAssemblyJournal(active.journal, "blocks_removed");
+			active.journal = advanceAssemblyJournal(active.journal, "authority_committed");
+			active.phase = "active";
+			this.#checkpoint(active);
 			active.projectionId = this.#world.spawnAssemblyProjection({ epoch: active.epoch, id, owner: active.owner, snapshot, transform: active.transform });
 			this.#world.setAssemblyProjectionTransform(active.projectionId, active.transform);
-			active.phase = "active";
-			this.#active.set(id, active);
-			for (const sourceKey of sourceKeys)
-				this.#claimedSources.set(sourceKey, id);
+			active.journal = advanceAssemblyJournal(active.journal, "projection_built");
+			active.journal = undefined;
+			this.#checkpoint(active);
 			return this.getActive(id);
 		} catch (error) {
 			if (active.projectionId) {
@@ -98,6 +119,8 @@ export class DynamicAssemblyController {
 			for (const block of removed.reverse())
 				this.#world.placeBlock(block);
 			this.#world.restoreAssemblyData(snapshot.attachments, snapshot.anchor);
+			this.#active.delete(id);
+			this.#releaseSources(id);
 			throw error;
 		}
 	}
@@ -112,21 +135,38 @@ export class DynamicAssemblyController {
 		}
 		if (blocks.some(block => !this.#world.canPlace(block.location)))
 			return false;
+		const destinationKeys = blocks.map(block => keyFor(block.location));
+		if (destinationKeys.some(key => this.#claimedDestinations.has(key) && this.#claimedDestinations.get(key) !== id))
+			return false;
+		for (const key of destinationKeys)
+			this.#claimedDestinations.set(key, id);
+		active.destinationClaims = [...destinationKeys].sort();
 		active.phase = "disassembling";
+		active.journal = advanceAssemblyJournal(createAssemblyJournal("disassemble", `${id}:disassemble:${active.epoch}`), "materialized");
+		active.journal = advanceAssemblyJournal(active.journal, "destinations_claimed");
+		this.#checkpoint(active);
 		const placed = [];
 		try {
 			for (const block of blocks) {
 				this.#world.placeBlock(block);
 				placed.push(block);
 			}
+			active.journal = advanceAssemblyJournal(active.journal, "blocks_placed");
 			this.#world.restoreAssemblyData(active.snapshot.attachments, {
 				x: active.snapshot.anchor.x + active.transform.translation.x / 4096,
 				y: active.snapshot.anchor.y + active.transform.translation.y / 4096,
 				z: active.snapshot.anchor.z + active.transform.translation.z / 4096
 			}, active.transform, active.snapshot.anchor);
-			this.#world.removeAssemblyProjection(active.projectionId);
-			this.#active.delete(id);
+			active.journal = advanceAssemblyJournal(active.journal, "adapters_restored");
+			if (blocks.some(block => this.#world.verifyBlockRestore?.(block) === false))
+				throw new Error(`Dynamic assembly ${id} failed restored payload verification`);
+			active.journal = advanceAssemblyJournal(active.journal, "receipts_verified");
 			this.#releaseSources(id);
+			active.journal = advanceAssemblyJournal(active.journal, "sources_released");
+			this.#world.removeAssemblyProjection(active.projectionId);
+			active.journal = advanceAssemblyJournal(active.journal, "projection_removed");
+			this.#active.delete(id);
+			this.#releaseDestinations(id);
 			return true;
 		} catch (error) {
 			for (const block of placed.reverse()) {
@@ -134,7 +174,13 @@ export class DynamicAssemblyController {
 					this.#world.removeBlock(block.location);
 				} catch {}
 			}
-			active.phase = "active";
+			active.phase = "frozen";
+			active.frozenReason = `disassembly_rollback_required:${error}`;
+			for (const source of active.sourceClaims)
+				this.#claimedSources.set(source, id);
+			this.#releaseDestinations(id);
+			active.destinationClaims = [];
+			this.#checkpoint(active);
 			throw error;
 		}
 	}
@@ -177,12 +223,33 @@ export class DynamicAssemblyController {
 					throw new Error(`Dynamic assembly source ${source} is already owned`);
 				sources.add(source);
 			}
+			for (const destination of record.destinationClaims) {
+				if (this.#claimedDestinations.has(destination))
+					throw new Error(`Dynamic assembly destination ${destination} is already owned`);
+			}
 		}
 		for (const record of pending) {
+			const disposition = recoveryDisposition(record);
+			if (disposition.action === "discard")
+				continue;
+			if (disposition.action === "freeze") {
+				record.phase = "frozen";
+				record.frozenReason = disposition.reason;
+			}
 			this.#active.set(record.id, record);
 			for (const source of this.#sourceKeys(record.snapshot))
 				this.#claimedSources.set(source, record.id);
-			this.ensureProjection(record.id);
+			for (const destination of record.destinationClaims)
+				this.#claimedDestinations.set(destination, record.id);
+			if (disposition.action === "restore_projection") {
+				const frozenReason = record.frozenReason;
+				const wasFrozen = record.phase === "frozen";
+				this.ensureProjection(record.id);
+				if (wasFrozen) {
+					record.phase = "frozen";
+					record.frozenReason = frozenReason;
+				}
+			}
 		}
 	}
 
@@ -241,12 +308,17 @@ export class DynamicAssemblyController {
 	snapshot() {
 		return [...this.#active.values()]
 			.map(active => ({
+				destinationClaims: [...active.destinationClaims],
 				epoch: active.epoch,
 				...(active.frozenReason ? { frozenReason: active.frozenReason } : {}),
 				id: active.id,
+				...(active.journal ? { journal: clone(active.journal) } : {}),
+				motionKind: active.motionKind,
 				...(active.owner === undefined ? {} : { owner: clone(active.owner) }),
 				phase: active.phase,
+				schemaVersion: DYNAMIC_ASSEMBLY_AUTHORITY_SCHEMA,
 				snapshot: active.snapshot,
+				sourceClaims: [...active.sourceClaims],
 				transform: active.transform
 			}))
 			.sort((left, right) => left.id.localeCompare(right.id));
@@ -254,22 +326,40 @@ export class DynamicAssemblyController {
 
 	#normalizeRecord(record) {
 		const id = assertId(record?.id);
-		if (!["active", "frozen"].includes(record?.phase))
-			throw new TypeError(`Dynamic assembly ${id} has an invalid phase`);
-		if (!Number.isInteger(record.epoch) || record.epoch < 1)
-			throw new TypeError(`Dynamic assembly ${id} has an invalid epoch`);
 		if (record.frozenReason !== undefined && (typeof record.frozenReason !== "string" || record.frozenReason.length > 512))
 			throw new TypeError(`Dynamic assembly ${id} has an invalid frozen reason`);
+		const normalized = normalizeDynamicAssemblyAuthorityRecord({
+			...record,
+			schemaVersion: record.schemaVersion ?? 1,
+			sourceClaims: record.sourceClaims ?? this.#sourceKeys(normalizeDynamicAssemblySnapshot(record.snapshot))
+		});
 		return {
-			epoch: record.epoch,
-			frozenReason: record.frozenReason,
-			id,
-			owner: clone(record.owner),
-			phase: record.phase,
-			projectionId: undefined,
-			snapshot: normalizeDynamicAssemblySnapshot(record.snapshot),
-			transform: createAssemblyTransform(record.transform)
+			...normalized,
+			projectionId: undefined
 		};
+	}
+
+	#checkpoint(active) {
+		this.#world.checkpointAssemblyAuthority?.(clone({
+			destinationClaims: active.destinationClaims,
+			epoch: active.epoch,
+			frozenReason: active.frozenReason,
+			id: active.id,
+			journal: active.journal,
+			motionKind: active.motionKind,
+			owner: active.owner,
+			phase: active.phase,
+			schemaVersion: DYNAMIC_ASSEMBLY_AUTHORITY_SCHEMA,
+			snapshot: active.snapshot,
+			sourceClaims: active.sourceClaims,
+			transform: active.transform
+		}));
+	}
+
+	#releaseDestinations(id) {
+		for (const [destination, owner] of this.#claimedDestinations)
+			if (owner === id)
+				this.#claimedDestinations.delete(destination);
 	}
 
 	#releaseSources(id) {
