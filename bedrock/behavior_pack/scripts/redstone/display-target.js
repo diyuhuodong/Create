@@ -1,3 +1,5 @@
+import { normalizeDisplaySourceKind, normalizeDisplaySourceLines } from "./display-source.js";
+
 export const DISPLAY_TARGET_SCHEMA = 1;
 export const MAX_DISPLAY_LINES = 16;
 export const MAX_DISPLAY_TEXT_LENGTH = 256;
@@ -106,8 +108,7 @@ export function resolveDisplayLinkWrite({ configuration, location, readSource })
 	if (typeof readSource !== "function")
 		throw new TypeError("Display Links require a source reader");
 	const settings = configuration?.settings ?? {};
-	if (settings.sourceKind !== undefined && settings.sourceKind !== "redstone_signal")
-		throw new RangeError("This Display Link supports the redstone_signal source kind");
+	const sourceKind = normalizeDisplaySourceKind(settings.sourceKind ?? "redstone_power");
 	const anchor = assertLocation(location);
 	const source = addOffset(anchor,
 		offset(settings, "source", { axis: "X", value: 0 }),
@@ -120,8 +121,11 @@ export function resolveDisplayLinkWrite({ configuration, location, readSource })
 	const line = settings.targetLine ?? 0;
 	if (!Number.isInteger(line) || line < 0 || line >= MAX_DISPLAY_LINES)
 		throw new RangeError(`Display Link target lines must be from 0 through ${MAX_DISPLAY_LINES - 1}`);
-	const value = readSource({ kind: settings.sourceKind ?? "redstone_signal", location: source });
-	if (!Number.isInteger(value) || value < 0 || value > 15)
-		throw new RangeError("Display Link redstone sources must provide a power level from 0 through 15");
-	return { line, source, target, text: String(value) };
+	const sourceLine = settings.sourceLine ?? 0;
+	if (!Number.isInteger(sourceLine) || sourceLine < 0 || sourceLine >= MAX_DISPLAY_LINES)
+		throw new RangeError(`Display Link source lines must be from 0 through ${MAX_DISPLAY_LINES - 1}`);
+	const lines = normalizeDisplaySourceLines(readSource({ kind: sourceKind, location: source }));
+	if (sourceLine >= lines.length)
+		throw new RangeError(`Display Source ${sourceKind} did not provide line ${sourceLine}`);
+	return { line, source, sourceKind, sourceLine, target, text: lines[sourceLine] };
 }

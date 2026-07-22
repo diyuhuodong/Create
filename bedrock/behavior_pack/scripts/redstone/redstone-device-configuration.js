@@ -1,5 +1,7 @@
 import { redstoneDeviceForId } from "./redstone-device-catalog.js";
 import { normalizeLogisticsAddress, normalizeLogisticsNetworkId } from "../logistics/logistics-address.js";
+import { applyVersionedConfiguration, normalizeConfigurationEditorId } from "../kernel/configuration-protocol.js";
+import { DISPLAY_SOURCE_KINDS } from "./display-source.js";
 import { normalizeRedstoneLinkFrequency } from "./redstone-link-network.js";
 import { transitionRedstoneDevice, validateRedstoneDeviceState } from "./redstone-device-state.js";
 
@@ -13,13 +15,16 @@ export const REDSTONE_DEVICE_CONFIGURATION_SCHEMA = 1;
 const FIELD_SETS = Object.freeze({
 	content_observer: [{ key: "filterItem", label: "Observed item (minecraft:air for any)", type: "item" }],
 	display_link: [
-		{ defaultValue: "redstone_signal", key: "sourceKind", label: "Source type", options: ["redstone_signal"], storage: "settings", type: "enum" },
+		{ defaultValue: "redstone_power", key: "sourceKind", label: "Source type", options: DISPLAY_SOURCE_KINDS, storage: "settings", type: "enum" },
+		{ defaultValue: "create", key: "scoreboardObjective", label: "Scoreboard objective", maxLength: 64, storage: "settings", type: "text" },
+		{ defaultValue: "", key: "computerText", label: "Computer text (use | for lines)", maxLength: 256, storage: "settings", type: "text" },
 		{ defaultValue: 0, key: "sourceOffsetX", label: "Source offset X", max: 64, min: -64, storage: "settings", type: "integer" },
 		{ defaultValue: 0, key: "sourceOffsetY", label: "Source offset Y", max: 64, min: -64, storage: "settings", type: "integer" },
 		{ defaultValue: -1, key: "sourceOffsetZ", label: "Source offset Z", max: 64, min: -64, storage: "settings", type: "integer" },
 		{ defaultValue: 0, key: "targetOffsetX", label: "Target offset X", max: 64, min: -64, storage: "settings", type: "integer" },
 		{ defaultValue: 0, key: "targetOffsetY", label: "Target offset Y", max: 64, min: -64, storage: "settings", type: "integer" },
 		{ defaultValue: 1, key: "targetOffsetZ", label: "Target offset Z", max: 64, min: -64, storage: "settings", type: "integer" },
+		{ defaultValue: 0, key: "sourceLine", label: "Source line", max: 15, min: 0, storage: "settings", type: "integer" },
 		{ defaultValue: 0, key: "targetLine", label: "Target line", max: 15, min: 0, storage: "settings", type: "integer" }
 	],
 	nixie_tube: [
@@ -58,14 +63,6 @@ function clone(value) {
 function assertKnownDevice(kind) {
 	if (!redstoneDeviceForId(kind))
 		throw new Error(`Unknown redstone device kind ${kind}`);
-}
-
-function normalizeEditorId(value) {
-	if (value === undefined || value === null)
-		return "";
-	if (typeof value !== "string" || value.length > 128)
-		throw new TypeError("Redstone device configuration editors must be short identifiers");
-	return value;
 }
 
 function normalizeInteger(value, field) {
@@ -162,7 +159,7 @@ export function validateRedstoneDeviceConfiguration(value) {
 		throw new Error(`Redstone device configuration must use schema ${REDSTONE_DEVICE_CONFIGURATION_SCHEMA}`);
 	if (!Number.isInteger(value.revision) || value.revision < 0 || value.revision > Number.MAX_SAFE_INTEGER)
 		throw new RangeError("Redstone device configuration revisions must be non-negative safe integers");
-	normalizeEditorId(value.lastEditorId);
+	normalizeConfigurationEditorId(value.lastEditorId);
 	const settings = value.settings ?? {};
 	if (!settings || typeof settings !== "object" || Array.isArray(settings) || Object.keys(settings).length > 32)
 		throw new TypeError("Redstone device configuration settings must be a small object");
@@ -181,16 +178,6 @@ export function validateRedstoneDeviceConfiguration(value) {
 export function configureRedstoneDevice({ configuration, editorId, expectedRevision, patch, state }) {
 	const currentConfiguration = normalizeRedstoneDeviceConfiguration(configuration);
 	const currentState = validateRedstoneDeviceState(state);
-	if (!Number.isInteger(expectedRevision) || expectedRevision < 0)
-		throw new RangeError("Redstone device configuration edits require a non-negative expected revision");
-	if (expectedRevision !== currentConfiguration.revision) {
-		return {
-			changed: false,
-			configuration: currentConfiguration,
-			conflict: true,
-			state: currentState
-		};
-	}
 	const normalizedPatch = normalizePatch(currentState.kind, patch);
 	const nextState = transitionRedstoneDevice(currentState, toDeviceAction(currentState.kind, normalizedPatch, currentState));
 	const nextSettings = { ...currentConfiguration.settings };
@@ -198,23 +185,20 @@ export function configureRedstoneDevice({ configuration, editorId, expectedRevis
 		if (field.storage === "settings" && normalizedPatch[field.key] !== undefined)
 			nextSettings[field.key] = normalizedPatch[field.key];
 	}
-	if (JSON.stringify(nextState) === JSON.stringify(currentState) && JSON.stringify(nextSettings) === JSON.stringify(currentConfiguration.settings)) {
-		return {
-			changed: false,
-			configuration: currentConfiguration,
-			conflict: false,
-			state: currentState
-		};
-	}
+	const applied = applyVersionedConfiguration({
+		apply: current => ({ ...current, settings: nextSettings }),
+		changed: JSON.stringify(nextState) !== JSON.stringify(currentState)
+			|| JSON.stringify(nextSettings) !== JSON.stringify(currentConfiguration.settings),
+		current: currentConfiguration,
+		editorId,
+		editorKey: "lastEditorId",
+		expectedRevision,
+		validate: normalizeRedstoneDeviceConfiguration
+	});
 	return {
-		changed: true,
-		configuration: {
-			...currentConfiguration,
-			lastEditorId: normalizeEditorId(editorId),
-			revision: currentConfiguration.revision + 1,
-			settings: nextSettings
-		},
-		conflict: false,
-		state: nextState
+		changed: applied.changed,
+		configuration: applied.state,
+		conflict: applied.conflict,
+		state: applied.conflict ? currentState : nextState
 	};
 }

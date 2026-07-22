@@ -1,6 +1,7 @@
 import { system, world } from "@minecraft/server";
 import { ModalFormData } from "@minecraft/server-ui";
 
+import { openConfigurationFormSession, submitVersionedConfigurationForm } from "../kernel/configuration-protocol.js";
 import { registerMovingBlockDataContributor } from "../contraptions/moving-block-data.js";
 import { registerTickHandler } from "../kernel/index.js";
 import { ShardedStateStore } from "../kernel/sharded-state-store.js";
@@ -204,6 +205,7 @@ function parseRequestAmount(value) {
 
 function showConfiguration(record, player) {
 	const state = record.state;
+	const session = openConfigurationFormSession({ revision: state.configurationRevision, subjectId: record.id });
 	const form = new ModalFormData()
 		.title("Stock Ticker")
 		.label(`Available: ${state.lastAvailable} • last request: ${state.requestStatus} • revision ${state.configurationRevision}`)
@@ -220,17 +222,21 @@ function showConfiguration(record, player) {
 			return false;
 		const values = response.formValues ?? [];
 		const categories = Array.from({ length: STOCK_TICKER_MAX_CATEGORIES }, (_, index) => String(values[index + 5] ?? "minecraft:air").trim());
-		const configured = configureStockTicker({
-			expectedRevision: state.configurationRevision,
-			patch: {
-				allowPartial: values[4] === true,
-				categories,
-				networkId: String(values[0] ?? "").trim(),
-				requestedItem: String(values[2] ?? "").trim(),
-				requestAmount: parseRequestAmount(values[3]),
-				targetAddress: String(values[1] ?? "").trim()
-			},
-			state: record.state
+		const configured = submitVersionedConfigurationForm({
+			actualRevision: () => record.state.configurationRevision,
+			session,
+			submit: expectedRevision => configureStockTicker({
+				expectedRevision,
+				patch: {
+					allowPartial: values[4] === true,
+					categories,
+					networkId: String(values[0] ?? "").trim(),
+					requestedItem: String(values[2] ?? "").trim(),
+					requestAmount: parseRequestAmount(values[3]),
+					targetAddress: String(values[1] ?? "").trim()
+				},
+				state: record.state
+			})
 		});
 		if (configured.conflict) {
 			player.sendMessage?.("Stock Ticker settings changed while the form was open. Reopen it and try again.");

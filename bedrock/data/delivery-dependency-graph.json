@@ -1,0 +1,280 @@
+{
+  "schemaVersion": 1,
+  "packages": [
+    {
+      "dependencies": [],
+      "id": "S3.15",
+      "name": "Stage 3 static closure and platform-acceptance ledger",
+      "order": 3.15
+    },
+    {
+      "dependencies": [
+        "S3.15"
+      ],
+      "id": "P4.0",
+      "name": "Dynamic-mechanical foundation",
+      "order": 4
+    },
+    {
+      "dependencies": [
+        "P4.0"
+      ],
+      "id": "P4.1",
+      "name": "Assembly and bearing integration",
+      "order": 4.1
+    },
+    {
+      "dependencies": [
+        "P4.1"
+      ],
+      "id": "P4.2",
+      "name": "Linear actuators",
+      "order": 4.2
+    },
+    {
+      "dependencies": [
+        "P4.2"
+      ],
+      "id": "P4.3",
+      "name": "Elevators and moving contacts",
+      "order": 4.3
+    },
+    {
+      "dependencies": [
+        "P4.3"
+      ],
+      "id": "P4.4",
+      "name": "Dynamic mechanical actors",
+      "order": 4.4
+    },
+    {
+      "dependencies": [
+        "P4.4"
+      ],
+      "id": "P4.5",
+      "name": "Minecart contraptions",
+      "order": 4.5
+    },
+    {
+      "dependencies": [
+        "P4.5"
+      ],
+      "id": "P4.6",
+      "name": "Sticker and glue attachments",
+      "order": 4.6
+    },
+    {
+      "dependencies": [
+        "P4.6"
+      ],
+      "id": "P4.7",
+      "name": "Schematics and symmetry",
+      "order": 4.7
+    },
+    {
+      "dependencies": [
+        "P4.5",
+        "S3.15"
+      ],
+      "id": "P5.0",
+      "name": "Train and package authority foundation",
+      "order": 5
+    },
+    {
+      "dependencies": [
+        "P5.0"
+      ],
+      "id": "P5.1",
+      "name": "Track signaling and schedules",
+      "order": 5.1
+    },
+    {
+      "dependencies": [
+        "P4.5",
+        "P5.1"
+      ],
+      "id": "P5.2",
+      "name": "Rolling stock and carriage integration",
+      "order": 5.2
+    },
+    {
+      "dependencies": [
+        "P5.0"
+      ],
+      "id": "P5.3",
+      "name": "Packages and packagers",
+      "order": 5.3
+    },
+    {
+      "dependencies": [
+        "P5.3"
+      ],
+      "id": "P5.4",
+      "name": "Package routing and factory requests",
+      "order": 5.4
+    },
+    {
+      "dependencies": [
+        "P5.2",
+        "P5.4"
+      ],
+      "id": "P5.5",
+      "name": "Train and logistics closure",
+      "order": 5.5
+    },
+    {
+      "dependencies": [
+        "S3.15"
+      ],
+      "id": "P6.0",
+      "name": "Equipment and interaction foundation",
+      "order": 6
+    },
+    {
+      "dependencies": [
+        "P6.0"
+      ],
+      "id": "P6.1",
+      "name": "Backtank and diving equipment",
+      "order": 6.1
+    },
+    {
+      "dependencies": [
+        "P6.1"
+      ],
+      "id": "P6.2",
+      "name": "Goggles, wrench, and Extendo Grip",
+      "order": 6.2
+    },
+    {
+      "dependencies": [
+        "P6.2"
+      ],
+      "id": "P6.3",
+      "name": "Potato Cannon",
+      "order": 6.3
+    },
+    {
+      "dependencies": [
+        "P6.1"
+      ],
+      "id": "P6.4",
+      "name": "Toolbox",
+      "order": 6.4
+    },
+    {
+      "dependencies": [
+        "P6.2",
+        "P6.3",
+        "P6.4"
+      ],
+      "id": "P6.5",
+      "name": "Equipment closure",
+      "order": 6.5
+    },
+    {
+      "dependencies": [],
+      "id": "P7.0",
+      "name": "Authoritative inventory and migration gate",
+      "order": 7
+    },
+    {
+      "dependencies": [
+        "P7.0"
+      ],
+      "id": "P7.1",
+      "name": "Content, materials, and acquisition",
+      "order": 7.1
+    },
+    {
+      "dependencies": [
+        "P7.1"
+      ],
+      "id": "P7.2",
+      "name": "Recipe compilation and processing closure",
+      "order": 7.2
+    },
+    {
+      "dependencies": [
+        "P7.2"
+      ],
+      "id": "P7.3",
+      "name": "Fluid, heat, and container semantics",
+      "order": 7.3
+    },
+    {
+      "dependencies": [
+        "P7.2"
+      ],
+      "id": "P7.4D.0",
+      "name": "Shared configuration and form protocol",
+      "order": 7.4
+    },
+    {
+      "dependencies": [
+        "P7.2",
+        "P7.4D.0"
+      ],
+      "id": "P7.4A",
+      "name": "Displays and redstone",
+      "order": 7.41
+    },
+    {
+      "dependencies": [
+        "P7.2",
+        "P7.4D.0"
+      ],
+      "id": "P7.4B",
+      "name": "Logistics and packages",
+      "order": 7.42
+    },
+    {
+      "dependencies": [
+        "P7.3"
+      ],
+      "id": "P7.4C",
+      "name": "Kinetics, stress, and boilers",
+      "order": 7.43
+    },
+    {
+      "dependencies": [
+        "P7.4D.0"
+      ],
+      "id": "P7.4D",
+      "name": "Controls and menus",
+      "order": 7.44
+    },
+    {
+      "dependencies": [
+        "P4.6",
+        "P7.4B",
+        "P7.4C",
+        "P7.4D"
+      ],
+      "id": "P7.5",
+      "name": "Dynamic mechanics, trains, and projections",
+      "order": 7.5
+    },
+    {
+      "dependencies": [
+        "P7.1",
+        "P7.5"
+      ],
+      "id": "P7.6",
+      "name": "Equipment, resources, and guidance",
+      "order": 7.6
+    },
+    {
+      "dependencies": [
+        "P5.5",
+        "P6.5",
+        "P7.4A",
+        "P7.5",
+        "P7.6"
+      ],
+      "id": "P7.7",
+      "name": "Static closure and platform acceptance",
+      "order": 7.7
+    }
+  ]
+}

@@ -3,6 +3,7 @@ import { world } from "@minecraft/server";
 import { registerTickHandler } from "../kernel/index.js";
 import { ShardedStateStore } from "../kernel/sharded-state-store.js";
 import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-property-storage.js";
+import { registerAssemblyAttachmentProvider } from "./assembly-attachments.js";
 import { isMovableBlockType } from "./movable-blocks.js";
 import { registerMovingBlockDataContributor } from "./moving-block-data.js";
 import { createStickerState, normalizeStickerRecord, stickerAttachmentTarget } from "./sticker-state.js";
@@ -145,6 +146,7 @@ export function registerStickers() {
 	if (registered)
 		return false;
 	registered = true;
+	registerAssemblyAttachmentProvider("sticker", stickerLinkedLocationsForAssembly);
 	registerMovingBlockDataContributor(STICKER_BLOCK, "sticker", {
 		capture: captureStickerMovingData,
 		detach: detachStickerMovingData,

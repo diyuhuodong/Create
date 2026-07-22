@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { createStickerState, mergeAssemblyAttachmentLocations, normalizeStickerRecord, stickerAttachmentTarget } from "../behavior_pack/scripts/contraptions/sticker-state.js";
+import { mergeAssemblyAttachmentLocations } from "../behavior_pack/scripts/contraptions/assembly-attachments.js";
+import { createStickerState, normalizeStickerRecord, stickerAttachmentTarget } from "../behavior_pack/scripts/contraptions/sticker-state.js";
 
 test("Sticker state preserves facing and only creates an edge while active", () => {
 	const inactive = createStickerState({ active: 0, facing: "north" });

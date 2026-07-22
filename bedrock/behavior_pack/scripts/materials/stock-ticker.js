@@ -1,4 +1,5 @@
 import { normalizeLogisticsAddress, normalizeLogisticsNetworkId } from "../logistics/logistics-address.js";
+import { applyVersionedConfiguration } from "../kernel/configuration-protocol.js";
 
 export const STOCK_TICKER_BLOCK = "createbedrock:stock_ticker";
 export const STOCK_TICKER_SCHEMA = 1;
@@ -71,20 +72,19 @@ export function validateStockTickerState(state) {
 
 export function configureStockTicker({ expectedRevision, patch, state }) {
 	const current = validateStockTickerState(state);
-	if (!Number.isSafeInteger(expectedRevision) || expectedRevision < 0)
-		throw new RangeError("Stock Ticker edits require a non-negative expected revision");
-	if (expectedRevision !== current.configurationRevision)
-		return { changed: false, conflict: true, state: current };
 	if (!patch || typeof patch !== "object" || Array.isArray(patch))
 		throw new TypeError("Stock Ticker edits require an object patch");
 	const permitted = new Set(["allowPartial", "categories", "networkId", "requestedItem", "requestAmount", "targetAddress"]);
 	for (const key of Object.keys(patch))
 		if (!permitted.has(key))
 			throw new Error(`Stock Ticker does not support configuration field ${key}`);
-	const next = validateStockTickerState({ ...current, ...patch });
-	if (JSON.stringify(next) === JSON.stringify(current))
-		return { changed: false, conflict: false, state: current };
-	return { changed: true, conflict: false, state: { ...next, configurationRevision: current.configurationRevision + 1 } };
+	return applyVersionedConfiguration({
+		apply: currentState => ({ ...currentState, ...patch }),
+		current,
+		expectedRevision,
+		revisionKey: "configurationRevision",
+		validate: validateStockTickerState
+	});
 }
 
 /** Start a durable DepotNetwork request without treating its queued stock as already delivered. */

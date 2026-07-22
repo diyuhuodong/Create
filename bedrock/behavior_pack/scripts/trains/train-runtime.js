@@ -567,6 +567,20 @@ export function getTrainDiagnostics() {
 	};
 }
 
+export function getTrainDisplayState(dimensionId) {
+	const controller = controllers.get(dimensionId);
+	const records = [...trains.entries()]
+		.filter(([, train]) => train.dimensionId === dimensionId)
+		.map(([id, train]) => ({
+			blockedReason: controller?.getMotionState(id)?.blockedReason ?? "",
+			id,
+			name: train.name ?? id,
+			stopped: train.stopped === true
+		}))
+		.sort((left, right) => left.id.localeCompare(right.id));
+	return { trains: records };
+}
+
 /** Stage-5 control plane access: callers may observe and command the one
  * authoritative controller, but never create a second route reservation map. */
 export function getTrainAuthority(dimensionId) {

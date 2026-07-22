@@ -87,7 +87,7 @@ const S3_9_RUNTIME_BOUNDARIES = [
     },
     {
         path: "behavior_pack/scripts/fluids/fluid-runtime.js",
-        markers: ["syncSteamEngines", "steamEngineOutput", "setExternalSource"]
+        markers: ["syncSteamEngines", "boilerSteamEngineOutput", "collectBoilerMembers", "setExternalSource"]
     },
     {
         path: "behavior_pack/scripts/contraptions/contraption-runtime.js",

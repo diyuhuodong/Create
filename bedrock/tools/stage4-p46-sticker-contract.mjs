@@ -75,12 +75,16 @@ export async function validateStage4P46Stickers({
 	for (const required of ["#claimedSources", "is already owned by"])
 		if (!controller.includes(required))
 			throw new Error(`P4.6 Sticker source ownership is missing ${required}`);
-	for (const required of ["createStickerState", "stickerAttachmentTarget", "mergeAssemblyAttachmentLocations", "normalizeStickerRecord"])
+	for (const required of ["createStickerState", "stickerAttachmentTarget", "normalizeStickerRecord"])
 		if (!state.includes(required))
 			throw new Error(`P4.6 Sticker state boundary is missing ${required}`);
-	for (const required of ["gluedLocationsForAssembly", "chassisLinkedLocationsForAssembly", "stickerLinkedLocationsForAssembly", "mergeAssemblyAttachmentLocations"])
+	if (!runtime.includes('registerAssemblyAttachmentProvider("sticker", stickerLinkedLocationsForAssembly)'))
+		throw new Error("P4.6 Sticker must register its assembly attachment provider");
+	for (const required of ["registerAssemblyAttachmentProvider", "assemblyAttachmentProviderIds", "mergeAssemblyAttachmentLocations"])
 		if (!attachments.includes(required))
-			throw new Error(`P4.6 unified assembly attachment graph is missing ${required}`);
+			throw new Error(`P4.6 extensible assembly attachment graph is missing ${required}`);
+	if (/from "\.\/(?:sticker|super-glue|chassis)-/.test(attachments))
+		throw new Error("P4.1 assembly attachments must not import later feature runtimes");
 	const block = await readJson(resolve(bedrockRoot, "behavior_pack", "blocks", "sticker.json"));
 	if (block["minecraft:block"]?.description?.identifier !== "createbedrock:sticker"
 		|| !Array.isArray(block["minecraft:block"]?.description?.properties?.["createbedrock:active"]))

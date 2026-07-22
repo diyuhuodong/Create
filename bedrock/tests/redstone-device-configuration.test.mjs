@@ -7,7 +7,7 @@ import { createRedstoneDeviceState } from "../behavior_pack/scripts/redstone/red
 test("configuration envelopes migrate absent R0 records and expose only device-supported fields", () => {
 	assert.deepEqual(normalizeRedstoneDeviceConfiguration(), createRedstoneDeviceConfiguration());
 	assert.deepEqual(deviceConfigurationFields("redstone_link").map(field => field.key), ["mode", "frequencyLeft", "frequencyRight"]);
-	assert.deepEqual(deviceConfigurationFields("display_link").map(field => field.key), ["sourceKind", "sourceOffsetX", "sourceOffsetY", "sourceOffsetZ", "targetOffsetX", "targetOffsetY", "targetOffsetZ", "targetLine"]);
+	assert.deepEqual(deviceConfigurationFields("display_link").map(field => field.key), ["sourceKind", "scoreboardObjective", "computerText", "sourceOffsetX", "sourceOffsetY", "sourceOffsetZ", "targetOffsetX", "targetOffsetY", "targetOffsetZ", "sourceLine", "targetLine"]);
 	assert.deepEqual(deviceConfigurationFields("nixie_tube").map(field => field.key), ["customText", "styleColor", "styleBrightness"]);
 	assert.deepEqual(deviceConfigurationFields("analog_lever"), []);
 });
@@ -97,7 +97,7 @@ test("display and Nixie UI settings persist outside simulation state and configu
 		configuration: normalizeRedstoneDeviceConfiguration({ lastEditorId: "", revision: 0, schemaVersion: 1 }),
 		editorId: "player-a",
 		expectedRevision: 0,
-		patch: { sourceKind: "redstone_signal", targetLine: 3, targetOffsetX: 4 },
+		patch: { sourceKind: "redstone_power", targetLine: 3, targetOffsetX: 4 },
 		state: createRedstoneDeviceState("display_link")
 	});
 	assert.equal(display.configuration.settings.targetLine, 3);

@@ -45,23 +45,3 @@ export function stickerAttachmentTarget(location, state) {
 	const direction = FACING_VECTORS.get(normalized.facing);
 	return { x: source.x + direction.x, y: source.y + direction.y, z: source.z + direction.z };
 }
-
-/** Merge Super Glue, chassis, and Sticker edges deterministically. A self-edge
- * is invalid for a Sticker cycle and is ignored before the collector's own
- * visited set handles longer cycles. */
-export function mergeAssemblyAttachmentLocations(source, ...groups) {
-	source = assertLocation(source, "source location");
-	const sourceKey = locationKey(source);
-	const merged = new Map();
-	for (const group of groups) {
-		if (!Array.isArray(group))
-			throw new TypeError("Assembly attachment groups must be arrays");
-		for (const location of group) {
-			const candidate = assertLocation(location, "attachment location");
-			const key = locationKey(candidate);
-			if (key !== sourceKey)
-				merged.set(key, candidate);
-		}
-	}
-	return [...merged.entries()].sort(([left], [right]) => left.localeCompare(right)).map(([, location]) => location);
-}

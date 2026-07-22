@@ -28,12 +28,14 @@ test("Display Link resolves saved source and target offsets into one redstone te
 			return 13;
 		}
 	});
-	assert.deepEqual(seen, [{ kind: "redstone_signal", location: { x: 8, y: 64, z: 9 } }]);
+	assert.deepEqual(seen, [{ kind: "redstone_power", location: { x: 8, y: 64, z: 9 } }]);
 	assert.deepEqual(write, {
 		line: 1,
 		source: { x: 8, y: 64, z: 9 },
+		sourceKind: "redstone_power",
+		sourceLine: 0,
 		target: { x: 10, y: 67, z: 11 },
 		text: "13"
 	});
-	assert.throws(() => resolveDisplayLinkWrite({ configuration: { settings: {} }, location: { x: 0, y: 0, z: 0 }, readSource: () => 16 }), /power level/);
+	assert.throws(() => resolveDisplayLinkWrite({ configuration: { settings: { sourceLine: 1 } }, location: { x: 0, y: 0, z: 0 }, readSource: () => ["first"] }), /line 1/);
 });

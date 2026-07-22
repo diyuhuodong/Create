@@ -1,5 +1,6 @@
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
 
+import { openConfigurationFormSession, submitVersionedConfigurationForm } from "../kernel/configuration-protocol.js";
 import { deviceConfigurationFields } from "./redstone-device-configuration.js";
 import { LINKED_CONTROLLER_CHANNELS } from "./linked-controller-bindings.js";
 
@@ -78,12 +79,13 @@ function addField(form, configuration, state, field) {
  * the final compare-and-swap commit because a player may leave the UI open
  * while another player changes the same block.
  */
-export function showRedstoneDeviceConfigurationForm({ configuration, player, state, submit }) {
+export function showRedstoneDeviceConfigurationForm({ configuration, currentRevision, player, state, subjectId, submit }) {
 	const fields = deviceConfigurationFields(state.kind);
 	if (fields.length === 0) {
 		player.sendMessage?.(`${displayName(state.kind)} has no editable settings in this phase.`);
 		return Promise.resolve(false);
 	}
+	const session = openConfigurationFormSession({ revision: configuration.revision, subjectId });
 	const form = new ModalFormData()
 		.title(`${displayName(state.kind)} Settings`)
 		.label(`Public settings • revision ${configuration.revision}`);
@@ -93,7 +95,14 @@ export function showRedstoneDeviceConfigurationForm({ configuration, player, sta
 	return form.show(player).then(response => {
 		if (response.canceled)
 			return false;
-		return submit({ expectedRevision: configuration.revision, patch: patchFromResponse(response, fields) }) === true;
+		const result = submitVersionedConfigurationForm({
+			actualRevision: currentRevision,
+			session,
+			submit: expectedRevision => submit({ expectedRevision, patch: patchFromResponse(response, fields) })
+		});
+		if (result.conflict)
+			player.sendMessage?.("These settings changed while the form was open. Reopen it and try again.");
+		return result.changed;
 	}).catch(error => {
 		player.sendMessage?.(`Could not save ${displayName(state.kind)} settings: ${error}`);
 		return false;

@@ -129,6 +129,21 @@ export class PackageLedger {
 		return { ok: true, record: clone(record), replay: false };
 	}
 
+	abortTransfer(id, { receiptId }) {
+		const record = this.#require(id);
+		receiptId = assertIdentifier(receiptId, "Package transfer receipt");
+		if (!record.receipts.includes(receiptId))
+			return { ok: false, reason: "unknown_receipt" };
+		if (!record.transfer)
+			return { ok: true, record: clone(record), replay: true };
+		if (record.transfer.receiptId !== receiptId)
+			return { ok: false, reason: "different_transfer_active" };
+		record.owner = record.transfer.from;
+		delete record.transfer;
+		record.revision++;
+		return { ok: true, record: clone(record), replay: false };
+	}
+
 	update(id, { address, expectedRevision, order }) {
 		const record = this.#require(id);
 		if (!Number.isInteger(expectedRevision) || expectedRevision !== record.revision)

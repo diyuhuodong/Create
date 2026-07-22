@@ -1,9 +1,14 @@
 import { ItemStack, system, world } from "@minecraft/server";
 
+import { DeferredPersistence } from "../kernel/deferred-persistence.js";
 import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
+import { ShardedStateStore } from "../kernel/sharded-state-store.js";
 import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-property-storage.js";
 import { BedrockEscrowRegistry } from "../logistics/bedrock-escrow-registry.js";
 import { registerEscrowProtection } from "../logistics/external-escrow-runtime.js";
+import { createBoilerController, evaluateBoilerController, observeBoilerWater } from "../kinetics/boiler-controller.js";
+import { boilerSteamEngineOutput } from "../kinetics/steam-engine.js";
+import { BURNER_HEAT_LEVEL } from "./heat-level.js";
 import { createBedrockWorldFluidEscrows } from "./bedrock-world-fluid-escrow.js";
 import { CreativeFluidPort } from "./creative-fluid-port.js";
 import { planFluidBucketInteraction, settleFluidBucketInteraction } from "./fluid-container.js";
@@ -12,7 +17,6 @@ import { fluidTankId, FluidNetworkState } from "./fluid-network-state.js";
 import { configureFluidRun, FLUID_FACING_OFFSETS, fluidDeviceId, fluidDeviceLocation, offsetFluidLocation } from "./fluid-topology.js";
 import { fluidFromWorldSource, VanillaWorldFluidPort, worldSourceForFluid } from "./world-fluid-port.js";
 import { fluidFillLevel, fluidVisualKind, tankSegmentForNeighbors } from "./fluid-tank-visuals.js";
-import { steamEngineOutput } from "../kinetics/steam-engine.js";
 import { blazeHeatAt } from "../materials/blaze-burner-runtime.js";
 
 const COPPER_VALVE_HANDLE_BLOCK = "createbedrock:copper_valve_handle";
@@ -31,6 +35,15 @@ const POWERED_SHAFT_BLOCK = "createbedrock:powered_shaft";
 const SMART_FLUID_PIPE_BLOCK = "createbedrock:smart_fluid_pipe";
 const SPOUT_BLOCK = "createbedrock:spout";
 const STEAM_ENGINE_BLOCK = "createbedrock:steam_engine";
+const PASSIVE_BOILER_HEATERS = new Set([
+	"createbedrock:lit_blaze_burner",
+	"minecraft:fire",
+	"minecraft:lava",
+	"minecraft:magma_block",
+	"minecraft:soul_fire",
+	"minecraft:campfire",
+	"minecraft:soul_campfire"
+]);
 const FLUID_PIPE_BLOCKS = new Set([
 	"createbedrock:fluid_pipe",
 	ENCASED_FLUID_PIPE_BLOCK,
@@ -54,6 +67,8 @@ const NEIGHBOR_OFFSETS = [
 	{ x: 0, y: 0, z: -1 }
 ];
 let kineticWorldProvider;
+let boilerTick = 0;
+const boilerControllers = new Map();
 const creativePorts = new Map();
 const redstoneLockedPumpIds = new Set();
 const worldFluidEscrows = new BedrockEscrowRegistry();
@@ -65,6 +80,29 @@ const state = new FluidNetworkState({
 		console.warn(`[Create Bedrock] Fluid state error: ${error}`);
 	},
 	storage: createWorldDynamicPropertyStorage(world)
+});
+
+const boilerStore = new ShardedStateStore({
+	keyPrefix: "createbedrock:boiler_state_v1",
+	onError(error) {
+		console.warn(`[Create Bedrock] Boiler state error: ${error}`);
+	},
+	partitionFor(record) {
+		if (!record?.dimensionId || !record?.members?.[0])
+			throw new TypeError("Boiler records require a dimension and Tank members");
+		const location = record.members[0];
+		return `${record.dimensionId}:${Math.floor(location.x / 16)}:${Math.floor(location.y / 16)}:${Math.floor(location.z / 16)}`;
+	},
+	storage: createWorldDynamicPropertyStorage(world)
+});
+const boilerPersistence = new DeferredPersistence({
+	name: "boiler",
+	onError(error) {
+		console.warn(`[Create Bedrock] Could not persist Boiler state: ${error}`);
+	},
+	write() {
+		boilerStore.request([...boilerControllers.values()].sort((left, right) => left.id.localeCompare(right.id)));
+	}
 });
 
 registerEscrowProtection(() => state.activeExternalEscrowIds());
@@ -551,44 +589,185 @@ function adjacentPoweredShafts(block) {
 		.filter(candidate => candidate?.typeId === POWERED_SHAFT_BLOCK);
 }
 
-function heatForSteamTank(tank) {
-	if (!tank)
-		return 0;
-	// P7.3 establishes the common heat contract. P7.4's boiler controller can
-	// later replace this local search without changing engine semantics.
-	return Math.max(...[{ x: 0, y: -1, z: 0 }, ...NEIGHBOR_OFFSETS].map(offset => blazeHeatAt(tank.dimension.id, offsetFluidLocation(tank.location, offset))));
+function boilerLocationId(dimensionId, location) {
+	return `${dimensionId}:${location.x}:${location.y}:${location.z}`;
+}
+
+function compareLocations(left, right) {
+	return left.x - right.x || left.y - right.y || left.z - right.z;
+}
+
+function collectBoilerMembers(tank) {
+	const members = [];
+	const pending = [{ ...tank.location }];
+	const visited = new Set();
+	while (pending.length > 0 && members.length < 512) {
+		const location = pending.shift();
+		const id = boilerLocationId(tank.dimension.id, location);
+		if (visited.has(id))
+			continue;
+		visited.add(id);
+		const block = tank.dimension.getBlock(location);
+		if (block?.typeId !== FLUID_TANK_BLOCK || !state.hasTank(tankIdentifier(block)))
+			continue;
+		members.push({ ...block.location });
+		for (const offset of NEIGHBOR_OFFSETS)
+			pending.push(offsetFluidLocation(location, offset));
+	}
+	return members.sort(compareLocations);
+}
+
+function boilerHeat(dimension, members) {
+	let activeHeat = 0;
+	let passiveHeat = false;
+	for (const member of members) {
+		const heaterLocation = offsetFluidLocation(member, { x: 0, y: -1, z: 0 });
+		const heat = blazeHeatAt(dimension.id, heaterLocation);
+		if (heat >= BURNER_HEAT_LEVEL.FADING)
+			activeHeat += heat === BURNER_HEAT_LEVEL.SEETHING ? 2 : 1;
+		else if (PASSIVE_BOILER_HEATERS.has(dimension.getBlock(heaterLocation)?.typeId))
+			passiveHeat = true;
+	}
+	return { activeHeat: Math.min(18, activeHeat), passiveHeat };
+}
+
+function inspectBoilerWater(dimension, members) {
+	let amount = 0;
+	for (const location of members) {
+		const block = dimension.getBlock(location);
+		if (!block || !state.hasTank(tankIdentifier(block)))
+			continue;
+		const contents = state.inspectTank(tankIdentifier(block)).contents;
+		if (contents?.typeId === "minecraft:water")
+			amount += contents.amount;
+	}
+	return amount;
+}
+
+function boilerWaterSnapshot(dimension, members) {
+	return Object.fromEntries(members.map(location => {
+		const block = dimension.getBlock(location);
+		const tankId = fluidTankId(dimension.id, location);
+		const contents = block && state.hasTank(tankId) ? state.inspectTank(tankId).contents : undefined;
+		return [tankId, contents?.typeId === "minecraft:water" ? contents.amount : 0];
+	}));
+}
+
+function extractBoilerWater(dimension, members, engineId) {
+	for (const location of members) {
+		const block = dimension.getBlock(location);
+		if (!block || !state.hasTank(tankIdentifier(block)))
+			continue;
+		const tankId = tankIdentifier(block);
+		const inspection = state.inspectTank(tankId);
+		if (inspection.contents?.typeId !== "minecraft:water" || inspection.contents.amount < 50)
+			continue;
+		const extracted = state.extract(tankId, {
+			maxAmount: 50,
+			predicate: fluid => fluid.typeId === "minecraft:water",
+			receiptId: `boiler:${engineId}:${tankId}:${inspection.revision}`
+		});
+		if (extracted?.amount === 50)
+			return true;
+	}
+	return false;
+}
+
+function steamEngineDescriptor(node) {
+	const dimension = world.getDimension(node.dimensionId);
+	const engine = dimension.getBlock(node.location);
+	if (engine?.typeId !== STEAM_ENGINE_BLOCK)
+		return undefined;
+	const direction = steamDirection(engine);
+	const tank = findSteamEndpoint(engine, { x: -direction.x, y: -direction.y, z: -direction.z }, FLUID_TANK_BLOCK);
+	const shaft = findSteamEndpoint(engine, direction, POWERED_SHAFT_BLOCK);
+	return {
+		dimension,
+		engine,
+		id: boilerLocationId(node.dimensionId, node.location),
+		node,
+		shaft,
+		tank
+	};
+}
+
+function zeroUnusedSteamShafts(kineticWorld, descriptor) {
+	let changed = false;
+	for (const candidate of adjacentPoweredShafts(descriptor.engine))
+		if (candidate.location.x !== descriptor.shaft?.location.x || candidate.location.y !== descriptor.shaft?.location.y || candidate.location.z !== descriptor.shaft?.location.z)
+			changed = kineticWorld.setExternalSource(descriptor.node.dimensionId, candidate.location, { capacity: 0, speed: 0 }) || changed;
+	return changed;
 }
 
 function syncSteamEngines(kineticWorld) {
 	if (!kineticWorld || typeof kineticWorld.getNodesByType !== "function" || typeof kineticWorld.setExternalSource !== "function")
 		return false;
+	boilerTick++;
 	let changed = false;
+	const groups = new Map();
 	for (const node of kineticWorld.getNodesByType(STEAM_ENGINE_BLOCK)) {
 		try {
-			const dimension = world.getDimension(node.dimensionId);
-			const engine = dimension.getBlock(node.location);
-			if (engine?.typeId !== STEAM_ENGINE_BLOCK)
+			const descriptor = steamEngineDescriptor(node);
+			if (!descriptor)
 				continue;
-			const direction = steamDirection(engine);
-			const tank = findSteamEndpoint(engine, { x: -direction.x, y: -direction.y, z: -direction.z }, FLUID_TANK_BLOCK);
-			const shaft = findSteamEndpoint(engine, direction, POWERED_SHAFT_BLOCK);
-			for (const candidate of adjacentPoweredShafts(engine))
-				if (candidate.location.x !== shaft?.location.x || candidate.location.y !== shaft?.location.y || candidate.location.z !== shaft?.location.z)
-					changed = kineticWorld.setExternalSource(node.dimensionId, candidate.location, { capacity: 0, speed: 0 }) || changed;
-			if (!shaft)
+			changed = zeroUnusedSteamShafts(kineticWorld, descriptor) || changed;
+			if (!descriptor.tank || !descriptor.shaft) {
+				if (descriptor.shaft)
+					changed = kineticWorld.setExternalSource(node.dimensionId, descriptor.shaft.location, { capacity: 0, speed: 0 }) || changed;
 				continue;
-			const inspection = tank && state.hasTank(tankIdentifier(tank)) ? state.inspectTank(tankIdentifier(tank)) : undefined;
-			const output = steamEngineOutput(inspection?.contents, { heatLevel: heatForSteamTank(tank) });
-			if (output.consume > 0 && tank)
-				state.extract(tankIdentifier(tank), {
-					maxAmount: output.consume,
-					predicate: fluid => fluid.typeId === "minecraft:water"
-				});
-			changed = kineticWorld.setExternalSource(node.dimensionId, shaft.location, output) || changed;
+			}
+			const members = collectBoilerMembers(descriptor.tank);
+			if (members.length === 0)
+				continue;
+			const controllerId = boilerLocationId(node.dimensionId, members[0]);
+			const group = groups.get(controllerId) ?? { dimension: descriptor.dimension, engines: [], id: controllerId, members };
+			group.engines.push(descriptor);
+			groups.set(controllerId, group);
 		} catch (error) {
 			console.warn(`[Create Bedrock] Could not synchronize steam engine at ${node.dimensionId}:${node.location.x}:${node.location.y}:${node.location.z}: ${error}`);
 		}
 	}
+
+	const activeControllers = new Set();
+	let persistenceChanged = false;
+	for (const group of groups.values()) {
+		activeControllers.add(group.id);
+		const previous = boilerControllers.get(group.id);
+		persistenceChanged = true;
+		const heat = boilerHeat(group.dimension, group.members);
+		const memberWater = boilerWaterSnapshot(group.dimension, group.members);
+		let controller = createBoilerController({
+			...previous,
+			...heat,
+			dimensionId: group.dimension.id,
+			engineIds: group.engines.map(engine => engine.id),
+			id: group.id,
+			members: group.members,
+			waterSamples: previous?.waterSamples ?? []
+		});
+		// Java's BoilerFluidHandler gathers only admitted water. Positive Tank
+		// deltas are the Bedrock equivalent; stored water from before a restart
+		// is deliberately not mistaken for continuing supply.
+		controller = observeBoilerWater(controller, memberWater);
+		boilerControllers.set(group.id, controller);
+		const evaluation = evaluateBoilerController(controller);
+		let availableWater = inspectBoilerWater(group.dimension, group.members);
+		for (const engine of group.engines.sort((left, right) => left.id.localeCompare(right.id))) {
+			let output = boilerSteamEngineOutput({ amount: availableWater, typeId: "minecraft:water" }, controller);
+			if (evaluation.engines[engine.id] <= 0 || output.consume > 0 && !extractBoilerWater(group.dimension, group.members, engine.id))
+				output = { capacity: 0, consume: 0, speed: 0 };
+			else
+				availableWater -= output.consume;
+			changed = kineticWorld.setExternalSource(engine.node.dimensionId, engine.shaft.location, output) || changed;
+		}
+	}
+	for (const id of [...boilerControllers.keys()])
+		if (!activeControllers.has(id)) {
+			boilerControllers.delete(id);
+			persistenceChanged = true;
+		}
+	if (persistenceChanged)
+		boilerPersistence.request();
 	return changed;
 }
 
@@ -600,7 +779,43 @@ export function extractFluidTank(block, options) {
 }
 
 export function getFluidDiagnostics() {
-	return { ...state.diagnostics(), redstoneLockedPumps: redstoneLockedPumpIds.size };
+	return {
+		...state.diagnostics(),
+		boilerPersistence: boilerPersistence.diagnostics(),
+		boilers: boilerControllers.size,
+		boilerStorage: boilerStore.diagnostics(),
+		redstoneLockedPumps: redstoneLockedPumpIds.size
+	};
+}
+
+export function getBoilerDisplayState(dimensionId, location) {
+	if (typeof dimensionId !== "string" || !location)
+		throw new TypeError("Boiler display lookups require a dimension and location");
+	const controller = [...boilerControllers.values()].find(candidate => candidate.dimensionId === dimensionId
+		&& candidate.members.some(member => member.x === location.x && member.y === location.y && member.z === location.z));
+	if (!controller)
+		return undefined;
+	const evaluation = evaluateBoilerController(controller);
+	return {
+		activeHeat: controller.activeHeat,
+		engineCount: controller.engineIds.length,
+		heatLevel: evaluation.heatLevel,
+		passiveHeat: controller.passiveHeat,
+		tankBlocks: controller.members.length,
+		waterSupply: Math.max(0, ...controller.waterSamples)
+	};
+}
+
+export function getFluidDisplayState(dimensionId, location) {
+	const id = fluidTankId(dimensionId, location);
+	if (!state.hasTank(id))
+		return undefined;
+	const inspection = state.inspectTank(id);
+	return {
+		amount: inspection.contents?.amount ?? 0,
+		capacity: inspection.capacity,
+		typeId: inspection.contents?.typeId
+	};
 }
 
 export function inspectFluidTank(block) {
@@ -802,15 +1017,27 @@ export function registerFluids(getKineticWorld) {
 		syncPumpStates(kineticWorld);
 		const steamChanged = syncSteamEngines(kineticWorld);
 		const ticked = state.tick();
+		const boilerRequested = boilerPersistence.tick();
+		const boilerStored = boilerStore.tick();
 		const visualsChanged = steamChanged || ticked ? syncFluidTankVisuals() : false;
-		return steamChanged || ticked || visualsChanged;
+		return steamChanged || ticked || boilerRequested || boilerStored || visualsChanged;
 	}, FLUID_TASK_GROUP);
 	system.run(() => {
 		try {
 			const restored = state.restore();
+			const restoredBoilers = boilerStore.read();
+			boilerControllers.clear();
+			for (const record of restoredBoilers?.records ?? []) {
+				const controller = createBoilerController(record);
+				if (typeof record.id !== "string" || record.id.length === 0 || typeof record.dimensionId !== "string")
+					throw new TypeError("Persisted Boiler controllers require stable identifiers");
+				boilerControllers.set(record.id, { ...controller, dimensionId: record.dimensionId, id: record.id });
+			}
 			syncFluidTankVisuals();
 			if (restored.tanks > 0 || restored.links > 0 || restored.transfers > 0 || restored.frozen)
 				console.warn(`[Create Bedrock] Restored ${restored.tanks} fluid tanks, ${restored.links} links, and ${restored.transfers} fluid transfers${restored.frozen ? " (frozen)" : ""}`);
+			if (boilerControllers.size > 0)
+				console.warn(`[Create Bedrock] Restored ${boilerControllers.size} Boiler controllers`);
 		} catch (error) {
 			console.warn(`[Create Bedrock] Could not restore fluid state: ${error}`);
 		}

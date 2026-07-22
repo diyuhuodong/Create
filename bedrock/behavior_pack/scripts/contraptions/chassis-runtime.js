@@ -1,6 +1,7 @@
 import { world } from "@minecraft/server";
 import { ModalFormData } from "@minecraft/server-ui";
 
+import { registerAssemblyAttachmentProvider } from "./assembly-attachments.js";
 import { isMovableBlockType } from "./movable-blocks.js";
 import {
 	chassisRange,
@@ -135,6 +136,7 @@ export function registerChassis() {
 	if (registered)
 		return false;
 	registered = true;
+	registerAssemblyAttachmentProvider("chassis", chassisLinkedLocationsForAssembly);
 	world.afterEvents.playerInteractWithBlock.subscribe(event => {
 		if (!isChassis(event.block?.typeId) || !event.player.isSneaking)
 			return;

@@ -114,7 +114,7 @@ export async function validateP73FluidHeatContract({ bedrockRoot = defaultBedroc
 	for (const marker of ["honey_bucket.png", "chocolate_bucket.png", "honey_still.png", "chocolate_still.png", "tea_still.png"])
 		if (!importer.includes(marker))
 			throw new Error(`P7.3 Java asset importer omits ${marker}`);
-	for (const marker of ["fluidFromWorldSource", "worldSourceForFluid", "fluidPortForBlock", "heatForSteamTank"])
+	for (const marker of ["fluidFromWorldSource", "worldSourceForFluid", "fluidPortForBlock", "boilerHeat"])
 		if (!runtime.includes(marker))
 			throw new Error(`P7.3 fluid runtime omits ${marker}`);
 	for (const marker of ["BasinProcessingMachine", "blazeHeatAt", "fluidPortForBlock"])

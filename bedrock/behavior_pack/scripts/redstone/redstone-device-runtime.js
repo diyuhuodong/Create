@@ -3,13 +3,18 @@ import { ItemStack, system, world } from "@minecraft/server";
 import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { ShardedStateStore } from "../kernel/sharded-state-store.js";
 import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-property-storage.js";
-import { getKineticWorldForTesting, setKineticSpeedControllerTarget } from "../kinetics/kinetic-runtime.js";
+import { getKineticNetworkAt, getKineticSpeedAt, getKineticWorldForTesting, setKineticSpeedControllerTarget } from "../kinetics/kinetic-runtime.js";
+import { getBoilerDisplayState, getFluidDisplayState } from "../fluids/fluid-runtime.js";
 import { countDepotNetworkItem, depotRequestStatus, hasDepotAt, requestDepotItem } from "../logistics/depot-runtime.js";
+import { getPackageDisplayState } from "../logistics/package-runtime.js";
 import { getCrushingWheelControllerState } from "../processing/crushing-wheel-runtime.js";
 import { linkedControllerChannelForSlot, normalizeLinkedControllerBindings } from "./linked-controller-bindings.js";
 import { configureLinkedControllerChannel, configureLinkedControllerChannels, readLinkedControllerItemState, writeLinkedControllerItemState } from "./linked-controller-item-state.js";
-import { resolveDisplayLinkWrite } from "./display-target.js";
+import { createDisplayTargetState, normalizeDisplayTargetState, resolveDisplayLinkWrite, writeDisplayTargetLine } from "./display-target.js";
+import { resolveDisplaySource } from "./display-source.js";
+import { registerWorldDisplaySourceProviders } from "./display-world-sources.js";
 import { writeDisplayBoardLine } from "../materials/display-board-runtime.js";
+import { getTrainDisplayState } from "../trains/train-runtime.js";
 import { collectNixieTubeGroup, composeNixieTubeDisplay, NIXIE_TUBE_BLOCK, nixieTubeGroupId } from "./nixie-display.js";
 import { beginLecternControllerUse, clearLecternControllerSession, createLecternControllerState, endLecternControllerUse, installLecternController, normalizeLecternControllerState, triggerLecternControllerChannel } from "./lectern-controller-state.js";
 import { fingerprintInventoryStacks } from "./redstone-inventory-fingerprint.js";
@@ -32,6 +37,7 @@ const ANALOG_OUTPUT_STATE = "createbedrock:signal";
 const DISPLAY_STATE = "createbedrock:display_signal";
 const NIXIE_DISPLAY_ENTITY = "createbedrock:nixie_display";
 const NIXIE_DISPLAY_GROUP_PROPERTY = "createbedrock:nixie_display_group";
+const worldDisplayTargets = new Map();
 const NIXIE_COLOR_CODES = Object.freeze({ blue: "§9", green: "§a", orange: "§6", red: "§c", white: "§f", yellow: "§e" });
 const NEIGHBOR_OFFSETS = [
 	{ x: -1, y: 0, z: 0 }, { x: 1, y: 0, z: 0 },
@@ -58,6 +64,7 @@ const controllerSignals = new Map();
 const dirtyNixieDimensions = new Set();
 let roundRobinAfter;
 let deviceTick = 0;
+let displaySourceProvidersRegistered = false;
 
 function clone(value) {
 	return JSON.parse(JSON.stringify(value));
@@ -89,6 +96,8 @@ const store = new ShardedStateStore({
 	partitionFor(record) {
 		if (record?.kind === "device")
 			return partitionFor(record);
+		if (record?.kind === "display_target")
+			return partitionFor(record);
 		if (record?.kind === "controller_binding" && typeof record.playerId === "string")
 			return `controller:${record.playerId}`;
 		throw new TypeError("Unknown redstone device persistent record");
@@ -107,6 +116,7 @@ function records() {
 			...(record.lectern ? { lectern: record.lectern } : {}),
 			state: record.state
 		}))
+		.concat([...worldDisplayTargets.values()].map(record => ({ ...record, kind: "display_target" })))
 		.concat([...controllerBindings.entries()].map(([playerId, frequencies]) => ({
 			frequencies,
 			kind: "controller_binding",
@@ -396,12 +406,12 @@ function refreshCrushingWheelController(record) {
 	}
 }
 
-function readDisplayRedstoneSource(record, source) {
-	const sourceRecord = devices.get(deviceId(record.dimensionId, source.location));
+function readDisplayRedstonePower(record, location) {
+	const sourceRecord = devices.get(deviceId(record.dimensionId, location));
 	if (sourceRecord)
 		return nativeOutputPower(sourceRecord.state);
 	try {
-		const states = world.getDimension(record.dimensionId).getBlock(source.location)?.permutation?.getAllStates?.() ?? {};
+		const states = world.getDimension(record.dimensionId).getBlock(location)?.permutation?.getAllStates?.() ?? {};
 		for (const property of [ANALOG_OUTPUT_STATE, OUTPUT_STATE, "minecraft:redstone_signal"])
 			if (Number.isInteger(states[property]) && states[property] >= 0 && states[property] <= 15)
 				return states[property];
@@ -409,6 +419,96 @@ function readDisplayRedstoneSource(record, source) {
 	} catch {
 		return 0;
 	}
+}
+
+function registerDisplaySourceProviders() {
+	if (displaySourceProvidersRegistered)
+		return;
+	displaySourceProvidersRegistered = true;
+	registerWorldDisplaySourceProviders({
+		getBoiler: getBoilerDisplayState,
+		getFluid: getFluidDisplayState,
+		getPackage: getPackageDisplayState,
+		getTrain: getTrainDisplayState,
+		kineticNetwork: getKineticNetworkAt,
+		kineticSpeed: getKineticSpeedAt,
+		readNixie(dimensionId, location) {
+			const source = devices.get(deviceId(dimensionId, location));
+			return source?.definition.id === "nixie_tube" ? source.state.display.lines : undefined;
+		},
+		world
+	});
+}
+
+function readDisplaySource(record, source) {
+	const lines = resolveDisplaySource({ context: { record }, kind: source.kind, location: source.location });
+	if (!lines)
+		throw new Error(`Display Source ${source.kind} is not available for this world state`);
+	return lines;
+}
+
+function displayTargetId(dimensionId, location) {
+	return `display-target:${dimensionId}:${location.x}:${location.y}:${location.z}`;
+}
+
+function worldDisplayTargetKind(block) {
+	if (block?.typeId === "minecraft:lectern")
+		return "lectern";
+	if (typeof block?.typeId === "string" && (block.typeId.endsWith("_sign") || block.typeId.endsWith("_wall_sign") || block.typeId.endsWith("_hanging_sign")))
+		return "sign";
+	return undefined;
+}
+
+function applyWorldDisplayTarget(record) {
+	const block = world.getDimension(record.dimensionId).getBlock(record.location);
+	if (worldDisplayTargetKind(block) !== record.targetKind)
+		return false;
+	const text = record.state.lines.join("\n");
+	if (record.targetKind === "sign") {
+		const component = block.getComponent?.("minecraft:sign");
+		if (typeof component?.setText !== "function")
+			return false;
+		component.setText(text);
+		return true;
+	}
+	const container = block.getComponent?.("minecraft:inventory")?.container;
+	const book = container?.getItem(0);
+	if (!book)
+		return false;
+	for (const componentId of ["minecraft:writable_book_content", "minecraft:written_book_content", "minecraft:book_content"]) {
+		const component = book.getComponent?.(componentId);
+		if (!component)
+			continue;
+		if (typeof component.setPages === "function")
+			component.setPages(record.state.lines);
+		else if ("pages" in component)
+			component.pages = [...record.state.lines];
+		else
+			continue;
+		container.setItem(0, book);
+		return true;
+	}
+	return false;
+}
+
+function writeWorldDisplayTarget(dimensionId, location, { line, text }) {
+	const block = world.getDimension(dimensionId).getBlock(location);
+	const targetKind = worldDisplayTargetKind(block);
+	if (!targetKind)
+		return false;
+	const id = displayTargetId(dimensionId, location);
+	const previous = worldDisplayTargets.get(id);
+	const state = previous?.state ?? createDisplayTargetState({ lineCount: targetKind === "sign" ? 4 : 16 });
+	if (line >= state.lines.length)
+		return false;
+	const update = writeDisplayTargetLine(state, { line, text });
+	if (!update.changed)
+		return false;
+	const record = { dimensionId, id, location: assertLocation(location), state: update.state, targetKind };
+	worldDisplayTargets.set(id, record);
+	persist();
+	try { applyWorldDisplayTarget(record); } catch (error) { console.warn(`[Create Bedrock] Could not project ${targetKind} display ${id}: ${error}`); }
+	return true;
 }
 
 /** Display Link stores offsets only; this is the sole world-facing target adapter. */
@@ -420,7 +520,7 @@ function refreshDisplayLink(record) {
 		write = resolveDisplayLinkWrite({
 			configuration: record.configuration,
 			location: record.location,
-			readSource: source => readDisplayRedstoneSource(record, source)
+			readSource: source => readDisplaySource(record, source)
 		});
 	} catch (error) {
 		console.warn(`[Create Bedrock] Display Link at ${record.id} could not resolve its source: ${error}`);
@@ -441,9 +541,9 @@ function refreshDisplayLink(record) {
 	}
 	try {
 		const targetBlock = world.getDimension(record.dimensionId).getBlock(write.target);
-		if (targetBlock?.typeId !== "createbedrock:display_board")
-			return false;
-		return writeDisplayBoardLine(record.dimensionId, write.target, { line: write.line, text: write.text }, getKineticWorldForTesting());
+		if (targetBlock?.typeId === "createbedrock:display_board")
+			return writeDisplayBoardLine(record.dimensionId, write.target, { line: write.line, text: write.text }, getKineticWorldForTesting());
+		return writeWorldDisplayTarget(record.dimensionId, write.target, { line: write.line, text: write.text });
 	} catch {
 		return false;
 	}
@@ -863,6 +963,19 @@ function restore() {
 				controllerBindings.set(record.playerId, normalizeLinkedControllerBindings(record.frequencies ?? record.frequency));
 				continue;
 			}
+			if (record?.kind === "display_target") {
+				const location = assertLocation(record.location);
+				if (typeof record.dimensionId !== "string" || !["sign", "lectern"].includes(record.targetKind) || record.id !== displayTargetId(record.dimensionId, location))
+					throw new Error("World Display Target state has an invalid identity");
+				worldDisplayTargets.set(record.id, {
+					dimensionId: record.dimensionId,
+					id: record.id,
+					location,
+					state: normalizeDisplayTargetState(record.state),
+					targetKind: record.targetKind
+				});
+				continue;
+			}
 			if (record?.kind !== "device" || typeof record.id !== "string" || typeof record.dimensionId !== "string")
 				throw new Error("Redstone device state contains an unknown record");
 			const location = assertLocation(record.location);
@@ -882,6 +995,8 @@ function restore() {
 			if (record.definition.id === "nixie_tube")
 				queueNixieDisplay(record.dimensionId);
 		}
+		for (const record of worldDisplayTargets.values())
+			try { applyWorldDisplayTarget(record); } catch {}
 		if (devices.size > 0)
 			console.warn(`[Create Bedrock] Restored ${devices.size} redstone devices`);
 	} catch (error) {
@@ -957,6 +1072,7 @@ export function getRedstoneDeviceDiagnostics() {
 		byKind[record.definition.id]++;
 	return {
 		active: devices.size,
+		worldDisplayTargets: worldDisplayTargets.size,
 		legacyControllerBindings: controllerBindings.size,
 		controllerSignals: controllerSignals.size,
 		byKind,
@@ -966,6 +1082,7 @@ export function getRedstoneDeviceDiagnostics() {
 }
 
 export function registerRedstoneDevices() {
+	registerDisplaySourceProviders();
 	registerKernelTaskGroup(DEVICE_TASK_GROUP, DEVICE_TASK_BUDGET);
 	registerNativeRedstoneEventHandler(handleNativeDeviceInput);
 	world.afterEvents.playerPlaceBlock.subscribe(event => ensureDevice(event.block));
@@ -979,6 +1096,8 @@ export function registerRedstoneDevices() {
 				queueNixieDisplay(record.dimensionId);
 			persist();
 		}
+		if (worldDisplayTargets.delete(displayTargetId(event.dimension.id, event.block.location)))
+			persist();
 	});
 	world.afterEvents.playerInteractWithBlock.subscribe(event => {
 		const record = ensureDevice(event.block);
@@ -1000,8 +1119,10 @@ export function registerRedstoneDevices() {
 			else if (CONFIGURABLE_BLOCK_DEVICE_IDS.has(record.definition.id)) {
 				showRedstoneDeviceConfigurationForm({
 					configuration: record.configuration,
+					currentRevision: () => record.configuration.revision,
 					player: event.player,
 					state: record.state,
+					subjectId: record.id,
 					submit: ({ expectedRevision, patch }) => configureRecord(record, event.player, expectedRevision, patch)
 				});
 			} else

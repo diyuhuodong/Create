@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { STEAM_ENGINE_CONSUMPTION_PER_TICK, steamEngineOutput } from "../behavior_pack/scripts/kinetics/steam-engine.js";
+import { boilerSteamEngineOutput, STEAM_ENGINE_CONSUMPTION_PER_TICK, steamEngineOutput } from "../behavior_pack/scripts/kinetics/steam-engine.js";
 import { BURNER_HEAT_LEVEL } from "../behavior_pack/scripts/fluids/heat-level.js";
 
 test("steam engine emits bounded power only for a sufficient water supply", () => {
@@ -22,4 +22,13 @@ test("steam engine emits bounded power only for a sufficient water supply", () =
 		consume: STEAM_ENGINE_CONSUMPTION_PER_TICK,
 		speed: 32
 	});
+});
+
+test("boiler Steam Engine output uses shared heat level and engine allocation instead of the legacy tiers", () => {
+	assert.deepEqual(boilerSteamEngineOutput({ amount: 50, typeId: "minecraft:water" }, {
+		activeHeat: 8, engineCount: 4, tankBlocks: 32, waterSamples: [80]
+	}), { capacity: 512, consume: 50, speed: 128 });
+	assert.deepEqual(boilerSteamEngineOutput({ amount: 50, typeId: "minecraft:water" }, {
+		activeHeat: 8, engineCount: 16, tankBlocks: 32, waterSamples: [80]
+	}), { capacity: 256, consume: 50, speed: 64 });
 });
