@@ -2,6 +2,34 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "acquisition": "not_required",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "virtualized",
+        "targets": [
+          "createbedrock:copper_backtank"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block_entity:create:backtank",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "not_required",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "virtualized",
+        "targets": [
+          "createbedrock:white_toolbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block_entity:create:toolbox",
+      "status": "implemented"
+    },
+    {
       "acquisition": "partial",
       "behavior": "not_required",
       "family": "p7_1/window",
@@ -212,6 +240,20 @@
       "status": "partial"
     },
     {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:black_toolbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:black_toolbox",
+      "status": "implemented"
+    },
+    {
       "acquisition": "partial",
       "behavior": "partial",
       "family": "p7_1/valve_handle",
@@ -294,6 +336,20 @@
       "resources": "verified",
       "sourceKey": "block:create:blue_table_cloth",
       "status": "partial"
+    },
+    {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:blue_toolbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:blue_toolbox",
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -394,6 +450,20 @@
       "status": "partial"
     },
     {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:brown_toolbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:brown_toolbox",
+      "status": "implemented"
+    },
+    {
       "acquisition": "partial",
       "behavior": "partial",
       "family": "p7_1/valve_handle",
@@ -447,6 +517,20 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:cherry_window_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:copper_backtank"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:copper_backtank",
       "status": "implemented"
     },
     {
@@ -2242,6 +2326,20 @@
       "status": "partial"
     },
     {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:cyan_toolbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:cyan_toolbox",
+      "status": "implemented"
+    },
+    {
       "acquisition": "partial",
       "behavior": "partial",
       "family": "p7_1/valve_handle",
@@ -2522,6 +2620,20 @@
       "status": "partial"
     },
     {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:gray_toolbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:gray_toolbox",
+      "status": "implemented"
+    },
+    {
       "acquisition": "partial",
       "behavior": "partial",
       "family": "p7_1/valve_handle",
@@ -2604,6 +2716,20 @@
       "resources": "verified",
       "sourceKey": "block:create:green_table_cloth",
       "status": "partial"
+    },
+    {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:green_toolbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:green_toolbox",
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -2970,6 +3096,20 @@
       "status": "partial"
     },
     {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:light_blue_toolbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:light_blue_toolbox",
+      "status": "implemented"
+    },
+    {
       "acquisition": "partial",
       "behavior": "partial",
       "family": "p7_1/valve_handle",
@@ -3054,6 +3194,20 @@
       "status": "partial"
     },
     {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:light_gray_toolbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:light_gray_toolbox",
+      "status": "implemented"
+    },
+    {
       "acquisition": "partial",
       "behavior": "partial",
       "family": "p7_1/valve_handle",
@@ -3136,6 +3290,20 @@
       "resources": "verified",
       "sourceKey": "block:create:lime_table_cloth",
       "status": "partial"
+    },
+    {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:lime_toolbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:lime_toolbox",
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -3250,6 +3418,20 @@
       "status": "partial"
     },
     {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:magenta_toolbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:magenta_toolbox",
+      "status": "implemented"
+    },
+    {
       "acquisition": "partial",
       "behavior": "partial",
       "family": "p7_1/valve_handle",
@@ -3289,6 +3471,20 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:mangrove_window_pane",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:netherite_backtank"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:netherite_backtank",
       "status": "implemented"
     },
     {
@@ -3402,6 +3598,20 @@
       "resources": "verified",
       "sourceKey": "block:create:orange_table_cloth",
       "status": "partial"
+    },
+    {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:orange_toolbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:orange_toolbox",
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -3598,6 +3808,20 @@
       "resources": "verified",
       "sourceKey": "block:create:pink_table_cloth",
       "status": "partial"
+    },
+    {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:pink_toolbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:pink_toolbox",
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -4468,6 +4692,20 @@
       "status": "partial"
     },
     {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:purple_toolbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:purple_toolbox",
+      "status": "implemented"
+    },
+    {
       "acquisition": "partial",
       "behavior": "partial",
       "family": "p7_1/valve_handle",
@@ -4550,6 +4788,20 @@
       "resources": "verified",
       "sourceKey": "block:create:red_table_cloth",
       "status": "partial"
+    },
+    {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:red_toolbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:red_toolbox",
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -6064,6 +6316,20 @@
       "status": "partial"
     },
     {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:white_toolbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:white_toolbox",
+      "status": "implemented"
+    },
+    {
       "acquisition": "partial",
       "behavior": "partial",
       "family": "p7_1/valve_handle",
@@ -6146,6 +6412,20 @@
       "resources": "verified",
       "sourceKey": "block:create:yellow_table_cloth",
       "status": "partial"
+    },
+    {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:yellow_toolbox"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "block:create:yellow_toolbox",
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -6272,6 +6552,34 @@
           "createbedrock:cinder_flour"
         ]
       }
+    },
+    {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:copper_backtank"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:copper_backtank",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:copper_backtank_placeable"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:copper_backtank_placeable",
+      "status": "implemented"
     },
     {
       "sourceKey": "item:create:crafter_slot_cover",
@@ -6440,6 +6748,76 @@
           "createbedrock:electron_tube"
         ]
       }
+    },
+    {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:extendo_grip"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:extendo_grip",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:goggles"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:goggles",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:netherite_backtank"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:netherite_backtank",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:netherite_backtank_placeable"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:netherite_backtank_placeable",
+      "status": "implemented"
+    },
+    {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:potato_cannon"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:potato_cannon",
+      "status": "implemented"
     },
     {
       "sourceKey": "item:create:propeller",
@@ -6650,6 +7028,20 @@
           "createbedrock:whisk"
         ]
       }
+    },
+    {
+      "acquisition": "verified",
+      "behavior": "verified",
+      "family": "p7_6/equipment",
+      "mapping": {
+        "relation": "one_to_one",
+        "targets": [
+          "createbedrock:wrench"
+        ]
+      },
+      "resources": "verified",
+      "sourceKey": "item:create:wrench",
+      "status": "implemented"
     }
   ]
 }

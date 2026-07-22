@@ -1,0 +1,152 @@
+{
+	"schemaVersion": 1,
+	"baseline": "ac7a4b587",
+	"packages": [
+		{
+			"id": "P7.6.0",
+			"name": "Baseline and migration gates",
+			"javaEvidence": [
+				"work/doc/create-bedrock-stage7-complete-migration-design.md",
+				"bedrock/data/domain-inventory.json"
+			],
+			"implementation": [
+				"bedrock/tools/p7-6-catalogs.mjs",
+				"bedrock/tools/generate-p7-6-catalogs.mjs",
+				"bedrock/tests/p7-6-catalogs.test.mjs"
+			],
+			"dependencies": [
+				"P7.1",
+				"P7.5"
+			],
+			"status": "static_verified"
+		},
+		{
+			"id": "P7.6A",
+			"name": "Equipment upgrades and air authority",
+			"javaEvidence": [
+				"src/main/java/com/simibubi/create/AllEnchantments.java",
+				"src/main/java/com/simibubi/create/content/equipment/armor/BacktankUtil.java"
+			],
+			"implementation": [
+				"bedrock/behavior_pack/scripts/equipment/equipment-upgrade-state.js",
+				"bedrock/behavior_pack/scripts/equipment/equipment-state.js",
+				"bedrock/tests/equipment-upgrade-state.test.mjs"
+			],
+			"dependencies": [
+				"P7.6.0"
+			],
+			"status": "static_verified"
+		},
+		{
+			"id": "P7.6B",
+			"name": "Potato Cannon and recovery",
+			"javaEvidence": [
+				"src/main/java/com/simibubi/create/content/equipment/potatoCannon/AllPotatoProjectileTypes.java",
+				"src/main/java/com/simibubi/create/content/equipment/potatoCannon/PotatoProjectileEntity.java"
+			],
+			"implementation": [
+				"bedrock/behavior_pack/scripts/equipment/potato-cannon-journal.js",
+				"bedrock/behavior_pack/scripts/materials/potato-projectile.js",
+				"bedrock/tests/potato-cannon-journal.test.mjs"
+			],
+			"dependencies": [
+				"P7.6A"
+			],
+			"status": "static_verified"
+		},
+		{
+			"id": "P7.6C",
+			"name": "Goggles, Wrench, Extendo, and Toolbox",
+			"javaEvidence": [
+				"src/main/java/com/simibubi/create/content/equipment/goggles/GogglesItem.java",
+				"src/main/java/com/simibubi/create/content/equipment/toolbox/ToolboxHandler.java"
+			],
+			"implementation": [
+				"bedrock/behavior_pack/scripts/equipment/goggles-diagnostics-registry.js",
+				"bedrock/behavior_pack/scripts/equipment/wrench-handler-registry.js",
+				"bedrock/behavior_pack/scripts/equipment/toolbox-bindings.js",
+				"bedrock/tests/equipment-tools.test.mjs"
+			],
+			"dependencies": [
+				"P7.6B"
+			],
+			"status": "static_verified"
+		},
+		{
+			"id": "P7.6D",
+			"name": "Core visual resources",
+			"javaEvidence": [
+				"src/main/resources/assets/create",
+				"src/generated/resources/assets/create"
+			],
+			"implementation": [
+				"bedrock/tools/p7-6-resources.mjs",
+				"bedrock/resource_pack/animations/createbedrock.p7_6.animation.json",
+				"bedrock/resource_pack/animation_controllers/createbedrock.p7_6.controllers.json",
+				"bedrock/tests/p7-6-resources.test.mjs"
+			],
+			"dependencies": [
+				"P7.6C"
+			],
+			"status": "static_verified"
+		},
+		{
+			"id": "P7.6E",
+			"name": "Sounds, particles, language, and resource closure",
+			"javaEvidence": [
+				"src/main/java/com/simibubi/create/AllSoundEvents.java",
+				"src/main/java/com/simibubi/create/AllParticleTypes.java",
+				"src/generated/resources/assets/create/sounds.json"
+			],
+			"implementation": [
+				"bedrock/data/p7-6-resource-ledger.json",
+				"bedrock/data/p7-6-sound-catalog.json",
+				"bedrock/resource_pack/particles",
+				"bedrock/tests/p7-6-effects.test.mjs"
+			],
+			"dependencies": [
+				"P7.6D"
+			],
+			"status": "static_verified"
+		},
+		{
+			"id": "P7.6F",
+			"name": "Ponder-equivalent guidance",
+			"javaEvidence": [
+				"src/main/java/com/simibubi/create/infrastructure/ponder/AllCreatePonderScenes.java",
+				"src/main/java/com/simibubi/create/infrastructure/ponder/scenes"
+			],
+			"implementation": [
+				"bedrock/data/p7-6-guidance-ledger.json",
+				"bedrock/behavior_pack/scripts/guidance/guidance-catalog.js",
+				"bedrock/behavior_pack/scripts/guidance/guidance-runtime.js",
+				"bedrock/tests/p7-6-guidance.test.mjs"
+			],
+			"dependencies": [
+				"P7.6E"
+			],
+			"status": "static_verified"
+		},
+		{
+			"id": "P7.6G",
+			"name": "Static closure and P7.7 handoff",
+			"javaEvidence": [
+				"work/doc/create-bedrock-p7-6-equipment-resources-guidance-design.md"
+			],
+			"implementation": [
+				"bedrock/tools/p7-6-static-contract.mjs",
+				"bedrock/tests/p7-6-static-contract.test.mjs",
+				"work/doc/create-bedrock-p7-6-static-completion.md"
+			],
+			"dependencies": [
+				"P7.6F"
+			],
+			"status": "static_verified"
+		}
+	],
+	"platform": {
+		"windows": "pending",
+		"realm": "pending",
+		"ps": "pending"
+	}
+}

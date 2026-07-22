@@ -47,10 +47,10 @@ test("migration ledger covers every Java registration and records reviewed mappi
 		readFile(resolve(bedrockRoot, "data", "migration-matrix.json"), "utf8").then(JSON.parse),
 		readFile(resolve(bedrockRoot, "data", "migration-overrides.json"), "utf8").then(JSON.parse)
 	]);
-	assert.deepEqual(validateMigrationOverrides(overrides, catalog), { entries: 475 });
+	assert.deepEqual(validateMigrationOverrides(overrides, catalog), { entries: 503 });
 	const { ledger } = await buildMigrationLedger({ bedrockRoot, catalog, domainInventory, matrix, overrides });
 	assert.deepEqual(validateMigrationLedger(ledger, catalog, domainInventory), { domains: 9067, registrations: 881 });
-	assert.equal(ledger.registrationEntries.filter(entry => entry.status === "unclassified").length, 406);
+	assert.equal(ledger.registrationEntries.filter(entry => entry.status === "unclassified").length, 378);
 	assert.deepEqual(ledger.registrationEntries.find(entry => entry.sourceKey === "item:create:brass_sheet").mapping, {
 		relation: "one_to_one",
 		targets: ["createbedrock:brass_sheet"]

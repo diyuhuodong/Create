@@ -1,20 +1,565 @@
 {
   "format_version": "1.20.20",
   "sound_definitions": {
-    "createbedrock:desk_bell": {
-      "__use_legacy_max_distance": true,
+    "createbedrock:blaze_munch": {
       "category": "block",
       "max_distance": 64,
-      "min_distance": null,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:cardboard_bonk": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/cardboard_bonk"
+      ]
+    },
+    "createbedrock:chiff": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/chiff"
+      ]
+    },
+    "createbedrock:clipboard_check": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/clipboard_check"
+      ]
+    },
+    "createbedrock:clipboard_erase": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/clipboard_erase"
+      ]
+    },
+    "createbedrock:cogs": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/cogs"
+      ]
+    },
+    "createbedrock:confirm": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:confirm_2": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:contraption_assemble": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:contraption_assemble_compounded_1": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:contraption_disassemble": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:controller_click": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:controller_put": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:controller_take": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:copper_armor_equip": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:crafter_click": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:crafter_click_compounded_1": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:crafter_craft": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:cranking": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:cranking_compounded_1": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:crushing_1": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:crushing_2": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:crushing_3": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:deny": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:depot_plop": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:depot_slide": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:desk_bell": {
+      "category": "block",
+      "max_distance": 64,
       "sounds": [
         "sounds/create/desk_bell"
       ]
     },
-    "createbedrock:haunted_bell_use": { "category": "block", "sounds": ["sounds/create/haunted_bell_use"] },
-    "createbedrock:haunted_bell_convert": { "category": "block", "sounds": ["sounds/create/haunted_bell_convert"] },
-    "createbedrock:whistle": { "category": "block", "sounds": ["sounds/create/whistle"] },
-    "createbedrock:whistle_low": { "category": "block", "sounds": ["sounds/create/whistle_low"] },
-    "createbedrock:whistle_high": { "category": "block", "sounds": ["sounds/create/whistle_high"] },
-    "createbedrock:cardboard_bonk": { "category": "player", "sounds": ["sounds/create/cardboard_bonk"] }
+    "createbedrock:frogport_catch": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/frogport_catch",
+        "sounds/create/frogport_catch_1",
+        "sounds/create/frogport_catch_2",
+        "sounds/create/frogport_catch_3"
+      ]
+    },
+    "createbedrock:frogport_close": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/frogport_close"
+      ]
+    },
+    "createbedrock:frogport_deposit": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:frogport_open": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:funnel_flap": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:funnel_flap_compounded_1": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:fwoomp": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/fwoomp"
+      ]
+    },
+    "createbedrock:haunted_bell_convert": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/haunted_bell_convert"
+      ]
+    },
+    "createbedrock:haunted_bell_use": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/haunted_bell_use"
+      ]
+    },
+    "createbedrock:item_hatch": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:item_hatch_compounded_1": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:mechanical_press_activation": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:mechanical_press_activation_belt": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:mechanical_press_activation_belt_compounded_1": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:mechanical_press_activation_compounded_1": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:mixing": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:mixing_compounded_1": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:package_pop": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:package_pop_compounded_1": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:packager": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:peculiar_bell_use": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:potato_hit": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:potato_hit_compounded_1": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:sanding_long": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/sanding_long"
+      ]
+    },
+    "createbedrock:sanding_short": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/sanding_short",
+        "sounds/create/sanding_short_1"
+      ]
+    },
+    "createbedrock:saw_activate_stone": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:saw_activate_wood": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:schematicannon_finish": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:schematicannon_launch_block": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:scroll_value": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:slime_added": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:spout": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/spout",
+        "sounds/create/spout_1",
+        "sounds/create/spout_2",
+        "sounds/create/spout_3"
+      ]
+    },
+    "createbedrock:steam": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/steam"
+      ]
+    },
+    "createbedrock:stock_link": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/stock_link"
+      ]
+    },
+    "createbedrock:stock_ticker_request": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/stock_ticker_request"
+      ]
+    },
+    "createbedrock:stock_ticker_trade": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/stock_ticker_trade"
+      ]
+    },
+    "createbedrock:train": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/train"
+      ]
+    },
+    "createbedrock:train2": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/train2"
+      ]
+    },
+    "createbedrock:train3": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/train3"
+      ]
+    },
+    "createbedrock:whistle": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/whistle"
+      ]
+    },
+    "createbedrock:whistle_high": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/whistle_high"
+      ]
+    },
+    "createbedrock:whistle_low": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/whistle_low"
+      ]
+    },
+    "createbedrock:whistle_train": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/whistle_train"
+      ]
+    },
+    "createbedrock:whistle_train_low": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/whistle_train_low"
+      ]
+    },
+    "createbedrock:whistle_train_manual": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/whistle_train_manual"
+      ]
+    },
+    "createbedrock:whistle_train_manual_end": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/whistle_train_manual_end"
+      ]
+    },
+    "createbedrock:whistle_train_manual_low": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/whistle_train_manual_low"
+      ]
+    },
+    "createbedrock:whistle_train_manual_low_end": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/whistle_train_manual_low_end"
+      ]
+    },
+    "createbedrock:worldshaper_place": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:wrench_remove": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:wrench_remove_compounded_1": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    },
+    "createbedrock:wrench_rotate": {
+      "category": "block",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/create/confirm_2"
+      ]
+    }
   }
 }

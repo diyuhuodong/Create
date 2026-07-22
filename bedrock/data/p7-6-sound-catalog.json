@@ -1,0 +1,950 @@
+{
+  "entries": [
+    {
+      "bedrockId": "createbedrock:blaze_munch",
+      "customFiles": [],
+      "id": "blaze_munch",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#blaze_munch",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.blaze_munch",
+      "vanillaEvents": [
+        "entity.generic.eat"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:cardboard_bonk",
+      "customFiles": [
+        "sounds/create/cardboard_bonk"
+      ],
+      "id": "cardboard_bonk",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#cardboard_bonk",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.cardboard_bonk",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:chiff",
+      "customFiles": [
+        "sounds/create/chiff"
+      ],
+      "id": "chiff",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#chiff",
+      "status": "static_verified",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:clipboard_check",
+      "customFiles": [
+        "sounds/create/clipboard_check"
+      ],
+      "id": "clipboard_check",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#clipboard_check",
+      "status": "static_verified",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:clipboard_erase",
+      "customFiles": [
+        "sounds/create/clipboard_erase"
+      ],
+      "id": "clipboard_erase",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#clipboard_erase",
+      "status": "static_verified",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:cogs",
+      "customFiles": [
+        "sounds/create/cogs"
+      ],
+      "id": "cogs",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#cogs",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.cogs",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:confirm",
+      "customFiles": [],
+      "id": "confirm",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#confirm",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.confirm",
+      "vanillaEvents": [
+        "block.note_block.bell"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:confirm_2",
+      "customFiles": [
+        "sounds/create/confirm_2"
+      ],
+      "id": "confirm_2",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#confirm_2",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.confirm_2",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:contraption_assemble",
+      "customFiles": [],
+      "id": "contraption_assemble",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#contraption_assemble",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.contraption_assemble",
+      "vanillaEvents": [
+        "block.wooden_trapdoor.open"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:contraption_assemble_compounded_1",
+      "customFiles": [],
+      "id": "contraption_assemble_compounded_1",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#contraption_assemble_compounded_1",
+      "status": "static_verified",
+      "vanillaEvents": [
+        "block.chest.open"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:contraption_disassemble",
+      "customFiles": [],
+      "id": "contraption_disassemble",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#contraption_disassemble",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.contraption_disassemble",
+      "vanillaEvents": [
+        "block.iron_trapdoor.close"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:controller_click",
+      "customFiles": [],
+      "id": "controller_click",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#controller_click",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.controller_click",
+      "vanillaEvents": [
+        "entity.item_frame.add_item"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:controller_put",
+      "customFiles": [],
+      "id": "controller_put",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#controller_put",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.controller_put",
+      "vanillaEvents": [
+        "item.book.put"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:controller_take",
+      "customFiles": [],
+      "id": "controller_take",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#controller_take",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.controller_take",
+      "vanillaEvents": [
+        "entity.item_frame.remove_item"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:copper_armor_equip",
+      "customFiles": [],
+      "id": "copper_armor_equip",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#copper_armor_equip",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.copper_armor_equip",
+      "vanillaEvents": [
+        "item.armor.equip_gold"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:crafter_click",
+      "customFiles": [],
+      "id": "crafter_click",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#crafter_click",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.crafter_click",
+      "vanillaEvents": [
+        "block.netherite_block.hit"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:crafter_click_compounded_1",
+      "customFiles": [],
+      "id": "crafter_click_compounded_1",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#crafter_click_compounded_1",
+      "status": "static_verified",
+      "vanillaEvents": [
+        "block.wooden_trapdoor.open"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:crafter_craft",
+      "customFiles": [],
+      "id": "crafter_craft",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#crafter_craft",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.crafter_craft",
+      "vanillaEvents": [
+        "entity.item.break"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:cranking",
+      "customFiles": [],
+      "id": "cranking",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#cranking",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.cranking",
+      "vanillaEvents": [
+        "block.wood.place"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:cranking_compounded_1",
+      "customFiles": [],
+      "id": "cranking_compounded_1",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#cranking_compounded_1",
+      "status": "static_verified",
+      "vanillaEvents": [
+        "block.wooden_button.click_off"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:crushing_1",
+      "customFiles": [],
+      "id": "crushing_1",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#crushing_1",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.crushing_1",
+      "vanillaEvents": [
+        "block.netherrack.hit"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:crushing_2",
+      "customFiles": [],
+      "id": "crushing_2",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#crushing_2",
+      "status": "static_verified",
+      "vanillaEvents": [
+        "block.gravel.place"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:crushing_3",
+      "customFiles": [],
+      "id": "crushing_3",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#crushing_3",
+      "status": "static_verified",
+      "vanillaEvents": [
+        "block.netherite_block.break"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:deny",
+      "customFiles": [],
+      "id": "deny",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#deny",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.deny",
+      "vanillaEvents": [
+        "block.note_block.bass"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:depot_plop",
+      "customFiles": [],
+      "id": "depot_plop",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#depot_plop",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.depot_plop",
+      "vanillaEvents": [
+        "entity.item_frame.add_item"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:depot_slide",
+      "customFiles": [],
+      "id": "depot_slide",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#depot_slide",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.depot_slide",
+      "vanillaEvents": [
+        "block.sand.break"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:desk_bell",
+      "customFiles": [
+        "sounds/create/desk_bell"
+      ],
+      "id": "desk_bell",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#desk_bell",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.desk_bell",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:frogport_catch",
+      "customFiles": [
+        "sounds/create/frogport_catch",
+        "sounds/create/frogport_catch_1",
+        "sounds/create/frogport_catch_2",
+        "sounds/create/frogport_catch_3"
+      ],
+      "id": "frogport_catch",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#frogport_catch",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.frogport_catch",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:frogport_close",
+      "customFiles": [
+        "sounds/create/frogport_close"
+      ],
+      "id": "frogport_close",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#frogport_close",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.frogport_close",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:frogport_deposit",
+      "customFiles": [],
+      "id": "frogport_deposit",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#frogport_deposit",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.frogport_deposit",
+      "vanillaEvents": [
+        "entity.frog.tongue"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:frogport_open",
+      "customFiles": [],
+      "id": "frogport_open",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#frogport_open",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.frogport_open",
+      "vanillaEvents": [
+        "entity.warden.tendril_clicks"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:funnel_flap",
+      "customFiles": [],
+      "id": "funnel_flap",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#funnel_flap",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.funnel_flap",
+      "vanillaEvents": [
+        "entity.item_frame.rotate_item"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:funnel_flap_compounded_1",
+      "customFiles": [],
+      "id": "funnel_flap_compounded_1",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#funnel_flap_compounded_1",
+      "status": "static_verified",
+      "vanillaEvents": [
+        "block.wool.break"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:fwoomp",
+      "customFiles": [
+        "sounds/create/fwoomp"
+      ],
+      "id": "fwoomp",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#fwoomp",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.fwoomp",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:haunted_bell_convert",
+      "customFiles": [
+        "sounds/create/haunted_bell_convert"
+      ],
+      "id": "haunted_bell_convert",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#haunted_bell_convert",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.haunted_bell_convert",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:haunted_bell_use",
+      "customFiles": [
+        "sounds/create/haunted_bell_use"
+      ],
+      "id": "haunted_bell_use",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#haunted_bell_use",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.haunted_bell_use",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:item_hatch",
+      "customFiles": [],
+      "id": "item_hatch",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#item_hatch",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.item_hatch",
+      "vanillaEvents": [
+        "block.barrel.open"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:item_hatch_compounded_1",
+      "customFiles": [],
+      "id": "item_hatch_compounded_1",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#item_hatch_compounded_1",
+      "status": "static_verified",
+      "vanillaEvents": [
+        "block.netherite_block.place"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:mechanical_press_activation",
+      "customFiles": [],
+      "id": "mechanical_press_activation",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#mechanical_press_activation",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.mechanical_press_activation",
+      "vanillaEvents": [
+        "block.anvil.land"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:mechanical_press_activation_belt",
+      "customFiles": [],
+      "id": "mechanical_press_activation_belt",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#mechanical_press_activation_belt",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.mechanical_press_activation_belt",
+      "vanillaEvents": [
+        "block.wool.hit"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:mechanical_press_activation_belt_compounded_1",
+      "customFiles": [],
+      "id": "mechanical_press_activation_belt_compounded_1",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#mechanical_press_activation_belt_compounded_1",
+      "status": "static_verified",
+      "vanillaEvents": [
+        "entity.item.break"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:mechanical_press_activation_compounded_1",
+      "customFiles": [],
+      "id": "mechanical_press_activation_compounded_1",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#mechanical_press_activation_compounded_1",
+      "status": "static_verified",
+      "vanillaEvents": [
+        "entity.item.break"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:mixing",
+      "customFiles": [],
+      "id": "mixing",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#mixing",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.mixing",
+      "vanillaEvents": [
+        "block.gilded_blackstone.break"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:mixing_compounded_1",
+      "customFiles": [],
+      "id": "mixing_compounded_1",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#mixing_compounded_1",
+      "status": "static_verified",
+      "vanillaEvents": [
+        "block.netherrack.break"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:package_pop",
+      "customFiles": [],
+      "id": "package_pop",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#package_pop",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.package_pop",
+      "vanillaEvents": [
+        "block.chiseled_bookshelf.break"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:package_pop_compounded_1",
+      "customFiles": [],
+      "id": "package_pop_compounded_1",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#package_pop_compounded_1",
+      "status": "static_verified",
+      "vanillaEvents": [
+        "block.wool.break"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:packager",
+      "customFiles": [],
+      "id": "packager",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#packager",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.packager",
+      "vanillaEvents": [
+        "entity.shulker.open"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:peculiar_bell_use",
+      "customFiles": [],
+      "id": "peculiar_bell_use",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#peculiar_bell_use",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.peculiar_bell_use",
+      "vanillaEvents": [
+        "block.bell.use"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:potato_hit",
+      "customFiles": [],
+      "id": "potato_hit",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#potato_hit",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.potato_hit",
+      "vanillaEvents": [
+        "entity.item_frame.break"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:potato_hit_compounded_1",
+      "customFiles": [],
+      "id": "potato_hit_compounded_1",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#potato_hit_compounded_1",
+      "status": "static_verified",
+      "vanillaEvents": [
+        "block.weeping_vines.break"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:sanding_long",
+      "customFiles": [
+        "sounds/create/sanding_long"
+      ],
+      "id": "sanding_long",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#sanding_long",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.sanding_long",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:sanding_short",
+      "customFiles": [
+        "sounds/create/sanding_short",
+        "sounds/create/sanding_short_1"
+      ],
+      "id": "sanding_short",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#sanding_short",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.sanding_short",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:saw_activate_stone",
+      "customFiles": [],
+      "id": "saw_activate_stone",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#saw_activate_stone",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.saw_activate_stone",
+      "vanillaEvents": [
+        "ui.stonecutter.take_result"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:saw_activate_wood",
+      "customFiles": [],
+      "id": "saw_activate_wood",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#saw_activate_wood",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.saw_activate_wood",
+      "vanillaEvents": [
+        "entity.boat.paddle_land"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:schematicannon_finish",
+      "customFiles": [],
+      "id": "schematicannon_finish",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#schematicannon_finish",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.schematicannon_finish",
+      "vanillaEvents": [
+        "block.note_block.bell"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:schematicannon_launch_block",
+      "customFiles": [],
+      "id": "schematicannon_launch_block",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#schematicannon_launch_block",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.schematicannon_launch_block",
+      "vanillaEvents": [
+        "entity.generic.explode"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:scroll_value",
+      "customFiles": [],
+      "id": "scroll_value",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#scroll_value",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.scroll_value",
+      "vanillaEvents": [
+        "block.note_block.hat"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:slime_added",
+      "customFiles": [],
+      "id": "slime_added",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#slime_added",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.slime_added",
+      "vanillaEvents": [
+        "block.slime_block.place"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:spout",
+      "customFiles": [
+        "sounds/create/spout",
+        "sounds/create/spout_1",
+        "sounds/create/spout_2",
+        "sounds/create/spout_3"
+      ],
+      "id": "spout",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#spout",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.spout",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:steam",
+      "customFiles": [
+        "sounds/create/steam"
+      ],
+      "id": "steam",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#steam",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.steam",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:stock_link",
+      "customFiles": [
+        "sounds/create/stock_link"
+      ],
+      "id": "stock_link",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#stock_link",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.stock_link",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:stock_ticker_request",
+      "customFiles": [
+        "sounds/create/stock_ticker_request"
+      ],
+      "id": "stock_ticker_request",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#stock_ticker_request",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.stock_ticker_request",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:stock_ticker_trade",
+      "customFiles": [
+        "sounds/create/stock_ticker_trade"
+      ],
+      "id": "stock_ticker_trade",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#stock_ticker_trade",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.stock_ticker_trade",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:train",
+      "customFiles": [
+        "sounds/create/train"
+      ],
+      "id": "train",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#train",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.train",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:train2",
+      "customFiles": [
+        "sounds/create/train2"
+      ],
+      "id": "train2",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#train2",
+      "status": "static_verified",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:train3",
+      "customFiles": [
+        "sounds/create/train3"
+      ],
+      "id": "train3",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#train3",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.train3",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:whistle",
+      "customFiles": [
+        "sounds/create/whistle"
+      ],
+      "id": "whistle",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#whistle",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.whistle",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:whistle_high",
+      "customFiles": [
+        "sounds/create/whistle_high"
+      ],
+      "id": "whistle_high",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#whistle_high",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.whistle_high",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:whistle_low",
+      "customFiles": [
+        "sounds/create/whistle_low"
+      ],
+      "id": "whistle_low",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#whistle_low",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.whistle_low",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:whistle_train",
+      "customFiles": [
+        "sounds/create/whistle_train"
+      ],
+      "id": "whistle_train",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#whistle_train",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.whistle_train",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:whistle_train_low",
+      "customFiles": [
+        "sounds/create/whistle_train_low"
+      ],
+      "id": "whistle_train_low",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#whistle_train_low",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.whistle_train_low",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:whistle_train_manual",
+      "customFiles": [
+        "sounds/create/whistle_train_manual"
+      ],
+      "id": "whistle_train_manual",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#whistle_train_manual",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.whistle_train_manual",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:whistle_train_manual_end",
+      "customFiles": [
+        "sounds/create/whistle_train_manual_end"
+      ],
+      "id": "whistle_train_manual_end",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#whistle_train_manual_end",
+      "status": "static_verified",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:whistle_train_manual_low",
+      "customFiles": [
+        "sounds/create/whistle_train_manual_low"
+      ],
+      "id": "whistle_train_manual_low",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#whistle_train_manual_low",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.whistle_train_manual_low",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:whistle_train_manual_low_end",
+      "customFiles": [
+        "sounds/create/whistle_train_manual_low_end"
+      ],
+      "id": "whistle_train_manual_low_end",
+      "relation": "custom_ogg",
+      "source": "src/generated/resources/assets/create/sounds.json#whistle_train_manual_low_end",
+      "status": "static_verified",
+      "vanillaEvents": []
+    },
+    {
+      "bedrockId": "createbedrock:worldshaper_place",
+      "customFiles": [],
+      "id": "worldshaper_place",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#worldshaper_place",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.worldshaper_place",
+      "vanillaEvents": [
+        "block.note_block.basedrum"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:wrench_remove",
+      "customFiles": [],
+      "id": "wrench_remove",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#wrench_remove",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.wrench_remove",
+      "vanillaEvents": [
+        "entity.item.pickup"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:wrench_remove_compounded_1",
+      "customFiles": [],
+      "id": "wrench_remove_compounded_1",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#wrench_remove_compounded_1",
+      "status": "static_verified",
+      "vanillaEvents": [
+        "block.netherite_block.hit"
+      ]
+    },
+    {
+      "bedrockId": "createbedrock:wrench_rotate",
+      "customFiles": [],
+      "id": "wrench_rotate",
+      "relation": "vanilla_mix",
+      "source": "src/generated/resources/assets/create/sounds.json#wrench_rotate",
+      "status": "static_verified",
+      "subtitle": "create.subtitle.wrench_rotate",
+      "vanillaEvents": [
+        "block.wooden_trapdoor.close"
+      ]
+    }
+  ],
+  "schemaVersion": 1,
+  "summary": {
+    "events": 79,
+    "relations": {
+      "custom_ogg": 31,
+      "vanilla_mix": 48,
+      "composite": 0,
+      "silent_not_applicable": 0
+    }
+  }
+}

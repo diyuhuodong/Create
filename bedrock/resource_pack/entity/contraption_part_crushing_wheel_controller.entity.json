@@ -14,6 +14,14 @@
       ],
       "textures": {
         "default": "textures/create_java/block/crushing_wheel_plates"
+      },
+      "animations": {
+        "machine_cycle": "controller.animation.createbedrock.machine_cycle"
+      },
+      "scripts": {
+        "animate": [
+          "machine_cycle"
+        ]
       }
     }
   }

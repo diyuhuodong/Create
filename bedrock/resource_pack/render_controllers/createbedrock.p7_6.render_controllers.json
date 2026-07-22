@@ -1,0 +1,26 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.createbedrock.belt_animated": {
+      "geometry": "Geometry.default",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "textures": [
+        "Texture.default"
+      ],
+      "uv_anim": {
+        "offset": [
+          "math.mod(query.life_time * 0.5, 1.0)",
+          0
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      }
+    }
+  }
+}

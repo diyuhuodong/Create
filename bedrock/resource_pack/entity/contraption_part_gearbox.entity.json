@@ -14,6 +14,14 @@
       ],
       "textures": {
         "default": "textures/create_java/block/gearbox"
+      },
+      "animations": {
+        "kinetic_rotation": "controller.animation.createbedrock.kinetic_rotation"
+      },
+      "scripts": {
+        "animate": [
+          "kinetic_rotation"
+        ]
       }
     }
   }

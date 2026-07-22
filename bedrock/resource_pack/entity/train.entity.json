@@ -3,6 +3,9 @@
   "minecraft:client_entity": {
     "description": {
       "identifier": "createbedrock:train",
+      "animations": {
+        "train_bogey": "controller.animation.createbedrock.train_bogey"
+      },
       "materials": {
         "default": "entity_alphatest"
       },
@@ -14,7 +17,12 @@
       },
       "render_controllers": [
         "controller.render.createbedrock.train"
-      ]
+      ],
+      "scripts": {
+        "animate": [
+          "train_bogey"
+        ]
+      }
     }
   }
 }

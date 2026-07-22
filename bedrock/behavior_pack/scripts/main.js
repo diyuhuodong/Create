@@ -33,6 +33,7 @@ import { getRollingStockDiagnostics, registerRollingStock } from "./trains/rolli
 import { getMinecartContraptionDiagnostics, registerMinecartContraptions } from "./trains/minecart-contraption-runtime.js";
 import { getBoundCardboardDiagnostics, registerBoundCardboard } from "./materials/bound-cardboard-runtime.js";
 import { getCasingApplicationDiagnostics, registerCasingApplications } from "./materials/casing-application-runtime.js";
+import { getGuidanceDiagnostics, registerGuidance } from "./guidance/guidance-runtime.js";
 
 import { getBlazeBurnerDiagnostics, registerBlazeBurners } from "./materials/blaze-burner-runtime.js";
 
@@ -102,6 +103,7 @@ registerRailwayControls();
 registerRollingStock();
 registerBoundCardboard();
 registerCasingApplications();
+registerGuidance();
 registerBlazeBurners();
 registerCardboardEquipment();
 registerCopycats();
@@ -157,6 +159,7 @@ registerKernelDiagnosticProvider("rollingStock", getRollingStockDiagnostics);
 registerKernelDiagnosticProvider("minecartContraptions", getMinecartContraptionDiagnostics);
 registerKernelDiagnosticProvider("boundCardboard", getBoundCardboardDiagnostics);
 registerKernelDiagnosticProvider("casingApplications", getCasingApplicationDiagnostics);
+registerKernelDiagnosticProvider("guidance", getGuidanceDiagnostics);
 registerKernelDiagnosticProvider("blazeBurner", getBlazeBurnerDiagnostics);
 registerKernelDiagnosticProvider("cardboardEquipment", getCardboardEquipmentDiagnostics);
 registerKernelDiagnosticProvider("copycats", getCopycatDiagnostics);

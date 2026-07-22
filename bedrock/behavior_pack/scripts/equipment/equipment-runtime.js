@@ -1,14 +1,16 @@
 import { EquipmentSlot, ItemStack, system, world } from "@minecraft/server";
 import { ActionFormData } from "@minecraft/server-ui";
 
+import { CREATE_EFFECTS, emitCreateEffect, playCreateSound } from "../effects/effects-runtime.js";
 import { getKineticNetworkAt, getKineticSpeedAt } from "../kinetics/kinetic-runtime.js";
 import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { ShardedStateStore } from "../kernel/sharded-state-store.js";
 import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-property-storage.js";
 import { POTATO_PROJECTILE_PROFILES } from "../materials/potato-projectile.js";
-import { spawnPotatoProjectile } from "../materials/potato-projectile-runtime.js";
+import { activePotatoProjectileReceipts, spawnPotatoProjectile } from "../materials/potato-projectile-runtime.js";
 import {
 	armPotatoCannon,
+	backtankCapacity,
 	BACKTANK_ITEMS,
 	consumeBacktankAir,
 	createBacktankState,
@@ -17,10 +19,17 @@ import {
 	readPotatoCannonState,
 	refillBacktank
 } from "./equipment-state.js";
+import { applyEquipmentUpgrade, upgradeKindForItem } from "./equipment-upgrade-state.js";
+import { queryGogglesDiagnostics, registerGogglesDiagnosticAdapter } from "./goggles-diagnostics-registry.js";
+import { beginPotatoCannonShot, escrowPotatoCannonAmmo, markPotatoCannonProjectileSpawned, reconcilePotatoCannonJournal, settlePotatoCannonShot } from "./potato-cannon-journal.js";
+import { bindToolboxSlot, createToolboxBindings, readToolboxBindings, reconcileToolboxBindings } from "./toolbox-bindings.js";
 import { createToolboxState, extractToolboxStack, insertToolboxStack, readToolboxState, TOOLBOX_COMPARTMENTS } from "./toolbox-state.js";
+import { invokeWrenchHandler, registerWrenchHandler } from "./wrench-handler-registry.js";
 
-const BACKTANK_ITEM_PROPERTY = "createbedrock:backtank_v1";
-const CANNON_ITEM_PROPERTY = "createbedrock:potato_cannon_v1";
+const BACKTANK_ITEM_PROPERTY = "createbedrock:backtank_v2";
+const BACKTANK_ITEM_PROPERTY_LEGACY = "createbedrock:backtank_v1";
+const CANNON_ITEM_PROPERTY = "createbedrock:potato_cannon_v2";
+const CANNON_ITEM_PROPERTY_LEGACY = "createbedrock:potato_cannon_v1";
 const EQUIPMENT_TASK_BUDGET = 24;
 const EQUIPMENT_TASK_GROUP = "equipment";
 const EXTENDO_GRIP = "createbedrock:extendo_grip";
@@ -29,6 +38,7 @@ const POTATO_CANNON = "createbedrock:potato_cannon";
 const TOOLBOX_ITEM_LORE_PREFIX = "createbedrock:toolbox:v1:";
 const TOOLBOX_ITEM_LORE_CHUNK = 180;
 const TOOLBOX_RANGE = 10;
+const TOOLBOX_BINDINGS_PROPERTY = "createbedrock:toolbox_bindings_v2";
 const TOOLBOX_COLORS = Object.freeze([
 	"white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray",
 	"light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"
@@ -52,6 +62,12 @@ let gogglesQueries = 0;
 let registered = false;
 let stationaryBacktankRefills = 0;
 let toolboxTransfers = 0;
+
+const WRENCH_SAFE_REMOVALS = new Set([
+	"createbedrock:andesite_casing", "createbedrock:brass_casing", "createbedrock:cogwheel", "createbedrock:copper_casing",
+	"createbedrock:encased_chain_drive", "createbedrock:gearbox", "createbedrock:large_cogwheel", "createbedrock:metal_bracket",
+	"createbedrock:shaft", "createbedrock:vertical_gearbox", "createbedrock:wooden_bracket"
+]);
 
 function clone(value) {
 	return JSON.parse(JSON.stringify(value));
@@ -121,6 +137,24 @@ function inventory(player) {
 	return player?.getComponent?.("minecraft:inventory")?.container;
 }
 
+function readPlayerBindings(player) {
+	try {
+		const value = player?.getDynamicProperty?.(TOOLBOX_BINDINGS_PROPERTY);
+		return readToolboxBindings(typeof value === "string" ? JSON.parse(value) : undefined);
+	} catch {
+		return createToolboxBindings();
+	}
+}
+
+function writePlayerBindings(player, state) {
+	try {
+		player.setDynamicProperty?.(TOOLBOX_BINDINGS_PROPERTY, JSON.stringify(readToolboxBindings(state)));
+		return true;
+	} catch {
+		return false;
+	}
+}
+
 function readJsonProperty(item, property, fallback) {
 	try {
 		const value = item?.getDynamicProperty?.(property);
@@ -145,7 +179,7 @@ function readItemBacktank(item) {
 	if (!isBacktankItem(item))
 		return undefined;
 	try {
-		return readBacktankState(readJsonProperty(item, BACKTANK_ITEM_PROPERTY, { itemType: item.typeId }));
+		return readBacktankState(readJsonProperty(item, BACKTANK_ITEM_PROPERTY, readJsonProperty(item, BACKTANK_ITEM_PROPERTY_LEGACY, { itemType: item.typeId })));
 	} catch {
 		return createBacktankState({ itemType: item.typeId });
 	}
@@ -283,7 +317,7 @@ function addLogicalStack(player, stack) {
 	return true;
 }
 
-function consumeCannonAmmo(player) {
+function findCannonAmmo(player) {
 	const container = inventory(player);
 	if (!container)
 		return undefined;
@@ -293,10 +327,10 @@ function consumeCannonAmmo(player) {
 		const item = container.getItem(index);
 		if (!item || !Object.hasOwn(POTATO_PROJECTILE_PROFILES, item.typeId))
 			continue;
-		const itemTypeId = item.typeId;
-		if (!removeOne({ getItem() { return container.getItem(index); }, setItem(value) { container.setItem(index, value); } }))
-			continue;
-		return itemTypeId;
+		return {
+			holder: { getItem() { return container.getItem(index); }, setItem(value) { container.setItem(index, value); } },
+			itemTypeId: item.typeId
+		};
 	}
 	return undefined;
 }
@@ -320,7 +354,7 @@ function cannonState(holder) {
 	const item = holder?.getItem?.();
 	if (item?.typeId !== POTATO_CANNON)
 		return undefined;
-	try { return readPotatoCannonState(readJsonProperty(item, CANNON_ITEM_PROPERTY, undefined)); } catch { return createPotatoCannonState(); }
+	try { return readPotatoCannonState(readJsonProperty(item, CANNON_ITEM_PROPERTY, readJsonProperty(item, CANNON_ITEM_PROPERTY_LEGACY, undefined))); } catch { return createPotatoCannonState(); }
 }
 
 function writeCannonState(holder, state) {
@@ -336,30 +370,97 @@ function firePotatoCannon(player) {
 	const holder = selectedSlot(player);
 	if (holder?.getItem()?.typeId !== POTATO_CANNON)
 		return false;
-	const armed = armPotatoCannon(cannonState(holder), { cooldownTicks: 12, now: system.currentTick ?? equipmentTicks });
+	let current = cannonState(holder);
+	const recovery = reconcilePotatoCannonJournal(current, activePotatoProjectileReceipts());
+	if (recovery.action === "wait")
+		return false;
+	if (recovery.action === "refund")
+		giveItem(player, new ItemStack(recovery.ammoTypeId, 1));
+	if (recovery.action !== "none") {
+		current = recovery.state;
+		if (!writeCannonState(holder, current))
+			return false;
+	}
+	const armed = armPotatoCannon(current, { cooldownTicks: 12, now: system.currentTick ?? equipmentTicks });
 	if (!armed.fired)
 		return false;
-	const ammo = consumeCannonAmmo(player);
+	const ammo = findCannonAmmo(player);
 	if (!ammo)
 		return false;
-	if (!writeCannonState(holder, armed.state)) {
-		giveItem(player, new ItemStack(ammo, 1));
-		return false;
-	}
-	if (!consumeChestAir(player, 1) && !damageCannon(holder)) {
-		giveItem(player, new ItemStack(ammo, 1));
-		return false;
-	}
 	const direction = player.getViewDirection?.();
 	if (!direction)
 		return false;
+	const shotId = `${player.id}:${system.currentTick ?? equipmentTicks}:${armed.state.revision}`;
+	const begun = beginPotatoCannonShot(armed.state, { ammoTypeId: ammo.itemTypeId, ownerId: player.id, recoveryRoll: Math.random(), shotId });
+	if (!begun.begun || !writeCannonState(holder, begun.state))
+		return false;
+	if (!removeOne(ammo.holder)) {
+		writeCannonState(holder, settlePotatoCannonShot(begun.state, shotId).state);
+		return false;
+	}
+	const escrowed = escrowPotatoCannonAmmo(cannonState(holder));
+	if (!escrowed.advanced || !writeCannonState(holder, escrowed.state)) {
+		giveItem(player, new ItemStack(ammo.itemTypeId, 1));
+		return false;
+	}
+	if (!consumeChestAir(player, 1) && !damageCannon(holder)) {
+		giveItem(player, new ItemStack(ammo.itemTypeId, 1));
+		writeCannonState(holder, settlePotatoCannonShot(cannonState(holder), shotId).state);
+		return false;
+	}
 	spawnPotatoProjectile({
 		dimension: player.dimension,
 		direction,
-		itemTypeId: ammo,
+		itemTypeId: ammo.itemTypeId,
 		location: { x: player.location.x, y: player.location.y + 1.5, z: player.location.z },
-		ownerId: player.id
+		ownerId: player.id,
+		receiptId: shotId,
+		recover: begun.state.journal.recover
 	});
+	emitCreateEffect(player.dimension, CREATE_EFFECTS.air, { x: player.location.x, y: player.location.y + 1.5, z: player.location.z });
+	playCreateSound(player.dimension, "createbedrock:potato_hit", player.location, { pitch: 1.2, volume: .7 });
+	const spawned = markPotatoCannonProjectileSpawned(cannonState(holder));
+	if (spawned.advanced)
+		writeCannonState(holder, settlePotatoCannonShot(spawned.state, shotId).state);
+	return true;
+}
+
+function applyHeldUpgrade(player, itemStack) {
+	const kind = upgradeKindForItem(itemStack?.typeId);
+	if (!kind)
+		return false;
+	const upgradeHolder = selectedSlot(player);
+	let target;
+	if (kind === "capacity") {
+		target = chestBacktank(player);
+		if (!target)
+			return false;
+	} else {
+		const holder = equipmentSlot(player, EquipmentSlot.Offhand);
+		const item = holder?.getItem?.();
+		if (item?.typeId !== POTATO_CANNON)
+			return false;
+		target = { holder, item, state: cannonState(holder) };
+	}
+	const receiptId = `upgrade:${player.id}:${system.currentTick ?? equipmentTicks}:${kind}`;
+	const result = applyEquipmentUpgrade(target.state, { expectedRevision: target.state.revision, kind, receiptId, targetTypeId: target.item.typeId });
+	if (!result.applied)
+		return false;
+	const written = kind === "capacity"
+		? writeItemBacktank(target.holder, createBacktankState(result.state))
+		: writeCannonState(target.holder, createPotatoCannonState(result.state));
+	if (!written)
+		return false;
+	if (!removeOne(upgradeHolder)) {
+		if (kind === "capacity")
+			writeItemBacktank(target.holder, target.state);
+		else
+			writeCannonState(target.holder, target.state);
+		return false;
+	}
+	player.sendMessage?.(`§aCreate§r ${kind === "capacity" ? "Capacity" : "Potato Recovery"} ${result.state.upgrades[kind]}/3 applied.`);
+	emitCreateEffect(player.dimension, CREATE_EFFECTS.rotationIndicator, player.location);
+	playCreateSound(player.dimension, "createbedrock:confirm", player.location, { volume: .8 });
 	return true;
 }
 
@@ -388,19 +489,56 @@ function rotateBlock(block) {
 	return false;
 }
 
-function wrenchBlock(player, block) {
-	if (!block || isBacktankBlock(block) || isToolboxBlock(block))
-		return false;
-	if (player.isSneaking) {
-		try {
-			block.setType("minecraft:air");
-			giveItem(player, new ItemStack(block.typeId, 1));
-			return true;
-		} catch {
-			return false;
+function safeWrenchRemoval(block) {
+	return WRENCH_SAFE_REMOVALS.has(block?.typeId);
+}
+
+function registerEquipmentAdapters() {
+	const domains = Object.freeze({
+		contraptions: ["bearing", "chassis", "contraption", "gantry", "piston", "pulley", "sticker"],
+		fluids: ["drain", "fluid", "hose", "pipe", "pump", "tank", "valve"],
+		logistics: ["belt", "depot", "funnel", "link", "package", "requester", "tunnel", "vault"],
+		processing: ["basin", "crafter", "crushing", "deploy", "millstone", "mixer", "press", "saw"],
+		redstone: ["analog", "contact", "diode", "lever", "nixie", "redstone", "rose_quartz"],
+		trains: ["bogey", "schedule", "signal", "station", "track", "train"],
+		kinetics: []
+	});
+	const domainFor = typeId => Object.entries(domains).find(([domain, tokens]) => domain !== "kinetics" && tokens.some(token => typeId.includes(token)))?.[0] ?? "kinetics";
+	for (const domain of ["contraptions", "fluids", "logistics", "processing", "redstone", "trains", "kinetics"])
+		registerGogglesDiagnosticAdapter({
+			id: domain,
+			supports: ({ block }) => block?.typeId?.startsWith("createbedrock:") && domainFor(block.typeId) === domain,
+			inspect: ({ block }) => {
+				const network = getKineticNetworkAt(block.dimension.id, block.location);
+				const speed = getKineticSpeedAt(block.dimension.id, block.location) ?? 0;
+				return { title: `${domain}: ${block.typeId}`, lines: [`Speed: ${Math.round(speed * 100) / 100} rpm`, `Stress: ${network?.stressImpact ?? 0}/${network?.stressCapacity ?? 0}`], revision: network?.revision ?? 0 };
+			}
+		});
+	registerWrenchHandler({
+		actions: ["rotate"],
+		id: "createbedrock:rotation",
+		supports: ({ block }) => block?.typeId?.startsWith("createbedrock:") && !isBacktankBlock(block) && !isToolboxBlock(block),
+		invoke: ({ block }) => ({ handled: rotateBlock(block), reason: "no_rotatable_state" })
+	});
+	registerWrenchHandler({
+		actions: ["remove"],
+		id: "createbedrock:safe_removal",
+		supports: ({ block }) => safeWrenchRemoval(block),
+		invoke: ({ block, player }) => {
+			const typeId = block.typeId;
+			try {
+				block.setType("minecraft:air");
+				giveItem(player, new ItemStack(typeId, 1));
+				return { handled: true };
+			} catch {
+				return { handled: false, reason: "domain_rejected" };
+			}
 		}
-	}
-	return rotateBlock(block);
+	});
+}
+
+function wrenchBlock(player, block) {
+	return invokeWrenchHandler({ block, player, typeId: block?.typeId }, player.isSneaking ? "remove" : "rotate").handled;
 }
 
 function extendoRange(player) {
@@ -418,18 +556,26 @@ function useExtendo(player) {
 	const nativeTarget = player.getBlockFromViewDirection?.({ maxDistance: 5 })?.block;
 	if (nativeTarget && locationKey(nativeTarget.dimension.id, nativeTarget.location) === locationKey(target.dimension.id, target.location))
 		return false;
-	if (!consumeChestAir(player, 1))
+	const backtank = chestBacktank(player);
+	const durability = holder.getItem()?.getComponent?.("minecraft:durability");
+	if (!backtank?.state?.air && (!durability || durability.damage + 1 >= durability.maxDurability))
 		return false;
-	return wrenchBlock(player, target);
+	if (!wrenchBlock(player, target))
+		return false;
+	if (!consumeChestAir(player, 1))
+		damageCannon(holder);
+	return true;
 }
 
 function gogglesMessage(player) {
 	const target = player.getBlockFromViewDirection?.({ maxDistance: 12 })?.block;
 	if (!target)
 		return false;
-	const network = getKineticNetworkAt(target.dimension.id, target.location);
-	const speed = getKineticSpeedAt(target.dimension.id, target.location) ?? 0;
-	player.sendMessage?.(`§bCreate§r ${target.typeId}\nSpeed: ${Math.round(speed * 100) / 100} rpm\nStress: ${network?.stressImpact ?? 0}/${network?.stressCapacity ?? 0}`);
+	const snapshot = queryGogglesDiagnostics({ block: target, player });
+	if (!snapshot)
+		return false;
+	const air = chestBacktank(player)?.state;
+	player.sendMessage?.(`§bCreate§r ${snapshot.title}\n${snapshot.lines.join("\n")}${air ? `\nAir: ${air.air}/${backtankCapacity(air.capacityLevel)}` : ""}`);
 	gogglesQueries++;
 	return true;
 }
@@ -553,37 +699,59 @@ function showToolbox(player, block, state) {
 function attachToolbox(player, block, state) {
 	if (toolboxDistance(player, state) > TOOLBOX_RANGE)
 		return false;
+	const hotbarSlot = player.selectedSlotIndex;
+	if (!Number.isInteger(hotbarSlot) || hotbarSlot < 0 || hotbarSlot > 8)
+		return false;
+	const itemTypeId = selectedSlot(player)?.getItem?.()?.typeId;
+	const compartment = Math.max(0, state.compartments.findIndex(candidate => !itemTypeId || candidate.filter?.typeId === itemTypeId));
+	const bindings = readPlayerBindings(player);
+	const result = bindToolboxSlot(bindings, { compartment, hotbarSlot, revision: state.revision, toolboxId: state.toolboxId }, bindings.revision);
+	if (!result.bound || !writePlayerBindings(player, result.state))
+		return false;
 	attachedToolboxes.set(player.id, locationKey(block.dimension.id, block.location));
-	player.sendMessage?.("Attached to Toolbox. Sneak-interact it again to deposit; interaction opens storage.");
+	player.sendMessage?.(`Toolbox compartment ${compartment + 1} attached to hotbar slot ${hotbarSlot + 1}.`);
 	return true;
 }
 
 function refillFromAttachedToolbox(player) {
-	const key = attachedToolboxes.get(player.id);
-	if (!key)
-		return false;
-	const state = toolboxes.get(key);
-	if (!state || toolboxDistance(player, state) > TOOLBOX_RANGE) {
-		attachedToolboxes.delete(player.id);
-		return false;
-	}
+	let bindings = readPlayerBindings(player);
+	const toolboxFor = binding => [...toolboxes.values()].find(state => state.toolboxId === binding.toolboxId);
+	bindings = reconcileToolboxBindings(bindings, binding => {
+		const state = toolboxFor(binding);
+		return state && toolboxDistance(player, state) <= TOOLBOX_RANGE && binding.compartment < state.compartments.length;
+	});
+	writePlayerBindings(player, bindings);
 	const container = inventory(player);
 	if (!container)
 		return false;
-	for (let index = 0; index < container.size; index++) {
-		const item = container.getItem(index);
-		if (!item || item.amount >= item.maxAmount)
+	for (const binding of bindings.bindings) {
+		const state = toolboxFor(binding);
+		const item = container.getItem(binding.hotbarSlot);
+		const filter = state?.compartments[binding.compartment]?.filter;
+		if (!state || !filter || (item && (item.typeId !== filter.typeId || item.amount >= item.maxAmount)))
 			continue;
-		const compartmentIndex = state.compartments.findIndex(compartment => compartment.filter?.typeId === item.typeId);
-		if (compartmentIndex < 0)
+		if (binding.revision !== state.revision) {
+			const refreshed = bindToolboxSlot(bindings, { ...binding, revision: state.revision }, bindings.revision);
+			if (refreshed.bound) {
+				bindings = refreshed.state;
+				writePlayerBindings(player, bindings);
+			}
 			continue;
-		const result = extractToolboxStack(state, compartmentIndex, { maxCount: item.maxAmount - item.amount, receiptId: `refill:${player.id}:${equipmentTicks}:${index}` });
+		}
+		const maxCount = item ? item.maxAmount - item.amount : 64;
+		const result = extractToolboxStack(state, binding.compartment, { maxCount, receiptId: `refill:${player.id}:${equipmentTicks}:${binding.hotbarSlot}` });
 		if (!result.extracted)
 			continue;
-		const next = item.clone();
-		next.amount += result.extracted.count;
-		container.setItem(index, next);
-		toolboxes.set(key, result.state);
+		const next = item?.clone?.() ?? new ItemStack(result.extracted.typeId, result.extracted.count);
+		if (item)
+			next.amount += result.extracted.count;
+		container.setItem(binding.hotbarSlot, next);
+		toolboxes.set(locationKey(result.state.host.dimensionId, result.state.host.location), result.state);
+		const updated = bindToolboxSlot(bindings, { ...binding, revision: result.state.revision }, bindings.revision);
+		if (updated.bound) {
+			bindings = updated.state;
+			writePlayerBindings(player, bindings);
+		}
 		toolboxTransfers++;
 		return true;
 	}
@@ -748,6 +916,7 @@ export function registerEquipment() {
 	if (registered)
 		return false;
 	registered = true;
+	registerEquipmentAdapters();
 	registerKernelTaskGroup(EQUIPMENT_TASK_GROUP, EQUIPMENT_TASK_BUDGET);
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
 		try {
@@ -794,7 +963,9 @@ export function registerEquipment() {
 	});
 	world.afterEvents.itemUse.subscribe(event => {
 		try {
-			if (event.itemStack?.typeId === POTATO_CANNON)
+			if (upgradeKindForItem(event.itemStack?.typeId))
+				applyHeldUpgrade(event.source, event.itemStack);
+			else if (event.itemStack?.typeId === POTATO_CANNON)
 				firePotatoCannon(event.source);
 			else if (event.itemStack?.typeId === EXTENDO_GRIP)
 				useExtendo(event.source);
@@ -820,8 +991,12 @@ export function registerEquipment() {
 		for (const player of world.getAllPlayers()) {
 			try {
 				tickDivingEquipment(player);
-				if (equipmentTicks % 20 === 0)
+				if (equipmentTicks % 20 === 0) {
+					const backtank = chestBacktank(player)?.state;
+					if (backtank)
+						player.onScreenDisplay?.setActionBar?.(`Air ${backtank.air}/${backtankCapacity(backtank.capacityLevel)} · Capacity ${backtank.capacityLevel}/3`);
 					dirty = refillFromAttachedToolbox(player) || dirty;
+				}
 			} catch { failedUpdates++; }
 		}
 		if (dirty || equipmentTicks % 200 === 0)

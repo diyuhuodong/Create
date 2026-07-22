@@ -1,0 +1,14 @@
+{
+  "backtank": {
+    "air": 1200,
+    "capacityLevel": 1,
+    "itemType": "createbedrock:copper_backtank",
+    "revision": 4,
+    "schemaVersion": 1
+  },
+  "potatoCannon": {
+    "cooldownUntil": 120,
+    "revision": 2,
+    "schemaVersion": 1
+  }
+}

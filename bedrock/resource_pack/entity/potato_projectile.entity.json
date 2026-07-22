@@ -3,6 +3,9 @@
   "minecraft:client_entity": {
     "description": {
       "identifier": "createbedrock:potato_projectile",
+      "animations": {
+        "equipment_idle": "controller.animation.createbedrock.equipment_idle"
+      },
       "materials": {
         "default": "entity_alphatest"
       },
@@ -12,7 +15,14 @@
       "geometry": {
         "default": "geometry.createbedrock.potato_projectile"
       },
-      "render_controllers": ["controller.render.createbedrock.contraption"]
+      "render_controllers": [
+        "controller.render.createbedrock.contraption"
+      ],
+      "scripts": {
+        "animate": [
+          "equipment_idle"
+        ]
+      }
     }
   }
 }

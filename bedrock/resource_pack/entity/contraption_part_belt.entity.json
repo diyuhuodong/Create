@@ -10,10 +10,18 @@
         "default": "entity_alphatest"
       },
       "render_controllers": [
-        "controller.render.createbedrock.contraption"
+        "controller.render.createbedrock.belt_animated"
       ],
       "textures": {
         "default": "textures/create_java/block/belt"
+      },
+      "animations": {
+        "belt_scroll": "controller.animation.createbedrock.belt_scroll"
+      },
+      "scripts": {
+        "animate": [
+          "belt_scroll"
+        ]
       }
     }
   }

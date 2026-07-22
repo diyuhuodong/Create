@@ -1,5 +1,6 @@
 import { BlockPermutation, ItemStack, world } from "@minecraft/server";
 
+import { CREATE_EFFECTS, emitCreateEffect, playCreateSound } from "../effects/effects-runtime.js";
 import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import {
 	launchVelocity,
@@ -11,6 +12,9 @@ import {
 const AGE_PROPERTY = "createbedrock:potato_age";
 const ITEM_PROPERTY = "createbedrock:potato_item";
 const OWNER_PROPERTY = "createbedrock:potato_owner";
+const RECOVER_PROPERTY = "createbedrock:potato_recover";
+const RECEIPT_PROPERTY = "createbedrock:potato_receipt";
+const SETTLED_PROPERTY = "createbedrock:potato_settled";
 const STUCK_PROPERTY = "createbedrock:potato_stuck";
 const VELOCITY_PROPERTY = "createbedrock:potato_velocity";
 const POTATO_PROJECTILE_TASK_GROUP = "potatoProjectiles";
@@ -211,23 +215,46 @@ function dropProfileItem(projectile, profile) {
 	try { projectile.dimension.spawnItem(new ItemStack(profile.drop, 1), projectile.location); } catch { failedUpdates++; }
 }
 
+function settleRecovery(projectile) {
+	if (projectile.getDynamicProperty(SETTLED_PROPERTY) === true)
+		return false;
+	try {
+		projectile.setDynamicProperty(SETTLED_PROPERTY, true);
+		if (projectile.getDynamicProperty(RECOVER_PROPERTY) === true) {
+			const itemTypeId = projectile.getDynamicProperty(ITEM_PROPERTY);
+			if (typeof itemTypeId === "string")
+				projectile.dimension.spawnItem(new ItemStack(itemTypeId, 1), projectile.location)?.setDynamicProperty?.(RECEIPT_PROPERTY, projectile.getDynamicProperty(RECEIPT_PROPERTY));
+		}
+		return true;
+	} catch {
+		failedUpdates++;
+		return false;
+	}
+}
+
 function hitEntity(projectile, target, profile, velocity) {
 	applyHitEffects(target, profile, velocity);
 	if (profile.teleportDiameter)
 		teleportHitTarget(target, profile.teleportDiameter);
 	entityHits++;
+	emitCreateEffect(projectile.dimension, CREATE_EFFECTS.cube, projectile.location);
+	playCreateSound(projectile.dimension, "createbedrock:potato_hit", projectile.location, { volume: .6 });
 	if (profile.sticky && stickToTarget(projectile, target))
 		return;
 	spawnSplitProjectiles(projectile, profile, velocity);
 	dropProfileItem(projectile, profile);
+	settleRecovery(projectile);
 	projectile.remove();
 }
 
 function impactBlock(projectile, hitBlock, profile, velocity) {
 	placeOrPlantProjectile(projectile.dimension, hitBlock, velocity, profile);
 	blockHits++;
+	emitCreateEffect(projectile.dimension, CREATE_EFFECTS.cube, projectile.location);
+	playCreateSound(projectile.dimension, "createbedrock:potato_hit", projectile.location, { volume: .6 });
 	spawnSplitProjectiles(projectile, profile, velocity);
 	dropProfileItem(projectile, profile);
+	settleRecovery(projectile);
 	projectile.remove();
 }
 
@@ -243,8 +270,17 @@ function targetAt(projectile, location) {
 }
 
 function tickProjectile(projectile) {
-	if (!projectile?.isValid || followStuckProjectile(projectile))
+	if (!projectile?.isValid)
 		return;
+	if (followStuckProjectile(projectile)) {
+		const age = projectile.getDynamicProperty(AGE_PROPERTY);
+		if (!Number.isInteger(age) || age >= MAX_PROJECTILE_AGE) {
+			settleRecovery(projectile);
+			projectile.remove();
+		} else
+			projectile.setDynamicProperty(AGE_PROPERTY, age + 1);
+		return;
+	}
 	const profile = profileFor(projectile);
 	const velocity = readVelocity(projectile);
 	if (!profile || !velocity) {
@@ -254,6 +290,7 @@ function tickProjectile(projectile) {
 	}
 	const age = projectile.getDynamicProperty(AGE_PROPERTY);
 	if (!Number.isInteger(age) || age >= MAX_PROJECTILE_AGE) {
+		settleRecovery(projectile);
 		projectile.remove();
 		return;
 	}
@@ -277,7 +314,7 @@ function tickProjectile(projectile) {
 	}
 }
 
-export function spawnPotatoProjectile({ dimension, direction, itemTypeId, location, ownerId } = {}) {
+export function spawnPotatoProjectile({ dimension, direction, itemTypeId, location, ownerId, recover = false, receiptId } = {}) {
 	if (!dimension?.spawnEntity || !finiteVector(location) || !finiteVector(direction))
 		throw new TypeError("Potato projectile spawning requires a dimension, location, and direction");
 	const velocity = launchVelocity(itemTypeId, direction);
@@ -286,6 +323,9 @@ export function spawnPotatoProjectile({ dimension, direction, itemTypeId, locati
 	projectile.setDynamicProperty(ITEM_PROPERTY, itemTypeId);
 	if (typeof ownerId === "string")
 		projectile.setDynamicProperty(OWNER_PROPERTY, ownerId);
+	projectile.setDynamicProperty(RECOVER_PROPERTY, recover === true);
+	if (typeof receiptId === "string")
+		projectile.setDynamicProperty(RECEIPT_PROPERTY, receiptId);
 	writeVelocity(projectile, velocity);
 	spawned++;
 	return projectile;
@@ -293,6 +333,25 @@ export function spawnPotatoProjectile({ dimension, direction, itemTypeId, locati
 
 export function getPotatoProjectileDiagnostics() {
 	return { blockHits, entityHits, failedUpdates, spawned };
+}
+
+export function activePotatoProjectileReceipts() {
+	const receipts = new Set();
+	const dimensions = typeof world.getDimensions === "function"
+		? world.getDimensions()
+		: ["minecraft:overworld", "minecraft:nether", "minecraft:the_end"].map(id => world.getDimension(id));
+	for (const dimension of dimensions) {
+		try {
+			for (const projectile of dimension.getEntities({ type: POTATO_PROJECTILE_ENTITY })) {
+				const receipt = projectile.getDynamicProperty(RECEIPT_PROPERTY);
+				if (typeof receipt === "string")
+					receipts.add(receipt);
+			}
+		} catch {
+			failedUpdates++;
+		}
+	}
+	return receipts;
 }
 
 export function registerPotatoProjectiles() {

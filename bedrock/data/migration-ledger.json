@@ -671,22 +671,24 @@
 			"status": "partial"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:black_toolbox"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:black_toolbox",
 			"kind": "block",
 			"legacyMatrix": null,
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:black_toolbox"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block:create:black_toolbox",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "partial",
@@ -831,22 +833,24 @@
 			"status": "partial"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:blue_toolbox"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:blue_toolbox",
 			"kind": "block",
 			"legacyMatrix": null,
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:blue_toolbox"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block:create:blue_toolbox",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "partial",
@@ -1275,22 +1279,24 @@
 			"status": "partial"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:brown_toolbox"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:brown_toolbox",
 			"kind": "block",
 			"legacyMatrix": null,
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:brown_toolbox"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block:create:brown_toolbox",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "partial",
@@ -1655,12 +1661,12 @@
 			"status": "unclassified"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:copper_backtank"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:copper_backtank",
 			"kind": "block",
 			"legacyMatrix": {
@@ -1669,12 +1675,14 @@
 				"status": "static_verified"
 			},
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:copper_backtank"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block:create:copper_backtank",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "partial",
@@ -4589,22 +4597,24 @@
 			"status": "partial"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:cyan_toolbox"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:cyan_toolbox",
 			"kind": "block",
 			"legacyMatrix": null,
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:cyan_toolbox"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block:create:cyan_toolbox",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "partial",
@@ -5557,22 +5567,24 @@
 			"status": "partial"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:gray_toolbox"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:gray_toolbox",
 			"kind": "block",
 			"legacyMatrix": null,
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:gray_toolbox"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block:create:gray_toolbox",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "partial",
@@ -5695,22 +5707,24 @@
 			"status": "partial"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:green_toolbox"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:green_toolbox",
 			"kind": "block",
 			"legacyMatrix": null,
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:green_toolbox"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block:create:green_toolbox",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "partial",
@@ -6493,22 +6507,24 @@
 			"status": "partial"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:light_blue_toolbox"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:light_blue_toolbox",
 			"kind": "block",
 			"legacyMatrix": null,
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:light_blue_toolbox"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block:create:light_blue_toolbox",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "partial",
@@ -6631,22 +6647,24 @@
 			"status": "partial"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:light_gray_toolbox"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:light_gray_toolbox",
 			"kind": "block",
 			"legacyMatrix": null,
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:light_gray_toolbox"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block:create:light_gray_toolbox",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "partial",
@@ -6769,22 +6787,24 @@
 			"status": "partial"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:lime_toolbox"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:lime_toolbox",
 			"kind": "block",
 			"legacyMatrix": null,
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:lime_toolbox"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block:create:lime_toolbox",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "partial",
@@ -6991,22 +7011,24 @@
 			"status": "partial"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:magenta_toolbox"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:magenta_toolbox",
 			"kind": "block",
 			"legacyMatrix": null,
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:magenta_toolbox"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block:create:magenta_toolbox",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "partial",
@@ -7487,12 +7509,12 @@
 			"status": "unclassified"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:netherite_backtank"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:netherite_backtank",
 			"kind": "block",
 			"legacyMatrix": {
@@ -7501,12 +7523,14 @@
 				"status": "static_verified"
 			},
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:netherite_backtank"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block:create:netherite_backtank",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "unreviewed",
@@ -7713,22 +7737,24 @@
 			"status": "partial"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:orange_toolbox"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:orange_toolbox",
 			"kind": "block",
 			"legacyMatrix": null,
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:orange_toolbox"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block:create:orange_toolbox",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "partial",
@@ -8077,22 +8103,24 @@
 			"status": "partial"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:pink_toolbox"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:pink_toolbox",
 			"kind": "block",
 			"legacyMatrix": null,
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:pink_toolbox"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block:create:pink_toolbox",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "partial",
@@ -9577,22 +9605,24 @@
 			"status": "partial"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:purple_toolbox"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:purple_toolbox",
 			"kind": "block",
 			"legacyMatrix": null,
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:purple_toolbox"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block:create:purple_toolbox",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "partial",
@@ -9781,22 +9811,24 @@
 			"status": "partial"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:red_toolbox"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:red_toolbox",
 			"kind": "block",
 			"legacyMatrix": null,
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:red_toolbox"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block:create:red_toolbox",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "partial",
@@ -12949,22 +12981,24 @@
 			"status": "partial"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:white_toolbox"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:white_toolbox",
 			"kind": "block",
 			"legacyMatrix": null,
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:white_toolbox"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block:create:white_toolbox",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "partial",
@@ -13131,22 +13165,24 @@
 			"status": "partial"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:yellow_toolbox"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:yellow_toolbox",
 			"kind": "block",
 			"legacyMatrix": null,
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:yellow_toolbox"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block:create:yellow_toolbox",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "partial",
@@ -13757,12 +13793,12 @@
 			"status": "implemented"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:copper_backtank"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:copper_backtank",
 			"kind": "item",
 			"legacyMatrix": {
@@ -13771,20 +13807,22 @@
 				"status": "static_verified"
 			},
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:copper_backtank"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "item:create:copper_backtank",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:copper_backtank_placeable"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:copper_backtank_placeable",
 			"kind": "item",
 			"legacyMatrix": {
@@ -13793,12 +13831,14 @@
 				"status": "static_verified"
 			},
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:copper_backtank_placeable"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "item:create:copper_backtank_placeable",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "unreviewed",
@@ -14303,12 +14343,12 @@
 			"status": "unclassified"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:extendo_grip"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:extendo_grip",
 			"kind": "item",
 			"legacyMatrix": {
@@ -14317,12 +14357,14 @@
 				"status": "static_verified"
 			},
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:extendo_grip"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "item:create:extendo_grip",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "unreviewed",
@@ -14369,12 +14411,12 @@
 			"status": "unclassified"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:goggles"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:goggles",
 			"kind": "item",
 			"legacyMatrix": {
@@ -14383,12 +14425,14 @@
 				"status": "static_verified"
 			},
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:goggles"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "item:create:goggles",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "unreviewed",
@@ -14591,12 +14635,12 @@
 			"status": "unclassified"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:netherite_backtank"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:netherite_backtank",
 			"kind": "item",
 			"legacyMatrix": {
@@ -14605,20 +14649,22 @@
 				"status": "static_verified"
 			},
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:netherite_backtank"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "item:create:netherite_backtank",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:netherite_backtank_placeable"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:netherite_backtank_placeable",
 			"kind": "item",
 			"legacyMatrix": {
@@ -14627,12 +14673,14 @@
 				"status": "static_verified"
 			},
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:netherite_backtank_placeable"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "item:create:netherite_backtank_placeable",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "unreviewed",
@@ -14719,12 +14767,12 @@
 			"status": "unclassified"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:potato_cannon"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:potato_cannon",
 			"kind": "item",
 			"legacyMatrix": {
@@ -14733,12 +14781,14 @@
 				"status": "static_verified"
 			},
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:potato_cannon"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "item:create:potato_cannon",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "unreviewed",
@@ -15433,12 +15483,12 @@
 			"status": "implemented"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"candidateTargets": [
 				"createbedrock:wrench"
 			],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:wrench",
 			"kind": "item",
 			"legacyMatrix": {
@@ -15447,12 +15497,14 @@
 				"status": "static_verified"
 			},
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "one_to_one",
+				"targets": [
+					"createbedrock:wrench"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "item:create:wrench",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "unreviewed",
@@ -15621,10 +15673,10 @@
 			"status": "unclassified"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "not_required",
+			"behavior": "verified",
 			"candidateTargets": [],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:backtank",
 			"kind": "block_entity",
 			"legacyMatrix": {
@@ -15633,12 +15685,14 @@
 				"status": "static_verified"
 			},
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "virtualized",
+				"targets": [
+					"createbedrock:copper_backtank"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block_entity:create:backtank",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "unreviewed",
@@ -17803,10 +17857,10 @@
 			"status": "unclassified"
 		},
 		{
-			"acquisition": "unreviewed",
-			"behavior": "unreviewed",
+			"acquisition": "not_required",
+			"behavior": "verified",
 			"candidateTargets": [],
-			"family": "unclassified",
+			"family": "p7_6/equipment",
 			"javaIdentifier": "create:toolbox",
 			"kind": "block_entity",
 			"legacyMatrix": {
@@ -17815,12 +17869,14 @@
 				"status": "static_verified"
 			},
 			"mapping": {
-				"relation": "unmapped",
-				"targets": []
+				"relation": "virtualized",
+				"targets": [
+					"createbedrock:white_toolbox"
+				]
 			},
-			"resources": "unreviewed",
+			"resources": "verified",
 			"sourceKey": "block_entity:create:toolbox",
-			"status": "unclassified"
+			"status": "implemented"
 		},
 		{
 			"acquisition": "unreviewed",

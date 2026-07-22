@@ -307,6 +307,15 @@
     },
     "createbedrock_p7_1_rare_vector_package": {
       "textures": "textures/create_java/item/package/rare_vector"
+    },
+    "createbedrock_capacity_upgrade": {
+      "textures": "textures/items/book_enchanted"
+    },
+    "createbedrock_potato_recovery_upgrade": {
+      "textures": "textures/items/book_enchanted"
+    },
+    "createbedrock_engineers_guide": {
+      "textures": "textures/items/book_normal"
     }
   }
 }

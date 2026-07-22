@@ -1,0 +1,137 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.createbedrock.belt_scroll": {
+      "animation_length": 2,
+      "bones": {
+        "java_model": {
+          "rotation": [
+            0,
+            "query.anim_time * 0",
+            0
+          ],
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "loop": true
+    },
+    "animation.createbedrock.kinetic_rotation": {
+      "animation_length": 1,
+      "bones": {
+        "java_model": {
+          "rotation": [
+            0,
+            "query.anim_time * 360",
+            0
+          ],
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        "crushing_wheel": {
+          "rotation": [
+            0,
+            "query.anim_time * 360",
+            0
+          ],
+          "position": [
+            0,
+            0,
+            0
+          ]
+        },
+        "marker": {
+          "rotation": [
+            0,
+            "query.anim_time * 360",
+            0
+          ],
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "loop": true
+    },
+    "animation.createbedrock.machine_cycle": {
+      "animation_length": 2,
+      "bones": {
+        "java_model": {
+          "rotation": [
+            0,
+            "query.anim_time * 0",
+            0
+          ],
+          "position": [
+            0,
+            "math.sin(query.anim_time * 180) * 0.25",
+            0
+          ]
+        }
+      },
+      "loop": true
+    },
+    "animation.createbedrock.tank_liquid": {
+      "animation_length": 1,
+      "bones": {
+        "java_model": {
+          "rotation": [
+            0,
+            "query.anim_time * 0",
+            0
+          ],
+          "position": [
+            0,
+            "math.sin(query.anim_time * 180) * 0.25",
+            0
+          ]
+        }
+      },
+      "loop": true
+    },
+    "animation.createbedrock.train_bogey": {
+      "animation_length": 2,
+      "bones": {
+        "marker": {
+          "rotation": [
+            0,
+            "query.anim_time * 360",
+            0
+          ],
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "loop": true
+    },
+    "animation.createbedrock.equipment_idle": {
+      "animation_length": 1,
+      "bones": {
+        "projectile": {
+          "rotation": [
+            0,
+            "query.anim_time * 90",
+            0
+          ],
+          "position": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "loop": true
+    }
+  }
+}

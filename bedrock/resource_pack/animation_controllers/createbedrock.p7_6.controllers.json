@@ -1,0 +1,65 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.createbedrock.belt_scroll": {
+      "initial_state": "active",
+      "states": {
+        "active": {
+          "animations": [
+            "belt_scroll"
+          ]
+        }
+      }
+    },
+    "controller.animation.createbedrock.kinetic_rotation": {
+      "initial_state": "active",
+      "states": {
+        "active": {
+          "animations": [
+            "kinetic_rotation"
+          ]
+        }
+      }
+    },
+    "controller.animation.createbedrock.machine_cycle": {
+      "initial_state": "active",
+      "states": {
+        "active": {
+          "animations": [
+            "machine_cycle"
+          ]
+        }
+      }
+    },
+    "controller.animation.createbedrock.tank_liquid": {
+      "initial_state": "active",
+      "states": {
+        "active": {
+          "animations": [
+            "tank_liquid"
+          ]
+        }
+      }
+    },
+    "controller.animation.createbedrock.train_bogey": {
+      "initial_state": "active",
+      "states": {
+        "active": {
+          "animations": [
+            "train_bogey"
+          ]
+        }
+      }
+    },
+    "controller.animation.createbedrock.equipment_idle": {
+      "initial_state": "active",
+      "states": {
+        "active": {
+          "animations": [
+            "equipment_idle"
+          ]
+        }
+      }
+    }
+  }
+}

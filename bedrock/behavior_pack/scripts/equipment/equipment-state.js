@@ -1,7 +1,9 @@
+import { normalizeEquipmentUpgrades } from "./equipment-upgrade-state.js";
+
 export const BACKTANK_AIR_BASE = 900;
 export const BACKTANK_AIR_PER_CAPACITY_LEVEL = 300;
-export const BACKTANK_SCHEMA_VERSION = 1;
-export const POTATO_CANNON_SCHEMA_VERSION = 1;
+export const BACKTANK_SCHEMA_VERSION = 2;
+export const POTATO_CANNON_SCHEMA_VERSION = 2;
 
 export const BACKTANK_ITEMS = new Set([
 	"createbedrock:copper_backtank",
@@ -28,21 +30,27 @@ export function backtankCapacity(capacityLevel = 0) {
 	return BACKTANK_AIR_BASE + BACKTANK_AIR_PER_CAPACITY_LEVEL * integer(capacityLevel, "Backtank capacity level", { maximum: 3 });
 }
 
-export function createBacktankState({ air = 0, capacityLevel = 0, itemType = "createbedrock:copper_backtank", revision = 0 } = {}) {
+export function createBacktankState({ air = 0, capacityLevel, itemType = "createbedrock:copper_backtank", lastUpgradeReceipt, revision = 0, upgrades } = {}) {
 	validateBacktankItem(itemType, "Backtank item type");
+	const normalizedUpgrades = normalizeEquipmentUpgrades(upgrades ?? { capacity: capacityLevel ?? 0 });
+	capacityLevel = normalizedUpgrades.capacity;
 	const capacity = backtankCapacity(capacityLevel);
 	return {
 		air: integer(air, "Backtank air", { maximum: capacity }),
 		capacityLevel: integer(capacityLevel, "Backtank capacity level", { maximum: 3 }),
 		itemType,
+		lastUpgradeReceipt: typeof lastUpgradeReceipt === "string" ? lastUpgradeReceipt : undefined,
 		revision: integer(revision, "Backtank revision"),
-		schemaVersion: BACKTANK_SCHEMA_VERSION
+		schemaVersion: BACKTANK_SCHEMA_VERSION,
+		upgrades: normalizedUpgrades
 	};
 }
 
 export function readBacktankState(value) {
 	if (!value || typeof value !== "object" || Array.isArray(value))
 		return createBacktankState();
+	if (value.schemaVersion === 1)
+		return createBacktankState({ ...value, upgrades: { capacity: value.capacityLevel ?? 0 } });
 	if (value.schemaVersion !== BACKTANK_SCHEMA_VERSION)
 		throw new TypeError(`Unsupported Backtank schema ${value.schemaVersion}`);
 	return createBacktankState(value);
@@ -71,17 +79,22 @@ export function consumeBacktankAir(state, amount = 1) {
 	return { consumed: true, state: { ...current, air: current.air - amount, revision: current.revision + 1 } };
 }
 
-export function createPotatoCannonState({ cooldownUntil = 0, revision = 0 } = {}) {
+export function createPotatoCannonState({ cooldownUntil = 0, journal = null, lastUpgradeReceipt, revision = 0, upgrades } = {}) {
 	return {
 		cooldownUntil: integer(cooldownUntil, "Potato Cannon cooldown"),
+		journal: journal === null ? null : clone(journal),
+		lastUpgradeReceipt: typeof lastUpgradeReceipt === "string" ? lastUpgradeReceipt : undefined,
 		revision: integer(revision, "Potato Cannon revision"),
-		schemaVersion: POTATO_CANNON_SCHEMA_VERSION
+		schemaVersion: POTATO_CANNON_SCHEMA_VERSION,
+		upgrades: normalizeEquipmentUpgrades(upgrades)
 	};
 }
 
 export function readPotatoCannonState(value) {
 	if (!value || typeof value !== "object" || Array.isArray(value))
 		return createPotatoCannonState();
+	if (value.schemaVersion === 1)
+		return createPotatoCannonState(value);
 	if (value.schemaVersion !== POTATO_CANNON_SCHEMA_VERSION)
 		throw new TypeError(`Unsupported Potato Cannon schema ${value.schemaVersion}`);
 	return createPotatoCannonState(value);

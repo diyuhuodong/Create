@@ -1,0 +1,14 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "createbedrock:capacity_upgrade" },
+    "tags": ["crafting_table"],
+    "pattern": [" B ", "SES", " B "],
+    "key": {
+      "B": { "item": "createbedrock:brass_sheet" },
+      "E": { "item": "createbedrock:experience_nugget" },
+      "S": { "item": "createbedrock:sturdy_sheet" }
+    },
+    "result": { "item": "createbedrock:capacity_upgrade" }
+  }
+}
