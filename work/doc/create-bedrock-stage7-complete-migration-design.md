@@ -156,6 +156,8 @@ P7.5 复用阶段 4、5 的权威状态，但替换目前的近似边界。
 
 ## P7.7：验证、平台验收与发布判定
 
+详细执行设计见 [P7.7 平台验收与发布判定详细设计](create-bedrock-p7-7-platform-acceptance-plan.md)。P7.7 拆为 P7.7.0（验收基础设施与候选冻结）、P7.7A（Windows 导入与能力探针）、P7.7B（Windows 全领域）、P7.7C（Realm）、P7.7D（PlayStation）和 P7.7E（统一收口），严格按前向依赖推进。
+
 每个实现包先运行静态门禁：
 
 ```sh
