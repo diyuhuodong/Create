@@ -1,7 +1,360 @@
 {
   "schemaVersion": 1,
-  "currentCandidateId": null,
-  "outcome": "pending_candidate",
-  "campaigns": [],
+  "currentCandidateId": "0.1.0-789a350a3-8028fa7d7da2",
+  "outcome": "pending_platform_validation",
+  "campaigns": [
+    {
+      "candidateId": "0.1.0-789a350a3-8028fa7d7da2",
+      "createdAt": "2026-07-23T03:43:16.530Z",
+      "state": "pending",
+      "platforms": [
+        {
+          "id": "windows_bedrock",
+          "state": "pending",
+          "scenarios": [
+            {
+              "id": "candidate_identity",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "pack_import_dependencies",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "content_log_script_boot",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "content_acquisition",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "language_guide",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "recipes_processing",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "fluids_heat",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "kinetics_network",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "redstone_controls",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "logistics_packages",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "contraptions_schematics",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "trains_schedules",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "equipment_tools",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "visual_audio_particles",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "restart_chunk_recovery",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "two_player_concurrency",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "realm_distribution_reconnect",
+              "requirement": "not_applicable",
+              "state": "not_applicable",
+              "latestRunId": null
+            },
+            {
+              "id": "stress_30_minutes",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            }
+          ],
+          "runs": []
+        },
+        {
+          "id": "test_realm",
+          "state": "pending",
+          "scenarios": [
+            {
+              "id": "candidate_identity",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "pack_import_dependencies",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "content_log_script_boot",
+              "requirement": "sampled",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "content_acquisition",
+              "requirement": "sampled",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "language_guide",
+              "requirement": "sampled",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "recipes_processing",
+              "requirement": "sampled",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "fluids_heat",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "kinetics_network",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "redstone_controls",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "logistics_packages",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "contraptions_schematics",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "trains_schedules",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "equipment_tools",
+              "requirement": "sampled",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "visual_audio_particles",
+              "requirement": "sampled",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "restart_chunk_recovery",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "two_player_concurrency",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "realm_distribution_reconnect",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "stress_30_minutes",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            }
+          ],
+          "runs": []
+        },
+        {
+          "id": "playstation",
+          "state": "pending",
+          "scenarios": [
+            {
+              "id": "candidate_identity",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "pack_import_dependencies",
+              "requirement": "sampled",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "content_log_script_boot",
+              "requirement": "not_applicable",
+              "state": "not_applicable",
+              "latestRunId": null
+            },
+            {
+              "id": "content_acquisition",
+              "requirement": "sampled",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "language_guide",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "recipes_processing",
+              "requirement": "sampled",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "fluids_heat",
+              "requirement": "sampled",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "kinetics_network",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "redstone_controls",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "logistics_packages",
+              "requirement": "sampled",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "contraptions_schematics",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "trains_schedules",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "equipment_tools",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "visual_audio_particles",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "restart_chunk_recovery",
+              "requirement": "sampled",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "two_player_concurrency",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "realm_distribution_reconnect",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            },
+            {
+              "id": "stress_30_minutes",
+              "requirement": "required",
+              "state": "pending",
+              "latestRunId": null
+            }
+          ],
+          "runs": []
+        }
+      ]
+    }
+  ],
   "defects": []
 }

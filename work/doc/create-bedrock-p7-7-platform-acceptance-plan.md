@@ -1,10 +1,12 @@
 # Create Bedrock P7.7：平台验收与发布判定详细设计
 
-> 状态：设计完成，尚未执行平台验收
+> 状态：P7.7.0 已完成；P7.7A–E 尚未执行真实平台验收
 >
 > 验收链：Windows Bedrock → Bedrock Realm → PlayStation
 >
 > 输入基线：P7.1–P7.6 已通过静态验证的 Bedrock Add-On
+
+P7.7.0 完成记录见 [P7.7.0 验收基础设施与候选冻结完成记录](create-bedrock-p7-7-static-completion.md)。
 
 ## 1. 目标与完成定义
 
