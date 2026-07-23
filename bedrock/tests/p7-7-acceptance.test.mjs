@@ -36,12 +36,18 @@ async function writeJson(file, value) {
 }
 
 async function fixtures() {
-	const [behaviorManifest, resourceManifest, catalog, ledger] = await Promise.all([
+	const [behaviorManifest, resourceManifest, catalog] = await Promise.all([
 		json(resolve(bedrockRoot, "behavior_pack", "manifest.json")),
 		json(resolve(bedrockRoot, "resource_pack", "manifest.json")),
-		json(resolve(bedrockRoot, "data", "p7-7-scenario-catalog.json")),
-		json(resolve(bedrockRoot, "data", "p7-7-acceptance.json"))
+		json(resolve(bedrockRoot, "data", "p7-7-scenario-catalog.json"))
 	]);
+	const ledger = {
+		schemaVersion: 1,
+		currentCandidateId: null,
+		outcome: "pending_candidate",
+		campaigns: [],
+		defects: []
+	};
 	const candidate = buildP77CandidateDocument({
 		commit: "a".repeat(40),
 		createdAt: "2026-07-23T00:00:00.000Z",
@@ -131,12 +137,15 @@ function runFor(candidate, {
 	return run;
 }
 
-test("P7.7 static contract keeps all physical checks pending before candidate freeze", async () => {
+test("P7.7 static contract keeps all physical checks pending before and after candidate freeze", async () => {
 	const report = await validateP77StaticContract();
-	assert.equal(report.candidateState, "uncreated");
 	assert.equal(report.scenarios, 18);
 	assert.equal(report.applicableChecks, 52);
-	assert.equal(report.outcome, "pending_candidate");
+	assert.ok(["uncreated", "frozen"].includes(report.candidateState));
+	assert.equal(report.outcome, report.candidateState === "frozen"
+		? "pending_platform_validation"
+		: "pending_candidate");
+	assert.equal(report.runs, 0);
 });
 
 test("P7.7 catalog rejects ownership and platform coverage drift", async () => {
