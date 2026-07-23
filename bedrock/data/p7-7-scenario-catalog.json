@@ -1,0 +1,279 @@
+{
+  "schemaVersion": 1,
+  "target": {
+    "id": "realm-console-1.26.0",
+    "minimumEngineVersion": [1, 26, 0]
+  },
+  "platforms": [
+    {
+      "id": "windows_bedrock",
+      "phase": "P7.7A-P7.7B"
+    },
+    {
+      "id": "test_realm",
+      "phase": "P7.7C"
+    },
+    {
+      "id": "playstation",
+      "phase": "P7.7D"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "candidate_identity",
+      "owner": "P7.7",
+      "description": "Verify the immutable archive digest, pack UUIDs, and pack versions.",
+      "applicability": {
+        "windows_bedrock": "required",
+        "test_realm": "required",
+        "playstation": "required"
+      },
+      "assertions": [
+        "The observed candidate ID matches the active campaign.",
+        "Behavior and resource UUIDs and versions match the frozen candidate."
+      ]
+    },
+    {
+      "id": "pack_import_dependencies",
+      "owner": "P7.7",
+      "description": "Import and activate both mutually dependent packs without cache fallback.",
+      "applicability": {
+        "windows_bedrock": "required",
+        "test_realm": "required",
+        "playstation": "sampled"
+      },
+      "assertions": [
+        "Both packs are active.",
+        "The world does not load an older cached pack."
+      ]
+    },
+    {
+      "id": "content_log_script_boot",
+      "owner": "P7.7",
+      "description": "Boot the Script API runtime and inspect the Windows Content Log.",
+      "applicability": {
+        "windows_bedrock": "required",
+        "test_realm": "sampled",
+        "playstation": "not_applicable"
+      },
+      "assertions": [
+        "Content Log contains no errors.",
+        "Warnings are absent or explicitly allowlisted.",
+        "Script API 2.5.0 and UI API 2.0.0 initialize."
+      ]
+    },
+    {
+      "id": "content_acquisition",
+      "owner": "P7.1",
+      "description": "Acquire migrated blocks and items through their declared survival paths.",
+      "applicability": {
+        "windows_bedrock": "required",
+        "test_realm": "sampled",
+        "playstation": "sampled"
+      },
+      "assertions": [
+        "Registered content is obtainable.",
+        "Drops and inventory quantities are correct."
+      ]
+    },
+    {
+      "id": "language_guide",
+      "owner": "P7.1/P7.6",
+      "description": "Verify localized names, tooltips, forms, and guide navigation.",
+      "applicability": {
+        "windows_bedrock": "required",
+        "test_realm": "sampled",
+        "playstation": "required"
+      },
+      "assertions": [
+        "No raw localization key is shown.",
+        "Guide forms remain navigable with the active input device."
+      ]
+    },
+    {
+      "id": "recipes_processing",
+      "owner": "P7.2",
+      "description": "Run recipe mapping, machine processing, random output, and recovery cases.",
+      "applicability": {
+        "windows_bedrock": "required",
+        "test_realm": "sampled",
+        "playstation": "sampled"
+      },
+      "assertions": [
+        "Inputs, outputs, chances, and heat requirements match the catalog.",
+        "Interrupted jobs recover without duplication or loss."
+      ]
+    },
+    {
+      "id": "fluids_heat",
+      "owner": "P7.3",
+      "description": "Exercise fluid capacity, ports, valves, competition, boilers, and heat sources.",
+      "applicability": {
+        "windows_bedrock": "required",
+        "test_realm": "required",
+        "playstation": "sampled"
+      },
+      "assertions": [
+        "Fluid volume is conserved.",
+        "Direction, valve, heat, and restart rules remain authoritative."
+      ]
+    },
+    {
+      "id": "kinetics_network",
+      "owner": "P7.4",
+      "description": "Exercise speed, direction, stress, overload, propagation, and restart recovery.",
+      "applicability": {
+        "windows_bedrock": "required",
+        "test_realm": "required",
+        "playstation": "required"
+      },
+      "assertions": [
+        "Network speed and direction are deterministic.",
+        "Overload and restored networks fail closed."
+      ]
+    },
+    {
+      "id": "redstone_controls",
+      "owner": "P7.4",
+      "description": "Exercise native redstone, links, requesters, controllers, gauges, and displays.",
+      "applicability": {
+        "windows_bedrock": "required",
+        "test_realm": "required",
+        "playstation": "required"
+      },
+      "assertions": [
+        "Native producer and consumer updates propagate.",
+        "Controller configuration and displayed values survive reload."
+      ]
+    },
+    {
+      "id": "logistics_packages",
+      "owner": "P7.4",
+      "description": "Exercise transport, filters, full endpoints, reversal, packages, and escrow.",
+      "applicability": {
+        "windows_bedrock": "required",
+        "test_realm": "required",
+        "playstation": "sampled"
+      },
+      "assertions": [
+        "Item and package quantities are conserved.",
+        "Concurrent or disconnected transfers recover exactly once."
+      ]
+    },
+    {
+      "id": "contraptions_schematics",
+      "owner": "P7.5",
+      "description": "Assemble, move, interrupt, reload, and paste dynamic structures.",
+      "applicability": {
+        "windows_bedrock": "required",
+        "test_realm": "required",
+        "playstation": "required"
+      },
+      "assertions": [
+        "Moved content is neither duplicated nor lost.",
+        "Assembly, contacts, actors, and schematic recovery preserve state."
+      ]
+    },
+    {
+      "id": "trains_schedules",
+      "owner": "P7.5",
+      "description": "Exercise track graphs, signals, schedules, carriage state, riding, and reconnect.",
+      "applicability": {
+        "windows_bedrock": "required",
+        "test_realm": "required",
+        "playstation": "required"
+      },
+      "assertions": [
+        "Conflicting routes fail closed.",
+        "Schedules, carriage spacing, riding, and cargo state recover."
+      ]
+    },
+    {
+      "id": "equipment_tools",
+      "owner": "P7.6",
+      "description": "Exercise wrench, toolbox, backtank, potato cannon, Extendo Grip, and equipment durability.",
+      "applicability": {
+        "windows_bedrock": "required",
+        "test_realm": "sampled",
+        "playstation": "required"
+      },
+      "assertions": [
+        "Equipment behavior and durability match documented Bedrock semantics.",
+        "Controller and hotbar interactions work with the active input device."
+      ]
+    },
+    {
+      "id": "visual_audio_particles",
+      "owner": "P7.6",
+      "description": "Inspect core models, textures, animations, sounds, and particle events.",
+      "applicability": {
+        "windows_bedrock": "required",
+        "test_realm": "sampled",
+        "playstation": "required"
+      },
+      "assertions": [
+        "No missing texture, model, or blocking animation defect is visible.",
+        "Representative sound and particle families trigger."
+      ]
+    },
+    {
+      "id": "restart_chunk_recovery",
+      "owner": "P7.2-P7.5",
+      "description": "Compare configured, in-flight, and restored checkpoints across unload and restart.",
+      "applicability": {
+        "windows_bedrock": "required",
+        "test_realm": "required",
+        "playstation": "sampled"
+      },
+      "assertions": [
+        "Inventory, fluid, kinetic, contraption, and train state is recoverable.",
+        "No transaction commits twice."
+      ]
+    },
+    {
+      "id": "two_player_concurrency",
+      "owner": "P7.7",
+      "description": "Operate shared endpoints and moving systems from two clients.",
+      "minimumPlayers": 2,
+      "applicability": {
+        "windows_bedrock": "required",
+        "test_realm": "required",
+        "playstation": "required"
+      },
+      "assertions": [
+        "Concurrent actions do not duplicate, lose, or deadlock state.",
+        "Both clients converge on the authoritative result."
+      ]
+    },
+    {
+      "id": "realm_distribution_reconnect",
+      "owner": "P7.7",
+      "description": "Distribute the frozen packs through Realm and reconnect all client types.",
+      "applicability": {
+        "windows_bedrock": "not_applicable",
+        "test_realm": "required",
+        "playstation": "required"
+      },
+      "assertions": [
+        "Clients automatically receive the frozen packs.",
+        "Disconnect and reconnect preserve player and world state."
+      ]
+    },
+    {
+      "id": "stress_30_minutes",
+      "owner": "P7.7",
+      "description": "Run a two-player 30-minute mixed-domain stability observation.",
+      "minimumPlayers": 2,
+      "minimumDurationMinutes": 30,
+      "applicability": {
+        "windows_bedrock": "required",
+        "test_realm": "required",
+        "playstation": "required"
+      },
+      "assertions": [
+        "No crash, watchdog termination, or unrecoverable disconnect occurs.",
+        "Kernel, scheduler, and dynamic-property metrics remain bounded."
+      ]
+    }
+  ]
+}

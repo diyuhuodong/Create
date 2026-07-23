@@ -4,7 +4,7 @@ This directory contains the Bedrock Add-On reimplementation of Create. It is iso
 
 ## Current Phase
 
-Stages 2–5 are statically complete: the migration matrix records 22 bounded mechanical-foundation entries in Stage 2, 245 fixed-system entries in Stage 3, 54 dynamic-assembly and schematic entries in Stage 4, and 25 train/package entries in Stage 5. `static_verified` means behavior, persistence boundaries, resources, recipes, and Node evidence have been checked; it does not claim Windows Bedrock, Realm, PS, visual, or full Create-parity acceptance. Stage 6 equipment and the three-platform acceptance remain pending.
+Stages 2–6 are statically complete. `static_verified` means behavior, persistence boundaries, resources, recipes, and Node evidence have been checked; it does not claim Windows Bedrock, Realm, PS, visual, or full Create-parity acceptance. P7.7 owns the remaining physical platform evidence.
 
 The Stage-2 bounded mechanical foundation accepts 17 explicitly adapted types: twelve kinetic or processing blocks plus andesite, brass, and copper casings, industrial iron blocks, and zinc blocks. Every accepted type has a visual contraption part; the five structural blocks also register an explicit stateless capture/detach/restore adapter. It intentionally enforces the 16-block limit at collection, snapshot, restore, and runtime assembly boundaries; larger moving structures are a separately verified Stage-4 system.
 
@@ -22,6 +22,7 @@ npm run validate
 npm run build
 npm run pack
 npm run acceptance:status
+npm run acceptance:p7-7:status
 npm test
 ```
 
@@ -33,7 +34,7 @@ npm test
 
 `npm run deploy:win` copies built packs to the Windows Bedrock development directory specified by `BEDROCK_DEV_ROOT`. `npm run pack` creates a `.mcaddon` archive after a successful build.
 
-`npm run acceptance:status` validates the S3-15 Windows, Realm, and PS evidence ledger and prints its current status. It does not run Minecraft or turn pending records into passes; follow [`tests/world/smoke-test.md`](tests/world/smoke-test.md) and record each physical result before changing the ledger.
+`npm run acceptance:status` validates the derived S3-15 compatibility ledger. P7.7 is authoritative: freeze a clean immutable archive with `npm run acceptance:p7-7:candidate`, record a hashed run report with `npm run acceptance:p7-7:record -- --report <path>`, and inspect it with `npm run acceptance:p7-7:status`. These commands do not run Minecraft or invent physical evidence; follow [`tests/world/smoke-test.md`](tests/world/smoke-test.md).
 
 With cheats enabled, a Game Director can run `/scriptevent createbedrock:diagnostics summary` to write compact scheduler, kinetic, contraption, train, and dynamic-property diagnostics to the Content Log. The command source also receives the summary when the Script API provides one.
 

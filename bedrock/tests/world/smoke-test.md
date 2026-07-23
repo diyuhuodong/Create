@@ -1,17 +1,129 @@
-# Bedrock Smoke-Test World
+# P7.7 Windows, Realm, and PlayStation Acceptance
 
-This checklist is executed only after the code-completion milestone, on Windows Bedrock and then on a test Realm.
+This checklist records physical evidence. Node tests cannot change a platform
+result from `pending` to `passed`.
 
-1. Deploy both packs with `npm run deploy:win` and activate them in a new survival test world. Confirm the Content Log has no error or warning.
-2. Use `/scriptevent createbedrock:diagnostics` as an operator. Confirm it returns valid JSON counters, includes scheduler/persistence data, and contains no item stacks, inventory slots, player data, or coordinates.
-3. Obtain the S3 static blocks from the creative menu. Verify their English and Chinese names, item visuals, placed visuals, and source textures load without missing-texture markers. Inspect the Crushing Wheel's oversized toothed geometry, a one-to-three-block belt run (start/middle/end caps), and one-to-three Tank columns at empty, water, and lava fill levels; record each platform's render result.
-4. Build a mixed kinetic line with crank, shafts, both cog sizes, gearbox, clutch, chain drive, water wheel, millstone, press, and crushing wheel. Check normal power, overload stall, source conflict, broken links, and recovery.
-5. Apply and remove vanilla redstone power to Andesite Funnel, Clutch, Gearshift, Sequenced Gearshift, Adjustable Chain Gearshift, and Mechanical Pump. Confirm each fails closed across a chunk unload/reload and resumes only after a zero-power sample. Record native consumer/producer behavior separately as each pending S3-14 device is implemented on the 1.26.0 target.
-6. Connect two valid shafts with the belt connector. Reject a cross-dimension or over-length attempt; break one endpoint; then restart the world and verify one restored link only.
-7. Start a millstone, press, and crushing wheel. Restart during processing, then assemble/disassemble each on a bearing. Confirm progress, inputs, and outputs neither duplicate nor disappear.
-8. Assemble a connected 16-block bearing contraption containing all five structural blocks. Verify rotation, collision freeze, occupied-space rejection, entity deletion/recovery, and two-player repeated interaction.
-9. Build flat, curved, and one-block-rising track. Run two two-carriage trains through a reservation conflict, a chunk unload/reload, world-block collision, player collision, and restart while the rear carriage is still clearing the final edge.
-10. Run a two-player, 30-minute pressure pass on Windows, the test Realm, and PS. On each platform, repeat steps 2-9; record Content Log errors/warnings, kernel pending/failed counters, scheduler executed/deferred counters, and Dynamic Property bytes.
-11. Save a separate evidence report for every passed or failed platform scenario, then update `data/s3-15-platform-acceptance.json` with its path. A pending scenario must keep `evidence: null`; do not mark a platform passed until all nine scenarios have evidence.
+## Freeze one candidate
 
-Do not mark any stage as platform-accepted until every item has a recorded Windows, Realm, and PS result.
+1. Commit all tracked implementation changes. The local `.codegraph/` index is
+   excluded from candidate cleanliness and pack hashing.
+2. Run `npm test`, `npm run validate`, `npm run matrix`, and
+   `npm run acceptance:p7-7:candidate`.
+3. Copy the resulting `candidateId`, archive path, archive SHA-256, BP/RP UUIDs,
+   and BP/RP versions from `data/p7-7-candidate.json`.
+4. Use only that archive for Windows, Realm, and PlayStation. Any BP, RP,
+   script, resource, or manifest change invalidates downstream results.
+
+Each run report belongs at:
+
+```text
+work/evidence/p7-7/<candidateId>/<platform>/<runId>/report.json
+```
+
+The report must follow the P7.7 schema and reference SHA-256 hashed evidence in
+the same directory. Record it with:
+
+```bash
+npm run acceptance:p7-7:record -- --report work/evidence/p7-7/<candidateId>/<platform>/<runId>/report.json
+```
+
+## Windows Bedrock
+
+Import the immutable `.mcaddon` into the current non-Preview Windows Bedrock
+client. Create or open the versioned acceptance world, activate both packs,
+enable the Creator Content Log file and GUI, and record the exact client build.
+
+Run these scenarios:
+
+- `candidate_identity`
+- `pack_import_dependencies`
+- `content_log_script_boot`
+- `content_acquisition`
+- `language_guide`
+- `recipes_processing`
+- `fluids_heat`
+- `kinetics_network`
+- `redstone_controls`
+- `logistics_packages`
+- `contraptions_schematics`
+- `trains_schedules`
+- `equipment_tools`
+- `visual_audio_particles`
+- `restart_chunk_recovery`
+- `two_player_concurrency`
+- `stress_30_minutes`
+
+Use a second Bedrock account for the two-player cases. Compare W1 configured,
+W2 in-flight, and W3 restored checkpoints after save/quit, chunk unload, and
+rejoin. The 30-minute run must retain bounded diagnostics and zero crashes,
+watchdogs, or unrecoverable disconnects.
+
+## Test Realm
+
+Download a Realm backup before replacing its world. Upload the exact Windows
+acceptance world and verify that both packs download automatically. Join with
+two accounts and run:
+
+- `candidate_identity`
+- `pack_import_dependencies`
+- `content_log_script_boot`
+- `content_acquisition`
+- `language_guide`
+- `recipes_processing`
+- `fluids_heat`
+- `kinetics_network`
+- `redstone_controls`
+- `logistics_packages`
+- `contraptions_schematics`
+- `trains_schedules`
+- `equipment_tools`
+- `visual_audio_particles`
+- `restart_chunk_recovery`
+- `two_player_concurrency`
+- `realm_distribution_reconnect`
+- `stress_30_minutes`
+
+Exercise shared endpoints, fluid competition, moving assemblies, train route
+conflicts, all-player disconnect/rejoin, and a two-player 30-minute mixed-domain
+run. Download the completed Realm world and reopen it on Windows to inspect
+persisted state.
+
+## PlayStation
+
+Join the same Realm with the linked Microsoft account; do not claim a local
+PlayStation sideload. Keep a Windows observer online to capture Content Log and
+`/scriptevent createbedrock:diagnostics` output. Use controller screenshots or
+video for forms, riding, equipment, and visual evidence.
+
+Run these PlayStation checks:
+
+- `candidate_identity`
+- `pack_import_dependencies`
+- `content_acquisition`
+- `language_guide`
+- `recipes_processing`
+- `fluids_heat`
+- `kinetics_network`
+- `redstone_controls`
+- `logistics_packages`
+- `contraptions_schematics`
+- `trains_schedules`
+- `equipment_tools`
+- `visual_audio_particles`
+- `restart_chunk_recovery`
+- `two_player_concurrency`
+- `realm_distribution_reconnect`
+- `stress_30_minutes`
+
+The final pressure run uses PlayStation plus Windows for at least 30 minutes.
+Verify automatic pack download, controller focus, disconnect/reconnect, train
+riding, dynamic machinery, native redstone, and bounded server diagnostics.
+
+## Close the campaign
+
+Run `npm run acceptance:p7-7:validate` and
+`npm run acceptance:p7-7:status`. A campaign is `platform_verified` only when
+every applicable scenario is passed on the same candidate, all evidence hashes
+resolve, and no P0-P2 defect remains open. Failed runs are never overwritten;
+fixes require a new pack version, candidate, Windows regression, and downstream
+Realm/PlayStation reruns.

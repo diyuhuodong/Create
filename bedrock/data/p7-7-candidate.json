@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "state": "uncreated",
+  "target": {
+    "id": "realm-console-1.26.0",
+    "minimumEngineVersion": [1, 26, 0]
+  },
+  "candidateId": null,
+  "createdAt": null,
+  "source": null,
+  "packs": null,
+  "artifact": null
+}

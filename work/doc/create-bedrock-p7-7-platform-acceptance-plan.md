@@ -175,7 +175,7 @@ P7.7.0 计划提供：
 ```bash
 npm run acceptance:p7-7:candidate
 npm run acceptance:p7-7:status
-npm run acceptance:p7-7:record -- --platform windows_bedrock --scenario kinetics_network
+npm run acceptance:p7-7:record -- --report work/evidence/p7-7/<candidateId>/<platform>/<runId>/report.json
 npm run acceptance:p7-7:validate
 ```
 
