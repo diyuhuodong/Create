@@ -1,0 +1,85 @@
+{
+	"schemaVersion": 1,
+	"rules": [
+		{
+			"domain": "recipes",
+			"family": "P7.2/recipe_ir",
+			"owner": "R2/recipes",
+			"rationale": "Each Java recipe needs IR strategy, acquisition closure, and machine semantics review.",
+			"status": "partial",
+			"strategy": "data_compilation"
+		},
+		{
+			"domain": "advancements",
+			"family": "P7.6/guidance",
+			"owner": "R5/guidance",
+			"rationale": "Java advancement triggers need a Bedrock achievement, guide, or explicit equivalent decision.",
+			"status": "partial",
+			"strategy": "runtime_contract"
+		},
+		{
+			"domain": "loot_tables",
+			"family": "P7.1/acquisition",
+			"owner": "R3/acquisition",
+			"rationale": "Drops must participate in the survival acquisition graph and preserve relevant conditions.",
+			"status": "partial",
+			"strategy": "data_compilation"
+		},
+		{
+			"domain": "tags",
+			"family": "P7.1/content",
+			"owner": "R3/content",
+			"rationale": "Tag membership controls recipes and runtime predicates and needs a Bedrock projection decision.",
+			"status": "partial",
+			"strategy": "data_compilation"
+		},
+		{
+			"domain": "gametest_structures",
+			"family": "P7.7/validation",
+			"owner": "R6/validation",
+			"rationale": "Java fixtures require a Bedrock test-world equivalent or a documented platform-only replacement.",
+			"status": "partial",
+			"strategy": "test_port"
+		},
+		{
+			"domain": "source_assets",
+			"family": "P7.6/resources",
+			"owner": "R4/resources",
+			"rationale": "Source models, textures, sounds, particles, and UI assets need a visible Bedrock resource projection.",
+			"status": "partial",
+			"strategy": "asset_projection"
+		},
+		{
+			"domain": "generated_assets",
+			"family": "P7.6/resources",
+			"owner": "R4/resources",
+			"rationale": "Generated Java assets require reproducible Bedrock resource output or an explicit equivalent.",
+			"status": "partial",
+			"strategy": "asset_projection"
+		},
+		{
+			"domain": "ponder_scenes",
+			"family": "P7.6/guidance",
+			"owner": "R5/guidance",
+			"rationale": "Every Ponder scene needs a Bedrock tutorial interaction, guide page, or documented replacement.",
+			"status": "partial",
+			"strategy": "runtime_contract"
+		},
+		{
+			"domain": "compatibility_classes",
+			"family": "P7.0/compatibility",
+			"owner": "R5/compatibility",
+			"rationale": "Java-only integrations require an explicit native substitute, optional pack, or non-applicable decision.",
+			"status": "deferred_compat",
+			"strategy": "external_compat"
+		},
+		{
+			"domain": "game_tests",
+			"family": "P7.7/validation",
+			"owner": "R6/validation",
+			"rationale": "Each Java behavior test needs a Node contract test, Bedrock test world scenario, or platform evidence plan.",
+			"status": "partial",
+			"strategy": "test_port"
+		}
+	]
+}

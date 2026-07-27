@@ -1,7 +1,14 @@
 import { readdir, readFile } from "node:fs/promises";
 import { relative, resolve } from "node:path";
 
-export const DOMAIN_INVENTORY_SCHEMA_VERSION = 1;
+export const DOMAIN_INVENTORY_SCHEMA_VERSION = 2;
+
+/** Stable key shared by generated inventory and the full migration ledger. */
+export function domainSourceKey(domain, entry) {
+	if (typeof domain !== "string" || domain.length === 0 || typeof entry?.source !== "string" || entry.source.length === 0)
+		throw new TypeError("Domain inventory entries require a domain and source path");
+	return `domain:${domain}:${entry.source}${entry.test ? `#${entry.test}` : ""}`;
+}
 
 async function filesUnder(directory) {
 	const files = [];
@@ -31,7 +38,8 @@ async function jsonDomain(repositoryRoot, name, directory) {
 		} catch {
 			type = "invalid_json";
 		}
-		entries.push({ source: sourcePath(repositoryRoot, file), type, status: "specification_pending" });
+		const entry = { source: sourcePath(repositoryRoot, file), type, status: "specification_pending" };
+		entries.push({ ...entry, sourceKey: domainSourceKey(name, entry) });
 	}
 	return { name, entries };
 }
@@ -39,7 +47,10 @@ async function jsonDomain(repositoryRoot, name, directory) {
 async function fileDomain(repositoryRoot, name, directory, filter = () => true) {
 	const entries = (await filesUnder(directory))
 		.filter(filter)
-		.map(file => ({ source: sourcePath(repositoryRoot, file), status: "specification_pending" }));
+		.map(file => {
+			const entry = { source: sourcePath(repositoryRoot, file), status: "specification_pending" };
+			return { ...entry, sourceKey: domainSourceKey(name, entry) };
+		});
 	return { name, entries };
 }
 
@@ -48,8 +59,10 @@ async function annotatedGameTests(repositoryRoot) {
 	const entries = [];
 	for (const file of await filesUnder(directory)) {
 		const content = await readFile(file, "utf8");
-		for (const match of content.matchAll(/@(?:CreateTest|GameTest)[\s\S]{0,400}?\b(?:void|static)\s+([A-Za-z0-9_]+)/g))
-			entries.push({ source: sourcePath(repositoryRoot, file), test: match[1], status: "specification_pending" });
+		for (const match of content.matchAll(/@(?:CreateTest|GameTest)[\s\S]{0,400}?\bvoid\s+([A-Za-z0-9_]+)/g)) {
+			const entry = { source: sourcePath(repositoryRoot, file), test: match[1], status: "specification_pending" };
+			entries.push({ ...entry, sourceKey: domainSourceKey("game_tests", entry) });
+		}
 	}
 	return { name: "game_tests", entries };
 }

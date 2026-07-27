@@ -6,9 +6,10 @@ import { fileURLToPath } from "node:url";
 import { buildDomainInventory } from "./domain-inventory.mjs";
 import { buildJavaRegistrationCatalog } from "./java-registration-catalog.mjs";
 import { buildMigrationLedger } from "./migration-ledger.mjs";
+import { buildP71AcquisitionLedger, validateP71AcquisitionLedger } from "./p7-1-acquisition-ledger.mjs";
 import { validateMigrationMatrix } from "./migration-matrix-schema.mjs";
 import { validateJavaRegistrationCatalog } from "./java-registration-catalog-schema.mjs";
-import { validateMigrationLedger, validateMigrationOverrides } from "./migration-ledger-schema.mjs";
+import { validateMigrationDomainOverrides, validateMigrationLedger, validateMigrationOverrides } from "./migration-ledger-schema.mjs";
 import { validateCoreMaterialChain } from "./core-material-chain-contract.mjs";
 import { validateCinderFlourChain } from "./cinder-flour-contract.mjs";
 import { buildRecipeIr, validateRecipeIr } from "./recipe-ir.mjs";
@@ -131,6 +132,8 @@ const migrationMatrix = await readJson(resolve(bedrockRoot, "data", "migration-m
 const javaRegistrationCatalog = await readJson(resolve(bedrockRoot, "data", "java-registration-catalog.json"));
 const migrationLedger = await readJson(resolve(bedrockRoot, "data", "migration-ledger.json"));
 const migrationOverrides = await readJson(resolve(bedrockRoot, "data", "migration-overrides.json"));
+const migrationDomainOverrides = await readJson(resolve(bedrockRoot, "data", "migration-domain-overrides.json"));
+const p71AcquisitionLedger = await readJson(resolve(bedrockRoot, "data", "p7-1-acquisition-ledger.json"));
 const interactionRecipes = await readJson(resolve(bedrockRoot, "data", "recipes", "interactions.json"));
 const mechanicalCraftingRecipes = await readJson(resolve(bedrockRoot, "data", "recipes", "mechanical-crafting.json"));
 const recipeIr = await readJson(resolve(bedrockRoot, "data", "recipes", "recipe-ir.json"));
@@ -150,7 +153,9 @@ const deliveryDependencyGraph = await readJson(resolve(bedrockRoot, "data", "del
 validateMigrationMatrix(migrationMatrix);
 const javaRegistrationCoverage = validateJavaRegistrationCatalog(javaRegistrationCatalog);
 validateMigrationOverrides(migrationOverrides, javaRegistrationCatalog);
+validateMigrationDomainOverrides(migrationDomainOverrides, domainInventory);
 const migrationLedgerCoverage = validateMigrationLedger(migrationLedger, javaRegistrationCatalog, domainInventory);
+validateP71AcquisitionLedger(p71AcquisitionLedger);
 const deliveryDependencyCoverage = validateDeliveryDependencyGraph(deliveryDependencyGraph);
 assertFreshGeneratedData("bedrock/data/delivery-dependency-graph.json", deliveryDependencyGraph, buildDeliveryDependencyGraph());
 const expectedDomainInventory = await buildDomainInventory({ repositoryRoot });
@@ -162,9 +167,11 @@ const { ledger: expectedMigrationLedger } = await buildMigrationLedger({
 	catalog: expectedJavaRegistrationCatalog,
 	domainInventory: expectedDomainInventory,
 	matrix: migrationMatrix,
-	overrides: migrationOverrides
+	overrides: migrationOverrides,
+	domainOverrides: migrationDomainOverrides
 });
 assertFreshGeneratedData("bedrock/data/migration-ledger.json", migrationLedger, expectedMigrationLedger);
+assertFreshGeneratedData("bedrock/data/p7-1-acquisition-ledger.json", p71AcquisitionLedger, await buildP71AcquisitionLedger({ bedrockRoot }));
 const coreMaterialChain = await validateCoreMaterialChain({ bedrockRoot });
 await validateCinderFlourChain({ bedrockRoot });
 validateInteractionRecipes(interactionRecipes);
