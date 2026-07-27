@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import { deriveS315CompatibilityLedger, P77_SCENARIO_RULES, summarizeP77Acceptance, validateP77AcceptanceDocument, validateP77ScenarioCatalog } from "./p7-7-acceptance-schema.mjs";
 import { validateP77CandidateDocument } from "./p7-7-candidate-schema.mjs";
 import { buildP77CookingParityCatalog, renderP77CookingParityRecipes, validateP77CookingParityCatalog } from "./p7-7-cooking-parity.mjs";
+import { buildP77AcceptanceWorldLayout, renderP77AcceptanceWorldLayout, validateP77AcceptanceWorldLayout } from "./p7-7-acceptance-world.mjs";
 import { buildP77GapLedger, validateP77GapLedger } from "./p7-7-gap-ledger.mjs";
 import { validateStage3PlatformAcceptanceDocument } from "./s3-15-platform-acceptance-schema.mjs";
 
@@ -23,7 +24,7 @@ export async function validateP77StaticContract({
 	root = defaultBedrockRoot,
 	trackingRoot = defaultBedrockRoot
 } = {}) {
-	const [behaviorManifest, resourceManifest, candidate, catalog, ledger, legacy, smokeTest, packageJson, gapLedger, nativeRecipes, interactions, recipeIr, matrix, resources, cookingParity, cookingParityRuntime] = await Promise.all([
+	const [behaviorManifest, resourceManifest, candidate, catalog, ledger, legacy, smokeTest, packageJson, gapLedger, nativeRecipes, interactions, recipeIr, matrix, resources, cookingParity, cookingParityRuntime, acceptanceWorld, acceptanceWorldRuntime] = await Promise.all([
 		json(resolve(root, "behavior_pack", "manifest.json")),
 		json(resolve(root, "resource_pack", "manifest.json")),
 		json(resolve(trackingRoot, "data", "p7-7-candidate.json")),
@@ -40,7 +41,9 @@ export async function validateP77StaticContract({
 		json(resolve(trackingRoot, "data", "p7-6-resource-ledger.json"))
 		,
 		json(resolve(trackingRoot, "data", "p7-7-cooking-parity.json")),
-		readFile(resolve(root, "behavior_pack", "scripts", "processing", "generated", "cooking-parity-recipes.js"), "utf8")
+		readFile(resolve(root, "behavior_pack", "scripts", "processing", "generated", "cooking-parity-recipes.js"), "utf8"),
+		json(resolve(trackingRoot, "data", "p7-7-acceptance-world.json")),
+		readFile(resolve(root, "behavior_pack", "scripts", "acceptance", "generated", "acceptance-world-layout.js"), "utf8")
 	]);
 	const candidateCoverage = validateP77CandidateDocument(candidate, {
 		behaviorManifest: candidate.state === "frozen" ? behaviorManifest : undefined,
@@ -58,6 +61,12 @@ export async function validateP77StaticContract({
 	const cookingCoverage = validateP77CookingParityCatalog(cookingParity);
 	if (cookingParityRuntime !== renderP77CookingParityRecipes(cookingParity))
 		throw new Error("P7.7 generated cooking parity recipes are stale; run npm run cooking:p7-7.");
+	const expectedAcceptanceWorld = buildP77AcceptanceWorldLayout(catalog);
+	if (!sameJson(acceptanceWorld, expectedAcceptanceWorld))
+		throw new Error("P7.7 acceptance world layout is stale; run npm run acceptance-world:p7-7.");
+	const acceptanceWorldCoverage = validateP77AcceptanceWorldLayout(acceptanceWorld, catalog);
+	if (acceptanceWorldRuntime !== renderP77AcceptanceWorldLayout(acceptanceWorld))
+		throw new Error("P7.7 generated acceptance world layout is stale; run npm run acceptance-world:p7-7.");
 	const expectedLegacy = deriveS315CompatibilityLedger({ candidate, catalog, ledger });
 	if (!sameJson(legacy, expectedLegacy))
 		throw new Error("S3-15 compatibility ledger is stale; derive it from P7.7 acceptance data");
@@ -65,13 +74,14 @@ export async function validateP77StaticContract({
 	for (const rule of P77_SCENARIO_RULES)
 		if (!smokeTest.includes(`\`${rule.id}\``))
 			throw new Error(`P7.7 smoke test is missing scenario ${rule.id}`);
-	for (const marker of ["candidateId", "SHA-256", "Windows", "Realm", "PlayStation", "30-minute"])
+	for (const marker of ["candidateId", "SHA-256", "Windows", "Realm", "PlayStation", "30-minute", "createbedrock:acceptance", "checkpoint W1", "W0"])
 		if (!smokeTest.includes(marker))
 			throw new Error(`P7.7 smoke test is missing ${marker} guidance`);
 	for (const script of [
 		"acceptance:p7-7:candidate",
 		"gap:p7-7",
 		"cooking:p7-7",
+		"acceptance-world:p7-7",
 		"acceptance:p7-7:status",
 		"acceptance:p7-7:record",
 		"acceptance:p7-7:validate"
@@ -88,6 +98,7 @@ export async function validateP77StaticContract({
 		outcome: acceptanceCoverage.outcome,
 		gapLedger: gapCoverage,
 		cookingParity: cookingCoverage,
+		acceptanceWorld: acceptanceWorldCoverage,
 		summary: summarizeP77Acceptance({ candidate, catalog, ledger })
 	};
 }

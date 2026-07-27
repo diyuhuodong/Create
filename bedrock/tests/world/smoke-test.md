@@ -27,6 +27,27 @@ the same directory. Record it with:
 npm run acceptance:p7-7:record -- --report work/evidence/p7-7/<candidateId>/<platform>/<runId>/report.json
 ```
 
+## Initialize the acceptance layout
+
+The generated P7.7 layout fixes the seed, ten non-overlapping zones, fixture
+IDs, and scenario ownership. It is not a fabricated `.mcworld`: build or open
+the world on Windows, place the declared fixtures, then use the script event
+to retain a fail-closed checkpoint record.
+
+```text
+/scriptevent createbedrock:acceptance setup
+/scriptevent createbedrock:acceptance checkpoint W1
+/scriptevent createbedrock:acceptance checkpoint W2
+/scriptevent createbedrock:acceptance checkpoint W3
+/scriptevent createbedrock:acceptance status
+```
+
+`setup` captures W0. W1, W2, and W3 must be recorded in that order; `reset`
+returns the checkpoint state to an uninitialized world. A checkpoint is marked
+incomplete when any kernel, processing, fluid, kinetic, logistics,
+contraption, or train snapshot provider is unavailable. Do not treat an
+incomplete checkpoint as platform evidence.
+
 ## Windows Bedrock
 
 Import the immutable `.mcaddon` into the current non-Preview Windows Bedrock

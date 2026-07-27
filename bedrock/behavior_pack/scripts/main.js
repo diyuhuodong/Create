@@ -1,7 +1,8 @@
 import { system, world } from "@minecraft/server";
 
 import { registerDiagnosticsCommand } from "./kernel/diagnostics-runtime.js";
-import { registerKernelDiagnosticProvider, startKernel } from "./kernel/index.js";
+import { getKernelDiagnostics, registerKernelDiagnosticProvider, startKernel } from "./kernel/index.js";
+import { getAcceptanceWorldDiagnostics, registerAcceptanceWorld } from "./acceptance/acceptance-world-runtime.js";
 import { getContraptionDiagnostics, registerContraptions } from "./contraptions/contraption-runtime.js";
 import { getLinearActuatorDiagnostics, registerLinearActuators } from "./contraptions/linear-actuator-runtime.js";
 import { getContraptionActorDiagnostics, registerContraptionActors } from "./contraptions/contraption-actors-runtime.js";
@@ -106,6 +107,17 @@ registerRollingStock();
 registerBoundCardboard();
 registerCasingApplications();
 registerGuidance();
+registerAcceptanceWorld({
+	providers: {
+		contraptions: getContraptionDiagnostics,
+		fluids: getFluidDiagnostics,
+		kernel: getKernelDiagnostics,
+		kinetics: getKineticDiagnostics,
+		logistics: () => ({ packages: getPackageDiagnostics(), runtime: getLogisticsDiagnostics() }),
+		processing: getStage3ProcessingDiagnostics,
+		trains: getTrainDiagnostics
+	}
+});
 registerBlazeBurners();
 registerCardboardEquipment();
 registerCopycats();
@@ -191,5 +203,6 @@ registerKernelDiagnosticProvider("treeFertilizer", getTreeFertilizerDiagnostics)
 registerKernelDiagnosticProvider("verticalMobility", getVerticalMobilityDiagnostics);
 registerKernelDiagnosticProvider("worldshaper", getWorldshaperDiagnostics);
 registerKernelDiagnosticProvider("storage", storageDiagnostics);
+registerKernelDiagnosticProvider("acceptanceWorld", getAcceptanceWorldDiagnostics);
 registerDiagnosticsCommand();
 system.run(startKernel);

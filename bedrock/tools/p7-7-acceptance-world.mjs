@@ -1,0 +1,157 @@
+export const P77_ACCEPTANCE_WORLD_SCHEMA_VERSION = 1;
+export const P77_ACCEPTANCE_ZONE_IDS = Object.freeze([
+	"spawn_diagnostics",
+	"content_gallery",
+	"kinetics_boiler",
+	"redstone_controls",
+	"processing",
+	"logistics_packages",
+	"fluids",
+	"contraptions_schematics",
+	"trains",
+	"equipment_resources"
+]);
+export const P77_ACCEPTANCE_CHECKPOINT_IDS = Object.freeze(["W0", "W1", "W2", "W3"]);
+
+const ZONE_DEFINITIONS = Object.freeze([
+	["spawn_diagnostics", 0, 0, 32, 32, "Candidate identity, pack activation, diagnostics, and Content Log handoff."],
+	["content_gallery", 64, 0, 48, 32, "Content acquisition, localized names, guide navigation, and visual samples."],
+	["kinetics_boiler", 128, 0, 48, 32, "Kinetic networks, stress, boilers, heat, and overload recovery."],
+	["redstone_controls", 192, 0, 48, 32, "Native redstone controls, links, requesters, displays, and gauges."],
+	["processing", 0, 80, 48, 32, "Recipes, processing machines, chance outputs, and cooking-parity fixtures."],
+	["logistics_packages", 64, 80, 48, 32, "Belts, funnels, filters, endpoints, packages, and escrow."],
+	["fluids", 128, 80, 48, 32, "Fluid capacity, ports, valves, competition, and source recovery."],
+	["contraptions_schematics", 192, 80, 48, 32, "Dynamic assemblies, contacts, actors, and schematic recovery."],
+	["trains", 0, 160, 112, 48, "Tracks, signals, schedules, riding, cargo, and reconnect recovery."],
+	["equipment_resources", 128, 160, 112, 48, "Equipment, toolbox, Extendo, particles, sounds, and resource gallery."]
+]);
+
+const SCENARIO_ZONES = Object.freeze({
+	candidate_identity: ["spawn_diagnostics"],
+	pack_import_dependencies: ["spawn_diagnostics"],
+	content_log_script_boot: ["spawn_diagnostics"],
+	content_acquisition: ["content_gallery"],
+	language_guide: ["content_gallery", "equipment_resources"],
+	recipes_processing: ["processing"],
+	fluids_heat: ["fluids", "kinetics_boiler"],
+	kinetics_network: ["kinetics_boiler"],
+	redstone_controls: ["redstone_controls"],
+	logistics_packages: ["logistics_packages"],
+	contraptions_schematics: ["contraptions_schematics"],
+	trains_schedules: ["trains"],
+	equipment_tools: ["equipment_resources"],
+	visual_audio_particles: ["content_gallery", "contraptions_schematics", "equipment_resources"],
+	restart_chunk_recovery: ["processing", "fluids", "kinetics_boiler", "logistics_packages", "contraptions_schematics", "trains"],
+	two_player_concurrency: ["logistics_packages", "fluids", "contraptions_schematics", "trains"],
+	realm_distribution_reconnect: ["spawn_diagnostics"],
+	stress_30_minutes: ["kinetics_boiler", "processing", "logistics_packages", "fluids", "contraptions_schematics", "trains"]
+});
+
+export const P77_ACCEPTANCE_SNAPSHOT_PROVIDERS = Object.freeze([
+	"kernel",
+	"processing",
+	"fluids",
+	"kinetics",
+	"logistics",
+	"contraptions",
+	"trains"
+]);
+
+function assertObject(value, label) {
+	if (!value || typeof value !== "object" || Array.isArray(value))
+		throw new TypeError(`P7.7 acceptance world ${label} must be an object`);
+}
+
+function exact(left, right) {
+	return JSON.stringify(left) === JSON.stringify(right);
+}
+
+function uniqueSorted(values) {
+	return [...new Set(values)].sort((left, right) => left.localeCompare(right));
+}
+
+export function buildP77AcceptanceWorldLayout(catalog) {
+	assertObject(catalog, "scenario catalog");
+	if (!Array.isArray(catalog.scenarios))
+		throw new TypeError("P7.7 acceptance world requires scenario catalog entries");
+	const zones = ZONE_DEFINITIONS.map(([id, x, z, width, depth, purpose]) => ({
+		bounds: { depth, height: 32, width, x, y: 80, z },
+		fixtureId: `createbedrock:p7_7/acceptance/${id}`,
+		id,
+		purpose
+	}));
+	const scenarios = catalog.scenarios.map(scenario => {
+		const zoneIds = SCENARIO_ZONES[scenario.id];
+		if (!zoneIds)
+			throw new Error(`P7.7 acceptance world has no zone mapping for scenario ${scenario.id}`);
+		return {
+			id: scenario.id,
+			owner: scenario.owner,
+			zoneIds: uniqueSorted(zoneIds)
+		};
+	}).sort((left, right) => left.id.localeCompare(right.id));
+	const layout = {
+		schemaVersion: P77_ACCEPTANCE_WORLD_SCHEMA_VERSION,
+		generatedAt: "deterministic",
+		generatedFrom: "data/p7-7-scenario-catalog.json",
+		id: "createbedrock:p7_7/acceptance_world",
+		seed: "createbedrock-p7-7-acceptance-v1",
+		origin: { x: 0, y: 80, z: 0 },
+		zones,
+		scenarios,
+		checkpoints: P77_ACCEPTANCE_CHECKPOINT_IDS.map((id, index) => ({
+			id,
+			previous: index === 0 ? null : P77_ACCEPTANCE_CHECKPOINT_IDS[index - 1],
+			requiredSnapshotProviders: index === 0 ? ["kernel"] : P77_ACCEPTANCE_SNAPSHOT_PROVIDERS
+		})),
+		summary: {
+			checkpoints: P77_ACCEPTANCE_CHECKPOINT_IDS.length,
+			scenarios: scenarios.length,
+			zones: zones.length
+		}
+	};
+	validateP77AcceptanceWorldLayout(layout, catalog);
+	return layout;
+}
+
+export function renderP77AcceptanceWorldLayout(layout) {
+	validateP77AcceptanceWorldLayout(layout);
+	return `// Generated by tools/generate-p7-7-acceptance-world.mjs. Do not edit.\nexport const ACCEPTANCE_WORLD_LAYOUT = Object.freeze(${JSON.stringify(layout, null, "\t")});\n`;
+}
+
+export function validateP77AcceptanceWorldLayout(layout, catalog) {
+	assertObject(layout, "layout");
+	if (layout.schemaVersion !== P77_ACCEPTANCE_WORLD_SCHEMA_VERSION || layout.generatedAt !== "deterministic" || layout.generatedFrom !== "data/p7-7-scenario-catalog.json" || layout.id !== "createbedrock:p7_7/acceptance_world")
+		throw new Error("P7.7 acceptance world layout has invalid schema or provenance");
+	if (!Array.isArray(layout.zones) || !Array.isArray(layout.scenarios) || !Array.isArray(layout.checkpoints) || !layout.summary)
+		throw new TypeError("P7.7 acceptance world layout requires zones, scenarios, checkpoints, and summary");
+	if (!exact(layout.zones.map(zone => zone.id), P77_ACCEPTANCE_ZONE_IDS))
+		throw new Error("P7.7 acceptance world layout must contain every zone in coordinate order");
+	for (const zone of layout.zones) {
+		if (!zone.bounds || !Number.isInteger(zone.bounds.x) || !Number.isInteger(zone.bounds.y) || !Number.isInteger(zone.bounds.z) || !Number.isInteger(zone.bounds.width) || !Number.isInteger(zone.bounds.depth) || zone.bounds.width < 1 || zone.bounds.depth < 1 || typeof zone.fixtureId !== "string" || typeof zone.purpose !== "string")
+			throw new Error(`P7.7 acceptance zone ${zone.id} is invalid`);
+	}
+	for (let index = 0; index < layout.zones.length; index++)
+		for (let other = index + 1; other < layout.zones.length; other++) {
+			const left = layout.zones[index].bounds;
+			const right = layout.zones[other].bounds;
+			if (left.x < right.x + right.width && right.x < left.x + left.width && left.z < right.z + right.depth && right.z < left.z + left.depth)
+				throw new Error(`P7.7 acceptance zones ${layout.zones[index].id} and ${layout.zones[other].id} overlap`);
+		}
+	const expectedScenarioIds = catalog?.scenarios?.map(scenario => scenario.id).sort((left, right) => left.localeCompare(right)) ?? layout.scenarios.map(scenario => scenario.id);
+	if (!exact(layout.scenarios.map(scenario => scenario.id), expectedScenarioIds))
+		throw new Error("P7.7 acceptance world layout scenario coverage is incomplete");
+	for (const scenario of layout.scenarios)
+		if (!Array.isArray(scenario.zoneIds) || scenario.zoneIds.length === 0 || scenario.zoneIds.some(zoneId => !P77_ACCEPTANCE_ZONE_IDS.includes(zoneId)))
+			throw new Error(`P7.7 acceptance scenario ${scenario.id} has invalid zones`);
+	if (!exact(layout.checkpoints.map(checkpoint => checkpoint.id), P77_ACCEPTANCE_CHECKPOINT_IDS))
+		throw new Error("P7.7 acceptance world layout must contain W0 through W3");
+	for (const [index, checkpoint] of layout.checkpoints.entries()) {
+		if (checkpoint.previous !== (index === 0 ? null : P77_ACCEPTANCE_CHECKPOINT_IDS[index - 1]) || !Array.isArray(checkpoint.requiredSnapshotProviders))
+			throw new Error(`P7.7 acceptance checkpoint ${checkpoint.id} has an invalid transition`);
+	}
+	const summary = { checkpoints: layout.checkpoints.length, scenarios: layout.scenarios.length, zones: layout.zones.length };
+	if (!exact(layout.summary, summary))
+		throw new Error("P7.7 acceptance world summary is stale");
+	return summary;
+}
