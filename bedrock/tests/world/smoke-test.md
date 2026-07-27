@@ -20,12 +20,35 @@ Each run report belongs at:
 work/evidence/p7-7/<candidateId>/<platform>/<runId>/report.json
 ```
 
-The report must follow the P7.7 schema and reference SHA-256 hashed evidence in
-the same directory. Record it with:
+Create a candidate-bound template, copy each observation under its evidence
+directory, and parse a copied Content Log where applicable:
+
+```bash
+npm run acceptance:p7-7:new-report -- --platform windows_bedrock --scenario candidate_identity --run windows-candidate-001
+# Fill report.json with the observed version, device, sanitized aliases, steps, and result.
+npm run acceptance:p7-7:content-log -- --report work/evidence/p7-7/<candidate>/windows_bedrock/<run>/report.json --log work/evidence/p7-7/<candidate>/windows_bedrock/<run>/content-log.txt
+npm run acceptance:p7-7:evidence -- --report work/evidence/p7-7/<candidate>/windows_bedrock/<run>/report.json
+```
+
+`files.sha256` excludes `report.json` to avoid a self-referential hash. Evidence
+paths must be repository-relative, use redacted filenames, and never contain
+account names, tokens, profiles, or absolute paths. The report must then follow
+the P7.7 schema and reference the generated SHA-256 evidence. Record it with:
 
 ```bash
 npm run acceptance:p7-7:record -- --report work/evidence/p7-7/<candidateId>/<platform>/<runId>/report.json
 ```
+
+Resolve a recorded defect only through its lifecycle tool. `closed` requires a
+new frozen candidate; only P3 defects may be accepted:
+
+```bash
+npm run acceptance:p7-7:defect -- --id P77-123 --state closed --resolution "Fixed in the new pack" --candidate <new-candidate-id>
+```
+
+Freezing a new candidate automatically marks every prior campaign as superseded.
+Their evidence remains historical, but their passed scenarios cannot satisfy the
+new candidate's platform gate.
 
 ## Initialize the acceptance layout
 

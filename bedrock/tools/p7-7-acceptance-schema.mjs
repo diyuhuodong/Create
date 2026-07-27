@@ -28,6 +28,7 @@ const RESULT_STATES = new Set(["pending", "passed", "failed", "not_applicable"])
 const DEFECT_STATES = new Set(["open", "closed", "accepted"]);
 const DEFECT_SEVERITIES = new Set(["P0", "P1", "P2", "P3"]);
 const EVIDENCE_SHA_PATTERN = /^[0-9a-f]{64}$/;
+const ACCOUNT_ALIAS_PATTERN = /^[a-z][a-z0-9_-]{0,31}$/;
 const LEGACY_SCENARIO_RULES = Object.freeze([
 	Object.freeze({ id: "pack_load_content_log", sources: ["candidate_identity", "pack_import_dependencies", "content_log_script_boot"] }),
 	Object.freeze({ id: "diagnostics_summary", sources: ["candidate_identity", "content_log_script_boot", "stress_30_minutes"] }),
@@ -133,6 +134,8 @@ function validateCandidateObservation(run, candidate) {
 
 function validateContentLogMetrics(run) {
 	assertObject(run.metrics, `run ${run.runId} metrics`);
+	if (!Number.isInteger(run.metrics.scriptBootMarkerCount) || run.metrics.scriptBootMarkerCount < 1)
+		throw new Error(`P7.7 Content Log run ${run.runId} requires a Create Bedrock script boot marker`);
 	if (run.metrics.contentLogErrorCount !== 0)
 		throw new Error(`P7.7 passed Content Log run ${run.runId} must report zero errors`);
 	if (!Number.isInteger(run.metrics.contentLogWarningCount) || run.metrics.contentLogWarningCount < 0)
@@ -184,7 +187,8 @@ function validateRun(run, { candidate, catalog, platformId }) {
 	if (!Array.isArray(run.accountAliases) || run.accountAliases.length !== run.playerCount)
 		throw new Error(`P7.7 run ${run.runId} requires one sanitized account alias per player`);
 	for (const alias of run.accountAliases)
-		assertString(alias, `run ${run.runId} account alias`);
+		if (typeof alias !== "string" || !ACCOUNT_ALIAS_PATTERN.test(alias))
+			throw new Error(`P7.7 run ${run.runId} account alias must be a sanitized alias`);
 	if (!Array.isArray(run.steps) || run.steps.length === 0)
 		throw new Error(`P7.7 run ${run.runId} requires executed steps`);
 	for (const step of run.steps)
@@ -282,10 +286,18 @@ function validateDefects(defects, campaignIds) {
 		if (defect.state === "closed") {
 			assertIsoDate(defect.closedAt, `defect ${defect.id} closedAt`);
 			assertString(defect.resolution, `defect ${defect.id} resolution`);
+			assertString(defect.resolutionCandidateId, `defect ${defect.id} resolution candidate`);
+			if (!campaignIds.has(defect.resolutionCandidateId) || defect.resolutionCandidateId === defect.candidateId)
+				throw new Error(`P7.7 closed defect ${defect.id} must name a newer frozen candidate`);
 		} else if (defect.state === "accepted") {
 			if (defect.severity !== "P3")
 				throw new Error(`P7.7 only P3 defects may be accepted`);
 			assertString(defect.resolution, `defect ${defect.id} acceptance`);
+			assertString(defect.resolutionCandidateId, `defect ${defect.id} acceptance candidate`);
+			if (!campaignIds.has(defect.resolutionCandidateId))
+				throw new Error(`P7.7 accepted defect ${defect.id} must name a frozen candidate`);
+		} else if (defect.closedAt !== null || defect.resolution !== null || defect.resolutionCandidateId !== null) {
+			throw new Error(`P7.7 open defect ${defect.id} cannot claim a resolution`);
 		}
 	}
 }
@@ -373,6 +385,8 @@ export function validateP77AcceptanceDocument(ledger, { candidate, catalog }) {
 			assertObject(campaign, `historical campaign ${campaign.candidateId}`);
 			assertString(campaign.candidateId, "historical candidate ID");
 			assertIsoDate(campaign.createdAt, `historical campaign ${campaign.candidateId} creation`);
+			if (campaign.supersededByCandidateId !== candidate.candidateId)
+				throw new Error(`P7.7 historical campaign ${campaign.candidateId} must be invalidated by the current candidate`);
 		}
 	}
 	const current = ledger.campaigns.at(-1);
@@ -423,6 +437,8 @@ export function appendP77Campaign(ledger, candidate, catalog, { previousCandidat
 	if (ledger.campaigns.some(campaign => campaign.candidateId === candidate.candidateId))
 		throw new Error(`P7.7 candidate ${candidate.candidateId} already has a campaign`);
 	const next = structuredClone(ledger);
+	for (const historical of next.campaigns)
+		historical.supersededByCandidateId = candidate.candidateId;
 	next.currentCandidateId = candidate.candidateId;
 	next.campaigns.push(createP77Campaign(candidate, catalog));
 	next.outcome = "pending_platform_validation";
@@ -452,10 +468,47 @@ export function recordP77AcceptanceRun(ledger, run, { candidate, catalog }) {
 			summary: run.issue.summary,
 			openedAt: run.endedAt,
 			closedAt: null,
-			resolution: null
+			resolution: null,
+			resolutionCandidateId: null
 		});
 	}
 	updateDerivedStates(next, campaign);
+	validateP77AcceptanceDocument(next, { candidate, catalog });
+	return next;
+}
+
+/** Resolve an immutable platform defect only against a frozen campaign in this ledger. */
+export function resolveP77Defect(ledger, {
+	defectId,
+	state,
+	resolution,
+	resolutionCandidateId,
+	closedAt
+}, { candidate, catalog }) {
+	validateP77AcceptanceDocument(ledger, { candidate, catalog });
+	if (!DEFECT_STATES.has(state) || state === "open")
+		throw new Error("P7.7 defect resolution state must be closed or accepted");
+	assertString(defectId, "defect ID");
+	assertString(resolution, `defect ${defectId} resolution`);
+	assertString(resolutionCandidateId, `defect ${defectId} resolution candidate`);
+	assertIsoDate(closedAt, `defect ${defectId} resolution time`);
+	const next = structuredClone(ledger);
+	const defect = next.defects.find(entry => entry.id === defectId);
+	if (!defect)
+		throw new Error(`P7.7 defect ${defectId} does not exist`);
+	if (defect.state !== "open")
+		throw new Error(`P7.7 defect ${defectId} is already ${defect.state}`);
+	if (!next.campaigns.some(campaign => campaign.candidateId === resolutionCandidateId))
+		throw new Error(`P7.7 resolution candidate ${resolutionCandidateId} has no frozen campaign`);
+	if (state === "accepted" && defect.severity !== "P3")
+		throw new Error(`P7.7 only P3 defects may be accepted; ${defectId} is ${defect.severity}`);
+	if (state === "closed" && resolutionCandidateId === defect.candidateId)
+		throw new Error(`P7.7 closed defect ${defectId} requires a newer frozen candidate`);
+	defect.state = state;
+	defect.resolution = resolution;
+	defect.resolutionCandidateId = resolutionCandidateId;
+	defect.closedAt = closedAt;
+	updateDerivedStates(next, next.campaigns.at(-1));
 	validateP77AcceptanceDocument(next, { candidate, catalog });
 	return next;
 }

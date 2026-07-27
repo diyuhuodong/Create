@@ -79,6 +79,10 @@ export async function validateP77StaticContract({
 			throw new Error(`P7.7 smoke test is missing ${marker} guidance`);
 	for (const script of [
 		"acceptance:p7-7:candidate",
+		"acceptance:p7-7:new-report",
+		"acceptance:p7-7:evidence",
+		"acceptance:p7-7:content-log",
+		"acceptance:p7-7:defect",
 		"gap:p7-7",
 		"cooking:p7-7",
 		"acceptance-world:p7-7",

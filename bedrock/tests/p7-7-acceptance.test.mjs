@@ -110,6 +110,7 @@ function runFor(candidate, {
 		};
 	if (scenarioId === "content_log_script_boot")
 		run.metrics = {
+			scriptBootMarkerCount: 1,
 			contentLogErrorCount: 0,
 			contentLogWarningCount: 0,
 			warningsAllowlisted: false
