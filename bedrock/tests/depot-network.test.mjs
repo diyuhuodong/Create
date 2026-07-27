@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { depotId, DepotNetwork } from "../behavior_pack/scripts/logistics/depot-network.js";
+import { carrierIdForBeltTransport, depotId, DepotNetwork, validateBeltTransportCarrierId } from "../behavior_pack/scripts/logistics/depot-network.js";
 import { ItemPort } from "../behavior_pack/scripts/logistics/item-port.js";
 
 function memoryStorage() {
@@ -630,6 +630,57 @@ test("DepotNetwork carries one persistent transport record along a directed belt
 	assert.deepEqual(network.extract(source), undefined);
 	assert.deepEqual(network.extract(destination), { count: 2, typeId: "minecraft:zinc_ingot" });
 	assert.equal(network.removeBelt("belt:0"), true);
+});
+
+test("DepotNetwork exposes a stable carrier identity for an in-flight Belt item", () => {
+	const storage = memoryStorage();
+	const first = createNetwork(storage, "createbedrock:belt_carriers");
+	const source = first.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } });
+	const destination = first.createDepot({ dimensionId: "minecraft:overworld", location: { x: 8, y: 64, z: 0 } });
+	first.insert(source, { count: 1, typeId: "createbedrock:golden_sheet" });
+	first.createBelt({ destinationId: destination, id: "belt:carrier", length: 8, sourceId: source, speed: 64 });
+	advance(first, () => first.beltTransports().length === 1 && !first.diagnostics().waitingForCommit);
+	const [transport] = first.beltTransports();
+	assert.equal(transport.carrierId, carrierIdForBeltTransport(transport.id));
+	const restored = createNetwork(storage, "createbedrock:belt_carriers");
+	assert.equal(restored.restore().transports, 1);
+	assert.deepEqual(restored.beltTransports(), [transport]);
+});
+
+test("DepotNetwork rejects a recovered transport whose carrier no longer matches its stable identity", () => {
+	assert.throws(
+		() => validateBeltTransportCarrierId("belt:carrier-validation:0", "belt-carrier:wrong"),
+		/carrier identity/
+	);
+});
+
+test("DepotNetwork persists a sequenced Belt carrier in the same escrow record and pauses delivery", () => {
+	const storage = memoryStorage();
+	const first = createNetwork(storage, "createbedrock:belt_sequenced_carrier");
+	const source = first.createDepot({ dimensionId: "minecraft:overworld", location: { x: 0, y: 64, z: 0 } });
+	const destination = first.createDepot({ dimensionId: "minecraft:overworld", location: { x: 8, y: 64, z: 0 } });
+	first.insert(source, { count: 1, typeId: "createbedrock:incomplete_precision_mechanism" });
+	first.createBelt({ destinationId: destination, id: "belt:sequenced", length: 1, sourceId: source, speed: 64 });
+	advance(first, () => first.beltTransports().length === 1 && !first.diagnostics().waitingForCommit);
+	const [transport] = first.beltTransports();
+	const held = first.updateBeltCarrier({
+		carrierId: transport.carrierId,
+		item: { count: 1, typeId: "createbedrock:incomplete_precision_mechanism" },
+		sequencedAssembly: {
+			carrierId: transport.carrierId,
+			controller: { machine: { completedLoops: 0, phase: "processing", recipeId: "create:sequenced_assembly/precision_mechanism", stepIndex: 0 }, nextOperation: 1, output: { extractionReceipts: [], id: `sequenced-carrier:${transport.carrierId}:output`, insertionReceipts: [], maxStackSize: 64, revision: 0, slots: [null, null, null, null] } }
+		},
+		transportId: transport.id
+	});
+	assert.equal(held.ok, true);
+	advance(first, () => !first.diagnostics().waitingForCommit);
+	first.tick();
+	assert.equal(first.beltTransports().length, 1);
+	assert.equal(depotSlots(first, destination)[0], undefined);
+
+	const restored = createNetwork(storage, "createbedrock:belt_sequenced_carrier");
+	assert.equal(restored.restore().transports, 1);
+	assert.deepEqual(restored.beltCarrier(transport.id), held.carrier);
 });
 
 test("DepotNetwork exposes durable belt endpoints for the world connector", () => {

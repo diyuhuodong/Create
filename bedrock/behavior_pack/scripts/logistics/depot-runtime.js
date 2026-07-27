@@ -655,6 +655,11 @@ export function getDepotDiagnostics() {
 	return network.diagnostics();
 }
 
+/** Shared physical Belt escrow domain for processing adapters. */
+export function getDepotNetwork() {
+	return network;
+}
+
 export function getDepotId(block) {
 	return identifierFor(block);
 }

@@ -29,6 +29,7 @@ import { getMechanicalCrafterDiagnostics, registerMechanicalCrafters } from "./p
 import { getStage3ProcessingDiagnostics, registerStage3Processing } from "./processing/stage3-processing-runtime.js";
 import { getInteractionProcessingDiagnostics, registerInteractionProcessing } from "./processing/interaction-processing-runtime.js";
 import { getCookingParityDiagnostics, registerCookingParity } from "./processing/cooking-parity-runtime.js";
+import { getSequencedAssemblyDiagnostics, registerSequencedAssembly } from "./processing/sequenced-assembly-runtime.js";
 import { getTrainDiagnostics, registerTrains } from "./trains/train-runtime.js";
 import { getRailwayControlDiagnostics, registerRailwayControls } from "./trains/railway-control-runtime.js";
 import { getRollingStockDiagnostics, registerRollingStock } from "./trains/rolling-stock-runtime.js";
@@ -88,6 +89,7 @@ registerMechanicalCrafters(getKineticWorldForTesting);
 registerStage3Processing(getKineticWorldForTesting);
 registerInteractionProcessing(getKineticWorldForTesting);
 registerCookingParity();
+registerSequencedAssembly();
 registerRedstone();
 registerRedstoneDevices();
 registerElevatorContacts();
@@ -114,7 +116,7 @@ registerAcceptanceWorld({
 		kernel: getKernelDiagnostics,
 		kinetics: getKineticDiagnostics,
 		logistics: () => ({ packages: getPackageDiagnostics(), runtime: getLogisticsDiagnostics() }),
-		processing: getStage3ProcessingDiagnostics,
+		processing: () => ({ ...getStage3ProcessingDiagnostics(), sequencedAssembly: getSequencedAssemblyDiagnostics() }),
 		trains: getTrainDiagnostics
 	}
 });

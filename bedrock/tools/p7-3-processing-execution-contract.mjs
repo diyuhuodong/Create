@@ -130,5 +130,13 @@ export async function validateP73ProcessingExecutionContract({ bedrockRoot = def
 				throw new Error(`P7.3 ${entry.sourceId} references an unregistered processing fluid ${typeId}`);
 		}
 	}
+	const pendingSequenced = ledger.entries.filter(entry => entry.execution === "runtime_adapter_pending");
+	const sequencedRuntime = await readFile(resolve(bedrockRoot, "behavior_pack/scripts/processing/sequenced-assembly-runtime.js"), "utf8");
+	if (pendingSequenced.length !== 3 || pendingSequenced.some(entry => entry.missingRuntime !== "world_station_binding"
+		|| JSON.stringify(entry.evidence) !== JSON.stringify(["data/recipes/sequenced-assembly.json", "behavior_pack/scripts/processing/sequenced-assembly-runtime.js"])))
+		throw new Error("P7.3 sequenced-assembly runtime ledger entries are stale");
+	for (const marker of ["SEQUENCED_ASSEMBLY_RECIPES", "SequencedAssemblyWorldAdapter", "registerSequencedAssembly"])
+		if (!sequencedRuntime.includes(marker) || !main.includes("registerSequencedAssembly"))
+			throw new Error("P7.3 sequenced-assembly runtime is not registered with its carrier adapter");
 	return { machineRecipes: machineEntries.length, processorKinds: PROCESSORS.size, referencedCreateItems, referencedFluidTypes };
 }

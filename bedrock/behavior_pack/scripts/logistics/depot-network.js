@@ -19,6 +19,28 @@ function clone(value) {
 	return JSON.parse(JSON.stringify(value));
 }
 
+export function carrierIdForBeltTransport(transportId) {
+	if (typeof transportId !== "string" || transportId.length === 0)
+		throw new TypeError("Belt transport carrier identifiers require a transport id");
+	return `belt-carrier:${transportId}`;
+}
+
+export function validateBeltTransportCarrierId(transportId, carrierId) {
+	const expectedCarrierId = carrierIdForBeltTransport(transportId);
+	if (typeof carrierId !== "string" || carrierId !== expectedCarrierId)
+		throw new Error("Belt transport carrier identity must match its stable transport id");
+	return expectedCarrierId;
+}
+
+function normalizeSequencedCarrierSession(session, carrierId) {
+	if (session === undefined)
+		return undefined;
+	if (!session || typeof session !== "object" || Array.isArray(session) || session.carrierId !== carrierId
+		|| !session.controller || typeof session.controller !== "object" || Array.isArray(session.controller))
+		throw new TypeError("Belt sequenced-assembly sessions require their carrier identity and controller state");
+	return clone(session);
+}
+
 function stableStringify(value) {
 	if (value === null || typeof value !== "object")
 		return JSON.stringify(value);
@@ -261,6 +283,56 @@ export class DepotNetwork {
 			})
 			.filter(Boolean)
 			.sort((left, right) => left.id.localeCompare(right.id));
+	}
+
+	/** Stable identities for in-flight Belt items, for cross-station processing. */
+	beltTransports() {
+		return [...this.#transports.values()].map(transport => ({
+			beltId: transport.beltId,
+			carrierId: transport.carrierId,
+			destinationId: transport.destinationId,
+			id: transport.id,
+			progress: transport.progress,
+			sequencedAssembly: transport.sequencedAssembly && clone(transport.sequencedAssembly),
+			sourceId: transport.sourceId
+		})).sort((left, right) => left.id.localeCompare(right.id));
+	}
+
+	/**
+	 * Returns the physical escrow record behind an in-flight Belt item. Sequenced
+	 * assembly owns its controller snapshot here, in the same persisted record as
+	 * the carrier item, rather than in a separate best-effort state store.
+	 */
+	beltCarrier(transportId) {
+		if (typeof transportId !== "string" || transportId.length === 0)
+			throw new TypeError("Belt carrier lookups require a transport id");
+		const transport = this.#transports.get(transportId);
+		return transport && {
+			carrierId: transport.carrierId,
+			id: transport.id,
+			item: cloneItemStack(transport.item),
+			sequencedAssembly: transport.sequencedAssembly && clone(transport.sequencedAssembly)
+		};
+	}
+
+	/**
+	 * Atomically replaces a Belt carrier's visible item and optional sequenced
+	 * controller snapshot in the DepotNetwork persistence domain. A session holds
+	 * ordinary delivery until its caller explicitly clears it with a final item.
+	 */
+	updateBeltCarrier({ carrierId, item, sequencedAssembly, transportId }) {
+		if (typeof transportId !== "string" || transportId.length === 0)
+			throw new TypeError("Belt carrier updates require a transport id");
+		const transport = this.#transports.get(transportId);
+		if (!transport)
+			return { ok: false, reason: "unknown_transport" };
+		validateBeltTransportCarrierId(transportId, carrierId);
+		if (carrierId !== transport.carrierId)
+			return { ok: false, reason: "carrier_mismatch" };
+		transport.item = cloneItemStack(item);
+		transport.sequencedAssembly = normalizeSequencedCarrierSession(sequencedAssembly, carrierId);
+		this.#persist();
+		return { ok: true, carrier: this.beltCarrier(transportId) };
 	}
 
 	createFunnel({ destinationId, filter, id, locked = false, sourceId }) {
@@ -1137,6 +1209,7 @@ export class DepotNetwork {
 			this.#transports.set(id, {
 				attempt: 0,
 				beltId: belt.id,
+				carrierId: carrierIdForBeltTransport(id),
 				destinationId,
 				forward: belt.speed > 0,
 				id,
@@ -1300,6 +1373,11 @@ export class DepotNetwork {
 	}
 
 	#tickBeltTransport(transport) {
+		// A sequenced carrier remains physically on the Belt, but its processing
+		// snapshot is authoritative until the station adapter clears the session.
+		// This prevents an intermediate item from being delivered as ordinary cargo.
+		if (transport.sequencedAssembly)
+			return false;
 		const belt = this.#belts.get(transport.beltId);
 		if (!belt) {
 			this.#report(new Error(`Transport ${transport.id} has no belt`));
@@ -1632,14 +1710,19 @@ export class DepotNetwork {
 			throw new TypeError("Belt transport records require valid progress and attempt state");
 		if (!belts.has(record.beltId) || !depots.has(record.sourceId) || !depots.has(record.destinationId))
 			throw new Error("Belt transport endpoints must refer to restored records");
+		const carrierId = record.carrierId === undefined
+			? carrierIdForBeltTransport(record.id)
+			: validateBeltTransportCarrierId(record.id, record.carrierId);
 		return {
 			attempt: record.attempt,
 			beltId: record.beltId,
+			carrierId,
 			destinationId: record.destinationId,
 			forward: record.forward,
 			id: record.id,
 			item: cloneItemStack(record.item),
 			progress: record.progress,
+			sequencedAssembly: normalizeSequencedCarrierSession(record.sequencedAssembly, carrierId),
 			sourceId: record.sourceId
 		};
 	}

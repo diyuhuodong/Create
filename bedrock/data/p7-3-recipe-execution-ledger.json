@@ -25451,7 +25451,7 @@
 		{
 			"evidence": [
 				"data/recipes/sequenced-assembly.json",
-				"behavior_pack/scripts/processing/sequenced-assembly-controller.js"
+				"behavior_pack/scripts/processing/sequenced-assembly-runtime.js"
 			],
 			"execution": "runtime_adapter_pending",
 			"originalExecution": "pending_interaction_adapter",
@@ -25462,12 +25462,12 @@
 				"type": "create:sequenced_assembly"
 			},
 			"sourceId": "create:sequenced_assembly/precision_mechanism",
-			"missingRuntime": "world_sequenced_assembly_adapter"
+			"missingRuntime": "world_station_binding"
 		},
 		{
 			"evidence": [
 				"data/recipes/sequenced-assembly.json",
-				"behavior_pack/scripts/processing/sequenced-assembly-controller.js"
+				"behavior_pack/scripts/processing/sequenced-assembly-runtime.js"
 			],
 			"execution": "runtime_adapter_pending",
 			"originalExecution": "pending_interaction_adapter",
@@ -25478,12 +25478,12 @@
 				"type": "create:sequenced_assembly"
 			},
 			"sourceId": "create:sequenced_assembly/sturdy_sheet",
-			"missingRuntime": "world_sequenced_assembly_adapter"
+			"missingRuntime": "world_station_binding"
 		},
 		{
 			"evidence": [
 				"data/recipes/sequenced-assembly.json",
-				"behavior_pack/scripts/processing/sequenced-assembly-controller.js"
+				"behavior_pack/scripts/processing/sequenced-assembly-runtime.js"
 			],
 			"execution": "runtime_adapter_pending",
 			"originalExecution": "pending_interaction_adapter",
@@ -25494,7 +25494,7 @@
 				"type": "create:sequenced_assembly"
 			},
 			"sourceId": "create:sequenced_assembly/track",
-			"missingRuntime": "world_sequenced_assembly_adapter"
+			"missingRuntime": "world_station_binding"
 		},
 		{
 			"evidence": [

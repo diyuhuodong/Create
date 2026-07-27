@@ -140,7 +140,7 @@ export async function buildP73RecipeExecutionLedger({ bedrockRoot }) {
 			if (interactionBySourceId.has(recipe.id))
 				return entryFromRecipe(recipe, "scripted_interaction", ["data/recipes/interactions.json", "behavior_pack/scripts/processing/interaction-recipe-runtime.js"]);
 			if (sequencedBySourceId.has(recipe.id))
-				return entryFromRecipe(recipe, "runtime_adapter_pending", ["data/recipes/sequenced-assembly.json", "behavior_pack/scripts/processing/sequenced-assembly-controller.js"], { missingRuntime: "world_sequenced_assembly_adapter" });
+				return entryFromRecipe(recipe, "runtime_adapter_pending", ["data/recipes/sequenced-assembly.json", "behavior_pack/scripts/processing/sequenced-assembly-runtime.js"], { missingRuntime: "world_station_binding" });
 			throw new Error(`P7.3 scripted interaction ${recipe.id} has no runtime conversion`);
 		}
 		if (recipe.strategy !== "runtime_machine")
