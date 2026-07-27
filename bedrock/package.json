@@ -17,6 +17,7 @@
     "acceptance:p7-7:evidence": "node tools/collect-p7-7-evidence.mjs",
     "acceptance:p7-7:content-log": "node tools/parse-p7-7-content-log.mjs",
     "acceptance:p7-7:defect": "node tools/resolve-p7-7-defect.mjs",
+    "acceptance:p7-7:closeout": "node tools/p7-7-static-closeout.mjs",
     "acceptance:p7-7:status": "node tools/report-p7-7-acceptance.mjs",
     "acceptance:p7-7:record": "node tools/record-p7-7-result.mjs",
     "acceptance:p7-7:validate": "node tools/validate-p7-7-acceptance.mjs",

@@ -50,6 +50,14 @@ Freezing a new candidate automatically marks every prior campaign as superseded.
 Their evidence remains historical, but their passed scenarios cannot satisfy the
 new candidate's platform gate.
 
+Before freezing, run the offline closeout report. `static_verified` only means
+the generated packs and contracts agree; it deliberately reports an old pack as
+`candidate_refreeze_required` and leaves the 52 real platform checks pending:
+
+```bash
+npm run acceptance:p7-7:closeout
+```
+
 ## Initialize the acceptance layout
 
 The generated P7.7 layout fixes the seed, ten non-overlapping zones, fixture

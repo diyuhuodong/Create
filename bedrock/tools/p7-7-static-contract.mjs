@@ -55,6 +55,10 @@ export async function validateP77StaticContract({
 	if (!sameJson(gapLedger, expectedGapLedger))
 		throw new Error("P7.7 gap ledger is stale; run npm run gap:p7-7.");
 	const gapCoverage = validateP77GapLedger(gapLedger);
+	if (gapCoverage.classifications.core_implementation_required !== 0)
+		throw new Error("P7.7 static closure cannot retain unclassified core implementation gaps");
+	if (gapCoverage.classifications.platform_capability_blocked !== cookingParity.summary.recipes)
+		throw new Error("P7.7 cooking capability blocks must match every managed cooking recipe");
 	const expectedCookingParity = buildP77CookingParityCatalog(nativeRecipes);
 	if (!sameJson(cookingParity, expectedCookingParity))
 		throw new Error("P7.7 cooking parity catalog is stale; run npm run cooking:p7-7.");
@@ -65,6 +69,8 @@ export async function validateP77StaticContract({
 	if (!sameJson(acceptanceWorld, expectedAcceptanceWorld))
 		throw new Error("P7.7 acceptance world layout is stale; run npm run acceptance-world:p7-7.");
 	const acceptanceWorldCoverage = validateP77AcceptanceWorldLayout(acceptanceWorld, catalog);
+	if (acceptanceWorldCoverage.zones !== 10 || acceptanceWorldCoverage.scenarios !== 18 || acceptanceWorldCoverage.checkpoints !== 4)
+		throw new Error("P7.7 static closure requires all ten zones, eighteen scenarios, and four checkpoints");
 	if (acceptanceWorldRuntime !== renderP77AcceptanceWorldLayout(acceptanceWorld))
 		throw new Error("P7.7 generated acceptance world layout is stale; run npm run acceptance-world:p7-7.");
 	const expectedLegacy = deriveS315CompatibilityLedger({ candidate, catalog, ledger });
@@ -83,6 +89,7 @@ export async function validateP77StaticContract({
 		"acceptance:p7-7:evidence",
 		"acceptance:p7-7:content-log",
 		"acceptance:p7-7:defect",
+		"acceptance:p7-7:closeout",
 		"gap:p7-7",
 		"cooking:p7-7",
 		"acceptance-world:p7-7",
@@ -95,6 +102,8 @@ export async function validateP77StaticContract({
 	return {
 		candidateState: candidateCoverage.state,
 		candidateId: candidateCoverage.candidateId,
+		candidateSourceCommit: candidate.state === "frozen" ? candidate.source.commit : null,
+		candidateArtifact: candidate.state === "frozen" ? candidate.artifact : null,
 		scenarios: catalogCoverage.scenarios,
 		applicableChecks: catalogCoverage.applicableChecks,
 		campaigns: acceptanceCoverage.campaigns,
@@ -103,6 +112,12 @@ export async function validateP77StaticContract({
 		gapLedger: gapCoverage,
 		cookingParity: cookingCoverage,
 		acceptanceWorld: acceptanceWorldCoverage,
+		staticClosure: {
+			coreImplementationGaps: gapCoverage.classifications.core_implementation_required,
+			cookingCapabilityBlocks: gapCoverage.classifications.platform_capability_blocked,
+			platformChecksPending: gapCoverage.classifications.static_verified_pending_platform,
+			ready: true
+		},
 		summary: summarizeP77Acceptance({ candidate, catalog, ledger })
 	};
 }
