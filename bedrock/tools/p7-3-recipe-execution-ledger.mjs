@@ -49,7 +49,7 @@ function summary(entries) {
 }
 
 function staticCovered(entries) {
-	return entries.filter(entry => entry.execution !== "external_compatibility").length;
+	return entries.filter(entry => !["external_compatibility", "runtime_adapter_pending"].includes(entry.execution)).length;
 }
 
 async function readJson(bedrockRoot, name) {
@@ -62,14 +62,15 @@ async function loadData(bedrockRoot) {
 }
 
 function runtimeRecords(data) {
+	const records = (artifact, runtime, recipes) => recipes.map(record => ({ artifact, record, runtime }));
 	return [
-		...data["recipes/milling.json"],
-		...data["recipes/crushing.json"],
-		...data["recipes/pressing.json"],
-		...data["recipes/basin.json"],
-		...data["recipes/fan.json"],
-		...data["recipes/cutting.json"],
-		...data["recipes/mechanical-crafting.json"].recipes
+		...records("data/recipes/milling.json", "behavior_pack/scripts/processing/millstone-runtime.js", data["recipes/milling.json"]),
+		...records("data/recipes/crushing.json", "behavior_pack/scripts/processing/crushing-wheel-runtime.js", data["recipes/crushing.json"]),
+		...records("data/recipes/pressing.json", "behavior_pack/scripts/processing/mechanical-press-runtime.js", data["recipes/pressing.json"]),
+		...records("data/recipes/basin.json", "behavior_pack/scripts/processing/stage3-processing-runtime.js", data["recipes/basin.json"]),
+		...records("data/recipes/fan.json", "behavior_pack/scripts/processing/stage3-processing-runtime.js", data["recipes/fan.json"]),
+		...records("data/recipes/cutting.json", "behavior_pack/scripts/processing/stage3-processing-runtime.js", data["recipes/cutting.json"]),
+		...records("data/recipes/mechanical-crafting.json", "behavior_pack/scripts/processing/mechanical-crafter-runtime.js", data["recipes/mechanical-crafting.json"].recipes)
 	];
 }
 
@@ -96,7 +97,7 @@ export function validateP73RecipeExecutionLedger(ledger) {
 		assertString(entry?.originalStrategy, `entry ${entry.sourceId} originalStrategy`);
 		if (!entry.source || typeof entry.source !== "object" || !Array.isArray(entry.evidence) || entry.evidence.length === 0
 			|| entry.evidence.some(evidence => typeof evidence !== "string" || evidence.length === 0)
-			|| !["external_compatibility", "native_recipe", "runtime_cooking_bridge", "runtime_machine", "scripted_interaction"].includes(entry.execution)
+			|| !["external_compatibility", "native_recipe", "runtime_adapter_pending", "runtime_cooking_bridge", "runtime_machine", "scripted_interaction"].includes(entry.execution)
 			|| sourceIds.has(entry.sourceId))
 			throw new Error(`P7.3 recipe execution ledger has an invalid entry for ${entry.sourceId}`);
 		sourceIds.add(entry.sourceId);
@@ -139,14 +140,14 @@ export async function buildP73RecipeExecutionLedger({ bedrockRoot }) {
 			if (interactionBySourceId.has(recipe.id))
 				return entryFromRecipe(recipe, "scripted_interaction", ["data/recipes/interactions.json", "behavior_pack/scripts/processing/interaction-recipe-runtime.js"]);
 			if (sequencedBySourceId.has(recipe.id))
-				return entryFromRecipe(recipe, "scripted_interaction", ["data/recipes/sequenced-assembly.json", "behavior_pack/scripts/processing/sequenced-assembly-runtime.js"], { interaction: "sequenced_assembly" });
+				return entryFromRecipe(recipe, "runtime_adapter_pending", ["data/recipes/sequenced-assembly.json", "behavior_pack/scripts/processing/sequenced-assembly-controller.js"], { missingRuntime: "world_sequenced_assembly_adapter" });
 			throw new Error(`P7.3 scripted interaction ${recipe.id} has no runtime conversion`);
 		}
 		if (recipe.strategy !== "runtime_machine")
 			throw new Error(`P7.3 recipe ${recipe.id} has an unsupported strategy ${recipe.strategy}`);
-		const converted = convertedRuntime.find(record => outputRecordMatches(record, recipe.id));
+		const converted = convertedRuntime.find(candidate => outputRecordMatches(candidate.record, recipe.id));
 		if (converted)
-			return entryFromRecipe(recipe, "runtime_machine", ["data/recipes", "behavior_pack/scripts/processing"], { convertedId: converted.id });
+			return entryFromRecipe(recipe, "runtime_machine", [converted.artifact, converted.runtime], { convertedId: converted.record.id, processor: recipe.source.type });
 		const sourcePath = recipe.id.slice("create:crushing/".length);
 		const compatibility = crushingCompatibility.get(sourcePath);
 		if (!compatibility)

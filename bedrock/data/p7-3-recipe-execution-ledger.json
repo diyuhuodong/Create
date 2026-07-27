@@ -788,8 +788,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/basin.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -800,12 +800,13 @@
 				"type": "create:compacting"
 			},
 			"sourceId": "create:compacting/andesite_from_flint",
-			"convertedId": "create:basin/compacting/andesite_from_flint:0"
+			"convertedId": "create:basin/compacting/andesite_from_flint:0",
+			"processor": "create:compacting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/basin.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -816,12 +817,13 @@
 				"type": "create:compacting"
 			},
 			"sourceId": "create:compacting/blaze_cake",
-			"convertedId": "create:basin/compacting/blaze_cake:0"
+			"convertedId": "create:basin/compacting/blaze_cake:0",
+			"processor": "create:compacting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/basin.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -832,12 +834,13 @@
 				"type": "create:compacting"
 			},
 			"sourceId": "create:compacting/chocolate",
-			"convertedId": "create:basin/compacting/chocolate:0"
+			"convertedId": "create:basin/compacting/chocolate:0",
+			"processor": "create:compacting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/basin.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -848,12 +851,13 @@
 				"type": "create:compacting"
 			},
 			"sourceId": "create:compacting/diorite_from_flint",
-			"convertedId": "create:basin/compacting/diorite_from_flint:0"
+			"convertedId": "create:basin/compacting/diorite_from_flint:0",
+			"processor": "create:compacting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/basin.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -864,12 +868,13 @@
 				"type": "create:compacting"
 			},
 			"sourceId": "create:compacting/granite_from_flint",
-			"convertedId": "create:basin/compacting/granite_from_flint:0"
+			"convertedId": "create:basin/compacting/granite_from_flint:0",
+			"processor": "create:compacting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/basin.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -880,12 +885,13 @@
 				"type": "create:compacting"
 			},
 			"sourceId": "create:compacting/honey",
-			"convertedId": "create:basin/compacting/honey:0"
+			"convertedId": "create:basin/compacting/honey:0",
+			"processor": "create:compacting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/basin.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -896,7 +902,8 @@
 				"type": "create:compacting"
 			},
 			"sourceId": "create:compacting/ice",
-			"convertedId": "create:basin/compacting/ice:0"
+			"convertedId": "create:basin/compacting/ice:0",
+			"processor": "create:compacting"
 		},
 		{
 			"evidence": [
@@ -7136,8 +7143,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -7148,12 +7155,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/amethyst_block",
-			"convertedId": "create:crushing/amethyst_block:0"
+			"convertedId": "create:crushing/amethyst_block:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -7164,12 +7172,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/amethyst_cluster",
-			"convertedId": "create:crushing/amethyst_cluster:0"
+			"convertedId": "create:crushing/amethyst_cluster:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -7180,12 +7189,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/asurine",
-			"convertedId": "create:crushing/asurine:0"
+			"convertedId": "create:crushing/asurine:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -7196,12 +7206,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/asurine_recycling",
-			"convertedId": "create:crushing/asurine_recycling:0"
+			"convertedId": "create:crushing/asurine_recycling:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -7212,12 +7223,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/blaze_rod",
-			"convertedId": "create:crushing/blaze_rod:0"
+			"convertedId": "create:crushing/blaze_rod:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -7228,7 +7240,8 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/coal_ore",
-			"convertedId": "create:crushing/coal_ore:0"
+			"convertedId": "create:crushing/coal_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
@@ -9167,8 +9180,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9179,12 +9192,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/copper_ore",
-			"convertedId": "create:crushing/copper_ore:0"
+			"convertedId": "create:crushing/copper_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9195,12 +9209,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/crimsite",
-			"convertedId": "create:crushing/crimsite:0"
+			"convertedId": "create:crushing/crimsite:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9211,12 +9226,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/crimsite_recycling",
-			"convertedId": "create:crushing/crimsite_recycling:0"
+			"convertedId": "create:crushing/crimsite_recycling:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9227,12 +9243,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/deepslate_coal_ore",
-			"convertedId": "create:crushing/deepslate_coal_ore:0"
+			"convertedId": "create:crushing/deepslate_coal_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9243,12 +9260,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/deepslate_copper_ore",
-			"convertedId": "create:crushing/deepslate_copper_ore:0"
+			"convertedId": "create:crushing/deepslate_copper_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9259,12 +9277,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/deepslate_diamond_ore",
-			"convertedId": "create:crushing/deepslate_diamond_ore:0"
+			"convertedId": "create:crushing/deepslate_diamond_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9275,12 +9294,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/deepslate_emerald_ore",
-			"convertedId": "create:crushing/deepslate_emerald_ore:0"
+			"convertedId": "create:crushing/deepslate_emerald_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9291,12 +9311,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/deepslate_gold_ore",
-			"convertedId": "create:crushing/deepslate_gold_ore:0"
+			"convertedId": "create:crushing/deepslate_gold_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9307,12 +9328,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/deepslate_iron_ore",
-			"convertedId": "create:crushing/deepslate_iron_ore:0"
+			"convertedId": "create:crushing/deepslate_iron_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9323,12 +9345,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/deepslate_lapis_ore",
-			"convertedId": "create:crushing/deepslate_lapis_ore:0"
+			"convertedId": "create:crushing/deepslate_lapis_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9339,12 +9362,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/deepslate_redstone_ore",
-			"convertedId": "create:crushing/deepslate_redstone_ore:0"
+			"convertedId": "create:crushing/deepslate_redstone_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9355,12 +9379,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/deepslate_zinc_ore",
-			"convertedId": "create:crushing/deepslate_zinc_ore:0"
+			"convertedId": "create:crushing/deepslate_zinc_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9371,12 +9396,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/diamond_horse_armor",
-			"convertedId": "create:crushing/diamond_horse_armor:0"
+			"convertedId": "create:crushing/diamond_horse_armor:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9387,12 +9413,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/diamond_ore",
-			"convertedId": "create:crushing/diamond_ore:0"
+			"convertedId": "create:crushing/diamond_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9403,12 +9430,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/diorite",
-			"convertedId": "create:crushing/diorite:0"
+			"convertedId": "create:crushing/diorite:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9419,12 +9447,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/diorite_recycling",
-			"convertedId": "create:crushing/diorite_recycling:0"
+			"convertedId": "create:crushing/diorite_recycling:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9435,12 +9464,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/emerald_ore",
-			"convertedId": "create:crushing/emerald_ore:0"
+			"convertedId": "create:crushing/emerald_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9451,12 +9481,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/gilded_blackstone",
-			"convertedId": "create:crushing/gilded_blackstone:0"
+			"convertedId": "create:crushing/gilded_blackstone:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9467,12 +9498,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/glowstone",
-			"convertedId": "create:crushing/glowstone:0"
+			"convertedId": "create:crushing/glowstone:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9483,12 +9515,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/gold_ore",
-			"convertedId": "create:crushing/gold_ore:0"
+			"convertedId": "create:crushing/gold_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9499,12 +9532,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/golden_horse_armor",
-			"convertedId": "create:crushing/golden_horse_armor:0"
+			"convertedId": "create:crushing/golden_horse_armor:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9515,12 +9549,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/gravel",
-			"convertedId": "create:crushing/gravel:0"
+			"convertedId": "create:crushing/gravel:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9531,12 +9566,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/iron_horse_armor",
-			"convertedId": "create:crushing/iron_horse_armor:0"
+			"convertedId": "create:crushing/iron_horse_armor:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9547,12 +9583,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/iron_ore",
-			"convertedId": "create:crushing/iron_ore:0"
+			"convertedId": "create:crushing/iron_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9563,7 +9600,8 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/lapis_ore",
-			"convertedId": "create:crushing/lapis_ore:0"
+			"convertedId": "create:crushing/lapis_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
@@ -9582,8 +9620,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9594,12 +9632,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/leather_horse_armor",
-			"convertedId": "create:crushing/leather_horse_armor:0"
+			"convertedId": "create:crushing/leather_horse_armor:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9610,12 +9649,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/nether_gold_ore",
-			"convertedId": "create:crushing/nether_gold_ore:0"
+			"convertedId": "create:crushing/nether_gold_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9626,12 +9666,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/nether_quartz_ore",
-			"convertedId": "create:crushing/nether_quartz_ore:0"
+			"convertedId": "create:crushing/nether_quartz_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9642,12 +9683,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/nether_wart_block",
-			"convertedId": "create:crushing/nether_wart_block:0"
+			"convertedId": "create:crushing/nether_wart_block:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9658,7 +9700,8 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/netherrack",
-			"convertedId": "create:crushing/netherrack:0"
+			"convertedId": "create:crushing/netherrack:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
@@ -9677,8 +9720,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9689,12 +9732,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/obsidian",
-			"convertedId": "create:crushing/obsidian:0"
+			"convertedId": "create:crushing/obsidian:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9705,12 +9749,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/ochrum",
-			"convertedId": "create:crushing/ochrum:0"
+			"convertedId": "create:crushing/ochrum:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9721,7 +9766,8 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/ochrum_recycling",
-			"convertedId": "create:crushing/ochrum_recycling:0"
+			"convertedId": "create:crushing/ochrum_recycling:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
@@ -9755,8 +9801,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9767,7 +9813,8 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/prismarine_crystals",
-			"convertedId": "create:crushing/prismarine_crystals:0"
+			"convertedId": "create:crushing/prismarine_crystals:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
@@ -9816,8 +9863,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9828,12 +9875,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/raw_copper",
-			"convertedId": "create:crushing/raw_copper:0"
+			"convertedId": "create:crushing/raw_copper:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9844,12 +9892,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/raw_copper_block",
-			"convertedId": "create:crushing/raw_copper_block:0"
+			"convertedId": "create:crushing/raw_copper_block:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9860,12 +9909,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/raw_gold",
-			"convertedId": "create:crushing/raw_gold:0"
+			"convertedId": "create:crushing/raw_gold:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9876,12 +9926,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/raw_gold_block",
-			"convertedId": "create:crushing/raw_gold_block:0"
+			"convertedId": "create:crushing/raw_gold_block:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9892,12 +9943,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/raw_iron",
-			"convertedId": "create:crushing/raw_iron:0"
+			"convertedId": "create:crushing/raw_iron:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -9908,7 +9960,8 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/raw_iron_block",
-			"convertedId": "create:crushing/raw_iron_block:0"
+			"convertedId": "create:crushing/raw_iron_block:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
@@ -10152,8 +10205,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -10164,12 +10217,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/raw_zinc",
-			"convertedId": "create:crushing/raw_zinc:0"
+			"convertedId": "create:crushing/raw_zinc:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -10180,12 +10234,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/raw_zinc_block",
-			"convertedId": "create:crushing/raw_zinc_block:0"
+			"convertedId": "create:crushing/raw_zinc_block:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -10196,7 +10251,8 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/redstone_ore",
-			"convertedId": "create:crushing/redstone_ore:0"
+			"convertedId": "create:crushing/redstone_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
@@ -10230,8 +10286,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -10242,12 +10298,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/tuff",
-			"convertedId": "create:crushing/tuff:0"
+			"convertedId": "create:crushing/tuff:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -10258,7 +10315,8 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/tuff_recycling",
-			"convertedId": "create:crushing/tuff_recycling:0"
+			"convertedId": "create:crushing/tuff_recycling:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
@@ -10277,8 +10335,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -10289,12 +10347,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/veridium",
-			"convertedId": "create:crushing/veridium:0"
+			"convertedId": "create:crushing/veridium:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -10305,12 +10364,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/veridium_recycling",
-			"convertedId": "create:crushing/veridium_recycling:0"
+			"convertedId": "create:crushing/veridium_recycling:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -10321,12 +10381,13 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/wool",
-			"convertedId": "create:crushing/wool:0"
+			"convertedId": "create:crushing/wool:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/crushing.json",
+				"behavior_pack/scripts/processing/crushing-wheel-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -10337,7 +10398,8 @@
 				"type": "create:crushing"
 			},
 			"sourceId": "create:crushing/zinc_ore",
-			"convertedId": "create:crushing/zinc_ore:0"
+			"convertedId": "create:crushing/zinc_ore:0",
+			"processor": "create:crushing"
 		},
 		{
 			"evidence": [
@@ -13925,8 +13987,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/cutting.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -13937,12 +13999,13 @@
 				"type": "create:cutting"
 			},
 			"sourceId": "create:cutting/andesite_alloy",
-			"convertedId": "create:cutting/cutting/andesite_alloy:0"
+			"convertedId": "create:cutting/cutting/andesite_alloy:0",
+			"processor": "create:cutting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/cutting.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -13953,7 +14016,8 @@
 				"type": "create:cutting"
 			},
 			"sourceId": "create:cutting/bamboo_planks",
-			"convertedId": "create:cutting/cutting/bamboo_planks:0"
+			"convertedId": "create:cutting/cutting/bamboo_planks:0",
+			"processor": "create:cutting"
 		},
 		{
 			"evidence": [
@@ -17608,8 +17672,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17620,7 +17684,8 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/blackstone",
-			"convertedId": "create:fan/haunting/blackstone:0"
+			"convertedId": "create:fan/haunting/blackstone:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
@@ -17654,8 +17719,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17666,12 +17731,13 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/crimson_fungus",
-			"convertedId": "create:fan/haunting/crimson_fungus:0"
+			"convertedId": "create:fan/haunting/crimson_fungus:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17682,12 +17748,13 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/glow_berries",
-			"convertedId": "create:fan/haunting/glow_berries:0"
+			"convertedId": "create:fan/haunting/glow_berries:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17698,12 +17765,13 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/glow_ink_sac",
-			"convertedId": "create:fan/haunting/glow_ink_sac:0"
+			"convertedId": "create:fan/haunting/glow_ink_sac:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17714,12 +17782,13 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/haunted_bell",
-			"convertedId": "create:fan/haunting/haunted_bell:0"
+			"convertedId": "create:fan/haunting/haunted_bell:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17730,12 +17799,13 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/infested_chiseled_stone_bricks",
-			"convertedId": "create:fan/haunting/infested_chiseled_stone_bricks:0"
+			"convertedId": "create:fan/haunting/infested_chiseled_stone_bricks:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17746,12 +17816,13 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/infested_cracked_stone_bricks",
-			"convertedId": "create:fan/haunting/infested_cracked_stone_bricks:0"
+			"convertedId": "create:fan/haunting/infested_cracked_stone_bricks:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17762,12 +17833,13 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/infested_deepslate",
-			"convertedId": "create:fan/haunting/infested_deepslate:0"
+			"convertedId": "create:fan/haunting/infested_deepslate:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17778,12 +17850,13 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/infested_mossy_stone_bricks",
-			"convertedId": "create:fan/haunting/infested_mossy_stone_bricks:0"
+			"convertedId": "create:fan/haunting/infested_mossy_stone_bricks:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17794,12 +17867,13 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/infested_stone",
-			"convertedId": "create:fan/haunting/infested_stone:0"
+			"convertedId": "create:fan/haunting/infested_stone:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17810,12 +17884,13 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/infested_stone_bricks",
-			"convertedId": "create:fan/haunting/infested_stone_bricks:0"
+			"convertedId": "create:fan/haunting/infested_stone_bricks:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17826,12 +17901,13 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/lapis_recycling",
-			"convertedId": "create:fan/haunting/lapis_recycling:0"
+			"convertedId": "create:fan/haunting/lapis_recycling:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17842,12 +17918,13 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/nether_brick",
-			"convertedId": "create:fan/haunting/nether_brick:0"
+			"convertedId": "create:fan/haunting/nether_brick:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17858,12 +17935,13 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/poisonous_potato",
-			"convertedId": "create:fan/haunting/poisonous_potato:0"
+			"convertedId": "create:fan/haunting/poisonous_potato:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17874,12 +17952,13 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/soul_campfire",
-			"convertedId": "create:fan/haunting/soul_campfire:0"
+			"convertedId": "create:fan/haunting/soul_campfire:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17890,12 +17969,13 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/soul_lantern",
-			"convertedId": "create:fan/haunting/soul_lantern:0"
+			"convertedId": "create:fan/haunting/soul_lantern:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17906,12 +17986,13 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/soul_sand",
-			"convertedId": "create:fan/haunting/soul_sand:0"
+			"convertedId": "create:fan/haunting/soul_sand:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17922,12 +18003,13 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/soul_soil",
-			"convertedId": "create:fan/haunting/soul_soil:0"
+			"convertedId": "create:fan/haunting/soul_soil:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17938,12 +18020,13 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/soul_torch",
-			"convertedId": "create:fan/haunting/soul_torch:0"
+			"convertedId": "create:fan/haunting/soul_torch:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -17954,7 +18037,8 @@
 				"type": "create:haunting"
 			},
 			"sourceId": "create:haunting/warped_fungus",
-			"convertedId": "create:fan/haunting/warped_fungus:0"
+			"convertedId": "create:fan/haunting/warped_fungus:0",
+			"processor": "create:haunting"
 		},
 		{
 			"evidence": [
@@ -18494,8 +18578,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/mechanical-crafting.json",
+				"behavior_pack/scripts/processing/mechanical-crafter-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -18506,12 +18590,13 @@
 				"type": "create:mechanical_crafting"
 			},
 			"sourceId": "create:mechanical_crafting/crushing_wheel",
-			"convertedId": "create:mechanical_crafting/crushing_wheel"
+			"convertedId": "create:mechanical_crafting/crushing_wheel",
+			"processor": "create:mechanical_crafting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/mechanical-crafting.json",
+				"behavior_pack/scripts/processing/mechanical-crafter-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -18522,12 +18607,13 @@
 				"type": "create:mechanical_crafting"
 			},
 			"sourceId": "create:mechanical_crafting/extendo_grip",
-			"convertedId": "create:mechanical_crafting/extendo_grip"
+			"convertedId": "create:mechanical_crafting/extendo_grip",
+			"processor": "create:mechanical_crafting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/mechanical-crafting.json",
+				"behavior_pack/scripts/processing/mechanical-crafter-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -18538,12 +18624,13 @@
 				"type": "create:mechanical_crafting"
 			},
 			"sourceId": "create:mechanical_crafting/potato_cannon",
-			"convertedId": "create:mechanical_crafting/potato_cannon"
+			"convertedId": "create:mechanical_crafting/potato_cannon",
+			"processor": "create:mechanical_crafting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/mechanical-crafting.json",
+				"behavior_pack/scripts/processing/mechanical-crafter-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -18554,12 +18641,13 @@
 				"type": "create:mechanical_crafting"
 			},
 			"sourceId": "create:mechanical_crafting/wand_of_symmetry",
-			"convertedId": "create:mechanical_crafting/wand_of_symmetry"
+			"convertedId": "create:mechanical_crafting/wand_of_symmetry",
+			"processor": "create:mechanical_crafting"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -18570,12 +18658,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/allium",
-			"convertedId": "create:milling/allium:0"
+			"convertedId": "create:milling/allium:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -18586,12 +18675,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/andesite",
-			"convertedId": "create:milling/andesite:0"
+			"convertedId": "create:milling/andesite:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -18602,12 +18692,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/azure_bluet",
-			"convertedId": "create:milling/azure_bluet:0"
+			"convertedId": "create:milling/azure_bluet:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -18618,12 +18709,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/beetroot",
-			"convertedId": "create:milling/beetroot:0"
+			"convertedId": "create:milling/beetroot:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -18634,12 +18726,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/blue_orchid",
-			"convertedId": "create:milling/blue_orchid:0"
+			"convertedId": "create:milling/blue_orchid:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -18650,12 +18743,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/bone",
-			"convertedId": "create:milling/bone:0"
+			"convertedId": "create:milling/bone:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -18666,12 +18760,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/bone_meal",
-			"convertedId": "create:milling/bone_meal:0"
+			"convertedId": "create:milling/bone_meal:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -18682,12 +18777,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/cactus",
-			"convertedId": "create:milling/cactus:0"
+			"convertedId": "create:milling/cactus:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -18698,12 +18794,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/calcite",
-			"convertedId": "create:milling/calcite:0"
+			"convertedId": "create:milling/calcite:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -18714,12 +18811,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/charcoal",
-			"convertedId": "create:milling/charcoal:0"
+			"convertedId": "create:milling/charcoal:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -18730,12 +18828,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/clay",
-			"convertedId": "create:milling/clay:0"
+			"convertedId": "create:milling/clay:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -18746,12 +18845,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/coal",
-			"convertedId": "create:milling/coal:0"
+			"convertedId": "create:milling/coal:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -18762,12 +18862,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/cobblestone",
-			"convertedId": "create:milling/cobblestone:0"
+			"convertedId": "create:milling/cobblestone:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -18778,7 +18879,8 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/cocoa_beans",
-			"convertedId": "create:milling/cocoa_beans:0"
+			"convertedId": "create:milling/cocoa_beans:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
@@ -21767,8 +21869,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -21779,12 +21881,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/cornflower",
-			"convertedId": "create:milling/cornflower:0"
+			"convertedId": "create:milling/cornflower:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -21795,12 +21898,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/dandelion",
-			"convertedId": "create:milling/dandelion:0"
+			"convertedId": "create:milling/dandelion:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -21811,12 +21915,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/dripstone_block",
-			"convertedId": "create:milling/dripstone_block:0"
+			"convertedId": "create:milling/dripstone_block:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -21827,12 +21932,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/fern",
-			"convertedId": "create:milling/fern:0"
+			"convertedId": "create:milling/fern:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -21843,12 +21949,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/granite",
-			"convertedId": "create:milling/granite:0"
+			"convertedId": "create:milling/granite:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -21859,12 +21966,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/gravel",
-			"convertedId": "create:milling/gravel:0"
+			"convertedId": "create:milling/gravel:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -21875,12 +21983,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/ink_sac",
-			"convertedId": "create:milling/ink_sac:0"
+			"convertedId": "create:milling/ink_sac:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -21891,12 +22000,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/lapis_lazuli",
-			"convertedId": "create:milling/lapis_lazuli:0"
+			"convertedId": "create:milling/lapis_lazuli:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -21907,12 +22017,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/large_fern",
-			"convertedId": "create:milling/large_fern:0"
+			"convertedId": "create:milling/large_fern:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -21923,12 +22034,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/lilac",
-			"convertedId": "create:milling/lilac:0"
+			"convertedId": "create:milling/lilac:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -21939,12 +22051,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/lily_of_the_valley",
-			"convertedId": "create:milling/lily_of_the_valley:0"
+			"convertedId": "create:milling/lily_of_the_valley:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -21955,12 +22068,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/orange_tulip",
-			"convertedId": "create:milling/orange_tulip:0"
+			"convertedId": "create:milling/orange_tulip:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -21971,12 +22085,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/oxeye_daisy",
-			"convertedId": "create:milling/oxeye_daisy:0"
+			"convertedId": "create:milling/oxeye_daisy:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -21987,12 +22102,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/peony",
-			"convertedId": "create:milling/peony:0"
+			"convertedId": "create:milling/peony:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22003,12 +22119,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/pink_petals",
-			"convertedId": "create:milling/pink_petals:0"
+			"convertedId": "create:milling/pink_petals:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22019,12 +22136,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/pink_tulip",
-			"convertedId": "create:milling/pink_tulip:0"
+			"convertedId": "create:milling/pink_tulip:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22035,12 +22153,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/pitcher_plant",
-			"convertedId": "create:milling/pitcher_plant:0"
+			"convertedId": "create:milling/pitcher_plant:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22051,12 +22170,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/poppy",
-			"convertedId": "create:milling/poppy:0"
+			"convertedId": "create:milling/poppy:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22067,12 +22187,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/red_tulip",
-			"convertedId": "create:milling/red_tulip:0"
+			"convertedId": "create:milling/red_tulip:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22083,12 +22204,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/rose_bush",
-			"convertedId": "create:milling/rose_bush:0"
+			"convertedId": "create:milling/rose_bush:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22099,12 +22221,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/saddle",
-			"convertedId": "create:milling/saddle:0"
+			"convertedId": "create:milling/saddle:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22115,12 +22238,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/sandstone",
-			"convertedId": "create:milling/sandstone:0"
+			"convertedId": "create:milling/sandstone:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22131,12 +22255,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/sea_pickle",
-			"convertedId": "create:milling/sea_pickle:0"
+			"convertedId": "create:milling/sea_pickle:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22147,12 +22272,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/short_grass",
-			"convertedId": "create:milling/short_grass:0"
+			"convertedId": "create:milling/short_grass:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22163,12 +22289,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/sugar_cane",
-			"convertedId": "create:milling/sugar_cane:0"
+			"convertedId": "create:milling/sugar_cane:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22179,12 +22306,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/sunflower",
-			"convertedId": "create:milling/sunflower:0"
+			"convertedId": "create:milling/sunflower:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22195,12 +22323,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/tall_grass",
-			"convertedId": "create:milling/tall_grass:0"
+			"convertedId": "create:milling/tall_grass:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22211,12 +22340,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/terracotta",
-			"convertedId": "create:milling/terracotta:0"
+			"convertedId": "create:milling/terracotta:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22227,12 +22357,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/torchflower",
-			"convertedId": "create:milling/torchflower:0"
+			"convertedId": "create:milling/torchflower:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22243,12 +22374,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/wheat",
-			"convertedId": "create:milling/wheat:0"
+			"convertedId": "create:milling/wheat:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22259,12 +22391,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/white_tulip",
-			"convertedId": "create:milling/white_tulip:0"
+			"convertedId": "create:milling/white_tulip:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22275,12 +22408,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/wither_rose",
-			"convertedId": "create:milling/wither_rose:0"
+			"convertedId": "create:milling/wither_rose:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/milling.json",
+				"behavior_pack/scripts/processing/millstone-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22291,12 +22425,13 @@
 				"type": "create:milling"
 			},
 			"sourceId": "create:milling/wool",
-			"convertedId": "create:milling/wool:0"
+			"convertedId": "create:milling/wool:0",
+			"processor": "create:milling"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/basin.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22307,12 +22442,13 @@
 				"type": "create:mixing"
 			},
 			"sourceId": "create:mixing/andesite_alloy",
-			"convertedId": "create:basin/mixing/andesite_alloy:0"
+			"convertedId": "create:basin/mixing/andesite_alloy:0",
+			"processor": "create:mixing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/basin.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22323,12 +22459,13 @@
 				"type": "create:mixing"
 			},
 			"sourceId": "create:mixing/andesite_alloy_from_zinc",
-			"convertedId": "create:basin/mixing/andesite_alloy_from_zinc:0"
+			"convertedId": "create:basin/mixing/andesite_alloy_from_zinc:0",
+			"processor": "create:mixing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/basin.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22339,12 +22476,13 @@
 				"type": "create:mixing"
 			},
 			"sourceId": "create:mixing/brass_ingot",
-			"convertedId": "create:basin/mixing/brass_ingot:0"
+			"convertedId": "create:basin/mixing/brass_ingot:0",
+			"processor": "create:mixing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/basin.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22355,12 +22493,13 @@
 				"type": "create:mixing"
 			},
 			"sourceId": "create:mixing/cardboard_pulp",
-			"convertedId": "create:basin/mixing/cardboard_pulp:0"
+			"convertedId": "create:basin/mixing/cardboard_pulp:0",
+			"processor": "create:mixing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/basin.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22371,12 +22510,13 @@
 				"type": "create:mixing"
 			},
 			"sourceId": "create:mixing/chocolate",
-			"convertedId": "create:basin/mixing/chocolate:0"
+			"convertedId": "create:basin/mixing/chocolate:0",
+			"processor": "create:mixing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/basin.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22387,7 +22527,8 @@
 				"type": "create:mixing"
 			},
 			"sourceId": "create:mixing/chocolate_melting",
-			"convertedId": "create:basin/mixing/chocolate_melting:0"
+			"convertedId": "create:basin/mixing/chocolate_melting:0",
+			"processor": "create:mixing"
 		},
 		{
 			"evidence": [
@@ -22436,8 +22577,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/basin.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22448,12 +22589,13 @@
 				"type": "create:mixing"
 			},
 			"sourceId": "create:mixing/dough_by_mixing",
-			"convertedId": "create:basin/mixing/dough_by_mixing:0"
+			"convertedId": "create:basin/mixing/dough_by_mixing:0",
+			"processor": "create:mixing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/basin.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22464,12 +22606,13 @@
 				"type": "create:mixing"
 			},
 			"sourceId": "create:mixing/honey",
-			"convertedId": "create:basin/mixing/honey:0"
+			"convertedId": "create:basin/mixing/honey:0",
+			"processor": "create:mixing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/basin.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22480,12 +22623,13 @@
 				"type": "create:mixing"
 			},
 			"sourceId": "create:mixing/lava_from_cobble",
-			"convertedId": "create:basin/mixing/lava_from_cobble:0"
+			"convertedId": "create:basin/mixing/lava_from_cobble:0",
+			"processor": "create:mixing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/basin.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22496,12 +22640,13 @@
 				"type": "create:mixing"
 			},
 			"sourceId": "create:mixing/mud_by_mixing",
-			"convertedId": "create:basin/mixing/mud_by_mixing:0"
+			"convertedId": "create:basin/mixing/mud_by_mixing:0",
+			"processor": "create:mixing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/basin.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -22512,7 +22657,8 @@
 				"type": "create:mixing"
 			},
 			"sourceId": "create:mixing/tea",
-			"convertedId": "create:basin/mixing/tea:0"
+			"convertedId": "create:basin/mixing/tea:0",
+			"processor": "create:mixing"
 		},
 		{
 			"evidence": [
@@ -24562,8 +24708,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/pressing.json",
+				"behavior_pack/scripts/processing/mechanical-press-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -24574,12 +24720,13 @@
 				"type": "create:pressing"
 			},
 			"sourceId": "create:pressing/brass_ingot",
-			"convertedId": "create:pressing/brass_ingot:createbedrock:brass_ingot"
+			"convertedId": "create:pressing/brass_ingot:createbedrock:brass_ingot",
+			"processor": "create:pressing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/pressing.json",
+				"behavior_pack/scripts/processing/mechanical-press-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -24590,7 +24737,8 @@
 				"type": "create:pressing"
 			},
 			"sourceId": "create:pressing/cardboard",
-			"convertedId": "create:pressing/cardboard:createbedrock:pulp"
+			"convertedId": "create:pressing/cardboard:createbedrock:pulp",
+			"processor": "create:pressing"
 		},
 		{
 			"evidence": [
@@ -25014,8 +25162,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/pressing.json",
+				"behavior_pack/scripts/processing/mechanical-press-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -25026,7 +25174,8 @@
 				"type": "create:pressing"
 			},
 			"sourceId": "create:pressing/copper_ingot",
-			"convertedId": "create:pressing/copper_ingot:minecraft:copper_ingot"
+			"convertedId": "create:pressing/copper_ingot:minecraft:copper_ingot",
+			"processor": "create:pressing"
 		},
 		{
 			"evidence": [
@@ -25045,8 +25194,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/pressing.json",
+				"behavior_pack/scripts/processing/mechanical-press-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -25057,12 +25206,13 @@
 				"type": "create:pressing"
 			},
 			"sourceId": "create:pressing/gold_ingot",
-			"convertedId": "create:pressing/gold_ingot:minecraft:gold_ingot"
+			"convertedId": "create:pressing/gold_ingot:minecraft:gold_ingot",
+			"processor": "create:pressing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/pressing.json",
+				"behavior_pack/scripts/processing/mechanical-press-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -25073,12 +25223,13 @@
 				"type": "create:pressing"
 			},
 			"sourceId": "create:pressing/iron_ingot",
-			"convertedId": "create:pressing/iron_ingot:minecraft:iron_ingot"
+			"convertedId": "create:pressing/iron_ingot:minecraft:iron_ingot",
+			"processor": "create:pressing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/pressing.json",
+				"behavior_pack/scripts/processing/mechanical-press-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -25089,12 +25240,13 @@
 				"type": "create:pressing"
 			},
 			"sourceId": "create:pressing/path",
-			"convertedId": "create:pressing/path:minecraft:coarse_dirt"
+			"convertedId": "create:pressing/path:minecraft:coarse_dirt",
+			"processor": "create:pressing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/pressing.json",
+				"behavior_pack/scripts/processing/mechanical-press-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -25105,7 +25257,8 @@
 				"type": "create:pressing"
 			},
 			"sourceId": "create:pressing/path_from_grass",
-			"convertedId": "create:pressing/path_from_grass:minecraft:grass_block"
+			"convertedId": "create:pressing/path_from_grass:minecraft:grass_block",
+			"processor": "create:pressing"
 		},
 		{
 			"evidence": [
@@ -25169,8 +25322,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/pressing.json",
+				"behavior_pack/scripts/processing/mechanical-press-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -25181,7 +25334,8 @@
 				"type": "create:pressing"
 			},
 			"sourceId": "create:pressing/sugar_cane",
-			"convertedId": "create:pressing/sugar_cane:minecraft:sugar_cane"
+			"convertedId": "create:pressing/sugar_cane:minecraft:sugar_cane",
+			"processor": "create:pressing"
 		},
 		{
 			"evidence": [
@@ -25297,9 +25451,9 @@
 		{
 			"evidence": [
 				"data/recipes/sequenced-assembly.json",
-				"behavior_pack/scripts/processing/sequenced-assembly-runtime.js"
+				"behavior_pack/scripts/processing/sequenced-assembly-controller.js"
 			],
-			"execution": "scripted_interaction",
+			"execution": "runtime_adapter_pending",
 			"originalExecution": "pending_interaction_adapter",
 			"originalStrategy": "scripted_interaction",
 			"source": {
@@ -25308,14 +25462,14 @@
 				"type": "create:sequenced_assembly"
 			},
 			"sourceId": "create:sequenced_assembly/precision_mechanism",
-			"interaction": "sequenced_assembly"
+			"missingRuntime": "world_sequenced_assembly_adapter"
 		},
 		{
 			"evidence": [
 				"data/recipes/sequenced-assembly.json",
-				"behavior_pack/scripts/processing/sequenced-assembly-runtime.js"
+				"behavior_pack/scripts/processing/sequenced-assembly-controller.js"
 			],
-			"execution": "scripted_interaction",
+			"execution": "runtime_adapter_pending",
 			"originalExecution": "pending_interaction_adapter",
 			"originalStrategy": "scripted_interaction",
 			"source": {
@@ -25324,14 +25478,14 @@
 				"type": "create:sequenced_assembly"
 			},
 			"sourceId": "create:sequenced_assembly/sturdy_sheet",
-			"interaction": "sequenced_assembly"
+			"missingRuntime": "world_sequenced_assembly_adapter"
 		},
 		{
 			"evidence": [
 				"data/recipes/sequenced-assembly.json",
-				"behavior_pack/scripts/processing/sequenced-assembly-runtime.js"
+				"behavior_pack/scripts/processing/sequenced-assembly-controller.js"
 			],
-			"execution": "scripted_interaction",
+			"execution": "runtime_adapter_pending",
 			"originalExecution": "pending_interaction_adapter",
 			"originalStrategy": "scripted_interaction",
 			"source": {
@@ -25340,7 +25494,7 @@
 				"type": "create:sequenced_assembly"
 			},
 			"sourceId": "create:sequenced_assembly/track",
-			"interaction": "sequenced_assembly"
+			"missingRuntime": "world_sequenced_assembly_adapter"
 		},
 		{
 			"evidence": [
@@ -27784,8 +27938,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -27796,12 +27950,13 @@
 				"type": "create:splashing"
 			},
 			"sourceId": "create:splashing/crushed_raw_copper",
-			"convertedId": "create:fan/splashing/crushed_raw_copper:0"
+			"convertedId": "create:fan/splashing/crushed_raw_copper:0",
+			"processor": "create:splashing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -27812,12 +27967,13 @@
 				"type": "create:splashing"
 			},
 			"sourceId": "create:splashing/crushed_raw_gold",
-			"convertedId": "create:fan/splashing/crushed_raw_gold:0"
+			"convertedId": "create:fan/splashing/crushed_raw_gold:0",
+			"processor": "create:splashing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -27828,12 +27984,13 @@
 				"type": "create:splashing"
 			},
 			"sourceId": "create:splashing/crushed_raw_iron",
-			"convertedId": "create:fan/splashing/crushed_raw_iron:0"
+			"convertedId": "create:fan/splashing/crushed_raw_iron:0",
+			"processor": "create:splashing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -27844,7 +28001,8 @@
 				"type": "create:splashing"
 			},
 			"sourceId": "create:splashing/crushed_raw_zinc",
-			"convertedId": "create:fan/splashing/crushed_raw_zinc:0"
+			"convertedId": "create:fan/splashing/crushed_raw_zinc:0",
+			"processor": "create:splashing"
 		},
 		{
 			"evidence": [
@@ -27998,8 +28156,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -28010,7 +28168,8 @@
 				"type": "create:splashing"
 			},
 			"sourceId": "create:splashing/gravel",
-			"convertedId": "create:fan/splashing/gravel:0"
+			"convertedId": "create:fan/splashing/gravel:0",
+			"processor": "create:splashing"
 		},
 		{
 			"evidence": [
@@ -28074,8 +28233,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -28086,7 +28245,8 @@
 				"type": "create:splashing"
 			},
 			"sourceId": "create:splashing/ice",
-			"convertedId": "create:fan/splashing/ice:0"
+			"convertedId": "create:fan/splashing/ice:0",
+			"processor": "create:splashing"
 		},
 		{
 			"evidence": [
@@ -28180,8 +28340,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -28192,12 +28352,13 @@
 				"type": "create:splashing"
 			},
 			"sourceId": "create:splashing/industrial_iron_block",
-			"convertedId": "create:fan/splashing/industrial_iron_block:0"
+			"convertedId": "create:fan/splashing/industrial_iron_block:0",
+			"processor": "create:splashing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -28208,12 +28369,13 @@
 				"type": "create:splashing"
 			},
 			"sourceId": "create:splashing/industrial_iron_window",
-			"convertedId": "create:fan/splashing/industrial_iron_window:0"
+			"convertedId": "create:fan/splashing/industrial_iron_window:0",
+			"processor": "create:splashing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -28224,12 +28386,13 @@
 				"type": "create:splashing"
 			},
 			"sourceId": "create:splashing/industrial_iron_window_pane",
-			"convertedId": "create:fan/splashing/industrial_iron_window_pane:0"
+			"convertedId": "create:fan/splashing/industrial_iron_window_pane:0",
+			"processor": "create:splashing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -28240,7 +28403,8 @@
 				"type": "create:splashing"
 			},
 			"sourceId": "create:splashing/magma_block",
-			"convertedId": "create:fan/splashing/magma_block:0"
+			"convertedId": "create:fan/splashing/magma_block:0",
+			"processor": "create:splashing"
 		},
 		{
 			"evidence": [
@@ -28349,8 +28513,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -28361,12 +28525,13 @@
 				"type": "create:splashing"
 			},
 			"sourceId": "create:splashing/red_sand",
-			"convertedId": "create:fan/splashing/red_sand:0"
+			"convertedId": "create:fan/splashing/red_sand:0",
+			"processor": "create:splashing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -28377,12 +28542,13 @@
 				"type": "create:splashing"
 			},
 			"sourceId": "create:splashing/sand",
-			"convertedId": "create:fan/splashing/sand:0"
+			"convertedId": "create:fan/splashing/sand:0",
+			"processor": "create:splashing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -28393,12 +28559,13 @@
 				"type": "create:splashing"
 			},
 			"sourceId": "create:splashing/soul_sand",
-			"convertedId": "create:fan/splashing/soul_sand:0"
+			"convertedId": "create:fan/splashing/soul_sand:0",
+			"processor": "create:splashing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -28409,12 +28576,13 @@
 				"type": "create:splashing"
 			},
 			"sourceId": "create:splashing/stained_glass",
-			"convertedId": "create:fan/splashing/stained_glass:0"
+			"convertedId": "create:fan/splashing/stained_glass:0",
+			"processor": "create:splashing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -28425,7 +28593,8 @@
 				"type": "create:splashing"
 			},
 			"sourceId": "create:splashing/stained_glass_pane",
-			"convertedId": "create:fan/splashing/stained_glass_pane:0"
+			"convertedId": "create:fan/splashing/stained_glass_pane:0",
+			"processor": "create:splashing"
 		},
 		{
 			"evidence": [
@@ -28519,8 +28688,8 @@
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -28531,12 +28700,13 @@
 				"type": "create:splashing"
 			},
 			"sourceId": "create:splashing/wheat_flour",
-			"convertedId": "create:fan/splashing/wheat_flour:0"
+			"convertedId": "create:fan/splashing/wheat_flour:0",
+			"processor": "create:splashing"
 		},
 		{
 			"evidence": [
-				"data/recipes",
-				"behavior_pack/scripts/processing"
+				"data/recipes/fan.json",
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js"
 			],
 			"execution": "runtime_machine",
 			"originalExecution": "pending_machine_adapter",
@@ -28547,7 +28717,8 @@
 				"type": "create:splashing"
 			},
 			"sourceId": "create:splashing/wool",
-			"convertedId": "create:fan/splashing/wool:0"
+			"convertedId": "create:fan/splashing/wool:0",
+			"processor": "create:splashing"
 		},
 		{
 			"evidence": [
@@ -29465,12 +29636,13 @@
 	"generatedAt": "deterministic",
 	"generatedFrom": "recipe IR, generated Bedrock recipe converters, and P7.7 cooking parity catalog",
 	"schemaVersion": 1,
-	"staticCovered": 1369,
+	"staticCovered": 1366,
 	"summary": {
 		"external_compatibility": 515,
 		"native_recipe": 983,
+		"runtime_adapter_pending": 3,
 		"runtime_cooking_bridge": 22,
 		"runtime_machine": 171,
-		"scripted_interaction": 193
+		"scripted_interaction": 190
 	}
 }

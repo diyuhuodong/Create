@@ -8,6 +8,7 @@ import { buildJavaRegistrationCatalog } from "./java-registration-catalog.mjs";
 import { buildMigrationLedger } from "./migration-ledger.mjs";
 import { buildP71AcquisitionLedger, validateP71AcquisitionLedger } from "./p7-1-acquisition-ledger.mjs";
 import { buildP73RecipeExecutionLedger, validateP73RecipeExecutionLedger } from "./p7-3-recipe-execution-ledger.mjs";
+import { validateP73ProcessingExecutionContract } from "./p7-3-processing-execution-contract.mjs";
 import { validateMigrationMatrix } from "./migration-matrix-schema.mjs";
 import { validateJavaRegistrationCatalog } from "./java-registration-catalog-schema.mjs";
 import { validateMigrationDomainOverrides, validateMigrationLedger, validateMigrationOverrides } from "./migration-ledger-schema.mjs";
@@ -176,6 +177,7 @@ const { ledger: expectedMigrationLedger } = await buildMigrationLedger({
 assertFreshGeneratedData("bedrock/data/migration-ledger.json", migrationLedger, expectedMigrationLedger);
 assertFreshGeneratedData("bedrock/data/p7-1-acquisition-ledger.json", p71AcquisitionLedger, await buildP71AcquisitionLedger({ bedrockRoot }));
 assertFreshGeneratedData("bedrock/data/p7-3-recipe-execution-ledger.json", p73RecipeExecutionLedger, await buildP73RecipeExecutionLedger({ bedrockRoot }));
+await validateP73ProcessingExecutionContract({ bedrockRoot });
 const coreMaterialChain = await validateCoreMaterialChain({ bedrockRoot });
 await validateCinderFlourChain({ bedrockRoot });
 validateInteractionRecipes(interactionRecipes);
