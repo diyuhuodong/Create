@@ -1,4 +1,4 @@
-import { readdir, readFile } from "node:fs/promises";
+import { access, readdir, readFile } from "node:fs/promises";
 import { relative, resolve } from "node:path";
 
 export const P71_ACQUISITION_LEDGER_SCHEMA_VERSION = 1;
@@ -8,14 +8,18 @@ const NON_RECIPE_PATHS = new Map([
 	["createbedrock:chest_minecart_contraption", ["runtime_state", "behavior_pack/scripts/trains/minecart-contraption-runtime.js"]],
 	["createbedrock:chocolate_bucket", ["runtime_transform", "behavior_pack/scripts/fluids/fluid-runtime.js"]],
 	["createbedrock:chromatic_compound", ["runtime_transform", "behavior_pack/scripts/materials/legacy-materials-runtime.js"]],
-	["createbedrock:copycat_bars", ["missing", "R2/content-copycats"]],
-	["createbedrock:copycat_base", ["missing", "R2/content-copycats"]],
+	// AllBlocks intentionally omits .item() for both and their Java loot tables
+	// return air. They are internal copycat render bases, not survival items.
+	["createbedrock:copycat_bars", ["not_survival_content", "src/main/java/com/simibubi/create/AllBlocks.java#COPYCAT_BARS"]],
+	["createbedrock:copycat_base", ["not_survival_content", "src/main/java/com/simibubi/create/AllBlocks.java#COPYCAT_BASE"]],
 	["createbedrock:creative_blaze_cake", ["creative_only", "behavior_pack/items/creative_blaze_cake.json"]],
 	["createbedrock:creative_crate", ["creative_only", "behavior_pack/blocks/creative_crate.json"]],
 	["createbedrock:creative_fluid_tank", ["creative_only", "behavior_pack/blocks/creative_fluid_tank.json"]],
 	["createbedrock:creative_motor", ["creative_only", "behavior_pack/blocks/creative_motor.json"]],
-	["createbedrock:deepslate_zinc_ore", ["worldgen", "behavior_pack/features/zinc_ore.json"]],
-	["createbedrock:elevator_contact", ["missing", "R2/content-elevator-contact"]],
+	["createbedrock:deepslate_zinc_ore", ["worldgen", "behavior_pack/feature_rules/deepslate_zinc_ore_underground.json"]],
+	// Java has no recipe and its loot table returns redstone_contact, so this is
+	// a runtime elevator state rather than a separately recoverable survival item.
+	["createbedrock:elevator_contact", ["runtime_state", "src/main/java/com/simibubi/create/AllBlocks.java#ELEVATOR_CONTACT"]],
 	["createbedrock:furnace_minecart_contraption", ["runtime_state", "behavior_pack/scripts/trains/minecart-contraption-runtime.js"]],
 	["createbedrock:handheld_worldshaper", ["creative_only", "behavior_pack/items/handheld_worldshaper.json"]],
 	["createbedrock:honey_bucket", ["runtime_transform", "behavior_pack/scripts/fluids/fluid-runtime.js"]],
@@ -34,7 +38,7 @@ const NON_RECIPE_PATHS = new Map([
 	["createbedrock:shopping_list", ["runtime_state", "behavior_pack/scripts/schematics/clipboard-runtime.js"]],
 	["createbedrock:steam_whistle_extension", ["runtime_state", "behavior_pack/scripts/materials/steam-whistle-runtime.js"]],
 	["createbedrock:water_wheel_structure", ["runtime_state", "behavior_pack/scripts/kinetics/kinetic-runtime.js"]],
-	["createbedrock:zinc_ore", ["worldgen", "behavior_pack/features/zinc_ore.json"]]
+	["createbedrock:zinc_ore", ["worldgen", "behavior_pack/feature_rules/zinc_ore_underground.json"]]
 ]);
 
 async function filesUnder(directory) {
@@ -79,6 +83,20 @@ async function recipeOutputs(repositoryRoot, directories) {
 	return outputs;
 }
 
+async function assertNonRecipeEvidence(bedrockRoot, entries) {
+	for (const entry of entries.filter(entry => entry.status !== "recipe_output")) {
+		for (const evidence of entry.evidence) {
+			const source = evidence.split("#", 1)[0];
+			const root = source.startsWith("src/") ? resolve(bedrockRoot, "..") : bedrockRoot;
+			try {
+				await access(resolve(root, source));
+			} catch {
+				throw new Error(`P7.1 acquisition evidence for ${entry.identifier} is missing: ${evidence}`);
+			}
+		}
+	}
+}
+
 function sameSummary(left, right) {
 	return Object.keys({ ...left, ...right }).every(key => left[key] === right[key]);
 }
@@ -88,7 +106,7 @@ export function validateP71AcquisitionLedger(ledger) {
 		throw new TypeError("P7.1 acquisition ledger has an invalid header");
 	const ids = new Set();
 	for (const entry of ledger.entries) {
-		if (typeof entry?.identifier !== "string" || ids.has(entry.identifier) || !["creative_only", "missing", "recipe_output", "runtime_state", "runtime_transform", "worldgen"].includes(entry.status)
+		if (typeof entry?.identifier !== "string" || ids.has(entry.identifier) || !["creative_only", "missing", "not_survival_content", "recipe_output", "runtime_state", "runtime_transform", "worldgen"].includes(entry.status)
 			|| !Array.isArray(entry.evidence) || entry.evidence.length === 0)
 			throw new Error("P7.1 acquisition ledger has an invalid entry");
 		ids.add(entry.identifier);
@@ -122,5 +140,6 @@ export async function buildP71AcquisitionLedger({ bedrockRoot }) {
 		summary: Object.fromEntries([...new Set(entries.map(entry => entry.status))].sort().map(status => [status, entries.filter(entry => entry.status === status).length]))
 	};
 	validateP71AcquisitionLedger(document);
+	await assertNonRecipeEvidence(bedrockRoot, entries);
 	return document;
 }

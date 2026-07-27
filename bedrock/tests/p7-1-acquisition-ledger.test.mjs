@@ -8,14 +8,14 @@ import { buildP71AcquisitionLedger, validateP71AcquisitionLedger } from "../tool
 
 const bedrockRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
-test("P7.1 acquisition ledger classifies every partial content projection and exposes only actionable gaps", async () => {
+test("P7.1 acquisition ledger preserves Java-only internal content and closes every survival path", async () => {
 	const generated = await buildP71AcquisitionLedger({ bedrockRoot });
-	assert.deepEqual(validateP71AcquisitionLedger(generated), { entries: 253, missing: 3 });
-	assert.deepEqual(generated.entries.filter(entry => entry.status === "missing").map(entry => entry.identifier), [
+	assert.deepEqual(validateP71AcquisitionLedger(generated), { entries: 253, missing: 0 });
+	assert.deepEqual(generated.entries.filter(entry => entry.status === "not_survival_content").map(entry => entry.identifier), [
 		"createbedrock:copycat_bars",
-		"createbedrock:copycat_base",
-		"createbedrock:elevator_contact"
+		"createbedrock:copycat_base"
 	]);
+	assert.equal(generated.entries.find(entry => entry.identifier === "createbedrock:elevator_contact").status, "runtime_state");
 	const committed = JSON.parse(await readFile(resolve(bedrockRoot, "data/p7-1-acquisition-ledger.json"), "utf8"));
 	assert.deepEqual(committed, generated);
 });

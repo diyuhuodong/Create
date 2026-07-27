@@ -674,17 +674,17 @@
 		},
 		{
 			"evidence": [
-				"R2/content-copycats"
+				"src/main/java/com/simibubi/create/AllBlocks.java#COPYCAT_BARS"
 			],
 			"identifier": "createbedrock:copycat_bars",
-			"status": "missing"
+			"status": "not_survival_content"
 		},
 		{
 			"evidence": [
-				"R2/content-copycats"
+				"src/main/java/com/simibubi/create/AllBlocks.java#COPYCAT_BASE"
 			],
 			"identifier": "createbedrock:copycat_base",
-			"status": "missing"
+			"status": "not_survival_content"
 		},
 		{
 			"evidence": [
@@ -804,7 +804,7 @@
 		},
 		{
 			"evidence": [
-				"behavior_pack/features/zinc_ore.json"
+				"behavior_pack/feature_rules/deepslate_zinc_ore_underground.json"
 			],
 			"identifier": "createbedrock:deepslate_zinc_ore",
 			"status": "worldgen"
@@ -858,10 +858,10 @@
 		},
 		{
 			"evidence": [
-				"R2/content-elevator-contact"
+				"src/main/java/com/simibubi/create/AllBlocks.java#ELEVATOR_CONTACT"
 			],
 			"identifier": "createbedrock:elevator_contact",
-			"status": "missing"
+			"status": "runtime_state"
 		},
 		{
 			"evidence": [
@@ -2403,7 +2403,7 @@
 		},
 		{
 			"evidence": [
-				"behavior_pack/features/zinc_ore.json"
+				"behavior_pack/feature_rules/zinc_ore_underground.json"
 			],
 			"identifier": "createbedrock:zinc_ore",
 			"status": "worldgen"
@@ -2414,9 +2414,9 @@
 	"schemaVersion": 1,
 	"summary": {
 		"creative_only": 5,
-		"missing": 3,
+		"not_survival_content": 2,
 		"recipe_output": 222,
-		"runtime_state": 15,
+		"runtime_state": 16,
 		"runtime_transform": 6,
 		"worldgen": 2
 	}
