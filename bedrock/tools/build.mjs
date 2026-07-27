@@ -57,7 +57,9 @@ const repositoryRoot = resolve(bedrockRoot, "..");
 const buildRoot = resolve(bedrockRoot, "build");
 const packs = ["behavior_pack", "resource_pack"];
 
-await rm(buildRoot, { force: true, recursive: true });
+// Asset staging may leave a directory entry briefly visible after a previous build.
+// Retry transient ENOTEMPTY/EPERM removals so repeated local builds are reliable.
+await rm(buildRoot, { force: true, maxRetries: 5, recursive: true, retryDelay: 100 });
 await mkdir(buildRoot, { recursive: true });
 
 for (const pack of packs) {
