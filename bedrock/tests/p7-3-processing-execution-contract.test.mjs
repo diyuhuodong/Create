@@ -8,6 +8,7 @@ test("P7.3 machine recipes load concrete catalogs through registered runtimes wi
 		machineRecipes: 171,
 		processorKinds: 9,
 		referencedCreateItems: 116,
-		referencedFluidTypes: 13
+		referencedFluidTypes: 13,
+		sequencedRecipes: 3
 	});
 });

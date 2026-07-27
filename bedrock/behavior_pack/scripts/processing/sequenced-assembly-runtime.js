@@ -3,11 +3,12 @@ import { system, world } from "@minecraft/server";
 import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { ShardedStateStore } from "../kernel/sharded-state-store.js";
 import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-property-storage.js";
-import { getDepotNetwork } from "../logistics/depot-runtime.js";
+import { getDepotNetwork, physicalBeltCarriers } from "../logistics/depot-runtime.js";
 
 import { SequencedAssemblyBeltCarrier } from "./sequenced-assembly-belt-carrier.js";
 import { SEQUENCED_ASSEMBLY_RECIPES } from "./generated/sequenced-assembly-recipes.js";
 import { SequencedAssemblyWorldAdapter } from "./sequenced-assembly-world-adapter.js";
+import { stationForSequencedBeltCarrier } from "./sequenced-assembly-station-registry.js";
 import { matchesSequencedAssemblyTag } from "./sequenced-assembly-tags.js";
 
 const SEQUENCED_ASSEMBLY_TASK_GROUP = "sequenced_assembly";
@@ -87,6 +88,10 @@ export function beginSequencedBeltCarrier(options) {
 	return beltCarrier.begin(options);
 }
 
+export function beginSequencedBeltCarrierAtStation(options) {
+	return beltCarrier.beginAtStation(options);
+}
+
 /** Apply one station action to a Belt-bound sequence. */
 export function applySequencedBeltCarrier(options) {
 	return beltCarrier.apply(options);
@@ -95,6 +100,11 @@ export function applySequencedBeltCarrier(options) {
 /** Release a completed Belt-bound sequence for normal Belt delivery. */
 export function releaseSequencedBeltCarrier(options) {
 	return beltCarrier.release(options);
+}
+
+/** Clear a station gate after a Belt carrier has moved beyond that station. */
+export function departSequencedBeltCarrierStation(options) {
+	return beltCarrier.departStation(options);
 }
 
 export function getSequencedAssemblyDiagnostics() {
@@ -108,12 +118,42 @@ export function getSequencedAssemblyDiagnostics() {
 	};
 }
 
+function tickBeltStations() {
+	for (const carrier of physicalBeltCarriers()) {
+		const station = stationForSequencedBeltCarrier(carrier);
+		if (!station) {
+			if (carrier.sequencedAssembly)
+				beltCarrier.departStation({ transportId: carrier.id });
+			continue;
+		}
+		if (!carrier.sequencedAssembly) {
+			const started = beltCarrier.beginAtStation({ stationType: station.stationType, transportId: carrier.id });
+			if (!started.accepted)
+				continue;
+		}
+		const applied = beltCarrier.apply({
+			fluidPort: station.fluidPort,
+			itemPort: station.itemPort,
+			stationId: station.id,
+			stationType: station.stationType,
+			transportId: carrier.id
+		});
+		if (applied.applied)
+			station.persist?.();
+		if (applied.applied && applied.complete)
+			beltCarrier.release({ transportId: carrier.id });
+	}
+}
+
 export function registerSequencedAssembly() {
 	if (registered)
 		return false;
 	registered = true;
 	registerKernelTaskGroup(SEQUENCED_ASSEMBLY_TASK_GROUP, SEQUENCED_ASSEMBLY_TASK_BUDGET);
-	registerTickHandler(() => state.tick(), SEQUENCED_ASSEMBLY_TASK_GROUP);
+	registerTickHandler(() => {
+		tickBeltStations();
+		return state.tick();
+	}, SEQUENCED_ASSEMBLY_TASK_GROUP);
 	system.run(restore);
 	return true;
 }

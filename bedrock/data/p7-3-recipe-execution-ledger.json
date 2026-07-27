@@ -25451,9 +25451,11 @@
 		{
 			"evidence": [
 				"data/recipes/sequenced-assembly.json",
-				"behavior_pack/scripts/processing/sequenced-assembly-runtime.js"
+				"behavior_pack/scripts/processing/sequenced-assembly-runtime.js",
+				"behavior_pack/scripts/processing/sequenced-assembly-belt-carrier.js",
+				"behavior_pack/scripts/processing/sequenced-assembly-station-registry.js"
 			],
-			"execution": "runtime_adapter_pending",
+			"execution": "scripted_interaction",
 			"originalExecution": "pending_interaction_adapter",
 			"originalStrategy": "scripted_interaction",
 			"source": {
@@ -25461,15 +25463,16 @@
 				"path": "src/generated/resources/data/create/recipe/sequenced_assembly/precision_mechanism.json",
 				"type": "create:sequenced_assembly"
 			},
-			"sourceId": "create:sequenced_assembly/precision_mechanism",
-			"missingRuntime": "world_station_binding"
+			"sourceId": "create:sequenced_assembly/precision_mechanism"
 		},
 		{
 			"evidence": [
 				"data/recipes/sequenced-assembly.json",
-				"behavior_pack/scripts/processing/sequenced-assembly-runtime.js"
+				"behavior_pack/scripts/processing/sequenced-assembly-runtime.js",
+				"behavior_pack/scripts/processing/sequenced-assembly-belt-carrier.js",
+				"behavior_pack/scripts/processing/sequenced-assembly-station-registry.js"
 			],
-			"execution": "runtime_adapter_pending",
+			"execution": "scripted_interaction",
 			"originalExecution": "pending_interaction_adapter",
 			"originalStrategy": "scripted_interaction",
 			"source": {
@@ -25477,15 +25480,16 @@
 				"path": "src/generated/resources/data/create/recipe/sequenced_assembly/sturdy_sheet.json",
 				"type": "create:sequenced_assembly"
 			},
-			"sourceId": "create:sequenced_assembly/sturdy_sheet",
-			"missingRuntime": "world_station_binding"
+			"sourceId": "create:sequenced_assembly/sturdy_sheet"
 		},
 		{
 			"evidence": [
 				"data/recipes/sequenced-assembly.json",
-				"behavior_pack/scripts/processing/sequenced-assembly-runtime.js"
+				"behavior_pack/scripts/processing/sequenced-assembly-runtime.js",
+				"behavior_pack/scripts/processing/sequenced-assembly-belt-carrier.js",
+				"behavior_pack/scripts/processing/sequenced-assembly-station-registry.js"
 			],
-			"execution": "runtime_adapter_pending",
+			"execution": "scripted_interaction",
 			"originalExecution": "pending_interaction_adapter",
 			"originalStrategy": "scripted_interaction",
 			"source": {
@@ -25493,8 +25497,7 @@
 				"path": "src/generated/resources/data/create/recipe/sequenced_assembly/track.json",
 				"type": "create:sequenced_assembly"
 			},
-			"sourceId": "create:sequenced_assembly/track",
-			"missingRuntime": "world_station_binding"
+			"sourceId": "create:sequenced_assembly/track"
 		},
 		{
 			"evidence": [
@@ -29636,13 +29639,12 @@
 	"generatedAt": "deterministic",
 	"generatedFrom": "recipe IR, generated Bedrock recipe converters, and P7.7 cooking parity catalog",
 	"schemaVersion": 1,
-	"staticCovered": 1366,
+	"staticCovered": 1369,
 	"summary": {
 		"external_compatibility": 515,
 		"native_recipe": 983,
-		"runtime_adapter_pending": 3,
 		"runtime_cooking_bridge": 22,
 		"runtime_machine": 171,
-		"scripted_interaction": 190
+		"scripted_interaction": 193
 	}
 }

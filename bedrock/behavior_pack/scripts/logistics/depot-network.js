@@ -41,6 +41,14 @@ function normalizeSequencedCarrierSession(session, carrierId) {
 	return clone(session);
 }
 
+function normalizeQueuedBeltItems(items) {
+	if (items === undefined)
+		return [];
+	if (!Array.isArray(items))
+		throw new TypeError("Belt transport queues require an item array");
+	return items.map(item => cloneItemStack(item));
+}
+
 function stableStringify(value) {
 	if (value === null || typeof value !== "object")
 		return JSON.stringify(value);
@@ -291,8 +299,10 @@ export class DepotNetwork {
 			beltId: transport.beltId,
 			carrierId: transport.carrierId,
 			destinationId: transport.destinationId,
+			forward: transport.forward,
 			id: transport.id,
 			progress: transport.progress,
+			queuedItems: transport.queuedItems.length,
 			sequencedAssembly: transport.sequencedAssembly && clone(transport.sequencedAssembly),
 			sourceId: transport.sourceId
 		})).sort((left, right) => left.id.localeCompare(right.id));
@@ -311,6 +321,7 @@ export class DepotNetwork {
 			carrierId: transport.carrierId,
 			id: transport.id,
 			item: cloneItemStack(transport.item),
+			queuedItems: transport.queuedItems.map(item => cloneItemStack(item)),
 			sequencedAssembly: transport.sequencedAssembly && clone(transport.sequencedAssembly)
 		};
 	}
@@ -320,7 +331,7 @@ export class DepotNetwork {
 	 * controller snapshot in the DepotNetwork persistence domain. A session holds
 	 * ordinary delivery until its caller explicitly clears it with a final item.
 	 */
-	updateBeltCarrier({ carrierId, item, sequencedAssembly, transportId }) {
+	updateBeltCarrier({ carrierId, item, queuedItems, sequencedAssembly, transportId }) {
 		if (typeof transportId !== "string" || transportId.length === 0)
 			throw new TypeError("Belt carrier updates require a transport id");
 		const transport = this.#transports.get(transportId);
@@ -330,6 +341,8 @@ export class DepotNetwork {
 		if (carrierId !== transport.carrierId)
 			return { ok: false, reason: "carrier_mismatch" };
 		transport.item = cloneItemStack(item);
+		if (queuedItems !== undefined)
+			transport.queuedItems = normalizeQueuedBeltItems(queuedItems);
 		transport.sequencedAssembly = normalizeSequencedCarrierSession(sequencedAssembly, carrierId);
 		this.#persist();
 		return { ok: true, carrier: this.beltCarrier(transportId) };
@@ -1209,13 +1222,15 @@ export class DepotNetwork {
 			this.#transports.set(id, {
 				attempt: 0,
 				beltId: belt.id,
-				carrierId: carrierIdForBeltTransport(id),
-				destinationId,
+			carrierId: carrierIdForBeltTransport(id),
+			deliveryEpoch: 0,
+			destinationId,
 				forward: belt.speed > 0,
 				id,
-				item,
-				progress: 0,
-				sourceId
+			item,
+			progress: 0,
+			queuedItems: [],
+			sourceId
 			});
 			this.#persist();
 			return true;
@@ -1373,11 +1388,6 @@ export class DepotNetwork {
 	}
 
 	#tickBeltTransport(transport) {
-		// A sequenced carrier remains physically on the Belt, but its processing
-		// snapshot is authoritative until the station adapter clears the session.
-		// This prevents an intermediate item from being delivered as ordinary cargo.
-		if (transport.sequencedAssembly)
-			return false;
 		const belt = this.#belts.get(transport.beltId);
 		if (!belt) {
 			this.#report(new Error(`Transport ${transport.id} has no belt`));
@@ -1393,6 +1403,12 @@ export class DepotNetwork {
 			this.#persist();
 			return true;
 		}
+		// Incomplete sequences may travel between stations, but are never allowed
+		// to enter an ordinary depot endpoint as their intermediate item.
+		if (transport.sequencedAssembly) {
+			this.#persist();
+			return false;
+		}
 		const endpointId = transport.progress === 1 ? transport.destinationId : transport.sourceId;
 		const destination = this.#depots.get(endpointId)?.port;
 		if (!destination)
@@ -1400,12 +1416,17 @@ export class DepotNetwork {
 		if (this.#isDepotWithdrawalLocked(endpointId))
 			return false;
 		const operation = transport.progress === 1 ? "deliver" : "return";
-		const result = destination.insert(transport.item, { receiptId: `belt:${transport.id}:${operation}:${transport.attempt}` });
+		const result = destination.insert(transport.item, { receiptId: `belt:${transport.id}:${operation}:${transport.deliveryEpoch}:${transport.attempt}` });
 		if (result.accepted)
 			this.#notifyExternalPortMutation(endpointId);
 		if (result.remainder) {
 			transport.attempt++;
 			transport.item = result.remainder;
+		} else if (transport.queuedItems.length > 0) {
+			transport.item = transport.queuedItems.shift();
+			transport.attempt = 0;
+			transport.deliveryEpoch++;
+			transport.progress = 0;
 		} else
 			this.#transports.delete(transport.id);
 		this.#persist();
@@ -1706,7 +1727,8 @@ export class DepotNetwork {
 	#transportFromRecord(record, belts, depots) {
 		if (record?.kind !== "transport" || typeof record.id !== "string" || typeof record.beltId !== "string" || typeof record.sourceId !== "string" || typeof record.destinationId !== "string" || typeof record.forward !== "boolean")
 			throw new TypeError("Belt transport records require identifiers");
-		if (!Number.isInteger(record.attempt) || record.attempt < 0 || !Number.isFinite(record.progress) || record.progress < 0 || record.progress > 1)
+		if (!Number.isInteger(record.attempt) || record.attempt < 0 || !Number.isFinite(record.progress) || record.progress < 0 || record.progress > 1
+			|| (record.deliveryEpoch !== undefined && (!Number.isInteger(record.deliveryEpoch) || record.deliveryEpoch < 0)))
 			throw new TypeError("Belt transport records require valid progress and attempt state");
 		if (!belts.has(record.beltId) || !depots.has(record.sourceId) || !depots.has(record.destinationId))
 			throw new Error("Belt transport endpoints must refer to restored records");
@@ -1717,11 +1739,13 @@ export class DepotNetwork {
 			attempt: record.attempt,
 			beltId: record.beltId,
 			carrierId,
+			deliveryEpoch: record.deliveryEpoch ?? 0,
 			destinationId: record.destinationId,
 			forward: record.forward,
 			id: record.id,
 			item: cloneItemStack(record.item),
 			progress: record.progress,
+			queuedItems: normalizeQueuedBeltItems(record.queuedItems),
 			sequencedAssembly: normalizeSequencedCarrierSession(record.sequencedAssembly, carrierId),
 			sourceId: record.sourceId
 		};

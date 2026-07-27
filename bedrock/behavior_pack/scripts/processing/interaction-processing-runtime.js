@@ -6,6 +6,7 @@ import { PROJECTED_ITEM_TAGS } from "./generated/p7-2-item-tags.js";
 import { INTERACTION_RECIPES } from "./generated/interaction-recipes.js";
 import { InteractionProcessingController } from "./interaction-processing-controller.js";
 import { createShardedMachineState } from "./sharded-machine-state.js";
+import { registerSequencedAssemblyStationResolver } from "./sequenced-assembly-station-registry.js";
 
 const DEPLOYER_BLOCK = "createbedrock:deployer";
 const SPOUT_BLOCK = "createbedrock:spout";
@@ -124,6 +125,21 @@ function workMachine(key, kineticWorld) {
 	return update?.accepted === true;
 }
 
+function interactionStationForCarrier(carrier, getKineticWorld) {
+	for (const machine of machines.values()) {
+		if (machine.dimensionId !== carrier.dimensionId || getKineticWorld().speedAt(machine.dimensionId, machine.location) === 0)
+			continue;
+		const below = machine.location.x === carrier.location.x && machine.location.y - 1 === carrier.location.y && machine.location.z === carrier.location.z;
+		const adjacent = Math.abs(machine.location.x - carrier.location.x) + Math.abs(machine.location.y - carrier.location.y) + Math.abs(machine.location.z - carrier.location.z) === 1;
+		if ((machine.typeId === SPOUT_BLOCK && !below) || (machine.typeId === DEPLOYER_BLOCK && !adjacent))
+			continue;
+		return machine.typeId === SPOUT_BLOCK
+			? { fluidPort: nearbyFluidPort(machine), id: `spout:${keyFor(machine.dimensionId, machine.location)}`, persist, stationType: "create:filling" }
+			: { id: `deployer:${keyFor(machine.dimensionId, machine.location)}`, itemPort: machine.controller.heldPort, persist, stationType: "create:deploying" };
+	}
+	return undefined;
+}
+
 function selected(player) {
 	const inventory = player?.getComponent("minecraft:inventory")?.container;
 	const slot = player?.selectedSlotIndex;
@@ -204,6 +220,7 @@ export function registerInteractionProcessing(getKineticWorld) {
 		return false;
 	registered = true;
 	registerKernelTaskGroup(INTERACTION_TASK_GROUP, INTERACTION_TASK_BUDGET);
+	registerSequencedAssemblyStationResolver("interaction-processing", carrier => interactionStationForCarrier(carrier, getKineticWorld));
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
 		if (ensureMachine(event.block))
 			persist();

@@ -8,16 +8,15 @@ import { buildP73RecipeExecutionLedger, validateP73RecipeExecutionLedger } from 
 
 const bedrockRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
-test("P7.3 recipe execution ledger distinguishes complete routes from an unbound sequenced-assembly controller", async () => {
+test("P7.3 recipe execution ledger records sequenced assembly as a Belt-bound scripted interaction", async () => {
 	const generated = await buildP73RecipeExecutionLedger({ bedrockRoot });
-	assert.deepEqual(validateP73RecipeExecutionLedger(generated), { entries: 1884, staticCovered: 1366 });
+	assert.deepEqual(validateP73RecipeExecutionLedger(generated), { entries: 1884, staticCovered: 1369 });
 	assert.deepEqual(generated.summary, {
 		external_compatibility: 515,
 		native_recipe: 983,
-		runtime_adapter_pending: 3,
+		scripted_interaction: 193,
 		runtime_cooking_bridge: 22,
-		runtime_machine: 171,
-		scripted_interaction: 190
+		runtime_machine: 171
 	});
 	assert.deepEqual(Object.fromEntries([...new Set(generated.entries.filter(entry => entry.execution === "runtime_machine").map(entry => entry.processor))].sort()
 		.map(processor => [processor, generated.entries.filter(entry => entry.processor === processor).length])), {
@@ -33,7 +32,7 @@ test("P7.3 recipe execution ledger distinguishes complete routes from an unbound
 	});
 	assert.equal(generated.entries.filter(entry => entry.execution === "runtime_machine").every(entry => entry.evidence.length === 2 && entry.processor !== undefined), true);
 	assert.equal(generated.entries.filter(entry => entry.execution === "runtime_cooking_bridge").every(entry => entry.platformVerification === "pending_windows_bedrock"), true);
-	assert.deepEqual(generated.entries.filter(entry => entry.execution === "runtime_adapter_pending").map(entry => entry.sourceId), [
+	assert.deepEqual(generated.entries.filter(entry => entry.source.type === "create:sequenced_assembly").map(entry => entry.sourceId), [
 		"create:sequenced_assembly/precision_mechanism",
 		"create:sequenced_assembly/sturdy_sheet",
 		"create:sequenced_assembly/track"

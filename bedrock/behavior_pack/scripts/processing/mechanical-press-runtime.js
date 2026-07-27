@@ -8,6 +8,7 @@ import { MechanicalPressMachine } from "./mechanical-press-machine.js";
 import { supportedProcessingRecipes } from "./processing-item-support.js";
 import { registerMovingBlockDataAdapter } from "../contraptions/moving-block-data.js";
 import { createShardedMachineState } from "./sharded-machine-state.js";
+import { registerSequencedAssemblyStationResolver } from "./sequenced-assembly-station-registry.js";
 
 const PRESS_BLOCK = "createbedrock:mechanical_press";
 const LEGACY_PERSISTENCE_KEY = "createbedrock:mechanical_presses_v1";
@@ -194,8 +195,21 @@ function processPress(key, getKineticWorld) {
 		persist();
 }
 
+function pressStationForCarrier(carrier, getKineticWorld) {
+	for (const press of presses.values()) {
+		if (press.dimensionId !== carrier.dimensionId || press.location.x !== carrier.location.x
+			|| press.location.y - 1 !== carrier.location.y || press.location.z !== carrier.location.z)
+			continue;
+		if (getKineticWorld().speedAt(press.dimensionId, press.location) === 0)
+			return undefined;
+		return { id: `mechanical-press:${keyFor(press.dimensionId, press.location)}`, stationType: "create:pressing" };
+	}
+	return undefined;
+}
+
 export function registerMechanicalPresses(getKineticWorld) {
 	registerKernelTaskGroup(MECHANICAL_PRESS_TASK_GROUP, MECHANICAL_PRESS_TASK_BUDGET);
+	registerSequencedAssemblyStationResolver("mechanical-press", carrier => pressStationForCarrier(carrier, getKineticWorld));
 	registerMovingBlockDataAdapter(PRESS_BLOCK, {
 		capture: capturePress,
 		detach: detachPress,

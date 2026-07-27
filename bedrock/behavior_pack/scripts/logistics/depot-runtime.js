@@ -660,6 +660,22 @@ export function getDepotNetwork() {
 	return network;
 }
 
+/**
+ * Physical Belt carriers projected to their current block coordinate.  Processing
+ * runtimes use this read-only view to match a carrier to Press, Spout, and
+ * Deployer stations without duplicating transport state.
+ */
+export function physicalBeltCarriers() {
+	return network.beltTransports().flatMap(transport => {
+		const belt = physicalBeltLocations.get(transport.beltId);
+		if (!belt || belt.locations.length === 0)
+			return [];
+		const path = transport.forward ? belt.locations : [...belt.locations].reverse();
+		const index = Math.max(0, Math.min(path.length - 1, Math.round(transport.progress * (path.length - 1))));
+		return [{ ...transport, dimensionId: belt.dimensionId, location: { ...path[index] } }];
+	});
+}
+
 export function getDepotId(block) {
 	return identifierFor(block);
 }
