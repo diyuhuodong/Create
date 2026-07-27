@@ -12,6 +12,7 @@ async function json(path) {
 
 const dataRoot = resolve(bedrockRoot, "data");
 const document = buildP77GapLedger({
+	cookingParity: await json(resolve(dataRoot, "p7-7-cooking-parity.json")),
 	interactions: await json(resolve(dataRoot, "recipes", "interactions.json")),
 	matrix: await json(resolve(dataRoot, "migration-matrix.json")),
 	nativeRecipes: await json(resolve(dataRoot, "recipes", "native.json")),

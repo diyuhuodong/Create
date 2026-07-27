@@ -15,6 +15,7 @@ async function json(path) {
 async function inputs() {
 	const dataRoot = resolve(bedrockRoot, "data");
 	return {
+		cookingParity: await json(resolve(dataRoot, "p7-7-cooking-parity.json")),
 		interactions: await json(resolve(dataRoot, "recipes", "interactions.json")),
 		matrix: await json(resolve(dataRoot, "migration-matrix.json")),
 		nativeRecipes: await json(resolve(dataRoot, "recipes", "native.json")),
@@ -28,9 +29,9 @@ test("P7.7 gap ledger records core gaps separately from compatibility and platfo
 	const document = buildP77GapLedger(await inputs());
 	assert.deepEqual(document.summary, {
 		classifications: {
-			core_implementation_required: 22,
+			core_implementation_required: 0,
 			static_verified_pending_platform: 52,
-			platform_capability_blocked: 0,
+			platform_capability_blocked: 22,
 			external_compat: 487,
 			equivalent: 2,
 			not_applicable: 92
@@ -42,7 +43,7 @@ test("P7.7 gap ledger records core gaps separately from compatibility and platfo
 	assert.equal(document.sources.migrationMatrix.resourceStatus.partial, 362);
 	assert.equal(document.sources.resources.status.static_verified, 5016);
 	assert.equal(document.sources.acceptance.applicableChecks, 52);
-	assert.ok(document.entries.filter(entry => entry.classification === "core_implementation_required")
+	assert.ok(document.entries.filter(entry => entry.classification === "platform_capability_blocked")
 		.every(entry => entry.scope === "create_core" && entry.owner === "P7.7.2"));
 	assert.ok(document.entries.filter(entry => entry.classification === "external_compat")
 		.every(entry => entry.scope === "external_mod" && entry.compatibilityDecisionRefs.length > 0));

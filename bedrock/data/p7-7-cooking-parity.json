@@ -1,0 +1,326 @@
+{
+	"schemaVersion": 1,
+	"generatedAt": "deterministic",
+	"generatedFrom": "data/recipes/native.json",
+	"recipes": [
+		{
+			"experience": 0.1,
+			"id": "createbedrock:p7_7/cooking/blasting/copper_ingot_from_crushed",
+			"input": "createbedrock:crushed_raw_copper",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_cooking_time",
+				"native_furnace_does_not_preserve_experience"
+			],
+			"output": "minecraft:copper_ingot",
+			"processingTicks": 100,
+			"sourceId": "create:blasting/copper_ingot_from_crushed",
+			"stations": [
+				"blast_furnace"
+			]
+		},
+		{
+			"experience": 0.1,
+			"id": "createbedrock:p7_7/cooking/blasting/gold_ingot_from_crushed",
+			"input": "createbedrock:crushed_raw_gold",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_cooking_time",
+				"native_furnace_does_not_preserve_experience"
+			],
+			"output": "minecraft:gold_ingot",
+			"processingTicks": 100,
+			"sourceId": "create:blasting/gold_ingot_from_crushed",
+			"stations": [
+				"blast_furnace"
+			]
+		},
+		{
+			"experience": 0.1,
+			"id": "createbedrock:p7_7/cooking/blasting/iron_ingot_from_crushed",
+			"input": "createbedrock:crushed_raw_iron",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_cooking_time",
+				"native_furnace_does_not_preserve_experience"
+			],
+			"output": "minecraft:iron_ingot",
+			"processingTicks": 100,
+			"sourceId": "create:blasting/iron_ingot_from_crushed",
+			"stations": [
+				"blast_furnace"
+			]
+		},
+		{
+			"experience": 0.1,
+			"id": "createbedrock:p7_7/cooking/blasting/zinc_ingot_from_crushed",
+			"input": "createbedrock:crushed_raw_zinc",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_cooking_time",
+				"native_furnace_does_not_preserve_experience"
+			],
+			"output": "createbedrock:zinc_ingot",
+			"processingTicks": 100,
+			"sourceId": "create:blasting/zinc_ingot_from_crushed",
+			"stations": [
+				"blast_furnace"
+			]
+		},
+		{
+			"experience": 1,
+			"id": "createbedrock:p7_7/cooking/blasting/zinc_ingot_from_ore",
+			"input": "createbedrock:deepslate_zinc_ore",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_cooking_time",
+				"native_furnace_does_not_preserve_experience"
+			],
+			"output": "createbedrock:zinc_ingot",
+			"processingTicks": 100,
+			"sourceId": "create:blasting/zinc_ingot_from_ore",
+			"stations": [
+				"blast_furnace"
+			]
+		},
+		{
+			"experience": 0.7,
+			"id": "createbedrock:p7_7/cooking/blasting/zinc_ingot_from_raw_ore",
+			"input": "createbedrock:raw_zinc",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_cooking_time",
+				"native_furnace_does_not_preserve_experience"
+			],
+			"output": "createbedrock:zinc_ingot",
+			"processingTicks": 100,
+			"sourceId": "create:blasting/zinc_ingot_from_raw_ore",
+			"stations": [
+				"blast_furnace"
+			]
+		},
+		{
+			"experience": 0,
+			"id": "createbedrock:p7_7/cooking/campfire_cooking/bread",
+			"input": "createbedrock:dough",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_cooking_time"
+			],
+			"output": "minecraft:bread",
+			"processingTicks": 600,
+			"sourceId": "create:campfire_cooking/bread",
+			"stations": [
+				"campfire"
+			]
+		},
+		{
+			"experience": 0.1,
+			"id": "createbedrock:p7_7/cooking/smelting/copper_ingot_from_crushed",
+			"input": "createbedrock:crushed_raw_copper",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_experience"
+			],
+			"output": "minecraft:copper_ingot",
+			"processingTicks": 200,
+			"sourceId": "create:smelting/copper_ingot_from_crushed",
+			"stations": [
+				"furnace"
+			]
+		},
+		{
+			"experience": 0,
+			"id": "createbedrock:p7_7/cooking/smelting/glass_from_framed_glass",
+			"input": "createbedrock:framed_glass",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_cooking_time"
+			],
+			"output": "minecraft:glass",
+			"processingTicks": 50,
+			"sourceId": "create:smelting/glass_from_framed_glass",
+			"stations": [
+				"furnace"
+			]
+		},
+		{
+			"experience": 0,
+			"id": "createbedrock:p7_7/cooking/smelting/glass_from_horizontal_framed_glass",
+			"input": "createbedrock:horizontal_framed_glass",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_cooking_time"
+			],
+			"output": "minecraft:glass",
+			"processingTicks": 50,
+			"sourceId": "create:smelting/glass_from_horizontal_framed_glass",
+			"stations": [
+				"furnace"
+			]
+		},
+		{
+			"experience": 0,
+			"id": "createbedrock:p7_7/cooking/smelting/glass_from_tiled_glass",
+			"input": "createbedrock:tiled_glass",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_cooking_time"
+			],
+			"output": "minecraft:glass",
+			"processingTicks": 50,
+			"sourceId": "create:smelting/glass_from_tiled_glass",
+			"stations": [
+				"furnace"
+			]
+		},
+		{
+			"experience": 0,
+			"id": "createbedrock:p7_7/cooking/smelting/glass_from_vertical_framed_glass",
+			"input": "createbedrock:vertical_framed_glass",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_cooking_time"
+			],
+			"output": "minecraft:glass",
+			"processingTicks": 50,
+			"sourceId": "create:smelting/glass_from_vertical_framed_glass",
+			"stations": [
+				"furnace"
+			]
+		},
+		{
+			"experience": 0,
+			"id": "createbedrock:p7_7/cooking/smelting/glass_pane_from_framed_glass_pane",
+			"input": "createbedrock:framed_glass_pane",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_cooking_time"
+			],
+			"output": "minecraft:glass_pane",
+			"processingTicks": 50,
+			"sourceId": "create:smelting/glass_pane_from_framed_glass_pane",
+			"stations": [
+				"furnace"
+			]
+		},
+		{
+			"experience": 0,
+			"id": "createbedrock:p7_7/cooking/smelting/glass_pane_from_horizontal_framed_glass_pane",
+			"input": "createbedrock:horizontal_framed_glass_pane",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_cooking_time"
+			],
+			"output": "minecraft:glass_pane",
+			"processingTicks": 50,
+			"sourceId": "create:smelting/glass_pane_from_horizontal_framed_glass_pane",
+			"stations": [
+				"furnace"
+			]
+		},
+		{
+			"experience": 0,
+			"id": "createbedrock:p7_7/cooking/smelting/glass_pane_from_tiled_glass_pane",
+			"input": "createbedrock:tiled_glass_pane",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_cooking_time"
+			],
+			"output": "minecraft:glass_pane",
+			"processingTicks": 50,
+			"sourceId": "create:smelting/glass_pane_from_tiled_glass_pane",
+			"stations": [
+				"furnace"
+			]
+		},
+		{
+			"experience": 0,
+			"id": "createbedrock:p7_7/cooking/smelting/glass_pane_from_vertical_framed_glass_pane",
+			"input": "createbedrock:vertical_framed_glass_pane",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_cooking_time"
+			],
+			"output": "minecraft:glass_pane",
+			"processingTicks": 50,
+			"sourceId": "create:smelting/glass_pane_from_vertical_framed_glass_pane",
+			"stations": [
+				"furnace"
+			]
+		},
+		{
+			"experience": 0.1,
+			"id": "createbedrock:p7_7/cooking/smelting/gold_ingot_from_crushed",
+			"input": "createbedrock:crushed_raw_gold",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_experience"
+			],
+			"output": "minecraft:gold_ingot",
+			"processingTicks": 200,
+			"sourceId": "create:smelting/gold_ingot_from_crushed",
+			"stations": [
+				"furnace"
+			]
+		},
+		{
+			"experience": 0.1,
+			"id": "createbedrock:p7_7/cooking/smelting/iron_ingot_from_crushed",
+			"input": "createbedrock:crushed_raw_iron",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_experience"
+			],
+			"output": "minecraft:iron_ingot",
+			"processingTicks": 200,
+			"sourceId": "create:smelting/iron_ingot_from_crushed",
+			"stations": [
+				"furnace"
+			]
+		},
+		{
+			"experience": 0.1,
+			"id": "createbedrock:p7_7/cooking/smelting/zinc_ingot_from_crushed",
+			"input": "createbedrock:crushed_raw_zinc",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_experience"
+			],
+			"output": "createbedrock:zinc_ingot",
+			"processingTicks": 200,
+			"sourceId": "create:smelting/zinc_ingot_from_crushed",
+			"stations": [
+				"furnace"
+			]
+		},
+		{
+			"experience": 1,
+			"id": "createbedrock:p7_7/cooking/smelting/zinc_ingot_from_ore",
+			"input": "createbedrock:deepslate_zinc_ore",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_experience"
+			],
+			"output": "createbedrock:zinc_ingot",
+			"processingTicks": 200,
+			"sourceId": "create:smelting/zinc_ingot_from_ore",
+			"stations": [
+				"furnace"
+			]
+		},
+		{
+			"experience": 0.7,
+			"id": "createbedrock:p7_7/cooking/smelting/zinc_ingot_from_raw_ore",
+			"input": "createbedrock:raw_zinc",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_experience"
+			],
+			"output": "createbedrock:zinc_ingot",
+			"processingTicks": 200,
+			"sourceId": "create:smelting/zinc_ingot_from_raw_ore",
+			"stations": [
+				"furnace"
+			]
+		},
+		{
+			"experience": 0,
+			"id": "createbedrock:p7_7/cooking/smoking/bread",
+			"input": "createbedrock:dough",
+			"issueKinds": [
+				"native_furnace_does_not_preserve_cooking_time"
+			],
+			"output": "minecraft:bread",
+			"processingTicks": 100,
+			"sourceId": "create:smoking/bread",
+			"stations": [
+				"smoker"
+			]
+		}
+	],
+	"summary": {
+		"experienceOverrides": 12,
+		"processingTimeOverrides": 16,
+		"recipes": 22
+	}
+}

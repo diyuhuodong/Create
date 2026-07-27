@@ -1,5 +1,5 @@
 {
-	"schemaVersion": 1,
+	"schemaVersion": 2,
 	"generatedAt": "deterministic",
 	"generatedFrom": [
 		"data/recipes/native.json",
@@ -7,13 +7,19 @@
 		"data/recipes/recipe-ir.json",
 		"data/migration-matrix.json",
 		"data/p7-6-resource-ledger.json",
-		"data/p7-7-scenario-catalog.json"
+		"data/p7-7-scenario-catalog.json",
+		"data/p7-7-cooking-parity.json"
 	],
 	"sources": {
 		"acceptance": {
 			"applicableChecks": 52,
 			"platforms": 3,
 			"scenarios": 18
+		},
+		"cookingParity": {
+			"experienceOverrides": 12,
+			"processingTimeOverrides": 16,
+			"recipes": 22
 		},
 		"interactionRecipes": {
 			"status": {
@@ -62,10 +68,10 @@
 	},
 	"entries": [
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:blasting/copper_ingot_from_crushed",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:blasting/copper_ingot_from_crushed",
 			"issueKinds": [
@@ -75,10 +81,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:blasting/gold_ingot_from_crushed",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:blasting/gold_ingot_from_crushed",
 			"issueKinds": [
@@ -88,10 +94,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:blasting/iron_ingot_from_crushed",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:blasting/iron_ingot_from_crushed",
 			"issueKinds": [
@@ -101,10 +107,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:blasting/zinc_ingot_from_crushed",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:blasting/zinc_ingot_from_crushed",
 			"issueKinds": [
@@ -114,10 +120,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:blasting/zinc_ingot_from_ore",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:blasting/zinc_ingot_from_ore",
 			"issueKinds": [
@@ -127,10 +133,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:blasting/zinc_ingot_from_raw_ore",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:blasting/zinc_ingot_from_raw_ore",
 			"issueKinds": [
@@ -140,10 +146,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:campfire_cooking/bread",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:campfire_cooking/bread",
 			"issueKinds": [
@@ -152,10 +158,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:smelting/copper_ingot_from_crushed",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:smelting/copper_ingot_from_crushed",
 			"issueKinds": [
@@ -164,10 +170,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:smelting/glass_from_framed_glass",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:smelting/glass_from_framed_glass",
 			"issueKinds": [
@@ -176,10 +182,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:smelting/glass_from_horizontal_framed_glass",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:smelting/glass_from_horizontal_framed_glass",
 			"issueKinds": [
@@ -188,10 +194,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:smelting/glass_from_tiled_glass",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:smelting/glass_from_tiled_glass",
 			"issueKinds": [
@@ -200,10 +206,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:smelting/glass_from_vertical_framed_glass",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:smelting/glass_from_vertical_framed_glass",
 			"issueKinds": [
@@ -212,10 +218,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:smelting/glass_pane_from_framed_glass_pane",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:smelting/glass_pane_from_framed_glass_pane",
 			"issueKinds": [
@@ -224,10 +230,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:smelting/glass_pane_from_horizontal_framed_glass_pane",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:smelting/glass_pane_from_horizontal_framed_glass_pane",
 			"issueKinds": [
@@ -236,10 +242,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:smelting/glass_pane_from_tiled_glass_pane",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:smelting/glass_pane_from_tiled_glass_pane",
 			"issueKinds": [
@@ -248,10 +254,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:smelting/glass_pane_from_vertical_framed_glass_pane",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:smelting/glass_pane_from_vertical_framed_glass_pane",
 			"issueKinds": [
@@ -260,10 +266,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:smelting/gold_ingot_from_crushed",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:smelting/gold_ingot_from_crushed",
 			"issueKinds": [
@@ -272,10 +278,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:smelting/iron_ingot_from_crushed",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:smelting/iron_ingot_from_crushed",
 			"issueKinds": [
@@ -284,10 +290,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:smelting/zinc_ingot_from_crushed",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:smelting/zinc_ingot_from_crushed",
 			"issueKinds": [
@@ -296,10 +302,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:smelting/zinc_ingot_from_ore",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:smelting/zinc_ingot_from_ore",
 			"issueKinds": [
@@ -308,10 +314,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:smelting/zinc_ingot_from_raw_ore",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:smelting/zinc_ingot_from_raw_ore",
 			"issueKinds": [
@@ -320,10 +326,10 @@
 			"sourceStatus": "blocked_platform_semantics"
 		},
 		{
-			"classification": "core_implementation_required",
+			"classification": "platform_capability_blocked",
 			"id": "core/recipe/create:smoking/bread",
 			"owner": "P7.7.2",
-			"reason": "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			"reason": "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes.",
 			"scope": "create_core",
 			"subject": "create:smoking/bread",
 			"issueKinds": [
@@ -7005,9 +7011,9 @@
 	],
 	"summary": {
 		"classifications": {
-			"core_implementation_required": 22,
+			"core_implementation_required": 0,
 			"static_verified_pending_platform": 52,
-			"platform_capability_blocked": 0,
+			"platform_capability_blocked": 22,
 			"external_compat": 487,
 			"equivalent": 2,
 			"not_applicable": 92

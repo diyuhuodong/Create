@@ -9,6 +9,7 @@
 	"scripts": {
 		"build": "node tools/build.mjs",
 		"gap:p7-7": "node tools/generate-p7-7-gap-ledger.mjs",
+		"cooking:p7-7": "node tools/generate-p7-7-cooking-parity.mjs",
     "acceptance:status": "node tools/report-s3-15-platform-acceptance.mjs",
     "acceptance:p7-7:candidate": "node tools/create-p7-7-candidate.mjs",
     "acceptance:p7-7:status": "node tools/report-p7-7-acceptance.mjs",
@@ -23,7 +24,7 @@
     "inventory": "node tools/generate-domain-inventory.mjs",
     "catalog": "node tools/generate-java-registration-catalog.mjs",
     "content:p7-1": "node tools/generate-p7-1-content-families.mjs",
-		"p7:compile": "node tools/generate-p7-1-content-families.mjs && node tools/generate-p7-5-projections.mjs && node tools/generate-p7-6-catalogs.mjs && node tools/generate-p7-6-resources.mjs && node tools/generate-p7-6-guidance.mjs && node tools/convert-recipe-ir.mjs && node tools/convert-native-recipes.mjs && node tools/convert-stage3-processing-recipes.mjs && node tools/convert-milling-recipes.mjs && node tools/convert-crushing-recipes.mjs && node tools/convert-pressing-recipes.mjs && node tools/convert-interaction-recipes.mjs && node tools/convert-sequenced-assembly-recipes.mjs && node tools/generate-p7-7-gap-ledger.mjs",
+		"p7:compile": "node tools/generate-p7-1-content-families.mjs && node tools/generate-p7-5-projections.mjs && node tools/generate-p7-6-catalogs.mjs && node tools/generate-p7-6-resources.mjs && node tools/generate-p7-6-guidance.mjs && node tools/convert-recipe-ir.mjs && node tools/convert-native-recipes.mjs && node tools/convert-stage3-processing-recipes.mjs && node tools/convert-milling-recipes.mjs && node tools/convert-crushing-recipes.mjs && node tools/convert-pressing-recipes.mjs && node tools/convert-interaction-recipes.mjs && node tools/convert-sequenced-assembly-recipes.mjs && node tools/generate-p7-7-cooking-parity.mjs && node tools/generate-p7-7-gap-ledger.mjs",
     "ledger": "node tools/generate-domain-inventory.mjs && node tools/generate-java-registration-catalog.mjs && node tools/generate-migration-ledger.mjs",
     "matrix": "node tools/generate-migration-matrix.mjs",
     "pack": "node tools/pack.mjs",

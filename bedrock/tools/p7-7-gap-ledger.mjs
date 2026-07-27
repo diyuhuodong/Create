@@ -1,6 +1,6 @@
 import { P77_PLATFORM_IDS, validateP77ScenarioCatalog } from "./p7-7-acceptance-schema.mjs";
 
-export const P77_GAP_LEDGER_SCHEMA_VERSION = 1;
+export const P77_GAP_LEDGER_SCHEMA_VERSION = 2;
 export const P77_GAP_CLASSIFICATIONS = Object.freeze([
 	"core_implementation_required",
 	"static_verified_pending_platform",
@@ -73,19 +73,25 @@ function platformEntries(catalog) {
 	return entries;
 }
 
-function nativeRecipeEntries(nativeRecipes) {
+function nativeRecipeEntries(nativeRecipes, cookingParity) {
+	const coveredRecipes = new Set(cookingParity.recipes.map(recipe => recipe.sourceId));
 	return nativeRecipes.records
 		.filter(record => record.status !== "emittable")
-		.map(record => summaryEntry({
-			classification: "core_implementation_required",
+		.map(record => {
+			const covered = coveredRecipes.has(record.id);
+			return summaryEntry({
+			classification: covered ? "platform_capability_blocked" : "core_implementation_required",
 			id: `core/recipe/${record.id}`,
 			issueKinds: normalizedIssueKinds(record),
 			owner: "P7.7.2",
-			reason: "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
+			reason: covered
+				? "The managed cooking adapter preserves the Java contract statically; binding it to a native Bedrock cooking station is blocked until the platform bridge capability probe passes."
+				: "The Bedrock-native recipe format cannot preserve this Java recipe's declared semantics without a managed adapter.",
 			scope: "create_core",
 			sourceStatus: record.status,
 			subject: record.id
-		}));
+			});
+		});
 }
 
 function externalCompatibilityEntries(recipeIr) {
@@ -132,13 +138,14 @@ function explicitEquivalenceEntries() {
 	}));
 }
 
-function sourceSummary({ interactions, matrix, nativeRecipes, recipeIr, resources, catalogCoverage }) {
+function sourceSummary({ cookingParity, interactions, matrix, nativeRecipes, recipeIr, resources, catalogCoverage }) {
 	return {
 		acceptance: {
 			applicableChecks: catalogCoverage.applicableChecks,
 			platforms: catalogCoverage.platforms,
 			scenarios: catalogCoverage.scenarios
 		},
+		cookingParity: { ...cookingParity.summary },
 		interactionRecipes: {
 			status: countBy(interactions.records, "status"),
 			total: interactions.records.length
@@ -174,8 +181,8 @@ function summarizeEntries(entries) {
 	};
 }
 
-export function buildP77GapLedger({ interactions, matrix, nativeRecipes, recipeIr, resources, catalog }) {
-	for (const [name, value] of Object.entries({ interactions, matrix, nativeRecipes, recipeIr, resources, catalog }))
+export function buildP77GapLedger({ cookingParity, interactions, matrix, nativeRecipes, recipeIr, resources, catalog }) {
+	for (const [name, value] of Object.entries({ cookingParity, interactions, matrix, nativeRecipes, recipeIr, resources, catalog }))
 		assertObject(value, name);
 	for (const [name, value] of Object.entries({
 		"interaction recipe records": interactions.records,
@@ -186,9 +193,11 @@ export function buildP77GapLedger({ interactions, matrix, nativeRecipes, recipeI
 	}))
 		if (!Array.isArray(value))
 			throw new TypeError(`P7.7 gap ledger ${name} must be an array`);
+	if (!Array.isArray(cookingParity.recipes) || !cookingParity.summary || typeof cookingParity.summary !== "object")
+		throw new TypeError("P7.7 gap ledger cooking parity catalog is invalid");
 	const catalogCoverage = validateP77ScenarioCatalog(catalog);
 	const entries = [
-		...nativeRecipeEntries(nativeRecipes),
+		...nativeRecipeEntries(nativeRecipes, cookingParity),
 		...externalCompatibilityEntries(recipeIr),
 		...platformEntries(catalog),
 		...notApplicableResourceEntries(resources),
@@ -203,9 +212,10 @@ export function buildP77GapLedger({ interactions, matrix, nativeRecipes, recipeI
 			"data/recipes/recipe-ir.json",
 			"data/migration-matrix.json",
 			"data/p7-6-resource-ledger.json",
-			"data/p7-7-scenario-catalog.json"
+			"data/p7-7-scenario-catalog.json",
+			"data/p7-7-cooking-parity.json"
 		],
-		sources: sourceSummary({ interactions, matrix, nativeRecipes, recipeIr, resources, catalogCoverage }),
+		sources: sourceSummary({ cookingParity, interactions, matrix, nativeRecipes, recipeIr, resources, catalogCoverage }),
 		entries,
 		summary: summarizeEntries(entries)
 	};
@@ -217,8 +227,8 @@ export function validateP77GapLedger(document) {
 	assertObject(document, "document");
 	if (document.schemaVersion !== P77_GAP_LEDGER_SCHEMA_VERSION)
 		throw new Error(`P7.7 gap ledger must use schema version ${P77_GAP_LEDGER_SCHEMA_VERSION}`);
-	if (document.generatedAt !== "deterministic" || !Array.isArray(document.generatedFrom) || document.generatedFrom.length !== 6)
-		throw new Error("P7.7 gap ledger must declare its six deterministic source documents");
+	if (document.generatedAt !== "deterministic" || !Array.isArray(document.generatedFrom) || document.generatedFrom.length !== 7)
+		throw new Error("P7.7 gap ledger must declare its seven deterministic source documents");
 	assertObject(document.sources, "sources");
 	assertObject(document.summary, "summary");
 	if (!Array.isArray(document.entries))
@@ -233,9 +243,9 @@ export function validateP77GapLedger(document) {
 		if (ids.has(entry.id))
 			throw new Error(`P7.7 gap ledger entry ${entry.id} is duplicated`);
 		ids.add(entry.id);
-		if (entry.classification === "core_implementation_required") {
+		if (["core_implementation_required", "platform_capability_blocked"].includes(entry.classification)) {
 			if (entry.scope !== "create_core" || !Array.isArray(entry.issueKinds) || entry.issueKinds.length === 0)
-				throw new Error(`P7.7 core gap ${entry.id} requires Create scope and issue kinds`);
+				throw new Error(`P7.7 core cooking entry ${entry.id} requires Create scope and issue kinds`);
 		}
 		if (entry.classification === "external_compat" && (!Array.isArray(entry.compatibilityDecisionRefs) || entry.compatibilityDecisionRefs.length === 0))
 			throw new Error(`P7.7 external compatibility entry ${entry.id} requires a decision reference`);
@@ -251,7 +261,8 @@ export function validateP77GapLedger(document) {
 		"recipe IR summary": document.sources.recipeIr,
 		"migration matrix summary": document.sources.migrationMatrix,
 		"resource summary": document.sources.resources,
-		"acceptance summary": document.sources.acceptance
+		"acceptance summary": document.sources.acceptance,
+		"cooking parity summary": document.sources.cookingParity
 	}))
 		assertObject(expected, name);
 	return {
