@@ -33,6 +33,7 @@
 		"converge:p8-2": "node tools/generate-p8-2-registration-convergence.mjs",
 		"converge:p8-3": "node tools/generate-p8-3-semantic-registration-convergence.mjs",
 		"converge:p8-4": "node tools/generate-p8-4-domain-convergence.mjs",
+		"candidate:p8-5": "node tools/p8-5-static-candidate.mjs",
     "catalog": "node tools/generate-java-registration-catalog.mjs",
 		"content:p7-1": "node tools/generate-p7-1-content-families.mjs",
 		"content:p8-1": "node tools/generate-p8-1-functional-color-recipes.mjs",

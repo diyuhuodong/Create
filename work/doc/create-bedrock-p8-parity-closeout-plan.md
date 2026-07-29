@@ -92,6 +92,8 @@ git diff --check
 
 生成不可变 `.mcaddon` 候选和差异摘要。候选要求核心缺口、`partial`、`missing` 均为零；仅允许外部兼容、不适用、明确等效和待平台验证项。
 
+实现入口为 `cd bedrock && npm run candidate:p8-5`。它先执行 Node 测试、包校验和构建，再在 `bedrock/dist/` 写入带 SHA-256 的 `.mcaddon` 与同名候选报告；报告的 `platformReadiness` 固定为 `pending_p8_6`。
+
 ## P8.6：Windows、Realm 与 PS 验收
 
 先在 Windows Bedrock 完成内容日志、单机、重启恢复、双人并发、压力和 22 项烹饪能力探测；再上传 Realm 验证服务端持久化和多人行为；最后用 PS 加入 Realm 验证控制器、界面、渲染、性能和断线重连。
