@@ -155,6 +155,8 @@ export function validateMigrationOverrides(overrides, catalog) {
 			if (!LEDGER_EVIDENCE_STATUSES.has(entry[field]))
 				throw new Error(`Migration override ${entry.sourceKey} has invalid ${field} evidence`);
 		}
+		if (entry.p8Convergence !== undefined && (entry.p8Convergence?.package !== "P8.2" || !isNonEmptyString(entry.p8Convergence.source)))
+			throw new Error(`Migration override ${entry.sourceKey} has invalid P8.2 convergence provenance`);
 		if (!entry.mapping || !LEDGER_MAPPING_RELATIONS.has(entry.mapping.relation) || !Array.isArray(entry.mapping.targets))
 			throw new Error(`Migration override ${entry.sourceKey} has an invalid mapping`);
 		if (!entry.mapping.targets.every(isIdentifier) || new Set(entry.mapping.targets).size !== entry.mapping.targets.length)

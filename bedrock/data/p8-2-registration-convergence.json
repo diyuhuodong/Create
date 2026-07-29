@@ -1,0 +1,3229 @@
+{
+	"deferred": [
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:blaze_heater",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:bogey",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:chassis",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:copycat",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:cursed_bell",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:drill",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:encased_cogwheel",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:encased_large_cogwheel",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:encased_shaft",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:factory_panel",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:flap_display",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:funnel",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:gantry_pinion",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:harvester",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:motor",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:saw",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:simple_kinetic",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:sliding_door",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:table_cloth",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"sourceKey": "block_entity:create:valve_handle",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "block:create:chocolate",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "block:create:honey",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "fluid:create:chocolate",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "fluid:create:honey",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "fluid:create:potion",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "fluid:create:tea",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:andesite_alloy",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:brass_ingot",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:chocolate_bucket",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:copper_nugget",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:copper_sheet",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:crushed_raw_copper",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:crushed_raw_gold",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:crushed_raw_iron",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:crushed_raw_zinc",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:golden_sheet",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:honey_bucket",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:incomplete_precision_mechanism",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:incomplete_track",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:iron_sheet",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:polished_rose_quartz",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:powdered_obsidian",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:precision_mechanism",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:raw_zinc",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:rose_quartz",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:sturdy_sheet",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:unprocessed_obsidian_sheet",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:wheat_flour",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:zinc_ingot",
+			"owner": "P8.3"
+		},
+		{
+			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"sourceKey": "item:create:zinc_nugget",
+			"owner": "P8.3"
+		}
+	],
+	"generatedAt": "deterministic",
+	"generatedFrom": [
+		"data/migration-matrix.json",
+		"data/migration-overrides.json",
+		"behavior_pack definitions"
+	],
+	"resolved": [
+		{
+			"acceptanceId": "KINETICS-ADJUSTABLE-CHAIN-GEARSHIFT-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/adjustable_chain_gearshift.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block_entity:create:adjustable_chain_gearshift",
+			"target": "createbedrock:adjustable_chain_gearshift"
+		},
+		{
+			"acceptanceId": "REDSTONE-ANALOG-LEVER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/analog_lever.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block_entity:create:analog_lever",
+			"target": "createbedrock:analog_lever"
+		},
+		{
+			"acceptanceId": "LOGISTICS-ANDESITE-TUNNEL-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/andesite_tunnel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block_entity:create:andesite_tunnel",
+			"target": "createbedrock:andesite_tunnel"
+		},
+		{
+			"acceptanceId": "PROCESSING-BASIN-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/basin.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/processing/stage3-processing-runtime.js",
+			"sourceKey": "block_entity:create:basin",
+			"target": "createbedrock:basin"
+		},
+		{
+			"acceptanceId": "LOGISTICS-BELT-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/belt.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block_entity:create:belt",
+			"target": "createbedrock:belt"
+		},
+		{
+			"acceptanceId": "LOGISTICS-BRASS-TUNNEL-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/brass_tunnel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block_entity:create:brass_tunnel",
+			"target": "createbedrock:brass_tunnel"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-CART-ASSEMBLER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/cart_assembler.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/minecart-contraption-runtime.js",
+			"sourceKey": "block_entity:create:cart_assembler",
+			"target": "createbedrock:cart_assembler"
+		},
+		{
+			"acceptanceId": "KINETICS-CHAIN-CONVEYOR-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/chain_conveyor.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block_entity:create:chain_conveyor",
+			"target": "createbedrock:chain_conveyor"
+		},
+		{
+			"acceptanceId": "LOGISTICS-CHUTE-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/chute.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block_entity:create:chute",
+			"target": "createbedrock:chute"
+		},
+		{
+			"acceptanceId": "SCHEMATICS-CLIPBOARD-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/clipboard.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/schematics/clipboard-runtime.js",
+			"sourceKey": "block_entity:create:clipboard",
+			"target": "createbedrock:clipboard"
+		},
+		{
+			"acceptanceId": "CONTENT-CLOCKWORK-BEARING-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/clockwork_bearing.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block_entity:create:clockwork_bearing",
+			"target": "createbedrock:clockwork_bearing"
+		},
+		{
+			"acceptanceId": "KINETICS-CLUTCH-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/clutch.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block_entity:create:clutch",
+			"target": "createbedrock:clutch"
+		},
+		{
+			"acceptanceId": "REDSTONE-CONTENT-OBSERVER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/content_observer.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block_entity:create:content_observer",
+			"target": "createbedrock:content_observer"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-CONTRAPTION-CONTROLS-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/contraption_controls.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/contraption-actors-runtime.js",
+			"sourceKey": "block_entity:create:contraption_controls",
+			"target": "createbedrock:contraption_controls"
+		},
+		{
+			"acceptanceId": "LOGISTICS-CREATIVE-CRATE-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/creative_crate.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block_entity:create:creative_crate",
+			"target": "createbedrock:creative_crate"
+		},
+		{
+			"acceptanceId": "FLUIDS-CREATIVE-FLUID-TANK-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/creative_fluid_tank.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block_entity:create:creative_fluid_tank",
+			"target": "createbedrock:creative_fluid_tank"
+		},
+		{
+			"acceptanceId": "PROCESSING-CRUSHING-WHEEL-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/crushing_wheel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/processing/crushing-wheel-runtime.js",
+			"sourceKey": "block_entity:create:crushing_wheel",
+			"target": "createbedrock:crushing_wheel"
+		},
+		{
+			"acceptanceId": "REDSTONE-CRUSHING-WHEEL-CONTROLLER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/crushing_wheel_controller.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block_entity:create:crushing_wheel_controller",
+			"target": "createbedrock:crushing_wheel_controller"
+		},
+		{
+			"acceptanceId": "CONTENT-CUCKOO-CLOCK-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/cuckoo_clock.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block_entity:create:cuckoo_clock",
+			"target": "createbedrock:cuckoo_clock"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-DEPLOYER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/deployer.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/contraption-actors-runtime.js",
+			"sourceKey": "block_entity:create:deployer",
+			"target": "createbedrock:deployer"
+		},
+		{
+			"acceptanceId": "LOGISTICS-DEPOT-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/depot.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block_entity:create:depot",
+			"target": "createbedrock:depot"
+		},
+		{
+			"acceptanceId": "CONTENT-DESK-BELL-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/desk_bell.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block_entity:create:desk_bell",
+			"target": "createbedrock:desk_bell"
+		},
+		{
+			"acceptanceId": "REDSTONE-DISPLAY-LINK-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/display_link.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block_entity:create:display_link",
+			"target": "createbedrock:display_link"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-ELEVATOR-CONTACT-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/elevator_contact.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/elevator-contact-runtime.js",
+			"sourceKey": "block_entity:create:elevator_contact",
+			"target": "createbedrock:elevator_contact"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-ELEVATOR-PULLEY-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/elevator_pulley.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/linear-actuator-runtime.js",
+			"sourceKey": "block_entity:create:elevator_pulley",
+			"target": "createbedrock:elevator_pulley"
+		},
+		{
+			"acceptanceId": "PROCESSING-ENCASED-FAN-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/encased_fan.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/processing/stage3-processing-runtime.js",
+			"sourceKey": "block_entity:create:encased_fan",
+			"target": "createbedrock:encased_fan"
+		},
+		{
+			"acceptanceId": "FLUIDS-ENCASED-FLUID-PIPE-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/encased_fluid_pipe.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block_entity:create:encased_fluid_pipe",
+			"target": "createbedrock:encased_fluid_pipe"
+		},
+		{
+			"acceptanceId": "TRAINS-FAKE-TRACK-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/fake_track.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/rolling-stock-runtime.js",
+			"sourceKey": "block_entity:create:fake_track",
+			"target": "createbedrock:fake_track"
+		},
+		{
+			"acceptanceId": "FLUIDS-FLUID-PIPE-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/fluid_pipe.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block_entity:create:fluid_pipe",
+			"target": "createbedrock:fluid_pipe"
+		},
+		{
+			"acceptanceId": "FLUIDS-FLUID-TANK-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/fluid_tank.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block_entity:create:fluid_tank",
+			"target": "createbedrock:fluid_tank"
+		},
+		{
+			"acceptanceId": "FLUIDS-FLUID-VALVE-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/fluid_valve.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block_entity:create:fluid_valve",
+			"target": "createbedrock:fluid_valve"
+		},
+		{
+			"acceptanceId": "KINETICS-FLYWHEEL-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/flywheel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block_entity:create:flywheel",
+			"target": "createbedrock:flywheel"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-GANTRY-SHAFT-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/gantry_shaft.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/linear-actuator-runtime.js",
+			"sourceKey": "block_entity:create:gantry_shaft",
+			"target": "createbedrock:gantry_shaft"
+		},
+		{
+			"acceptanceId": "KINETICS-GEARBOX-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/gearbox.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block_entity:create:gearbox",
+			"target": "createbedrock:gearbox"
+		},
+		{
+			"acceptanceId": "KINETICS-GEARSHIFT-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/gearshift.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block_entity:create:gearshift",
+			"target": "createbedrock:gearshift"
+		},
+		{
+			"acceptanceId": "FLUIDS-GLASS-FLUID-PIPE-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/glass_fluid_pipe.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block_entity:create:glass_fluid_pipe",
+			"target": "createbedrock:glass_fluid_pipe"
+		},
+		{
+			"acceptanceId": "KINETICS-HAND-CRANK-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/hand_crank.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block_entity:create:hand_crank",
+			"target": "createbedrock:hand_crank"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-HOSE-PULLEY-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/hose_pulley.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/linear-actuator-runtime.js",
+			"sourceKey": "block_entity:create:hose_pulley",
+			"target": "createbedrock:hose_pulley"
+		},
+		{
+			"acceptanceId": "FLUIDS-ITEM-DRAIN-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/item_drain.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block_entity:create:item_drain",
+			"target": "createbedrock:item_drain"
+		},
+		{
+			"acceptanceId": "LOGISTICS-ITEM-HATCH-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/item_hatch.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block_entity:create:item_hatch",
+			"target": "createbedrock:item_hatch"
+		},
+		{
+			"acceptanceId": "LOGISTICS-ITEM-VAULT-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/item_vault.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block_entity:create:item_vault",
+			"target": "createbedrock:item_vault"
+		},
+		{
+			"acceptanceId": "KINETICS-LARGE-WATER-WHEEL-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/large_water_wheel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block_entity:create:large_water_wheel",
+			"target": "createbedrock:large_water_wheel"
+		},
+		{
+			"acceptanceId": "REDSTONE-LECTERN-CONTROLLER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/lectern_controller.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block_entity:create:lectern_controller",
+			"target": "createbedrock:lectern_controller"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-MECHANICAL-ARM-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_arm.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/contraption-actors-runtime.js",
+			"sourceKey": "block_entity:create:mechanical_arm",
+			"target": "createbedrock:mechanical_arm"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-MECHANICAL-BEARING-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_bearing.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/contraption-runtime.js",
+			"sourceKey": "block_entity:create:mechanical_bearing",
+			"target": "createbedrock:mechanical_bearing"
+		},
+		{
+			"acceptanceId": "CONTENT-MECHANICAL-CRAFTER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_crafter.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block_entity:create:mechanical_crafter",
+			"target": "createbedrock:mechanical_crafter"
+		},
+		{
+			"acceptanceId": "PROCESSING-MECHANICAL-MIXER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_mixer.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/processing/stage3-processing-runtime.js",
+			"sourceKey": "block_entity:create:mechanical_mixer",
+			"target": "createbedrock:mechanical_mixer"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-MECHANICAL-PISTON-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_piston.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/linear-actuator-runtime.js",
+			"sourceKey": "block_entity:create:mechanical_piston",
+			"target": "createbedrock:mechanical_piston"
+		},
+		{
+			"acceptanceId": "PROCESSING-MECHANICAL-PRESS-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_press.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/processing/mechanical-press-runtime.js",
+			"sourceKey": "block_entity:create:mechanical_press",
+			"target": "createbedrock:mechanical_press"
+		},
+		{
+			"acceptanceId": "FLUIDS-MECHANICAL-PUMP-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_pump.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block_entity:create:mechanical_pump",
+			"target": "createbedrock:mechanical_pump"
+		},
+		{
+			"acceptanceId": "CONTENT-MECHANICAL-ROLLER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_roller.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block_entity:create:mechanical_roller",
+			"target": "createbedrock:mechanical_roller"
+		},
+		{
+			"acceptanceId": "PROCESSING-MILLSTONE-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/millstone.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/processing/millstone-runtime.js",
+			"sourceKey": "block_entity:create:millstone",
+			"target": "createbedrock:millstone"
+		},
+		{
+			"acceptanceId": "REDSTONE-NIXIE-TUBE-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/nixie_tube.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block_entity:create:nixie_tube",
+			"target": "createbedrock:nixie_tube"
+		},
+		{
+			"acceptanceId": "CONTENT-NOZZLE-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/nozzle.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block_entity:create:nozzle",
+			"target": "createbedrock:nozzle"
+		},
+		{
+			"acceptanceId": "LOGISTICS-PACKAGE-FROGPORT-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/package_frogport.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/package-runtime.js",
+			"sourceKey": "block_entity:create:package_frogport",
+			"target": "createbedrock:package_frogport"
+		},
+		{
+			"acceptanceId": "LOGISTICS-PACKAGE-POSTBOX-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/package_postbox.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/package-runtime.js",
+			"sourceKey": "block_entity:create:package_postbox",
+			"target": "createbedrock:package_postbox"
+		},
+		{
+			"acceptanceId": "LOGISTICS-PACKAGER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/packager.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/package-runtime.js",
+			"sourceKey": "block_entity:create:packager",
+			"target": "createbedrock:packager"
+		},
+		{
+			"acceptanceId": "LOGISTICS-PACKAGER-LINK-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/packager_link.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/package-runtime.js",
+			"sourceKey": "block_entity:create:packager_link",
+			"target": "createbedrock:packager_link"
+		},
+		{
+			"acceptanceId": "CONTENT-PECULIAR-BELL-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/peculiar_bell.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block_entity:create:peculiar_bell",
+			"target": "createbedrock:peculiar_bell"
+		},
+		{
+			"acceptanceId": "CONTENT-PLACARD-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/placard.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block_entity:create:placard",
+			"target": "createbedrock:placard"
+		},
+		{
+			"acceptanceId": "FLUIDS-PORTABLE-FLUID-INTERFACE-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/portable_fluid_interface.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block_entity:create:portable_fluid_interface",
+			"target": "createbedrock:portable_fluid_interface"
+		},
+		{
+			"acceptanceId": "CONTENT-PORTABLE-STORAGE-INTERFACE-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/portable_storage_interface.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block_entity:create:portable_storage_interface",
+			"target": "createbedrock:portable_storage_interface"
+		},
+		{
+			"acceptanceId": "KINETICS-POWERED-SHAFT-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/powered_shaft.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block_entity:create:powered_shaft",
+			"target": "createbedrock:powered_shaft"
+		},
+		{
+			"acceptanceId": "REDSTONE-PULSE-EXTENDER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/pulse_extender.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block_entity:create:pulse_extender",
+			"target": "createbedrock:pulse_extender"
+		},
+		{
+			"acceptanceId": "REDSTONE-PULSE-REPEATER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/pulse_repeater.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block_entity:create:pulse_repeater",
+			"target": "createbedrock:pulse_repeater"
+		},
+		{
+			"acceptanceId": "REDSTONE-PULSE-TIMER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/pulse_timer.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block_entity:create:pulse_timer",
+			"target": "createbedrock:pulse_timer"
+		},
+		{
+			"acceptanceId": "REDSTONE-REDSTONE-LINK-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/redstone_link.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block_entity:create:redstone_link",
+			"target": "createbedrock:redstone_link"
+		},
+		{
+			"acceptanceId": "REDSTONE-REDSTONE-REQUESTER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/redstone_requester.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block_entity:create:redstone_requester",
+			"target": "createbedrock:redstone_requester"
+		},
+		{
+			"acceptanceId": "LOGISTICS-REPACKAGER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/repackager.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/package-runtime.js",
+			"sourceKey": "block_entity:create:repackager",
+			"target": "createbedrock:repackager"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-ROPE-PULLEY-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/rope_pulley.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/linear-actuator-runtime.js",
+			"sourceKey": "block_entity:create:rope_pulley",
+			"target": "createbedrock:rope_pulley"
+		},
+		{
+			"acceptanceId": "REDSTONE-ROTATION-SPEED-CONTROLLER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/rotation_speed_controller.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block_entity:create:rotation_speed_controller",
+			"target": "createbedrock:rotation_speed_controller"
+		},
+		{
+			"acceptanceId": "SCHEMATICS-SCHEMATIC-TABLE-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/schematic_table.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/schematics/schematic-runtime.js",
+			"sourceKey": "block_entity:create:schematic_table",
+			"target": "createbedrock:schematic_table"
+		},
+		{
+			"acceptanceId": "SCHEMATICS-SCHEMATICANNON-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/schematicannon.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/schematics/schematic-runtime.js",
+			"sourceKey": "block_entity:create:schematicannon",
+			"target": "createbedrock:schematicannon"
+		},
+		{
+			"acceptanceId": "KINETICS-SEQUENCED-GEARSHIFT-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/sequenced_gearshift.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block_entity:create:sequenced_gearshift",
+			"target": "createbedrock:sequenced_gearshift"
+		},
+		{
+			"acceptanceId": "LOGISTICS-SMART-CHUTE-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/smart_chute.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block_entity:create:smart_chute",
+			"target": "createbedrock:smart_chute"
+		},
+		{
+			"acceptanceId": "FLUIDS-SMART-FLUID-PIPE-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/smart_fluid_pipe.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block_entity:create:smart_fluid_pipe",
+			"target": "createbedrock:smart_fluid_pipe"
+		},
+		{
+			"acceptanceId": "CONTENT-SPEEDOMETER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/speedometer.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block_entity:create:speedometer",
+			"target": "createbedrock:speedometer"
+		},
+		{
+			"acceptanceId": "FLUIDS-SPOUT-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/spout.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block_entity:create:spout",
+			"target": "createbedrock:spout"
+		},
+		{
+			"acceptanceId": "KINETICS-STEAM-ENGINE-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/steam_engine.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block_entity:create:steam_engine",
+			"target": "createbedrock:steam_engine"
+		},
+		{
+			"acceptanceId": "CONTENT-STEAM-WHISTLE-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/steam_whistle.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block_entity:create:steam_whistle",
+			"target": "createbedrock:steam_whistle"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-STICKER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/sticker.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/sticker-runtime.js",
+			"sourceKey": "block_entity:create:sticker",
+			"target": "createbedrock:sticker"
+		},
+		{
+			"acceptanceId": "CONTENT-STOCK-TICKER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/stock_ticker.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block_entity:create:stock_ticker",
+			"target": "createbedrock:stock_ticker"
+		},
+		{
+			"acceptanceId": "CONTENT-STOCKPILE-SWITCH-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/stockpile_switch.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block_entity:create:stockpile_switch",
+			"target": "createbedrock:stockpile_switch"
+		},
+		{
+			"acceptanceId": "CONTENT-STRESSOMETER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/stressometer.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block_entity:create:stressometer",
+			"target": "createbedrock:stressometer"
+		},
+		{
+			"acceptanceId": "TRAINS-TRACK-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/track.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/train-runtime.js",
+			"sourceKey": "block_entity:create:track",
+			"target": "createbedrock:track"
+		},
+		{
+			"acceptanceId": "TRAINS-TRACK-OBSERVER-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/track_observer.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/railway-control-runtime.js",
+			"sourceKey": "block_entity:create:track_observer",
+			"target": "createbedrock:track_observer"
+		},
+		{
+			"acceptanceId": "TRAINS-TRACK-SIGNAL-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/track_signal.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/railway-control-runtime.js",
+			"sourceKey": "block_entity:create:track_signal",
+			"target": "createbedrock:track_signal"
+		},
+		{
+			"acceptanceId": "TRAINS-TRACK-STATION-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/track_station.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/train-runtime.js",
+			"sourceKey": "block_entity:create:track_station",
+			"target": "createbedrock:track_station"
+		},
+		{
+			"acceptanceId": "CONTENT-TURNTABLE-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/turntable.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block_entity:create:turntable",
+			"target": "createbedrock:turntable"
+		},
+		{
+			"acceptanceId": "KINETICS-WATER-WHEEL-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/water_wheel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block_entity:create:water_wheel",
+			"target": "createbedrock:water_wheel"
+		},
+		{
+			"acceptanceId": "LOGISTICS-WEIGHTED-EJECTOR-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/weighted_ejector.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block_entity:create:weighted_ejector",
+			"target": "createbedrock:weighted_ejector"
+		},
+		{
+			"acceptanceId": "KINETICS-WINDMILL-BEARING-BLOCK_ENTITY",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/windmill_bearing.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/contraption-runtime.js",
+			"sourceKey": "block_entity:create:windmill_bearing",
+			"target": "createbedrock:windmill_bearing"
+		},
+		{
+			"acceptanceId": "KINETICS-ADJUSTABLE-CHAIN-GEARSHIFT-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/adjustable_chain_gearshift.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:adjustable_chain_gearshift",
+			"target": "createbedrock:adjustable_chain_gearshift"
+		},
+		{
+			"acceptanceId": "REDSTONE-ANALOG-LEVER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/analog_lever.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block:create:analog_lever",
+			"target": "createbedrock:analog_lever"
+		},
+		{
+			"acceptanceId": "CONTENT-ANDESITE-ALLOY-BLOCK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/andesite_alloy_block.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:andesite_alloy_block",
+			"target": "createbedrock:andesite_alloy_block"
+		},
+		{
+			"acceptanceId": "LOGISTICS-ANDESITE-BELT-FUNNEL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/andesite_belt_funnel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block:create:andesite_belt_funnel",
+			"target": "createbedrock:andesite_belt_funnel"
+		},
+		{
+			"acceptanceId": "CONTENT-ANDESITE-CASING-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/andesite_casing.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:andesite_casing",
+			"target": "createbedrock:andesite_casing"
+		},
+		{
+			"acceptanceId": "CONTENT-ANDESITE-DOOR-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/andesite_door.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:andesite_door",
+			"target": "createbedrock:andesite_door"
+		},
+		{
+			"acceptanceId": "KINETICS-ANDESITE-ENCASED-COGWHEEL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/andesite_encased_cogwheel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:andesite_encased_cogwheel",
+			"target": "createbedrock:andesite_encased_cogwheel"
+		},
+		{
+			"acceptanceId": "KINETICS-ANDESITE-ENCASED-LARGE-COGWHEEL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/andesite_encased_large_cogwheel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:andesite_encased_large_cogwheel",
+			"target": "createbedrock:andesite_encased_large_cogwheel"
+		},
+		{
+			"acceptanceId": "KINETICS-ANDESITE-ENCASED-SHAFT-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/andesite_encased_shaft.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:andesite_encased_shaft",
+			"target": "createbedrock:andesite_encased_shaft"
+		},
+		{
+			"acceptanceId": "LOGISTICS-ANDESITE-FUNNEL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/andesite_funnel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block:create:andesite_funnel",
+			"target": "createbedrock:andesite_funnel"
+		},
+		{
+			"acceptanceId": "CONTENT-ANDESITE-LADDER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/andesite_ladder.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:andesite_ladder",
+			"target": "createbedrock:andesite_ladder"
+		},
+		{
+			"acceptanceId": "CONTENT-ANDESITE-SCAFFOLDING-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/andesite_scaffolding.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:andesite_scaffolding",
+			"target": "createbedrock:andesite_scaffolding"
+		},
+		{
+			"acceptanceId": "CONTENT-ANDESITE-TABLE-CLOTH-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/andesite_table_cloth.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:andesite_table_cloth",
+			"target": "createbedrock:andesite_table_cloth"
+		},
+		{
+			"acceptanceId": "LOGISTICS-ANDESITE-TUNNEL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/andesite_tunnel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block:create:andesite_tunnel",
+			"target": "createbedrock:andesite_tunnel"
+		},
+		{
+			"acceptanceId": "PROCESSING-BASIN-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/basin.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/processing/stage3-processing-runtime.js",
+			"sourceKey": "block:create:basin",
+			"target": "createbedrock:basin"
+		},
+		{
+			"acceptanceId": "LOGISTICS-BELT-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/belt.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block:create:belt",
+			"target": "createbedrock:belt"
+		},
+		{
+			"acceptanceId": "CONTENT-BLAZE-BURNER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/blaze_burner.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:blaze_burner",
+			"target": "createbedrock:blaze_burner"
+		},
+		{
+			"acceptanceId": "CONTENT-BOUND-CARDBOARD-BLOCK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/bound_cardboard_block.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:bound_cardboard_block",
+			"target": "createbedrock:bound_cardboard_block"
+		},
+		{
+			"acceptanceId": "LOGISTICS-BRASS-BELT-FUNNEL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/brass_belt_funnel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block:create:brass_belt_funnel",
+			"target": "createbedrock:brass_belt_funnel"
+		},
+		{
+			"acceptanceId": "CONTENT-BRASS-BLOCK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/brass_block.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:brass_block",
+			"target": "createbedrock:brass_block"
+		},
+		{
+			"acceptanceId": "CONTENT-BRASS-CASING-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/brass_casing.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:brass_casing",
+			"target": "createbedrock:brass_casing"
+		},
+		{
+			"acceptanceId": "CONTENT-BRASS-DOOR-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/brass_door.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:brass_door",
+			"target": "createbedrock:brass_door"
+		},
+		{
+			"acceptanceId": "KINETICS-BRASS-ENCASED-COGWHEEL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/brass_encased_cogwheel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:brass_encased_cogwheel",
+			"target": "createbedrock:brass_encased_cogwheel"
+		},
+		{
+			"acceptanceId": "KINETICS-BRASS-ENCASED-LARGE-COGWHEEL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/brass_encased_large_cogwheel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:brass_encased_large_cogwheel",
+			"target": "createbedrock:brass_encased_large_cogwheel"
+		},
+		{
+			"acceptanceId": "KINETICS-BRASS-ENCASED-SHAFT-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/brass_encased_shaft.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:brass_encased_shaft",
+			"target": "createbedrock:brass_encased_shaft"
+		},
+		{
+			"acceptanceId": "LOGISTICS-BRASS-FUNNEL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/brass_funnel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block:create:brass_funnel",
+			"target": "createbedrock:brass_funnel"
+		},
+		{
+			"acceptanceId": "CONTENT-BRASS-LADDER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/brass_ladder.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:brass_ladder",
+			"target": "createbedrock:brass_ladder"
+		},
+		{
+			"acceptanceId": "CONTENT-BRASS-SCAFFOLDING-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/brass_scaffolding.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:brass_scaffolding",
+			"target": "createbedrock:brass_scaffolding"
+		},
+		{
+			"acceptanceId": "CONTENT-BRASS-TABLE-CLOTH-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/brass_table_cloth.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:brass_table_cloth",
+			"target": "createbedrock:brass_table_cloth"
+		},
+		{
+			"acceptanceId": "LOGISTICS-BRASS-TUNNEL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/brass_tunnel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block:create:brass_tunnel",
+			"target": "createbedrock:brass_tunnel"
+		},
+		{
+			"acceptanceId": "CONTENT-CARDBOARD-BLOCK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/cardboard_block.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:cardboard_block",
+			"target": "createbedrock:cardboard_block"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-CART-ASSEMBLER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/cart_assembler.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/minecart-contraption-runtime.js",
+			"sourceKey": "block:create:cart_assembler",
+			"target": "createbedrock:cart_assembler"
+		},
+		{
+			"acceptanceId": "KINETICS-CHAIN-CONVEYOR-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/chain_conveyor.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block:create:chain_conveyor",
+			"target": "createbedrock:chain_conveyor"
+		},
+		{
+			"acceptanceId": "LOGISTICS-CHUTE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/chute.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block:create:chute",
+			"target": "createbedrock:chute"
+		},
+		{
+			"acceptanceId": "SCHEMATICS-CLIPBOARD-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/clipboard.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/schematics/clipboard-runtime.js",
+			"sourceKey": "block:create:clipboard",
+			"target": "createbedrock:clipboard"
+		},
+		{
+			"acceptanceId": "CONTENT-CLOCKWORK-BEARING-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/clockwork_bearing.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:clockwork_bearing",
+			"target": "createbedrock:clockwork_bearing"
+		},
+		{
+			"acceptanceId": "KINETICS-CLUTCH-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/clutch.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:clutch",
+			"target": "createbedrock:clutch"
+		},
+		{
+			"acceptanceId": "KINETICS-COGWHEEL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/cogwheel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:cogwheel",
+			"target": "createbedrock:cogwheel"
+		},
+		{
+			"acceptanceId": "REDSTONE-CONTENT-OBSERVER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/content_observer.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block:create:content_observer",
+			"target": "createbedrock:content_observer"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-CONTRAPTION-CONTROLS-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/contraption_controls.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/contraption-actors-runtime.js",
+			"sourceKey": "block:create:contraption_controls",
+			"target": "createbedrock:contraption_controls"
+		},
+		{
+			"acceptanceId": "TRAINS-CONTROLLER-RAIL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/controller_rail.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/railway-control-runtime.js",
+			"sourceKey": "block:create:controller_rail",
+			"target": "createbedrock:controller_rail"
+		},
+		{
+			"acceptanceId": "CONTENT-CONTROLS-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/controls.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:controls",
+			"target": "createbedrock:controls"
+		},
+		{
+			"acceptanceId": "CONTENT-COPPER-CASING-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/copper_casing.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:copper_casing",
+			"target": "createbedrock:copper_casing"
+		},
+		{
+			"acceptanceId": "CONTENT-COPPER-DOOR-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/copper_door.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:copper_door",
+			"target": "createbedrock:copper_door"
+		},
+		{
+			"acceptanceId": "CONTENT-COPPER-LADDER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/copper_ladder.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:copper_ladder",
+			"target": "createbedrock:copper_ladder"
+		},
+		{
+			"acceptanceId": "CONTENT-COPPER-SCAFFOLDING-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/copper_scaffolding.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:copper_scaffolding",
+			"target": "createbedrock:copper_scaffolding"
+		},
+		{
+			"acceptanceId": "CONTENT-COPPER-TABLE-CLOTH-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/copper_table_cloth.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:copper_table_cloth",
+			"target": "createbedrock:copper_table_cloth"
+		},
+		{
+			"acceptanceId": "FLUIDS-COPPER-VALVE-HANDLE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/copper_valve_handle.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block:create:copper_valve_handle",
+			"target": "createbedrock:copper_valve_handle"
+		},
+		{
+			"acceptanceId": "CONTENT-COPYCAT-BARS-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/copycat_bars.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:copycat_bars",
+			"target": "createbedrock:copycat_bars"
+		},
+		{
+			"acceptanceId": "CONTENT-COPYCAT-BASE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/copycat_base.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:copycat_base",
+			"target": "createbedrock:copycat_base"
+		},
+		{
+			"acceptanceId": "CONTENT-COPYCAT-PANEL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/copycat_panel.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:copycat_panel",
+			"target": "createbedrock:copycat_panel"
+		},
+		{
+			"acceptanceId": "CONTENT-COPYCAT-STEP-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/copycat_step.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:copycat_step",
+			"target": "createbedrock:copycat_step"
+		},
+		{
+			"acceptanceId": "LOGISTICS-CREATIVE-CRATE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/creative_crate.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block:create:creative_crate",
+			"target": "createbedrock:creative_crate"
+		},
+		{
+			"acceptanceId": "FLUIDS-CREATIVE-FLUID-TANK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/creative_fluid_tank.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block:create:creative_fluid_tank",
+			"target": "createbedrock:creative_fluid_tank"
+		},
+		{
+			"acceptanceId": "KINETICS-CREATIVE-MOTOR-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/creative_motor.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:creative_motor",
+			"target": "createbedrock:creative_motor"
+		},
+		{
+			"acceptanceId": "PROCESSING-CRUSHING-WHEEL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/crushing_wheel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/processing/crushing-wheel-runtime.js",
+			"sourceKey": "block:create:crushing_wheel",
+			"target": "createbedrock:crushing_wheel"
+		},
+		{
+			"acceptanceId": "REDSTONE-CRUSHING-WHEEL-CONTROLLER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/crushing_wheel_controller.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block:create:crushing_wheel_controller",
+			"target": "createbedrock:crushing_wheel_controller"
+		},
+		{
+			"acceptanceId": "CONTENT-CUCKOO-CLOCK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/cuckoo_clock.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:cuckoo_clock",
+			"target": "createbedrock:cuckoo_clock"
+		},
+		{
+			"acceptanceId": "CONTENT-DEEPSLATE-ZINC-ORE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/deepslate_zinc_ore.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:deepslate_zinc_ore",
+			"target": "createbedrock:deepslate_zinc_ore"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-DEPLOYER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/deployer.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/contraption-actors-runtime.js",
+			"sourceKey": "block:create:deployer",
+			"target": "createbedrock:deployer"
+		},
+		{
+			"acceptanceId": "LOGISTICS-DEPOT-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/depot.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block:create:depot",
+			"target": "createbedrock:depot"
+		},
+		{
+			"acceptanceId": "CONTENT-DESK-BELL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/desk_bell.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:desk_bell",
+			"target": "createbedrock:desk_bell"
+		},
+		{
+			"acceptanceId": "CONTENT-DISPLAY-BOARD-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/display_board.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:display_board",
+			"target": "createbedrock:display_board"
+		},
+		{
+			"acceptanceId": "REDSTONE-DISPLAY-LINK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/display_link.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block:create:display_link",
+			"target": "createbedrock:display_link"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-ELEVATOR-CONTACT-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/elevator_contact.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/elevator-contact-runtime.js",
+			"sourceKey": "block:create:elevator_contact",
+			"target": "createbedrock:elevator_contact"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-ELEVATOR-PULLEY-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/elevator_pulley.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/linear-actuator-runtime.js",
+			"sourceKey": "block:create:elevator_pulley",
+			"target": "createbedrock:elevator_pulley"
+		},
+		{
+			"acceptanceId": "KINETICS-ENCASED-CHAIN-DRIVE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/encased_chain_drive.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:encased_chain_drive",
+			"target": "createbedrock:encased_chain_drive"
+		},
+		{
+			"acceptanceId": "PROCESSING-ENCASED-FAN-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/encased_fan.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/processing/stage3-processing-runtime.js",
+			"sourceKey": "block:create:encased_fan",
+			"target": "createbedrock:encased_fan"
+		},
+		{
+			"acceptanceId": "FLUIDS-ENCASED-FLUID-PIPE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/encased_fluid_pipe.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block:create:encased_fluid_pipe",
+			"target": "createbedrock:encased_fluid_pipe"
+		},
+		{
+			"acceptanceId": "CONTENT-EXPERIENCE-BLOCK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/experience_block.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:experience_block",
+			"target": "createbedrock:experience_block"
+		},
+		{
+			"acceptanceId": "LOGISTICS-FACTORY-GAUGE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/factory_gauge.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/package-runtime.js",
+			"sourceKey": "block:create:factory_gauge",
+			"target": "createbedrock:factory_gauge"
+		},
+		{
+			"acceptanceId": "TRAINS-FAKE-TRACK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/fake_track.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/rolling-stock-runtime.js",
+			"sourceKey": "block:create:fake_track",
+			"target": "createbedrock:fake_track"
+		},
+		{
+			"acceptanceId": "FLUIDS-FLUID-PIPE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/fluid_pipe.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block:create:fluid_pipe",
+			"target": "createbedrock:fluid_pipe"
+		},
+		{
+			"acceptanceId": "FLUIDS-FLUID-TANK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/fluid_tank.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block:create:fluid_tank",
+			"target": "createbedrock:fluid_tank"
+		},
+		{
+			"acceptanceId": "FLUIDS-FLUID-VALVE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/fluid_valve.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block:create:fluid_valve",
+			"target": "createbedrock:fluid_valve"
+		},
+		{
+			"acceptanceId": "KINETICS-FLYWHEEL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/flywheel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:flywheel",
+			"target": "createbedrock:flywheel"
+		},
+		{
+			"acceptanceId": "CONTENT-FRAMED-GLASS-DOOR-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/framed_glass_door.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:framed_glass_door",
+			"target": "createbedrock:framed_glass_door"
+		},
+		{
+			"acceptanceId": "CONTENT-FRAMED-GLASS-TRAPDOOR-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/framed_glass_trapdoor.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:framed_glass_trapdoor",
+			"target": "createbedrock:framed_glass_trapdoor"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-GANTRY-CARRIAGE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/gantry_carriage.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/linear-actuator-runtime.js",
+			"sourceKey": "block:create:gantry_carriage",
+			"target": "createbedrock:gantry_carriage"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-GANTRY-SHAFT-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/gantry_shaft.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/linear-actuator-runtime.js",
+			"sourceKey": "block:create:gantry_shaft",
+			"target": "createbedrock:gantry_shaft"
+		},
+		{
+			"acceptanceId": "KINETICS-GEARBOX-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/gearbox.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:gearbox",
+			"target": "createbedrock:gearbox"
+		},
+		{
+			"acceptanceId": "KINETICS-GEARSHIFT-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/gearshift.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:gearshift",
+			"target": "createbedrock:gearshift"
+		},
+		{
+			"acceptanceId": "FLUIDS-GLASS-FLUID-PIPE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/glass_fluid_pipe.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block:create:glass_fluid_pipe",
+			"target": "createbedrock:glass_fluid_pipe"
+		},
+		{
+			"acceptanceId": "KINETICS-HAND-CRANK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/hand_crank.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:hand_crank",
+			"target": "createbedrock:hand_crank"
+		},
+		{
+			"acceptanceId": "CONTENT-HAUNTED-BELL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/haunted_bell.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:haunted_bell",
+			"target": "createbedrock:haunted_bell"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-HOSE-PULLEY-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/hose_pulley.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/linear-actuator-runtime.js",
+			"sourceKey": "block:create:hose_pulley",
+			"target": "createbedrock:hose_pulley"
+		},
+		{
+			"acceptanceId": "CONTENT-INDUSTRIAL-IRON-BLOCK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/industrial_iron_block.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:industrial_iron_block",
+			"target": "createbedrock:industrial_iron_block"
+		},
+		{
+			"acceptanceId": "FLUIDS-ITEM-DRAIN-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/item_drain.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block:create:item_drain",
+			"target": "createbedrock:item_drain"
+		},
+		{
+			"acceptanceId": "LOGISTICS-ITEM-HATCH-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/item_hatch.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block:create:item_hatch",
+			"target": "createbedrock:item_hatch"
+		},
+		{
+			"acceptanceId": "LOGISTICS-ITEM-VAULT-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/item_vault.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block:create:item_vault",
+			"target": "createbedrock:item_vault"
+		},
+		{
+			"acceptanceId": "TRAINS-LARGE-BOGEY-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/large_bogey.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/rolling-stock-runtime.js",
+			"sourceKey": "block:create:large_bogey",
+			"target": "createbedrock:large_bogey"
+		},
+		{
+			"acceptanceId": "KINETICS-LARGE-COGWHEEL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/large_cogwheel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:large_cogwheel",
+			"target": "createbedrock:large_cogwheel"
+		},
+		{
+			"acceptanceId": "KINETICS-LARGE-WATER-WHEEL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/large_water_wheel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:large_water_wheel",
+			"target": "createbedrock:large_water_wheel"
+		},
+		{
+			"acceptanceId": "REDSTONE-LECTERN-CONTROLLER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/lectern_controller.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block:create:lectern_controller",
+			"target": "createbedrock:lectern_controller"
+		},
+		{
+			"acceptanceId": "CONTENT-LINEAR-CHASSIS-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/linear_chassis.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:linear_chassis",
+			"target": "createbedrock:linear_chassis"
+		},
+		{
+			"acceptanceId": "CONTENT-LIT-BLAZE-BURNER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/lit_blaze_burner.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:lit_blaze_burner",
+			"target": "createbedrock:lit_blaze_burner"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-MECHANICAL-ARM-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_arm.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/contraption-actors-runtime.js",
+			"sourceKey": "block:create:mechanical_arm",
+			"target": "createbedrock:mechanical_arm"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-MECHANICAL-BEARING-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_bearing.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/contraption-runtime.js",
+			"sourceKey": "block:create:mechanical_bearing",
+			"target": "createbedrock:mechanical_bearing"
+		},
+		{
+			"acceptanceId": "CONTENT-MECHANICAL-CRAFTER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_crafter.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:mechanical_crafter",
+			"target": "createbedrock:mechanical_crafter"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-MECHANICAL-DRILL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_drill.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/contraption-actors-runtime.js",
+			"sourceKey": "block:create:mechanical_drill",
+			"target": "createbedrock:mechanical_drill"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-MECHANICAL-HARVESTER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_harvester.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/contraption-actors-runtime.js",
+			"sourceKey": "block:create:mechanical_harvester",
+			"target": "createbedrock:mechanical_harvester"
+		},
+		{
+			"acceptanceId": "PROCESSING-MECHANICAL-MIXER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_mixer.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/processing/stage3-processing-runtime.js",
+			"sourceKey": "block:create:mechanical_mixer",
+			"target": "createbedrock:mechanical_mixer"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-MECHANICAL-PISTON-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_piston.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/linear-actuator-runtime.js",
+			"sourceKey": "block:create:mechanical_piston",
+			"target": "createbedrock:mechanical_piston"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-MECHANICAL-PISTON-HEAD-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_piston_head.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/linear-actuator-runtime.js",
+			"sourceKey": "block:create:mechanical_piston_head",
+			"target": "createbedrock:mechanical_piston_head"
+		},
+		{
+			"acceptanceId": "CONTENT-MECHANICAL-PLOUGH-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_plough.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:mechanical_plough",
+			"target": "createbedrock:mechanical_plough"
+		},
+		{
+			"acceptanceId": "PROCESSING-MECHANICAL-PRESS-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_press.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/processing/mechanical-press-runtime.js",
+			"sourceKey": "block:create:mechanical_press",
+			"target": "createbedrock:mechanical_press"
+		},
+		{
+			"acceptanceId": "FLUIDS-MECHANICAL-PUMP-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_pump.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block:create:mechanical_pump",
+			"target": "createbedrock:mechanical_pump"
+		},
+		{
+			"acceptanceId": "CONTENT-MECHANICAL-ROLLER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_roller.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:mechanical_roller",
+			"target": "createbedrock:mechanical_roller"
+		},
+		{
+			"acceptanceId": "PROCESSING-MECHANICAL-SAW-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mechanical_saw.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/processing/stage3-processing-runtime.js",
+			"sourceKey": "block:create:mechanical_saw",
+			"target": "createbedrock:mechanical_saw"
+		},
+		{
+			"acceptanceId": "CONTENT-METAL-BRACKET-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/metal_bracket.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:metal_bracket",
+			"target": "createbedrock:metal_bracket"
+		},
+		{
+			"acceptanceId": "CONTENT-METAL-GIRDER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/metal_girder.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:metal_girder",
+			"target": "createbedrock:metal_girder"
+		},
+		{
+			"acceptanceId": "KINETICS-METAL-GIRDER-ENCASED-SHAFT-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/metal_girder_encased_shaft.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:metal_girder_encased_shaft",
+			"target": "createbedrock:metal_girder_encased_shaft"
+		},
+		{
+			"acceptanceId": "PROCESSING-MILLSTONE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/millstone.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/processing/millstone-runtime.js",
+			"sourceKey": "block:create:millstone",
+			"target": "createbedrock:millstone"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-MINECART-ANCHOR-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/minecart_anchor.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/minecart-contraption-runtime.js",
+			"sourceKey": "block:create:minecart_anchor",
+			"target": "createbedrock:minecart_anchor"
+		},
+		{
+			"acceptanceId": "CONTENT-MYSTERIOUS-CUCKOO-CLOCK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/mysterious_cuckoo_clock.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:mysterious_cuckoo_clock",
+			"target": "createbedrock:mysterious_cuckoo_clock"
+		},
+		{
+			"acceptanceId": "REDSTONE-NIXIE-TUBE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/nixie_tube.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block:create:nixie_tube",
+			"target": "createbedrock:nixie_tube"
+		},
+		{
+			"acceptanceId": "CONTENT-NOZZLE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/nozzle.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:nozzle",
+			"target": "createbedrock:nozzle"
+		},
+		{
+			"acceptanceId": "LOGISTICS-PACKAGE-FROGPORT-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/package_frogport.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/package-runtime.js",
+			"sourceKey": "block:create:package_frogport",
+			"target": "createbedrock:package_frogport"
+		},
+		{
+			"acceptanceId": "LOGISTICS-PACKAGER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/packager.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/package-runtime.js",
+			"sourceKey": "block:create:packager",
+			"target": "createbedrock:packager"
+		},
+		{
+			"acceptanceId": "CONTENT-PECULIAR-BELL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/peculiar_bell.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:peculiar_bell",
+			"target": "createbedrock:peculiar_bell"
+		},
+		{
+			"acceptanceId": "CONTENT-PISTON-EXTENSION-POLE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/piston_extension_pole.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:piston_extension_pole",
+			"target": "createbedrock:piston_extension_pole"
+		},
+		{
+			"acceptanceId": "CONTENT-PLACARD-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/placard.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:placard",
+			"target": "createbedrock:placard"
+		},
+		{
+			"acceptanceId": "FLUIDS-PORTABLE-FLUID-INTERFACE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/portable_fluid_interface.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block:create:portable_fluid_interface",
+			"target": "createbedrock:portable_fluid_interface"
+		},
+		{
+			"acceptanceId": "CONTENT-PORTABLE-STORAGE-INTERFACE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/portable_storage_interface.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:portable_storage_interface",
+			"target": "createbedrock:portable_storage_interface"
+		},
+		{
+			"acceptanceId": "REDSTONE-POWERED-LATCH-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/powered_latch.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block:create:powered_latch",
+			"target": "createbedrock:powered_latch"
+		},
+		{
+			"acceptanceId": "KINETICS-POWERED-SHAFT-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/powered_shaft.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block:create:powered_shaft",
+			"target": "createbedrock:powered_shaft"
+		},
+		{
+			"acceptanceId": "REDSTONE-POWERED-TOGGLE-LATCH-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/powered_toggle_latch.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block:create:powered_toggle_latch",
+			"target": "createbedrock:powered_toggle_latch"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-PULLEY-MAGNET-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/pulley_magnet.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/linear-actuator-runtime.js",
+			"sourceKey": "block:create:pulley_magnet",
+			"target": "createbedrock:pulley_magnet"
+		},
+		{
+			"acceptanceId": "REDSTONE-PULSE-EXTENDER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/pulse_extender.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block:create:pulse_extender",
+			"target": "createbedrock:pulse_extender"
+		},
+		{
+			"acceptanceId": "REDSTONE-PULSE-REPEATER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/pulse_repeater.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block:create:pulse_repeater",
+			"target": "createbedrock:pulse_repeater"
+		},
+		{
+			"acceptanceId": "REDSTONE-PULSE-TIMER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/pulse_timer.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block:create:pulse_timer",
+			"target": "createbedrock:pulse_timer"
+		},
+		{
+			"acceptanceId": "CONTENT-RADIAL-CHASSIS-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/radial_chassis.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:radial_chassis",
+			"target": "createbedrock:radial_chassis"
+		},
+		{
+			"acceptanceId": "CONTENT-RAILWAY-CASING-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/railway_casing.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:railway_casing",
+			"target": "createbedrock:railway_casing"
+		},
+		{
+			"acceptanceId": "CONTENT-RAW-ZINC-BLOCK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/raw_zinc_block.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:raw_zinc_block",
+			"target": "createbedrock:raw_zinc_block"
+		},
+		{
+			"acceptanceId": "REDSTONE-REDSTONE-CONTACT-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/redstone_contact.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block:create:redstone_contact",
+			"target": "createbedrock:redstone_contact"
+		},
+		{
+			"acceptanceId": "REDSTONE-REDSTONE-LINK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/redstone_link.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block:create:redstone_link",
+			"target": "createbedrock:redstone_link"
+		},
+		{
+			"acceptanceId": "REDSTONE-REDSTONE-REQUESTER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/redstone_requester.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block:create:redstone_requester",
+			"target": "createbedrock:redstone_requester"
+		},
+		{
+			"acceptanceId": "CONTENT-REFINED-RADIANCE-CASING-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/refined_radiance_casing.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:refined_radiance_casing",
+			"target": "createbedrock:refined_radiance_casing"
+		},
+		{
+			"acceptanceId": "LOGISTICS-REPACKAGER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/repackager.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/package-runtime.js",
+			"sourceKey": "block:create:repackager",
+			"target": "createbedrock:repackager"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-ROPE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/rope.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/linear-actuator-runtime.js",
+			"sourceKey": "block:create:rope",
+			"target": "createbedrock:rope"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-ROPE-PULLEY-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/rope_pulley.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/linear-actuator-runtime.js",
+			"sourceKey": "block:create:rope_pulley",
+			"target": "createbedrock:rope_pulley"
+		},
+		{
+			"acceptanceId": "CONTENT-ROSE-QUARTZ-BLOCK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/rose_quartz_block.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:rose_quartz_block",
+			"target": "createbedrock:rose_quartz_block"
+		},
+		{
+			"acceptanceId": "CONTENT-ROSE-QUARTZ-LAMP-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/rose_quartz_lamp.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:rose_quartz_lamp",
+			"target": "createbedrock:rose_quartz_lamp"
+		},
+		{
+			"acceptanceId": "CONTENT-ROSE-QUARTZ-TILES-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/rose_quartz_tiles.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:rose_quartz_tiles",
+			"target": "createbedrock:rose_quartz_tiles"
+		},
+		{
+			"acceptanceId": "REDSTONE-ROTATION-SPEED-CONTROLLER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/rotation_speed_controller.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block:create:rotation_speed_controller",
+			"target": "createbedrock:rotation_speed_controller"
+		},
+		{
+			"acceptanceId": "CONTENT-SAIL-FRAME-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/sail_frame.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:sail_frame",
+			"target": "createbedrock:sail_frame"
+		},
+		{
+			"acceptanceId": "SCHEMATICS-SCHEMATIC-TABLE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/schematic_table.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/schematics/schematic-runtime.js",
+			"sourceKey": "block:create:schematic_table",
+			"target": "createbedrock:schematic_table"
+		},
+		{
+			"acceptanceId": "SCHEMATICS-SCHEMATICANNON-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/schematicannon.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/schematics/schematic-runtime.js",
+			"sourceKey": "block:create:schematicannon",
+			"target": "createbedrock:schematicannon"
+		},
+		{
+			"acceptanceId": "CONTENT-SECONDARY-LINEAR-CHASSIS-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/secondary_linear_chassis.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:secondary_linear_chassis",
+			"target": "createbedrock:secondary_linear_chassis"
+		},
+		{
+			"acceptanceId": "KINETICS-SEQUENCED-GEARSHIFT-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/sequenced_gearshift.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:sequenced_gearshift",
+			"target": "createbedrock:sequenced_gearshift"
+		},
+		{
+			"acceptanceId": "CONTENT-SHADOW-STEEL-CASING-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/shadow_steel_casing.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:shadow_steel_casing",
+			"target": "createbedrock:shadow_steel_casing"
+		},
+		{
+			"acceptanceId": "KINETICS-SHAFT-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/shaft.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:shaft",
+			"target": "createbedrock:shaft"
+		},
+		{
+			"acceptanceId": "TRAINS-SMALL-BOGEY-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/small_bogey.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/rolling-stock-runtime.js",
+			"sourceKey": "block:create:small_bogey",
+			"target": "createbedrock:small_bogey"
+		},
+		{
+			"acceptanceId": "CONTENT-SMALL-ROSE-QUARTZ-TILES-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/small_rose_quartz_tiles.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:small_rose_quartz_tiles",
+			"target": "createbedrock:small_rose_quartz_tiles"
+		},
+		{
+			"acceptanceId": "LOGISTICS-SMART-CHUTE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/smart_chute.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block:create:smart_chute",
+			"target": "createbedrock:smart_chute"
+		},
+		{
+			"acceptanceId": "FLUIDS-SMART-FLUID-PIPE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/smart_fluid_pipe.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block:create:smart_fluid_pipe",
+			"target": "createbedrock:smart_fluid_pipe"
+		},
+		{
+			"acceptanceId": "CONTENT-SPEEDOMETER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/speedometer.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:speedometer",
+			"target": "createbedrock:speedometer"
+		},
+		{
+			"acceptanceId": "FLUIDS-SPOUT-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/spout.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block:create:spout",
+			"target": "createbedrock:spout"
+		},
+		{
+			"acceptanceId": "KINETICS-STEAM-ENGINE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/steam_engine.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/fluids/fluid-runtime.js",
+			"sourceKey": "block:create:steam_engine",
+			"target": "createbedrock:steam_engine"
+		},
+		{
+			"acceptanceId": "CONTENT-STEAM-WHISTLE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/steam_whistle.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:steam_whistle",
+			"target": "createbedrock:steam_whistle"
+		},
+		{
+			"acceptanceId": "CONTENT-STEAM-WHISTLE-EXTENSION-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/steam_whistle_extension.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:steam_whistle_extension",
+			"target": "createbedrock:steam_whistle_extension"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-STICKER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/sticker.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/sticker-runtime.js",
+			"sourceKey": "block:create:sticker",
+			"target": "createbedrock:sticker"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-STICKY-MECHANICAL-PISTON-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/sticky_mechanical_piston.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/linear-actuator-runtime.js",
+			"sourceKey": "block:create:sticky_mechanical_piston",
+			"target": "createbedrock:sticky_mechanical_piston"
+		},
+		{
+			"acceptanceId": "REDSTONE-STOCK-LINK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/stock_link.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "block:create:stock_link",
+			"target": "createbedrock:stock_link"
+		},
+		{
+			"acceptanceId": "CONTENT-STOCK-TICKER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/stock_ticker.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:stock_ticker",
+			"target": "createbedrock:stock_ticker"
+		},
+		{
+			"acceptanceId": "CONTENT-STOCKPILE-SWITCH-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/stockpile_switch.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:stockpile_switch",
+			"target": "createbedrock:stockpile_switch"
+		},
+		{
+			"acceptanceId": "CONTENT-STRESSOMETER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/stressometer.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:stressometer",
+			"target": "createbedrock:stressometer"
+		},
+		{
+			"acceptanceId": "TRAINS-TRACK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/track.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/train-runtime.js",
+			"sourceKey": "block:create:track",
+			"target": "createbedrock:track"
+		},
+		{
+			"acceptanceId": "TRAINS-TRACK-OBSERVER-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/track_observer.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/railway-control-runtime.js",
+			"sourceKey": "block:create:track_observer",
+			"target": "createbedrock:track_observer"
+		},
+		{
+			"acceptanceId": "TRAINS-TRACK-SIGNAL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/track_signal.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/railway-control-runtime.js",
+			"sourceKey": "block:create:track_signal",
+			"target": "createbedrock:track_signal"
+		},
+		{
+			"acceptanceId": "TRAINS-TRACK-STATION-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/track_station.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/train-runtime.js",
+			"sourceKey": "block:create:track_station",
+			"target": "createbedrock:track_station"
+		},
+		{
+			"acceptanceId": "TRAINS-TRAIN-DOOR-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/train_door.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/rolling-stock-runtime.js",
+			"sourceKey": "block:create:train_door",
+			"target": "createbedrock:train_door"
+		},
+		{
+			"acceptanceId": "TRAINS-TRAIN-TRAPDOOR-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/train_trapdoor.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/rolling-stock-runtime.js",
+			"sourceKey": "block:create:train_trapdoor",
+			"target": "createbedrock:train_trapdoor"
+		},
+		{
+			"acceptanceId": "CONTENT-TURNTABLE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/turntable.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:turntable",
+			"target": "createbedrock:turntable"
+		},
+		{
+			"acceptanceId": "KINETICS-WATER-WHEEL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/water_wheel.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:water_wheel",
+			"target": "createbedrock:water_wheel"
+		},
+		{
+			"acceptanceId": "KINETICS-WATER-WHEEL-STRUCTURE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/water_wheel_structure.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "block:create:water_wheel_structure",
+			"target": "createbedrock:water_wheel_structure"
+		},
+		{
+			"acceptanceId": "CONTENT-WEATHERED-IRON-BLOCK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/weathered_iron_block.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:weathered_iron_block",
+			"target": "createbedrock:weathered_iron_block"
+		},
+		{
+			"acceptanceId": "LOGISTICS-WEIGHTED-EJECTOR-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/weighted_ejector.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "block:create:weighted_ejector",
+			"target": "createbedrock:weighted_ejector"
+		},
+		{
+			"acceptanceId": "CONTENT-WHITE-SAIL-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/white_sail.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:white_sail",
+			"target": "createbedrock:white_sail"
+		},
+		{
+			"acceptanceId": "KINETICS-WINDMILL-BEARING-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/windmill_bearing.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/contraption-runtime.js",
+			"sourceKey": "block:create:windmill_bearing",
+			"target": "createbedrock:windmill_bearing"
+		},
+		{
+			"acceptanceId": "CONTENT-WOODEN-BRACKET-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/wooden_bracket.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:wooden_bracket",
+			"target": "createbedrock:wooden_bracket"
+		},
+		{
+			"acceptanceId": "CONTENT-ZINC-BLOCK-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/zinc_block.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:zinc_block",
+			"target": "createbedrock:zinc_block"
+		},
+		{
+			"acceptanceId": "CONTENT-ZINC-ORE-BLOCK",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/zinc_ore.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "block:create:zinc_ore",
+			"target": "createbedrock:zinc_ore"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-CARRIAGE-CONTRAPTION-ENTITY",
+			"artifactKind": "entity",
+			"artifactPath": "behavior_pack/entities/carriage_contraption.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/minecart-contraption-runtime.js",
+			"sourceKey": "entity:create:carriage_contraption",
+			"target": "createbedrock:carriage_contraption"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-CONTRAPTION-ENTITY",
+			"artifactKind": "entity",
+			"artifactPath": "behavior_pack/entities/contraption.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/contraption-runtime.js",
+			"sourceKey": "entity:create:contraption",
+			"target": "createbedrock:contraption"
+		},
+		{
+			"acceptanceId": "SCHEMATICS-CRAFTING-BLUEPRINT-ENTITY",
+			"artifactKind": "entity",
+			"artifactPath": "behavior_pack/entities/crafting_blueprint.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/schematics/schematic-runtime.js",
+			"sourceKey": "entity:create:crafting_blueprint",
+			"target": "createbedrock:crafting_blueprint"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-GANTRY-CONTRAPTION-ENTITY",
+			"artifactKind": "entity",
+			"artifactPath": "behavior_pack/entities/gantry_contraption.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/linear-actuator-runtime.js",
+			"sourceKey": "entity:create:gantry_contraption",
+			"target": "createbedrock:gantry_contraption"
+		},
+		{
+			"acceptanceId": "LOGISTICS-PACKAGE-ENTITY",
+			"artifactKind": "entity",
+			"artifactPath": "behavior_pack/entities/package.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/package-runtime.js",
+			"sourceKey": "entity:create:package",
+			"target": "createbedrock:package"
+		},
+		{
+			"acceptanceId": "CONTENT-POTATO-PROJECTILE-ENTITY",
+			"artifactKind": "entity",
+			"artifactPath": "behavior_pack/entities/potato_projectile.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "entity:create:potato_projectile",
+			"target": "createbedrock:potato_projectile"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-SEAT-ENTITY",
+			"artifactKind": "entity",
+			"artifactPath": "behavior_pack/entities/seat.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/minecart-contraption-runtime.js",
+			"sourceKey": "entity:create:seat",
+			"target": "createbedrock:seat"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-STATIONARY-CONTRAPTION-ENTITY",
+			"artifactKind": "entity",
+			"artifactPath": "behavior_pack/entities/stationary_contraption.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/contraptions/contraption-runtime.js",
+			"sourceKey": "entity:create:stationary_contraption",
+			"target": "createbedrock:stationary_contraption"
+		},
+		{
+			"acceptanceId": "CONTENT-SUPER-GLUE-ENTITY",
+			"artifactKind": "entity",
+			"artifactPath": "behavior_pack/entities/super_glue.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "entity:create:super_glue",
+			"target": "createbedrock:super_glue"
+		},
+		{
+			"acceptanceId": "LOGISTICS-ATTRIBUTE-FILTER-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/attribute_filter.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "item:create:attribute_filter",
+			"target": "createbedrock:attribute_filter"
+		},
+		{
+			"acceptanceId": "CONTENT-BAR-OF-CHOCOLATE-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/bar_of_chocolate.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:bar_of_chocolate",
+			"target": "createbedrock:bar_of_chocolate"
+		},
+		{
+			"acceptanceId": "KINETICS-BELT-CONNECTOR-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/belt_connector.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "item:create:belt_connector",
+			"target": "createbedrock:belt_connector"
+		},
+		{
+			"acceptanceId": "CONTENT-BLAZE-CAKE-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/blaze_cake.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:blaze_cake",
+			"target": "createbedrock:blaze_cake"
+		},
+		{
+			"acceptanceId": "CONTENT-BLAZE-CAKE-BASE-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/blaze_cake_base.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:blaze_cake_base",
+			"target": "createbedrock:blaze_cake_base"
+		},
+		{
+			"acceptanceId": "CONTENT-BUILDERS-TEA-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/builders_tea.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:builders_tea",
+			"target": "createbedrock:builders_tea"
+		},
+		{
+			"acceptanceId": "CONTENT-CARDBOARD-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/cardboard.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:cardboard",
+			"target": "createbedrock:cardboard"
+		},
+		{
+			"acceptanceId": "CONTENT-CARDBOARD-BOOTS-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/cardboard_boots.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:cardboard_boots",
+			"target": "createbedrock:cardboard_boots"
+		},
+		{
+			"acceptanceId": "CONTENT-CARDBOARD-CHESTPLATE-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/cardboard_chestplate.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:cardboard_chestplate",
+			"target": "createbedrock:cardboard_chestplate"
+		},
+		{
+			"acceptanceId": "CONTENT-CARDBOARD-HELMET-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/cardboard_helmet.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:cardboard_helmet",
+			"target": "createbedrock:cardboard_helmet"
+		},
+		{
+			"acceptanceId": "CONTENT-CARDBOARD-LEGGINGS-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/cardboard_leggings.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:cardboard_leggings",
+			"target": "createbedrock:cardboard_leggings"
+		},
+		{
+			"acceptanceId": "CONTENT-CARDBOARD-SWORD-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/cardboard_sword.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:cardboard_sword",
+			"target": "createbedrock:cardboard_sword"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-CHEST-MINECART-CONTRAPTION-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/chest_minecart_contraption.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/minecart-contraption-runtime.js",
+			"sourceKey": "item:create:chest_minecart_contraption",
+			"target": "createbedrock:chest_minecart_contraption"
+		},
+		{
+			"acceptanceId": "CONTENT-CHOCOLATE-GLAZED-BERRIES-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/chocolate_glazed_berries.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:chocolate_glazed_berries",
+			"target": "createbedrock:chocolate_glazed_berries"
+		},
+		{
+			"acceptanceId": "CONTENT-CHROMATIC-COMPOUND-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/chromatic_compound.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:chromatic_compound",
+			"target": "createbedrock:chromatic_compound"
+		},
+		{
+			"acceptanceId": "EQUIPMENT-COPPER-DIVING-BOOTS-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/copper_diving_boots.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/equipment/equipment-runtime.js",
+			"sourceKey": "item:create:copper_diving_boots",
+			"target": "createbedrock:copper_diving_boots"
+		},
+		{
+			"acceptanceId": "EQUIPMENT-COPPER-DIVING-HELMET-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/copper_diving_helmet.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/equipment/equipment-runtime.js",
+			"sourceKey": "item:create:copper_diving_helmet",
+			"target": "createbedrock:copper_diving_helmet"
+		},
+		{
+			"acceptanceId": "SCHEMATICS-CRAFTING-BLUEPRINT-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/crafting_blueprint.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/schematics/schematic-runtime.js",
+			"sourceKey": "item:create:crafting_blueprint",
+			"target": "createbedrock:crafting_blueprint"
+		},
+		{
+			"acceptanceId": "CONTENT-CREATIVE-BLAZE-CAKE-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/creative_blaze_cake.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:creative_blaze_cake",
+			"target": "createbedrock:creative_blaze_cake"
+		},
+		{
+			"acceptanceId": "CONTENT-EMPTY-BLAZE-BURNER-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/empty_blaze_burner.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:empty_blaze_burner",
+			"target": "createbedrock:empty_blaze_burner"
+		},
+		{
+			"acceptanceId": "SCHEMATICS-EMPTY-SCHEMATIC-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/empty_schematic.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/schematics/schematic-runtime.js",
+			"sourceKey": "item:create:empty_schematic",
+			"target": "createbedrock:empty_schematic"
+		},
+		{
+			"acceptanceId": "CONTENT-EXPERIENCE-NUGGET-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/experience_nugget.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:experience_nugget",
+			"target": "createbedrock:experience_nugget"
+		},
+		{
+			"acceptanceId": "LOGISTICS-FILTER-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/filter.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/depot-runtime.js",
+			"sourceKey": "item:create:filter",
+			"target": "createbedrock:filter"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-FURNACE-MINECART-CONTRAPTION-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/furnace_minecart_contraption.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/minecart-contraption-runtime.js",
+			"sourceKey": "item:create:furnace_minecart_contraption",
+			"target": "createbedrock:furnace_minecart_contraption"
+		},
+		{
+			"acceptanceId": "CONTENT-HANDHELD-WORLDSHAPER-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/handheld_worldshaper.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:handheld_worldshaper",
+			"target": "createbedrock:handheld_worldshaper"
+		},
+		{
+			"acceptanceId": "CONTENT-HONEYED-APPLE-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/honeyed_apple.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:honeyed_apple",
+			"target": "createbedrock:honeyed_apple"
+		},
+		{
+			"acceptanceId": "REDSTONE-LINKED-CONTROLLER-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/linked_controller.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/redstone/redstone-device-runtime.js",
+			"sourceKey": "item:create:linked_controller",
+			"target": "createbedrock:linked_controller"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-MINECART-CONTRAPTION-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/minecart_contraption.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/minecart-contraption-runtime.js",
+			"sourceKey": "item:create:minecart_contraption",
+			"target": "createbedrock:minecart_contraption"
+		},
+		{
+			"acceptanceId": "CONTRAPTIONS-MINECART-COUPLING-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/minecart_coupling.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/minecart-contraption-runtime.js",
+			"sourceKey": "item:create:minecart_coupling",
+			"target": "createbedrock:minecart_coupling"
+		},
+		{
+			"acceptanceId": "EQUIPMENT-NETHERITE-DIVING-BOOTS-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/netherite_diving_boots.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/equipment/equipment-runtime.js",
+			"sourceKey": "item:create:netherite_diving_boots",
+			"target": "createbedrock:netherite_diving_boots"
+		},
+		{
+			"acceptanceId": "EQUIPMENT-NETHERITE-DIVING-HELMET-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/netherite_diving_helmet.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/equipment/equipment-runtime.js",
+			"sourceKey": "item:create:netherite_diving_helmet",
+			"target": "createbedrock:netherite_diving_helmet"
+		},
+		{
+			"acceptanceId": "LOGISTICS-PACKAGE-FILTER-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/package_filter.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/logistics/package-runtime.js",
+			"sourceKey": "item:create:package_filter",
+			"target": "createbedrock:package_filter"
+		},
+		{
+			"acceptanceId": "CONTENT-RED-SAND-PAPER-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/red_sand_paper.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:red_sand_paper",
+			"target": "createbedrock:red_sand_paper"
+		},
+		{
+			"acceptanceId": "CONTENT-REFINED-RADIANCE-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/refined_radiance.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:refined_radiance",
+			"target": "createbedrock:refined_radiance"
+		},
+		{
+			"acceptanceId": "CONTENT-SAND-PAPER-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/sand_paper.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:sand_paper",
+			"target": "createbedrock:sand_paper"
+		},
+		{
+			"acceptanceId": "TRAINS-SCHEDULE-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/schedule.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/trains/railway-control-runtime.js",
+			"sourceKey": "item:create:schedule",
+			"target": "createbedrock:schedule"
+		},
+		{
+			"acceptanceId": "SCHEMATICS-SCHEMATIC-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/schematic.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/schematics/schematic-runtime.js",
+			"sourceKey": "item:create:schematic",
+			"target": "createbedrock:schematic"
+		},
+		{
+			"acceptanceId": "SCHEMATICS-SCHEMATIC-AND-QUILL-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/schematic_and_quill.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/schematics/schematic-runtime.js",
+			"sourceKey": "item:create:schematic_and_quill",
+			"target": "createbedrock:schematic_and_quill"
+		},
+		{
+			"acceptanceId": "CONTENT-SHADOW-STEEL-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/shadow_steel.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:shadow_steel",
+			"target": "createbedrock:shadow_steel"
+		},
+		{
+			"acceptanceId": "CONTENT-SHOPPING-LIST-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/shopping_list.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:shopping_list",
+			"target": "createbedrock:shopping_list"
+		},
+		{
+			"acceptanceId": "CONTENT-SUPER-GLUE-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/super_glue.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:super_glue",
+			"target": "createbedrock:super_glue"
+		},
+		{
+			"acceptanceId": "CONTENT-SWEET-ROLL-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/sweet_roll.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:sweet_roll",
+			"target": "createbedrock:sweet_roll"
+		},
+		{
+			"acceptanceId": "CONTENT-TREE-FERTILIZER-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/tree_fertilizer.json",
+			"behavior": "not_required",
+			"behaviorPath": null,
+			"sourceKey": "item:create:tree_fertilizer",
+			"target": "createbedrock:tree_fertilizer"
+		},
+		{
+			"acceptanceId": "KINETICS-VERTICAL-GEARBOX-ITEM",
+			"artifactKind": "block",
+			"artifactPath": "behavior_pack/blocks/generated/p7_1/vertical_gearbox.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/kinetics/kinetic-runtime.js",
+			"sourceKey": "item:create:vertical_gearbox",
+			"target": "createbedrock:vertical_gearbox"
+		},
+		{
+			"acceptanceId": "SCHEMATICS-WAND-OF-SYMMETRY-ITEM",
+			"artifactKind": "item",
+			"artifactPath": "behavior_pack/items/wand_of_symmetry.json",
+			"behavior": "verified",
+			"behaviorPath": "behavior_pack/scripts/schematics/symmetry-runtime.js",
+			"sourceKey": "item:create:wand_of_symmetry",
+			"target": "createbedrock:wand_of_symmetry"
+		}
+	],
+	"schemaVersion": 1,
+	"summary": {
+		"deferred": 50,
+		"resolved": 329,
+		"total": 379
+	}
+}
