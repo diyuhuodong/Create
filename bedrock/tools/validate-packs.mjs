@@ -10,6 +10,7 @@ import { buildP71AcquisitionLedger, validateP71AcquisitionLedger } from "./p7-1-
 import { buildP73RecipeExecutionLedger, validateP73RecipeExecutionLedger } from "./p7-3-recipe-execution-ledger.mjs";
 import { assertP82Convergence, buildP82RegistrationConvergence } from "./p8-2-registration-convergence.mjs";
 import { assertP83Convergence, buildP83SemanticRegistrationConvergence } from "./p8-3-semantic-registration-convergence.mjs";
+import { assertP84Convergence, buildP84DomainConvergence } from "./p8-4-domain-convergence.mjs";
 import { validateP73ProcessingExecutionContract } from "./p7-3-processing-execution-contract.mjs";
 import { validateMigrationMatrix } from "./migration-matrix-schema.mjs";
 import { validateJavaRegistrationCatalog } from "./java-registration-catalog-schema.mjs";
@@ -138,6 +139,7 @@ const migrationLedger = await readJson(resolve(bedrockRoot, "data", "migration-l
 const migrationOverrides = await readJson(resolve(bedrockRoot, "data", "migration-overrides.json"));
 const p82RegistrationConvergence = await readJson(resolve(bedrockRoot, "data", "p8-2-registration-convergence.json"));
 const p83SemanticRegistrationConvergence = await readJson(resolve(bedrockRoot, "data", "p8-3-semantic-registration-convergence.json"));
+const p84DomainConvergence = await readJson(resolve(bedrockRoot, "data", "p8-4-domain-convergence.json"));
 const migrationDomainOverrides = await readJson(resolve(bedrockRoot, "data", "migration-domain-overrides.json"));
 const p71AcquisitionLedger = await readJson(resolve(bedrockRoot, "data", "p7-1-acquisition-ledger.json"));
 const p73RecipeExecutionLedger = await readJson(resolve(bedrockRoot, "data", "p7-3-recipe-execution-ledger.json"));
@@ -162,6 +164,7 @@ const javaRegistrationCoverage = validateJavaRegistrationCatalog(javaRegistratio
 validateMigrationOverrides(migrationOverrides, javaRegistrationCatalog);
 assertP82Convergence(p82RegistrationConvergence);
 assertP83Convergence(p83SemanticRegistrationConvergence);
+assertP84Convergence(p84DomainConvergence);
 validateMigrationDomainOverrides(migrationDomainOverrides, domainInventory);
 const migrationLedgerCoverage = validateMigrationLedger(migrationLedger, javaRegistrationCatalog, domainInventory);
 validateP71AcquisitionLedger(p71AcquisitionLedger);
@@ -186,6 +189,7 @@ const expectedP83SemanticRegistrationConvergence = await buildP83SemanticRegistr
 });
 assertFreshGeneratedData("bedrock/data/p8-3-semantic-registration-convergence.json", p83SemanticRegistrationConvergence, expectedP83SemanticRegistrationConvergence.document);
 assertFreshGeneratedData("bedrock/data/migration-overrides.json", migrationOverrides, expectedP83SemanticRegistrationConvergence.overrides);
+assertFreshGeneratedData("bedrock/data/p8-4-domain-convergence.json", p84DomainConvergence, await buildP84DomainConvergence({ bedrockRoot, domainInventory: expectedDomainInventory, recipeIr, resourceLedger: await readJson(resolve(bedrockRoot, "data", "p7-6-resource-ledger.json")), tagProjections: await readJson(resolve(bedrockRoot, "data", "recipes", "tag-projections.json")) }));
 const { ledger: expectedMigrationLedger } = await buildMigrationLedger({
 	bedrockRoot,
 	catalog: expectedJavaRegistrationCatalog,

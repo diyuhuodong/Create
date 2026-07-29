@@ -76,6 +76,8 @@ P8.3 的注册语义切片已完成：`p8-3-semantic-registration-convergence.js
 
 **退出条件：** 领域台账 `partial=0`；汇总数字可由源目录确定性重建，旧矩阵与新台账无冲突。
 
+已交付静态领域收敛器：`p8-4-domain-convergence.json` 对 9,067 个源领域项逐一给出证据和结论（7,132 个已有 Bedrock 等效投影、1,821 个 Java 专属格式的明确替代、114 个外部兼容边界）。它不把 Java Advancement/GameTest 文件伪称为可在 Bedrock 中运行；其平台行为证据仍由 P8.6 收集。
+
 ## P8.5：离线静态候选
 
 依次执行：
