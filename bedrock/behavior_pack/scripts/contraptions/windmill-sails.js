@@ -1,6 +1,8 @@
+import { WINDMILL_SAIL_BLOCKS as FUNCTIONAL_WINDMILL_SAIL_BLOCKS } from "../kernel/functional-color-families.js";
+
 export const SAIL_FRAME_BLOCK = "createbedrock:sail_frame";
 export const WHITE_SAIL_BLOCK = "createbedrock:white_sail";
-export const WINDMILL_SAIL_BLOCKS = Object.freeze(new Set([SAIL_FRAME_BLOCK, WHITE_SAIL_BLOCK]));
+export const WINDMILL_SAIL_BLOCKS = Object.freeze(new Set(FUNCTIONAL_WINDMILL_SAIL_BLOCKS));
 export const MINIMUM_WINDMILL_SAILS = 8;
 export const SAILS_PER_RPM = 8;
 export const MAX_WINDMILL_SPEED = 16;

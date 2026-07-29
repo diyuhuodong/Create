@@ -1,13 +1,10 @@
 import { normalizeLogisticsAddress, normalizeLogisticsNetworkId } from "../logistics/logistics-address.js";
+import { TABLE_CLOTH_BLOCKS as FUNCTIONAL_TABLE_CLOTH_BLOCKS } from "../kernel/functional-color-families.js";
 
 export const TABLE_CLOTH_SCHEMA = 1;
 export const SHOPPING_LIST_SCHEMA = 1;
 export const SHOPPING_LIST_ITEM = "createbedrock:shopping_list";
-export const TABLE_CLOTH_BLOCKS = new Set([
-	"createbedrock:andesite_table_cloth",
-	"createbedrock:brass_table_cloth",
-	"createbedrock:copper_table_cloth"
-]);
+export const TABLE_CLOTH_BLOCKS = new Set(FUNCTIONAL_TABLE_CLOTH_BLOCKS);
 export const TABLE_CLOTH_MAX_MANUAL_ITEMS = 4;
 export const TABLE_CLOTH_MAX_WARES = 9;
 export const SHOPPING_LIST_MAX_PURCHASES = 64;

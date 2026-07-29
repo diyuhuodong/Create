@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { REDSTONE_DEVICE_CATALOG, allRedstoneAcceptanceIds } from "../behavior_pack/scripts/redstone/redstone-device-catalog.js";
+import { REDSTONE_DEVICE_CATALOG, allRedstoneAcceptanceIds, redstoneDeviceForBlock } from "../behavior_pack/scripts/redstone/redstone-device-catalog.js";
 import { createRedstoneDeviceState, nativeOutputPower, transitionRedstoneDevice } from "../behavior_pack/scripts/redstone/redstone-device-state.js";
 
 function ticks(state, count) {
@@ -18,6 +18,7 @@ test("redstone device catalog owns all 29 S3-14 acceptance IDs exactly once", ()
 	assert.equal(new Set(acceptanceIds).size, acceptanceIds.length);
 	assert.equal(REDSTONE_DEVICE_CATALOG.filter(device => device.input).length, 9);
 	assert.equal(REDSTONE_DEVICE_CATALOG.filter(device => device.output).length, 13);
+	assert.equal(redstoneDeviceForBlock("createbedrock:red_nixie_tube")?.id, "nixie_tube");
 });
 
 test("analog levers preserve their full 0 through 15 native producer range", () => {

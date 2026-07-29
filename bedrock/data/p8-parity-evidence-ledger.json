@@ -200787,7 +200787,7 @@
 			"owner": "p7_1/nixie",
 			"recordType": "registration",
 			"sourceKey": "block:create:black_nixie_tube",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:black_nixie_tube",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/black_nixie_tube.json"
@@ -200808,7 +200808,7 @@
 			"owner": "p7_1/postbox",
 			"recordType": "registration",
 			"sourceKey": "block:create:black_postbox",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:black_postbox",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/black_postbox.json"
@@ -200829,7 +200829,7 @@
 			"owner": "p7_1/sail",
 			"recordType": "registration",
 			"sourceKey": "block:create:black_sail",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:black_sail",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/black_sail.json"
@@ -200871,7 +200871,7 @@
 			"owner": "p7_1/table_cloth",
 			"recordType": "registration",
 			"sourceKey": "block:create:black_table_cloth",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:black_table_cloth",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/black_table_cloth.json"
@@ -200913,7 +200913,7 @@
 			"owner": "p7_1/valve_handle",
 			"recordType": "registration",
 			"sourceKey": "block:create:black_valve_handle",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:black_valve_handle",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/black_valve_handle.json"
@@ -200958,7 +200958,7 @@
 			"owner": "p7_1/nixie",
 			"recordType": "registration",
 			"sourceKey": "block:create:blue_nixie_tube",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:blue_nixie_tube",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/blue_nixie_tube.json"
@@ -200979,7 +200979,7 @@
 			"owner": "p7_1/postbox",
 			"recordType": "registration",
 			"sourceKey": "block:create:blue_postbox",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:blue_postbox",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/blue_postbox.json"
@@ -201000,7 +201000,7 @@
 			"owner": "p7_1/sail",
 			"recordType": "registration",
 			"sourceKey": "block:create:blue_sail",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:blue_sail",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/blue_sail.json"
@@ -201042,7 +201042,7 @@
 			"owner": "p7_1/table_cloth",
 			"recordType": "registration",
 			"sourceKey": "block:create:blue_table_cloth",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:blue_table_cloth",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/blue_table_cloth.json"
@@ -201084,7 +201084,7 @@
 			"owner": "p7_1/valve_handle",
 			"recordType": "registration",
 			"sourceKey": "block:create:blue_valve_handle",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:blue_valve_handle",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/blue_valve_handle.json"
@@ -201450,7 +201450,7 @@
 			"owner": "p7_1/nixie",
 			"recordType": "registration",
 			"sourceKey": "block:create:brown_nixie_tube",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:brown_nixie_tube",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/brown_nixie_tube.json"
@@ -201471,7 +201471,7 @@
 			"owner": "p7_1/postbox",
 			"recordType": "registration",
 			"sourceKey": "block:create:brown_postbox",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:brown_postbox",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/brown_postbox.json"
@@ -201492,7 +201492,7 @@
 			"owner": "p7_1/sail",
 			"recordType": "registration",
 			"sourceKey": "block:create:brown_sail",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:brown_sail",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/brown_sail.json"
@@ -201534,7 +201534,7 @@
 			"owner": "p7_1/table_cloth",
 			"recordType": "registration",
 			"sourceKey": "block:create:brown_table_cloth",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:brown_table_cloth",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/brown_table_cloth.json"
@@ -201576,7 +201576,7 @@
 			"owner": "p7_1/valve_handle",
 			"recordType": "registration",
 			"sourceKey": "block:create:brown_valve_handle",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:brown_valve_handle",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/brown_valve_handle.json"
@@ -204993,7 +204993,7 @@
 			"owner": "p7_1/nixie",
 			"recordType": "registration",
 			"sourceKey": "block:create:cyan_nixie_tube",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:cyan_nixie_tube",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/cyan_nixie_tube.json"
@@ -205014,7 +205014,7 @@
 			"owner": "p7_1/postbox",
 			"recordType": "registration",
 			"sourceKey": "block:create:cyan_postbox",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:cyan_postbox",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/cyan_postbox.json"
@@ -205035,7 +205035,7 @@
 			"owner": "p7_1/sail",
 			"recordType": "registration",
 			"sourceKey": "block:create:cyan_sail",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:cyan_sail",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/cyan_sail.json"
@@ -205077,7 +205077,7 @@
 			"owner": "p7_1/table_cloth",
 			"recordType": "registration",
 			"sourceKey": "block:create:cyan_table_cloth",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:cyan_table_cloth",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/cyan_table_cloth.json"
@@ -205119,7 +205119,7 @@
 			"owner": "p7_1/valve_handle",
 			"recordType": "registration",
 			"sourceKey": "block:create:cyan_valve_handle",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:cyan_valve_handle",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/cyan_valve_handle.json"
@@ -206072,7 +206072,7 @@
 			"owner": "p7_1/nixie",
 			"recordType": "registration",
 			"sourceKey": "block:create:gray_nixie_tube",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:gray_nixie_tube",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/gray_nixie_tube.json"
@@ -206093,7 +206093,7 @@
 			"owner": "p7_1/postbox",
 			"recordType": "registration",
 			"sourceKey": "block:create:gray_postbox",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:gray_postbox",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/gray_postbox.json"
@@ -206114,7 +206114,7 @@
 			"owner": "p7_1/sail",
 			"recordType": "registration",
 			"sourceKey": "block:create:gray_sail",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:gray_sail",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/gray_sail.json"
@@ -206156,7 +206156,7 @@
 			"owner": "p7_1/table_cloth",
 			"recordType": "registration",
 			"sourceKey": "block:create:gray_table_cloth",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:gray_table_cloth",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/gray_table_cloth.json"
@@ -206198,7 +206198,7 @@
 			"owner": "p7_1/valve_handle",
 			"recordType": "registration",
 			"sourceKey": "block:create:gray_valve_handle",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:gray_valve_handle",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/gray_valve_handle.json"
@@ -206219,7 +206219,7 @@
 			"owner": "p7_1/nixie",
 			"recordType": "registration",
 			"sourceKey": "block:create:green_nixie_tube",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:green_nixie_tube",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/green_nixie_tube.json"
@@ -206240,7 +206240,7 @@
 			"owner": "p7_1/postbox",
 			"recordType": "registration",
 			"sourceKey": "block:create:green_postbox",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:green_postbox",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/green_postbox.json"
@@ -206261,7 +206261,7 @@
 			"owner": "p7_1/sail",
 			"recordType": "registration",
 			"sourceKey": "block:create:green_sail",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:green_sail",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/green_sail.json"
@@ -206303,7 +206303,7 @@
 			"owner": "p7_1/table_cloth",
 			"recordType": "registration",
 			"sourceKey": "block:create:green_table_cloth",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:green_table_cloth",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/green_table_cloth.json"
@@ -206345,7 +206345,7 @@
 			"owner": "p7_1/valve_handle",
 			"recordType": "registration",
 			"sourceKey": "block:create:green_valve_handle",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:green_valve_handle",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/green_valve_handle.json"
@@ -207090,7 +207090,7 @@
 			"owner": "p7_1/nixie",
 			"recordType": "registration",
 			"sourceKey": "block:create:light_blue_nixie_tube",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:light_blue_nixie_tube",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/light_blue_nixie_tube.json"
@@ -207111,7 +207111,7 @@
 			"owner": "p7_1/postbox",
 			"recordType": "registration",
 			"sourceKey": "block:create:light_blue_postbox",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:light_blue_postbox",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/light_blue_postbox.json"
@@ -207132,7 +207132,7 @@
 			"owner": "p7_1/sail",
 			"recordType": "registration",
 			"sourceKey": "block:create:light_blue_sail",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:light_blue_sail",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/light_blue_sail.json"
@@ -207174,7 +207174,7 @@
 			"owner": "p7_1/table_cloth",
 			"recordType": "registration",
 			"sourceKey": "block:create:light_blue_table_cloth",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:light_blue_table_cloth",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/light_blue_table_cloth.json"
@@ -207216,7 +207216,7 @@
 			"owner": "p7_1/valve_handle",
 			"recordType": "registration",
 			"sourceKey": "block:create:light_blue_valve_handle",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:light_blue_valve_handle",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/light_blue_valve_handle.json"
@@ -207237,7 +207237,7 @@
 			"owner": "p7_1/nixie",
 			"recordType": "registration",
 			"sourceKey": "block:create:light_gray_nixie_tube",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:light_gray_nixie_tube",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/light_gray_nixie_tube.json"
@@ -207258,7 +207258,7 @@
 			"owner": "p7_1/postbox",
 			"recordType": "registration",
 			"sourceKey": "block:create:light_gray_postbox",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:light_gray_postbox",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/light_gray_postbox.json"
@@ -207279,7 +207279,7 @@
 			"owner": "p7_1/sail",
 			"recordType": "registration",
 			"sourceKey": "block:create:light_gray_sail",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:light_gray_sail",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/light_gray_sail.json"
@@ -207321,7 +207321,7 @@
 			"owner": "p7_1/table_cloth",
 			"recordType": "registration",
 			"sourceKey": "block:create:light_gray_table_cloth",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:light_gray_table_cloth",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/light_gray_table_cloth.json"
@@ -207363,7 +207363,7 @@
 			"owner": "p7_1/valve_handle",
 			"recordType": "registration",
 			"sourceKey": "block:create:light_gray_valve_handle",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:light_gray_valve_handle",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/light_gray_valve_handle.json"
@@ -207384,7 +207384,7 @@
 			"owner": "p7_1/nixie",
 			"recordType": "registration",
 			"sourceKey": "block:create:lime_nixie_tube",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:lime_nixie_tube",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/lime_nixie_tube.json"
@@ -207405,7 +207405,7 @@
 			"owner": "p7_1/postbox",
 			"recordType": "registration",
 			"sourceKey": "block:create:lime_postbox",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:lime_postbox",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/lime_postbox.json"
@@ -207426,7 +207426,7 @@
 			"owner": "p7_1/sail",
 			"recordType": "registration",
 			"sourceKey": "block:create:lime_sail",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:lime_sail",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/lime_sail.json"
@@ -207468,7 +207468,7 @@
 			"owner": "p7_1/table_cloth",
 			"recordType": "registration",
 			"sourceKey": "block:create:lime_table_cloth",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:lime_table_cloth",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/lime_table_cloth.json"
@@ -207510,7 +207510,7 @@
 			"owner": "p7_1/valve_handle",
 			"recordType": "registration",
 			"sourceKey": "block:create:lime_valve_handle",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:lime_valve_handle",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/lime_valve_handle.json"
@@ -207621,7 +207621,7 @@
 			"owner": "p7_1/nixie",
 			"recordType": "registration",
 			"sourceKey": "block:create:magenta_nixie_tube",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:magenta_nixie_tube",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/magenta_nixie_tube.json"
@@ -207642,7 +207642,7 @@
 			"owner": "p7_1/postbox",
 			"recordType": "registration",
 			"sourceKey": "block:create:magenta_postbox",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:magenta_postbox",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/magenta_postbox.json"
@@ -207663,7 +207663,7 @@
 			"owner": "p7_1/sail",
 			"recordType": "registration",
 			"sourceKey": "block:create:magenta_sail",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:magenta_sail",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/magenta_sail.json"
@@ -207705,7 +207705,7 @@
 			"owner": "p7_1/table_cloth",
 			"recordType": "registration",
 			"sourceKey": "block:create:magenta_table_cloth",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:magenta_table_cloth",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/magenta_table_cloth.json"
@@ -207747,7 +207747,7 @@
 			"owner": "p7_1/valve_handle",
 			"recordType": "registration",
 			"sourceKey": "block:create:magenta_valve_handle",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:magenta_valve_handle",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/magenta_valve_handle.json"
@@ -208452,7 +208452,7 @@
 			"owner": "p7_1/postbox",
 			"recordType": "registration",
 			"sourceKey": "block:create:orange_postbox",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:orange_postbox",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/orange_postbox.json"
@@ -208473,7 +208473,7 @@
 			"owner": "p7_1/sail",
 			"recordType": "registration",
 			"sourceKey": "block:create:orange_sail",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:orange_sail",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/orange_sail.json"
@@ -208515,7 +208515,7 @@
 			"owner": "p7_1/table_cloth",
 			"recordType": "registration",
 			"sourceKey": "block:create:orange_table_cloth",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:orange_table_cloth",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/orange_table_cloth.json"
@@ -208557,7 +208557,7 @@
 			"owner": "p7_1/valve_handle",
 			"recordType": "registration",
 			"sourceKey": "block:create:orange_valve_handle",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:orange_valve_handle",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/orange_valve_handle.json"
@@ -208822,7 +208822,7 @@
 			"owner": "p7_1/nixie",
 			"recordType": "registration",
 			"sourceKey": "block:create:pink_nixie_tube",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:pink_nixie_tube",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/pink_nixie_tube.json"
@@ -208843,7 +208843,7 @@
 			"owner": "p7_1/postbox",
 			"recordType": "registration",
 			"sourceKey": "block:create:pink_postbox",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:pink_postbox",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/pink_postbox.json"
@@ -208864,7 +208864,7 @@
 			"owner": "p7_1/sail",
 			"recordType": "registration",
 			"sourceKey": "block:create:pink_sail",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:pink_sail",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/pink_sail.json"
@@ -208906,7 +208906,7 @@
 			"owner": "p7_1/table_cloth",
 			"recordType": "registration",
 			"sourceKey": "block:create:pink_table_cloth",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:pink_table_cloth",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/pink_table_cloth.json"
@@ -208948,7 +208948,7 @@
 			"owner": "p7_1/valve_handle",
 			"recordType": "registration",
 			"sourceKey": "block:create:pink_valve_handle",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:pink_valve_handle",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/pink_valve_handle.json"
@@ -210425,7 +210425,7 @@
 			"owner": "p7_1/nixie",
 			"recordType": "registration",
 			"sourceKey": "block:create:purple_nixie_tube",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:purple_nixie_tube",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/purple_nixie_tube.json"
@@ -210446,7 +210446,7 @@
 			"owner": "p7_1/postbox",
 			"recordType": "registration",
 			"sourceKey": "block:create:purple_postbox",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:purple_postbox",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/purple_postbox.json"
@@ -210467,7 +210467,7 @@
 			"owner": "p7_1/sail",
 			"recordType": "registration",
 			"sourceKey": "block:create:purple_sail",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:purple_sail",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/purple_sail.json"
@@ -210509,7 +210509,7 @@
 			"owner": "p7_1/table_cloth",
 			"recordType": "registration",
 			"sourceKey": "block:create:purple_table_cloth",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:purple_table_cloth",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/purple_table_cloth.json"
@@ -210551,7 +210551,7 @@
 			"owner": "p7_1/valve_handle",
 			"recordType": "registration",
 			"sourceKey": "block:create:purple_valve_handle",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:purple_valve_handle",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/purple_valve_handle.json"
@@ -210644,7 +210644,7 @@
 			"owner": "p7_1/nixie",
 			"recordType": "registration",
 			"sourceKey": "block:create:red_nixie_tube",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:red_nixie_tube",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/red_nixie_tube.json"
@@ -210665,7 +210665,7 @@
 			"owner": "p7_1/postbox",
 			"recordType": "registration",
 			"sourceKey": "block:create:red_postbox",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:red_postbox",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/red_postbox.json"
@@ -210686,7 +210686,7 @@
 			"owner": "p7_1/sail",
 			"recordType": "registration",
 			"sourceKey": "block:create:red_sail",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:red_sail",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/red_sail.json"
@@ -210728,7 +210728,7 @@
 			"owner": "p7_1/table_cloth",
 			"recordType": "registration",
 			"sourceKey": "block:create:red_table_cloth",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:red_table_cloth",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/red_table_cloth.json"
@@ -210770,7 +210770,7 @@
 			"owner": "p7_1/valve_handle",
 			"recordType": "registration",
 			"sourceKey": "block:create:red_valve_handle",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:red_valve_handle",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/red_valve_handle.json"
@@ -214066,7 +214066,7 @@
 			"owner": "p7_1/nixie",
 			"recordType": "registration",
 			"sourceKey": "block:create:white_nixie_tube",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:white_nixie_tube",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/white_nixie_tube.json"
@@ -214087,7 +214087,7 @@
 			"owner": "p7_1/postbox",
 			"recordType": "registration",
 			"sourceKey": "block:create:white_postbox",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:white_postbox",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/white_postbox.json"
@@ -214153,7 +214153,7 @@
 			"owner": "p7_1/table_cloth",
 			"recordType": "registration",
 			"sourceKey": "block:create:white_table_cloth",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:white_table_cloth",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/white_table_cloth.json"
@@ -214195,7 +214195,7 @@
 			"owner": "p7_1/valve_handle",
 			"recordType": "registration",
 			"sourceKey": "block:create:white_valve_handle",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:white_valve_handle",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/white_valve_handle.json"
@@ -214266,7 +214266,7 @@
 			"owner": "p7_1/nixie",
 			"recordType": "registration",
 			"sourceKey": "block:create:yellow_nixie_tube",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:yellow_nixie_tube",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/yellow_nixie_tube.json"
@@ -214287,7 +214287,7 @@
 			"owner": "p7_1/postbox",
 			"recordType": "registration",
 			"sourceKey": "block:create:yellow_postbox",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:yellow_postbox",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/yellow_postbox.json"
@@ -214308,7 +214308,7 @@
 			"owner": "p7_1/sail",
 			"recordType": "registration",
 			"sourceKey": "block:create:yellow_sail",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:yellow_sail",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/yellow_sail.json"
@@ -214350,7 +214350,7 @@
 			"owner": "p7_1/table_cloth",
 			"recordType": "registration",
 			"sourceKey": "block:create:yellow_table_cloth",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:yellow_table_cloth",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/yellow_table_cloth.json"
@@ -214392,7 +214392,7 @@
 			"owner": "p7_1/valve_handle",
 			"recordType": "registration",
 			"sourceKey": "block:create:yellow_valve_handle",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:yellow_valve_handle",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/yellow_valve_handle.json"
@@ -217267,8 +217267,8 @@
 		"status": {
 			"audit_pending": 1319,
 			"deferred_compat": 114,
-			"implemented": 424,
-			"partial": 9410
+			"implemented": 502,
+			"partial": 9332
 		},
 		"total": 11267
 	}

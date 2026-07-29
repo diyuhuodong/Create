@@ -1,3 +1,5 @@
+import { COLORED_NIXIE_TUBE_BLOCKS, COLORED_SAIL_BLOCKS } from "../kernel/functional-color-families.js";
+
 export const MAX_CONTRAPTION_BLOCKS = 16;
 
 export const MOVABLE_BLOCK_TYPES = new Set([
@@ -44,6 +46,7 @@ export const MOVABLE_BLOCK_TYPES = new Set([
 	"createbedrock:display_link",
 	"createbedrock:lectern_controller",
 	"createbedrock:nixie_tube",
+	...COLORED_NIXIE_TUBE_BLOCKS,
 	"createbedrock:powered_latch",
 	"createbedrock:powered_toggle_latch",
 	"createbedrock:pulse_extender",
@@ -73,6 +76,7 @@ export const MOVABLE_BLOCK_TYPES = new Set([
 	"createbedrock:steam_whistle_extension",
 	"createbedrock:sail_frame",
 	"createbedrock:white_sail",
+	...COLORED_SAIL_BLOCKS,
 	"createbedrock:nozzle",
 	"createbedrock:linear_chassis",
 	"createbedrock:secondary_linear_chassis",
@@ -101,6 +105,7 @@ export const STATELESS_MOVABLE_BLOCK_TYPES = new Set([
 	"createbedrock:steam_whistle_extension",
 	"createbedrock:sail_frame",
 	"createbedrock:white_sail",
+	...COLORED_SAIL_BLOCKS,
 	"createbedrock:linear_chassis",
 	"createbedrock:secondary_linear_chassis",
 	"createbedrock:radial_chassis",

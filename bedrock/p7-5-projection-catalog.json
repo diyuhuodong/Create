@@ -29,6 +29,34 @@
       "textureAlias": "createbedrock_belt"
     },
     {
+      "blockTypeId": "createbedrock:black_nixie_tube",
+      "entityTypeId": "createbedrock:contraption_part_black_nixie_tube",
+      "geometry": "geometry.createbedrock.p7_1_full_cube",
+      "texture": "textures/create_java/block/nixie_tube",
+      "textureAlias": "createbedrock_p7_1_black_nixie_tube"
+    },
+    {
+      "blockTypeId": "createbedrock:black_sail",
+      "entityTypeId": "createbedrock:contraption_part_black_sail",
+      "geometry": "geometry.createbedrock.p7_1_black_sail",
+      "texture": "textures/create_java/block/sail/canvas_black",
+      "textureAlias": "createbedrock_p7_1_black_sail"
+    },
+    {
+      "blockTypeId": "createbedrock:blue_nixie_tube",
+      "entityTypeId": "createbedrock:contraption_part_blue_nixie_tube",
+      "geometry": "geometry.createbedrock.p7_1_full_cube",
+      "texture": "textures/create_java/block/nixie_tube",
+      "textureAlias": "createbedrock_p7_1_blue_nixie_tube"
+    },
+    {
+      "blockTypeId": "createbedrock:blue_sail",
+      "entityTypeId": "createbedrock:contraption_part_blue_sail",
+      "geometry": "geometry.createbedrock.p7_1_blue_sail",
+      "texture": "textures/create_java/block/sail/canvas_blue",
+      "textureAlias": "createbedrock_p7_1_blue_sail"
+    },
+    {
       "blockTypeId": "createbedrock:brass_casing",
       "entityTypeId": "createbedrock:contraption_part_brass_casing",
       "geometry": "geometry.createbedrock.contraption_marker",
@@ -41,6 +69,20 @@
       "geometry": "geometry.createbedrock.brass_door_bottom",
       "texture": "textures/create_java/block/brass_door_side",
       "textureAlias": "createbedrock_brass_door_side"
+    },
+    {
+      "blockTypeId": "createbedrock:brown_nixie_tube",
+      "entityTypeId": "createbedrock:contraption_part_brown_nixie_tube",
+      "geometry": "geometry.createbedrock.p7_1_full_cube",
+      "texture": "textures/create_java/block/nixie_tube",
+      "textureAlias": "createbedrock_p7_1_brown_nixie_tube"
+    },
+    {
+      "blockTypeId": "createbedrock:brown_sail",
+      "entityTypeId": "createbedrock:contraption_part_brown_sail",
+      "geometry": "geometry.createbedrock.p7_1_brown_sail",
+      "texture": "textures/create_java/block/sail/canvas_brown",
+      "textureAlias": "createbedrock_p7_1_brown_sail"
     },
     {
       "blockTypeId": "createbedrock:clutch",
@@ -134,6 +176,20 @@
       "textureAlias": "createbedrock_cuckoo_clock"
     },
     {
+      "blockTypeId": "createbedrock:cyan_nixie_tube",
+      "entityTypeId": "createbedrock:contraption_part_cyan_nixie_tube",
+      "geometry": "geometry.createbedrock.p7_1_full_cube",
+      "texture": "textures/create_java/block/nixie_tube",
+      "textureAlias": "createbedrock_p7_1_cyan_nixie_tube"
+    },
+    {
+      "blockTypeId": "createbedrock:cyan_sail",
+      "entityTypeId": "createbedrock:contraption_part_cyan_sail",
+      "geometry": "geometry.createbedrock.p7_1_cyan_sail",
+      "texture": "textures/create_java/block/sail/canvas_cyan",
+      "textureAlias": "createbedrock_p7_1_cyan_sail"
+    },
+    {
       "blockTypeId": "createbedrock:deployer",
       "entityTypeId": "createbedrock:contraption_part_deployer",
       "geometry": "geometry.createbedrock.deployer",
@@ -204,6 +260,34 @@
       "textureAlias": "createbedrock_gearbox"
     },
     {
+      "blockTypeId": "createbedrock:gray_nixie_tube",
+      "entityTypeId": "createbedrock:contraption_part_gray_nixie_tube",
+      "geometry": "geometry.createbedrock.p7_1_full_cube",
+      "texture": "textures/create_java/block/nixie_tube",
+      "textureAlias": "createbedrock_p7_1_gray_nixie_tube"
+    },
+    {
+      "blockTypeId": "createbedrock:gray_sail",
+      "entityTypeId": "createbedrock:contraption_part_gray_sail",
+      "geometry": "geometry.createbedrock.p7_1_gray_sail",
+      "texture": "textures/create_java/block/sail/canvas_gray",
+      "textureAlias": "createbedrock_p7_1_gray_sail"
+    },
+    {
+      "blockTypeId": "createbedrock:green_nixie_tube",
+      "entityTypeId": "createbedrock:contraption_part_green_nixie_tube",
+      "geometry": "geometry.createbedrock.p7_1_full_cube",
+      "texture": "textures/create_java/block/nixie_tube",
+      "textureAlias": "createbedrock_p7_1_green_nixie_tube"
+    },
+    {
+      "blockTypeId": "createbedrock:green_sail",
+      "entityTypeId": "createbedrock:contraption_part_green_sail",
+      "geometry": "geometry.createbedrock.p7_1_green_sail",
+      "texture": "textures/create_java/block/sail/canvas_green",
+      "textureAlias": "createbedrock_p7_1_green_sail"
+    },
+    {
       "blockTypeId": "createbedrock:hand_crank",
       "entityTypeId": "createbedrock:contraption_part_hand_crank",
       "geometry": "geometry.createbedrock.hand_crank",
@@ -260,11 +344,67 @@
       "textureAlias": "createbedrock_brass_casing"
     },
     {
+      "blockTypeId": "createbedrock:light_blue_nixie_tube",
+      "entityTypeId": "createbedrock:contraption_part_light_blue_nixie_tube",
+      "geometry": "geometry.createbedrock.p7_1_full_cube",
+      "texture": "textures/create_java/block/nixie_tube",
+      "textureAlias": "createbedrock_p7_1_light_blue_nixie_tube"
+    },
+    {
+      "blockTypeId": "createbedrock:light_blue_sail",
+      "entityTypeId": "createbedrock:contraption_part_light_blue_sail",
+      "geometry": "geometry.createbedrock.p7_1_light_blue_sail",
+      "texture": "textures/create_java/block/sail/canvas_light_blue",
+      "textureAlias": "createbedrock_p7_1_light_blue_sail"
+    },
+    {
+      "blockTypeId": "createbedrock:light_gray_nixie_tube",
+      "entityTypeId": "createbedrock:contraption_part_light_gray_nixie_tube",
+      "geometry": "geometry.createbedrock.p7_1_full_cube",
+      "texture": "textures/create_java/block/nixie_tube",
+      "textureAlias": "createbedrock_p7_1_light_gray_nixie_tube"
+    },
+    {
+      "blockTypeId": "createbedrock:light_gray_sail",
+      "entityTypeId": "createbedrock:contraption_part_light_gray_sail",
+      "geometry": "geometry.createbedrock.p7_1_light_gray_sail",
+      "texture": "textures/create_java/block/sail/canvas_light_gray",
+      "textureAlias": "createbedrock_p7_1_light_gray_sail"
+    },
+    {
+      "blockTypeId": "createbedrock:lime_nixie_tube",
+      "entityTypeId": "createbedrock:contraption_part_lime_nixie_tube",
+      "geometry": "geometry.createbedrock.p7_1_full_cube",
+      "texture": "textures/create_java/block/nixie_tube",
+      "textureAlias": "createbedrock_p7_1_lime_nixie_tube"
+    },
+    {
+      "blockTypeId": "createbedrock:lime_sail",
+      "entityTypeId": "createbedrock:contraption_part_lime_sail",
+      "geometry": "geometry.createbedrock.p7_1_lime_sail",
+      "texture": "textures/create_java/block/sail/canvas_lime",
+      "textureAlias": "createbedrock_p7_1_lime_sail"
+    },
+    {
       "blockTypeId": "createbedrock:linear_chassis",
       "entityTypeId": "createbedrock:contraption_part_linear_chassis",
       "geometry": "geometry.createbedrock.contraption_marker",
       "texture": "textures/create_java/block/linear_chassis_side",
       "textureAlias": "createbedrock_linear_chassis"
+    },
+    {
+      "blockTypeId": "createbedrock:magenta_nixie_tube",
+      "entityTypeId": "createbedrock:contraption_part_magenta_nixie_tube",
+      "geometry": "geometry.createbedrock.p7_1_full_cube",
+      "texture": "textures/create_java/block/nixie_tube",
+      "textureAlias": "createbedrock_p7_1_magenta_nixie_tube"
+    },
+    {
+      "blockTypeId": "createbedrock:magenta_sail",
+      "entityTypeId": "createbedrock:contraption_part_magenta_sail",
+      "geometry": "geometry.createbedrock.p7_1_magenta_sail",
+      "texture": "textures/create_java/block/sail/canvas_magenta",
+      "textureAlias": "createbedrock_p7_1_magenta_sail"
     },
     {
       "blockTypeId": "createbedrock:mechanical_arm",
@@ -358,11 +498,32 @@
       "textureAlias": "createbedrock_nozzle_net"
     },
     {
+      "blockTypeId": "createbedrock:orange_sail",
+      "entityTypeId": "createbedrock:contraption_part_orange_sail",
+      "geometry": "geometry.createbedrock.p7_1_orange_sail",
+      "texture": "textures/create_java/block/sail/canvas_orange",
+      "textureAlias": "createbedrock_p7_1_orange_sail"
+    },
+    {
       "blockTypeId": "createbedrock:peculiar_bell",
       "entityTypeId": "createbedrock:contraption_part_peculiar_bell",
       "geometry": "geometry.createbedrock.peculiar_bell",
       "texture": "textures/create_java/block/bell",
       "textureAlias": "createbedrock_bell"
+    },
+    {
+      "blockTypeId": "createbedrock:pink_nixie_tube",
+      "entityTypeId": "createbedrock:contraption_part_pink_nixie_tube",
+      "geometry": "geometry.createbedrock.p7_1_full_cube",
+      "texture": "textures/create_java/block/nixie_tube",
+      "textureAlias": "createbedrock_p7_1_pink_nixie_tube"
+    },
+    {
+      "blockTypeId": "createbedrock:pink_sail",
+      "entityTypeId": "createbedrock:contraption_part_pink_sail",
+      "geometry": "geometry.createbedrock.p7_1_pink_sail",
+      "texture": "textures/create_java/block/sail/canvas_pink",
+      "textureAlias": "createbedrock_p7_1_pink_sail"
     },
     {
       "blockTypeId": "createbedrock:piston_extension_pole",
@@ -428,11 +589,39 @@
       "textureAlias": "createbedrock_redstone_pulse_timer"
     },
     {
+      "blockTypeId": "createbedrock:purple_nixie_tube",
+      "entityTypeId": "createbedrock:contraption_part_purple_nixie_tube",
+      "geometry": "geometry.createbedrock.p7_1_full_cube",
+      "texture": "textures/create_java/block/nixie_tube",
+      "textureAlias": "createbedrock_p7_1_purple_nixie_tube"
+    },
+    {
+      "blockTypeId": "createbedrock:purple_sail",
+      "entityTypeId": "createbedrock:contraption_part_purple_sail",
+      "geometry": "geometry.createbedrock.p7_1_purple_sail",
+      "texture": "textures/create_java/block/sail/canvas_purple",
+      "textureAlias": "createbedrock_p7_1_purple_sail"
+    },
+    {
       "blockTypeId": "createbedrock:radial_chassis",
       "entityTypeId": "createbedrock:contraption_part_radial_chassis",
       "geometry": "geometry.createbedrock.contraption_marker",
       "texture": "textures/create_java/block/radial_chassis_side",
       "textureAlias": "createbedrock_radial_chassis"
+    },
+    {
+      "blockTypeId": "createbedrock:red_nixie_tube",
+      "entityTypeId": "createbedrock:contraption_part_red_nixie_tube",
+      "geometry": "geometry.createbedrock.p7_1_full_cube",
+      "texture": "textures/create_java/block/nixie_tube",
+      "textureAlias": "createbedrock_p7_1_red_nixie_tube"
+    },
+    {
+      "blockTypeId": "createbedrock:red_sail",
+      "entityTypeId": "createbedrock:contraption_part_red_sail",
+      "geometry": "geometry.createbedrock.p7_1_red_sail",
+      "texture": "textures/create_java/block/sail/canvas_red",
+      "textureAlias": "createbedrock_p7_1_red_sail"
     },
     {
       "blockTypeId": "createbedrock:redstone_contact",
@@ -575,11 +764,32 @@
       "textureAlias": "createbedrock_gearbox"
     },
     {
+      "blockTypeId": "createbedrock:white_nixie_tube",
+      "entityTypeId": "createbedrock:contraption_part_white_nixie_tube",
+      "geometry": "geometry.createbedrock.p7_1_full_cube",
+      "texture": "textures/create_java/block/nixie_tube",
+      "textureAlias": "createbedrock_p7_1_white_nixie_tube"
+    },
+    {
       "blockTypeId": "createbedrock:white_sail",
       "entityTypeId": "createbedrock:contraption_part_white_sail",
       "geometry": "geometry.createbedrock.white_sail",
       "texture": "textures/create_java/block/sail/canvas_white",
       "textureAlias": "createbedrock_white_sail"
+    },
+    {
+      "blockTypeId": "createbedrock:yellow_nixie_tube",
+      "entityTypeId": "createbedrock:contraption_part_yellow_nixie_tube",
+      "geometry": "geometry.createbedrock.p7_1_full_cube",
+      "texture": "textures/create_java/block/nixie_tube",
+      "textureAlias": "createbedrock_p7_1_yellow_nixie_tube"
+    },
+    {
+      "blockTypeId": "createbedrock:yellow_sail",
+      "entityTypeId": "createbedrock:contraption_part_yellow_sail",
+      "geometry": "geometry.createbedrock.p7_1_yellow_sail",
+      "texture": "textures/create_java/block/sail/canvas_yellow",
+      "textureAlias": "createbedrock_p7_1_yellow_sail"
     },
     {
       "blockTypeId": "createbedrock:zinc_block",

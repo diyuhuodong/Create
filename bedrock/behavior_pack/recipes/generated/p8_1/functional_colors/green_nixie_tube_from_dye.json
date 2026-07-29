@@ -1,0 +1,22 @@
+{
+  "format_version": "1.26.0",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "createbedrock:p8_1/green_nixie_tube_from_dye"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "createbedrock:nixie_tube"
+      },
+      {
+        "item": "minecraft:green_dye"
+      }
+    ],
+    "result": {
+      "item": "createbedrock:green_nixie_tube"
+    }
+  }
+}

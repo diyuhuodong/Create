@@ -3,6 +3,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { assertReleaseProjectionCoverage } from "../behavior_pack/scripts/contraptions/projection-registry.js";
+import { MOVABLE_BLOCK_TYPES } from "../behavior_pack/scripts/contraptions/movable-blocks.js";
 import { SCHEDULE_CONDITION_TYPES, SCHEDULE_INSTRUCTION_TYPES } from "../behavior_pack/scripts/trains/schedule-ast.js";
 
 const defaultRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -34,9 +35,10 @@ export async function validateP75StaticContract({ root = defaultRoot, trackingRo
 
 	const catalog = JSON.parse(await text(trackingRoot, "p7-5-projection-catalog.json"));
 	const audit = assertReleaseProjectionCoverage();
-	if (catalog.schemaVersion !== 1 || catalog.entries.length !== 84 || audit.missing.length || audit.authorityOnly.length)
-		throw new Error("P7.5 release requires all 84 dedicated movable-block projections");
-	if (new Set(catalog.entries.map(entry => entry.blockTypeId)).size !== 84 || new Set(catalog.entries.map(entry => entry.entityTypeId)).size !== 84)
+	const expectedProjectionCount = MOVABLE_BLOCK_TYPES.size;
+	if (catalog.schemaVersion !== 1 || catalog.entries.length !== expectedProjectionCount || audit.missing.length || audit.authorityOnly.length)
+		throw new Error(`P7.5 release requires all ${expectedProjectionCount} dedicated movable-block projections`);
+	if (new Set(catalog.entries.map(entry => entry.blockTypeId)).size !== expectedProjectionCount || new Set(catalog.entries.map(entry => entry.entityTypeId)).size !== expectedProjectionCount)
 		throw new Error("P7.5 projection catalog contains duplicate block or entity mappings");
 	for (const entry of catalog.entries) {
 		if (entry.entityTypeId === "createbedrock:contraption_part")

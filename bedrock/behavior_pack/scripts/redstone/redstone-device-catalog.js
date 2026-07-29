@@ -1,3 +1,5 @@
+import { COLORED_NIXIE_TUBE_BLOCKS } from "../kernel/functional-color-families.js";
+
 const DEVICE_DEFINITIONS = [
 	{
 		id: "analog_lever",
@@ -50,6 +52,7 @@ const DEVICE_DEFINITIONS = [
 	{
 		id: "nixie_tube",
 		blockId: "createbedrock:nixie_tube",
+		variantBlockIds: COLORED_NIXIE_TUBE_BLOCKS,
 		acceptanceIds: ["REDSTONE-NIXIE-TUBE-BLOCK", "REDSTONE-NIXIE-TUBE-BLOCK_ENTITY"],
 		input: true,
 		output: false,
@@ -138,14 +141,18 @@ const DEVICE_DEFINITIONS = [
 ];
 
 function freezeDevice(device) {
-	return Object.freeze({ ...device, acceptanceIds: Object.freeze([...device.acceptanceIds]) });
+	return Object.freeze({
+		...device,
+		acceptanceIds: Object.freeze([...device.acceptanceIds]),
+		variantBlockIds: Object.freeze([...(device.variantBlockIds ?? [])])
+	});
 }
 
 export const REDSTONE_DEVICE_CATALOG = Object.freeze(DEVICE_DEFINITIONS.map(freezeDevice));
 export const REDSTONE_BLOCK_DEVICES = Object.freeze(REDSTONE_DEVICE_CATALOG.filter(device => device.blockId));
 export const REDSTONE_ITEM_DEVICES = Object.freeze(REDSTONE_DEVICE_CATALOG.filter(device => device.itemId));
 
-const byBlockId = new Map(REDSTONE_BLOCK_DEVICES.map(device => [device.blockId, device]));
+const byBlockId = new Map(REDSTONE_BLOCK_DEVICES.flatMap(device => [device.blockId, ...device.variantBlockIds].map(blockId => [blockId, device])));
 const byId = new Map(REDSTONE_DEVICE_CATALOG.map(device => [device.id, device]));
 
 export function redstoneDeviceForBlock(blockTypeId) {

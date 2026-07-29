@@ -1,6 +1,8 @@
 import { normalizeDisplayTargetState } from "./display-target.js";
+import { colorForFunctionalBlock, isNixieTubeBlock, NIXIE_TUBE_BLOCKS } from "../kernel/functional-color-families.js";
 
 export const NIXIE_TUBE_BLOCK = "createbedrock:nixie_tube";
+export { NIXIE_TUBE_BLOCKS };
 export const MAX_NIXIE_TUBE_GROUP = 16;
 
 function assertLocation(location) {
@@ -28,9 +30,9 @@ export function nixieTubeGroupDirection(facing) {
 	throw new TypeError("Nixie tube groups require a recognized facing direction");
 }
 
-function matchingTube(readTube, location, facing) {
+function matchingTube(readTube, location, facing, typeId) {
 	const tube = readTube(assertLocation(location));
-	if (!tube || tube.typeId !== NIXIE_TUBE_BLOCK || tube.facing !== facing)
+	if (!tube || !isNixieTubeBlock(tube.typeId) || tube.facing !== facing || tube.typeId !== typeId)
 		return undefined;
 	return { ...tube, location: assertLocation(location), display: normalizeDisplayTargetState(tube.display) };
 }
@@ -46,20 +48,20 @@ export function collectNixieTubeGroup({ anchor, readTube, maxSize = MAX_NIXIE_TU
 		throw new RangeError(`Nixie tube group sizes must be from 1 through ${MAX_NIXIE_TUBE_GROUP}`);
 	const seedLocation = assertLocation(anchor);
 	const seed = readTube(seedLocation);
-	if (!seed || seed.typeId !== NIXIE_TUBE_BLOCK)
+	if (!seed || !isNixieTubeBlock(seed.typeId))
 		return undefined;
 	const facing = seed.facing;
 	const direction = nixieTubeGroupDirection(facing);
 	let first = seedLocation;
 	for (let count = 1; count < maxSize; count++) {
 		const previous = offset(first, { x: -direction.x, y: -direction.y, z: -direction.z });
-		if (!matchingTube(readTube, previous, facing))
+		if (!matchingTube(readTube, previous, facing, seed.typeId))
 			break;
 		first = previous;
 	}
 	const tubes = [];
 	for (let location = first; tubes.length < maxSize; location = offset(location, direction)) {
-		const tube = matchingTube(readTube, location, facing);
+		const tube = matchingTube(readTube, location, facing, seed.typeId);
 		if (!tube)
 			break;
 		tubes.push(tube);
@@ -80,8 +82,9 @@ export function composeNixieTubeDisplay(group, { line = 0 } = {}) {
 	if (!Number.isInteger(line) || line < 0)
 		throw new RangeError("Nixie display lines must be non-negative integers");
 	const displays = group.tubes.map(tube => normalizeDisplayTargetState(tube.display));
+	const color = colorForFunctionalBlock(group.tubes[0].typeId, "nixie_tube", displays[0].style.color);
 	return {
-		style: { ...displays[0].style },
+		style: { ...displays[0].style, color },
 		text: displays.map(display => display.lines[line] ?? "").join("")
 	};
 }

@@ -3,6 +3,7 @@ import test from "node:test";
 
 import { partTypeFor } from "../behavior_pack/scripts/contraptions/contraption-parts.js";
 import { isMovableBlockType, MAX_CONTRAPTION_BLOCKS, MOVABLE_BLOCK_TYPES, STATELESS_MOVABLE_BLOCK_TYPES } from "../behavior_pack/scripts/contraptions/movable-blocks.js";
+import { COLORED_SAIL_BLOCKS } from "../behavior_pack/scripts/kernel/functional-color-families.js";
 import { defaultProjectionEntityType } from "../behavior_pack/scripts/contraptions/projection-registry.js";
 
 test("Contraption part registry gives every movable family a dedicated projection", () => {
@@ -102,7 +103,7 @@ test("Contraption part registry gives every movable family a dedicated projectio
 		assert.equal(isMovableBlockType(typeId), true);
 		assert.equal(partTypeFor(typeId), defaultProjectionEntityType(typeId));
 	}
-	assert.equal(MOVABLE_BLOCK_TYPES.size, 84);
+	assert.equal(MOVABLE_BLOCK_TYPES.size, 114);
 	assert.deepEqual([...STATELESS_MOVABLE_BLOCK_TYPES].sort(), [
 		"createbedrock:andesite_casing",
 		"createbedrock:brass_casing",
@@ -115,9 +116,10 @@ test("Contraption part registry gives every movable family a dedicated projectio
 		"createbedrock:radial_chassis",
 		"createbedrock:rope",
 		"createbedrock:sail_frame",
+		...COLORED_SAIL_BLOCKS,
 		"createbedrock:secondary_linear_chassis",
 		"createbedrock:steam_whistle_extension",
 		"createbedrock:white_sail",
 		"createbedrock:zinc_block"
-	]);
+	].sort());
 });

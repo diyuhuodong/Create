@@ -15,7 +15,7 @@ import { resolveDisplaySource } from "./display-source.js";
 import { registerWorldDisplaySourceProviders } from "./display-world-sources.js";
 import { writeDisplayBoardLine } from "../materials/display-board-runtime.js";
 import { getTrainDisplayState, setTrainRedstoneLinkResolver } from "../trains/train-runtime.js";
-import { collectNixieTubeGroup, composeNixieTubeDisplay, NIXIE_TUBE_BLOCK, nixieTubeGroupId } from "./nixie-display.js";
+import { collectNixieTubeGroup, composeNixieTubeDisplay, NIXIE_TUBE_BLOCKS, nixieTubeGroupId } from "./nixie-display.js";
 import { beginLecternControllerUse, clearLecternControllerSession, createLecternControllerState, endLecternControllerUse, installLecternController, normalizeLecternControllerState, triggerLecternControllerChannel } from "./lectern-controller-state.js";
 import { fingerprintInventoryStacks } from "./redstone-inventory-fingerprint.js";
 import { registerNativeRedstoneEventHandler } from "./redstone-native-events.js";
@@ -154,6 +154,10 @@ function resolveBlock(record) {
 	}
 }
 
+function blockMatchesDefinition(block, definition) {
+	return block?.typeId === definition?.blockId || definition?.variantBlockIds?.includes(block?.typeId);
+}
+
 function setBlockState(block, property, value) {
 	if (!block?.permutation?.getAllStates || typeof block.setPermutation !== "function")
 		return false;
@@ -169,7 +173,7 @@ function setBlockState(block, property, value) {
 }
 
 function applyStateToBlock(record, block = resolveBlock(record)) {
-	if (!block || block.typeId !== record.definition.blockId)
+	if (!blockMatchesDefinition(block, record.definition))
 		return false;
 	if (record.definition.output) {
 		const analogOutput = record.definition.id === "analog_lever" || record.definition.id === "redstone_link";
@@ -193,12 +197,12 @@ function nixieTubeRecord(record) {
 	if (record?.definition.id !== "nixie_tube")
 		return undefined;
 	const block = resolveBlock(record);
-	if (block?.typeId !== NIXIE_TUBE_BLOCK)
+	if (!NIXIE_TUBE_BLOCKS.includes(block?.typeId))
 		return undefined;
 	const facing = block.permutation?.getAllStates?.()["minecraft:facing_direction"];
 	if (facing === undefined)
 		return undefined;
-	return { display: record.state.display, facing, location: record.location, typeId: NIXIE_TUBE_BLOCK };
+	return { display: record.state.display, facing, location: record.location, typeId: block.typeId };
 }
 
 function nixieMarkerLocation(group) {

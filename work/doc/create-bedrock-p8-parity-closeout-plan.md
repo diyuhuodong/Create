@@ -13,6 +13,8 @@ P8 的目标是把“能够构建并通过现有静态测试”提升为“Java 
 
 P8.0 已完成：`java-behavior-inventory.json` 记录 1,319 个 Java 行为来源，`p8-parity-evidence-ledger.json` 将注册、领域与行为统一为 11,267 条证据记录，P7.7 gap ledger 已强制纳入这些记录。执行 `cd bedrock && npm run ledger && npm run gap:p7-7` 可确定性重建三份台账。
 
+P8.1 已完成：78 个彩色功能方块均通过共享颜色族目录接入对应运行时、生成资源、获取配方和移动投影；迁移台账已确定性标为 `implemented`，并由 `p8-functional-color-families.test.mjs` 覆盖资源、获取、状态、运行时和台账结论。
+
 ## 前向依赖
 
 `P8.0 审计门禁 → P8.1 已知缺口 → P8.2 注册收敛 → P8.3 行为核对 → P8.4 领域收敛 → P8.5 静态候选 → P8.6 平台验收`

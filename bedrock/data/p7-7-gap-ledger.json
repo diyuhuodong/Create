@@ -100,8 +100,8 @@
 			},
 			"registrations": {
 				"status": {
-					"implemented": 424,
-					"partial": 457
+					"implemented": 502,
+					"partial": 379
 				},
 				"total": 881
 			}
@@ -123744,121 +123744,11 @@
 		},
 		{
 			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ablack_nixie_tube",
-			"owner": "p7_1/nixie",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:black_nixie_tube",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ablack_postbox",
-			"owner": "p7_1/postbox",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:black_postbox",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ablack_sail",
-			"owner": "p7_1/sail",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:black_sail",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ablack_table_cloth",
-			"owner": "p7_1/table_cloth",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:black_table_cloth",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ablack_valve_handle",
-			"owner": "p7_1/valve_handle",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:black_valve_handle",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
 			"id": "core/registration/block%3Acreate%3Ablaze_burner",
 			"owner": "P7.1/content_and_acquisition",
 			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
 			"scope": "create_core",
 			"subject": "block:create:blaze_burner",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ablue_nixie_tube",
-			"owner": "p7_1/nixie",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:blue_nixie_tube",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ablue_postbox",
-			"owner": "p7_1/postbox",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:blue_postbox",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ablue_sail",
-			"owner": "p7_1/sail",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:blue_sail",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ablue_table_cloth",
-			"owner": "p7_1/table_cloth",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:blue_table_cloth",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ablue_valve_handle",
-			"owner": "p7_1/valve_handle",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:blue_valve_handle",
 			"issueKinds": [
 				"registration_partial"
 			]
@@ -124002,61 +123892,6 @@
 			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
 			"scope": "create_core",
 			"subject": "block:create:brass_tunnel",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Abrown_nixie_tube",
-			"owner": "p7_1/nixie",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:brown_nixie_tube",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Abrown_postbox",
-			"owner": "p7_1/postbox",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:brown_postbox",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Abrown_sail",
-			"owner": "p7_1/sail",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:brown_sail",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Abrown_table_cloth",
-			"owner": "p7_1/table_cloth",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:brown_table_cloth",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Abrown_valve_handle",
-			"owner": "p7_1/valve_handle",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:brown_valve_handle",
 			"issueKinds": [
 				"registration_partial"
 			]
@@ -124382,61 +124217,6 @@
 		},
 		{
 			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Acyan_nixie_tube",
-			"owner": "p7_1/nixie",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:cyan_nixie_tube",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Acyan_postbox",
-			"owner": "p7_1/postbox",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:cyan_postbox",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Acyan_sail",
-			"owner": "p7_1/sail",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:cyan_sail",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Acyan_table_cloth",
-			"owner": "p7_1/table_cloth",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:cyan_table_cloth",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Acyan_valve_handle",
-			"owner": "p7_1/valve_handle",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:cyan_valve_handle",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
 			"id": "core/registration/block%3Acreate%3Adeepslate_zinc_ore",
 			"owner": "P7.1/content_and_acquisition",
 			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
@@ -124712,116 +124492,6 @@
 		},
 		{
 			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Agray_nixie_tube",
-			"owner": "p7_1/nixie",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:gray_nixie_tube",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Agray_postbox",
-			"owner": "p7_1/postbox",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:gray_postbox",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Agray_sail",
-			"owner": "p7_1/sail",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:gray_sail",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Agray_table_cloth",
-			"owner": "p7_1/table_cloth",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:gray_table_cloth",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Agray_valve_handle",
-			"owner": "p7_1/valve_handle",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:gray_valve_handle",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Agreen_nixie_tube",
-			"owner": "p7_1/nixie",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:green_nixie_tube",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Agreen_postbox",
-			"owner": "p7_1/postbox",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:green_postbox",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Agreen_sail",
-			"owner": "p7_1/sail",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:green_sail",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Agreen_table_cloth",
-			"owner": "p7_1/table_cloth",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:green_table_cloth",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Agreen_valve_handle",
-			"owner": "p7_1/valve_handle",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:green_valve_handle",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
 			"id": "core/registration/block%3Acreate%3Ahand_crank",
 			"owner": "P7.1/content_and_acquisition",
 			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
@@ -124954,171 +124624,6 @@
 		},
 		{
 			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Alight_blue_nixie_tube",
-			"owner": "p7_1/nixie",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:light_blue_nixie_tube",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Alight_blue_postbox",
-			"owner": "p7_1/postbox",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:light_blue_postbox",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Alight_blue_sail",
-			"owner": "p7_1/sail",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:light_blue_sail",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Alight_blue_table_cloth",
-			"owner": "p7_1/table_cloth",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:light_blue_table_cloth",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Alight_blue_valve_handle",
-			"owner": "p7_1/valve_handle",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:light_blue_valve_handle",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Alight_gray_nixie_tube",
-			"owner": "p7_1/nixie",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:light_gray_nixie_tube",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Alight_gray_postbox",
-			"owner": "p7_1/postbox",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:light_gray_postbox",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Alight_gray_sail",
-			"owner": "p7_1/sail",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:light_gray_sail",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Alight_gray_table_cloth",
-			"owner": "p7_1/table_cloth",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:light_gray_table_cloth",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Alight_gray_valve_handle",
-			"owner": "p7_1/valve_handle",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:light_gray_valve_handle",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Alime_nixie_tube",
-			"owner": "p7_1/nixie",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:lime_nixie_tube",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Alime_postbox",
-			"owner": "p7_1/postbox",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:lime_postbox",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Alime_sail",
-			"owner": "p7_1/sail",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:lime_sail",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Alime_table_cloth",
-			"owner": "p7_1/table_cloth",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:lime_table_cloth",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Alime_valve_handle",
-			"owner": "p7_1/valve_handle",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:lime_valve_handle",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
 			"id": "core/registration/block%3Acreate%3Alinear_chassis",
 			"owner": "P7.1/content_and_acquisition",
 			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
@@ -125135,61 +124640,6 @@
 			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
 			"scope": "create_core",
 			"subject": "block:create:lit_blaze_burner",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Amagenta_nixie_tube",
-			"owner": "p7_1/nixie",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:magenta_nixie_tube",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Amagenta_postbox",
-			"owner": "p7_1/postbox",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:magenta_postbox",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Amagenta_sail",
-			"owner": "p7_1/sail",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:magenta_sail",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Amagenta_table_cloth",
-			"owner": "p7_1/table_cloth",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:magenta_table_cloth",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Amagenta_valve_handle",
-			"owner": "p7_1/valve_handle",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:magenta_valve_handle",
 			"issueKinds": [
 				"registration_partial"
 			]
@@ -125427,50 +124877,6 @@
 		},
 		{
 			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Aorange_postbox",
-			"owner": "p7_1/postbox",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:orange_postbox",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Aorange_sail",
-			"owner": "p7_1/sail",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:orange_sail",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Aorange_table_cloth",
-			"owner": "p7_1/table_cloth",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:orange_table_cloth",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Aorange_valve_handle",
-			"owner": "p7_1/valve_handle",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:orange_valve_handle",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
 			"id": "core/registration/block%3Acreate%3Apackage_frogport",
 			"owner": "P7.1/content_and_acquisition",
 			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
@@ -125498,61 +124904,6 @@
 			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
 			"scope": "create_core",
 			"subject": "block:create:peculiar_bell",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Apink_nixie_tube",
-			"owner": "p7_1/nixie",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:pink_nixie_tube",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Apink_postbox",
-			"owner": "p7_1/postbox",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:pink_postbox",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Apink_sail",
-			"owner": "p7_1/sail",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:pink_sail",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Apink_table_cloth",
-			"owner": "p7_1/table_cloth",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:pink_table_cloth",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Apink_valve_handle",
-			"owner": "p7_1/valve_handle",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:pink_valve_handle",
 			"issueKinds": [
 				"registration_partial"
 			]
@@ -125680,61 +125031,6 @@
 		},
 		{
 			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Apurple_nixie_tube",
-			"owner": "p7_1/nixie",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:purple_nixie_tube",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Apurple_postbox",
-			"owner": "p7_1/postbox",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:purple_postbox",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Apurple_sail",
-			"owner": "p7_1/sail",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:purple_sail",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Apurple_table_cloth",
-			"owner": "p7_1/table_cloth",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:purple_table_cloth",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Apurple_valve_handle",
-			"owner": "p7_1/valve_handle",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:purple_valve_handle",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
 			"id": "core/registration/block%3Acreate%3Aradial_chassis",
 			"owner": "P7.1/content_and_acquisition",
 			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
@@ -125762,61 +125058,6 @@
 			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
 			"scope": "create_core",
 			"subject": "block:create:raw_zinc_block",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ared_nixie_tube",
-			"owner": "p7_1/nixie",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:red_nixie_tube",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ared_postbox",
-			"owner": "p7_1/postbox",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:red_postbox",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ared_sail",
-			"owner": "p7_1/sail",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:red_sail",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ared_table_cloth",
-			"owner": "p7_1/table_cloth",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:red_table_cloth",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ared_valve_handle",
-			"owner": "p7_1/valve_handle",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:red_valve_handle",
 			"issueKinds": [
 				"registration_partial"
 			]
@@ -126307,55 +125548,11 @@
 		},
 		{
 			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Awhite_nixie_tube",
-			"owner": "p7_1/nixie",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:white_nixie_tube",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Awhite_postbox",
-			"owner": "p7_1/postbox",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:white_postbox",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
 			"id": "core/registration/block%3Acreate%3Awhite_sail",
 			"owner": "P7.1/content_and_acquisition",
 			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
 			"scope": "create_core",
 			"subject": "block:create:white_sail",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Awhite_table_cloth",
-			"owner": "p7_1/table_cloth",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:white_table_cloth",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Awhite_valve_handle",
-			"owner": "p7_1/valve_handle",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:white_valve_handle",
 			"issueKinds": [
 				"registration_partial"
 			]
@@ -126378,61 +125575,6 @@
 			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
 			"scope": "create_core",
 			"subject": "block:create:wooden_bracket",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ayellow_nixie_tube",
-			"owner": "p7_1/nixie",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:yellow_nixie_tube",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ayellow_postbox",
-			"owner": "p7_1/postbox",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:yellow_postbox",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ayellow_sail",
-			"owner": "p7_1/sail",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:yellow_sail",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ayellow_table_cloth",
-			"owner": "p7_1/table_cloth",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:yellow_table_cloth",
-			"issueKinds": [
-				"registration_partial"
-			]
-		},
-		{
-			"classification": "core_implementation_required",
-			"id": "core/registration/block%3Acreate%3Ayellow_valve_handle",
-			"owner": "p7_1/valve_handle",
-			"reason": "Migration registration remains partial; a mapping or definition is not proof of behavioral parity.",
-			"scope": "create_core",
-			"subject": "block:create:yellow_valve_handle",
 			"issueKinds": [
 				"registration_partial"
 			]
@@ -135290,13 +134432,13 @@
 	"summary": {
 		"classifications": {
 			"core_audit_required": 1319,
-			"core_implementation_required": 9410,
+			"core_implementation_required": 9332,
 			"static_verified_pending_platform": 52,
 			"platform_capability_blocked": 22,
 			"external_compat": 601,
 			"equivalent": 2,
 			"not_applicable": 92
 		},
-		"total": 11498
+		"total": 11420
 	}
 }

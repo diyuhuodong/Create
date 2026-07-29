@@ -63,6 +63,12 @@ function recipeUsesVanillaSurvivalIngredients(recipe) {
 	return true;
 }
 
+function runtimeSupportsFluidBlock(runtime, identifier) {
+	if (identifier === "copper_valve_handle")
+		return runtime.includes("isValveHandleBlock");
+	return runtime.includes(`createbedrock:${identifier}`);
+}
+
 async function validateStaticDeliveryState(trackingRoot) {
 	const [matrix, workQueue] = await Promise.all([
 		readJson(resolve(trackingRoot, "data", "migration-matrix.json")),
@@ -114,7 +120,7 @@ export async function validateStage3FluidSourceContract({
 		await stat(resolve(behaviorRoot, block.components["minecraft:loot"]));
 		if (!english.has(`tile.${fullIdentifier}.name`) || !chinese.has(`tile.${fullIdentifier}.name`))
 			throw new Error(`S3-12 fluid block ${identifier} is missing EN/ZH translations`);
-		if (!runtime.includes(fullIdentifier))
+		if (!runtimeSupportsFluidBlock(runtime, identifier))
 			throw new Error(`S3-12 fluid block ${identifier} is not registered by the fluid runtime`);
 	}
 	for (const identifier of S3_12_DIRECT_RECIPE_BLOCKS) {

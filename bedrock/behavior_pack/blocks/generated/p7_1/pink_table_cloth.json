@@ -6,6 +6,26 @@
       "menu_category": {
         "category": "construction",
         "group": "itemGroup.name.misc"
+      },
+      "properties": {
+        "createbedrock:display_count": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "createbedrock:shop": [
+          0,
+          1
+        ]
+      },
+      "traits": {
+        "minecraft:placement_direction": {
+          "enabled_states": [
+            "minecraft:facing_direction"
+          ]
+        }
       }
     },
     "components": {
@@ -66,6 +86,14 @@
           16
         ]
       }
-    }
+    },
+    "permutations": [
+      {
+        "condition": "query.block_state('createbedrock:shop') == 1",
+        "components": {
+          "minecraft:light_emission": 1
+        }
+      }
+    ]
   }
 }

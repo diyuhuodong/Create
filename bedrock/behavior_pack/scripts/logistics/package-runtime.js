@@ -8,6 +8,7 @@ import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-prope
 import { PackageLedger } from "./package-ledger.js";
 import { createPackageEndpoint, routePackage } from "./package-network-state.js";
 import { beginTrainPackageDelivery, beginTrainPackageRetrieval, settleTrainPackageTransfer, trainPackageCargo } from "../trains/train-package-exchange.js";
+import { isPostboxBlock } from "../kernel/functional-color-families.js";
 
 export const FACTORY_GAUGE_BLOCK = "createbedrock:factory_gauge";
 export const PACKAGE_ENTITY = "createbedrock:package";
@@ -28,8 +29,10 @@ let registered = false;
 
 function location(value) { if (![value?.x, value?.y, value?.z].every(Number.isInteger)) throw new TypeError("Package endpoint locations must be integers"); return { x: value.x, y: value.y, z: value.z }; }
 function endpointId(kind, dimensionId, at) { return `${kind}:${dimensionId}:${at.x}:${at.y}:${at.z}`; }
-function endpointKind(typeId) {
-	return new Map([[PACKAGER_BLOCK, "packager"], [REPACKAGER_BLOCK, "repackager"], [PACKAGE_FROGPORT_BLOCK, "frogport"], [POSTBOX_BLOCK, "postbox"], [PACKAGER_LINK_BLOCK, "packager_link"], [FACTORY_GAUGE_BLOCK, "factory_gauge"]]).get(typeId);
+export function packageEndpointKindForBlock(typeId) {
+	if (isPostboxBlock(typeId))
+		return "postbox";
+	return new Map([[PACKAGER_BLOCK, "packager"], [REPACKAGER_BLOCK, "repackager"], [PACKAGE_FROGPORT_BLOCK, "frogport"], [PACKAGER_LINK_BLOCK, "packager_link"], [FACTORY_GAUGE_BLOCK, "factory_gauge"]]).get(typeId);
 }
 function records() {
 	const snapshot = ledger.snapshot();
@@ -59,7 +62,7 @@ function spawnProjection(packageRecord, endpoint) {
 	} catch {}
 }
 function addEndpoint(block) {
-	const kind = endpointKind(block.typeId); if (!kind) return false;
+	const kind = packageEndpointKindForBlock(block.typeId); if (!kind) return false;
 	const at = location(block.location); const id = endpointId(kind, block.dimension.id, at);
 	endpoints.set(id, createPackageEndpoint({ address: "", connected: true, dimensionId: block.dimension.id, enabled: true, id, kind, location: at }));
 	persist(); return true;
@@ -203,7 +206,7 @@ export function registerPackages() {
 	if (registered) return false; registered = true;
 	world.afterEvents.playerPlaceBlock.subscribe(event => { try { addEndpoint(event.block); } catch {} });
 	world.afterEvents.playerBreakBlock.subscribe(event => { for (const [id, endpoint] of endpoints) if (endpoint.dimensionId === event.dimension.id && endpoint.location.x === event.block.location.x && endpoint.location.y === event.block.location.y && endpoint.location.z === event.block.location.z) { endpoints.delete(id); persist(); } });
-	world.afterEvents.playerInteractWithBlock.subscribe(event => { const endpoint = endpoints.get(endpointId(endpointKind(event.block?.typeId), event.block?.dimension?.id, event.block?.location ?? {})); if (!endpoint) return; if (event.player.isSneaking) { configureEndpoint(endpoint, event.player); return; } if (endpoint.kind === "packager" || endpoint.kind === "repackager") { if (!pack(event.player, endpoint)) unpack(event.player, endpoint); } });
+	world.afterEvents.playerInteractWithBlock.subscribe(event => { const endpoint = endpoints.get(endpointId(packageEndpointKindForBlock(event.block?.typeId), event.block?.dimension?.id, event.block?.location ?? {})); if (!endpoint) return; if (event.player.isSneaking) { configureEndpoint(endpoint, event.player); return; } if (endpoint.kind === "packager" || endpoint.kind === "repackager") { if (!pack(event.player, endpoint)) unpack(event.player, endpoint); } });
 	registerTickHandler(tick); system.run(restore); return true;
 }
 export function getPackageDiagnostics() { return { endpoints: endpoints.size, packages: ledger.snapshot().records.length, storage: store.diagnostics() }; }

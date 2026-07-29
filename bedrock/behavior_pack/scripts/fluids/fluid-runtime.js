@@ -18,8 +18,8 @@ import { configureFluidRun, FLUID_FACING_OFFSETS, fluidDeviceId, fluidDeviceLoca
 import { fluidFromWorldSource, VanillaWorldFluidPort, worldSourceForFluid } from "./world-fluid-port.js";
 import { fluidFillLevel, fluidVisualKind, tankSegmentForNeighbors } from "./fluid-tank-visuals.js";
 import { blazeHeatAt } from "../materials/blaze-burner-runtime.js";
+import { isValveHandleBlock } from "../kernel/functional-color-families.js";
 
-const COPPER_VALVE_HANDLE_BLOCK = "createbedrock:copper_valve_handle";
 const BASIN_BLOCK = "createbedrock:basin";
 const CREATIVE_FLUID_TANK_BLOCK = "createbedrock:creative_fluid_tank";
 const ENCASED_FLUID_PIPE_BLOCK = "createbedrock:encased_fluid_pipe";
@@ -946,13 +946,13 @@ export function registerFluids(getKineticWorld) {
 				});
 				return;
 			}
-			if (event.block.typeId === COPPER_VALVE_HANDLE_BLOCK && !event.itemStack) {
+			if (isValveHandleBlock(event.block.typeId) && !event.itemStack) {
 				event.cancel = true;
 				const dimensionId = event.block.dimension.id;
 				const location = { ...event.block.location };
 				system.run(() => {
 					const block = world.getDimension(dimensionId).getBlock(location);
-					if (block?.typeId === COPPER_VALVE_HANDLE_BLOCK)
+					if (isValveHandleBlock(block?.typeId))
 						toggleAdjacentValve(block);
 				});
 				return;

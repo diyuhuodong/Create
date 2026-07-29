@@ -10,6 +10,8 @@ const CONTENT_CATALOG_PATH = "data/p7-1-content-families.json";
 const FALLBACK_BLOCK_TEXTURE = "andesite_casing";
 const FALLBACK_ITEM_TEXTURE = "cardboard";
 const FUNCTIONAL_FAMILIES = new Set(["nixie", "postbox", "sail", "table_cloth", "valve_handle", "vertical_gearbox"]);
+const P8_1_FUNCTIONAL_COLOR_FAMILIES = new Set(["nixie", "postbox", "sail", "table_cloth", "valve_handle"]);
+const DYE_COLOR_PREFIX = /^(black|blue|brown|cyan|gray|green|light_blue|light_gray|lime|magenta|orange|pink|purple|red|white|yellow)_/;
 
 function identifierFromJava(javaIdentifier) {
 	return javaIdentifier.replace(/^create:/, "createbedrock:");
@@ -91,6 +93,13 @@ function materialInstances(texture, renderMethod) {
 	};
 }
 
+function signalPermutations(property) {
+	return Array.from({ length: 16 }, (_, signal) => ({
+		condition: `query.block_state('${property}') == ${signal}`,
+		components: { "minecraft:light_emission": signal }
+	}));
+}
+
 function blockDefinition(entry) {
 	const family = entry.family;
 	const components = {
@@ -114,6 +123,25 @@ function blockDefinition(entry) {
 		menu_category: { category: "construction", group: "itemGroup.name.misc" }
 	};
 	const permutations = [];
+	if (family === "nixie") {
+		description.properties = { "createbedrock:display_signal": Array.from({ length: 16 }, (_, value) => value) };
+		description.traits = { "minecraft:placement_direction": { enabled_states: ["minecraft:facing_direction"] } };
+		components["minecraft:redstone_conductivity"] = { redstone_conductor: true };
+		components["minecraft:redstone_consumer"] = { min_power: 0, propagates_power: false };
+		components["createbedrock:redstone_input"] = {};
+		permutations.push(...signalPermutations("createbedrock:display_signal"));
+	}
+	if (family === "table_cloth") {
+		description.properties = {
+			"createbedrock:display_count": [0, 1, 2, 3, 4],
+			"createbedrock:shop": [0, 1]
+		};
+		description.traits = { "minecraft:placement_direction": { enabled_states: ["minecraft:facing_direction"] } };
+		permutations.push({
+			condition: "query.block_state('createbedrock:shop') == 1",
+			components: { "minecraft:light_emission": 1 }
+		});
+	}
 	if (["slab", "stairs"].includes(family)) {
 		description.traits = { "minecraft:placement_position": { enabled_states: ["minecraft:vertical_half"] } };
 		permutations.push({
@@ -397,14 +425,15 @@ async function updateLanguage(file, entries) {
 
 function ledgerOverride(entry) {
 	const functional = FUNCTIONAL_FAMILIES.has(entry.family);
+	const p81FunctionalColor = P8_1_FUNCTIONAL_COLOR_FAMILIES.has(entry.family) && DYE_COLOR_PREFIX.test(entry.identifier);
 	return {
-		acquisition: "partial",
-		behavior: functional ? "partial" : "not_required",
+		acquisition: p81FunctionalColor ? "verified" : "partial",
+		behavior: p81FunctionalColor ? "verified" : functional ? "partial" : "not_required",
 		family: `p7_1/${entry.family}`,
 		mapping: { relation: "one_to_one", targets: [`createbedrock:${entry.identifier}`] },
 		resources: entry.texture.verified ? "verified" : "partial",
 		sourceKey: entry.sourceKey,
-		status: functional || !entry.texture.verified ? "partial" : "implemented"
+		status: p81FunctionalColor || (!functional && entry.texture.verified) ? "implemented" : "partial"
 	};
 }
 

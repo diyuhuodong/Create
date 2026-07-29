@@ -102931,8 +102931,8 @@
 			"sourceKey": "block:create:birch_window_pane"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/nixie",
 			"mapping": {
 				"relation": "one_to_one",
@@ -102941,7 +102941,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:black_nixie_tube"
 			],
@@ -102951,8 +102951,8 @@
 			"sourceKey": "block:create:black_nixie_tube"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/postbox",
 			"mapping": {
 				"relation": "one_to_one",
@@ -102961,7 +102961,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:black_postbox"
 			],
@@ -102971,8 +102971,8 @@
 			"sourceKey": "block:create:black_postbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/sail",
 			"mapping": {
 				"relation": "one_to_one",
@@ -102981,7 +102981,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:black_sail"
 			],
@@ -103011,8 +103011,8 @@
 			"sourceKey": "block:create:black_seat"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/table_cloth",
 			"mapping": {
 				"relation": "one_to_one",
@@ -103021,7 +103021,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:black_table_cloth"
 			],
@@ -103051,8 +103051,8 @@
 			"sourceKey": "block:create:black_toolbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/valve_handle",
 			"mapping": {
 				"relation": "one_to_one",
@@ -103061,7 +103061,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:black_valve_handle"
 			],
@@ -103095,8 +103095,8 @@
 			"sourceKey": "block:create:blaze_burner"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/nixie",
 			"mapping": {
 				"relation": "one_to_one",
@@ -103105,7 +103105,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:blue_nixie_tube"
 			],
@@ -103115,8 +103115,8 @@
 			"sourceKey": "block:create:blue_nixie_tube"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/postbox",
 			"mapping": {
 				"relation": "one_to_one",
@@ -103125,7 +103125,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:blue_postbox"
 			],
@@ -103135,8 +103135,8 @@
 			"sourceKey": "block:create:blue_postbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/sail",
 			"mapping": {
 				"relation": "one_to_one",
@@ -103145,7 +103145,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:blue_sail"
 			],
@@ -103175,8 +103175,8 @@
 			"sourceKey": "block:create:blue_seat"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/table_cloth",
 			"mapping": {
 				"relation": "one_to_one",
@@ -103185,7 +103185,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:blue_table_cloth"
 			],
@@ -103215,8 +103215,8 @@
 			"sourceKey": "block:create:blue_toolbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/valve_handle",
 			"mapping": {
 				"relation": "one_to_one",
@@ -103225,7 +103225,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:blue_valve_handle"
 			],
@@ -103567,8 +103567,8 @@
 			"sourceKey": "block:create:brass_tunnel"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/nixie",
 			"mapping": {
 				"relation": "one_to_one",
@@ -103577,7 +103577,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:brown_nixie_tube"
 			],
@@ -103587,8 +103587,8 @@
 			"sourceKey": "block:create:brown_nixie_tube"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/postbox",
 			"mapping": {
 				"relation": "one_to_one",
@@ -103597,7 +103597,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:brown_postbox"
 			],
@@ -103607,8 +103607,8 @@
 			"sourceKey": "block:create:brown_postbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/sail",
 			"mapping": {
 				"relation": "one_to_one",
@@ -103617,7 +103617,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:brown_sail"
 			],
@@ -103647,8 +103647,8 @@
 			"sourceKey": "block:create:brown_seat"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/table_cloth",
 			"mapping": {
 				"relation": "one_to_one",
@@ -103657,7 +103657,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:brown_table_cloth"
 			],
@@ -103687,8 +103687,8 @@
 			"sourceKey": "block:create:brown_toolbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/valve_handle",
 			"mapping": {
 				"relation": "one_to_one",
@@ -103697,7 +103697,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:brown_valve_handle"
 			],
@@ -106943,8 +106943,8 @@
 			"sourceKey": "block:create:cut_veridium_wall"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/nixie",
 			"mapping": {
 				"relation": "one_to_one",
@@ -106953,7 +106953,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:cyan_nixie_tube"
 			],
@@ -106963,8 +106963,8 @@
 			"sourceKey": "block:create:cyan_nixie_tube"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/postbox",
 			"mapping": {
 				"relation": "one_to_one",
@@ -106973,7 +106973,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:cyan_postbox"
 			],
@@ -106983,8 +106983,8 @@
 			"sourceKey": "block:create:cyan_postbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/sail",
 			"mapping": {
 				"relation": "one_to_one",
@@ -106993,7 +106993,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:cyan_sail"
 			],
@@ -107023,8 +107023,8 @@
 			"sourceKey": "block:create:cyan_seat"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/table_cloth",
 			"mapping": {
 				"relation": "one_to_one",
@@ -107033,7 +107033,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:cyan_table_cloth"
 			],
@@ -107063,8 +107063,8 @@
 			"sourceKey": "block:create:cyan_toolbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/valve_handle",
 			"mapping": {
 				"relation": "one_to_one",
@@ -107073,7 +107073,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:cyan_valve_handle"
 			],
@@ -107963,8 +107963,8 @@
 			"sourceKey": "block:create:granite_pillar"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/nixie",
 			"mapping": {
 				"relation": "one_to_one",
@@ -107973,7 +107973,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:gray_nixie_tube"
 			],
@@ -107983,8 +107983,8 @@
 			"sourceKey": "block:create:gray_nixie_tube"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/postbox",
 			"mapping": {
 				"relation": "one_to_one",
@@ -107993,7 +107993,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:gray_postbox"
 			],
@@ -108003,8 +108003,8 @@
 			"sourceKey": "block:create:gray_postbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/sail",
 			"mapping": {
 				"relation": "one_to_one",
@@ -108013,7 +108013,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:gray_sail"
 			],
@@ -108043,8 +108043,8 @@
 			"sourceKey": "block:create:gray_seat"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/table_cloth",
 			"mapping": {
 				"relation": "one_to_one",
@@ -108053,7 +108053,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:gray_table_cloth"
 			],
@@ -108083,8 +108083,8 @@
 			"sourceKey": "block:create:gray_toolbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/valve_handle",
 			"mapping": {
 				"relation": "one_to_one",
@@ -108093,7 +108093,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:gray_valve_handle"
 			],
@@ -108103,8 +108103,8 @@
 			"sourceKey": "block:create:gray_valve_handle"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/nixie",
 			"mapping": {
 				"relation": "one_to_one",
@@ -108113,7 +108113,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:green_nixie_tube"
 			],
@@ -108123,8 +108123,8 @@
 			"sourceKey": "block:create:green_nixie_tube"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/postbox",
 			"mapping": {
 				"relation": "one_to_one",
@@ -108133,7 +108133,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:green_postbox"
 			],
@@ -108143,8 +108143,8 @@
 			"sourceKey": "block:create:green_postbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/sail",
 			"mapping": {
 				"relation": "one_to_one",
@@ -108153,7 +108153,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:green_sail"
 			],
@@ -108183,8 +108183,8 @@
 			"sourceKey": "block:create:green_seat"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/table_cloth",
 			"mapping": {
 				"relation": "one_to_one",
@@ -108193,7 +108193,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:green_table_cloth"
 			],
@@ -108223,8 +108223,8 @@
 			"sourceKey": "block:create:green_toolbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/valve_handle",
 			"mapping": {
 				"relation": "one_to_one",
@@ -108233,7 +108233,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:green_valve_handle"
 			],
@@ -108927,8 +108927,8 @@
 			"sourceKey": "block:create:lectern_controller"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/nixie",
 			"mapping": {
 				"relation": "one_to_one",
@@ -108937,7 +108937,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:light_blue_nixie_tube"
 			],
@@ -108947,8 +108947,8 @@
 			"sourceKey": "block:create:light_blue_nixie_tube"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/postbox",
 			"mapping": {
 				"relation": "one_to_one",
@@ -108957,7 +108957,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:light_blue_postbox"
 			],
@@ -108967,8 +108967,8 @@
 			"sourceKey": "block:create:light_blue_postbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/sail",
 			"mapping": {
 				"relation": "one_to_one",
@@ -108977,7 +108977,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:light_blue_sail"
 			],
@@ -109007,8 +109007,8 @@
 			"sourceKey": "block:create:light_blue_seat"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/table_cloth",
 			"mapping": {
 				"relation": "one_to_one",
@@ -109017,7 +109017,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:light_blue_table_cloth"
 			],
@@ -109047,8 +109047,8 @@
 			"sourceKey": "block:create:light_blue_toolbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/valve_handle",
 			"mapping": {
 				"relation": "one_to_one",
@@ -109057,7 +109057,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:light_blue_valve_handle"
 			],
@@ -109067,8 +109067,8 @@
 			"sourceKey": "block:create:light_blue_valve_handle"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/nixie",
 			"mapping": {
 				"relation": "one_to_one",
@@ -109077,7 +109077,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:light_gray_nixie_tube"
 			],
@@ -109087,8 +109087,8 @@
 			"sourceKey": "block:create:light_gray_nixie_tube"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/postbox",
 			"mapping": {
 				"relation": "one_to_one",
@@ -109097,7 +109097,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:light_gray_postbox"
 			],
@@ -109107,8 +109107,8 @@
 			"sourceKey": "block:create:light_gray_postbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/sail",
 			"mapping": {
 				"relation": "one_to_one",
@@ -109117,7 +109117,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:light_gray_sail"
 			],
@@ -109147,8 +109147,8 @@
 			"sourceKey": "block:create:light_gray_seat"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/table_cloth",
 			"mapping": {
 				"relation": "one_to_one",
@@ -109157,7 +109157,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:light_gray_table_cloth"
 			],
@@ -109187,8 +109187,8 @@
 			"sourceKey": "block:create:light_gray_toolbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/valve_handle",
 			"mapping": {
 				"relation": "one_to_one",
@@ -109197,7 +109197,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:light_gray_valve_handle"
 			],
@@ -109207,8 +109207,8 @@
 			"sourceKey": "block:create:light_gray_valve_handle"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/nixie",
 			"mapping": {
 				"relation": "one_to_one",
@@ -109217,7 +109217,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:lime_nixie_tube"
 			],
@@ -109227,8 +109227,8 @@
 			"sourceKey": "block:create:lime_nixie_tube"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/postbox",
 			"mapping": {
 				"relation": "one_to_one",
@@ -109237,7 +109237,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:lime_postbox"
 			],
@@ -109247,8 +109247,8 @@
 			"sourceKey": "block:create:lime_postbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/sail",
 			"mapping": {
 				"relation": "one_to_one",
@@ -109257,7 +109257,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:lime_sail"
 			],
@@ -109287,8 +109287,8 @@
 			"sourceKey": "block:create:lime_seat"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/table_cloth",
 			"mapping": {
 				"relation": "one_to_one",
@@ -109297,7 +109297,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:lime_table_cloth"
 			],
@@ -109327,8 +109327,8 @@
 			"sourceKey": "block:create:lime_toolbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/valve_handle",
 			"mapping": {
 				"relation": "one_to_one",
@@ -109337,7 +109337,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:lime_valve_handle"
 			],
@@ -109435,8 +109435,8 @@
 			"sourceKey": "block:create:lit_blaze_burner"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/nixie",
 			"mapping": {
 				"relation": "one_to_one",
@@ -109445,7 +109445,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:magenta_nixie_tube"
 			],
@@ -109455,8 +109455,8 @@
 			"sourceKey": "block:create:magenta_nixie_tube"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/postbox",
 			"mapping": {
 				"relation": "one_to_one",
@@ -109465,7 +109465,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:magenta_postbox"
 			],
@@ -109475,8 +109475,8 @@
 			"sourceKey": "block:create:magenta_postbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/sail",
 			"mapping": {
 				"relation": "one_to_one",
@@ -109485,7 +109485,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:magenta_sail"
 			],
@@ -109515,8 +109515,8 @@
 			"sourceKey": "block:create:magenta_seat"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/table_cloth",
 			"mapping": {
 				"relation": "one_to_one",
@@ -109525,7 +109525,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:magenta_table_cloth"
 			],
@@ -109555,8 +109555,8 @@
 			"sourceKey": "block:create:magenta_toolbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/valve_handle",
 			"mapping": {
 				"relation": "one_to_one",
@@ -109565,7 +109565,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:magenta_valve_handle"
 			],
@@ -110223,8 +110223,8 @@
 			"sourceKey": "block:create:ochrum_pillar"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/postbox",
 			"mapping": {
 				"relation": "one_to_one",
@@ -110233,7 +110233,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:orange_postbox"
 			],
@@ -110243,8 +110243,8 @@
 			"sourceKey": "block:create:orange_postbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/sail",
 			"mapping": {
 				"relation": "one_to_one",
@@ -110253,7 +110253,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:orange_sail"
 			],
@@ -110283,8 +110283,8 @@
 			"sourceKey": "block:create:orange_seat"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/table_cloth",
 			"mapping": {
 				"relation": "one_to_one",
@@ -110293,7 +110293,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:orange_table_cloth"
 			],
@@ -110323,8 +110323,8 @@
 			"sourceKey": "block:create:orange_toolbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/valve_handle",
 			"mapping": {
 				"relation": "one_to_one",
@@ -110333,7 +110333,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:orange_valve_handle"
 			],
@@ -110575,8 +110575,8 @@
 			"sourceKey": "block:create:peculiar_bell"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/nixie",
 			"mapping": {
 				"relation": "one_to_one",
@@ -110585,7 +110585,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:pink_nixie_tube"
 			],
@@ -110595,8 +110595,8 @@
 			"sourceKey": "block:create:pink_nixie_tube"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/postbox",
 			"mapping": {
 				"relation": "one_to_one",
@@ -110605,7 +110605,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:pink_postbox"
 			],
@@ -110615,8 +110615,8 @@
 			"sourceKey": "block:create:pink_postbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/sail",
 			"mapping": {
 				"relation": "one_to_one",
@@ -110625,7 +110625,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:pink_sail"
 			],
@@ -110655,8 +110655,8 @@
 			"sourceKey": "block:create:pink_seat"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/table_cloth",
 			"mapping": {
 				"relation": "one_to_one",
@@ -110665,7 +110665,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:pink_table_cloth"
 			],
@@ -110695,8 +110695,8 @@
 			"sourceKey": "block:create:pink_toolbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/valve_handle",
 			"mapping": {
 				"relation": "one_to_one",
@@ -110705,7 +110705,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:pink_valve_handle"
 			],
@@ -112099,8 +112099,8 @@
 			"sourceKey": "block:create:pulse_timer"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/nixie",
 			"mapping": {
 				"relation": "one_to_one",
@@ -112109,7 +112109,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:purple_nixie_tube"
 			],
@@ -112119,8 +112119,8 @@
 			"sourceKey": "block:create:purple_nixie_tube"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/postbox",
 			"mapping": {
 				"relation": "one_to_one",
@@ -112129,7 +112129,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:purple_postbox"
 			],
@@ -112139,8 +112139,8 @@
 			"sourceKey": "block:create:purple_postbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/sail",
 			"mapping": {
 				"relation": "one_to_one",
@@ -112149,7 +112149,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:purple_sail"
 			],
@@ -112179,8 +112179,8 @@
 			"sourceKey": "block:create:purple_seat"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/table_cloth",
 			"mapping": {
 				"relation": "one_to_one",
@@ -112189,7 +112189,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:purple_table_cloth"
 			],
@@ -112219,8 +112219,8 @@
 			"sourceKey": "block:create:purple_toolbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/valve_handle",
 			"mapping": {
 				"relation": "one_to_one",
@@ -112229,7 +112229,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:purple_valve_handle"
 			],
@@ -112311,8 +112311,8 @@
 			"sourceKey": "block:create:raw_zinc_block"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/nixie",
 			"mapping": {
 				"relation": "one_to_one",
@@ -112321,7 +112321,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:red_nixie_tube"
 			],
@@ -112331,8 +112331,8 @@
 			"sourceKey": "block:create:red_nixie_tube"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/postbox",
 			"mapping": {
 				"relation": "one_to_one",
@@ -112341,7 +112341,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:red_postbox"
 			],
@@ -112351,8 +112351,8 @@
 			"sourceKey": "block:create:red_postbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/sail",
 			"mapping": {
 				"relation": "one_to_one",
@@ -112361,7 +112361,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:red_sail"
 			],
@@ -112391,8 +112391,8 @@
 			"sourceKey": "block:create:red_seat"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/table_cloth",
 			"mapping": {
 				"relation": "one_to_one",
@@ -112401,7 +112401,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:red_table_cloth"
 			],
@@ -112431,8 +112431,8 @@
 			"sourceKey": "block:create:red_toolbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/valve_handle",
 			"mapping": {
 				"relation": "one_to_one",
@@ -112441,7 +112441,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:red_valve_handle"
 			],
@@ -115567,8 +115567,8 @@
 			"sourceKey": "block:create:weighted_ejector"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/nixie",
 			"mapping": {
 				"relation": "one_to_one",
@@ -115577,7 +115577,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:white_nixie_tube"
 			],
@@ -115587,8 +115587,8 @@
 			"sourceKey": "block:create:white_nixie_tube"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/postbox",
 			"mapping": {
 				"relation": "one_to_one",
@@ -115597,7 +115597,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:white_postbox"
 			],
@@ -115651,8 +115651,8 @@
 			"sourceKey": "block:create:white_seat"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/table_cloth",
 			"mapping": {
 				"relation": "one_to_one",
@@ -115661,7 +115661,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:white_table_cloth"
 			],
@@ -115691,8 +115691,8 @@
 			"sourceKey": "block:create:white_toolbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/valve_handle",
 			"mapping": {
 				"relation": "one_to_one",
@@ -115701,7 +115701,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:white_valve_handle"
 			],
@@ -115759,8 +115759,8 @@
 			"sourceKey": "block:create:wooden_bracket"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/nixie",
 			"mapping": {
 				"relation": "one_to_one",
@@ -115769,7 +115769,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:yellow_nixie_tube"
 			],
@@ -115779,8 +115779,8 @@
 			"sourceKey": "block:create:yellow_nixie_tube"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/postbox",
 			"mapping": {
 				"relation": "one_to_one",
@@ -115789,7 +115789,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:yellow_postbox"
 			],
@@ -115799,8 +115799,8 @@
 			"sourceKey": "block:create:yellow_postbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/sail",
 			"mapping": {
 				"relation": "one_to_one",
@@ -115809,7 +115809,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:yellow_sail"
 			],
@@ -115839,8 +115839,8 @@
 			"sourceKey": "block:create:yellow_seat"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/table_cloth",
 			"mapping": {
 				"relation": "one_to_one",
@@ -115849,7 +115849,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:yellow_table_cloth"
 			],
@@ -115879,8 +115879,8 @@
 			"sourceKey": "block:create:yellow_toolbox"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
+			"acquisition": "verified",
+			"behavior": "verified",
 			"family": "p7_1/valve_handle",
 			"mapping": {
 				"relation": "one_to_one",
@@ -115889,7 +115889,7 @@
 				]
 			},
 			"resources": "verified",
-			"status": "partial",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:yellow_valve_handle"
 			],

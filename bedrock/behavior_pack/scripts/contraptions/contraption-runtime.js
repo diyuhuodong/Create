@@ -569,16 +569,17 @@ function processBearing(bearingKey) {
 
 function registerRedstoneMovingDataAdapters() {
 	for (const device of REDSTONE_BLOCK_DEVICES) {
-		registerMovingBlockDataContributor(device.blockId, "redstone", {
-			capture: captureRedstoneDeviceMovingData,
-			detach: detachRedstoneDeviceMovingData,
-			restore: restoreRedstoneDeviceMovingData,
-			schemaVersion: 1,
-			validate(state) {
-				if (!state || typeof state !== "object" || !state.state)
-					throw new TypeError("Redstone moving data must contain durable device state");
-			}
-		});
+		for (const typeId of [device.blockId, ...(device.variantBlockIds ?? [])])
+			registerMovingBlockDataContributor(typeId, "redstone", {
+				capture: captureRedstoneDeviceMovingData,
+				detach: detachRedstoneDeviceMovingData,
+				restore: restoreRedstoneDeviceMovingData,
+				schemaVersion: 1,
+				validate(state) {
+					if (!state || typeof state !== "object" || !state.state)
+						throw new TypeError("Redstone moving data must contain durable device state");
+				}
+			});
 	}
 }
 

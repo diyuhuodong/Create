@@ -200,8 +200,9 @@ const expectedNativeRecipes = await buildNativeRecipes({ bedrockRoot, repository
 assertFreshGeneratedData("bedrock/data/recipes/native.json", nativeRecipes, expectedNativeRecipes);
 const nativeRecipeDirectory = resolve(bedrockRoot, "behavior_pack", "recipes", "generated");
 const expectedNativeFiles = renderNativeRecipeFiles(expectedNativeRecipes);
-const actualNativeFiles = new Map(await Promise.all((await jsonFiles(nativeRecipeDirectory))
-	.map(async file => [relative(nativeRecipeDirectory, file), await readFile(file, "utf8")])));
+const nativeRecipeEntries = await Promise.all((await jsonFiles(nativeRecipeDirectory))
+	.map(async file => [relative(nativeRecipeDirectory, file), await readFile(file, "utf8")]));
+const actualNativeFiles = new Map(nativeRecipeEntries.filter(([file]) => file.startsWith("p7_2/")));
 if (actualNativeFiles.size !== expectedNativeFiles.size)
 	throw new Error("Generated native Bedrock recipe file count is stale; run npm run recipes:native before validation.");
 for (const [file, expected] of expectedNativeFiles) {

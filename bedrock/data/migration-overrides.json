@@ -170,8 +170,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/nixie",
       "mapping": {
         "relation": "one_to_one",
@@ -181,11 +181,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:black_nixie_tube",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/postbox",
       "mapping": {
         "relation": "one_to_one",
@@ -195,11 +195,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:black_postbox",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/sail",
       "mapping": {
         "relation": "one_to_one",
@@ -209,7 +209,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:black_sail",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -226,8 +226,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/table_cloth",
       "mapping": {
         "relation": "one_to_one",
@@ -237,7 +237,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:black_table_cloth",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "verified",
@@ -254,8 +254,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/valve_handle",
       "mapping": {
         "relation": "one_to_one",
@@ -265,11 +265,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:black_valve_handle",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/nixie",
       "mapping": {
         "relation": "one_to_one",
@@ -279,11 +279,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:blue_nixie_tube",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/postbox",
       "mapping": {
         "relation": "one_to_one",
@@ -293,11 +293,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:blue_postbox",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/sail",
       "mapping": {
         "relation": "one_to_one",
@@ -307,7 +307,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:blue_sail",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -324,8 +324,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/table_cloth",
       "mapping": {
         "relation": "one_to_one",
@@ -335,7 +335,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:blue_table_cloth",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "verified",
@@ -352,8 +352,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/valve_handle",
       "mapping": {
         "relation": "one_to_one",
@@ -363,7 +363,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:blue_valve_handle",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -380,8 +380,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/nixie",
       "mapping": {
         "relation": "one_to_one",
@@ -391,11 +391,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:brown_nixie_tube",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/postbox",
       "mapping": {
         "relation": "one_to_one",
@@ -405,11 +405,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:brown_postbox",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/sail",
       "mapping": {
         "relation": "one_to_one",
@@ -419,7 +419,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:brown_sail",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -436,8 +436,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/table_cloth",
       "mapping": {
         "relation": "one_to_one",
@@ -447,7 +447,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:brown_table_cloth",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "verified",
@@ -464,8 +464,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/valve_handle",
       "mapping": {
         "relation": "one_to_one",
@@ -475,7 +475,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:brown_valve_handle",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -2256,8 +2256,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/nixie",
       "mapping": {
         "relation": "one_to_one",
@@ -2267,11 +2267,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:cyan_nixie_tube",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/postbox",
       "mapping": {
         "relation": "one_to_one",
@@ -2281,11 +2281,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:cyan_postbox",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/sail",
       "mapping": {
         "relation": "one_to_one",
@@ -2295,7 +2295,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:cyan_sail",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -2312,8 +2312,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/table_cloth",
       "mapping": {
         "relation": "one_to_one",
@@ -2323,7 +2323,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:cyan_table_cloth",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "verified",
@@ -2340,8 +2340,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/valve_handle",
       "mapping": {
         "relation": "one_to_one",
@@ -2351,7 +2351,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:cyan_valve_handle",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -2550,8 +2550,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/nixie",
       "mapping": {
         "relation": "one_to_one",
@@ -2561,11 +2561,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:gray_nixie_tube",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/postbox",
       "mapping": {
         "relation": "one_to_one",
@@ -2575,11 +2575,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:gray_postbox",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/sail",
       "mapping": {
         "relation": "one_to_one",
@@ -2589,7 +2589,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:gray_sail",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -2606,8 +2606,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/table_cloth",
       "mapping": {
         "relation": "one_to_one",
@@ -2617,7 +2617,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:gray_table_cloth",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "verified",
@@ -2634,8 +2634,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/valve_handle",
       "mapping": {
         "relation": "one_to_one",
@@ -2645,11 +2645,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:gray_valve_handle",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/nixie",
       "mapping": {
         "relation": "one_to_one",
@@ -2659,11 +2659,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:green_nixie_tube",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/postbox",
       "mapping": {
         "relation": "one_to_one",
@@ -2673,11 +2673,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:green_postbox",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/sail",
       "mapping": {
         "relation": "one_to_one",
@@ -2687,7 +2687,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:green_sail",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -2704,8 +2704,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/table_cloth",
       "mapping": {
         "relation": "one_to_one",
@@ -2715,7 +2715,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:green_table_cloth",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "verified",
@@ -2732,8 +2732,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/valve_handle",
       "mapping": {
         "relation": "one_to_one",
@@ -2743,7 +2743,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:green_valve_handle",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -3026,8 +3026,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/nixie",
       "mapping": {
         "relation": "one_to_one",
@@ -3037,11 +3037,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:light_blue_nixie_tube",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/postbox",
       "mapping": {
         "relation": "one_to_one",
@@ -3051,11 +3051,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:light_blue_postbox",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/sail",
       "mapping": {
         "relation": "one_to_one",
@@ -3065,7 +3065,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:light_blue_sail",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -3082,8 +3082,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/table_cloth",
       "mapping": {
         "relation": "one_to_one",
@@ -3093,7 +3093,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:light_blue_table_cloth",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "verified",
@@ -3110,8 +3110,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/valve_handle",
       "mapping": {
         "relation": "one_to_one",
@@ -3121,11 +3121,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:light_blue_valve_handle",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/nixie",
       "mapping": {
         "relation": "one_to_one",
@@ -3135,11 +3135,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:light_gray_nixie_tube",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/postbox",
       "mapping": {
         "relation": "one_to_one",
@@ -3149,11 +3149,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:light_gray_postbox",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/sail",
       "mapping": {
         "relation": "one_to_one",
@@ -3163,7 +3163,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:light_gray_sail",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -3180,8 +3180,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/table_cloth",
       "mapping": {
         "relation": "one_to_one",
@@ -3191,7 +3191,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:light_gray_table_cloth",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "verified",
@@ -3208,8 +3208,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/valve_handle",
       "mapping": {
         "relation": "one_to_one",
@@ -3219,11 +3219,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:light_gray_valve_handle",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/nixie",
       "mapping": {
         "relation": "one_to_one",
@@ -3233,11 +3233,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:lime_nixie_tube",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/postbox",
       "mapping": {
         "relation": "one_to_one",
@@ -3247,11 +3247,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:lime_postbox",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/sail",
       "mapping": {
         "relation": "one_to_one",
@@ -3261,7 +3261,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:lime_sail",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -3278,8 +3278,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/table_cloth",
       "mapping": {
         "relation": "one_to_one",
@@ -3289,7 +3289,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:lime_table_cloth",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "verified",
@@ -3306,8 +3306,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/valve_handle",
       "mapping": {
         "relation": "one_to_one",
@@ -3317,7 +3317,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:lime_valve_handle",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -3348,8 +3348,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/nixie",
       "mapping": {
         "relation": "one_to_one",
@@ -3359,11 +3359,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:magenta_nixie_tube",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/postbox",
       "mapping": {
         "relation": "one_to_one",
@@ -3373,11 +3373,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:magenta_postbox",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/sail",
       "mapping": {
         "relation": "one_to_one",
@@ -3387,7 +3387,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:magenta_sail",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -3404,8 +3404,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/table_cloth",
       "mapping": {
         "relation": "one_to_one",
@@ -3415,7 +3415,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:magenta_table_cloth",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "verified",
@@ -3432,8 +3432,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/valve_handle",
       "mapping": {
         "relation": "one_to_one",
@@ -3443,7 +3443,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:magenta_valve_handle",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -3544,8 +3544,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/postbox",
       "mapping": {
         "relation": "one_to_one",
@@ -3555,11 +3555,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:orange_postbox",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/sail",
       "mapping": {
         "relation": "one_to_one",
@@ -3569,7 +3569,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:orange_sail",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -3586,8 +3586,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/table_cloth",
       "mapping": {
         "relation": "one_to_one",
@@ -3597,7 +3597,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:orange_table_cloth",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "verified",
@@ -3614,8 +3614,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/valve_handle",
       "mapping": {
         "relation": "one_to_one",
@@ -3625,7 +3625,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:orange_valve_handle",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -3740,8 +3740,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/nixie",
       "mapping": {
         "relation": "one_to_one",
@@ -3751,11 +3751,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:pink_nixie_tube",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/postbox",
       "mapping": {
         "relation": "one_to_one",
@@ -3765,11 +3765,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:pink_postbox",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/sail",
       "mapping": {
         "relation": "one_to_one",
@@ -3779,7 +3779,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:pink_sail",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -3796,8 +3796,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/table_cloth",
       "mapping": {
         "relation": "one_to_one",
@@ -3807,7 +3807,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:pink_table_cloth",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "verified",
@@ -3824,8 +3824,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/valve_handle",
       "mapping": {
         "relation": "one_to_one",
@@ -3835,7 +3835,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:pink_valve_handle",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -4622,8 +4622,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/nixie",
       "mapping": {
         "relation": "one_to_one",
@@ -4633,11 +4633,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:purple_nixie_tube",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/postbox",
       "mapping": {
         "relation": "one_to_one",
@@ -4647,11 +4647,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:purple_postbox",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/sail",
       "mapping": {
         "relation": "one_to_one",
@@ -4661,7 +4661,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:purple_sail",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -4678,8 +4678,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/table_cloth",
       "mapping": {
         "relation": "one_to_one",
@@ -4689,7 +4689,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:purple_table_cloth",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "verified",
@@ -4706,8 +4706,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/valve_handle",
       "mapping": {
         "relation": "one_to_one",
@@ -4717,11 +4717,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:purple_valve_handle",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/nixie",
       "mapping": {
         "relation": "one_to_one",
@@ -4731,11 +4731,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:red_nixie_tube",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/postbox",
       "mapping": {
         "relation": "one_to_one",
@@ -4745,11 +4745,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:red_postbox",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/sail",
       "mapping": {
         "relation": "one_to_one",
@@ -4759,7 +4759,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:red_sail",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -4776,8 +4776,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/table_cloth",
       "mapping": {
         "relation": "one_to_one",
@@ -4787,7 +4787,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:red_table_cloth",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "verified",
@@ -4804,8 +4804,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/valve_handle",
       "mapping": {
         "relation": "one_to_one",
@@ -4815,7 +4815,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:red_valve_handle",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -6260,8 +6260,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/nixie",
       "mapping": {
         "relation": "one_to_one",
@@ -6271,11 +6271,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:white_nixie_tube",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/postbox",
       "mapping": {
         "relation": "one_to_one",
@@ -6285,7 +6285,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:white_postbox",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -6302,8 +6302,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/table_cloth",
       "mapping": {
         "relation": "one_to_one",
@@ -6313,7 +6313,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:white_table_cloth",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "verified",
@@ -6330,8 +6330,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/valve_handle",
       "mapping": {
         "relation": "one_to_one",
@@ -6341,11 +6341,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:white_valve_handle",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/nixie",
       "mapping": {
         "relation": "one_to_one",
@@ -6355,11 +6355,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:yellow_nixie_tube",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/postbox",
       "mapping": {
         "relation": "one_to_one",
@@ -6369,11 +6369,11 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:yellow_postbox",
-      "status": "partial"
+      "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/sail",
       "mapping": {
         "relation": "one_to_one",
@@ -6383,7 +6383,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:yellow_sail",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "partial",
@@ -6400,8 +6400,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/table_cloth",
       "mapping": {
         "relation": "one_to_one",
@@ -6411,7 +6411,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:yellow_table_cloth",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "acquisition": "verified",
@@ -6428,8 +6428,8 @@
       "status": "implemented"
     },
     {
-      "acquisition": "partial",
-      "behavior": "partial",
+      "acquisition": "verified",
+      "behavior": "verified",
       "family": "p7_1/valve_handle",
       "mapping": {
         "relation": "one_to_one",
@@ -6439,7 +6439,7 @@
       },
       "resources": "verified",
       "sourceKey": "block:create:yellow_valve_handle",
-      "status": "partial"
+      "status": "implemented"
     },
     {
       "sourceKey": "item:create:brass_hand",

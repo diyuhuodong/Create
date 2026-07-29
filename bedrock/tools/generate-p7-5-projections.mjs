@@ -33,17 +33,41 @@ function geometryFor(components) {
 	return !identifier || identifier === "minecraft:geometry.full_block" ? "geometry.createbedrock.contraption_marker" : identifier;
 }
 
+async function blockDefinition(path) {
+	for (const directory of [resolve(root, "behavior_pack", "blocks"), resolve(root, "behavior_pack", "blocks", "generated", "p7_1")]) {
+		try {
+			return JSON.parse(await readFile(resolve(directory, `${path}.json`), "utf8"));
+		} catch (error) {
+			if (error?.code !== "ENOENT")
+				throw error;
+		}
+	}
+	throw new Error(`No Bedrock block definition exists for movable projection ${path}`);
+}
+
+async function existingClientEntityDescription(file) {
+	try {
+		return JSON.parse(await readFile(file, "utf8"))["minecraft:client_entity"]?.description ?? {};
+	} catch (error) {
+		if (error?.code === "ENOENT")
+			return {};
+		throw error;
+	}
+}
+
 await mkdir(behaviorEntities, { recursive: true });
 await mkdir(resourceEntities, { recursive: true });
 const catalog = [];
 for (const blockTypeId of [...MOVABLE_BLOCK_TYPES].sort()) {
 	const path = blockTypeId.split(":")[1];
 	const entityTypeId = defaultProjectionEntityType(blockTypeId);
-	const block = JSON.parse(await readFile(resolve(root, "behavior_pack", "blocks", `${path}.json`), "utf8"));
+	const block = await blockDefinition(path);
 	const components = block?.["minecraft:block"]?.components ?? {};
 	const textureAlias = firstTexture(components);
 	const texture = texturePath(textureAlias) ?? "textures/create_java/block/andesite_casing";
 	const geometry = geometryFor(components);
+	const file = `contraption_part_${path}.json`;
+	const existingDescription = await existingClientEntityDescription(resolve(resourceEntities, file.replace(".json", ".entity.json")));
 	const behavior = {
 		format_version: "1.26.0",
 		"minecraft:entity": {
@@ -61,15 +85,15 @@ for (const blockTypeId of [...MOVABLE_BLOCK_TYPES].sort()) {
 		format_version: "1.10.0",
 		"minecraft:client_entity": {
 			description: {
-				geometry: { default: geometry },
+				...existingDescription,
+				geometry: { ...existingDescription.geometry, default: geometry },
 				identifier: entityTypeId,
-				materials: { default: "entity_alphatest" },
-				render_controllers: ["controller.render.createbedrock.contraption"],
-				textures: { default: texture }
+				materials: { default: "entity_alphatest", ...existingDescription.materials },
+				render_controllers: existingDescription.render_controllers ?? ["controller.render.createbedrock.contraption"],
+				textures: { ...existingDescription.textures, default: texture }
 			}
 		}
 	};
-	const file = `contraption_part_${path}.json`;
 	await writeFile(resolve(behaviorEntities, file), `${JSON.stringify(behavior, null, 2)}\n`);
 	await writeFile(resolve(resourceEntities, file.replace(".json", ".entity.json")), `${JSON.stringify(resource, null, 2)}\n`);
 	catalog.push({ blockTypeId, entityTypeId, geometry, texture, textureAlias: textureAlias ?? null });
