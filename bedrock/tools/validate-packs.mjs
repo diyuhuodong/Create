@@ -192,14 +192,16 @@ const expectedP83SemanticRegistrationConvergence = await buildP83SemanticRegistr
 });
 assertFreshGeneratedData("bedrock/data/p8-3-semantic-registration-convergence.json", p83SemanticRegistrationConvergence, expectedP83SemanticRegistrationConvergence.document);
 assertFreshGeneratedData("bedrock/data/migration-overrides.json", migrationOverrides, expectedP83SemanticRegistrationConvergence.overrides);
-assertFreshGeneratedData("bedrock/data/p8-4-domain-convergence.json", p84DomainConvergence, await buildP84DomainConvergence({ bedrockRoot, domainInventory: expectedDomainInventory, recipeIr, resourceLedger: await readJson(resolve(bedrockRoot, "data", "p7-6-resource-ledger.json")), tagProjections: await readJson(resolve(bedrockRoot, "data", "recipes", "tag-projections.json")) }));
+const expectedP84DomainConvergence = await buildP84DomainConvergence({ bedrockRoot, domainInventory: expectedDomainInventory, recipeIr, resourceLedger: await readJson(resolve(bedrockRoot, "data", "p7-6-resource-ledger.json")), tagProjections: await readJson(resolve(bedrockRoot, "data", "recipes", "tag-projections.json")) });
+assertFreshGeneratedData("bedrock/data/p8-4-domain-convergence.json", p84DomainConvergence, expectedP84DomainConvergence);
 const { ledger: expectedMigrationLedger } = await buildMigrationLedger({
 	bedrockRoot,
 	catalog: expectedJavaRegistrationCatalog,
 	domainInventory: expectedDomainInventory,
 	matrix: migrationMatrix,
 	overrides: migrationOverrides,
-	domainOverrides: migrationDomainOverrides
+	domainOverrides: migrationDomainOverrides,
+	domainConvergence: expectedP84DomainConvergence
 });
 assertFreshGeneratedData("bedrock/data/migration-ledger.json", migrationLedger, expectedMigrationLedger);
 assertFreshGeneratedData("bedrock/data/p7-1-acquisition-ledger.json", p71AcquisitionLedger, await buildP71AcquisitionLedger({ bedrockRoot }));

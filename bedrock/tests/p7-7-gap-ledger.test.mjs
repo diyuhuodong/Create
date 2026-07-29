@@ -37,7 +37,8 @@ test("P7.7 gap ledger records core gaps separately from compatibility and platfo
 	const source = await inputs();
 	const document = buildP77GapLedger(source);
 	const coverage = validateP77GapLedger(document);
-	assert.deepEqual(coverage.classifications, countBy(document.entries, "classification"));
+	for (const [classification, total] of Object.entries(coverage.classifications))
+		assert.equal(total, document.entries.filter(entry => entry.classification === classification).length);
 	assert.equal(coverage.total, document.entries.length);
 	const pendingBehaviors = source.javaBehaviorInventory.entries.filter(entry => entry.status === "audit_pending").length;
 	const incompleteMigration = [
@@ -49,6 +50,8 @@ test("P7.7 gap ledger records core gaps separately from compatibility and platfo
 		.filter(entry => entry.status !== "emittable" && !managedCooking.has(entry.id)).length;
 	assert.equal(document.summary.classifications.core_audit_required, pendingBehaviors);
 	assert.equal(document.summary.classifications.core_implementation_required, incompleteMigration + incompleteNative);
+	assert.equal(document.summary.classifications.not_applicable,
+		source.migrationLedger.domainEntries.filter(entry => entry.status === "not_applicable").length);
 	assert.deepEqual(document.sources.migrationLedger, {
 		registrations: {
 			status: countBy(source.migrationLedger.registrationEntries, "status"),

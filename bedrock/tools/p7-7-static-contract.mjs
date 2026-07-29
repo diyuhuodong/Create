@@ -29,7 +29,7 @@ export async function validateP77StaticContract({
 	root = defaultBedrockRoot,
 	trackingRoot = defaultBedrockRoot
 } = {}) {
-	const [behaviorManifest, resourceManifest, candidate, catalog, ledger, legacy, smokeTest, packageJson, gapLedger, migrationLedger, javaBehaviorInventory, parityEvidence, nativeRecipes, interactions, recipeIr, matrix, resources, cookingParity, cookingParityRuntime, acceptanceWorld, acceptanceWorldRuntime, overrides, domainOverrides] = await Promise.all([
+	const [behaviorManifest, resourceManifest, candidate, catalog, ledger, legacy, smokeTest, packageJson, gapLedger, migrationLedger, javaBehaviorInventory, parityEvidence, nativeRecipes, interactions, recipeIr, matrix, resources, cookingParity, cookingParityRuntime, acceptanceWorld, acceptanceWorldRuntime, overrides, domainOverrides, domainConvergence] = await Promise.all([
 		json(resolve(root, "behavior_pack", "manifest.json")),
 		json(resolve(root, "resource_pack", "manifest.json")),
 		json(resolve(trackingRoot, "data", "p7-7-candidate.json")),
@@ -52,7 +52,8 @@ export async function validateP77StaticContract({
 		json(resolve(trackingRoot, "data", "p7-7-acceptance-world.json")),
 		readFile(resolve(root, "behavior_pack", "scripts", "acceptance", "generated", "acceptance-world-layout.js"), "utf8"),
 		json(resolve(trackingRoot, "data", "migration-overrides.json")),
-		json(resolve(trackingRoot, "data", "migration-domain-overrides.json"))
+		json(resolve(trackingRoot, "data", "migration-domain-overrides.json")),
+		json(resolve(trackingRoot, "data", "p8-4-domain-convergence.json"))
 	]);
 	const repositoryRoot = resolve(trackingRoot, "..");
 	const [expectedCatalog, expectedDomainInventory] = await Promise.all([
@@ -65,7 +66,8 @@ export async function validateP77StaticContract({
 		domainInventory: expectedDomainInventory,
 		matrix,
 		overrides,
-		domainOverrides
+		domainOverrides,
+		domainConvergence
 	});
 	if (!sameJson(migrationLedger, expectedMigrationLedger))
 		throw new Error("Migration ledger is stale; run npm run ledger.");

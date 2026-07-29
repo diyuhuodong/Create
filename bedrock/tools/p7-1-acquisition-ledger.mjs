@@ -1,7 +1,7 @@
 import { access, readdir, readFile } from "node:fs/promises";
 import { relative, resolve } from "node:path";
 
-export const P71_ACQUISITION_LEDGER_SCHEMA_VERSION = 1;
+export const P71_ACQUISITION_LEDGER_SCHEMA_VERSION = 2;
 
 const NON_RECIPE_PATHS = new Map([
 	["createbedrock:blaze_burner", ["runtime_transform", "behavior_pack/scripts/materials/blaze-burner-runtime.js"]],
@@ -40,6 +40,13 @@ const NON_RECIPE_PATHS = new Map([
 	["createbedrock:water_wheel_structure", ["runtime_state", "behavior_pack/scripts/kinetics/kinetic-runtime.js"]],
 	["createbedrock:zinc_ore", ["worldgen", "behavior_pack/feature_rules/zinc_ore_underground.json"]]
 ]);
+
+for (const identifier of [
+	"cardboard_package_10x12", "cardboard_package_10x8", "cardboard_package_12x10", "cardboard_package_12x12",
+	"rare_creeper_package", "rare_darcy_package", "rare_evan_package", "rare_jinx_package", "rare_kryppers_package",
+	"rare_simi_package", "rare_starlotte_package", "rare_thunder_package", "rare_up_package", "rare_vector_package"
+])
+	NON_RECIPE_PATHS.set(`createbedrock:${identifier}`, ["runtime_transform", "behavior_pack/scripts/logistics/package-styles.js"]);
 
 async function filesUnder(directory) {
 	const files = [];
@@ -83,8 +90,30 @@ async function recipeOutputs(repositoryRoot, directories) {
 	return outputs;
 }
 
+async function lootOutputs(repositoryRoot) {
+	const outputs = new Map();
+	for (const file of await filesUnder(resolve(repositoryRoot, "behavior_pack/loot_tables"))) {
+		const source = relative(repositoryRoot, file).replaceAll("\\", "/");
+		const visit = value => {
+			if (Array.isArray(value)) {
+				for (const item of value) visit(item);
+				return;
+			}
+			if (!value || typeof value !== "object") return;
+			if (value.type === "item" && typeof value.name === "string") {
+				const sources = outputs.get(value.name) ?? new Set();
+				sources.add(source);
+				outputs.set(value.name, sources);
+			}
+			for (const child of Object.values(value)) visit(child);
+		};
+		visit(JSON.parse(await readFile(file, "utf8")));
+	}
+	return outputs;
+}
+
 async function assertNonRecipeEvidence(bedrockRoot, entries) {
-	for (const entry of entries.filter(entry => entry.status !== "recipe_output")) {
+	for (const entry of entries) {
 		for (const evidence of entry.evidence) {
 			const source = evidence.split("#", 1)[0];
 			const root = source.startsWith("src/") ? resolve(bedrockRoot, "..") : bedrockRoot;
@@ -106,8 +135,8 @@ export function validateP71AcquisitionLedger(ledger) {
 		throw new TypeError("P7.1 acquisition ledger has an invalid header");
 	const ids = new Set();
 	for (const entry of ledger.entries) {
-		if (typeof entry?.identifier !== "string" || ids.has(entry.identifier) || !["creative_only", "missing", "not_survival_content", "recipe_output", "runtime_state", "runtime_transform", "worldgen"].includes(entry.status)
-			|| !Array.isArray(entry.evidence) || entry.evidence.length === 0)
+		if (typeof entry?.identifier !== "string" || ids.has(entry.identifier) || !["creative_only", "loot_output", "missing", "not_survival_content", "recipe_output", "runtime_state", "runtime_transform", "worldgen"].includes(entry.status)
+			|| !Array.isArray(entry.evidence) || entry.evidence.length === 0 || !Array.isArray(entry.registrationSourceKeys) || entry.registrationSourceKeys.length === 0)
 			throw new Error("P7.1 acquisition ledger has an invalid entry");
 		ids.add(entry.identifier);
 	}
@@ -120,23 +149,34 @@ export function validateP71AcquisitionLedger(ledger) {
 export async function buildP71AcquisitionLedger({ bedrockRoot }) {
 	const ledger = JSON.parse(await readFile(resolve(bedrockRoot, "data/migration-ledger.json"), "utf8"));
 	const outputs = await recipeOutputs(bedrockRoot, ["behavior_pack/recipes", "data/recipes"]);
-	const identifiers = new Set();
+	const loot = await lootOutputs(bedrockRoot);
+	const projections = new Map();
 	for (const entry of ledger.registrationEntries)
-		if ((entry.family === "P7.1/content_and_acquisition" && entry.status === "partial")
-			|| (entry.p8Semantic?.package === "P8.3" && (entry.kind === "item" || ["block:create:chocolate", "block:create:honey"].includes(entry.sourceKey))))
-			for (const target of entry.mapping.targets)
-				identifiers.add(target);
-	const entries = [...identifiers].sort().map(identifier => {
+		if (entry.status === "implemented" && ["block", "item"].includes(entry.kind))
+			for (const target of entry.mapping.targets.filter(target => target.startsWith("createbedrock:"))) {
+				const sources = projections.get(target) ?? new Set();
+				sources.add(entry.sourceKey);
+				projections.set(target, sources);
+			}
+	const entries = [...projections].sort(([left], [right]) => left.localeCompare(right)).map(([identifier, sourceKeys]) => {
+		const registrationSourceKeys = [...sourceKeys].sort();
 		const recipeEvidence = [...(outputs.get(identifier) ?? [])].sort();
 		if (recipeEvidence.length > 0)
-			return { evidence: recipeEvidence, identifier, status: "recipe_output" };
-		const [status, evidence] = NON_RECIPE_PATHS.get(identifier) ?? ["missing", "R2/unclassified-acquisition"];
-		return { evidence: [evidence], identifier, status };
+			return { evidence: recipeEvidence, identifier, registrationSourceKeys, status: "recipe_output" };
+		const explicit = NON_RECIPE_PATHS.get(identifier);
+		if (explicit) {
+			const [status, evidence] = explicit;
+			return { evidence: [evidence], identifier, registrationSourceKeys, status };
+		}
+		const lootEvidence = [...(loot.get(identifier) ?? [])].sort();
+		if (lootEvidence.length > 0)
+			return { evidence: lootEvidence, identifier, registrationSourceKeys, status: "loot_output" };
+		return { evidence: ["R2/unclassified-acquisition"], identifier, registrationSourceKeys, status: "missing" };
 	});
 	const document = {
 		entries,
 		generatedAt: "deterministic",
-		generatedFrom: "bedrock/data/migration-ledger.json, Bedrock recipes, and normalized recipe data",
+		generatedFrom: "bedrock/data/migration-ledger.json, Bedrock recipes, loot tables, and explicit runtime acquisition decisions",
 		schemaVersion: P71_ACQUISITION_LEDGER_SCHEMA_VERSION,
 		summary: Object.fromEntries([...new Set(entries.map(entry => entry.status))].sort().map(status => [status, entries.filter(entry => entry.status === status).length]))
 	};

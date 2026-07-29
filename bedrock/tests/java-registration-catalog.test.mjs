@@ -42,16 +42,17 @@ test("Java registration catalog includes dynamic content families and rejects sy
 });
 
 test("migration ledger covers every Java registration and assigns R1 ownership to every source domain", async () => {
-	const [catalog, domainInventory, matrix, overrides, domainOverrides] = await Promise.all([
+	const [catalog, domainInventory, matrix, overrides, domainOverrides, domainConvergence] = await Promise.all([
 		buildJavaRegistrationCatalog({ repositoryRoot }),
 		buildDomainInventory({ repositoryRoot }),
 		readFile(resolve(bedrockRoot, "data", "migration-matrix.json"), "utf8").then(JSON.parse),
 		readFile(resolve(bedrockRoot, "data", "migration-overrides.json"), "utf8").then(JSON.parse),
-		readFile(resolve(bedrockRoot, "data", "migration-domain-overrides.json"), "utf8").then(JSON.parse)
+		readFile(resolve(bedrockRoot, "data", "migration-domain-overrides.json"), "utf8").then(JSON.parse),
+		readFile(resolve(bedrockRoot, "data", "p8-4-domain-convergence.json"), "utf8").then(JSON.parse)
 	]);
 	assert.deepEqual(validateMigrationOverrides(overrides, catalog), { entries: overrides.entries.length });
 	assert.deepEqual(validateMigrationDomainOverrides(domainOverrides, domainInventory), { rules: domainOverrides.rules.length });
-	const { definitions, ledger } = await buildMigrationLedger({ bedrockRoot, catalog, domainInventory, matrix, overrides, domainOverrides });
+	const { definitions, ledger } = await buildMigrationLedger({ bedrockRoot, catalog, domainInventory, matrix, overrides, domainOverrides, domainConvergence });
 	const domainTotal = domainInventory.domains.reduce((total, domain) => total + domain.entries.length, 0);
 	assert.deepEqual(validateMigrationLedger(ledger, catalog, domainInventory), {
 		domains: domainTotal,
@@ -61,6 +62,11 @@ test("migration ledger covers every Java registration and assigns R1 ownership t
 	assert.equal(ledger.registrationEntries.filter(entry => entry.status === "unclassified").length, 0);
 	assert.equal(ledger.domainEntries.length, domainTotal);
 	assert.ok(ledger.domainEntries.every(entry => entry.status !== "unclassified" && entry.owner !== "R0/unassigned"));
+	assert.deepEqual(
+		Object.fromEntries([...new Set(ledger.domainEntries.map(entry => entry.status))].sort()
+			.map(status => [status, ledger.domainEntries.filter(entry => entry.status === status).length])),
+		domainConvergence.summary
+	);
 	assert.equal(new Set(ledger.domainEntries.map(entry => entry.sourceKey)).size, ledger.domainEntries.length);
 	assert.ok(ledger.domainEntries.some(entry => entry.sourceKey.startsWith("domain:game_tests:") && !entry.sourceKey.endsWith("#void")));
 	const incompleteRules = structuredClone(domainOverrides);

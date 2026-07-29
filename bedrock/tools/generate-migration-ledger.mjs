@@ -10,17 +10,18 @@ import { validateMigrationDomainOverrides, validateMigrationOverrides } from "./
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(toolDirectory, "..");
 
-const [catalog, domainInventory, matrix, overrides, domainOverrides] = await Promise.all([
+const [catalog, domainInventory, matrix, overrides, domainOverrides, domainConvergence] = await Promise.all([
 	readFile(resolve(bedrockRoot, "data", "java-registration-catalog.json"), "utf8").then(JSON.parse),
 	readFile(resolve(bedrockRoot, "data", "domain-inventory.json"), "utf8").then(JSON.parse),
 	readFile(resolve(bedrockRoot, "data", "migration-matrix.json"), "utf8").then(JSON.parse),
 	readFile(resolve(bedrockRoot, "data", "migration-overrides.json"), "utf8").then(JSON.parse),
-	readFile(resolve(bedrockRoot, "data", "migration-domain-overrides.json"), "utf8").then(JSON.parse)
+	readFile(resolve(bedrockRoot, "data", "migration-domain-overrides.json"), "utf8").then(JSON.parse),
+	readFile(resolve(bedrockRoot, "data", "p8-4-domain-convergence.json"), "utf8").then(JSON.parse)
 ]);
 validateJavaRegistrationCatalog(catalog);
 validateMigrationMatrix(matrix);
 validateMigrationOverrides(overrides, catalog);
 validateMigrationDomainOverrides(domainOverrides, domainInventory);
-const { ledger } = await buildMigrationLedger({ bedrockRoot, catalog, domainInventory, matrix, overrides, domainOverrides });
+const { ledger } = await buildMigrationLedger({ bedrockRoot, catalog, domainInventory, matrix, overrides, domainOverrides, domainConvergence });
 await writeFile(resolve(bedrockRoot, "data", "migration-ledger.json"), `${JSON.stringify(ledger, null, "\t")}\n`);
 console.log(`Wrote ${ledger.registrationEntries.length} registration records and linked ${ledger.domainInventory.total} domain records.`);

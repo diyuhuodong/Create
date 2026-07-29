@@ -7,6 +7,7 @@ import { ShardedStateStore } from "../kernel/sharded-state-store.js";
 import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-property-storage.js";
 import { PackageLedger } from "./package-ledger.js";
 import { createPackageEndpoint, routePackage } from "./package-network-state.js";
+import { packageItemForId } from "./package-styles.js";
 import { beginTrainPackageDelivery, beginTrainPackageRetrieval, settleTrainPackageTransfer, trainPackageCargo } from "../trains/train-package-exchange.js";
 import { isPostboxBlock } from "../kernel/functional-color-families.js";
 
@@ -70,7 +71,7 @@ function addEndpoint(block) {
 function consumeSelectedStack(player) {
 	const container = player.getComponent("minecraft:inventory")?.container; const slot = player.selectedSlotIndex;
 	if (!container || !Number.isInteger(slot) || slot < 0) return undefined;
-	const stack = container.getItem(slot); if (!stack || stack.typeId === PACKAGE_ITEM) return undefined;
+	const stack = container.getItem(slot); if (!stack || stack.typeId === PACKAGE_ITEM || stack.hasTag?.("createbedrock:package")) return undefined;
 	container.setItem(slot, undefined); return stack;
 }
 function pack(player, endpoint) {
@@ -81,7 +82,7 @@ function pack(player, endpoint) {
 function givePackageItem(player, packageRecord) {
 	const container = player.getComponent("minecraft:inventory")?.container; const slot = player.selectedSlotIndex;
 	if (!container || !Number.isInteger(slot) || container.getItem(slot)) return false;
-	const item = new ItemStack(PACKAGE_ITEM, 1); item.setDynamicProperty(PACKAGE_ITEM_PROPERTY, packageRecord.id); container.setItem(slot, item); return true;
+	const item = new ItemStack(packageItemForId(packageRecord.id), 1); item.setDynamicProperty(PACKAGE_ITEM_PROPERTY, packageRecord.id); container.setItem(slot, item); return true;
 }
 function unpack(player, endpoint) {
 	const packageRecord = ledger.snapshot().records.find(record => record.owner.kind === "port" && record.owner.id === endpoint.id && !record.transfer);

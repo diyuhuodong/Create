@@ -169,11 +169,16 @@ function blockLoot(entry) {
 }
 
 function itemDefinition(entry) {
+	const packageStyle = /^(?:cardboard_package_\d+x\d+|rare_[a-z0-9_]+_package)$/.test(entry.identifier);
 	return {
 		format_version: "1.26.0",
 		"minecraft:item": {
 			description: { identifier: `createbedrock:${entry.identifier}`, menu_category: { category: "items", group: "itemGroup.name.misc" } },
-			components: { "minecraft:icon": entry.texture.key, "minecraft:max_stack_size": 64 }
+			components: {
+				"minecraft:icon": entry.texture.key,
+				"minecraft:max_stack_size": packageStyle ? 1 : 64,
+				...(packageStyle ? { "minecraft:tags": { tags: ["createbedrock:package"] } } : {})
+			}
 		}
 	};
 }

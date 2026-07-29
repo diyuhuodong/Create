@@ -115,23 +115,6 @@ function externalCompatibilityEntries(recipeIr) {
 		});
 }
 
-function notApplicableResourceEntries(resources) {
-	return resources.entries
-		.filter(resource => resource.relation === "not_applicable")
-		.map(resource => {
-			assertString(resource.reason, `resource ${resource.source} not-applicable reason`);
-			return summaryEntry({
-				classification: "not_applicable",
-				id: `not_applicable/resource/${encodeURIComponent(resource.source)}`,
-				owner: "P7.6",
-				reason: resource.reason,
-				scope: "resource",
-				subject: resource.source,
-				target: resource.target
-			});
-		});
-}
-
 function explicitEquivalenceEntries() {
 	return EXPLICIT_EQUIVALENCES.map(entry => summaryEntry({
 		classification: "equivalent",
@@ -207,14 +190,28 @@ function migrationLedgerEntries(ledger) {
 		}));
 	}
 	for (const record of ledger.domainEntries) {
+		if (["equivalent", "implemented"].includes(record.status))
+			continue;
 		if (record.status === "deferred_compat") {
 			entries.push(summaryEntry({
 				classification: "external_compat",
-				compatibilityDecisionRefs: [`data/migration-domain-overrides.json#${record.domain}`],
+					compatibilityDecisionRefs: record.convergence.evidence,
 				id: `external_compat/domain/${encodeURIComponent(record.sourceKey)}`,
 				owner: record.owner,
 				reason: record.rationale,
 				scope: "external_mod",
+				subject: record.sourceKey
+			}));
+			continue;
+		}
+		if (record.status === "not_applicable") {
+			entries.push(summaryEntry({
+				classification: "not_applicable",
+				compatibilityDecisionRefs: record.convergence.evidence,
+				id: `not_applicable/domain/${encodeURIComponent(record.sourceKey)}`,
+				owner: record.owner,
+				reason: record.rationale,
+				scope: "java_only_format",
 				subject: record.sourceKey
 			}));
 			continue;
@@ -288,7 +285,6 @@ export function buildP77GapLedger({ cookingParity, interactions, matrix, migrati
 		...nativeRecipeEntries(nativeRecipes, cookingParity),
 		...externalCompatibilityEntries(recipeIr),
 		...platformEntries(catalog),
-		...notApplicableResourceEntries(resources),
 		...explicitEquivalenceEntries()
 	].sort((left, right) => left.id.localeCompare(right.id));
 	const document = {

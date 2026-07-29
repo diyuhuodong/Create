@@ -46,20 +46,25 @@ function candidateTargets(entry, definitions) {
 	return definitions[definitionKind]?.has(identifier) ? [identifier] : [];
 }
 
-function domainLedgerEntries(domainInventory, domainOverrides) {
+function domainLedgerEntries(domainInventory, domainOverrides, domainConvergence) {
 	const rules = new Map(domainOverrides.rules.map(rule => [rule.domain, rule]));
+	const conclusions = new Map(domainConvergence.entries.map(entry => [entry.sourceKey, entry]));
 	return domainInventory.domains
 		.flatMap(domain => domain.entries.map(entry => {
 			const rule = rules.get(domain.name);
+			const conclusion = conclusions.get(entry.sourceKey);
+			if (!conclusion || conclusion.domain !== domain.name || conclusion.source !== entry.source)
+				throw new Error(`Migration ledger domain ${entry.sourceKey} is missing its P8.4 conclusion`);
 			return {
+				convergence: { evidence: conclusion.evidence, package: "P8.4" },
 				domain: domain.name,
 				family: rule.family,
 				owner: rule.owner,
 				registrationSourceKeys: [],
-				rationale: rule.rationale,
+				rationale: conclusion.rationale,
 				source: entry.source,
 				sourceKey: entry.sourceKey,
-				status: rule.status,
+				status: conclusion.status,
 				strategy: rule.strategy,
 				...(entry.test ? { test: entry.test } : {}),
 				...(entry.type ? { type: entry.type } : {})
@@ -134,11 +139,13 @@ function r1RegistrationClassification(entry, definitions) {
 	};
 }
 
-export async function buildMigrationLedger({ bedrockRoot, catalog, domainInventory, matrix, overrides = { schemaVersion: 1, entries: [] }, domainOverrides }) {
-	if (!bedrockRoot || !catalog || !domainInventory || !matrix)
-		throw new TypeError("Migration ledger requires Bedrock root, catalog, domain inventory, and matrix");
+export async function buildMigrationLedger({ bedrockRoot, catalog, domainInventory, matrix, overrides = { schemaVersion: 1, entries: [] }, domainOverrides, domainConvergence }) {
+	if (!bedrockRoot || !catalog || !domainInventory || !matrix || !domainConvergence)
+		throw new TypeError("Migration ledger requires Bedrock root, catalog, domain inventory, matrix, and P8.4 domain convergence");
 	validateMigrationOverrides(overrides, catalog);
 	validateMigrationDomainOverrides(domainOverrides, domainInventory);
+	if (!Array.isArray(domainConvergence.entries) || domainConvergence.entries.length !== domainInventory.domains.reduce((total, domain) => total + domain.entries.length, 0))
+		throw new Error("Migration ledger requires complete P8.4 domain convergence");
 	const overridesBySourceKey = new Map(overrides.entries.map(entry => [entry.sourceKey, entry]));
 	const behaviorRoot = resolve(bedrockRoot, "behavior_pack");
 	const definitions = {
@@ -154,8 +161,8 @@ export async function buildMigrationLedger({ bedrockRoot, catalog, domainInvento
 			total: totalDomains
 		},
 		generatedAt: "deterministic",
-		generatedFrom: "bedrock/data/java-registration-catalog.json, migration-matrix.json, domain-inventory.json, migration-overrides.json, and migration-domain-overrides.json",
-		domainEntries: domainLedgerEntries(domainInventory, domainOverrides),
+			generatedFrom: "bedrock/data/java-registration-catalog.json, migration-matrix.json, domain-inventory.json, migration-overrides.json, migration-domain-overrides.json, and p8-4-domain-convergence.json",
+			domainEntries: domainLedgerEntries(domainInventory, domainOverrides, domainConvergence),
 		registrationEntries: catalog.entries.map(entry => ({
 			...r1RegistrationClassification(entry, definitions),
 			candidateTargets: candidateTargets(entry, definitions),

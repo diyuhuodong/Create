@@ -4,6 +4,7 @@
 	"generatedFrom": [
 		"data/p7-1-acquisition-ledger.json",
 		"data/java-behavior-inventory.json",
+		"data/p8-4-domain-convergence.json",
 		"data/domain-inventory.json",
 		"data/p7-7-gap-ledger.json",
 		"data/migration-ledger.json",
@@ -19,13 +20,13 @@
 	"documents": [
 		{
 			"counts": {
-				"entries": 26,
+				"entries": 752,
 				"missing": 0
 			},
 			"id": "acquisition",
 			"path": "data/p7-1-acquisition-ledger.json",
-			"schemaVersion": 1,
-			"sha256": "953c6800baf799c13e9687eed2d30ab202ff9409d944cea0609309823ec0fd9b"
+			"schemaVersion": 2,
+			"sha256": "6f0dff05138318d5ed009e0f0370d17abf15c59605b9c914772cd8d0013d536c"
 		},
 		{
 			"counts": {
@@ -41,6 +42,20 @@
 		},
 		{
 			"counts": {
+				"entries": 9067,
+				"status": {
+					"deferred_compat": 114,
+					"equivalent": 7132,
+					"not_applicable": 1821
+				}
+			},
+			"id": "domainConvergence",
+			"path": "data/p8-4-domain-convergence.json",
+			"schemaVersion": 1,
+			"sha256": "35f86b6014b70a9a32339d6ff570aa3ed446ee5ec64cd145e51876899efcbf5d"
+		},
+		{
+			"counts": {
 				"entries": 9067
 			},
 			"id": "domainInventory",
@@ -52,26 +67,27 @@
 			"counts": {
 				"classifications": {
 					"core_audit_required": 1319,
-					"core_implementation_required": 8953,
+					"core_implementation_required": 0,
 					"static_verified_pending_platform": 52,
 					"platform_capability_blocked": 22,
 					"external_compat": 601,
 					"equivalent": 2,
-					"not_applicable": 92
+					"not_applicable": 1821
 				},
-				"entries": 11041
+				"entries": 3817
 			},
 			"id": "gapLedger",
 			"path": "data/p7-7-gap-ledger.json",
 			"schemaVersion": 3,
-			"sha256": "175b98c8ba15d4041f78c29b1d63fcf4034d731018e1fbe21b0379a23d7df32a"
+			"sha256": "0edb0070b0704ba15f3ef421a385073b06f027f5d458f6da82ac8109ec8fe7cf"
 		},
 		{
 			"counts": {
 				"domains": 9067,
 				"domainStatus": {
 					"deferred_compat": 114,
-					"partial": 8953
+					"equivalent": 7132,
+					"not_applicable": 1821
 				},
 				"registrations": 881,
 				"registrationStatus": {
@@ -80,8 +96,8 @@
 			},
 			"id": "migrationLedger",
 			"path": "data/migration-ledger.json",
-			"schemaVersion": 2,
-			"sha256": "35b99e15529bc3e70fb786fcf6e83a7fb6cf6e183acc64a54f65babfc42d2874"
+			"schemaVersion": 3,
+			"sha256": "cff8b4ba53240e7f965d33e06cb28c45e75e613c561a49fad71e7e7b9af2cecd"
 		},
 		{
 			"counts": {
@@ -93,7 +109,7 @@
 			"id": "parityEvidence",
 			"path": "data/p8-parity-evidence-ledger.json",
 			"schemaVersion": 1,
-			"sha256": "d157c3e1defbd72e5718cbd3492adeebdf4d69451c9b836ec7c717022f6c78d3"
+			"sha256": "0735ddab1a1f9cf5ce8f8f47a21eefaccb1bc0e2d258fc4b69d195bd7593dd39"
 		},
 		{
 			"counts": {
@@ -105,14 +121,6 @@
 			"sha256": "e198cbd134cba2c37d43e4de784e10262cfeb9cf2e0cee25db525776538fbff5"
 		}
 	],
-	"openResponsibilities": [
-		{
-			"id": "C1/acquisition-scope",
-			"observedEntries": 26,
-			"owner": "P8-C1",
-			"reason": "The acquisition ledger currently follows legacy partial-registration selection and must be rebuilt from the complete survival-content projection.",
-			"state": "open"
-		}
-	],
-	"fingerprint": "c23df1531de1487729d5641dadcaa2284258cbf6830a1b3b051556bc261a46ac"
+	"openResponsibilities": [],
+	"fingerprint": "ad413b3034e98614b16a3a79a8965c9e08254bc4c5e66f94e5ae2a2047fecebb"
 }

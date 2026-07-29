@@ -134,7 +134,7 @@ export function buildP8ParityEvidenceLedger({ catalog, javaBehaviorInventory, ma
 		status: entry.status,
 		subject: entry.source,
 		javaSources: [entry.source],
-		evidence: evidence()
+		evidence: evidence({ staticContracts: entry.convergence.evidence })
 	}));
 	const behaviors = javaBehaviorInventory.entries.map(entry => ({
 		id: `behavior:${entry.sourceKey}`,

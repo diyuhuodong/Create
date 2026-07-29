@@ -20,10 +20,10 @@
 | Java 领域项 | 9,067 |
 | Java 行为项 | 1,319，均为 `audit_pending` |
 | 统一证据记录 | 11,267，均为 `pending` |
-| 旧台账核心实现缺口 | 8,953 |
+| 核心实现缺口 | 0（C1 完成后） |
 | 平台能力阻断 | 22 |
 | Windows/Realm/PS 待验收 | 52 |
-| Node 测试 | 647/647 通过（C0 完成后） |
+| Node 测试 | 649/649 通过（C1 完成后） |
 
 包校验和构建当前通过，但 5 个失败测试暴露了注册数量、生存获取、gap ledger 和证据汇总之间的版本漂移。因此现有 P8.5 报告只能视为构建候选，不能视为功能完整候选。
 
@@ -57,6 +57,17 @@ C0 已完成。`data/p8-integrity-baseline.json` 现在对注册目录、领域�
 3. 更新 P7.7 gap ledger 和 P8 evidence ledger，使状态由同一权威记录派生。
 
 **退出条件：** 获取台账 `missing=0`；不存在相同 source key 的冲突结论；5 个基线测试全部通过。
+
+### C1 实施结果（2026-07-29）
+
+C1 已完成。获取台账不再依赖旧 `partial` 状态，而是从全部 `implemented` 方块和物品注册投影确定性生成：
+
+- 752 个唯一 Bedrock 内容投影全部进入台账，`missing=0`；
+- 705 项由配方获得，2 项由方块掉落获得，5 项为创造限定，2 项为非生存内部状态，其余由世界生成或明确运行时转换/状态产生；
+- 14 种 Java 包裹外观已接入基于持久 package id 的确定性选择，保留 1/7500 稀有包裹比例并避免重连改变样式；
+- P8.4 的 9,067 个逐项结论已成为 migration ledger 的唯一领域状态：7,132 `equivalent`、1,821 `not_applicable`、114 `deferred_compat`；
+- P7.7 gap ledger 的领域核心实现缺口从 8,953 降为 0，P8 evidence ledger 与 migration ledger 使用相同状态和 P8.4 证据；
+- C0 基线中的 `C1/acquisition-scope` 开放责任已清除。
 
 ## 6. C2：加固 P8.5 完成门禁
 

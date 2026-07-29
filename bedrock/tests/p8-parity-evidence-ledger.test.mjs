@@ -46,6 +46,8 @@ test("P8 parity evidence records every registration, domain artifact, and Java b
 	assert.deepEqual(brassSheet.evidence.resourceProjections, ["createbedrock:brass_sheet"]);
 	const kinetic = ledger.records.find(record => record.id === "registration:block:create:adjustable_chain_gearshift");
 	assert.deepEqual(kinetic.evidence.bedrockRuntime, ["behavior_pack/scripts/kinetics/kinetic-runtime.js"]);
+	assert.ok(ledger.records.filter(record => record.recordType === "domain")
+		.every(record => record.evidence.staticContracts.length > 0));
 	const generated = await json("p8-parity-evidence-ledger.json");
 	assert.deepEqual(generated, ledger);
 });

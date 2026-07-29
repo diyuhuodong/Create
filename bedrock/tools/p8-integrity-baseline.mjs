@@ -8,6 +8,7 @@ export const P8_INTEGRITY_JAVA_BASELINE = "Create 6.0.11 / Minecraft Java 1.21.1
 export const P8_INTEGRITY_DOCUMENTS = Object.freeze([
 	["acquisition", "data/p7-1-acquisition-ledger.json"],
 	["behaviorInventory", "data/java-behavior-inventory.json"],
+	["domainConvergence", "data/p8-4-domain-convergence.json"],
 	["domainInventory", "data/domain-inventory.json"],
 	["gapLedger", "data/p7-7-gap-ledger.json"],
 	["migrationLedger", "data/migration-ledger.json"],
@@ -93,6 +94,7 @@ export async function buildP8IntegrityBaseline({ bedrockRoot }) {
 	const {
 		acquisition,
 		behaviorInventory,
+		domainConvergence,
 		domainInventory,
 		gapLedger,
 		migrationLedger,
@@ -112,6 +114,11 @@ export async function buildP8IntegrityBaseline({ bedrockRoot }) {
 	if (migrationLedger.registrationEntries.length !== authoritativeCounts.registrations
 		|| migrationLedger.domainEntries.length !== authoritativeCounts.domains)
 		throw new Error("P8 C0 migration ledger does not match the authoritative Java inventories");
+	const migrationDomains = new Map(migrationLedger.domainEntries.map(entry => [entry.sourceKey, entry]));
+	if (domainConvergence.entries.length !== authoritativeCounts.domains || domainConvergence.entries.some(entry =>
+		migrationDomains.get(entry.sourceKey)?.status !== entry.status
+		|| JSON.stringify(migrationDomains.get(entry.sourceKey)?.convergence?.evidence) !== JSON.stringify(entry.evidence)))
+		throw new Error("P8 C1 migration domains do not match P8.4 convergence");
 	if (parityEvidence.summary.recordType.registration !== authoritativeCounts.registrations
 		|| parityEvidence.summary.recordType.domain !== authoritativeCounts.domains
 		|| parityEvidence.summary.recordType.behavior !== authoritativeCounts.behaviors)
@@ -123,6 +130,11 @@ export async function buildP8IntegrityBaseline({ bedrockRoot }) {
 		throw new Error("P8 C0 gap ledger source summaries are inconsistent");
 	const migrationRegistrationStatus = countBy(migrationLedger.registrationEntries, "status");
 	const migrationDomainStatus = countBy(migrationLedger.domainEntries, "status");
+	const expectedAcquisition = new Set(migrationLedger.registrationEntries
+		.filter(entry => entry.status === "implemented" && ["block", "item"].includes(entry.kind))
+		.flatMap(entry => entry.mapping.targets)
+		.filter(identifier => identifier.startsWith("createbedrock:")));
+	const acquisitionIds = new Set(acquisition.entries.map(entry => entry.identifier));
 	const documents = [
 		sourceDocument("acquisition", "data/p7-1-acquisition-ledger.json", acquisition, {
 			entries: acquisition.entries.length,
@@ -131,6 +143,10 @@ export async function buildP8IntegrityBaseline({ bedrockRoot }) {
 		sourceDocument("behaviorInventory", "data/java-behavior-inventory.json", behaviorInventory, {
 			entries: behaviorInventory.entries.length,
 			status: countBy(behaviorInventory.entries, "status")
+		}),
+		sourceDocument("domainConvergence", "data/p8-4-domain-convergence.json", domainConvergence, {
+			entries: domainConvergence.entries.length,
+			status: domainConvergence.summary
 		}),
 		sourceDocument("domainInventory", "data/domain-inventory.json", domainInventory, {
 			entries: authoritativeCounts.domains
@@ -153,13 +169,17 @@ export async function buildP8IntegrityBaseline({ bedrockRoot }) {
 			entries: registrationCatalog.entries.length
 		})
 	].sort((left, right) => left.id.localeCompare(right.id));
-	const openResponsibilities = [{
-		id: "C1/acquisition-scope",
-		observedEntries: acquisition.entries.length,
-		owner: "P8-C1",
-		reason: "The acquisition ledger currently follows legacy partial-registration selection and must be rebuilt from the complete survival-content projection.",
-		state: "open"
-	}];
+	const openResponsibilities = [];
+	if (acquisition.summary.missing || acquisitionIds.size !== expectedAcquisition.size
+		|| [...expectedAcquisition].some(identifier => !acquisitionIds.has(identifier)))
+		openResponsibilities.push({
+			expectedEntries: expectedAcquisition.size,
+			id: "C1/acquisition-scope",
+			observedEntries: acquisition.entries.length,
+			owner: "P8-C1",
+			reason: "The acquisition ledger does not cover the complete projected survival-content scope.",
+			state: "open"
+		});
 	const document = {
 		schemaVersion: P8_INTEGRITY_BASELINE_SCHEMA_VERSION,
 		generatedAt: "deterministic",

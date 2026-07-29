@@ -1,7 +1,7 @@
 import { JAVA_REGISTRATION_KINDS } from "./java-registration-catalog-schema.mjs";
 import { domainSourceKey } from "./domain-inventory.mjs";
 
-export const MIGRATION_LEDGER_SCHEMA_VERSION = 2;
+export const MIGRATION_LEDGER_SCHEMA_VERSION = 3;
 export const MIGRATION_OVERRIDE_SCHEMA_VERSION = 1;
 export const MIGRATION_DOMAIN_OVERRIDE_SCHEMA_VERSION = 1;
 
@@ -112,6 +112,9 @@ function validateDomainEntries(entries, catalog, domainInventory) {
 		if (!isNonEmptyString(entry.owner) || !isNonEmptyString(entry.family) || !isNonEmptyString(entry.rationale)
 			|| !DOMAIN_MIGRATION_STRATEGIES.has(entry.strategy) || !LEDGER_STATUSES.has(entry.status) || entry.status === "unclassified")
 			throw new Error(`Migration ledger domain entry ${entry.sourceKey} has invalid classification metadata`);
+		if (entry.convergence?.package !== "P8.4" || !Array.isArray(entry.convergence.evidence) || entry.convergence.evidence.length === 0
+			|| entry.convergence.evidence.some(value => !isNonEmptyString(value)))
+			throw new Error(`Migration ledger domain entry ${entry.sourceKey} requires P8.4 convergence evidence`);
 		if (!Array.isArray(entry.registrationSourceKeys) || new Set(entry.registrationSourceKeys).size !== entry.registrationSourceKeys.length
 			|| !entry.registrationSourceKeys.every(sourceKey => catalogKeys.has(sourceKey)))
 			throw new Error(`Migration ledger domain entry ${entry.sourceKey} has invalid registration references`);

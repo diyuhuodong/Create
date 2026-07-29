@@ -21,11 +21,11 @@ test("P8 C0 records one deterministic fingerprint across every integrity ledger"
 	assert.deepEqual(first, second);
 	assert.deepEqual(committed, first);
 	assert.deepEqual(validateP8IntegrityBaseline(first), {
-		documents: 7,
+		documents: 8,
 		fingerprint: first.fingerprint,
 		...first.authoritativeCounts
 	});
-	assert.deepEqual(first.openResponsibilities.map(entry => entry.id), ["C1/acquisition-scope"]);
+	assert.deepEqual(first.openResponsibilities, []);
 });
 
 test("P8 C0 derives authoritative totals and rejects a stale aggregate fingerprint", async () => {
@@ -44,4 +44,3 @@ test("P8 C0 derives authoritative totals and rejects a stale aggregate fingerpri
 	stale.documents[0].counts.entries++;
 	assert.throws(() => validateP8IntegrityBaseline(stale), /fingerprint is stale/);
 });
-
