@@ -80,7 +80,7 @@ function assertCoreEvidenceClosure(evidenceRecords) {
 	return coreRecords.length;
 }
 
-export function buildP85StaticCandidate({ acquisitionLedger, artifact, behaviorManifest, gapLedger, javaBehaviorInventory, p84, parityEvidenceLedger, resourceManifest, migrationLedger }) {
+export function buildP85StaticCandidate({ acquisitionLedger, artifact, behaviorManifest, gapLedger, javaBehaviorInventory, p84, parityEvidenceLedger, resourceManifest, migrationLedger, sourceCommit = "unresolved" }) {
 	const registrations = migrationLedger.registrationEntries;
 	const domains = migrationLedger.domainEntries;
 	const acquisitionEntries = requiredArray(acquisitionLedger?.entries, "an acquisition ledger entry array");
@@ -105,6 +105,7 @@ export function buildP85StaticCandidate({ acquisitionLedger, artifact, behaviorM
 		packs: { behaviorVersion, resourceVersion: version(resourceManifest) },
 		platformReadiness: "pending_p8_6",
 		schemaVersion: P8_5_STATIC_CANDIDATE_SCHEMA_VERSION,
+		source: { commit: sourceCommit },
 		staticEvidence: {
 			acquisitionSources,
 			behaviorContracts: behaviorEntries.length,
@@ -115,6 +116,13 @@ export function buildP85StaticCandidate({ acquisitionLedger, artifact, behaviorM
 		},
 		staticState: "static_verified"
 	};
+}
+
+function sourceCommit(bedrockRoot) {
+	const result = spawnSync("git", ["-C", resolve(bedrockRoot, ".."), "rev-parse", "HEAD"], { encoding: "utf8" });
+	if (result.status !== 0 || !/^[a-f0-9]{40}\n?$/.test(result.stdout))
+		throw new Error("P8.5 requires a resolvable Git source commit");
+	return result.stdout.trim();
 }
 
 function run(bedrockRoot, file) {
@@ -129,7 +137,7 @@ export async function createP85StaticCandidate({ bedrockRoot = defaultBedrockRoo
 		data("p7-1-acquisition-ledger.json"), readFile(resolve(bedrockRoot, "build", "behavior_pack", "manifest.json"), "utf8").then(JSON.parse), data("p7-7-gap-ledger.json"), data("java-behavior-inventory.json"), data("migration-ledger.json"), data("p8-4-domain-convergence.json"), data("p8-parity-evidence-ledger.json"), readFile(resolve(bedrockRoot, "build", "resource_pack", "manifest.json"), "utf8").then(JSON.parse)
 	]);
 	const artifact = await createPackArchive({ bedrockRoot });
-	const candidate = buildP85StaticCandidate({ acquisitionLedger, artifact, behaviorManifest, gapLedger, javaBehaviorInventory, migrationLedger, p84, parityEvidenceLedger, resourceManifest });
+	const candidate = buildP85StaticCandidate({ acquisitionLedger, artifact, behaviorManifest, gapLedger, javaBehaviorInventory, migrationLedger, p84, parityEvidenceLedger, resourceManifest, sourceCommit: sourceCommit(bedrockRoot) });
 	const report = resolve(bedrockRoot, "dist", `p8-5-${candidate.candidateId}.json`);
 	await mkdir(dirname(report), { recursive: true });
 	await writeFile(report, `${JSON.stringify(candidate, null, 2)}\n`);

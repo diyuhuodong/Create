@@ -176,7 +176,7 @@ git diff --check
 
 ### C6 实施结果（2026-07-29）
 
-C6 已完成静态候选冻结。`candidate:p8-5` 通过完整 Node 测试、包校验与构建，生成候选 `0.1.0-ec3dbe04e70b`，产物为 `dist/createbedrock-0.1.0-ec3dbe04e70b.mcaddon`，报告为对应的 `p8-5-*.json`。该状态仍为 `pending_p8_6`：它证明离线台账和包结构闭合，不替代 Windows、Realm 与 PS 的真实平台验收。
+C6 已完成静态候选冻结。`candidate:p8-5` 通过完整 Node 测试、包校验与构建，生成候选 `0.1.0-ec3dbe04e70b`，产物为 `dist/createbedrock-0.1.0-ec3dbe04e70b.mcaddon`，报告为对应的 `p8-5-*.json`。报告还绑定生成时的 Git commit、包版本和归档 SHA-256。该状态仍为 `pending_p8_6`：它证明离线台账和包结构闭合，不替代 Windows、Realm 与 PS 的真实平台验收。
 
 ## 11. P8.6：真实平台验收
 
