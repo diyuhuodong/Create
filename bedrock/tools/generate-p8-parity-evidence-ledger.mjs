@@ -15,4 +15,4 @@ const ledger = buildP8ParityEvidenceLedger({
 	migrationLedger: await json("migration-ledger.json")
 });
 await writeFile(resolve(dataRoot, "p8-parity-evidence-ledger.json"), `${JSON.stringify(ledger, null, "\t")}\n`);
-console.log(`P8 parity evidence: ${ledger.summary.total} records, ${ledger.summary.evidenceState.pending} pending evidence links.`);
+console.log(`P8 parity evidence: ${ledger.summary.total} records, ${ledger.summary.evidenceState.pending ?? 0} pending evidence links.`);

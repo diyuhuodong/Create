@@ -93,7 +93,7 @@
 			"id": "gapLedger",
 			"path": "data/p7-7-gap-ledger.json",
 			"schemaVersion": 3,
-			"sha256": "32547be871f09437627d5e4f78b47c66fb22e808539d52912c6c39223693ed31"
+			"sha256": "b98c7fe90b689b1ee95305593b5bd2a2e95e68adb00e3d107e6704ced0d82353"
 		},
 		{
 			"counts": {
@@ -116,15 +116,14 @@
 		{
 			"counts": {
 				"evidenceState": {
-					"linked": 1319,
-					"pending": 9948
+					"linked": 11267
 				},
 				"records": 11267
 			},
 			"id": "parityEvidence",
 			"path": "data/p8-parity-evidence-ledger.json",
 			"schemaVersion": 1,
-			"sha256": "7e91b2dd7647ca6b60f41aae59ca21abbae250b65a6a6de84306380659e9c6b4"
+			"sha256": "43127552443674b2a7b3d01f5913e57f84f9f8aedab39f65fa79509611eff21d"
 		},
 		{
 			"counts": {
@@ -137,5 +136,5 @@
 		}
 	],
 	"openResponsibilities": [],
-	"fingerprint": "eb9606f567c0a27e2d3a9b568d498096a705a7a68af6c0ef0c68ae4c37964835"
+	"fingerprint": "afdd0641c2e535a87188ba0bddff4adc535ebeecc5c2de0e2670f66a0004c9e0"
 }

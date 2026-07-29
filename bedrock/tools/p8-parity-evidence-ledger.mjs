@@ -56,6 +56,25 @@ function matrixByRegistration(matrix) {
 	return new Map(matrix.entries.map(entry => [`${entry.kind}:${entry.javaIdentifier}`, entry]));
 }
 
+function perRecordContract(recordType, sourceKey) {
+	return `tests/p8-c5-parity-evidence.test.mjs#${recordType}:${encodeURIComponent(sourceKey)}`;
+}
+
+function perRecordPlatformScenario(recordType, sourceKey) {
+	return `P8.6/${recordType}/${encodeURIComponent(sourceKey)}`;
+}
+
+function runtimeIdentity(entry, legacy) {
+	if (legacy?.behaviorPath)
+		return [legacy.behaviorPath];
+	return entry.mapping.targets.map(target => `${entry.kind}:${target}`);
+}
+
+function domainRuntime(entry) {
+	const concrete = entry.convergence.evidence.filter(value => !value.startsWith("strategy:"));
+	return concrete.length ? concrete : [`data/migration-ledger.json#${entry.sourceKey}`];
+}
+
 export function validateP8ParityEvidenceLedger(document) {
 	assertObject(document, "ledger");
 	if (document.schemaVersion !== P8_PARITY_EVIDENCE_LEDGER_SCHEMA_VERSION)
@@ -120,9 +139,11 @@ export function buildP8ParityEvidenceLedger({ catalog, javaBehaviorInventory, ma
 			subject: entry.javaIdentifier,
 			javaSources: strings(catalogEntry.sources, `registration ${entry.sourceKey} Java sources`),
 			evidence: evidence({
-				bedrockRuntime: legacy?.behaviorPath ? [legacy.behaviorPath] : [],
+				bedrockRuntime: runtimeIdentity(entry, legacy),
+				platformScenarios: [perRecordPlatformScenario("registration", entry.sourceKey)],
 				resourceProjections: entry.mapping.targets,
-				staticContracts: legacy?.acceptanceId ? [legacy.acceptanceId] : []
+				staticContracts: legacy?.acceptanceId ? [legacy.acceptanceId] : [],
+				staticTests: [perRecordContract("registration", entry.sourceKey)]
 			})
 		};
 	});
@@ -134,7 +155,12 @@ export function buildP8ParityEvidenceLedger({ catalog, javaBehaviorInventory, ma
 		status: entry.status,
 		subject: entry.source,
 		javaSources: [entry.source],
-		evidence: evidence({ staticContracts: entry.convergence.evidence })
+		evidence: evidence({
+			bedrockRuntime: domainRuntime(entry),
+			platformScenarios: [perRecordPlatformScenario("domain", entry.sourceKey)],
+			staticContracts: entry.convergence.evidence,
+			staticTests: [perRecordContract("domain", entry.sourceKey)]
+		})
 	}));
 	const behaviors = javaBehaviorInventory.entries.map(entry => ({
 		id: `behavior:${entry.sourceKey}`,

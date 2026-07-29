@@ -153,6 +153,10 @@ C4 已完成。`data/p8-c4-semantic-differences.json` 以五条确定性决策�
 
 **退出条件：** 核心 `partial=0`、`missing=0`、`audit_pending=0`、`evidence pending=0`，且 gap ledger 核心缺口为零。
 
+### C5 实施结果（2026-07-29）
+
+C5 已完成。统一证据台账的 11,267 条记录均已链接：注册项以实际 Bedrock 标识或专用运行时为入口，领域项以其收敛产物为入口，且每条核心记录均具备唯一的逐项静态契约测试引用与 P8.6 待验收场景引用。`tests/p8-c5-parity-evidence.test.mjs` 会逐项拒绝丢失运行时、测试或平台场景的证据；台账 `pending=0`，核心 gap 仍为零。
+
 ## 10. C6：离线静态候选
 
 依次执行：
@@ -169,6 +173,10 @@ git diff --check
 候选报告必须包含 Git commit、包版本、SHA-256、十大功能域汇总、已知限制和 P8.6 场景版本。所有生成器连续运行两次不得产生差异。
 
 **退出条件：** 全部静态测试通过，包校验与构建通过，候选门禁通过，工作树除候选产物外保持干净。
+
+### C6 实施结果（2026-07-29）
+
+C6 已完成静态候选冻结。`candidate:p8-5` 通过完整 Node 测试、包校验与构建，生成候选 `0.1.0-ec3dbe04e70b`，产物为 `dist/createbedrock-0.1.0-ec3dbe04e70b.mcaddon`，报告为对应的 `p8-5-*.json`。该状态仍为 `pending_p8_6`：它证明离线台账和包结构闭合，不替代 Windows、Realm 与 PS 的真实平台验收。
 
 ## 11. P8.6：真实平台验收
 
