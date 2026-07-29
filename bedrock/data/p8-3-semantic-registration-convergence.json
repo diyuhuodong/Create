@@ -1,0 +1,842 @@
+{
+	"entries": [
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/blaze_burner.json",
+				"behavior_pack/blocks/lit_blaze_burner.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/materials/blaze-burner-runtime.js"
+			],
+			"rationale": "The Java heater state is split between unlit and lit burner blocks.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:blaze_heater",
+			"targets": [
+				"createbedrock:blaze_burner",
+				"createbedrock:lit_blaze_burner"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/small_bogey.json",
+				"behavior_pack/blocks/large_bogey.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/trains/rolling-stock-runtime.js",
+				"behavior_pack/scripts/trains/rolling-stock-state.js"
+			],
+			"rationale": "Small and large bogey blocks share one rolling-stock state model.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:bogey",
+			"targets": [
+				"createbedrock:small_bogey",
+				"createbedrock:large_bogey"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/linear_chassis.json",
+				"behavior_pack/blocks/secondary_linear_chassis.json",
+				"behavior_pack/blocks/radial_chassis.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/contraptions/chassis-runtime.js"
+			],
+			"rationale": "The Java chassis entity spans the three Bedrock chassis block forms.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:chassis",
+			"targets": [
+				"createbedrock:linear_chassis",
+				"createbedrock:secondary_linear_chassis",
+				"createbedrock:radial_chassis"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/copycat_panel.json",
+				"behavior_pack/blocks/copycat_step.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/materials/copycat-runtime.js"
+			],
+			"rationale": "Bedrock's stateful copycat implementation is represented by panel and step forms.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:copycat",
+			"targets": [
+				"createbedrock:copycat_panel",
+				"createbedrock:copycat_step"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/peculiar_bell.json",
+				"behavior_pack/blocks/haunted_bell.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/materials/bell-runtime.js"
+			],
+			"rationale": "Both Create bell variants share the Bedrock bell runtime.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:cursed_bell",
+			"targets": [
+				"createbedrock:peculiar_bell",
+				"createbedrock:haunted_bell"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/mechanical_drill.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/contraptions/contraption-actors-runtime.js"
+			],
+			"rationale": "The drill is executed as a contraption actor.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:drill",
+			"targets": [
+				"createbedrock:mechanical_drill"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/andesite_encased_cogwheel.json",
+				"behavior_pack/blocks/brass_encased_cogwheel.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/kinetics/kinetic-runtime.js"
+			],
+			"rationale": "Material-specific encased small cogwheels share the kinetic runtime.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:encased_cogwheel",
+			"targets": [
+				"createbedrock:andesite_encased_cogwheel",
+				"createbedrock:brass_encased_cogwheel"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/andesite_encased_large_cogwheel.json",
+				"behavior_pack/blocks/brass_encased_large_cogwheel.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/kinetics/kinetic-runtime.js"
+			],
+			"rationale": "Material-specific encased large cogwheels share the kinetic runtime.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:encased_large_cogwheel",
+			"targets": [
+				"createbedrock:andesite_encased_large_cogwheel",
+				"createbedrock:brass_encased_large_cogwheel"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/andesite_encased_shaft.json",
+				"behavior_pack/blocks/brass_encased_shaft.json",
+				"behavior_pack/blocks/metal_girder_encased_shaft.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/kinetics/kinetic-runtime.js"
+			],
+			"rationale": "The Java encased-shaft entity covers the Bedrock shaft variants.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:encased_shaft",
+			"targets": [
+				"createbedrock:andesite_encased_shaft",
+				"createbedrock:brass_encased_shaft",
+				"createbedrock:metal_girder_encased_shaft"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/factory_gauge.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/logistics/package-runtime.js"
+			],
+			"rationale": "The Bedrock factory gauge is the package-network endpoint equivalent.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:factory_panel",
+			"targets": [
+				"createbedrock:factory_gauge"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/display_board.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/materials/display-board-runtime.js"
+			],
+			"rationale": "The display board provides the persistent flap-display equivalent.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:flap_display",
+			"targets": [
+				"createbedrock:display_board"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/andesite_funnel.json",
+				"behavior_pack/blocks/brass_funnel.json",
+				"behavior_pack/blocks/andesite_belt_funnel.json",
+				"behavior_pack/blocks/brass_belt_funnel.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/logistics/depot-runtime.js"
+			],
+			"rationale": "Funnel forms are represented through the item-transport endpoint runtime.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:funnel",
+			"targets": [
+				"createbedrock:andesite_funnel",
+				"createbedrock:brass_funnel",
+				"createbedrock:andesite_belt_funnel",
+				"createbedrock:brass_belt_funnel"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/gantry_carriage.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/contraptions/linear-actuator-runtime.js"
+			],
+			"rationale": "The Java gantry pinion maps to the Bedrock gantry carriage actuator.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:gantry_pinion",
+			"targets": [
+				"createbedrock:gantry_carriage"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/mechanical_harvester.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/contraptions/contraption-actors-runtime.js"
+			],
+			"rationale": "The harvester is executed as a contraption actor.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:harvester",
+			"targets": [
+				"createbedrock:mechanical_harvester"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/creative_motor.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/kinetics/kinetic-runtime.js"
+			],
+			"rationale": "The creative motor is a Bedrock kinetic source.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:motor",
+			"targets": [
+				"createbedrock:creative_motor"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/mechanical_saw.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/processing/stage3-processing-runtime.js",
+				"behavior_pack/scripts/kinetics/kinetic-world.js"
+			],
+			"rationale": "The saw combines processing and kinetic-world behavior.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:saw",
+			"targets": [
+				"createbedrock:mechanical_saw"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/shaft.json",
+				"behavior_pack/blocks/cogwheel.json",
+				"behavior_pack/blocks/large_cogwheel.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/kinetics/kinetic-runtime.js"
+			],
+			"rationale": "Java's shared simple-kinetic entity is represented by its three concrete kinetic blocks.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:simple_kinetic",
+			"targets": [
+				"createbedrock:shaft",
+				"createbedrock:cogwheel",
+				"createbedrock:large_cogwheel"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/andesite_door.json",
+				"behavior_pack/blocks/brass_door.json",
+				"behavior_pack/blocks/copper_door.json",
+				"behavior_pack/blocks/framed_glass_door.json",
+				"behavior_pack/blocks/train_door.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/materials/sliding-door-runtime.js",
+				"behavior_pack/scripts/trains/rolling-stock-runtime.js"
+			],
+			"rationale": "Door variants share the sliding-door and train-door state models.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:sliding_door",
+			"targets": [
+				"createbedrock:andesite_door",
+				"createbedrock:brass_door",
+				"createbedrock:copper_door",
+				"createbedrock:framed_glass_door",
+				"createbedrock:train_door"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/andesite_table_cloth.json",
+				"behavior_pack/blocks/brass_table_cloth.json",
+				"behavior_pack/blocks/copper_table_cloth.json",
+				"behavior_pack/blocks/generated/p7_1/white_table_cloth.json",
+				"behavior_pack/blocks/generated/p7_1/orange_table_cloth.json",
+				"behavior_pack/blocks/generated/p7_1/magenta_table_cloth.json",
+				"behavior_pack/blocks/generated/p7_1/light_blue_table_cloth.json",
+				"behavior_pack/blocks/generated/p7_1/yellow_table_cloth.json",
+				"behavior_pack/blocks/generated/p7_1/lime_table_cloth.json",
+				"behavior_pack/blocks/generated/p7_1/pink_table_cloth.json",
+				"behavior_pack/blocks/generated/p7_1/gray_table_cloth.json",
+				"behavior_pack/blocks/generated/p7_1/light_gray_table_cloth.json",
+				"behavior_pack/blocks/generated/p7_1/cyan_table_cloth.json",
+				"behavior_pack/blocks/generated/p7_1/purple_table_cloth.json",
+				"behavior_pack/blocks/generated/p7_1/blue_table_cloth.json",
+				"behavior_pack/blocks/generated/p7_1/brown_table_cloth.json",
+				"behavior_pack/blocks/generated/p7_1/green_table_cloth.json",
+				"behavior_pack/blocks/generated/p7_1/red_table_cloth.json",
+				"behavior_pack/blocks/generated/p7_1/black_table_cloth.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/materials/table-cloth-runtime.js",
+				"behavior_pack/scripts/kernel/functional-color-families.js"
+			],
+			"rationale": "All metal and dyed table-cloth forms share the shop/display runtime.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:table_cloth",
+			"targets": [
+				"createbedrock:andesite_table_cloth",
+				"createbedrock:brass_table_cloth",
+				"createbedrock:copper_table_cloth",
+				"createbedrock:white_table_cloth",
+				"createbedrock:orange_table_cloth",
+				"createbedrock:magenta_table_cloth",
+				"createbedrock:light_blue_table_cloth",
+				"createbedrock:yellow_table_cloth",
+				"createbedrock:lime_table_cloth",
+				"createbedrock:pink_table_cloth",
+				"createbedrock:gray_table_cloth",
+				"createbedrock:light_gray_table_cloth",
+				"createbedrock:cyan_table_cloth",
+				"createbedrock:purple_table_cloth",
+				"createbedrock:blue_table_cloth",
+				"createbedrock:brown_table_cloth",
+				"createbedrock:green_table_cloth",
+				"createbedrock:red_table_cloth",
+				"createbedrock:black_table_cloth"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/copper_valve_handle.json",
+				"behavior_pack/blocks/generated/p7_1/white_valve_handle.json",
+				"behavior_pack/blocks/generated/p7_1/orange_valve_handle.json",
+				"behavior_pack/blocks/generated/p7_1/magenta_valve_handle.json",
+				"behavior_pack/blocks/generated/p7_1/light_blue_valve_handle.json",
+				"behavior_pack/blocks/generated/p7_1/yellow_valve_handle.json",
+				"behavior_pack/blocks/generated/p7_1/lime_valve_handle.json",
+				"behavior_pack/blocks/generated/p7_1/pink_valve_handle.json",
+				"behavior_pack/blocks/generated/p7_1/gray_valve_handle.json",
+				"behavior_pack/blocks/generated/p7_1/light_gray_valve_handle.json",
+				"behavior_pack/blocks/generated/p7_1/cyan_valve_handle.json",
+				"behavior_pack/blocks/generated/p7_1/purple_valve_handle.json",
+				"behavior_pack/blocks/generated/p7_1/blue_valve_handle.json",
+				"behavior_pack/blocks/generated/p7_1/brown_valve_handle.json",
+				"behavior_pack/blocks/generated/p7_1/green_valve_handle.json",
+				"behavior_pack/blocks/generated/p7_1/red_valve_handle.json",
+				"behavior_pack/blocks/generated/p7_1/black_valve_handle.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/fluids/fluid-runtime.js",
+				"behavior_pack/scripts/kernel/functional-color-families.js"
+			],
+			"rationale": "Copper and dyed valve handles act as equivalent fluid-control inputs.",
+			"relation": "one_to_many_composite",
+			"sourceKey": "block_entity:create:valve_handle",
+			"targets": [
+				"createbedrock:copper_valve_handle",
+				"createbedrock:white_valve_handle",
+				"createbedrock:orange_valve_handle",
+				"createbedrock:magenta_valve_handle",
+				"createbedrock:light_blue_valve_handle",
+				"createbedrock:yellow_valve_handle",
+				"createbedrock:lime_valve_handle",
+				"createbedrock:pink_valve_handle",
+				"createbedrock:gray_valve_handle",
+				"createbedrock:light_gray_valve_handle",
+				"createbedrock:cyan_valve_handle",
+				"createbedrock:purple_valve_handle",
+				"createbedrock:blue_valve_handle",
+				"createbedrock:brown_valve_handle",
+				"createbedrock:green_valve_handle",
+				"createbedrock:red_valve_handle",
+				"createbedrock:black_valve_handle"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/chocolate.json",
+				"behavior_pack/items/chocolate_bucket.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/fluids/fluid-registry.js",
+				"behavior_pack/scripts/fluids/fluid-runtime.js"
+			],
+			"rationale": "Chocolate is represented by a virtual fluid plus its placeable and bucket forms.",
+			"relation": "virtualized",
+			"sourceKey": "block:create:chocolate",
+			"targets": [
+				"createbedrock:chocolate",
+				"createbedrock:chocolate_bucket"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/honey.json",
+				"behavior_pack/items/honey_bucket.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/fluids/fluid-registry.js",
+				"behavior_pack/scripts/fluids/fluid-runtime.js"
+			],
+			"rationale": "Honey is represented by a virtual fluid plus its placeable and bucket forms.",
+			"relation": "virtualized",
+			"sourceKey": "block:create:honey",
+			"targets": [
+				"createbedrock:honey",
+				"createbedrock:honey_bucket"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/chocolate.json",
+				"behavior_pack/items/chocolate_bucket.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/fluids/fluid-registry.js",
+				"behavior_pack/scripts/fluids/fluid-runtime.js"
+			],
+			"rationale": "Bedrock has no custom fluid registry entry, so the fluid is virtualized through the fluid runtime.",
+			"relation": "virtualized",
+			"sourceKey": "fluid:create:chocolate",
+			"targets": [
+				"createbedrock:chocolate",
+				"createbedrock:chocolate_bucket"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/blocks/honey.json",
+				"behavior_pack/items/honey_bucket.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/fluids/fluid-registry.js",
+				"behavior_pack/scripts/fluids/fluid-runtime.js"
+			],
+			"rationale": "Bedrock has no custom fluid registry entry, so the fluid is virtualized through the fluid runtime.",
+			"relation": "virtualized",
+			"sourceKey": "fluid:create:honey",
+			"targets": [
+				"createbedrock:honey",
+				"createbedrock:honey_bucket"
+			]
+		},
+		{
+			"artifactPaths": [
+				null
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/fluids/fluid-registry.js",
+				"behavior_pack/scripts/fluids/fluid-runtime.js"
+			],
+			"rationale": "Potion fluid delegates to Bedrock's native potion item while retaining Create fluid transactions.",
+			"relation": "virtualized",
+			"sourceKey": "fluid:create:potion",
+			"targets": [
+				"minecraft:potion"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/builders_tea.json"
+			],
+			"behavior": "verified",
+			"behaviorPaths": [
+				"behavior_pack/scripts/fluids/fluid-registry.js",
+				"behavior_pack/scripts/fluids/fluid-runtime.js"
+			],
+			"rationale": "Tea is virtualized through the Create fluid runtime and Builder's Tea item.",
+			"relation": "virtualized",
+			"sourceKey": "fluid:create:tea",
+			"targets": [
+				"createbedrock:builders_tea"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/andesite_alloy.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:andesite_alloy",
+			"targets": [
+				"createbedrock:andesite_alloy"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/brass_ingot.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:brass_ingot",
+			"targets": [
+				"createbedrock:brass_ingot"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/chocolate_bucket.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:chocolate_bucket",
+			"targets": [
+				"createbedrock:chocolate_bucket"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/copper_nugget.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:copper_nugget",
+			"targets": [
+				"createbedrock:copper_nugget"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/copper_sheet.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:copper_sheet",
+			"targets": [
+				"createbedrock:copper_sheet"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/crushed_raw_copper.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:crushed_raw_copper",
+			"targets": [
+				"createbedrock:crushed_raw_copper"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/crushed_raw_gold.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:crushed_raw_gold",
+			"targets": [
+				"createbedrock:crushed_raw_gold"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/crushed_raw_iron.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:crushed_raw_iron",
+			"targets": [
+				"createbedrock:crushed_raw_iron"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/crushed_raw_zinc.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:crushed_raw_zinc",
+			"targets": [
+				"createbedrock:crushed_raw_zinc"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/golden_sheet.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:golden_sheet",
+			"targets": [
+				"createbedrock:golden_sheet"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/honey_bucket.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:honey_bucket",
+			"targets": [
+				"createbedrock:honey_bucket"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/incomplete_precision_mechanism.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:incomplete_precision_mechanism",
+			"targets": [
+				"createbedrock:incomplete_precision_mechanism"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/incomplete_track.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:incomplete_track",
+			"targets": [
+				"createbedrock:incomplete_track"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/iron_sheet.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:iron_sheet",
+			"targets": [
+				"createbedrock:iron_sheet"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/polished_rose_quartz.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:polished_rose_quartz",
+			"targets": [
+				"createbedrock:polished_rose_quartz"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/powdered_obsidian.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:powdered_obsidian",
+			"targets": [
+				"createbedrock:powdered_obsidian"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/precision_mechanism.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:precision_mechanism",
+			"targets": [
+				"createbedrock:precision_mechanism"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/raw_zinc.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:raw_zinc",
+			"targets": [
+				"createbedrock:raw_zinc"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/rose_quartz.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:rose_quartz",
+			"targets": [
+				"createbedrock:rose_quartz"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/sturdy_sheet.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:sturdy_sheet",
+			"targets": [
+				"createbedrock:sturdy_sheet"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/unprocessed_obsidian_sheet.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:unprocessed_obsidian_sheet",
+			"targets": [
+				"createbedrock:unprocessed_obsidian_sheet"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/wheat_flour.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:wheat_flour",
+			"targets": [
+				"createbedrock:wheat_flour"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/zinc_ingot.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:zinc_ingot",
+			"targets": [
+				"createbedrock:zinc_ingot"
+			]
+		},
+		{
+			"artifactPaths": [
+				"behavior_pack/items/zinc_nugget.json"
+			],
+			"behavior": "not_required",
+			"behaviorPaths": [],
+			"rationale": "The Bedrock item is acquired through the compiled recipe and material chain.",
+			"relation": "one_to_one",
+			"sourceKey": "item:create:zinc_nugget",
+			"targets": [
+				"createbedrock:zinc_nugget"
+			]
+		}
+	],
+	"generatedAt": "deterministic",
+	"generatedFrom": [
+		"data/p8-2-registration-convergence.json",
+		"data/recipes/recipe-ir.json",
+		"behavior_pack definitions and runtime scripts"
+	],
+	"schemaVersion": 1,
+	"summary": {
+		"resolved": 50,
+		"total": 50
+	}
+}

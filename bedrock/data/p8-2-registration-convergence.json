@@ -1,252 +1,252 @@
 {
 	"deferred": [
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:blaze_heater",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:bogey",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:chassis",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:copycat",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:cursed_bell",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:drill",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:encased_cogwheel",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:encased_large_cogwheel",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:encased_shaft",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:factory_panel",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:flap_display",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:funnel",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:gantry_pinion",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:harvester",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:motor",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:saw",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:simple_kinetic",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:sliding_door",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:table_cloth",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 must supply an explicit virtualized or composite mapping.",
+			"reason": "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping.",
 			"sourceKey": "block_entity:create:valve_handle",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "block:create:chocolate",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "block:create:honey",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "fluid:create:chocolate",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "fluid:create:honey",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "fluid:create:potion",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "fluid:create:tea",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:andesite_alloy",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:brass_ingot",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:chocolate_bucket",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:copper_nugget",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:copper_sheet",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:crushed_raw_copper",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:crushed_raw_gold",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:crushed_raw_iron",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:crushed_raw_zinc",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:golden_sheet",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:honey_bucket",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:incomplete_precision_mechanism",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:incomplete_track",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:iron_sheet",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:polished_rose_quartz",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:powdered_obsidian",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:precision_mechanism",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:raw_zinc",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:rose_quartz",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:sturdy_sheet",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:unprocessed_obsidian_sheet",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:wheat_flour",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:zinc_ingot",
 			"owner": "P8.3"
 		},
 		{
-			"reason": "No legacy static-verification record exists; P8.3 requires a dedicated semantic implementation.",
+			"reason": "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
 			"sourceKey": "item:create:zinc_nugget",
 			"owner": "P8.3"
 		}

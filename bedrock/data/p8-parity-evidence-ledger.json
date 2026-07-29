@@ -197494,10 +197494,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:blaze_heater",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:blaze_heater",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:blaze_heater",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -197506,7 +197506,8 @@
 				"bedrockRuntime": [],
 				"platformScenarios": [],
 				"resourceProjections": [
-					"createbedrock:blaze_burner"
+					"createbedrock:blaze_burner",
+					"createbedrock:lit_blaze_burner"
 				],
 				"staticContracts": [
 					"CONTENT-BLAZE-HEATER-BLOCK_ENTITY"
@@ -197517,10 +197518,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:bogey",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:bogey",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:bogey",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -197618,10 +197619,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:chassis",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:chassis",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:chassis",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -197791,10 +197792,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:copycat",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:copycat",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:copycat",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -197803,8 +197804,6 @@
 				"bedrockRuntime": [],
 				"platformScenarios": [],
 				"resourceProjections": [
-					"createbedrock:copycat_bars",
-					"createbedrock:copycat_base",
 					"createbedrock:copycat_panel",
 					"createbedrock:copycat_step"
 				],
@@ -197940,10 +197939,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:cursed_bell",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:cursed_bell",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:cursed_bell",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -197952,7 +197951,8 @@
 				"bedrockRuntime": [],
 				"platformScenarios": [],
 				"resourceProjections": [
-					"createbedrock:haunted_bell"
+					"createbedrock:haunted_bell",
+					"createbedrock:peculiar_bell"
 				],
 				"staticContracts": [
 					"CONTENT-CURSED-BELL-BLOCK_ENTITY"
@@ -198061,10 +198061,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:drill",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:drill",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:drill",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -198136,10 +198136,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:encased_cogwheel",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:encased_cogwheel",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:encased_cogwheel",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -198212,10 +198212,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:encased_large_cogwheel",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:encased_large_cogwheel",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:encased_large_cogwheel",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -198238,10 +198238,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:encased_shaft",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:encased_shaft",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:encased_shaft",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -198254,7 +198254,6 @@
 				"resourceProjections": [
 					"createbedrock:andesite_encased_shaft",
 					"createbedrock:brass_encased_shaft",
-					"createbedrock:encased_chain_drive",
 					"createbedrock:metal_girder_encased_shaft"
 				],
 				"staticContracts": [
@@ -198266,10 +198265,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:factory_panel",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:factory_panel",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:factory_panel",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -198316,10 +198315,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:flap_display",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:flap_display",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:flap_display",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -198439,10 +198438,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:funnel",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:funnel",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:funnel",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -198453,7 +198452,9 @@
 				],
 				"platformScenarios": [],
 				"resourceProjections": [
+					"createbedrock:andesite_belt_funnel",
 					"createbedrock:andesite_funnel",
+					"createbedrock:brass_belt_funnel",
 					"createbedrock:brass_funnel"
 				],
 				"staticContracts": [
@@ -198465,10 +198466,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:gantry_pinion",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:gantry_pinion",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:gantry_pinion",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -198615,10 +198616,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:harvester",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:harvester",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:harvester",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -199011,10 +199012,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:motor",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:motor",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:motor",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -199503,10 +199504,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:saw",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:saw",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:saw",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -199603,10 +199604,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:simple_kinetic",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:simple_kinetic",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:simple_kinetic",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -199630,10 +199631,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:sliding_door",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:sliding_door",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:sliding_door",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -199897,10 +199898,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:table_cloth",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:table_cloth",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:table_cloth",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -199910,8 +199911,24 @@
 				"platformScenarios": [],
 				"resourceProjections": [
 					"createbedrock:andesite_table_cloth",
+					"createbedrock:black_table_cloth",
+					"createbedrock:blue_table_cloth",
 					"createbedrock:brass_table_cloth",
-					"createbedrock:copper_table_cloth"
+					"createbedrock:brown_table_cloth",
+					"createbedrock:copper_table_cloth",
+					"createbedrock:cyan_table_cloth",
+					"createbedrock:gray_table_cloth",
+					"createbedrock:green_table_cloth",
+					"createbedrock:light_blue_table_cloth",
+					"createbedrock:light_gray_table_cloth",
+					"createbedrock:lime_table_cloth",
+					"createbedrock:magenta_table_cloth",
+					"createbedrock:orange_table_cloth",
+					"createbedrock:pink_table_cloth",
+					"createbedrock:purple_table_cloth",
+					"createbedrock:red_table_cloth",
+					"createbedrock:white_table_cloth",
+					"createbedrock:yellow_table_cloth"
 				],
 				"staticContracts": [
 					"CONTENT-TABLE-CLOTH-BLOCK_ENTITY"
@@ -200070,10 +200087,10 @@
 		},
 		{
 			"id": "registration:block_entity:create:valve_handle",
-			"owner": "P7.4/system_semantics",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block_entity:create:valve_handle",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:valve_handle",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllBlockEntityTypes.java"
@@ -200084,7 +200101,23 @@
 				],
 				"platformScenarios": [],
 				"resourceProjections": [
-					"createbedrock:copper_valve_handle"
+					"createbedrock:black_valve_handle",
+					"createbedrock:blue_valve_handle",
+					"createbedrock:brown_valve_handle",
+					"createbedrock:copper_valve_handle",
+					"createbedrock:cyan_valve_handle",
+					"createbedrock:gray_valve_handle",
+					"createbedrock:green_valve_handle",
+					"createbedrock:light_blue_valve_handle",
+					"createbedrock:light_gray_valve_handle",
+					"createbedrock:lime_valve_handle",
+					"createbedrock:magenta_valve_handle",
+					"createbedrock:orange_valve_handle",
+					"createbedrock:pink_valve_handle",
+					"createbedrock:purple_valve_handle",
+					"createbedrock:red_valve_handle",
+					"createbedrock:white_valve_handle",
+					"createbedrock:yellow_valve_handle"
 				],
 				"staticContracts": [
 					"FLUIDS-VALVE-HANDLE-BLOCK_ENTITY"
@@ -201733,10 +201766,10 @@
 		},
 		{
 			"id": "registration:block:create:chocolate",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block:create:chocolate",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:chocolate",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/chocolate.json",
@@ -201746,7 +201779,8 @@
 				"bedrockRuntime": [],
 				"platformScenarios": [],
 				"resourceProjections": [
-					"createbedrock:chocolate"
+					"createbedrock:chocolate",
+					"createbedrock:chocolate_bucket"
 				],
 				"staticContracts": [],
 				"staticTests": []
@@ -206413,10 +206447,10 @@
 		},
 		{
 			"id": "registration:block:create:honey",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "block:create:honey",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:honey",
 			"javaSources": [
 				"src/generated/resources/data/create/.wiki/block_info/honey.json",
@@ -206426,7 +206460,8 @@
 				"bedrockRuntime": [],
 				"platformScenarios": [],
 				"resourceProjections": [
-					"createbedrock:honey"
+					"createbedrock:honey",
+					"createbedrock:honey_bucket"
 				],
 				"staticContracts": [],
 				"staticTests": []
@@ -214679,10 +214714,10 @@
 		},
 		{
 			"id": "registration:fluid:create:chocolate",
-			"owner": "P7.3/fluid_heat",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "fluid:create:chocolate",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:chocolate",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllFluids.java"
@@ -214691,7 +214726,8 @@
 				"bedrockRuntime": [],
 				"platformScenarios": [],
 				"resourceProjections": [
-					"createbedrock:chocolate"
+					"createbedrock:chocolate",
+					"createbedrock:chocolate_bucket"
 				],
 				"staticContracts": [],
 				"staticTests": []
@@ -214700,10 +214736,10 @@
 		},
 		{
 			"id": "registration:fluid:create:honey",
-			"owner": "P7.3/fluid_heat",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "fluid:create:honey",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:honey",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllFluids.java"
@@ -214712,7 +214748,8 @@
 				"bedrockRuntime": [],
 				"platformScenarios": [],
 				"resourceProjections": [
-					"createbedrock:honey"
+					"createbedrock:honey",
+					"createbedrock:honey_bucket"
 				],
 				"staticContracts": [],
 				"staticTests": []
@@ -214721,10 +214758,10 @@
 		},
 		{
 			"id": "registration:fluid:create:potion",
-			"owner": "P7.3/fluid_heat",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "fluid:create:potion",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:potion",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllFluids.java"
@@ -214742,10 +214779,10 @@
 		},
 		{
 			"id": "registration:fluid:create:tea",
-			"owner": "P7.3/fluid_heat",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "fluid:create:tea",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:tea",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllFluids.java"
@@ -214763,10 +214800,10 @@
 		},
 		{
 			"id": "registration:item:create:andesite_alloy",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:andesite_alloy",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:andesite_alloy",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -214924,10 +214961,10 @@
 		},
 		{
 			"id": "registration:item:create:brass_ingot",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:brass_ingot",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:brass_ingot",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -215257,10 +215294,10 @@
 		},
 		{
 			"id": "registration:item:create:chocolate_bucket",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:chocolate_bucket",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:chocolate_bucket",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllFluids.java"
@@ -215445,10 +215482,10 @@
 		},
 		{
 			"id": "registration:item:create:copper_nugget",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:copper_nugget",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:copper_nugget",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -215466,10 +215503,10 @@
 		},
 		{
 			"id": "registration:item:create:copper_sheet",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:copper_sheet",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:copper_sheet",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -215577,10 +215614,10 @@
 		},
 		{
 			"id": "registration:item:create:crushed_raw_copper",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:crushed_raw_copper",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:crushed_raw_copper",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -215598,10 +215635,10 @@
 		},
 		{
 			"id": "registration:item:create:crushed_raw_gold",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:crushed_raw_gold",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:crushed_raw_gold",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -215619,10 +215656,10 @@
 		},
 		{
 			"id": "registration:item:create:crushed_raw_iron",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:crushed_raw_iron",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:crushed_raw_iron",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -215808,10 +215845,10 @@
 		},
 		{
 			"id": "registration:item:create:crushed_raw_zinc",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:crushed_raw_zinc",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:crushed_raw_zinc",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -216042,10 +216079,10 @@
 		},
 		{
 			"id": "registration:item:create:golden_sheet",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:golden_sheet",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:golden_sheet",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -216086,10 +216123,10 @@
 		},
 		{
 			"id": "registration:item:create:honey_bucket",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:honey_bucket",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:honey_bucket",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllFluids.java"
@@ -216130,10 +216167,10 @@
 		},
 		{
 			"id": "registration:item:create:incomplete_precision_mechanism",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:incomplete_precision_mechanism",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:incomplete_precision_mechanism",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -216151,10 +216188,10 @@
 		},
 		{
 			"id": "registration:item:create:incomplete_track",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:incomplete_track",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:incomplete_track",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -216172,10 +216209,10 @@
 		},
 		{
 			"id": "registration:item:create:iron_sheet",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:iron_sheet",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:iron_sheet",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -216393,10 +216430,10 @@
 		},
 		{
 			"id": "registration:item:create:polished_rose_quartz",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:polished_rose_quartz",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:polished_rose_quartz",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -216439,10 +216476,10 @@
 		},
 		{
 			"id": "registration:item:create:powdered_obsidian",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:powdered_obsidian",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:powdered_obsidian",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -216460,10 +216497,10 @@
 		},
 		{
 			"id": "registration:item:create:precision_mechanism",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:precision_mechanism",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:precision_mechanism",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -216733,10 +216770,10 @@
 		},
 		{
 			"id": "registration:item:create:raw_zinc",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:raw_zinc",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:raw_zinc",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -216800,10 +216837,10 @@
 		},
 		{
 			"id": "registration:item:create:rose_quartz",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:rose_quartz",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:rose_quartz",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -216965,10 +217002,10 @@
 		},
 		{
 			"id": "registration:item:create:sturdy_sheet",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:sturdy_sheet",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:sturdy_sheet",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -217076,10 +217113,10 @@
 		},
 		{
 			"id": "registration:item:create:unprocessed_obsidian_sheet",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:unprocessed_obsidian_sheet",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:unprocessed_obsidian_sheet",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -217147,10 +217184,10 @@
 		},
 		{
 			"id": "registration:item:create:wheat_flour",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:wheat_flour",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:wheat_flour",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -217214,10 +217251,10 @@
 		},
 		{
 			"id": "registration:item:create:zinc_ingot",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:zinc_ingot",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:zinc_ingot",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -217235,10 +217272,10 @@
 		},
 		{
 			"id": "registration:item:create:zinc_nugget",
-			"owner": "P7.1/content_and_acquisition",
+			"owner": "P8.3/semantic-registration",
 			"recordType": "registration",
 			"sourceKey": "item:create:zinc_nugget",
-			"status": "partial",
+			"status": "implemented",
 			"subject": "create:zinc_nugget",
 			"javaSources": [
 				"src/main/java/com/simibubi/create/AllItems.java"
@@ -217267,8 +217304,8 @@
 		"status": {
 			"audit_pending": 1319,
 			"deferred_compat": 114,
-			"implemented": 831,
-			"partial": 9003
+			"implemented": 881,
+			"partial": 8953
 		},
 		"total": 11267
 	}

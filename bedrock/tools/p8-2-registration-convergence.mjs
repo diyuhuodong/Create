@@ -91,6 +91,17 @@ export async function buildP82RegistrationConvergence({ bedrockRoot, catalog, ma
 		const matrixEntry = matrixEntries.get(catalogEntry.sourceKey);
 		let override = existing.get(catalogEntry.sourceKey);
 		const previouslyConverged = override?.p8Convergence?.package === "P8.2";
+		const convergedByP83 = override?.p8Semantic?.package === "P8.3";
+		if (convergedByP83) {
+			deferred.push({
+				reason: matrixEntry?.status === "static_verified"
+					? "The legacy static-verification record has no concrete mapped Bedrock target artifact; P8.3 supplies the explicit virtualized or composite mapping."
+					: matrixEntry ? `Matrix status is ${matrixEntry.status}; P8.3 supplies the dedicated semantic implementation.` : "No legacy static-verification record exists; P8.3 supplies the dedicated semantic implementation.",
+				sourceKey: catalogEntry.sourceKey,
+				owner: "P8.3"
+			});
+			continue;
+		}
 		const eligible = override?.status === "partial" || previouslyConverged || override === undefined;
 		if (!eligible)
 			continue;

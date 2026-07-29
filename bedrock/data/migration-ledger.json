@@ -103971,24 +103971,29 @@
 			"sourceKey": "block:create:cherry_window_pane"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "one_to_one",
+				"relation": "virtualized",
 				"targets": [
-					"createbedrock:chocolate"
+					"createbedrock:chocolate",
+					"createbedrock:chocolate_bucket"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:chocolate"
 			],
 			"javaIdentifier": "create:chocolate",
 			"kind": "block",
 			"legacyMatrix": null,
-			"sourceKey": "block:create:chocolate"
+			"sourceKey": "block:create:chocolate",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "Chocolate is represented by a virtual fluid plus its placeable and bucket forms."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -108631,24 +108636,29 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "one_to_one",
+				"relation": "virtualized",
 				"targets": [
-					"createbedrock:honey"
+					"createbedrock:honey",
+					"createbedrock:honey_bucket"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:honey"
 			],
 			"javaIdentifier": "create:honey",
 			"kind": "block",
 			"legacyMatrix": null,
-			"sourceKey": "block:create:honey"
+			"sourceKey": "block:create:honey",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "Honey is represented by a virtual fluid plus its placeable and bucket forms."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -116679,24 +116689,28 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:andesite_alloy"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:andesite_alloy"
 			],
 			"javaIdentifier": "create:andesite_alloy",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:andesite_alloy"
+			"sourceKey": "item:create:andesite_alloy",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -116859,24 +116873,28 @@
 			"sourceKey": "item:create:brass_hand"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:brass_ingot"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:brass_ingot"
 			],
 			"javaIdentifier": "create:brass_ingot",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:brass_ingot"
+			"sourceKey": "item:create:brass_ingot",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
 			"acquisition": "verified",
@@ -117223,24 +117241,28 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:chocolate_bucket"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:chocolate_bucket"
 			],
 			"javaIdentifier": "create:chocolate_bucket",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:chocolate_bucket"
+			"sourceKey": "item:create:chocolate_bucket",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -117423,44 +117445,52 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:copper_nugget"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:copper_nugget"
 			],
 			"javaIdentifier": "create:copper_nugget",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:copper_nugget"
+			"sourceKey": "item:create:copper_nugget",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:copper_sheet"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:copper_sheet"
 			],
 			"javaIdentifier": "create:copper_sheet",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:copper_sheet"
+			"sourceKey": "item:create:copper_sheet",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
 			"acquisition": "verified",
@@ -117559,64 +117589,76 @@
 			"sourceKey": "item:create:crushed_raw_aluminum"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:crushed_raw_copper"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:crushed_raw_copper"
 			],
 			"javaIdentifier": "create:crushed_raw_copper",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:crushed_raw_copper"
+			"sourceKey": "item:create:crushed_raw_copper",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:crushed_raw_gold"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:crushed_raw_gold"
 			],
 			"javaIdentifier": "create:crushed_raw_gold",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:crushed_raw_gold"
+			"sourceKey": "item:create:crushed_raw_gold",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:crushed_raw_iron"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:crushed_raw_iron"
 			],
 			"javaIdentifier": "create:crushed_raw_iron",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:crushed_raw_iron"
+			"sourceKey": "item:create:crushed_raw_iron",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -117779,24 +117821,28 @@
 			"sourceKey": "item:create:crushed_raw_uranium"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:crushed_raw_zinc"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:crushed_raw_zinc"
 			],
 			"javaIdentifier": "create:crushed_raw_zinc",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:crushed_raw_zinc"
+			"sourceKey": "item:create:crushed_raw_zinc",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -118027,24 +118073,28 @@
 			"sourceKey": "item:create:goggles"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:golden_sheet"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:golden_sheet"
 			],
 			"javaIdentifier": "create:golden_sheet",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:golden_sheet"
+			"sourceKey": "item:create:golden_sheet",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -118075,24 +118125,28 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:honey_bucket"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:honey_bucket"
 			],
 			"javaIdentifier": "create:honey_bucket",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:honey_bucket"
+			"sourceKey": "item:create:honey_bucket",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -118123,64 +118177,76 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:incomplete_precision_mechanism"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:incomplete_precision_mechanism"
 			],
 			"javaIdentifier": "create:incomplete_precision_mechanism",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:incomplete_precision_mechanism"
+			"sourceKey": "item:create:incomplete_precision_mechanism",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:incomplete_track"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:incomplete_track"
 			],
 			"javaIdentifier": "create:incomplete_track",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:incomplete_track"
+			"sourceKey": "item:create:incomplete_track",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:iron_sheet"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:iron_sheet"
 			],
 			"javaIdentifier": "create:iron_sheet",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:iron_sheet"
+			"sourceKey": "item:create:iron_sheet",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -118399,24 +118465,28 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:polished_rose_quartz"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:polished_rose_quartz"
 			],
 			"javaIdentifier": "create:polished_rose_quartz",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:polished_rose_quartz"
+			"sourceKey": "item:create:polished_rose_quartz",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
 			"acquisition": "verified",
@@ -118443,44 +118513,52 @@
 			"sourceKey": "item:create:potato_cannon"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:powdered_obsidian"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:powdered_obsidian"
 			],
 			"javaIdentifier": "create:powdered_obsidian",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:powdered_obsidian"
+			"sourceKey": "item:create:powdered_obsidian",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:precision_mechanism"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:precision_mechanism"
 			],
 			"javaIdentifier": "create:precision_mechanism",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:precision_mechanism"
+			"sourceKey": "item:create:precision_mechanism",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
 			"acquisition": "verified",
@@ -118723,24 +118801,28 @@
 			"sourceKey": "item:create:rare_vector_package"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:raw_zinc"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:raw_zinc"
 			],
 			"javaIdentifier": "create:raw_zinc",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:raw_zinc"
+			"sourceKey": "item:create:raw_zinc",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -118799,24 +118881,28 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:rose_quartz"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:rose_quartz"
 			],
 			"javaIdentifier": "create:rose_quartz",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:rose_quartz"
+			"sourceKey": "item:create:rose_quartz",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -118987,24 +119073,28 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:sturdy_sheet"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:sturdy_sheet"
 			],
 			"javaIdentifier": "create:sturdy_sheet",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:sturdy_sheet"
+			"sourceKey": "item:create:sturdy_sheet",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -119111,24 +119201,28 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:unprocessed_obsidian_sheet"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:unprocessed_obsidian_sheet"
 			],
 			"javaIdentifier": "create:unprocessed_obsidian_sheet",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:unprocessed_obsidian_sheet"
+			"sourceKey": "item:create:unprocessed_obsidian_sheet",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -119185,24 +119279,28 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:wheat_flour"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:wheat_flour"
 			],
 			"javaIdentifier": "create:wheat_flour",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:wheat_flour"
+			"sourceKey": "item:create:wheat_flour",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
 			"acquisition": "verified",
@@ -119249,116 +119347,142 @@
 			"sourceKey": "item:create:wrench"
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:zinc_ingot"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:zinc_ingot"
 			],
 			"javaIdentifier": "create:zinc_ingot",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:zinc_ingot"
+			"sourceKey": "item:create:zinc_ingot",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.1/content_and_acquisition",
+			"acquisition": "verified",
+			"behavior": "not_required",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "one_to_one",
 				"targets": [
 					"createbedrock:zinc_nugget"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [
 				"createbedrock:zinc_nugget"
 			],
 			"javaIdentifier": "create:zinc_nugget",
 			"kind": "item",
 			"legacyMatrix": null,
-			"sourceKey": "item:create:zinc_nugget"
+			"sourceKey": "item:create:zinc_nugget",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock item is acquired through the compiled recipe and material chain."
+			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.3/fluid_heat",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "virtualized",
 				"targets": [
-					"createbedrock:chocolate"
+					"createbedrock:chocolate",
+					"createbedrock:chocolate_bucket"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:chocolate",
 			"kind": "fluid",
 			"legacyMatrix": null,
-			"sourceKey": "fluid:create:chocolate"
+			"sourceKey": "fluid:create:chocolate",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "Bedrock has no custom fluid registry entry, so the fluid is virtualized through the fluid runtime."
+			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.3/fluid_heat",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "virtualized",
 				"targets": [
-					"createbedrock:honey"
+					"createbedrock:honey",
+					"createbedrock:honey_bucket"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:honey",
 			"kind": "fluid",
 			"legacyMatrix": null,
-			"sourceKey": "fluid:create:honey"
+			"sourceKey": "fluid:create:honey",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "Bedrock has no custom fluid registry entry, so the fluid is virtualized through the fluid runtime."
+			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.3/fluid_heat",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "virtualized",
 				"targets": [
 					"minecraft:potion"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:potion",
 			"kind": "fluid",
 			"legacyMatrix": null,
-			"sourceKey": "fluid:create:potion"
+			"sourceKey": "fluid:create:potion",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "Potion fluid delegates to Bedrock's native potion item while retaining Create fluid transactions."
+			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.3/fluid_heat",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
 				"relation": "virtualized",
 				"targets": [
 					"createbedrock:builders_tea"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:tea",
 			"kind": "fluid",
 			"legacyMatrix": null,
-			"sourceKey": "fluid:create:tea"
+			"sourceKey": "fluid:create:tea",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "Tea is virtualized through the Create fluid runtime and Builder's Tea item."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -119523,17 +119647,18 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
-					"createbedrock:blaze_burner"
+					"createbedrock:blaze_burner",
+					"createbedrock:lit_blaze_burner"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:blaze_heater",
 			"kind": "block_entity",
@@ -119542,21 +119667,25 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:blaze_heater"
+			"sourceKey": "block_entity:create:blaze_heater",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Java heater state is split between unlit and lit burner blocks."
+			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
 					"createbedrock:small_bogey",
 					"createbedrock:large_bogey"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:bogey",
 			"kind": "block_entity",
@@ -119565,7 +119694,11 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:bogey"
+			"sourceKey": "block_entity:create:bogey",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "Small and large bogey blocks share one rolling-stock state model."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -119652,19 +119785,19 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
 					"createbedrock:linear_chassis",
-					"createbedrock:radial_chassis",
-					"createbedrock:secondary_linear_chassis"
+					"createbedrock:secondary_linear_chassis",
+					"createbedrock:radial_chassis"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:chassis",
 			"kind": "block_entity",
@@ -119673,7 +119806,11 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:chassis"
+			"sourceKey": "block_entity:create:chassis",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Java chassis entity spans the three Bedrock chassis block forms."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -119844,20 +119981,18 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
-					"createbedrock:copycat_base",
 					"createbedrock:copycat_panel",
-					"createbedrock:copycat_step",
-					"createbedrock:copycat_bars"
+					"createbedrock:copycat_step"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:copycat",
 			"kind": "block_entity",
@@ -119866,7 +120001,11 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:copycat"
+			"sourceKey": "block_entity:create:copycat",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "Bedrock's stateful copycat implementation is represented by panel and step forms."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -120009,17 +120148,18 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
+					"createbedrock:peculiar_bell",
 					"createbedrock:haunted_bell"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:cursed_bell",
 			"kind": "block_entity",
@@ -120028,7 +120168,11 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:cursed_bell"
+			"sourceKey": "block_entity:create:cursed_bell",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "Both Create bell variants share the Bedrock bell runtime."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -120143,17 +120287,17 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
 					"createbedrock:mechanical_drill"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:drill",
 			"kind": "block_entity",
@@ -120162,7 +120306,11 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:drill"
+			"sourceKey": "block_entity:create:drill",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The drill is executed as a contraption actor."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -120221,18 +120369,18 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
 					"createbedrock:andesite_encased_cogwheel",
 					"createbedrock:brass_encased_cogwheel"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:encased_cogwheel",
 			"kind": "block_entity",
@@ -120241,7 +120389,11 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:encased_cogwheel"
+			"sourceKey": "block_entity:create:encased_cogwheel",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "Material-specific encased small cogwheels share the kinetic runtime."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -120300,18 +120452,18 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
 					"createbedrock:andesite_encased_large_cogwheel",
 					"createbedrock:brass_encased_large_cogwheel"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:encased_large_cogwheel",
 			"kind": "block_entity",
@@ -120320,23 +120472,26 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:encased_large_cogwheel"
+			"sourceKey": "block_entity:create:encased_large_cogwheel",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "Material-specific encased large cogwheels share the kinetic runtime."
+			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
 					"createbedrock:andesite_encased_shaft",
 					"createbedrock:brass_encased_shaft",
-					"createbedrock:encased_chain_drive",
 					"createbedrock:metal_girder_encased_shaft"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:encased_shaft",
 			"kind": "block_entity",
@@ -120345,20 +120500,24 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:encased_shaft"
+			"sourceKey": "block_entity:create:encased_shaft",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Java encased-shaft entity covers the Bedrock shaft variants."
+			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
 					"createbedrock:factory_gauge"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:factory_panel",
 			"kind": "block_entity",
@@ -120367,7 +120526,11 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:factory_panel"
+			"sourceKey": "block_entity:create:factory_panel",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Bedrock factory gauge is the package-network endpoint equivalent."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -120398,17 +120561,17 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
 					"createbedrock:display_board"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:flap_display",
 			"kind": "block_entity",
@@ -120417,7 +120580,11 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:flap_display"
+			"sourceKey": "block_entity:create:flap_display",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The display board provides the persistent flap-display equivalent."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -120532,18 +120699,20 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
 					"createbedrock:andesite_funnel",
-					"createbedrock:brass_funnel"
+					"createbedrock:brass_funnel",
+					"createbedrock:andesite_belt_funnel",
+					"createbedrock:brass_belt_funnel"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:funnel",
 			"kind": "block_entity",
@@ -120552,20 +120721,24 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:funnel"
+			"sourceKey": "block_entity:create:funnel",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "Funnel forms are represented through the item-transport endpoint runtime."
+			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
 					"createbedrock:gantry_carriage"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:gantry_pinion",
 			"kind": "block_entity",
@@ -120574,7 +120747,11 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:gantry_pinion"
+			"sourceKey": "block_entity:create:gantry_pinion",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The Java gantry pinion maps to the Bedrock gantry carriage actuator."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -120717,17 +120894,17 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
 					"createbedrock:mechanical_harvester"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:harvester",
 			"kind": "block_entity",
@@ -120736,7 +120913,11 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:harvester"
+			"sourceKey": "block_entity:create:harvester",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The harvester is executed as a contraption actor."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -121159,17 +121340,17 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
 					"createbedrock:creative_motor"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:motor",
 			"kind": "block_entity",
@@ -121178,7 +121359,11 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:motor"
+			"sourceKey": "block_entity:create:motor",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The creative motor is a Bedrock kinetic source."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -121713,17 +121898,17 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
 					"createbedrock:mechanical_saw"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:saw",
 			"kind": "block_entity",
@@ -121732,7 +121917,11 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:saw"
+			"sourceKey": "block_entity:create:saw",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "The saw combines processing and kinetic-world behavior."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -121819,19 +122008,19 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
 					"createbedrock:shaft",
 					"createbedrock:cogwheel",
 					"createbedrock:large_cogwheel"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:simple_kinetic",
 			"kind": "block_entity",
@@ -121840,14 +122029,18 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:simple_kinetic"
+			"sourceKey": "block_entity:create:simple_kinetic",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "Java's shared simple-kinetic entity is represented by its three concrete kinetic blocks."
+			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
 					"createbedrock:andesite_door",
 					"createbedrock:brass_door",
@@ -121856,8 +122049,8 @@
 					"createbedrock:train_door"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:sliding_door",
 			"kind": "block_entity",
@@ -121866,7 +122059,11 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:sliding_door"
+			"sourceKey": "block_entity:create:sliding_door",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "Door variants share the sliding-door and train-door state models."
+			}
 		},
 		{
 			"acquisition": "partial",
@@ -122149,19 +122346,35 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
 					"createbedrock:andesite_table_cloth",
 					"createbedrock:brass_table_cloth",
-					"createbedrock:copper_table_cloth"
+					"createbedrock:copper_table_cloth",
+					"createbedrock:white_table_cloth",
+					"createbedrock:orange_table_cloth",
+					"createbedrock:magenta_table_cloth",
+					"createbedrock:light_blue_table_cloth",
+					"createbedrock:yellow_table_cloth",
+					"createbedrock:lime_table_cloth",
+					"createbedrock:pink_table_cloth",
+					"createbedrock:gray_table_cloth",
+					"createbedrock:light_gray_table_cloth",
+					"createbedrock:cyan_table_cloth",
+					"createbedrock:purple_table_cloth",
+					"createbedrock:blue_table_cloth",
+					"createbedrock:brown_table_cloth",
+					"createbedrock:green_table_cloth",
+					"createbedrock:red_table_cloth",
+					"createbedrock:black_table_cloth"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:table_cloth",
 			"kind": "block_entity",
@@ -122170,7 +122383,11 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:table_cloth"
+			"sourceKey": "block_entity:create:table_cloth",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "All metal and dyed table-cloth forms share the shop/display runtime."
+			}
 		},
 		{
 			"acquisition": "not_required",
@@ -122335,17 +122552,33 @@
 			}
 		},
 		{
-			"acquisition": "partial",
-			"behavior": "partial",
-			"family": "P7.4/system_semantics",
+			"acquisition": "verified",
+			"behavior": "verified",
+			"family": "P8.3/semantic-registration",
 			"mapping": {
-				"relation": "virtualized",
+				"relation": "one_to_many_composite",
 				"targets": [
-					"createbedrock:copper_valve_handle"
+					"createbedrock:copper_valve_handle",
+					"createbedrock:white_valve_handle",
+					"createbedrock:orange_valve_handle",
+					"createbedrock:magenta_valve_handle",
+					"createbedrock:light_blue_valve_handle",
+					"createbedrock:yellow_valve_handle",
+					"createbedrock:lime_valve_handle",
+					"createbedrock:pink_valve_handle",
+					"createbedrock:gray_valve_handle",
+					"createbedrock:light_gray_valve_handle",
+					"createbedrock:cyan_valve_handle",
+					"createbedrock:purple_valve_handle",
+					"createbedrock:blue_valve_handle",
+					"createbedrock:brown_valve_handle",
+					"createbedrock:green_valve_handle",
+					"createbedrock:red_valve_handle",
+					"createbedrock:black_valve_handle"
 				]
 			},
-			"resources": "partial",
-			"status": "partial",
+			"resources": "verified",
+			"status": "implemented",
 			"candidateTargets": [],
 			"javaIdentifier": "create:valve_handle",
 			"kind": "block_entity",
@@ -122354,7 +122587,11 @@
 				"resourceStatus": "partial",
 				"status": "static_verified"
 			},
-			"sourceKey": "block_entity:create:valve_handle"
+			"sourceKey": "block_entity:create:valve_handle",
+			"p8Semantic": {
+				"package": "P8.3",
+				"source": "Copper and dyed valve handles act as equivalent fluid-control inputs."
+			}
 		},
 		{
 			"acquisition": "partial",

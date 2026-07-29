@@ -23,8 +23,11 @@ test("P8.2 upgrades only registrations corroborated by matrix, target artifacts,
 		assert.equal(registration?.resources, "verified");
 		assert.equal(registration?.behavior, entry.behavior);
 	}
-	for (const entry of convergence.deferred)
-		assert.equal(registrations.get(entry.sourceKey)?.status, "partial");
+	for (const entry of convergence.deferred) {
+		const registration = registrations.get(entry.sourceKey);
+		const semanticOverride = overrides.entries.find(override => override.sourceKey === entry.sourceKey)?.p8Semantic;
+		assert.equal(registration?.status, semanticOverride?.package === "P8.3" ? "implemented" : "partial");
+	}
 	assert.equal(convergence.deferred.filter(entry => entry.reason.includes("no concrete mapped Bedrock target artifact")).length, 20);
 	assert.equal(convergence.deferred.filter(entry => entry.reason.includes("No legacy static-verification record exists")).length, 30);
 });

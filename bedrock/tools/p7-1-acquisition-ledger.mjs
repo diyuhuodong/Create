@@ -122,7 +122,8 @@ export async function buildP71AcquisitionLedger({ bedrockRoot }) {
 	const outputs = await recipeOutputs(bedrockRoot, ["behavior_pack/recipes", "data/recipes"]);
 	const identifiers = new Set();
 	for (const entry of ledger.registrationEntries)
-		if (entry.family === "P7.1/content_and_acquisition" && entry.status === "partial")
+		if ((entry.family === "P7.1/content_and_acquisition" && entry.status === "partial")
+			|| (entry.p8Semantic?.package === "P8.3" && (entry.kind === "item" || ["block:create:chocolate", "block:create:honey"].includes(entry.sourceKey))))
 			for (const target of entry.mapping.targets)
 				identifiers.add(target);
 	const entries = [...identifiers].sort().map(identifier => {
