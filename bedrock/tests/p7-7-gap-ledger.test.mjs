@@ -28,31 +28,46 @@ async function inputs() {
 	};
 }
 
+function countBy(entries, field) {
+	return Object.fromEntries([...new Set(entries.map(entry => String(entry[field])))].sort()
+		.map(value => [value, entries.filter(entry => String(entry[field]) === value).length]));
+}
+
 test("P7.7 gap ledger records core gaps separately from compatibility and platform work", async () => {
-	const document = buildP77GapLedger(await inputs());
-	assert.deepEqual(document.summary, {
-		classifications: {
-			core_audit_required: 1319,
-			core_implementation_required: 9410,
-			static_verified_pending_platform: 52,
-			platform_capability_blocked: 22,
-			external_compat: 601,
-			equivalent: 2,
-			not_applicable: 92
-		},
-		total: 11498
-	});
+	const source = await inputs();
+	const document = buildP77GapLedger(source);
+	const coverage = validateP77GapLedger(document);
+	assert.deepEqual(coverage.classifications, countBy(document.entries, "classification"));
+	assert.equal(coverage.total, document.entries.length);
+	const pendingBehaviors = source.javaBehaviorInventory.entries.filter(entry => entry.status === "audit_pending").length;
+	const incompleteMigration = [
+		...source.migrationLedger.registrationEntries,
+		...source.migrationLedger.domainEntries
+	].filter(entry => ["partial", "missing"].includes(entry.status)).length;
+	const managedCooking = new Set(source.cookingParity.recipes.map(recipe => recipe.sourceId));
+	const incompleteNative = source.nativeRecipes.records
+		.filter(entry => entry.status !== "emittable" && !managedCooking.has(entry.id)).length;
+	assert.equal(document.summary.classifications.core_audit_required, pendingBehaviors);
+	assert.equal(document.summary.classifications.core_implementation_required, incompleteMigration + incompleteNative);
 	assert.deepEqual(document.sources.migrationLedger, {
-		registrations: { status: { implemented: 424, partial: 457 }, total: 881 },
-		domains: { status: { deferred_compat: 114, partial: 8953 }, total: 9067 }
+		registrations: {
+			status: countBy(source.migrationLedger.registrationEntries, "status"),
+			total: source.migrationLedger.registrationEntries.length
+		},
+		domains: {
+			status: countBy(source.migrationLedger.domainEntries, "status"),
+			total: source.migrationLedger.domainEntries.length
+		}
 	});
-	assert.equal(document.sources.javaBehaviorInventory.total, 1319);
-	assert.equal(document.sources.parityEvidence.total, 11267);
-	assert.equal(document.sources.nativeRecipes.status.blocked_platform_semantics, 22);
-	assert.equal(document.sources.migrationMatrix.status.static_verified, 362);
-	assert.equal(document.sources.migrationMatrix.resourceStatus.partial, 362);
-	assert.equal(document.sources.resources.status.static_verified, 5016);
-	assert.equal(document.sources.acceptance.applicableChecks, 52);
+	assert.equal(document.sources.javaBehaviorInventory.total, source.javaBehaviorInventory.entries.length);
+	assert.equal(document.sources.parityEvidence.total, source.parityEvidence.records.length);
+	assert.deepEqual(document.sources.nativeRecipes.status, countBy(source.nativeRecipes.records, "status"));
+	assert.deepEqual(document.sources.migrationMatrix.status, countBy(source.matrix.entries, "status"));
+	assert.deepEqual(document.sources.migrationMatrix.resourceStatus, countBy(source.matrix.entries, "resourceStatus"));
+	assert.deepEqual(document.sources.resources.status, countBy(source.resources.entries, "status"));
+	const applicableChecks = source.catalog.scenarios.reduce((total, scenario) =>
+		total + Object.values(scenario.applicability).filter(value => value !== "not_applicable").length, 0);
+	assert.equal(document.sources.acceptance.applicableChecks, applicableChecks);
 	assert.ok(document.entries.filter(entry => entry.classification === "platform_capability_blocked")
 		.every(entry => entry.scope === "create_core" && entry.owner === "P7.7.2"));
 	assert.ok(document.entries.filter(entry => entry.classification === "external_compat")

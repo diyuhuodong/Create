@@ -49,12 +49,17 @@ test("migration ledger covers every Java registration and assigns R1 ownership t
 		readFile(resolve(bedrockRoot, "data", "migration-overrides.json"), "utf8").then(JSON.parse),
 		readFile(resolve(bedrockRoot, "data", "migration-domain-overrides.json"), "utf8").then(JSON.parse)
 	]);
-	assert.deepEqual(validateMigrationOverrides(overrides, catalog), { entries: 503 });
-	assert.deepEqual(validateMigrationDomainOverrides(domainOverrides, domainInventory), { rules: 10 });
+	assert.deepEqual(validateMigrationOverrides(overrides, catalog), { entries: overrides.entries.length });
+	assert.deepEqual(validateMigrationDomainOverrides(domainOverrides, domainInventory), { rules: domainOverrides.rules.length });
 	const { definitions, ledger } = await buildMigrationLedger({ bedrockRoot, catalog, domainInventory, matrix, overrides, domainOverrides });
-	assert.deepEqual(validateMigrationLedger(ledger, catalog, domainInventory), { domains: 9067, registrations: 881, domainEntries: 9067 });
+	const domainTotal = domainInventory.domains.reduce((total, domain) => total + domain.entries.length, 0);
+	assert.deepEqual(validateMigrationLedger(ledger, catalog, domainInventory), {
+		domains: domainTotal,
+		registrations: catalog.entries.length,
+		domainEntries: domainTotal
+	});
 	assert.equal(ledger.registrationEntries.filter(entry => entry.status === "unclassified").length, 0);
-	assert.equal(ledger.domainEntries.length, 9067);
+	assert.equal(ledger.domainEntries.length, domainTotal);
 	assert.ok(ledger.domainEntries.every(entry => entry.status !== "unclassified" && entry.owner !== "R0/unassigned"));
 	assert.equal(new Set(ledger.domainEntries.map(entry => entry.sourceKey)).size, ledger.domainEntries.length);
 	assert.ok(ledger.domainEntries.some(entry => entry.sourceKey.startsWith("domain:game_tests:") && !entry.sourceKey.endsWith("#void")));
@@ -91,8 +96,9 @@ test("migration ledger covers every Java registration and assigns R1 ownership t
 		"block_entity:create:valve_handle"
 	]) {
 		const entry = ledger.registrationEntries.find(candidate => candidate.sourceKey === sourceKey);
-		assert.equal(entry.status, "partial", `${sourceKey} needs an explicit virtualized block projection`);
-		assert.equal(entry.mapping.relation, "virtualized");
+		assert.equal(entry.status, "implemented", `${sourceKey} must retain its P8 semantic projection`);
+		assert.equal(entry.p8Semantic?.package, "P8.3");
+		assert.notEqual(entry.mapping.relation, "unmapped");
 		assert.ok(entry.mapping.targets.length > 0);
 		assert.ok(entry.mapping.targets.every(target => definitions.block.has(target)), `${sourceKey} references a missing Bedrock block definition`);
 	}

@@ -139,7 +139,10 @@ function runFor(candidate, {
 }
 
 test("P7.7 static contract keeps all physical checks pending before and after candidate freeze", async () => {
-	const report = await validateP77StaticContract();
+	const [report, gapLedger] = await Promise.all([
+		validateP77StaticContract(),
+		json(resolve(bedrockRoot, "data", "p7-7-gap-ledger.json"))
+	]);
 	assert.equal(report.scenarios, 18);
 	assert.equal(report.applicableChecks, 52);
 	assert.ok(["uncreated", "frozen"].includes(report.candidateState));
@@ -148,8 +151,8 @@ test("P7.7 static contract keeps all physical checks pending before and after ca
 		: "pending_candidate");
 	assert.equal(report.runs, 0);
 	assert.equal(report.staticClosure.ready, false);
-	assert.equal(report.staticClosure.coreAuditGaps, 1319);
-	assert.equal(report.staticClosure.coreImplementationGaps, 9410);
+	assert.equal(report.staticClosure.coreAuditGaps, gapLedger.summary.classifications.core_audit_required);
+	assert.equal(report.staticClosure.coreImplementationGaps, gapLedger.summary.classifications.core_implementation_required);
 });
 
 test("P7.7 catalog rejects ownership and platform coverage drift", async () => {

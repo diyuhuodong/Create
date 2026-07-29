@@ -1,0 +1,118 @@
+{
+	"schemaVersion": 1,
+	"generatedAt": "deterministic",
+	"generatedFrom": [
+		"data/p7-1-acquisition-ledger.json",
+		"data/java-behavior-inventory.json",
+		"data/domain-inventory.json",
+		"data/p7-7-gap-ledger.json",
+		"data/migration-ledger.json",
+		"data/p8-parity-evidence-ledger.json",
+		"data/java-registration-catalog.json"
+	],
+	"javaBaseline": "Create 6.0.11 / Minecraft Java 1.21.1",
+	"authoritativeCounts": {
+		"behaviors": 1319,
+		"domains": 9067,
+		"registrations": 881
+	},
+	"documents": [
+		{
+			"counts": {
+				"entries": 26,
+				"missing": 0
+			},
+			"id": "acquisition",
+			"path": "data/p7-1-acquisition-ledger.json",
+			"schemaVersion": 1,
+			"sha256": "953c6800baf799c13e9687eed2d30ab202ff9409d944cea0609309823ec0fd9b"
+		},
+		{
+			"counts": {
+				"entries": 1319,
+				"status": {
+					"audit_pending": 1319
+				}
+			},
+			"id": "behaviorInventory",
+			"path": "data/java-behavior-inventory.json",
+			"schemaVersion": 1,
+			"sha256": "71d47e5f575bb7c4c9fee8c18cb2c87414cc72ace9349faa1004da3f7a6db6d5"
+		},
+		{
+			"counts": {
+				"entries": 9067
+			},
+			"id": "domainInventory",
+			"path": "data/domain-inventory.json",
+			"schemaVersion": 2,
+			"sha256": "304ef23adff3c4b358d209a642817899c6dc0a8962a2c186a904da65be6394e7"
+		},
+		{
+			"counts": {
+				"classifications": {
+					"core_audit_required": 1319,
+					"core_implementation_required": 8953,
+					"static_verified_pending_platform": 52,
+					"platform_capability_blocked": 22,
+					"external_compat": 601,
+					"equivalent": 2,
+					"not_applicable": 92
+				},
+				"entries": 11041
+			},
+			"id": "gapLedger",
+			"path": "data/p7-7-gap-ledger.json",
+			"schemaVersion": 3,
+			"sha256": "175b98c8ba15d4041f78c29b1d63fcf4034d731018e1fbe21b0379a23d7df32a"
+		},
+		{
+			"counts": {
+				"domains": 9067,
+				"domainStatus": {
+					"deferred_compat": 114,
+					"partial": 8953
+				},
+				"registrations": 881,
+				"registrationStatus": {
+					"implemented": 881
+				}
+			},
+			"id": "migrationLedger",
+			"path": "data/migration-ledger.json",
+			"schemaVersion": 2,
+			"sha256": "35b99e15529bc3e70fb786fcf6e83a7fb6cf6e183acc64a54f65babfc42d2874"
+		},
+		{
+			"counts": {
+				"evidenceState": {
+					"pending": 11267
+				},
+				"records": 11267
+			},
+			"id": "parityEvidence",
+			"path": "data/p8-parity-evidence-ledger.json",
+			"schemaVersion": 1,
+			"sha256": "d157c3e1defbd72e5718cbd3492adeebdf4d69451c9b836ec7c717022f6c78d3"
+		},
+		{
+			"counts": {
+				"entries": 881
+			},
+			"id": "registrationCatalog",
+			"path": "data/java-registration-catalog.json",
+			"schemaVersion": 1,
+			"sha256": "e198cbd134cba2c37d43e4de784e10262cfeb9cf2e0cee25db525776538fbff5"
+		}
+	],
+	"openResponsibilities": [
+		{
+			"id": "C1/acquisition-scope",
+			"observedEntries": 26,
+			"owner": "P8-C1",
+			"reason": "The acquisition ledger currently follows legacy partial-registration selection and must be rebuilt from the complete survival-content projection.",
+			"state": "open"
+		}
+	],
+	"fingerprint": "c23df1531de1487729d5641dadcaa2284258cbf6830a1b3b051556bc261a46ac"
+}

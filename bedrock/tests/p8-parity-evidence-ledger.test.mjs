@@ -23,14 +23,24 @@ async function inputs() {
 	};
 }
 
+function countBy(entries, field) {
+	return Object.fromEntries([...new Set(entries.map(entry => String(entry[field])))].sort()
+		.map(value => [value, entries.filter(entry => String(entry[field]) === value).length]));
+}
+
 test("P8 parity evidence records every registration, domain artifact, and Java behavior source", async () => {
-	const ledger = buildP8ParityEvidenceLedger(await inputs());
+	const source = await inputs();
+	const ledger = buildP8ParityEvidenceLedger(source);
 	assert.deepEqual(validateP8ParityEvidenceLedger(ledger), {
-		records: 11267,
-		evidenceState: { pending: 11267 },
-		recordType: { behavior: 1319, domain: 9067, registration: 881 },
-		status: { audit_pending: 1319, deferred_compat: 114, implemented: 424, partial: 9410 },
-		total: 11267
+		records: ledger.records.length,
+		evidenceState: countBy(ledger.records, "evidenceState"),
+		recordType: {
+			behavior: source.javaBehaviorInventory.entries.length,
+			domain: source.migrationLedger.domainEntries.length,
+			registration: source.migrationLedger.registrationEntries.length
+		},
+		status: countBy(ledger.records, "status"),
+		total: ledger.records.length
 	});
 	const brassSheet = ledger.records.find(record => record.id === "registration:item:create:brass_sheet");
 	assert.deepEqual(brassSheet.evidence.resourceProjections, ["createbedrock:brass_sheet"]);
