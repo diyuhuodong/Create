@@ -37,6 +37,8 @@ test("P7.7 static closeout refuses a dirty source and treats only CodeGraph as e
 	assert.match(closeout.requiredActions[0], /Commit or remove/);
 });
 
-test("P7.7 current repository closeout refuses to claim static closure while P8 parity gaps are open", async () => {
-	await assert.rejects(() => inspectP77StaticCloseout(), /passed static closure contract/);
+test("P7.7 current repository closeout recognizes C3's closed core behavior audit", async () => {
+	const closeout = await inspectP77StaticCloseout();
+	assert.equal(closeout.staticState, "static_verified");
+	assert.equal(closeout.platformReadiness, "platform_validation_pending");
 });

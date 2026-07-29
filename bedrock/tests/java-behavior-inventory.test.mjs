@@ -15,7 +15,7 @@ test("Java behavior inventory covers content, worldgen, and behavior registratio
 	assert.deepEqual(validateJavaBehaviorInventory(inventory), {
 		entries: 1319,
 		areas: inventory.summary.areas,
-		status: { audit_pending: 1319 },
+		status: inventory.summary.status,
 		total: 1319
 	});
 	const sourceKeys = new Set(inventory.entries.map(entry => entry.sourceKey));
@@ -26,9 +26,18 @@ test("Java behavior inventory covers content, worldgen, and behavior registratio
 		"behavior:src/main/java/com/simibubi/create/AllMovementBehaviours.java"
 	])
 		assert.ok(sourceKeys.has(sourceKey), `behavior inventory is missing ${sourceKey}`);
-	assert.ok(inventory.entries.every(entry => entry.evidence.bedrockRuntime.length === 0
-		&& entry.evidence.staticTests.length === 0
-		&& entry.evidence.platformScenarios.length === 0));
+	assert.equal(inventory.summary.status.audit_pending ?? 0, 0);
+	assert.equal(inventory.summary.status.implementation_required ?? 0, 0);
+	assert.equal(inventory.entries.filter(entry => entry.status === "equivalent").length, 945);
+	assert.equal(inventory.entries.filter(entry => entry.status === "implemented_with_documented_difference").length, 329);
+	assert.equal(inventory.entries.filter(entry => entry.status === "not_applicable").length, 45);
+	assert.equal(new Set(inventory.entries.flatMap(entry => entry.evidence.platformScenarios)).size, inventory.entries.length);
+	for (const entry of inventory.entries) {
+		assert.ok(entry.contract.includes(entry.source));
+		assert.ok(entry.rationale.length > 0);
+		for (const path of [...entry.evidence.bedrockRuntime, ...entry.evidence.staticTests])
+			await readFile(resolve(bedrockRoot, path), "utf8");
+	}
 	const generated = await readFile(resolve(bedrockRoot, "data", "java-behavior-inventory.json"), "utf8").then(JSON.parse);
 	assert.deepEqual(generated, inventory);
 });

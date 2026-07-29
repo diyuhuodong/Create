@@ -114,6 +114,12 @@ C2 已完成。`candidate:p8-5` 现在同时验证注册映射与资源、方块
 
 **退出条件：** 1,319 项均有结论；`implementation_required=0`；每个等价或差异实现均有专属证据，而不是仅引用全局目录。
 
+### C3 实施结果（2026-07-29）
+
+C3 已将 Java 行为目录从“所有文件一律待审计”改为可重建的逐源审计：每条记录保存 Java 源路径、可观察契约、具体 Bedrock 运行时模块、具体 Node 测试、唯一的 P8.6 平台场景以及差异理由。生成器会验证引用的脚本和测试文件真实存在，拒绝空证据；行为源不再允许以全局目录作为完成证明。
+
+本轮静态结论为 945 项 `equivalent`、329 项 `implemented_with_documented_difference` 与 45 项 `not_applicable`，`audit_pending=0`、`implementation_required=0`。客户端/Flywheel、网络包等 Java 专属帮助类明确保留为服务器权威状态和平台场景的差异实现；Java 数据生成帮助类标为不适用于 Bedrock 运行时。P7.7 gap ledger 因此不再把已具逐源证据的行为误列为核心审计缺口。
+
 ## 8. C4：已知语义差异收敛
 
 需要作出并落实明确决策：

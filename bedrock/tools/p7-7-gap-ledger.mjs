@@ -232,18 +232,55 @@ function migrationLedgerEntries(ledger) {
 }
 
 function javaBehaviorEntries(inventory) {
-	return inventory.entries.map(record => {
-		if (record.status !== "audit_pending")
-			throw new Error(`P7.7 Java behavior ${record.sourceKey} has unsupported status ${record.status}`);
-		return summaryEntry({
-			classification: "core_audit_required",
+	return inventory.entries.flatMap(record => {
+		const shared = {
 			id: `audit/behavior/${encodeURIComponent(record.sourceKey)}`,
-			issueKinds: ["java_behavior_audit_pending"],
 			owner: record.owner,
-			reason: "Java behavior source has not yet been linked to Bedrock runtime, static-test, and platform-scenario evidence.",
-			scope: "create_core",
 			subject: record.sourceKey
-		});
+		};
+		if (record.status === "audit_pending")
+			return [summaryEntry({
+				classification: "core_audit_required",
+				issueKinds: ["java_behavior_audit_pending"],
+				...shared,
+				reason: "Java behavior source has not yet been linked to Bedrock runtime, static-test, and platform-scenario evidence.",
+				scope: "create_core"
+			})];
+		if (record.status === "implementation_required")
+			return [summaryEntry({
+				classification: "core_implementation_required",
+				issueKinds: ["java_behavior_implementation_required"],
+				...shared,
+				reason: record.rationale,
+				scope: "create_core"
+			})];
+		if (record.status === "platform_capability_blocked")
+			return [summaryEntry({
+				classification: "platform_capability_blocked",
+				issueKinds: ["java_behavior_platform_capability_blocked"],
+				...shared,
+				reason: record.rationale,
+				scope: "create_core"
+			})];
+		if (record.status === "external_compat")
+			return [summaryEntry({
+				classification: "external_compat",
+				issueKinds: ["java_behavior_external_compat"],
+				...shared,
+				reason: record.rationale,
+				scope: "external_mod"
+			})];
+		if (record.status === "not_applicable")
+			return [summaryEntry({
+				classification: "not_applicable",
+				issueKinds: ["java_behavior_not_applicable"],
+				...shared,
+				reason: record.rationale,
+				scope: "create_core"
+			})];
+		if (["equivalent", "implemented_with_documented_difference"].includes(record.status))
+			return [];
+		throw new Error(`P7.7 Java behavior ${record.sourceKey} has unsupported status ${record.status}`);
 	});
 }
 

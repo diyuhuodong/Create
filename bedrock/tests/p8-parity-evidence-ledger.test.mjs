@@ -52,10 +52,10 @@ test("P8 parity evidence records every registration, domain artifact, and Java b
 	assert.deepEqual(generated, ledger);
 });
 
-test("P8 parity evidence rejects a source record with stale evidence state", async () => {
+	test("P8 parity evidence rejects a source record with stale evidence state", async () => {
 	const ledger = buildP8ParityEvidenceLedger(await inputs());
 	const stale = structuredClone(ledger);
-	stale.records[0].evidenceState = "linked";
+	stale.records.find(record => record.evidenceState === "pending").evidenceState = "linked";
 	assert.throws(() => validateP8ParityEvidenceLedger(stale), /stale evidence state/);
 });
 

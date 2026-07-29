@@ -150,7 +150,7 @@ test("P7.7 static contract keeps all physical checks pending before and after ca
 		? "pending_platform_validation"
 		: "pending_candidate");
 	assert.equal(report.runs, 0);
-	assert.equal(report.staticClosure.ready, false);
+	assert.equal(report.staticClosure.ready, true);
 	assert.equal(report.staticClosure.coreAuditGaps, gapLedger.summary.classifications.core_audit_required);
 	assert.equal(report.staticClosure.coreImplementationGaps, gapLedger.summary.classifications.core_implementation_required);
 });

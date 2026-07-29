@@ -32,13 +32,15 @@
 			"counts": {
 				"entries": 1319,
 				"status": {
-					"audit_pending": 1319
+					"equivalent": 945,
+					"implemented_with_documented_difference": 329,
+					"not_applicable": 45
 				}
 			},
 			"id": "behaviorInventory",
 			"path": "data/java-behavior-inventory.json",
-			"schemaVersion": 1,
-			"sha256": "71d47e5f575bb7c4c9fee8c18cb2c87414cc72ace9349faa1004da3f7a6db6d5"
+			"schemaVersion": 2,
+			"sha256": "f24382a897fc4ac64b92a46771bf440d68cc50abc9c7a7847d7e832ffb1fac44"
 		},
 		{
 			"counts": {
@@ -66,20 +68,20 @@
 		{
 			"counts": {
 				"classifications": {
-					"core_audit_required": 1319,
+					"core_audit_required": 0,
 					"core_implementation_required": 0,
 					"static_verified_pending_platform": 52,
 					"platform_capability_blocked": 22,
 					"external_compat": 601,
 					"equivalent": 2,
-					"not_applicable": 1821
+					"not_applicable": 1866
 				},
-				"entries": 3817
+				"entries": 2543
 			},
 			"id": "gapLedger",
 			"path": "data/p7-7-gap-ledger.json",
 			"schemaVersion": 3,
-			"sha256": "0edb0070b0704ba15f3ef421a385073b06f027f5d458f6da82ac8109ec8fe7cf"
+			"sha256": "32547be871f09437627d5e4f78b47c66fb22e808539d52912c6c39223693ed31"
 		},
 		{
 			"counts": {
@@ -102,14 +104,15 @@
 		{
 			"counts": {
 				"evidenceState": {
-					"pending": 11267
+					"linked": 1319,
+					"pending": 9948
 				},
 				"records": 11267
 			},
 			"id": "parityEvidence",
 			"path": "data/p8-parity-evidence-ledger.json",
 			"schemaVersion": 1,
-			"sha256": "0735ddab1a1f9cf5ce8f8f47a21eefaccb1bc0e2d258fc4b69d195bd7593dd39"
+			"sha256": "7e91b2dd7647ca6b60f41aae59ca21abbae250b65a6a6de84306380659e9c6b4"
 		},
 		{
 			"counts": {
@@ -122,5 +125,5 @@
 		}
 	],
 	"openResponsibilities": [],
-	"fingerprint": "ad413b3034e98614b16a3a79a8965c9e08254bc4c5e66f94e5ae2a2047fecebb"
+	"fingerprint": "3bb818b5e776bb15633687174e8c59598c4d46833d3d2694109cb7e32293e47e"
 }
