@@ -1,0 +1,155 @@
+{
+	"generatedAt": "deterministic",
+	"generatedFrom": [
+		"data/p7-7-cooking-parity.json",
+		"data/p7-7-gap-ledger.json",
+		"data/p7-6-guidance-ledger.json"
+	],
+	"records": [
+		{
+			"acceptance": [
+				"Node: p7-7 cooking-parity catalog and P7.7 static contract cover every managed recipe.",
+				"Platform: run the native-station capability probe before exposing a native furnace bridge."
+			],
+			"id": "native_cooking_bridge",
+			"implementation": [
+				"behavior_pack/scripts/processing/generated/cooking-parity-recipes.js",
+				"tools/p7-7-cooking-parity.mjs"
+			],
+			"limitationRationale": "Bedrock native furnace recipes cannot encode each Java cooking-time and experience value. The managed Create cooking adapter retains those values, while native-station binding remains capability-gated.",
+			"platformState": "blocked_pending_capability_probe",
+			"status": "platform_capability_blocked",
+			"subjects": [
+				"create:blasting/copper_ingot_from_crushed",
+				"create:blasting/gold_ingot_from_crushed",
+				"create:blasting/iron_ingot_from_crushed",
+				"create:blasting/zinc_ingot_from_crushed",
+				"create:blasting/zinc_ingot_from_ore",
+				"create:blasting/zinc_ingot_from_raw_ore",
+				"create:campfire_cooking/bread",
+				"create:smelting/copper_ingot_from_crushed",
+				"create:smelting/glass_from_framed_glass",
+				"create:smelting/glass_from_horizontal_framed_glass",
+				"create:smelting/glass_from_tiled_glass",
+				"create:smelting/glass_from_vertical_framed_glass",
+				"create:smelting/glass_pane_from_framed_glass_pane",
+				"create:smelting/glass_pane_from_horizontal_framed_glass_pane",
+				"create:smelting/glass_pane_from_tiled_glass_pane",
+				"create:smelting/glass_pane_from_vertical_framed_glass_pane",
+				"create:smelting/gold_ingot_from_crushed",
+				"create:smelting/iron_ingot_from_crushed",
+				"create:smelting/zinc_ingot_from_crushed",
+				"create:smelting/zinc_ingot_from_ore",
+				"create:smelting/zinc_ingot_from_raw_ore",
+				"create:smoking/bread"
+			],
+			"summary": {
+				"managedRecipes": 22
+			},
+			"tests": [
+				"tests/p7-7-gap-ledger.test.mjs",
+				"tests/p7-7-acceptance.test.mjs"
+			],
+			"userVisibleImpact": "The 22 listed recipes preserve Create-managed timing and XP, but players must not expect a vanilla furnace, smoker, blast furnace, or campfire to reproduce the Java-specific values until the platform probe succeeds."
+		},
+		{
+			"acceptance": [
+				"Node: snapshot and Stage 4 foundation contracts construct, collect, and serialize a full 512-block assembly.",
+				"Platform: move, reload, and disassemble a 512-block contraption on Windows, Realm, and PS while observing performance and rollback."
+			],
+			"id": "dynamic_assembly_budget",
+			"implementation": [
+				"behavior_pack/scripts/contraptions/dynamic-assembly-snapshot.js#MAX_DYNAMIC_ASSEMBLY_BLOCKS",
+				"behavior_pack/scripts/contraptions/assembly-collector.js"
+			],
+			"limitationRationale": "Bedrock Add-On script/entity projection has a bounded per-assembly persistence and performance budget. The explicit 512-block cap prevents partial capture or an unbounded world mutation.",
+			"platformState": "pending_platform_performance_validation",
+			"status": "implemented_with_documented_difference",
+			"summary": {
+				"maxBlocks": 512
+			},
+			"tests": [
+				"tests/dynamic-assembly-snapshot.test.mjs",
+				"tests/stage4-dynamic-foundation-contract.test.mjs"
+			],
+			"userVisibleImpact": "Assemblies and schematics above 512 blocks are rejected before movement or capture; supported assemblies retain deterministic save, recovery, and rollback behavior."
+		},
+		{
+			"acceptance": [
+				"Node: source projection tests extract and place exactly one full Honey or Chocolate bucket without fluid duplication.",
+				"Platform: place, pump, restart, and reclaim static Honey and Chocolate source blocks; verify that they do not claim vanilla flowing-liquid physics."
+			],
+			"id": "honey_and_chocolate_world_fluids",
+			"implementation": [
+				"behavior_pack/scripts/fluids/fluid-registry.js",
+				"behavior_pack/scripts/fluids/world-fluid-port.js"
+			],
+			"limitationRationale": "Add-On blocks cannot integrate a custom flowing-liquid simulation into Bedrock's vanilla fluid engine. The transaction port therefore projects only complete static source blocks.",
+			"platformState": "pending_platform_world_interaction_validation",
+			"status": "implemented_with_documented_difference",
+			"summary": {
+				"staticWorldFluids": [
+					"createbedrock:chocolate",
+					"createbedrock:honey"
+				]
+			},
+			"tests": [
+				"tests/world-fluid-port.test.mjs"
+			],
+			"userVisibleImpact": "Honey and Chocolate can be bucketed and moved through Create fluid networks or placed as static full sources; they do not spread, level, or interact as native flowing fluids."
+		},
+		{
+			"acceptance": [
+				"Node: generated guide pages cover each Ponder family/storyboard and every Java advancement has a classified local milestone.",
+				"Platform: execute the owning P8.6 scenario for each feature family; platform scenarios, not the guide itself, establish runtime acceptance."
+			],
+			"id": "guidance_advancement_and_platform_scenarios",
+			"implementation": [
+				"behavior_pack/scripts/guidance/guidance-catalog.js",
+				"data/p7-6-guidance-ledger.json",
+				"data/p7-7-scenario-catalog.json"
+			],
+			"limitationRationale": "Bedrock has no direct equivalent of Java Ponder's cinematic renderer, advancement trigger graph, or NeoForge GameTest harness. Guides and non-authoritative milestones teach/index outcomes; platform scenarios validate them.",
+			"platformState": "pending_platform_scenarios",
+			"status": "implemented_with_documented_difference",
+			"summary": {
+				"advancements": 1150,
+				"sceneFamilies": 52,
+				"storyboards": 179
+			},
+			"tests": [
+				"tests/p7-6-guidance.test.mjs",
+				"tests/p7-7-acceptance.test.mjs"
+			],
+			"userVisibleImpact": "Players receive searchable guide pages and local milestones instead of Java's cinematic Ponder scenes and advancement UI; a guide page never by itself proves multiplayer or platform behavior."
+		},
+		{
+			"acceptance": [
+				"Node: gap-ledger validation requires every external entry to retain external_mod scope and a compatibility decision reference.",
+				"Release: report this count separately from Create-core implementation and platform acceptance."
+			],
+			"id": "external_java_mod_compatibility",
+			"implementation": [
+				"tools/p7-7-gap-ledger.mjs",
+				"data/migration-ledger.json"
+			],
+			"limitationRationale": "These entries describe integrations with separately distributed Java mods and their APIs, recipes, or items. They cannot be inferred from, or bundled into, the Create Bedrock core port.",
+			"platformState": "out_of_scope_for_create_core",
+			"status": "external_compat",
+			"summary": {
+				"externalCompatibilityEntries": 601
+			},
+			"tests": [
+				"tests/p7-7-gap-ledger.test.mjs"
+			],
+			"userVisibleImpact": "Core Create content remains usable without these integrations. Java-mod-specific recipes, APIs, and cross-mod automation are unavailable unless a separate Bedrock integration explicitly adds them."
+		}
+	],
+	"schemaVersion": 1,
+	"summary": {
+		"externalCompatibilityEntries": 601,
+		"platformCapabilityBlocked": 22,
+		"records": 5,
+		"staticDifferences": 3
+	}
+}

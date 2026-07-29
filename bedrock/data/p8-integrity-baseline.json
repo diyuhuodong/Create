@@ -4,6 +4,7 @@
 	"generatedFrom": [
 		"data/p7-1-acquisition-ledger.json",
 		"data/java-behavior-inventory.json",
+		"data/p8-c4-semantic-differences.json",
 		"data/p8-4-domain-convergence.json",
 		"data/domain-inventory.json",
 		"data/p7-7-gap-ledger.json",
@@ -41,6 +42,17 @@
 			"path": "data/java-behavior-inventory.json",
 			"schemaVersion": 2,
 			"sha256": "f24382a897fc4ac64b92a46771bf440d68cc50abc9c7a7847d7e832ffb1fac44"
+		},
+		{
+			"counts": {
+				"externalCompatibilityEntries": 601,
+				"platformCapabilityBlocked": 22,
+				"records": 5
+			},
+			"id": "c4SemanticDifferences",
+			"path": "data/p8-c4-semantic-differences.json",
+			"schemaVersion": 1,
+			"sha256": "2c1c1511bfccd4594a39749d03db17b28e38f1122e6ba7adecb67ed197153a8d"
 		},
 		{
 			"counts": {
@@ -125,5 +137,5 @@
 		}
 	],
 	"openResponsibilities": [],
-	"fingerprint": "3bb818b5e776bb15633687174e8c59598c4d46833d3d2694109cb7e32293e47e"
+	"fingerprint": "eb9606f567c0a27e2d3a9b568d498096a705a7a68af6c0ef0c68ae4c37964835"
 }

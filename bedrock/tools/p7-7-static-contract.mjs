@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import { deriveS315CompatibilityLedger, P77_SCENARIO_RULES, summarizeP77Acceptance, validateP77AcceptanceDocument, validateP77ScenarioCatalog } from "./p7-7-acceptance-schema.mjs";
 import { validateP77CandidateDocument } from "./p7-7-candidate-schema.mjs";
 import { buildP77CookingParityCatalog, renderP77CookingParityRecipes, validateP77CookingParityCatalog } from "./p7-7-cooking-parity.mjs";
+import { buildP8C4SemanticDifferenceLedger, validateP8C4SemanticDifferenceLedger } from "./p8-c4-semantic-differences.mjs";
 import { buildP77AcceptanceWorldLayout, renderP77AcceptanceWorldLayout, validateP77AcceptanceWorldLayout } from "./p7-7-acceptance-world.mjs";
 import { buildP77GapLedger, validateP77GapLedger } from "./p7-7-gap-ledger.mjs";
 import { validateStage3PlatformAcceptanceDocument } from "./s3-15-platform-acceptance-schema.mjs";
@@ -29,7 +30,7 @@ export async function validateP77StaticContract({
 	root = defaultBedrockRoot,
 	trackingRoot = defaultBedrockRoot
 } = {}) {
-	const [behaviorManifest, resourceManifest, candidate, catalog, ledger, legacy, smokeTest, packageJson, gapLedger, migrationLedger, javaBehaviorInventory, parityEvidence, nativeRecipes, interactions, recipeIr, matrix, resources, cookingParity, cookingParityRuntime, acceptanceWorld, acceptanceWorldRuntime, overrides, domainOverrides, domainConvergence] = await Promise.all([
+	const [behaviorManifest, resourceManifest, candidate, catalog, ledger, legacy, smokeTest, packageJson, gapLedger, migrationLedger, javaBehaviorInventory, parityEvidence, nativeRecipes, interactions, recipeIr, matrix, resources, cookingParity, cookingParityRuntime, acceptanceWorld, acceptanceWorldRuntime, overrides, domainOverrides, domainConvergence, guidanceLedger, c4SemanticDifferences] = await Promise.all([
 		json(resolve(root, "behavior_pack", "manifest.json")),
 		json(resolve(root, "resource_pack", "manifest.json")),
 		json(resolve(trackingRoot, "data", "p7-7-candidate.json")),
@@ -53,7 +54,9 @@ export async function validateP77StaticContract({
 		readFile(resolve(root, "behavior_pack", "scripts", "acceptance", "generated", "acceptance-world-layout.js"), "utf8"),
 		json(resolve(trackingRoot, "data", "migration-overrides.json")),
 		json(resolve(trackingRoot, "data", "migration-domain-overrides.json")),
-		json(resolve(trackingRoot, "data", "p8-4-domain-convergence.json"))
+		json(resolve(trackingRoot, "data", "p8-4-domain-convergence.json")),
+		json(resolve(trackingRoot, "data", "p7-6-guidance-ledger.json")),
+		json(resolve(trackingRoot, "data", "p8-c4-semantic-differences.json"))
 	]);
 	const repositoryRoot = resolve(trackingRoot, "..");
 	const [expectedCatalog, expectedDomainInventory] = await Promise.all([
@@ -114,6 +117,10 @@ export async function validateP77StaticContract({
 	const cookingCoverage = validateP77CookingParityCatalog(cookingParity);
 	if (cookingParityRuntime !== renderP77CookingParityRecipes(cookingParity))
 		throw new Error("P7.7 generated cooking parity recipes are stale; run npm run cooking:p7-7.");
+	const expectedC4SemanticDifferences = buildP8C4SemanticDifferenceLedger({ cookingParity, gapLedger, guidanceLedger });
+	if (!sameJson(c4SemanticDifferences, expectedC4SemanticDifferences))
+		throw new Error("P8 C4 semantic-difference ledger is stale; run npm run differences:p8-c4.");
+	const c4SemanticDifferenceCoverage = validateP8C4SemanticDifferenceLedger(c4SemanticDifferences, { cookingParity, gapLedger, guidanceLedger });
 	const expectedAcceptanceWorld = buildP77AcceptanceWorldLayout(catalog);
 	if (!sameJson(acceptanceWorld, expectedAcceptanceWorld))
 		throw new Error("P7.7 acceptance world layout is stale; run npm run acceptance-world:p7-7.");
@@ -160,6 +167,7 @@ export async function validateP77StaticContract({
 		outcome: acceptanceCoverage.outcome,
 		gapLedger: gapCoverage,
 		cookingParity: cookingCoverage,
+		c4SemanticDifferences: c4SemanticDifferenceCoverage,
 		acceptanceWorld: acceptanceWorldCoverage,
 		staticClosure: {
 			coreAuditGaps: gapCoverage.classifications.core_audit_required,

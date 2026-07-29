@@ -8,6 +8,7 @@ export const P8_INTEGRITY_JAVA_BASELINE = "Create 6.0.11 / Minecraft Java 1.21.1
 export const P8_INTEGRITY_DOCUMENTS = Object.freeze([
 	["acquisition", "data/p7-1-acquisition-ledger.json"],
 	["behaviorInventory", "data/java-behavior-inventory.json"],
+	["c4SemanticDifferences", "data/p8-c4-semantic-differences.json"],
 	["domainConvergence", "data/p8-4-domain-convergence.json"],
 	["domainInventory", "data/domain-inventory.json"],
 	["gapLedger", "data/p7-7-gap-ledger.json"],
@@ -94,6 +95,7 @@ export async function buildP8IntegrityBaseline({ bedrockRoot }) {
 	const {
 		acquisition,
 		behaviorInventory,
+		c4SemanticDifferences,
 		domainConvergence,
 		domainInventory,
 		gapLedger,
@@ -143,6 +145,11 @@ export async function buildP8IntegrityBaseline({ bedrockRoot }) {
 		sourceDocument("behaviorInventory", "data/java-behavior-inventory.json", behaviorInventory, {
 			entries: behaviorInventory.entries.length,
 			status: countBy(behaviorInventory.entries, "status")
+		}),
+		sourceDocument("c4SemanticDifferences", "data/p8-c4-semantic-differences.json", c4SemanticDifferences, {
+			externalCompatibilityEntries: c4SemanticDifferences.summary.externalCompatibilityEntries,
+			platformCapabilityBlocked: c4SemanticDifferences.summary.platformCapabilityBlocked,
+			records: c4SemanticDifferences.records.length
 		}),
 		sourceDocument("domainConvergence", "data/p8-4-domain-convergence.json", domainConvergence, {
 			entries: domainConvergence.entries.length,

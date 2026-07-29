@@ -21,7 +21,7 @@ test("P8 C0 records one deterministic fingerprint across every integrity ledger"
 	assert.deepEqual(first, second);
 	assert.deepEqual(committed, first);
 	assert.deepEqual(validateP8IntegrityBaseline(first), {
-		documents: 8,
+		documents: 9,
 		fingerprint: first.fingerprint,
 		...first.authoritativeCounts
 	});
