@@ -8,6 +8,11 @@ import { buildP77CookingParityCatalog, renderP77CookingParityRecipes, validateP7
 import { buildP77AcceptanceWorldLayout, renderP77AcceptanceWorldLayout, validateP77AcceptanceWorldLayout } from "./p7-7-acceptance-world.mjs";
 import { buildP77GapLedger, validateP77GapLedger } from "./p7-7-gap-ledger.mjs";
 import { validateStage3PlatformAcceptanceDocument } from "./s3-15-platform-acceptance-schema.mjs";
+import { buildJavaBehaviorInventory, validateJavaBehaviorInventory } from "./java-behavior-inventory.mjs";
+import { buildP8ParityEvidenceLedger, validateP8ParityEvidenceLedger } from "./p8-parity-evidence-ledger.mjs";
+import { buildDomainInventory } from "./domain-inventory.mjs";
+import { buildJavaRegistrationCatalog } from "./java-registration-catalog.mjs";
+import { buildMigrationLedger } from "./migration-ledger.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultBedrockRoot = resolve(toolDirectory, "..");
@@ -24,7 +29,7 @@ export async function validateP77StaticContract({
 	root = defaultBedrockRoot,
 	trackingRoot = defaultBedrockRoot
 } = {}) {
-	const [behaviorManifest, resourceManifest, candidate, catalog, ledger, legacy, smokeTest, packageJson, gapLedger, nativeRecipes, interactions, recipeIr, matrix, resources, cookingParity, cookingParityRuntime, acceptanceWorld, acceptanceWorldRuntime] = await Promise.all([
+	const [behaviorManifest, resourceManifest, candidate, catalog, ledger, legacy, smokeTest, packageJson, gapLedger, migrationLedger, javaBehaviorInventory, parityEvidence, nativeRecipes, interactions, recipeIr, matrix, resources, cookingParity, cookingParityRuntime, acceptanceWorld, acceptanceWorldRuntime, overrides, domainOverrides] = await Promise.all([
 		json(resolve(root, "behavior_pack", "manifest.json")),
 		json(resolve(root, "resource_pack", "manifest.json")),
 		json(resolve(trackingRoot, "data", "p7-7-candidate.json")),
@@ -34,29 +39,71 @@ export async function validateP77StaticContract({
 		readFile(resolve(trackingRoot, "tests", "world", "smoke-test.md"), "utf8"),
 		json(resolve(trackingRoot, "package.json")),
 		json(resolve(trackingRoot, "data", "p7-7-gap-ledger.json")),
+		json(resolve(trackingRoot, "data", "migration-ledger.json")),
+		json(resolve(trackingRoot, "data", "java-behavior-inventory.json")),
+		json(resolve(trackingRoot, "data", "p8-parity-evidence-ledger.json")),
 		json(resolve(trackingRoot, "data", "recipes", "native.json")),
 		json(resolve(trackingRoot, "data", "recipes", "interactions.json")),
 		json(resolve(trackingRoot, "data", "recipes", "recipe-ir.json")),
 		json(resolve(trackingRoot, "data", "migration-matrix.json")),
-		json(resolve(trackingRoot, "data", "p7-6-resource-ledger.json"))
-		,
+		json(resolve(trackingRoot, "data", "p7-6-resource-ledger.json")),
 		json(resolve(trackingRoot, "data", "p7-7-cooking-parity.json")),
 		readFile(resolve(root, "behavior_pack", "scripts", "processing", "generated", "cooking-parity-recipes.js"), "utf8"),
 		json(resolve(trackingRoot, "data", "p7-7-acceptance-world.json")),
-		readFile(resolve(root, "behavior_pack", "scripts", "acceptance", "generated", "acceptance-world-layout.js"), "utf8")
+		readFile(resolve(root, "behavior_pack", "scripts", "acceptance", "generated", "acceptance-world-layout.js"), "utf8"),
+		json(resolve(trackingRoot, "data", "migration-overrides.json")),
+		json(resolve(trackingRoot, "data", "migration-domain-overrides.json"))
 	]);
+	const repositoryRoot = resolve(trackingRoot, "..");
+	const [expectedCatalog, expectedDomainInventory] = await Promise.all([
+		buildJavaRegistrationCatalog({ repositoryRoot }),
+		buildDomainInventory({ repositoryRoot })
+	]);
+	const { ledger: expectedMigrationLedger } = await buildMigrationLedger({
+		bedrockRoot: trackingRoot,
+		catalog: expectedCatalog,
+		domainInventory: expectedDomainInventory,
+		matrix,
+		overrides,
+		domainOverrides
+	});
+	if (!sameJson(migrationLedger, expectedMigrationLedger))
+		throw new Error("Migration ledger is stale; run npm run ledger.");
 	const candidateCoverage = validateP77CandidateDocument(candidate, {
 		behaviorManifest: candidate.state === "frozen" ? behaviorManifest : undefined,
 		resourceManifest: candidate.state === "frozen" ? resourceManifest : undefined
 	});
 	const catalogCoverage = validateP77ScenarioCatalog(catalog);
 	const acceptanceCoverage = validateP77AcceptanceDocument(ledger, { candidate, catalog });
-	const expectedGapLedger = buildP77GapLedger({ cookingParity, interactions, matrix, nativeRecipes, recipeIr, resources, catalog });
+	const expectedJavaBehaviorInventory = await buildJavaBehaviorInventory({ repositoryRoot });
+	if (!sameJson(javaBehaviorInventory, expectedJavaBehaviorInventory))
+		throw new Error("Java behavior inventory is stale; run npm run inventory:behaviors.");
+	validateJavaBehaviorInventory(javaBehaviorInventory);
+	const expectedParityEvidence = buildP8ParityEvidenceLedger({
+		catalog: expectedCatalog,
+		javaBehaviorInventory,
+		matrix,
+		migrationLedger: expectedMigrationLedger
+	});
+	if (!sameJson(parityEvidence, expectedParityEvidence))
+		throw new Error("P8 parity evidence ledger is stale; run npm run evidence:p8.");
+	validateP8ParityEvidenceLedger(parityEvidence);
+	const expectedGapLedger = buildP77GapLedger({
+		cookingParity,
+		interactions,
+		javaBehaviorInventory,
+		matrix,
+		migrationLedger,
+		nativeRecipes,
+		parityEvidence,
+		recipeIr,
+		resources,
+		catalog
+	});
 	if (!sameJson(gapLedger, expectedGapLedger))
 		throw new Error("P7.7 gap ledger is stale; run npm run gap:p7-7.");
 	const gapCoverage = validateP77GapLedger(gapLedger);
-	if (gapCoverage.classifications.core_implementation_required !== 0)
-		throw new Error("P7.7 static closure cannot retain unclassified core implementation gaps");
+	const unresolvedCoreGaps = gapCoverage.classifications.core_audit_required + gapCoverage.classifications.core_implementation_required;
 	if (gapCoverage.classifications.platform_capability_blocked !== cookingParity.summary.recipes)
 		throw new Error("P7.7 cooking capability blocks must match every managed cooking recipe");
 	const expectedCookingParity = buildP77CookingParityCatalog(nativeRecipes);
@@ -113,10 +160,12 @@ export async function validateP77StaticContract({
 		cookingParity: cookingCoverage,
 		acceptanceWorld: acceptanceWorldCoverage,
 		staticClosure: {
+			coreAuditGaps: gapCoverage.classifications.core_audit_required,
 			coreImplementationGaps: gapCoverage.classifications.core_implementation_required,
 			cookingCapabilityBlocks: gapCoverage.classifications.platform_capability_blocked,
 			platformChecksPending: gapCoverage.classifications.static_verified_pending_platform,
-			ready: true
+			ready: unresolvedCoreGaps === 0,
+			unresolvedCoreGaps
 		},
 		summary: summarizeP77Acceptance({ candidate, catalog, ledger })
 	};

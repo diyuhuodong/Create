@@ -147,6 +147,9 @@ test("P7.7 static contract keeps all physical checks pending before and after ca
 		? "pending_platform_validation"
 		: "pending_candidate");
 	assert.equal(report.runs, 0);
+	assert.equal(report.staticClosure.ready, false);
+	assert.equal(report.staticClosure.coreAuditGaps, 1319);
+	assert.equal(report.staticClosure.coreImplementationGaps, 9410);
 });
 
 test("P7.7 catalog rejects ownership and platform coverage drift", async () => {

@@ -1,7 +1,9 @@
 import { P77_PLATFORM_IDS, validateP77ScenarioCatalog } from "./p7-7-acceptance-schema.mjs";
+import { validateP8ParityEvidenceLedger } from "./p8-parity-evidence-ledger.mjs";
 
-export const P77_GAP_LEDGER_SCHEMA_VERSION = 2;
+export const P77_GAP_LEDGER_SCHEMA_VERSION = 3;
 export const P77_GAP_CLASSIFICATIONS = Object.freeze([
+	"core_audit_required",
 	"core_implementation_required",
 	"static_verified_pending_platform",
 	"platform_capability_blocked",
@@ -171,6 +173,83 @@ function sourceSummary({ cookingParity, interactions, matrix, nativeRecipes, rec
 	};
 }
 
+function ledgerStatusSummary(ledger) {
+	return {
+		domains: {
+			status: countBy(ledger.domainEntries, "status"),
+			total: ledger.domainEntries.length
+		},
+		registrations: {
+			status: countBy(ledger.registrationEntries, "status"),
+			total: ledger.registrationEntries.length
+		}
+	};
+}
+
+function migrationLedgerEntries(ledger) {
+	const entries = [];
+	for (const record of ledger.registrationEntries) {
+		if (record.status === "implemented") {
+			if (!Array.isArray(record.mapping?.targets) || record.mapping.targets.length === 0)
+				throw new Error(`P7.7 implemented registration ${record.sourceKey} is missing a Bedrock projection`);
+			continue;
+		}
+		if (!["partial", "missing"].includes(record.status))
+			throw new Error(`P7.7 registration ${record.sourceKey} has unsupported status ${record.status}`);
+		entries.push(summaryEntry({
+			classification: "core_implementation_required",
+			id: `core/registration/${encodeURIComponent(record.sourceKey)}`,
+			issueKinds: [`registration_${record.status}`],
+			owner: record.family,
+			reason: `Migration registration remains ${record.status}; a mapping or definition is not proof of behavioral parity.`,
+			scope: "create_core",
+			subject: record.sourceKey
+		}));
+	}
+	for (const record of ledger.domainEntries) {
+		if (record.status === "deferred_compat") {
+			entries.push(summaryEntry({
+				classification: "external_compat",
+				compatibilityDecisionRefs: [`data/migration-domain-overrides.json#${record.domain}`],
+				id: `external_compat/domain/${encodeURIComponent(record.sourceKey)}`,
+				owner: record.owner,
+				reason: record.rationale,
+				scope: "external_mod",
+				subject: record.sourceKey
+			}));
+			continue;
+		}
+		if (!["partial", "missing"].includes(record.status))
+			throw new Error(`P7.7 domain ${record.sourceKey} has unsupported status ${record.status}`);
+		entries.push(summaryEntry({
+			classification: "core_implementation_required",
+			id: `core/domain/${encodeURIComponent(record.sourceKey)}`,
+			issueKinds: [`domain_${record.status}`, record.strategy],
+			owner: record.owner,
+			reason: `Migration domain remains ${record.status}; ${record.rationale}`,
+			scope: "create_core",
+			subject: record.sourceKey
+		}));
+	}
+	return entries;
+}
+
+function javaBehaviorEntries(inventory) {
+	return inventory.entries.map(record => {
+		if (record.status !== "audit_pending")
+			throw new Error(`P7.7 Java behavior ${record.sourceKey} has unsupported status ${record.status}`);
+		return summaryEntry({
+			classification: "core_audit_required",
+			id: `audit/behavior/${encodeURIComponent(record.sourceKey)}`,
+			issueKinds: ["java_behavior_audit_pending"],
+			owner: record.owner,
+			reason: "Java behavior source has not yet been linked to Bedrock runtime, static-test, and platform-scenario evidence.",
+			scope: "create_core",
+			subject: record.sourceKey
+		});
+	});
+}
+
 function summarizeEntries(entries) {
 	return {
 		classifications: Object.fromEntries(P77_GAP_CLASSIFICATIONS.map(classification => [
@@ -181,8 +260,8 @@ function summarizeEntries(entries) {
 	};
 }
 
-export function buildP77GapLedger({ cookingParity, interactions, matrix, nativeRecipes, recipeIr, resources, catalog }) {
-	for (const [name, value] of Object.entries({ cookingParity, interactions, matrix, nativeRecipes, recipeIr, resources, catalog }))
+export function buildP77GapLedger({ cookingParity, interactions, matrix, migrationLedger, nativeRecipes, parityEvidence, recipeIr, resources, catalog, javaBehaviorInventory }) {
+	for (const [name, value] of Object.entries({ cookingParity, interactions, matrix, migrationLedger, nativeRecipes, parityEvidence, recipeIr, resources, catalog, javaBehaviorInventory }))
 		assertObject(value, name);
 	for (const [name, value] of Object.entries({
 		"interaction recipe records": interactions.records,
@@ -195,8 +274,17 @@ export function buildP77GapLedger({ cookingParity, interactions, matrix, nativeR
 			throw new TypeError(`P7.7 gap ledger ${name} must be an array`);
 	if (!Array.isArray(cookingParity.recipes) || !cookingParity.summary || typeof cookingParity.summary !== "object")
 		throw new TypeError("P7.7 gap ledger cooking parity catalog is invalid");
+	if (!Array.isArray(migrationLedger.registrationEntries) || !Array.isArray(migrationLedger.domainEntries))
+		throw new TypeError("P7.7 gap ledger migration ledger is invalid");
+	if (!Array.isArray(javaBehaviorInventory.entries))
+		throw new TypeError("P7.7 gap ledger Java behavior inventory is invalid");
+	const evidenceCoverage = validateP8ParityEvidenceLedger(parityEvidence);
+	if (evidenceCoverage.records !== migrationLedger.registrationEntries.length + migrationLedger.domainEntries.length + javaBehaviorInventory.entries.length)
+		throw new Error("P7.7 gap ledger parity evidence does not cover every migration and Java behavior record");
 	const catalogCoverage = validateP77ScenarioCatalog(catalog);
 	const entries = [
+		...migrationLedgerEntries(migrationLedger),
+		...javaBehaviorEntries(javaBehaviorInventory),
 		...nativeRecipeEntries(nativeRecipes, cookingParity),
 		...externalCompatibilityEntries(recipeIr),
 		...platformEntries(catalog),
@@ -207,6 +295,9 @@ export function buildP77GapLedger({ cookingParity, interactions, matrix, nativeR
 		schemaVersion: P77_GAP_LEDGER_SCHEMA_VERSION,
 		generatedAt: "deterministic",
 		generatedFrom: [
+			"data/java-behavior-inventory.json",
+			"data/migration-ledger.json",
+			"data/p8-parity-evidence-ledger.json",
 			"data/recipes/native.json",
 			"data/recipes/interactions.json",
 			"data/recipes/recipe-ir.json",
@@ -215,7 +306,20 @@ export function buildP77GapLedger({ cookingParity, interactions, matrix, nativeR
 			"data/p7-7-scenario-catalog.json",
 			"data/p7-7-cooking-parity.json"
 		],
-		sources: sourceSummary({ cookingParity, interactions, matrix, nativeRecipes, recipeIr, resources, catalogCoverage }),
+			sources: {
+				...sourceSummary({ cookingParity, interactions, matrix, nativeRecipes, recipeIr, resources, catalogCoverage }),
+				javaBehaviorInventory: {
+					areas: countBy(javaBehaviorInventory.entries, "area"),
+					status: countBy(javaBehaviorInventory.entries, "status"),
+					total: javaBehaviorInventory.entries.length
+				},
+				migrationLedger: ledgerStatusSummary(migrationLedger),
+				parityEvidence: {
+					evidenceState: evidenceCoverage.evidenceState,
+					recordType: evidenceCoverage.recordType,
+					total: evidenceCoverage.records
+				}
+			},
 		entries,
 		summary: summarizeEntries(entries)
 	};
@@ -227,8 +331,8 @@ export function validateP77GapLedger(document) {
 	assertObject(document, "document");
 	if (document.schemaVersion !== P77_GAP_LEDGER_SCHEMA_VERSION)
 		throw new Error(`P7.7 gap ledger must use schema version ${P77_GAP_LEDGER_SCHEMA_VERSION}`);
-	if (document.generatedAt !== "deterministic" || !Array.isArray(document.generatedFrom) || document.generatedFrom.length !== 7)
-		throw new Error("P7.7 gap ledger must declare its seven deterministic source documents");
+	if (document.generatedAt !== "deterministic" || !Array.isArray(document.generatedFrom) || document.generatedFrom.length !== 10)
+		throw new Error("P7.7 gap ledger must declare its ten deterministic source documents");
 	assertObject(document.sources, "sources");
 	assertObject(document.summary, "summary");
 	if (!Array.isArray(document.entries))
@@ -243,9 +347,9 @@ export function validateP77GapLedger(document) {
 		if (ids.has(entry.id))
 			throw new Error(`P7.7 gap ledger entry ${entry.id} is duplicated`);
 		ids.add(entry.id);
-		if (["core_implementation_required", "platform_capability_blocked"].includes(entry.classification)) {
+		if (["core_audit_required", "core_implementation_required", "platform_capability_blocked"].includes(entry.classification)) {
 			if (entry.scope !== "create_core" || !Array.isArray(entry.issueKinds) || entry.issueKinds.length === 0)
-				throw new Error(`P7.7 core cooking entry ${entry.id} requires Create scope and issue kinds`);
+				throw new Error(`P7.7 core entry ${entry.id} requires Create scope and issue kinds`);
 		}
 		if (entry.classification === "external_compat" && (!Array.isArray(entry.compatibilityDecisionRefs) || entry.compatibilityDecisionRefs.length === 0))
 			throw new Error(`P7.7 external compatibility entry ${entry.id} requires a decision reference`);
@@ -256,6 +360,9 @@ export function validateP77GapLedger(document) {
 	if (JSON.stringify(document.summary) !== JSON.stringify(expectedSummary))
 		throw new Error("P7.7 gap ledger summary is stale");
 	for (const [name, expected] of Object.entries({
+		"Java behavior inventory summary": document.sources.javaBehaviorInventory,
+		"migration ledger summary": document.sources.migrationLedger,
+		"P8 parity evidence summary": document.sources.parityEvidence,
 		"native recipe summary": document.sources.nativeRecipes,
 		"interaction recipe summary": document.sources.interactionRecipes,
 		"recipe IR summary": document.sources.recipeIr,
