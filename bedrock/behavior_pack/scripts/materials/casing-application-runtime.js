@@ -55,7 +55,7 @@ export function registerCasingApplications() {
 	if (registered)
 		return false;
 	registered = true;
-	world.afterEvents.itemUseOn.subscribe(event => {
+	world.afterEvents.itemStartUseOn.subscribe(event => {
 		try {
 			applyCasing(event.source, event.block, event.itemStack?.typeId);
 		} catch (error) {

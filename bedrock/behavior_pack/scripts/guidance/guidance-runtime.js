@@ -62,7 +62,7 @@ export function registerGuidance() {
 		if (event.itemStack?.typeId === CREATE_GUIDE_ITEM)
 			showGuideIndex(event.source);
 	});
-	world.afterEvents.itemUseOn.subscribe(event => {
+	world.afterEvents.itemStartUseOn.subscribe(event => {
 		if (event.itemStack?.typeId !== CREATE_GUIDE_ITEM)
 			return;
 		const match = searchCreateGuidance(event.block?.typeId)?.[0];

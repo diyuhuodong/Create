@@ -34,7 +34,7 @@ export async function validateSandpaperMaterials({ bedrockRoot = defaultBedrockR
 		readFile(resolve(resourceRoot, "texts", "en_US.lang"), "utf8"),
 		readFile(resolve(resourceRoot, "texts", "zh_CN.lang"), "utf8")
 	]);
-	if (!runtime.includes("world.afterEvents.itemUse") || !runtime.includes("world.afterEvents.itemUseOn")
+	if (!runtime.includes("world.afterEvents.itemUse") || !runtime.includes("world.afterEvents.itemStartUseOn")
 		|| !runtime.includes("damageSandpaper") || !runtime.includes("sandBlockWithPaper")
 		|| !material.includes("POLISHING_RECIPES") || !material.includes("copperTransformFor"))
 		throw new Error("Sandpaper must retain offhand polishing, durability, and copper scrape/wax-removal behavior");

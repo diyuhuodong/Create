@@ -331,7 +331,7 @@ export function registerWorldshaper() {
 		return false;
 	registered = true;
 	registerKernelTaskGroup("worldshaper", WORLDSHAPER_TASK_BUDGET);
-	world.afterEvents.itemUseOn.subscribe(event => {
+	world.afterEvents.itemStartUseOn.subscribe(event => {
 		if (event.itemStack?.typeId !== WORLDSHAPER_ITEM)
 			return;
 		handledUseOn.add(event.source.id);

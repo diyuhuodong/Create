@@ -65,7 +65,7 @@ export function registerTreeFertilizer() {
 	if (registered)
 		return false;
 	registered = true;
-	world.afterEvents.itemUseOn.subscribe(event => {
+	world.afterEvents.itemStartUseOn.subscribe(event => {
 		if (event.itemStack?.typeId !== TREE_FERTILIZER_ITEM)
 			return;
 		try {

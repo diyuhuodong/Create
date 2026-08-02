@@ -97,7 +97,7 @@ export function registerSymmetryWand() {
 	if (registered)
 		return false;
 	registered = true;
-	world.afterEvents.itemUseOn.subscribe(event => {
+	world.afterEvents.itemStartUseOn.subscribe(event => {
 		if (event.itemStack?.typeId !== WAND_OF_SYMMETRY_ITEM)
 			return;
 		handledUseOn.add(event.source.id);

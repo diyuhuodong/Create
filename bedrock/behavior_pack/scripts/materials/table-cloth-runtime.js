@@ -559,7 +559,7 @@ export function registerTableCloths() {
 			event.source?.sendMessage?.(`Could not discard Shopping List: ${error}`);
 		}
 	});
-	world.afterEvents.itemUseOn.subscribe(event => {
+	world.afterEvents.itemStartUseOn.subscribe(event => {
 		if (event.itemStack?.typeId !== SHOPPING_LIST_ITEM || event.block?.typeId !== "createbedrock:stock_ticker")
 			return;
 		try {

@@ -293,7 +293,7 @@ export function registerSuperGlue() {
 		return false;
 	registered = true;
 	registerAssemblyAttachmentProvider("super_glue", gluedLocationsForAssembly);
-	world.afterEvents.itemUseOn.subscribe(event => {
+	world.afterEvents.itemStartUseOn.subscribe(event => {
 		if (event.itemStack?.typeId !== SUPER_GLUE_ITEM)
 			return;
 		try { handleGlueUse(event.source, event.block); } catch (error) {

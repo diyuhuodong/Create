@@ -134,7 +134,7 @@ export function registerSandpaper() {
 			try { polishOffhandItem(player); } catch { failedUses++; }
 		});
 	});
-	world.afterEvents.itemUseOn.subscribe(event => {
+	world.afterEvents.itemStartUseOn.subscribe(event => {
 		if (!isSandpaper(event.itemStack?.typeId))
 			return;
 		recentUseOn.set(event.source.id, true);

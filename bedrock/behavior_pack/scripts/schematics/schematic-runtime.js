@@ -456,7 +456,7 @@ export function registerSchematics() {
 		if (event.block?.typeId === SCHEMATICANNON_BLOCK)
 			removeCannon(event.dimension.id, event.block.location);
 	});
-	world.afterEvents.itemUseOn.subscribe(event => {
+	world.afterEvents.itemStartUseOn.subscribe(event => {
 		try {
 			if (event.itemStack?.typeId === SCHEMATIC_AND_QUILL_ITEM)
 				captureWithQuill(event.source, event.block);

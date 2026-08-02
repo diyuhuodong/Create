@@ -954,7 +954,7 @@ export function registerEquipment() {
 				showToolbox(event.player, event.block, state);
 		} catch { failedUpdates++; }
 	});
-	world.afterEvents.itemUseOn.subscribe(event => {
+	world.afterEvents.itemStartUseOn.subscribe(event => {
 		try {
 			rememberPlacementItem(event.source, event.itemStack);
 			if (event.itemStack?.typeId === "createbedrock:wrench")
