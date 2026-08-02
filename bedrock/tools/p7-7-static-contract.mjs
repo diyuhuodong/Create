@@ -32,7 +32,8 @@ function sameText(left, right) {
 
 export async function validateP77StaticContract({
 	root = defaultBedrockRoot,
-	trackingRoot = defaultBedrockRoot
+	trackingRoot = defaultBedrockRoot,
+	allowCandidateIdentityDrift = false
 } = {}) {
 	const [behaviorManifest, resourceManifest, candidate, catalog, ledger, legacy, smokeTest, packageJson, gapLedger, migrationLedger, javaBehaviorInventory, parityEvidence, nativeRecipes, interactions, recipeIr, matrix, resources, cookingParity, cookingParityRuntime, acceptanceWorld, acceptanceWorldRuntime, overrides, domainOverrides, domainConvergence, guidanceLedger, c4SemanticDifferences] = await Promise.all([
 		json(resolve(root, "behavior_pack", "manifest.json")),
@@ -79,8 +80,8 @@ export async function validateP77StaticContract({
 	if (!sameJson(migrationLedger, expectedMigrationLedger))
 		throw new Error("Migration ledger is stale; run npm run ledger.");
 	const candidateCoverage = validateP77CandidateDocument(candidate, {
-		behaviorManifest: candidate.state === "frozen" ? behaviorManifest : undefined,
-		resourceManifest: candidate.state === "frozen" ? resourceManifest : undefined
+		behaviorManifest: candidate.state === "frozen" && !allowCandidateIdentityDrift ? behaviorManifest : undefined,
+		resourceManifest: candidate.state === "frozen" && !allowCandidateIdentityDrift ? resourceManifest : undefined
 	});
 	const catalogCoverage = validateP77ScenarioCatalog(catalog);
 	const acceptanceCoverage = validateP77AcceptanceDocument(ledger, { candidate, catalog });

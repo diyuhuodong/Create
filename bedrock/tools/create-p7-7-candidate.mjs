@@ -35,7 +35,7 @@ function assertCleanWorktree(repositoryRoot) {
 }
 
 function runBuild(bedrockRoot) {
-	const result = spawnSync(process.execPath, [resolve(toolDirectory, "build.mjs")], {
+	const result = spawnSync(process.execPath, [resolve(toolDirectory, "build.mjs"), "--allow-p7-7-candidate-refreeze"], {
 		cwd: bedrockRoot,
 		stdio: "inherit"
 	});
