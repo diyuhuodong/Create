@@ -21,6 +21,14 @@ function same(actual, expected, label) {
 		throw new Error(`${label} is stale; run npm run p7:compile.`);
 }
 
+function normalizeLineEndings(text) {
+	return text.replace(/\r\n/g, "\n");
+}
+
+function sameText(actual, expected) {
+	return normalizeLineEndings(actual) === expected;
+}
+
 export async function validateP76StaticContract({ root = defaultRoot, trackingRoot = defaultRoot } = {}) {
 	const repositoryRoot = resolve(trackingRoot, "..");
 	const dataRoot = resolve(trackingRoot, "data");
@@ -53,15 +61,15 @@ export async function validateP76StaticContract({ root = defaultRoot, trackingRo
 	same(await json(resolve(root, "resource_pack/animations/createbedrock.p7_6.animation.json")), renderP76Animations(), "P7.6 animations");
 	same(await json(resolve(root, "resource_pack/animation_controllers/createbedrock.p7_6.controllers.json")), renderP76AnimationControllers(), "P7.6 animation controllers");
 	same(await json(resolve(root, "resource_pack/render_controllers/createbedrock.p7_6.render_controllers.json")), renderP76RenderControllers(), "P7.6 render controllers");
-	if (await readFile(resolve(root, "behavior_pack/scripts/effects/generated-sound-catalog.js"), "utf8") !== renderP76RuntimeSoundCatalog(sounds))
+	if (!sameText(await readFile(resolve(root, "behavior_pack/scripts/effects/generated-sound-catalog.js"), "utf8"), renderP76RuntimeSoundCatalog(sounds)))
 		throw new Error("P7.6 runtime sound catalog is stale");
 	const tutorials = buildP76GuidanceTutorials(guidance);
 	const guidanceSource = await readFile(resolve(root, "behavior_pack/scripts/guidance/guidance-catalog.js"), "utf8");
-	if (guidanceSource !== renderP76GuidanceCatalog(tutorials))
+	if (!sameText(guidanceSource, renderP76GuidanceCatalog(tutorials)))
 		throw new Error("P7.6 guidance runtime catalog is stale");
 	for (const locale of ["en_US", "zh_CN"]) {
 		const language = await readFile(resolve(root, `resource_pack/texts/${locale}.lang`), "utf8");
-		if (!language.includes(renderP76GuidanceLanguage(tutorials, locale)))
+		if (!normalizeLineEndings(language).includes(renderP76GuidanceLanguage(tutorials, locale)))
 			throw new Error(`P7.6 ${locale} guidance language catalog is stale`);
 	}
 	for (const file of ["capacity_upgrade", "potato_recovery_upgrade", "engineers_guide"]) {

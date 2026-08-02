@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 
 import { AcceptanceWorldState } from "../behavior_pack/scripts/acceptance/acceptance-world-state.js";
 import { buildP77AcceptanceWorldLayout, renderP77AcceptanceWorldLayout, validateP77AcceptanceWorldLayout } from "../tools/p7-7-acceptance-world.mjs";
+import { normalizeLineEndings } from "./test-text.mjs";
 
 const bedrockRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -21,7 +22,7 @@ test("P7.7 acceptance world covers every scenario with ten non-overlapping zones
 	const expected = buildP77AcceptanceWorldLayout(catalog);
 	assert.deepEqual(actual, expected);
 	assert.deepEqual(validateP77AcceptanceWorldLayout(actual, catalog), { checkpoints: 4, scenarios: 18, zones: 10 });
-	assert.equal(await readFile(resolve(bedrockRoot, "behavior_pack", "scripts", "acceptance", "generated", "acceptance-world-layout.js"), "utf8"), renderP77AcceptanceWorldLayout(actual));
+	assert.equal(normalizeLineEndings(await readFile(resolve(bedrockRoot, "behavior_pack", "scripts", "acceptance", "generated", "acceptance-world-layout.js"), "utf8")), renderP77AcceptanceWorldLayout(actual));
 });
 
 test("P7.7 acceptance checkpoints advance only from W0 through W3 and fail closed for absent providers", async () => {

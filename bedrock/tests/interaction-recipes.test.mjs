@@ -5,6 +5,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { buildInteractionRecipes, renderInteractionRecipes, validateInteractionRecipes } from "../tools/interaction-recipes.mjs";
+import { normalizeLineEndings } from "./test-text.mjs";
 
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(testDirectory, "..");
@@ -18,7 +19,7 @@ test("P7.2 interaction IR preserves every direct Create deployment, filling, emp
 	assert.equal(coverage.status.manual_specification, 0);
 	const persisted = await readFile(resolve(bedrockRoot, "data", "recipes", "interactions.json"), "utf8").then(JSON.parse);
 	assert.deepEqual(persisted, generated);
-	assert.equal(await readFile(resolve(bedrockRoot, "behavior_pack", "scripts", "processing", "generated", "interaction-recipes.js"), "utf8"), renderInteractionRecipes(generated.recipes));
+	assert.equal(normalizeLineEndings(await readFile(resolve(bedrockRoot, "behavior_pack", "scripts", "processing", "generated", "interaction-recipes.js"), "utf8")), renderInteractionRecipes(generated.recipes));
 
 	const tea = generated.recipes.find(recipe => recipe.id === "create:emptying/builders_tea");
 	assert.deepEqual(tea.results.find(result => result.kind === "fluid"), {

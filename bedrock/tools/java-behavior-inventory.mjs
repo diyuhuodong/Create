@@ -200,7 +200,7 @@ export async function buildJavaBehaviorInventory({ repositoryRoot }) {
 		filesWithSuffix(resolve(bedrockRoot, "tests"), ".mjs")
 	]);
 	const auditFiles = {
-		defaultRuntime: sourcePath(bedrockRoot, scripts.find(path => path.endsWith("/scripts/main.js"))),
+		defaultRuntime: sourcePath(bedrockRoot, scripts.find(path => path.endsWith("main.js"))),
 		scripts: scripts.map(path => sourcePath(bedrockRoot, path)),
 		tests: tests.map(path => sourcePath(bedrockRoot, path))
 	};

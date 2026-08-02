@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import { CookingParityMachine } from "../behavior_pack/scripts/processing/cooking-parity-machine.js";
 import { inspectNativeCookingBridge } from "../behavior_pack/scripts/processing/native-cooking-bridge.js";
 import { buildP77CookingParityCatalog, renderP77CookingParityRecipes, validateP77CookingParityCatalog } from "../tools/p7-7-cooking-parity.mjs";
+import { normalizeLineEndings } from "./test-text.mjs";
 
 const bedrockRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -30,7 +31,7 @@ test("P7.7 cooking catalog tracks all native timing and experience gaps", async 
 		processingTimeOverrides: 16,
 		recipes: 22
 	});
-	assert.equal(await readFile(resolve(bedrockRoot, "behavior_pack", "scripts", "processing", "generated", "cooking-parity-recipes.js"), "utf8"), renderP77CookingParityRecipes(actual));
+	assert.equal(normalizeLineEndings(await readFile(resolve(bedrockRoot, "behavior_pack", "scripts", "processing", "generated", "cooking-parity-recipes.js"), "utf8")), renderP77CookingParityRecipes(actual));
 });
 
 test("CookingParityMachine preserves exact timing, output, and one experience claim", async () => {

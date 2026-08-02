@@ -22,7 +22,7 @@ async function definitions(root, kind) {
 	for (const file of await jsonFiles(directory)) {
 		const identifier = JSON.parse(await readFile(file, "utf8"))[key]?.description?.identifier;
 		if (typeof identifier === "string")
-			records.set(identifier, relative(root, file));
+			records.set(identifier, relative(root, file).replaceAll("\\", "/"));
 	}
 	return records;
 }

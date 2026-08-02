@@ -62,7 +62,7 @@ async function artifacts(bedrockRoot) {
 	for (const [directory, key] of [["blocks", "minecraft:block"], ["items", "minecraft:item"], ["entities", "minecraft:entity"]]) {
 		for (const file of await jsonFiles(resolve(bedrockRoot, "behavior_pack", directory))) {
 			const identifier = JSON.parse(await readFile(file, "utf8"))[key]?.description?.identifier;
-			if (typeof identifier === "string") records.set(identifier, relative(bedrockRoot, file));
+			if (typeof identifier === "string") records.set(identifier, relative(bedrockRoot, file).replaceAll("\\", "/"));
 		}
 	}
 	return records;

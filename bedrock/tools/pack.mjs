@@ -27,7 +27,7 @@ function createArchiveFile(buildRoot, archive) {
 		? spawnSync("powershell.exe", [
 			"-NoProfile",
 			"-Command",
-			`Compress-Archive -Path behavior_pack,resource_pack -DestinationPath '${archive.replaceAll("'", "''")}' -Force`
+			`Compress-Archive -Path behavior_pack,resource_pack -DestinationPath '${`${archive}.zip`.replaceAll("'", "''")}' -Force\nMove-Item -LiteralPath '${`${archive}.zip`.replaceAll("'", "''")}' -Destination '${archive.replaceAll("'", "''")}' -Force`
 		], { cwd: buildRoot, stdio: "inherit" })
 		: spawnSync("zip", ["-q", "-r", archive, "behavior_pack", "resource_pack"], { cwd: buildRoot, stdio: "inherit" });
 	if (result.status !== 0)

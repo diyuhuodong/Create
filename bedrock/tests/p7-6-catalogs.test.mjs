@@ -1,10 +1,11 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 
 import { buildP76GuidanceLedger, buildP76ResourceLedger, buildP76WorkQueue, P76_PACKAGE_IDS } from "../tools/p7-6-catalogs.mjs";
 
-const repositoryRoot = new URL("../../", import.meta.url).pathname.replace(/\/$/, "");
+const repositoryRoot = fileURLToPath(new URL("../../", import.meta.url));
 const domainInventory = JSON.parse(await readFile(new URL("../data/domain-inventory.json", import.meta.url), "utf8"));
 
 test("P7.6 work queue preserves eight ordered forward-only packages", () => {

@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import { readFile } from "node:fs/promises";
 
 import { buildSequencedAssemblyRecipes, renderSequencedAssemblyRecipes, validateSequencedAssemblyRecipes } from "../tools/sequenced-assembly-recipes.mjs";
+import { normalizeLineEndings } from "./test-text.mjs";
 
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(testDirectory, "..");
@@ -23,5 +24,5 @@ test("P7.2 sequenced-assembly IR preserves every Java recipe, loop, step, probab
 	assert.deepEqual(sturdySheet.steps[0].ingredients[1], { amount: 500, kind: "fluid", typeId: "minecraft:lava" });
 	const persisted = await readFile(resolve(bedrockRoot, "data", "recipes", "sequenced-assembly.json"), "utf8").then(JSON.parse);
 	assert.deepEqual(persisted, generated);
-	assert.equal(await readFile(resolve(bedrockRoot, "behavior_pack", "scripts", "processing", "generated", "sequenced-assembly-recipes.js"), "utf8"), renderSequencedAssemblyRecipes(generated.recipes));
+	assert.equal(normalizeLineEndings(await readFile(resolve(bedrockRoot, "behavior_pack", "scripts", "processing", "generated", "sequenced-assembly-recipes.js"), "utf8")), renderSequencedAssemblyRecipes(generated.recipes));
 });

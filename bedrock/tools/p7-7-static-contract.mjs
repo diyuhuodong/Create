@@ -26,6 +26,10 @@ function sameJson(left, right) {
 	return JSON.stringify(left) === JSON.stringify(right);
 }
 
+function sameText(left, right) {
+	return left.replace(/\r\n/g, "\n") === right;
+}
+
 export async function validateP77StaticContract({
 	root = defaultBedrockRoot,
 	trackingRoot = defaultBedrockRoot
@@ -115,7 +119,7 @@ export async function validateP77StaticContract({
 	if (!sameJson(cookingParity, expectedCookingParity))
 		throw new Error("P7.7 cooking parity catalog is stale; run npm run cooking:p7-7.");
 	const cookingCoverage = validateP77CookingParityCatalog(cookingParity);
-	if (cookingParityRuntime !== renderP77CookingParityRecipes(cookingParity))
+	if (!sameText(cookingParityRuntime, renderP77CookingParityRecipes(cookingParity)))
 		throw new Error("P7.7 generated cooking parity recipes are stale; run npm run cooking:p7-7.");
 	const expectedC4SemanticDifferences = buildP8C4SemanticDifferenceLedger({ cookingParity, gapLedger, guidanceLedger });
 	if (!sameJson(c4SemanticDifferences, expectedC4SemanticDifferences))
@@ -127,7 +131,7 @@ export async function validateP77StaticContract({
 	const acceptanceWorldCoverage = validateP77AcceptanceWorldLayout(acceptanceWorld, catalog);
 	if (acceptanceWorldCoverage.zones !== 10 || acceptanceWorldCoverage.scenarios !== 18 || acceptanceWorldCoverage.checkpoints !== 4)
 		throw new Error("P7.7 static closure requires all ten zones, eighteen scenarios, and four checkpoints");
-	if (acceptanceWorldRuntime !== renderP77AcceptanceWorldLayout(acceptanceWorld))
+	if (!sameText(acceptanceWorldRuntime, renderP77AcceptanceWorldLayout(acceptanceWorld)))
 		throw new Error("P7.7 generated acceptance world layout is stale; run npm run acceptance-world:p7-7.");
 	const expectedLegacy = deriveS315CompatibilityLedger({ candidate, catalog, ledger });
 	if (!sameJson(legacy, expectedLegacy))

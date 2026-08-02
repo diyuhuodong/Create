@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 
 import { matchMechanicalCraftingRecipe } from "../behavior_pack/scripts/processing/mechanical-crafter.js";
 import { buildMechanicalCraftingRecipes, renderMechanicalCraftingRecipes, validateMechanicalCraftingRecipes } from "../tools/mechanical-crafting-recipes.mjs";
+import { normalizeLineEndings } from "./test-text.mjs";
 
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 const bedrockRoot = resolve(testDirectory, "..");
@@ -15,7 +16,7 @@ test("P7.2 mechanical crafting is generated from every Java recipe and preserves
 	const generated = await buildMechanicalCraftingRecipes({ repositoryRoot });
 	assert.deepEqual(validateMechanicalCraftingRecipes(generated), { recipes: 4 });
 	assert.deepEqual(await readFile(resolve(bedrockRoot, "data", "recipes", "mechanical-crafting.json"), "utf8").then(JSON.parse), generated);
-	assert.equal(await readFile(resolve(bedrockRoot, "behavior_pack", "scripts", "processing", "generated", "mechanical-crafting-recipes.js"), "utf8"), renderMechanicalCraftingRecipes(generated.recipes));
+	assert.equal(normalizeLineEndings(await readFile(resolve(bedrockRoot, "behavior_pack", "scripts", "processing", "generated", "mechanical-crafting-recipes.js"), "utf8")), renderMechanicalCraftingRecipes(generated.recipes));
 	const recipe = generated.recipes.find(entry => entry.id === "create:mechanical_crafting/potato_cannon");
 	const grid = recipe.pattern.map((row, rowIndex) => [...row].map(symbol => symbol === " " ? undefined : ({
 		C: "minecraft:copper_ingot",
