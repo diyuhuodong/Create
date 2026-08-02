@@ -25,7 +25,7 @@ async function fixtures() {
 		commit,
 		createdAt: "2026-07-27T00:00:00.000Z",
 		tree: { sha256: "b".repeat(64), files: 10, bytes: 100 },
-		artifact: { path: `bedrock/dist/createbedrock-0.1.0-${"c".repeat(12)}.mcaddon`, sha256: "c".repeat(64), sizeBytes: 200 },
+		artifact: { path: `bedrock/dist/createbedrock-${behaviorManifest.header.version.join(".")}-${"c".repeat(12)}.mcaddon`, sha256: "c".repeat(64), sizeBytes: 200 },
 		behaviorManifest,
 		resourceManifest
 	});
