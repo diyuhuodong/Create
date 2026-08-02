@@ -1,4 +1,4 @@
-import { BlockPermutation, ItemStack, world } from "@minecraft/server";
+import { BlockPermutation, ItemStack, system, world } from "@minecraft/server";
 
 import { registerTickHandler } from "../kernel/index.js";
 import { ShardedStateStore } from "../kernel/sharded-state-store.js";
@@ -489,6 +489,6 @@ export function registerSchematics() {
 		}
 	});
 	registerTickHandler(runCannons, "schematics");
-	restore();
+	system.run(restore);
 	return true;
 }

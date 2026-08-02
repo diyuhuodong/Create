@@ -1,4 +1,4 @@
-import { world } from "@minecraft/server";
+import { system, world } from "@minecraft/server";
 import { ModalFormData } from "@minecraft/server-ui";
 
 import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
@@ -123,6 +123,6 @@ export function registerClipboards() {
 			editClipboard(event.player, event.block);
 	});
 	registerTickHandler(() => store.tick(), "clipboard");
-	restore();
+	system.run(restore);
 	return true;
 }

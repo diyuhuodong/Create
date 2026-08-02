@@ -1,4 +1,4 @@
-import { world } from "@minecraft/server";
+import { system, world } from "@minecraft/server";
 
 import { registerTickHandler } from "../kernel/index.js";
 import { ShardedStateStore } from "../kernel/sharded-state-store.js";
@@ -175,6 +175,6 @@ export function registerStickers() {
 		}
 	});
 	registerTickHandler(() => store.tick());
-	restore();
+	system.run(restore);
 	return true;
 }
