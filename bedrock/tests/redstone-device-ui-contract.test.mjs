@@ -13,7 +13,7 @@ test("R1 declares stable server-ui and wires all configuration entry points thro
 	const manifest = JSON.parse(await text("behavior_pack/manifest.json"));
 	assert.deepEqual(manifest.dependencies.find(dependency => dependency.module_name === "@minecraft/server-ui"), {
 		module_name: "@minecraft/server-ui",
-		version: "2.0.0"
+		version: "2.1.0"
 	});
 	const ui = await text("behavior_pack/scripts/redstone/redstone-device-ui.js");
 	assert.match(ui, /ActionFormData, ModalFormData/);

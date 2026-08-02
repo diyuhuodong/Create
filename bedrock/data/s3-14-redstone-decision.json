@@ -4,7 +4,7 @@
   "target": {
     "minimumEngineVersion": [1, 26, 0],
     "blockFormatVersion": "1.26.0",
-    "scriptApiVersion": "2.5.0",
+    "scriptApiVersion": "2.8.0",
     "experimentalFeatures": [],
     "platformAcceptance": "pending_s3_15"
   },

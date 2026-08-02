@@ -19,7 +19,7 @@ export const NATIVE_REDSTONE_COMPONENTS = Object.freeze([
 	"minecraft:redstone_producer"
 ]);
 
-export const NATIVE_REDSTONE_SCRIPT_API_VERSION = "2.5.0";
+export const NATIVE_REDSTONE_SCRIPT_API_VERSION = "2.8.0";
 
 export const NATIVE_REDSTONE_INPUT_COMPONENT = "createbedrock:redstone_input";
 

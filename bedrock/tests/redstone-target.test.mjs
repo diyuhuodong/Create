@@ -10,7 +10,7 @@ test("S3-14 native target only accepts the declared 1.26.0 Realm and console bas
 	assert.equal(REDSTONE_COMPATIBILITY_TARGET.inputMode, "native_consumer_events_with_fail_closed_polling_fallback");
 	assert.equal(REDSTONE_COMPATIBILITY_TARGET.outputMode, "native_components_with_device_implementations_in_progress");
 	assert.deepEqual(NATIVE_REDSTONE_COMPONENTS, ["minecraft:redstone_consumer", "minecraft:redstone_producer"]);
-	assert.equal(NATIVE_REDSTONE_SCRIPT_API_VERSION, "2.5.0");
+	assert.equal(NATIVE_REDSTONE_SCRIPT_API_VERSION, "2.8.0");
 	assert.equal(NATIVE_REDSTONE_INPUT_COMPONENT, "createbedrock:redstone_input");
 	assert.equal(COMPATIBILITY_REDSTONE_CONTROLS.length, 6);
 });

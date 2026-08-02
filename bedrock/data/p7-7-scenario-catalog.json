@@ -59,7 +59,7 @@
       "assertions": [
         "Content Log contains no errors.",
         "Warnings are absent or explicitly allowlisted.",
-        "Script API 2.5.0 and UI API 2.0.0 initialize."
+        "Script API 2.8.0 and UI API 2.1.0 initialize."
       ]
     },
     {
