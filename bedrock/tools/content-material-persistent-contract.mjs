@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 
 import { plannedGeometryIdentifiers } from "./convert-java-models.mjs";
 import { JAVA_BLOCK_TEXTURES, JAVA_SOUND_ASSETS } from "./import-java-assets.mjs";
+import { hasRegisteredBlockComponent } from "./block-custom-component-compatibility.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultBedrockRoot = resolve(toolDirectory, "..");
@@ -132,7 +133,7 @@ export async function validateContentMaterialPersistent({ bedrockRoot = defaultB
 		|| components["minecraft:geometry"] !== DESK_BELL.geometry
 		|| components["minecraft:item_visual"]?.geometry?.identifier !== DESK_BELL.geometry
 		|| components["minecraft:loot"] !== "loot_tables/blocks/desk_bell.json"
-		|| !Object.hasOwn(components, "createbedrock:desk_bell_interaction"))
+		|| !hasRegisteredBlockComponent(components, "createbedrock:desk_bell_interaction"))
 		throw new Error("C2 Desk Bell must retain its stateful directional block definition and runtime component");
 	if (!geometries.has(DESK_BELL.geometry) || !geometries.has(DESK_BELL.poweredGeometry))
 		throw new Error("C2 Desk Bell must use Java-derived idle and pressed geometry");
@@ -186,7 +187,7 @@ export async function validateContentMaterialPersistent({ bedrockRoot = defaultB
 		|| lampComponents["minecraft:redstone_consumer"]?.propagates_power !== false
 		|| JSON.stringify(lampComponents["minecraft:tick"]?.interval_range) !== JSON.stringify([1, 1])
 		|| lampComponents["minecraft:tick"]?.looping !== true
-		|| !Object.hasOwn(lampComponents, "createbedrock:rose_quartz_lamp_runtime")
+		|| !hasRegisteredBlockComponent(lampComponents, "createbedrock:rose_quartz_lamp_runtime")
 		|| lampComponents["minecraft:loot"] !== "loot_tables/blocks/rose_quartz_lamp.json")
 		throw new Error("C2 Rose Quartz Lamp must preserve its Java state, native input, tick runtime, and loot declaration");
 	for (const [atlasKey, sourceTexture] of ROSE_QUARTZ_LAMP.textures) {
