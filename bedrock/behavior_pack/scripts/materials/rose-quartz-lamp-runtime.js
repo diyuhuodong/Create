@@ -31,8 +31,8 @@ function isRoseQuartzLamp(block) {
 
 function currentOutputMask(permutation) {
 	const mask = permutation?.getAllStates?.()["createbedrock:output_mask"];
-	if (!Number.isInteger(mask) || mask < 0 || mask > 63)
-		throw new RangeError("Rose Quartz Lamp output mask must be an integer from 0 through 63");
+	if (!Number.isInteger(mask) || mask < 0 || mask > 15)
+		throw new RangeError("Rose Quartz Lamp output mask must be an integer from 0 through 15");
 	return mask;
 }
 
@@ -49,7 +49,7 @@ function setRoseQuartzLampState(block, nextState) {
 		powered: nextState.powered ?? current.powered,
 		powering: nextState.powering ?? current.powering
 	};
-	const outputMask = outputMaskFor(block);
+	const outputMask = outputMaskFor(block) & 15;
 	if (desired.activate === current.activate && desired.powered === current.powered
 		&& desired.powering === current.powering && outputMask === currentOutputMask(block.permutation))
 		return false;

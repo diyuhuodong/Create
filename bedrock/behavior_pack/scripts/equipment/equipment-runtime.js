@@ -112,12 +112,11 @@ function headBlock(player) {
 
 function equipmentSlot(player, slot) {
 	const equippable = player?.getComponent?.("minecraft:equippable");
-	const equipmentSlot = equippable?.getEquipmentSlot?.(slot);
-	if (!equipmentSlot)
+	if (typeof equippable?.getEquipment !== "function" || typeof equippable?.setEquipment !== "function")
 		return undefined;
 	return {
-		getItem() { return equipmentSlot.getItem?.() ?? equippable.getEquipment?.(slot); },
-		setItem(item) { equipmentSlot.setItem?.(item); }
+		getItem() { return equippable.getEquipment(slot); },
+		setItem(item) { return equippable.setEquipment(slot, item); }
 	};
 }
 

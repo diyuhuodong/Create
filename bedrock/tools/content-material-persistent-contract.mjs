@@ -182,7 +182,9 @@ export async function validateContentMaterialPersistent({ bedrockRoot = defaultB
 		|| JSON.stringify((lamp?.description?.states ?? lamp?.description?.properties)?.["createbedrock:activate"]) !== JSON.stringify([0, 1])
 		|| JSON.stringify((lamp?.description?.states ?? lamp?.description?.properties)?.["createbedrock:powered"]) !== JSON.stringify([0, 1])
 		|| JSON.stringify((lamp?.description?.states ?? lamp?.description?.properties)?.["createbedrock:powering"]) !== JSON.stringify([0, 1])
-		|| !Array.isArray(outputMasks) || outputMasks.length !== 64 || outputMasks[0] !== 63
+		|| !Array.isArray(outputMasks) || (built
+			? JSON.stringify(outputMasks) !== JSON.stringify(Array.from({ length: 16 }, (_, value) => value))
+			: outputMasks.length !== 64 || outputMasks[0] !== 63)
 		|| lampComponents["minecraft:redstone_consumer"]?.propagates_power !== false
 		|| JSON.stringify(lampComponents["minecraft:tick"]?.interval_range) !== JSON.stringify([1, 1])
 		|| lampComponents["minecraft:tick"]?.looping !== true

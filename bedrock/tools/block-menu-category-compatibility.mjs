@@ -24,10 +24,31 @@ function normalizeMenuCategory(description) {
 function normalizeBlockStates(definition) {
 	const description = definition?.["minecraft:block"]?.description;
 	if (!description?.properties || description.states)
-		return false;
+		return normalizeStateEnums(description?.states);
 	description.states = description.properties;
 	delete description.properties;
-	return true;
+	return normalizeStateEnums(description.states) || true;
+}
+
+function normalizeStateEnums(states) {
+	if (!states || typeof states !== "object")
+		return false;
+	let changed = false;
+	for (const [name, values] of Object.entries(states)) {
+		if (!Array.isArray(values))
+			continue;
+		if (values.length === 1) {
+			values.push(typeof values[0] === "number" ? values[0] + 1 : `${values[0]}_alt`);
+			changed = true;
+		}
+		if (values.length > 16) {
+			values.splice(0, values.length, ...(name === "createbedrock:output_mask"
+				? Array.from({ length: 16 }, (_, value) => value)
+				: values.slice(0, 16)));
+			changed = true;
+		}
+	}
+	return changed;
 }
 
 function normalizeBlockGeometry(definition) {
@@ -36,6 +57,38 @@ function normalizeBlockGeometry(definition) {
 		return false;
 	components["minecraft:geometry"] = "minecraft:geometry.full_block";
 	return true;
+}
+
+function normalizeBlockComponents(definition) {
+	let changed = false;
+	const normalizeComponents = components => {
+		if (!components || typeof components !== "object")
+			return;
+		const materials = components["minecraft:material_instances"];
+		if (!materials || typeof materials !== "object")
+			return;
+		const entries = Object.entries(materials).filter(([, material]) => material && typeof material === "object");
+		if (entries.length === 0)
+			return;
+		if (!materials["*"]) {
+			materials["*"] = { ...entries[0][1] };
+			changed = true;
+		}
+		const transparent = Object.values(materials).some(material => material?.render_method === "blend" || material?.render_method === "alpha_blend");
+		if (!transparent)
+			return;
+		for (const material of Object.values(materials)) {
+			if (material?.render_method === "opaque") {
+				material.render_method = "blend";
+				changed = true;
+			}
+		}
+	};
+	const block = definition?.["minecraft:block"];
+	normalizeComponents(block?.components);
+	for (const permutation of block?.permutations ?? [])
+		normalizeComponents(permutation.components);
+	return changed;
 }
 
 function normalizeBlockBounds(definition) {
@@ -80,9 +133,10 @@ export function normalizeBlockContent(definition) {
 	const menuCategory = normalizeBlockMenuCategory(definition);
 	const states = normalizeBlockStates(definition);
 	const geometry = normalizeBlockGeometry(definition);
+	const components = normalizeBlockComponents(definition);
 	const bounds = normalizeBlockBounds(definition);
 	const renderMethods = normalizeMaterialRenderMethods(definition);
-	return menuCategory || states || geometry || bounds || renderMethods;
+	return menuCategory || states || geometry || components || bounds || renderMethods;
 }
 
 export async function normalizeStagedBlockContent({ behaviorPackRoot }) {
