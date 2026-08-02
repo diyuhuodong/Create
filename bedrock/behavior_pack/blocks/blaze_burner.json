@@ -30,8 +30,7 @@
           "blaze_flame": { "texture": "createbedrock_blaze_burner_flame", "render_method": "alpha_test" },
           "*": { "texture": "createbedrock_blaze_heater_brazier", "render_method": "alpha_test" }
         }
-      },
-      "createbedrock:blaze_burner_runtime": {}
+      }
     },
     "permutations": [
       { "condition": "query.block_state('createbedrock:heat_level') == 1", "components": { "minecraft:material_instances": { "blaze_face": { "texture": "createbedrock_blaze_idle", "render_method": "alpha_test" } } } },

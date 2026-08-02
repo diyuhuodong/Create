@@ -28,8 +28,7 @@
         "stripped_spruce_log": { "texture": "stripped_spruce_log", "render_method": "opaque" },
         "*": { "texture": "createbedrock_axis", "render_method": "opaque" }
       },
-      "minecraft:loot": "loot_tables/blocks/turntable.json",
-      "createbedrock:turntable_runtime": {}
+      "minecraft:loot": "loot_tables/blocks/turntable.json"
     }
   }
 }

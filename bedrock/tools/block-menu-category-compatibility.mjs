@@ -1,10 +1,12 @@
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-function blockFiles(directory) {
-	return readdir(directory, { withFileTypes: true }).then(entries => entries
-		.filter(entry => entry.isFile() && entry.name.endsWith(".json"))
-		.map(entry => resolve(directory, entry.name)));
+async function blockFiles(directory) {
+	const entries = await readdir(directory, { withFileTypes: true });
+	const nested = await Promise.all(entries.map(entry => entry.isDirectory()
+		? blockFiles(resolve(directory, entry.name))
+		: entry.name.endsWith(".json") ? [resolve(directory, entry.name)] : []));
+	return nested.flat();
 }
 
 export function normalizeBlockMenuCategory(definition) {
