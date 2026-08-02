@@ -22,18 +22,36 @@ function packVersion(manifest) {
 	return version.join(".");
 }
 
-function createArchiveFile(buildRoot, archive) {
-	const behaviorArchive = "createbedrock-behavior.mcpack";
-	const resourceArchive = "createbedrock-resource.mcpack";
-	const result = process.platform === "win32"
-		? spawnSync("powershell.exe", [
-			"-NoProfile",
-			"-Command",
-			`$ErrorActionPreference = 'Stop'\nCompress-Archive -Path 'behavior_pack\\*' -DestinationPath '${`${behaviorArchive}.zip`}' -Force\nMove-Item -LiteralPath '${`${behaviorArchive}.zip`}' -Destination '${behaviorArchive}' -Force\nCompress-Archive -Path 'resource_pack\\*' -DestinationPath '${`${resourceArchive}.zip`}' -Force\nMove-Item -LiteralPath '${`${resourceArchive}.zip`}' -Destination '${resourceArchive}' -Force\nCompress-Archive -Path '${behaviorArchive}','${resourceArchive}' -DestinationPath '${`${archive}.zip`.replaceAll("'", "''")}' -Force\nMove-Item -LiteralPath '${`${archive}.zip`.replaceAll("'", "''")}' -Destination '${archive.replaceAll("'", "''")}' -Force\nRemove-Item -LiteralPath '${behaviorArchive}','${resourceArchive}' -Force`
-		], { cwd: buildRoot, stdio: "inherit" })
-		: spawnSync("sh", ["-c", `cd behavior_pack && zip -q -r ../${behaviorArchive} . && cd ../resource_pack && zip -q -r ../${resourceArchive} . && cd .. && zip -q ${archive} ${behaviorArchive} ${resourceArchive} && rm -f ${behaviorArchive} ${resourceArchive}`], { cwd: buildRoot, stdio: "inherit" });
+function runArchive(command, args, options) {
+	const result = spawnSync(command, args, { ...options, stdio: "inherit" });
 	if (result.status !== 0)
 		throw new Error("Unable to create the .mcaddon archive. Run npm run build first and ensure the platform archive tool is available.");
+}
+
+async function createArchiveFile(buildRoot, archive) {
+	const behaviorArchive = "createbedrock-behavior.mcpack";
+	const resourceArchive = "createbedrock-resource.mcpack";
+	const behaviorPath = resolve(buildRoot, behaviorArchive);
+	const resourcePath = resolve(buildRoot, resourceArchive);
+	const behaviorZip = `${behaviorPath}.zip`;
+	const resourceZip = `${resourcePath}.zip`;
+	const archiveZip = `${archive}.zip`;
+	try {
+		if (process.platform === "win32") {
+			runArchive("tar", ["-a", "-c", "-f", behaviorZip, "-C", "behavior_pack", "."], { cwd: buildRoot });
+			await rename(behaviorZip, behaviorPath);
+			runArchive("tar", ["-a", "-c", "-f", resourceZip, "-C", "resource_pack", "."], { cwd: buildRoot });
+			await rename(resourceZip, resourcePath);
+			runArchive("tar", ["-a", "-c", "-f", archiveZip, behaviorArchive, resourceArchive], { cwd: buildRoot });
+			await rename(archiveZip, archive);
+		} else {
+			runArchive("zip", ["-q", "-r", behaviorPath, "."], { cwd: resolve(buildRoot, "behavior_pack") });
+			runArchive("zip", ["-q", "-r", resourcePath, "."], { cwd: resolve(buildRoot, "resource_pack") });
+			runArchive("zip", ["-q", archive, behaviorArchive, resourceArchive], { cwd: buildRoot });
+		}
+	} finally {
+		await Promise.all([behaviorPath, resourcePath, behaviorZip, resourceZip, archiveZip].map(file => rm(file, { force: true })));
+	}
 }
 
 export async function createPackArchive({ bedrockRoot = defaultBedrockRoot } = {}) {
@@ -46,7 +64,7 @@ export async function createPackArchive({ bedrockRoot = defaultBedrockRoot } = {
 	await mkdir(distributionRoot, { recursive: true });
 	const temporary = resolve(distributionRoot, `createbedrock-${version}.tmp.mcaddon`);
 	await rm(temporary, { force: true });
-	createArchiveFile(buildRoot, temporary);
+	await createArchiveFile(buildRoot, temporary);
 	const sha256 = await sha256File(temporary);
 	const archive = resolve(distributionRoot, `createbedrock-${version}-${sha256.slice(0, 12)}.mcaddon`);
 	await rm(archive, { force: true });
