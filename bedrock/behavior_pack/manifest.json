@@ -1,30 +1,30 @@
 {
   "format_version": 2,
   "header": {
-    "name": "Create Bedrock Behavior Pack v0.1.13",
-    "description": "Candidate v0.1.13: server-authoritative Create mechanics for Bedrock and Realms.",
+    "name": "Create Bedrock Behavior Pack v0.1.14",
+    "description": "Candidate v0.1.14: server-authoritative Create mechanics for Bedrock and Realms.",
     "uuid": "f0d04e1a-0b1f-4c23-8f2f-44d0dca3ba41",
-		"version": [0, 1, 13],
+		"version": [0, 1, 14],
     "min_engine_version": [1, 26, 0]
   },
   "modules": [
     {
       "type": "data",
       "uuid": "b0c5f27b-f8cb-48ea-a8fe-96f17bc16f02",
-			"version": [0, 1, 13]
+			"version": [0, 1, 14]
     },
     {
       "type": "script",
       "language": "javascript",
       "uuid": "c26b370c-08fc-40c9-9411-2604c6d70bcb",
-      "version": [0, 1, 13],
+      "version": [0, 1, 14],
       "entry": "scripts/main.js"
     }
   ],
   "dependencies": [
     {
       "uuid": "ed3cbcf1-0d4e-4f0c-bcf7-f11aa568c32c",
-      "version": [0, 1, 13]
+      "version": [0, 1, 14]
     },
     {
       "module_name": "@minecraft/server",
