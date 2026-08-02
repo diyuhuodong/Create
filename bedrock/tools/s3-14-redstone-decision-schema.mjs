@@ -3,7 +3,6 @@ import { dirname, extname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { COMPATIBILITY_REDSTONE_CONTROLS, hasCompatibilityEngineVersion, NATIVE_REDSTONE_COMPONENTS, NATIVE_REDSTONE_INPUT_COMPONENT, NATIVE_REDSTONE_SCRIPT_API_VERSION, REDSTONE_COMPATIBILITY_TARGET } from "../behavior_pack/scripts/redstone/redstone-target.js";
-import { hasRegisteredBlockComponent } from "./block-custom-component-compatibility.mjs";
 import { validateMigrationMatrix } from "./migration-matrix-schema.mjs";
 import { validateStage3RedstoneDeviceSourceContract } from "./s3-14-redstone-device-contract.mjs";
 import { validateStage3RedstoneSemanticContract } from "./s3-14-redstone-semantic-contract.mjs";
@@ -146,7 +145,7 @@ export async function validateStage3RedstoneDecision({ bedrockRoot = defaultBedr
 			throw new Error(`S3-14 input control ${blockType} must remain redstone-conductive`);
 		if (components["minecraft:redstone_consumer"]?.min_power !== 0
 			|| components["minecraft:redstone_consumer"]?.propagates_power !== false
-			|| !hasRegisteredBlockComponent(components, NATIVE_REDSTONE_INPUT_COMPONENT))
+			|| !(NATIVE_REDSTONE_INPUT_COMPONENT in components))
 			throw new Error(`S3-14 input control ${blockType} must bind the stable native consumer component`);
 	}
 	if (!runtime.includes("Block.getRedstonePower") || !runtime.includes("registerNativeRedstoneEventHandler") || !runtime.includes("REDSTONE_COMPATIBILITY_TARGET"))
@@ -154,7 +153,7 @@ export async function validateStage3RedstoneDecision({ bedrockRoot = defaultBedr
 	for (const file of await jsonFiles(behaviorRoot)) {
 		const definition = await readJson(file);
 		const components = definition["minecraft:block"]?.components ?? {};
-		if (NATIVE_REDSTONE_COMPONENTS.some(component => hasRegisteredBlockComponent(components, component))
+		if (NATIVE_REDSTONE_COMPONENTS.some(component => component in components)
 			&& definition.format_version !== EXPECTED_BLOCK_FORMAT)
 			throw new Error(`S3-14 native redstone component in ${file} requires format ${EXPECTED_BLOCK_FORMAT}`);
 	}

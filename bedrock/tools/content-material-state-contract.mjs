@@ -4,7 +4,6 @@ import { fileURLToPath } from "node:url";
 
 import { plannedGeometryIdentifiers } from "./convert-java-models.mjs";
 import { JAVA_BLOCK_TEXTURES } from "./import-java-assets.mjs";
-import { hasRegisteredBlockComponent } from "./block-custom-component-compatibility.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultBedrockRoot = resolve(toolDirectory, "..");
@@ -227,7 +226,7 @@ export async function validateContentMaterialStates({ bedrockRoot = defaultBedro
 	if (experienceComponents?.["minecraft:light_emission"] !== 15
 		|| JSON.stringify(experienceComponents?.["minecraft:tick"]?.interval_range) !== JSON.stringify([3, 7])
 		|| experienceComponents?.["minecraft:tick"]?.looping !== true
-		|| !hasRegisteredBlockComponent(experienceComponents, "createbedrock:experience_block_particle"))
+		|| !Object.hasOwn(experienceComponents ?? {}, "createbedrock:experience_block_particle"))
 		throw new Error("C1 experience block must preserve Java light level 15 and end-rod particle cadence");
 
 	const framedTrapdoor = await readJson(resolve(behaviorRoot, "blocks", "framed_glass_trapdoor.json"));
@@ -256,7 +255,7 @@ export async function validateContentMaterialStates({ bedrockRoot = defaultBedro
 		|| trapdoorWaterRule?.on_liquid_touches !== "blocking"
 		|| trapdoorWaterRule?.use_liquid_clipping !== true
 		|| framedTrapdoorBlock?.components?.["minecraft:redstone_consumer"]?.propagates_power !== false
-		|| !hasRegisteredBlockComponent(framedTrapdoorBlock?.components, "createbedrock:redstone_input")
+		|| !Object.hasOwn(framedTrapdoorBlock?.components ?? {}, "createbedrock:redstone_input")
 		|| trapdoorPermutations.length !== 12
 		|| !requiredClosedTrapdoorStates.every(condition => trapdoorPermutations.some(entry => entry.condition === condition))
 		|| !requiredOpenTrapdoorStates.every(condition => trapdoorPermutations.some(entry => entry.condition === condition))

@@ -4,7 +4,7 @@ import test from "node:test";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { hasRegisteredBlockComponent, normalizeBlockCustomComponents } from "../tools/block-custom-component-compatibility.mjs";
+import { normalizeBlockMenuCategory } from "../tools/block-menu-category-compatibility.mjs";
 
 const scriptsRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..", "behavior_pack", "scripts");
 
@@ -32,26 +32,13 @@ test("Bedrock persistent runtimes defer world restoration until after early exec
 	}
 });
 
-test("Bedrock packages registered block runtimes through the current custom-component declaration", () => {
+test("Bedrock packages namespace every block menu-category group", () => {
 	const definition = {
 		"minecraft:block": {
-			components: {
-				"minecraft:custom_components": ["createbedrock:bell_runtime"],
-				"createbedrock:bell_runtime": {},
-				"createbedrock:redstone_input": {},
-				"minecraft:redstone_consumer": { min_power: 0 }
-			}
+			description: { menu_category: { category: "construction", group: "itemGroup.name.misc" } }
 		}
 	};
-	assert.deepEqual(normalizeBlockCustomComponents(definition), [
-		"createbedrock:redstone_input",
-		"createbedrock:bell_runtime"
-	]);
-	const components = definition["minecraft:block"].components;
-	assert.deepEqual(components["minecraft:custom_components"], [
-		"createbedrock:bell_runtime",
-		"createbedrock:redstone_input"
-	]);
-	assert.equal(hasRegisteredBlockComponent(components, "createbedrock:redstone_input"), true);
-	assert.equal(Object.hasOwn(components, "createbedrock:redstone_input"), false);
+	assert.equal(normalizeBlockMenuCategory(definition), true);
+	assert.equal(definition["minecraft:block"].description.menu_category.group, "minecraft:itemGroup.name.misc");
+	assert.equal(normalizeBlockMenuCategory(definition), false);
 });

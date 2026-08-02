@@ -4,7 +4,6 @@ import { fileURLToPath } from "node:url";
 
 import { REDSTONE_BLOCK_DEVICES, REDSTONE_ITEM_DEVICES, allRedstoneAcceptanceIds } from "../behavior_pack/scripts/redstone/redstone-device-catalog.js";
 import { NATIVE_REDSTONE_INPUT_COMPONENT } from "../behavior_pack/scripts/redstone/redstone-target.js";
-import { hasRegisteredBlockComponent } from "./block-custom-component-compatibility.mjs";
 
 const toolDirectory = dirname(fileURLToPath(import.meta.url));
 const defaultBedrockRoot = resolve(toolDirectory, "..");
@@ -64,7 +63,7 @@ function assertNativeInput(device, block) {
 		return;
 	if (components["minecraft:redstone_consumer"]?.min_power !== 0
 		|| components["minecraft:redstone_consumer"]?.propagates_power !== false
-		|| !hasRegisteredBlockComponent(components, NATIVE_REDSTONE_INPUT_COMPONENT))
+		|| !(NATIVE_REDSTONE_INPUT_COMPONENT in components))
 		throw new Error(`S3-14 ${device.blockId} must bind the stable native redstone consumer`);
 }
 
