@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { createReadStream } from "node:fs";
-import { mkdir, readFile, rename, rm, stat } from "node:fs/promises";
+import { mkdir, readFile, readdir, rename, rm, stat } from "node:fs/promises";
 import { dirname, relative, resolve, sep } from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -36,17 +36,21 @@ async function createArchiveFile(buildRoot, archive) {
 	const behaviorZip = `${behaviorPath}.zip`;
 	const resourceZip = `${resourcePath}.zip`;
 	const archiveZip = `${archive}.zip`;
+	const [behaviorEntries, resourceEntries] = await Promise.all([
+		readdir(resolve(buildRoot, "behavior_pack")),
+		readdir(resolve(buildRoot, "resource_pack"))
+	]);
 	try {
 		if (process.platform === "win32") {
-			runArchive("tar", ["-a", "-c", "-f", behaviorZip, "-C", "behavior_pack", "."], { cwd: buildRoot });
+			runArchive("tar", ["-a", "-c", "-f", behaviorZip, "-C", "behavior_pack", ...behaviorEntries], { cwd: buildRoot });
 			await rename(behaviorZip, behaviorPath);
-			runArchive("tar", ["-a", "-c", "-f", resourceZip, "-C", "resource_pack", "."], { cwd: buildRoot });
+			runArchive("tar", ["-a", "-c", "-f", resourceZip, "-C", "resource_pack", ...resourceEntries], { cwd: buildRoot });
 			await rename(resourceZip, resourcePath);
 			runArchive("tar", ["-a", "-c", "-f", archiveZip, behaviorArchive, resourceArchive], { cwd: buildRoot });
 			await rename(archiveZip, archive);
 		} else {
-			runArchive("zip", ["-q", "-r", behaviorPath, "."], { cwd: resolve(buildRoot, "behavior_pack") });
-			runArchive("zip", ["-q", "-r", resourcePath, "."], { cwd: resolve(buildRoot, "resource_pack") });
+			runArchive("zip", ["-q", "-r", behaviorPath, ...behaviorEntries], { cwd: resolve(buildRoot, "behavior_pack") });
+			runArchive("zip", ["-q", "-r", resourcePath, ...resourceEntries], { cwd: resolve(buildRoot, "resource_pack") });
 			runArchive("zip", ["-q", archive, behaviorArchive, resourceArchive], { cwd: buildRoot });
 		}
 	} finally {
