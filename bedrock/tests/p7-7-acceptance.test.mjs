@@ -205,6 +205,9 @@ test("P7.7 packer emits a digest-named immutable mcaddon", async () => {
 		assert.match(artifact.archive, /createbedrock-1\.2\.3-[0-9a-f]{12}\.mcaddon$/);
 		assert.equal(await sha256File(artifact.archive), artifact.sha256);
 		assert.ok(artifact.sizeBytes > 0);
+		const archiveContents = (await readFile(artifact.archive)).toString("latin1");
+		assert.match(archiveContents, /createbedrock-behavior\.mcpack/);
+		assert.match(archiveContents, /createbedrock-resource\.mcpack/);
 	} finally {
 		await rm(root, { recursive: true, force: true });
 	}

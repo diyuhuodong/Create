@@ -23,13 +23,15 @@ function packVersion(manifest) {
 }
 
 function createArchiveFile(buildRoot, archive) {
+	const behaviorArchive = "createbedrock-behavior.mcpack";
+	const resourceArchive = "createbedrock-resource.mcpack";
 	const result = process.platform === "win32"
 		? spawnSync("powershell.exe", [
 			"-NoProfile",
 			"-Command",
-			`Compress-Archive -Path behavior_pack,resource_pack -DestinationPath '${`${archive}.zip`.replaceAll("'", "''")}' -Force\nMove-Item -LiteralPath '${`${archive}.zip`.replaceAll("'", "''")}' -Destination '${archive.replaceAll("'", "''")}' -Force`
+			`$ErrorActionPreference = 'Stop'\nCompress-Archive -Path 'behavior_pack\\*' -DestinationPath '${`${behaviorArchive}.zip`}' -Force\nMove-Item -LiteralPath '${`${behaviorArchive}.zip`}' -Destination '${behaviorArchive}' -Force\nCompress-Archive -Path 'resource_pack\\*' -DestinationPath '${`${resourceArchive}.zip`}' -Force\nMove-Item -LiteralPath '${`${resourceArchive}.zip`}' -Destination '${resourceArchive}' -Force\nCompress-Archive -Path '${behaviorArchive}','${resourceArchive}' -DestinationPath '${`${archive}.zip`.replaceAll("'", "''")}' -Force\nMove-Item -LiteralPath '${`${archive}.zip`.replaceAll("'", "''")}' -Destination '${archive.replaceAll("'", "''")}' -Force\nRemove-Item -LiteralPath '${behaviorArchive}','${resourceArchive}' -Force`
 		], { cwd: buildRoot, stdio: "inherit" })
-		: spawnSync("zip", ["-q", "-r", archive, "behavior_pack", "resource_pack"], { cwd: buildRoot, stdio: "inherit" });
+		: spawnSync("sh", ["-c", `cd behavior_pack && zip -q -r ../${behaviorArchive} . && cd ../resource_pack && zip -q -r ../${resourceArchive} . && cd .. && zip -q ${archive} ${behaviorArchive} ${resourceArchive} && rm -f ${behaviorArchive} ${resourceArchive}`], { cwd: buildRoot, stdio: "inherit" });
 	if (result.status !== 0)
 		throw new Error("Unable to create the .mcaddon archive. Run npm run build first and ensure the platform archive tool is available.");
 }
