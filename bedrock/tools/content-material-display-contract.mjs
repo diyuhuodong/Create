@@ -99,7 +99,7 @@ export async function validateContentMaterialDisplayPackage({ bedrockRoot = defa
 	if (!displayRuntime.includes("registerMovingBlockDataContributor(DISPLAY_BOARD_BLOCK, \"display_board\"")
 		|| !displayRuntime.includes("collectDisplayBoardGroup") || !displayRuntime.includes("writeDisplayBoardLine")
 		|| !displayLogic.includes("DISPLAY_BOARD_MAX_WIDTH = 32") || !displayLogic.includes("DISPLAY_BOARD_MAX_HEIGHT = 32")
-		|| !redstoneRuntime.includes("writeDisplayBoardLine") || !main.includes("registerDisplayBoards(getKineticWorldForTesting)"))
+		|| !redstoneRuntime.includes("writeDisplayBoardLine") || !main.includes("registerDisplayBoards(getKineticWorldForTesting())"))
 		throw new Error("C2 Display Board must preserve a 32×32 controller, moving state, kinetic gate, and Display Link target adapter");
 	const placard = placardBlock["minecraft:block"];
 	if (!geometries.has("geometry.createbedrock.placard")

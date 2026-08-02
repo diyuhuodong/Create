@@ -84,7 +84,7 @@ export async function validateContentMaterialGauges({ bedrockRoot = defaultBedro
 	if (!runtime.includes("registerMovingBlockDataContributor(typeId, \"gauge\"") || !runtime.includes("schemaVersion: 1")
 		|| !runtime.includes("detach()") || !runtime.includes("gaugeReading")
 		|| !runtimeLogic.includes("speedGaugeDialTarget") || !runtimeLogic.includes("stressGaugeDialTarget")
-		|| !kineticWorld.includes("networkAt(dimensionId, location)") || !main.includes("registerGauges(getKineticWorldForTesting)"))
+		|| !kineticWorld.includes("networkAt(dimensionId, location)") || !main.includes("registerGauges(getKineticWorldForTesting())"))
 		throw new Error("C2 gauges must connect Java-equivalent readings to kinetic, contraption, and main runtimes");
 	return { persistentBlocks: GAUGES.length };
 }
