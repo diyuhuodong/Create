@@ -4,7 +4,8 @@ import test from "node:test";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { normalizeBlockMenuCategory } from "../tools/block-menu-category-compatibility.mjs";
+import { normalizeBlockContent, normalizeBlockMenuCategory } from "../tools/block-menu-category-compatibility.mjs";
+import { normalizeRecipeUnlocks } from "../tools/recipe-unlock-compatibility.mjs";
 
 const scriptsRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..", "behavior_pack", "scripts");
 
@@ -41,4 +42,31 @@ test("Bedrock packages namespace every block menu-category group", () => {
 	assert.equal(normalizeBlockMenuCategory(definition), true);
 	assert.equal(definition["minecraft:block"].description.menu_category.group, "minecraft:itemGroup.name.misc");
 	assert.equal(normalizeBlockMenuCategory(definition), false);
+});
+
+test("Bedrock staging fixes invalid block bounds and blend render methods", () => {
+	const definition = {
+		"minecraft:block": {
+			components: {
+				"minecraft:collision_box": { origin: [-7, -8, -7], size: [14, 30, 14] },
+				"minecraft:selection_box": { origin: [-7, -8, -7], size: [14, 30, 14] },
+				"minecraft:material_instances": { "*": { render_method: "alpha_blend" } }
+			}
+		}
+	};
+	assert.equal(normalizeBlockContent(definition), true);
+	const components = definition["minecraft:block"].components;
+	assert.deepEqual(components["minecraft:collision_box"], { origin: [-7, 0, -7], size: [14, 24, 14] });
+	assert.deepEqual(components["minecraft:selection_box"], { origin: [-7, 0, -7], size: [14, 16, 14] });
+	assert.equal(components["minecraft:material_instances"]["*"].render_method, "blend");
+});
+
+test("Bedrock staging unlocks recipes that require current unlock metadata", () => {
+	const definition = {
+		"minecraft:recipe_shaped": { description: { identifier: "createbedrock:compatibility_test" } },
+		"minecraft:recipe_brewing_mix": { description: { identifier: "createbedrock:unchanged" } }
+	};
+	assert.equal(normalizeRecipeUnlocks(definition), true);
+	assert.deepEqual(definition["minecraft:recipe_shaped"].unlock, { context: "AlwaysUnlocked" });
+	assert.equal(definition["minecraft:recipe_brewing_mix"].unlock, undefined);
 });
