@@ -1,12 +1,13 @@
 import { world } from "@minecraft/server";
 import { ModalFormData } from "@minecraft/server-ui";
 
-import { registerTickHandler } from "../kernel/index.js";
+import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { ShardedStateStore } from "../kernel/sharded-state-store.js";
 import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-property-storage.js";
 import { createClipboardState, normalizeClipboardRecord } from "./clipboard-state.js";
 
 export const CLIPBOARD_BLOCK = "createbedrock:clipboard";
+const CLIPBOARD_TASK_BUDGET = 4;
 
 const records = new Map();
 let failedUpdates = 0;
@@ -108,6 +109,7 @@ export function registerClipboards() {
 	if (registered)
 		return false;
 	registered = true;
+	registerKernelTaskGroup("clipboard", CLIPBOARD_TASK_BUDGET);
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
 		if (event.block?.typeId === CLIPBOARD_BLOCK)
 			ensureRecord(event.block);
