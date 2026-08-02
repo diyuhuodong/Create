@@ -1,6 +1,6 @@
 import { BlockPermutation, ItemStack, system, world } from "@minecraft/server";
 
-import { registerTickHandler } from "../kernel/index.js";
+import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { ShardedStateStore } from "../kernel/sharded-state-store.js";
 import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-property-storage.js";
 import {
@@ -17,6 +17,7 @@ export const EMPTY_SCHEMATIC_ITEM = "createbedrock:empty_schematic";
 export const SCHEMATIC_AND_QUILL_ITEM = "createbedrock:schematic_and_quill";
 export const SCHEMATIC_ITEM = "createbedrock:schematic";
 export const SCHEMATIC_TABLE_BLOCK = "createbedrock:schematic_table";
+const SCHEMATICS_TASK_BUDGET = 8;
 export const SCHEMATICANNON_BLOCK = "createbedrock:schematicannon";
 
 export const SCHEMATIC_ITEM_STATE_PROPERTY = "createbedrock:schematic_snapshot";
@@ -446,6 +447,7 @@ export function registerSchematics() {
 	if (registered)
 		return false;
 	registered = true;
+	registerKernelTaskGroup("schematics", SCHEMATICS_TASK_BUDGET);
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
 		if (event.block?.typeId === SCHEMATIC_TABLE_BLOCK)
 			tableRecord(event.block);
