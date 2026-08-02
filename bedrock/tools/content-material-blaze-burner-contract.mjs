@@ -30,12 +30,12 @@ export async function validateBlazeBurnerContract({ bedrockRoot = defaultBedrock
 	]);
 	const burnerDefinition = burner["minecraft:block"];
 	if (burnerDefinition?.description?.identifier !== "createbedrock:blaze_burner"
-		|| !burnerDefinition.description.properties?.["createbedrock:heat_level"]?.includes(4)
+		|| !(burnerDefinition.description.states ?? burnerDefinition.description.properties)?.["createbedrock:heat_level"]?.includes(4)
 		|| burnerDefinition.components?.["minecraft:geometry"] !== "geometry.createbedrock.blaze_burner"
 		|| burnerDefinition.components?.["minecraft:loot"] !== "loot_tables/blocks/blaze_burner.json")
 		throw new Error("Blaze Burner must expose its five heat states, Java-derived geometry, and explicit loot");
 	if (lit["minecraft:block"]?.description?.identifier !== "createbedrock:lit_blaze_burner"
-		|| !lit["minecraft:block"].description.properties?.["createbedrock:flame_type"]?.includes("soul")
+		|| !(lit["minecraft:block"].description.states ?? lit["minecraft:block"].description.properties)?.["createbedrock:flame_type"]?.includes("soul")
 		|| lit["minecraft:block"].components?.["minecraft:loot"] !== "loot_tables/blocks/lit_blaze_burner.json")
 		throw new Error("Lit Blaze Burner must preserve regular and soul flame states with empty-burner loot");
 	const components = empty["minecraft:item"]?.components;

@@ -4,7 +4,7 @@ import test from "node:test";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { normalizeBlockContent, normalizeBlockMenuCategory } from "../tools/block-menu-category-compatibility.mjs";
+import { normalizeBlockContent, normalizeBlockMenuCategory, normalizeItemContent } from "../tools/block-menu-category-compatibility.mjs";
 import { normalizeRecipeUnlocks } from "../tools/recipe-unlock-compatibility.mjs";
 
 const scriptsRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..", "behavior_pack", "scripts");
@@ -59,6 +59,27 @@ test("Bedrock staging fixes invalid block bounds and blend render methods", () =
 	assert.deepEqual(components["minecraft:collision_box"], { origin: [-7, 0, -7], size: [14, 24, 14] });
 	assert.deepEqual(components["minecraft:selection_box"], { origin: [-7, 0, -7], size: [14, 16, 14] });
 	assert.equal(components["minecraft:material_instances"]["*"].render_method, "blend");
+});
+
+test("Bedrock staging uses current state and menu schemas for block and item definitions", () => {
+	const block = {
+		"minecraft:block": {
+			description: {
+				menu_category: { group: "itemGroup.name.misc" },
+				properties: { "createbedrock:powered": [0, 1] }
+			},
+			components: { "minecraft:material_instances": { "*": { render_method: "blend" } } }
+		}
+	};
+	assert.equal(normalizeBlockContent(block), true);
+	assert.deepEqual(block["minecraft:block"].description.states, { "createbedrock:powered": [0, 1] });
+	assert.equal(block["minecraft:block"].description.properties, undefined);
+	assert.equal(block["minecraft:block"].description.menu_category.group, "minecraft:itemGroup.name.misc");
+	assert.equal(block["minecraft:block"].components["minecraft:geometry"], "minecraft:geometry.full_block");
+
+	const item = { "minecraft:item": { description: { menu_category: { group: "itemGroup.name.misc" } } } };
+	assert.equal(normalizeItemContent(item), true);
+	assert.equal(item["minecraft:item"].description.menu_category.group, "minecraft:itemGroup.name.misc");
 });
 
 test("Bedrock staging unlocks recipes that require current unlock metadata", () => {

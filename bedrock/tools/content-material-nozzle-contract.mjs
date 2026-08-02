@@ -30,7 +30,7 @@ export async function validateNozzleMaterial({ bedrockRoot = defaultBedrockRoot,
 	if (definition?.description?.identifier !== "createbedrock:nozzle" || !definition.description.menu_category?.category
 		|| definition.components?.["minecraft:geometry"] !== "geometry.createbedrock.nozzle"
 		|| definition.components?.["minecraft:loot"] !== "loot_tables/blocks/nozzle.json"
-		|| definition.description.properties?.["createbedrock:active"]?.join(",") !== "0,1")
+		|| (definition.description.states ?? definition.description.properties)?.["createbedrock:active"]?.join(",") !== "0,1")
 		throw new Error("Nozzle must retain its directional visual, loot, and active-state block definition");
 	const shaped = recipe["minecraft:recipe_shaped"];
 	if (shaped?.description?.identifier !== "createbedrock:nozzle" || shaped.pattern?.join(",") !== " A , W ,AAA"

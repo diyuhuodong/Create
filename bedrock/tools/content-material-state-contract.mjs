@@ -231,7 +231,7 @@ export async function validateContentMaterialStates({ bedrockRoot = defaultBedro
 
 	const framedTrapdoor = await readJson(resolve(behaviorRoot, "blocks", "framed_glass_trapdoor.json"));
 	const framedTrapdoorBlock = framedTrapdoor["minecraft:block"];
-	const trapdoorProperties = framedTrapdoorBlock?.description?.properties;
+	const trapdoorProperties = framedTrapdoorBlock?.description?.states ?? framedTrapdoorBlock?.description?.properties;
 	const trapdoorDirection = framedTrapdoorBlock?.description?.traits?.["minecraft:placement_direction"];
 	const trapdoorPosition = framedTrapdoorBlock?.description?.traits?.["minecraft:placement_position"];
 	const trapdoorPermutations = framedTrapdoorBlock?.permutations ?? [];

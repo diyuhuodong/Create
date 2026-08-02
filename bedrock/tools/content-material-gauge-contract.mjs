@@ -57,7 +57,7 @@ export async function validateContentMaterialGauges({ bedrockRoot = defaultBedro
 		throw new Error("C2 gauges require the Java gauge texture source");
 	for (const [index, name] of GAUGES.entries()) {
 		const block = definitions[index]?.["minecraft:block"];
-		const properties = block?.description?.properties ?? {};
+		const properties = block?.description?.states ?? block?.description?.properties ?? {};
 		const permutations = block?.permutations ?? [];
 		if (block?.description?.identifier !== `createbedrock:${name}`
 			|| JSON.stringify(properties["createbedrock:axis"]) !== JSON.stringify(["x", "y", "z"])

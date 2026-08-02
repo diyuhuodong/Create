@@ -10,10 +10,31 @@ async function blockFiles(directory) {
 }
 
 export function normalizeBlockMenuCategory(definition) {
-	const menuCategory = definition?.["minecraft:block"]?.description?.menu_category;
+	return normalizeMenuCategory(definition?.["minecraft:block"]?.description);
+}
+
+function normalizeMenuCategory(description) {
+	const menuCategory = description?.menu_category;
 	if (typeof menuCategory?.group !== "string" || menuCategory.group.includes(":"))
 		return false;
 	menuCategory.group = `minecraft:${menuCategory.group}`;
+	return true;
+}
+
+function normalizeBlockStates(definition) {
+	const description = definition?.["minecraft:block"]?.description;
+	if (!description?.properties || description.states)
+		return false;
+	description.states = description.properties;
+	delete description.properties;
+	return true;
+}
+
+function normalizeBlockGeometry(definition) {
+	const components = definition?.["minecraft:block"]?.components;
+	if (!components?.["minecraft:material_instances"] || components["minecraft:geometry"])
+		return false;
+	components["minecraft:geometry"] = "minecraft:geometry.full_block";
 	return true;
 }
 
@@ -57,9 +78,11 @@ function normalizeMaterialRenderMethods(value) {
 
 export function normalizeBlockContent(definition) {
 	const menuCategory = normalizeBlockMenuCategory(definition);
+	const states = normalizeBlockStates(definition);
+	const geometry = normalizeBlockGeometry(definition);
 	const bounds = normalizeBlockBounds(definition);
 	const renderMethods = normalizeMaterialRenderMethods(definition);
-	return menuCategory || bounds || renderMethods;
+	return menuCategory || states || geometry || bounds || renderMethods;
 }
 
 export async function normalizeStagedBlockContent({ behaviorPackRoot }) {
@@ -73,4 +96,21 @@ export async function normalizeStagedBlockContent({ behaviorPackRoot }) {
 		blocks++;
 	}
 	return { blocks };
+}
+
+export function normalizeItemContent(definition) {
+	return normalizeMenuCategory(definition?.["minecraft:item"]?.description);
+}
+
+export async function normalizeStagedItemContent({ behaviorPackRoot }) {
+	const files = await blockFiles(resolve(behaviorPackRoot, "items"));
+	let items = 0;
+	for (const file of files) {
+		const definition = JSON.parse(await readFile(file, "utf8"));
+		if (!normalizeItemContent(definition))
+			continue;
+		await writeFile(file, `${JSON.stringify(definition, null, 2)}\n`);
+		items++;
+	}
+	return { items };
 }

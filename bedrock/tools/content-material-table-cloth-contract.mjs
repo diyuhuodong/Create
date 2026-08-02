@@ -44,8 +44,8 @@ export async function validateTableClothMaterials({ bedrockRoot = defaultBedrock
 		if (definition?.description?.identifier !== identifier || !definition.description.menu_category?.category
 			|| definition.components?.["minecraft:geometry"] !== `geometry.createbedrock.${cloth.name}`
 			|| definition.components?.["minecraft:loot"] !== `loot_tables/blocks/${cloth.name}.json`
-			|| definition.description.properties?.["createbedrock:shop"]?.join(",") !== "0,1"
-			|| definition.description.properties?.["createbedrock:display_count"]?.join(",") !== "0,1,2,3,4")
+			|| (definition.description.states ?? definition.description.properties)?.["createbedrock:shop"]?.join(",") !== "0,1"
+			|| (definition.description.states ?? definition.description.properties)?.["createbedrock:display_count"]?.join(",") !== "0,1,2,3,4")
 			throw new Error(`${identifier} must retain its interactive shop block definition`);
 		const shaping = recipe["minecraft:recipe_shapeless"];
 		if (shaping?.description?.identifier !== identifier || shaping.ingredients?.[0]?.item !== cloth.ingredient

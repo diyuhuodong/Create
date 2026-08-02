@@ -109,7 +109,7 @@ export async function validateP73FluidHeatContract({ bedrockRoot = defaultBedroc
 		if (!items.texture_data[key])
 			throw new Error(`P7.3 item atlas is missing ${key}`);
 	for (const kind of ["honey", "chocolate", "tea"])
-		if (!tank["minecraft:block"].description.properties["createbedrock:fluid_kind"].includes(kind))
+		if (!(tank["minecraft:block"].description.states ?? tank["minecraft:block"].description.properties)["createbedrock:fluid_kind"].includes(kind))
 			throw new Error(`P7.3 tank visuals do not support ${kind}`);
 	for (const marker of ["honey_bucket.png", "chocolate_bucket.png", "honey_still.png", "chocolate_still.png", "tea_still.png"])
 		if (!importer.includes(marker))

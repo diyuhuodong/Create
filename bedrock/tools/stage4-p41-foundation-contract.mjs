@@ -84,7 +84,7 @@ export async function validateStage4P41Foundation({
 	const controls = await readJson(resolve(bedrockRoot, "behavior_pack", "blocks", "contraption_controls.json"));
 	const block = controls["minecraft:block"];
 	if (block?.description?.identifier !== "createbedrock:contraption_controls"
-		|| !Array.isArray(block.description.properties?.["createbedrock:disabled"])
+		|| !Array.isArray((block.description.states ?? block.description.properties)?.["createbedrock:disabled"])
 		|| block.components?.["minecraft:geometry"] !== "geometry.createbedrock.contraption_controls"
 		|| block.components?.["minecraft:loot"] !== "loot_tables/blocks/contraption_controls.json")
 		throw new Error("Contraption Controls must retain its distinct identifier, state, geometry, and loot");

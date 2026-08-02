@@ -92,8 +92,8 @@ export async function validateContentMaterialDisplayPackage({ bedrockRoot = defa
 	const display = displayBlock["minecraft:block"];
 	if (!geometries.has("geometry.createbedrock.display_board")
 		|| display?.components?.["minecraft:geometry"] !== "geometry.createbedrock.display_board"
-		|| JSON.stringify(display?.description?.properties?.["createbedrock:active"]) !== JSON.stringify([0, 1])
-		|| JSON.stringify(display?.description?.properties?.["createbedrock:glowing"]) !== JSON.stringify([0, 1])
+		|| JSON.stringify((display?.description?.states ?? display?.description?.properties)?.["createbedrock:active"]) !== JSON.stringify([0, 1])
+		|| JSON.stringify((display?.description?.states ?? display?.description?.properties)?.["createbedrock:glowing"]) !== JSON.stringify([0, 1])
 		|| marker["minecraft:entity"]?.description?.identifier !== "createbedrock:display_board_text")
 		throw new Error("C2 Display Board must retain Java geometry, active/glow state, and a dedicated display marker");
 	if (!displayRuntime.includes("registerMovingBlockDataContributor(DISPLAY_BOARD_BLOCK, \"display_board\"")
@@ -104,8 +104,8 @@ export async function validateContentMaterialDisplayPackage({ bedrockRoot = defa
 	const placard = placardBlock["minecraft:block"];
 	if (!geometries.has("geometry.createbedrock.placard")
 		|| placard?.components?.["minecraft:geometry"] !== "geometry.createbedrock.placard"
-		|| JSON.stringify(placard?.description?.properties?.["createbedrock:has_item"]) !== JSON.stringify([0, 1])
-		|| JSON.stringify(placard?.description?.properties?.["createbedrock:powered"]) !== JSON.stringify([0, 1]))
+		|| JSON.stringify((placard?.description?.states ?? placard?.description?.properties)?.["createbedrock:has_item"]) !== JSON.stringify([0, 1])
+		|| JSON.stringify((placard?.description?.states ?? placard?.description?.properties)?.["createbedrock:powered"]) !== JSON.stringify([0, 1]))
 		throw new Error("C2 Placard must retain Java geometry plus stored-item and redstone states");
 	if (!placardRuntime.includes("registerMovingBlockDataContributor(PLACARD_BLOCK, \"placard\"")
 		|| !placardRuntime.includes("setHeldInventoryItem") || !placardLogic.includes("PLACARD_PULSE_TICKS = 20")
@@ -114,7 +114,7 @@ export async function validateContentMaterialDisplayPackage({ bedrockRoot = defa
 	const ticker = tickerBlock["minecraft:block"];
 	if (!geometries.has("geometry.createbedrock.stock_ticker")
 		|| ticker?.components?.["minecraft:geometry"] !== "geometry.createbedrock.stock_ticker"
-		|| JSON.stringify(ticker?.description?.properties?.["createbedrock:request_status"]) !== JSON.stringify([0, 1, 2, 3, 4]))
+		|| JSON.stringify((ticker?.description?.states ?? ticker?.description?.properties)?.["createbedrock:request_status"]) !== JSON.stringify([0, 1, 2, 3, 4]))
 		throw new Error("C2 Stock Ticker must retain Java geometry and durable request status state");
 	if (!tickerRuntime.includes("requestDepotItem") || !tickerRuntime.includes("countDepotNetworkItem")
 		|| !tickerRuntime.includes("registerMovingBlockDataContributor(STOCK_TICKER_BLOCK, \"stock_ticker\"")

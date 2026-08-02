@@ -192,11 +192,11 @@ export async function validateStage3KineticSourceContract({
     const gearshiftBlock = gearshift["minecraft:block"];
     const chainGearshiftBlock = chainGearshift["minecraft:block"];
     const sequencedGearshiftBlock = sequencedGearshift["minecraft:block"];
-    if (JSON.stringify(gearshiftBlock.description.properties?.["createbedrock:powered"]) !== JSON.stringify([0, 1]))
+    if (JSON.stringify((gearshiftBlock.description.states ?? gearshiftBlock.description.properties)?.["createbedrock:powered"]) !== JSON.stringify([0, 1]))
         throw new Error("S3-9 gearshift is missing its durable powered state");
-    if (JSON.stringify(chainGearshiftBlock.description.properties?.["createbedrock:signal"]) !== JSON.stringify(Array.from({ length: 16 }, (_, value) => value)))
+    if (JSON.stringify((chainGearshiftBlock.description.states ?? chainGearshiftBlock.description.properties)?.["createbedrock:signal"]) !== JSON.stringify(Array.from({ length: 16 }, (_, value) => value)))
         throw new Error("S3-9 chain gearshift is missing its durable analog signal state");
-    if (JSON.stringify(sequencedGearshiftBlock.description.properties?.["createbedrock:powered"]) !== JSON.stringify([0, 1]))
+    if (JSON.stringify((sequencedGearshiftBlock.description.states ?? sequencedGearshiftBlock.description.properties)?.["createbedrock:powered"]) !== JSON.stringify([0, 1]))
         throw new Error("S3-9 sequenced gearshift is missing its durable powered state");
     if (!gearshiftBlock.components?.["minecraft:redstone_conductivity"]?.redstone_conductor
         || !chainGearshiftBlock.components?.["minecraft:redstone_conductivity"]?.redstone_conductor

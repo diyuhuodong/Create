@@ -87,7 +87,7 @@ export async function validateStage4P46Stickers({
 		throw new Error("P4.1 assembly attachments must not import later feature runtimes");
 	const block = await readJson(resolve(bedrockRoot, "behavior_pack", "blocks", "sticker.json"));
 	if (block["minecraft:block"]?.description?.identifier !== "createbedrock:sticker"
-		|| !Array.isArray(block["minecraft:block"]?.description?.properties?.["createbedrock:active"]))
+		|| !Array.isArray((block["minecraft:block"]?.description?.states ?? block["minecraft:block"]?.description?.properties)?.["createbedrock:active"]))
 		throw new Error("P4.6 Sticker block must retain identity and active state");
 	if (!movable.includes('"createbedrock:sticker"') || !kinetic.includes('"createbedrock:sticker"'))
 		throw new Error("P4.6 Sticker must be movable and kinetically registered");

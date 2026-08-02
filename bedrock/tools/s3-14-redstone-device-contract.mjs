@@ -43,7 +43,7 @@ function expectedSignalValues(device) {
 function assertNativeOutput(device, block) {
 	if (!device.output)
 		return;
-	const properties = block["minecraft:block"]?.description?.properties ?? {};
+	const properties = block["minecraft:block"]?.description?.states ?? block["minecraft:block"]?.description?.properties ?? {};
 	const property = device.id === "analog_lever" || device.id === "redstone_link" ? "createbedrock:signal" : "createbedrock:powered";
 	const expected = expectedSignalValues(device);
 	if (JSON.stringify(properties[property]) !== JSON.stringify(expected))

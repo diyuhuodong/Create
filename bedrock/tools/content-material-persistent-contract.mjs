@@ -127,7 +127,7 @@ export async function validateContentMaterialPersistent({ bedrockRoot = defaultB
 	const geometries = plannedGeometryIdentifiers();
 	const languageSets = [languageKeys(enUs), languageKeys(zhCn)];
 	if (block?.description?.identifier !== DESK_BELL.identifier
-		|| JSON.stringify(block?.description?.properties?.["createbedrock:powered"]) !== JSON.stringify([0, 1])
+		|| JSON.stringify((block?.description?.states ?? block?.description?.properties)?.["createbedrock:powered"]) !== JSON.stringify([0, 1])
 		|| !block?.description?.traits?.["minecraft:placement_direction"]?.enabled_states?.includes("minecraft:facing_direction")
 		|| components["minecraft:geometry"] !== DESK_BELL.geometry
 		|| components["minecraft:item_visual"]?.geometry?.identifier !== DESK_BELL.geometry
@@ -173,15 +173,15 @@ export async function validateContentMaterialPersistent({ bedrockRoot = defaultB
 	const lamp = lampDefinition["minecraft:block"];
 	const lampComponents = lamp?.components ?? {};
 	const lampPermutations = lamp?.permutations ?? [];
-	const outputMasks = lamp?.description?.properties?.["createbedrock:output_mask"];
+	const outputMasks = (lamp?.description?.states ?? lamp?.description?.properties)?.["createbedrock:output_mask"];
 	if (lamp?.description?.identifier !== ROSE_QUARTZ_LAMP.identifier
 		|| lampComponents["minecraft:geometry"] !== "geometry.createbedrock.rose_quartz_lamp"
 		|| lampComponents["minecraft:item_visual"]?.geometry?.identifier !== "geometry.createbedrock.rose_quartz_lamp"
 		|| lampComponents["minecraft:material_instances"]?.all?.texture !== "createbedrock_rose_quartz_lamp"
 		|| lampComponents["minecraft:item_visual"]?.material_instances?.all?.texture !== "createbedrock_rose_quartz_lamp"
-		|| JSON.stringify(lamp?.description?.properties?.["createbedrock:activate"]) !== JSON.stringify([0, 1])
-		|| JSON.stringify(lamp?.description?.properties?.["createbedrock:powered"]) !== JSON.stringify([0, 1])
-		|| JSON.stringify(lamp?.description?.properties?.["createbedrock:powering"]) !== JSON.stringify([0, 1])
+		|| JSON.stringify((lamp?.description?.states ?? lamp?.description?.properties)?.["createbedrock:activate"]) !== JSON.stringify([0, 1])
+		|| JSON.stringify((lamp?.description?.states ?? lamp?.description?.properties)?.["createbedrock:powered"]) !== JSON.stringify([0, 1])
+		|| JSON.stringify((lamp?.description?.states ?? lamp?.description?.properties)?.["createbedrock:powering"]) !== JSON.stringify([0, 1])
 		|| !Array.isArray(outputMasks) || outputMasks.length !== 64 || outputMasks[0] !== 63
 		|| lampComponents["minecraft:redstone_consumer"]?.propagates_power !== false
 		|| JSON.stringify(lampComponents["minecraft:tick"]?.interval_range) !== JSON.stringify([1, 1])
@@ -221,7 +221,7 @@ export async function validateContentMaterialPersistent({ bedrockRoot = defaultB
 	const stockpile = stockpileDefinition["minecraft:block"];
 	const stockpileComponents = stockpile?.components ?? {};
 	const stockpilePermutations = stockpile?.permutations ?? [];
-	const stockpileProperties = stockpile?.description?.properties ?? {};
+	const stockpileProperties = stockpile?.description?.states ?? stockpile?.description?.properties ?? {};
 	if (stockpile?.description?.identifier !== STOCKPILE_SWITCH.identifier
 		|| JSON.stringify(stockpileProperties["createbedrock:target_direction"]) !== JSON.stringify([2, 3, 4, 5, 0, 1])
 		|| JSON.stringify(stockpileProperties["createbedrock:display_level"]) !== JSON.stringify([0, 1, 2, 3, 4, 5])

@@ -73,7 +73,7 @@ export async function validateStage3VisualSourceContract({ bedrockRoot = default
 		throw new Error("S3-13 Crushing Wheel is not sourced from the Java OBJ during build");
 
 	const belt = block(beltDefinition, "belt");
-	if (JSON.stringify(belt.description?.properties?.["createbedrock:belt_segment"]) !== JSON.stringify(["single", "start", "middle", "end"]))
+	if (JSON.stringify((belt.description?.states ?? belt.description?.properties)?.["createbedrock:belt_segment"]) !== JSON.stringify(["single", "start", "middle", "end"]))
 		throw new Error("S3-13 belt is missing durable segment visual states");
 	for (const geometry of ["geometry.createbedrock.belt_start", "geometry.createbedrock.belt_end"])
 		if (!geometryReferences(belt).includes(geometry))
@@ -86,10 +86,10 @@ export async function validateStage3VisualSourceContract({ bedrockRoot = default
 		"createbedrock:tank_segment": ["single", "bottom", "middle", "top"],
 		"createbedrock:fluid_level": [0, 1, 2, 3, 4]
 	})) {
-		if (JSON.stringify(tank.description?.properties?.[property]) !== JSON.stringify(values))
+		if (JSON.stringify((tank.description?.states ?? tank.description?.properties)?.[property]) !== JSON.stringify(values))
 			throw new Error(`S3-13 Fluid Tank is missing ${property}`);
 	}
-	const fluidKinds = tank.description?.properties?.["createbedrock:fluid_kind"];
+	const fluidKinds = (tank.description?.states ?? tank.description?.properties)?.["createbedrock:fluid_kind"];
 	if (!Array.isArray(fluidKinds) || !["empty", "water", "lava"].every(kind => fluidKinds.includes(kind)))
 		throw new Error("S3-13 Fluid Tank is missing its baseline fluid kinds");
 	for (const geometry of ["geometry.createbedrock.fluid_tank_bottom", "geometry.createbedrock.fluid_tank_middle", "geometry.createbedrock.fluid_tank_top", "geometry.createbedrock.fluid_tank_level_4"])
