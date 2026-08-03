@@ -93,6 +93,11 @@ test("Crushing Wheel OBJ conversion emits standard cuboids instead of unsupporte
 	assert.ok(cubes.length >= 10);
 	assert.equal(JSON.stringify(geometry).includes("poly_mesh"), false);
 	assert.equal(cubes.some(cube => cube.uv.north.material_instance === "crushing_wheel_insert"), true);
+	for (const axis of [0, 2]) {
+		const minimum = Math.min(...cubes.map(cube => cube.origin[axis]));
+		const maximum = Math.max(...cubes.map(cube => cube.origin[axis] + cube.size[axis]));
+		assert.ok(maximum - minimum <= 30);
+	}
 });
 
 test("Blaze Burner OBJ conversion retains a state-swappable brazier, blaze, and flame silhouette", () => {

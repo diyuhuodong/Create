@@ -568,16 +568,22 @@ function cube(origin, size, material, rotation) {
 export function convertCrushingWheelObj({ identifier, source }) {
 	if (typeof source !== "string" || !/^v\s/m.test(source) || !/^f\s/m.test(source) || !/^usemtl\s/m.test(source))
 		throw new TypeError("Crushing Wheel OBJ must contain vertices, faces, and material groups");
+	// Bedrock permits at most 1 + 14/16 blocks of geometry on an axis. Scale
+	// Java's 36-unit wheel footprint into the permitted 30-unit range.
+	const scaleFootprint = ([x, y, z, width, height, depth]) => [x * 5 / 6, y, z * 5 / 6, width * 5 / 6, height, depth * 5 / 6];
 	const rim = [
 		[-4, 1, -18, 8, 14, 10], [10, 1, -18, 8, 14, 10],
 		[-18, 1, -4, 10, 14, 8], [8, 1, -4, 10, 14, 8],
 		[-14, 1, -14, 8, 14, 8], [6, 1, -14, 8, 14, 8],
 		[-14, 1, 6, 8, 14, 8], [6, 1, 6, 8, 14, 8]
-	].map(([x, y, z, width, height, depth]) => cube([x, y, z], [width, height, depth], "crushing_wheel_plates"));
+	].map(bounds => {
+		const [x, y, z, width, height, depth] = scaleFootprint(bounds);
+		return cube([x, y, z], [width, height, depth], "crushing_wheel_plates");
+	});
 	const hub = [
-		cube([-5, 4, -5], [10, 8, 10], "crushing_wheel_insert"),
-		cube([-2, -2, -2], [4, 20, 4], "axis"),
-		cube([-3, 16, -3], [6, 1, 6], "axis_top")
+		cube([-5 * 5 / 6, 4, -5 * 5 / 6], [10 * 5 / 6, 8, 10 * 5 / 6], "crushing_wheel_insert"),
+		cube([-2 * 5 / 6, -2, -2 * 5 / 6], [4 * 5 / 6, 20, 4 * 5 / 6], "axis"),
+		cube([-3 * 5 / 6, 16, -3 * 5 / 6], [6 * 5 / 6, 1, 6 * 5 / 6], "axis_top")
 	];
 	return {
 		format_version: "1.21.0",
@@ -586,7 +592,7 @@ export function convertCrushingWheelObj({ identifier, source }) {
 				identifier,
 				texture_width: 16,
 				texture_height: 16,
-				visible_bounds_width: 3,
+				visible_bounds_width: 2,
 				visible_bounds_height: 2,
 				visible_bounds_offset: [0, 0.5, 0]
 			},
