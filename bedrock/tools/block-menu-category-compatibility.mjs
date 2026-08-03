@@ -9,12 +9,10 @@ const SLIDING_DOOR_IDENTIFIERS = new Set([
 	"createbedrock:train_door"
 ]);
 const ITEM_VISUAL_FALLBACK_IDENTIFIERS = new Set([
-	"createbedrock:crushing_wheel",
 	"createbedrock:deployer",
 	"createbedrock:vertical_gearbox"
 ]);
 const BLOCK_GEOMETRY_FALLBACK_IDENTIFIERS = new Set([
-	"createbedrock:crushing_wheel",
 	"createbedrock:deployer",
 	"createbedrock:vertical_gearbox"
 ]);
