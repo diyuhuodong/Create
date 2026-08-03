@@ -61,6 +61,21 @@ test("Bedrock staging fixes invalid block bounds and blend render methods", () =
 	assert.equal(components["minecraft:material_instances"]["*"].render_method, "blend");
 });
 
+test("Bedrock staging keeps alpha-test material groups internally consistent", () => {
+	const definition = {
+		"minecraft:block": {
+			components: {
+				"minecraft:material_instances": {
+					canvas: { render_method: "alpha_test" },
+					frame: { render_method: "opaque" }
+				}
+			}
+		}
+	};
+	assert.equal(normalizeBlockContent(definition), true);
+	assert.equal(definition["minecraft:block"].components["minecraft:material_instances"].frame.render_method, "alpha_test");
+});
+
 test("Bedrock staging keeps material render modes compatible and removes only invalid sliding-door transforms", () => {
 	const door = {
 		"minecraft:block": {

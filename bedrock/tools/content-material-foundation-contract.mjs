@@ -43,8 +43,8 @@ function assertOreFeature(document, variant) {
 function assertScatterFeature(document, variant) {
 	const scatter = document["minecraft:scatter_feature"];
 	if (document.format_version !== "1.20.30" || scatter?.description?.identifier !== `createbedrock:${variant.feature}_scatter`
-		|| scatter.places_feature !== `createbedrock:${variant.feature}_vein` || scatter.distribution?.iterations !== 8
-		|| JSON.stringify(scatter.distribution?.y?.extent) !== JSON.stringify(variant.range))
+		|| scatter.places_feature !== `createbedrock:${variant.feature}_vein` || scatter.iterations !== 8
+		|| JSON.stringify(scatter.y?.extent) !== JSON.stringify(variant.range))
 		throw new Error(`C0 ore scatter ${variant.feature} must retain its bounded underground distribution`);
 }
 

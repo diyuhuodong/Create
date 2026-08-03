@@ -86,12 +86,14 @@ function normalizeBlockComponents(definition) {
 			materials["*"] = { ...entries[0][1] };
 			changed = true;
 		}
-		const transparent = Object.values(materials).some(material => material?.render_method === "blend" || material?.render_method === "alpha_blend");
-		if (!transparent)
+		const transparentMethod = Object.values(materials).some(material => material?.render_method === "blend" || material?.render_method === "alpha_blend")
+			? "blend"
+			: Object.values(materials).some(material => material?.render_method === "alpha_test") ? "alpha_test" : undefined;
+		if (!transparentMethod)
 			return;
 		for (const material of Object.values(materials)) {
 			if (material?.render_method === "opaque") {
-				material.render_method = "blend";
+				material.render_method = transparentMethod;
 				changed = true;
 			}
 		}
