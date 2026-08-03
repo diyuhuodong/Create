@@ -16,6 +16,9 @@ const NON_RECIPE_PATHS = new Map([
 	["createbedrock:creative_crate", ["creative_only", "behavior_pack/blocks/creative_crate.json"]],
 	["createbedrock:creative_fluid_tank", ["creative_only", "behavior_pack/blocks/creative_fluid_tank.json"]],
 	["createbedrock:creative_motor", ["creative_only", "behavior_pack/blocks/creative_motor.json"]],
+	// Java creates this invisible processor only between a valid pair of Crushing
+	// Wheels; it has no item, loot table, or survival acquisition path.
+	["createbedrock:crushing_wheel_controller", ["not_survival_content", "src/main/java/com/simibubi/create/AllBlocks.java#CRUSHING_WHEEL_CONTROLLER"]],
 	["createbedrock:deepslate_zinc_ore", ["worldgen", "behavior_pack/feature_rules/deepslate_zinc_ore_underground.json"]],
 	// Java has no recipe and its loot table returns redstone_contact, so this is
 	// a runtime elevator state rather than a separately recoverable survival item.
@@ -160,14 +163,17 @@ export async function buildP71AcquisitionLedger({ bedrockRoot }) {
 			}
 	const entries = [...projections].sort(([left], [right]) => left.localeCompare(right)).map(([identifier, sourceKeys]) => {
 		const registrationSourceKeys = [...sourceKeys].sort();
-		const recipeEvidence = [...(outputs.get(identifier) ?? [])].sort();
-		if (recipeEvidence.length > 0)
-			return { evidence: recipeEvidence, identifier, registrationSourceKeys, status: "recipe_output" };
+		// Explicit lifecycle decisions take precedence over resource remnants.  The
+		// crushing-wheel controller is an internal Java block and must never become
+		// a survival-acquirable item merely because an older pack still has a recipe.
 		const explicit = NON_RECIPE_PATHS.get(identifier);
 		if (explicit) {
 			const [status, evidence] = explicit;
 			return { evidence: [evidence], identifier, registrationSourceKeys, status };
 		}
+		const recipeEvidence = [...(outputs.get(identifier) ?? [])].sort();
+		if (recipeEvidence.length > 0)
+			return { evidence: recipeEvidence, identifier, registrationSourceKeys, status: "recipe_output" };
 		const lootEvidence = [...(loot.get(identifier) ?? [])].sort();
 		if (lootEvidence.length > 0)
 			return { evidence: lootEvidence, identifier, registrationSourceKeys, status: "loot_output" };

@@ -2084,13 +2084,13 @@
 		},
 		{
 			"evidence": [
-				"behavior_pack/recipes/crushing_wheel_controller.json"
+				"src/main/java/com/simibubi/create/AllBlocks.java#CRUSHING_WHEEL_CONTROLLER"
 			],
 			"identifier": "createbedrock:crushing_wheel_controller",
 			"registrationSourceKeys": [
 				"block:create:crushing_wheel_controller"
 			],
-			"status": "recipe_output"
+			"status": "not_survival_content"
 		},
 		{
 			"evidence": [
@@ -14016,8 +14016,8 @@
 	"summary": {
 		"creative_only": 5,
 		"loot_output": 2,
-		"not_survival_content": 2,
-		"recipe_output": 705,
+		"not_survival_content": 3,
+		"recipe_output": 704,
 		"runtime_state": 16,
 		"runtime_transform": 20,
 		"worldgen": 2
