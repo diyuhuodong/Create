@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { addTankFillLevels, convertBlazeBurnerObj, convertCrushingWheelObj, convertCubeColumnParent, convertFullCubeParent, convertJavaModel } from "../tools/convert-java-models.mjs";
+import { addTankFillLevels, convertBlazeBurnerObj, convertCrushingWheelControllerProxy, convertCrushingWheelObj, convertCubeColumnParent, convertFullCubeParent, convertJavaModel } from "../tools/convert-java-models.mjs";
 
 test("convertJavaModel preserves Java cube bounds, rotations, UVs, and materials", () => {
 	const geometry = convertJavaModel({
@@ -99,6 +99,14 @@ test("Crushing Wheel OBJ conversion emits standard cuboids instead of unsupporte
 		const maximum = Math.max(...cubes.map(cube => cube.origin[axis] + cube.size[axis]));
 		assert.ok(maximum - minimum <= 30);
 	}
+});
+
+test("Crushing Wheel Controller uses a compact compatibility marker instead of wheel geometry", () => {
+	const geometry = convertCrushingWheelControllerProxy("geometry.createbedrock.crushing_wheel_controller");
+	const definition = geometry["minecraft:geometry"][0];
+	assert.equal(definition.description.identifier, "geometry.createbedrock.crushing_wheel_controller");
+	assert.equal(definition.bones[0].cubes.length, 3);
+	assert.equal(definition.bones[0].cubes.every(cube => cube.uv.north.material_instance === "redstone_surface"), true);
 });
 
 test("Blaze Burner OBJ conversion retains a state-swappable brazier, blaze, and flame silhouette", () => {

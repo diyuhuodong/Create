@@ -167,6 +167,7 @@ export const JAVA_MODELS = [
 		source: "crushing_wheel/crushing_wheel.obj",
 		converter: "crushing_wheel_proxy"
 	},
+	{ name: "crushing_wheel_controller", converter: "crushing_wheel_controller_proxy" },
 	{
 		name: "blaze_burner",
 		source: "blaze_burner/item.obj",
@@ -602,6 +603,35 @@ export function convertCrushingWheelObj({ identifier, source }) {
 	};
 }
 
+// Java materializes this controller only as an invisible intermediary between
+// two opposing wheels. Bedrock exposes it as a placeable compatibility block,
+// so render a compact brass control core instead of incorrectly duplicating an
+// entire Crushing Wheel.
+export function convertCrushingWheelControllerProxy(identifier) {
+	return {
+		format_version: "1.21.0",
+		"minecraft:geometry": [{
+			description: {
+				identifier,
+				texture_width: 16,
+				texture_height: 16,
+				visible_bounds_width: 1,
+				visible_bounds_height: 1,
+				visible_bounds_offset: [0, 0.5, 0]
+			},
+			bones: [{
+				name: "crushing_wheel_controller",
+				pivot: [0, 8, 0],
+				cubes: [
+					cube([-5, 6, -5], [10, 4, 10], "redstone_surface"),
+					cube([-7, 7, -2], [14, 2, 4], "redstone_surface"),
+					cube([-2, 7, -7], [4, 2, 14], "redstone_surface")
+				]
+			}]
+		}]
+	};
+}
+
 // Create renders the burner through several OBJ partials (cage, blaze, rods
 // and flame). Bedrock's current data-driven block geometry cannot consume OBJ
 // meshes or Flywheel partials, so this deliberately keeps the recognizable
@@ -739,6 +769,11 @@ export async function convertJavaModels(resourcePackRoot) {
 				identifier: `geometry.createbedrock.${entry.name}`,
 				source: await readFile(source, "utf8")
 			});
+			await writeFile(resolve(outputDirectory, `${entry.name}.geo.json`), `${JSON.stringify(geometry, null, 2)}\n`);
+			continue;
+		}
+		if (entry.converter === "crushing_wheel_controller_proxy") {
+			const geometry = convertCrushingWheelControllerProxy(`geometry.createbedrock.${entry.name}`);
 			await writeFile(resolve(outputDirectory, `${entry.name}.geo.json`), `${JSON.stringify(geometry, null, 2)}\n`);
 			continue;
 		}

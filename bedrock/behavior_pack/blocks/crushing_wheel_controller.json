@@ -31,18 +31,18 @@
       "minecraft:redstone_conductivity": {
         "redstone_conductor": true
       },
-      "minecraft:geometry": "geometry.createbedrock.crushing_wheel",
+      "minecraft:geometry": "geometry.createbedrock.crushing_wheel_controller",
       "minecraft:item_visual": {
         "geometry": {
-          "identifier": "geometry.createbedrock.crushing_wheel"
+          "identifier": "geometry.createbedrock.crushing_wheel_controller"
         },
         "material_instances": {
           "redstone_surface": {
-            "texture": "createbedrock_crushing_wheel",
+            "texture": "createbedrock_brass_casing",
             "render_method": "opaque"
           },
           "*": {
-            "texture": "createbedrock_crushing_wheel",
+            "texture": "createbedrock_brass_casing",
             "render_method": "opaque"
           }
         }
@@ -50,11 +50,11 @@
       "minecraft:loot": "loot_tables/blocks/crushing_wheel_controller.json",
       "minecraft:material_instances": {
         "redstone_surface": {
-          "texture": "createbedrock_crushing_wheel",
+          "texture": "createbedrock_brass_casing",
           "render_method": "opaque"
         },
         "*": {
-          "texture": "createbedrock_crushing_wheel",
+          "texture": "createbedrock_brass_casing",
           "render_method": "opaque"
         }
       }
