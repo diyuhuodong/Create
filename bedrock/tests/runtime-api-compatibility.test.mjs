@@ -128,7 +128,7 @@ test("Bedrock staging uses a safe inventory geometry only for models rejected by
 		}
 	};
 	assert.equal(normalizeBlockContent(deployer), true);
-	assert.equal(deployer["minecraft:block"].components["minecraft:geometry"], "geometry.createbedrock.deployer");
+	assert.equal(deployer["minecraft:block"].components["minecraft:geometry"], "minecraft:geometry.full_block");
 	assert.equal(deployer["minecraft:block"].components["minecraft:item_visual"].geometry.identifier, "minecraft:geometry.full_block");
 
 	const verticalGearbox = {
@@ -175,4 +175,23 @@ test("Bedrock staging unlocks recipes that require current unlock metadata", () 
 	assert.deepEqual(definition["minecraft:recipe_shaped"].unlock, { context: "AlwaysUnlocked" });
 	assert.equal(definition["minecraft:recipe_shaped"].result.count, 1);
 	assert.equal(definition["minecraft:recipe_brewing_mix"].unlock, undefined);
+});
+
+test("Bedrock staging uses valid discriminators without changing zinc decompacting", () => {
+	const contact = {
+		"minecraft:recipe_shapeless": {
+			description: { identifier: "createbedrock:redstone_contact" },
+			ingredients: [], result: { item: "createbedrock:redstone_contact" }
+		}
+	};
+	const copycatPanel = {
+		"minecraft:recipe_shapeless": {
+			description: { identifier: "createbedrock:copycat_panel" },
+			ingredients: [{ item: "createbedrock:zinc_ingot" }], result: { item: "createbedrock:copycat_panel" }
+		}
+	};
+	assert.equal(normalizeRecipeUnlocks(contact), true);
+	assert.equal(normalizeRecipeUnlocks(copycatPanel), true);
+	assert.deepEqual(contact["minecraft:recipe_shapeless"].ingredients.at(-1), { item: "minecraft:heavy_weighted_pressure_plate" });
+	assert.deepEqual(copycatPanel["minecraft:recipe_shapeless"].ingredients.at(-1), { item: "minecraft:slime_ball" });
 });

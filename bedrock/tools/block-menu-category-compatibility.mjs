@@ -10,11 +10,15 @@ const SLIDING_DOOR_IDENTIFIERS = new Set([
 ]);
 const ITEM_VISUAL_FALLBACK_IDENTIFIERS = new Set([
 	"createbedrock:crushing_wheel",
+	"createbedrock:deployer",
+	"createbedrock:vertical_gearbox"
+]);
+const BLOCK_GEOMETRY_FALLBACK_IDENTIFIERS = new Set([
+	"createbedrock:crushing_wheel",
 	"createbedrock:crushing_wheel_controller",
 	"createbedrock:deployer",
 	"createbedrock:vertical_gearbox"
 ]);
-const BLOCK_GEOMETRY_FALLBACK_IDENTIFIERS = new Set(["createbedrock:vertical_gearbox"]);
 
 async function blockFiles(directory) {
 	const entries = await readdir(directory, { withFileTypes: true });
