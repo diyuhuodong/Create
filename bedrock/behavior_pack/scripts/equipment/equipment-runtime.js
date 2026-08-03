@@ -759,8 +759,8 @@ function refillFromAttachedToolbox(player) {
 
 function serializeRecords() {
 	return [
-		...backtanks.values().map(record => ({ kind: "backtank", ...record })),
-		...toolboxes.values().map(state => ({ kind: "toolbox", state }))
+		...[...backtanks.values()].map(record => ({ kind: "backtank", ...record })),
+		...[...toolboxes.values()].map(state => ({ kind: "toolbox", state }))
 	];
 }
 

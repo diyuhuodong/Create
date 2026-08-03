@@ -32,13 +32,13 @@ const shardedState = createShardedMachineState({
 
 function snapshot() {
 	return [
-		...wheels.values().map(wheel => ({
+		...[...wheels.values()].map(wheel => ({
 			dimensionId: wheel.dimensionId,
 			kind: "wheel",
 			location: wheel.location,
 			processor: wheel.machine.snapshot()
 		})),
-		...controllers.values().map(controller => ({
+		...[...controllers.values()].map(controller => ({
 			dimensionId: controller.dimensionId,
 			kind: "controller",
 			location: controller.location,

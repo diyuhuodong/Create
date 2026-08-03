@@ -1,24 +1,24 @@
 {
   "format_version": 2,
   "header": {
-    "name": "Create Bedrock Resource Pack v0.1.18",
-    "description": "Candidate v0.1.18: resources for the Create Bedrock migration.",
+    "name": "Create Bedrock Resource Pack v0.1.19",
+    "description": "Candidate v0.1.19: resources for the Create Bedrock migration.",
     "uuid": "ed3cbcf1-0d4e-4f0c-bcf7-f11aa568c32c",
     "pack_scope": "world",
-		"version": [0, 1, 18],
+		"version": [0, 1, 19],
     "min_engine_version": [1, 26, 0]
   },
   "modules": [
     {
       "type": "resources",
       "uuid": "723f5d6f-9ba7-41a6-9e0a-ecbd2fb0c467",
-			"version": [0, 1, 18]
+			"version": [0, 1, 19]
     }
   ],
   "dependencies": [
     {
       "uuid": "f0d04e1a-0b1f-4c23-8f2f-44d0dca3ba41",
-      "version": [0, 1, 18]
+      "version": [0, 1, 19]
     }
   ]
 }
