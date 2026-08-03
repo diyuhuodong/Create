@@ -27,7 +27,7 @@
 			"id": "acquisition",
 			"path": "data/p7-1-acquisition-ledger.json",
 			"schemaVersion": 2,
-			"sha256": "6f0dff05138318d5ed009e0f0370d17abf15c59605b9c914772cd8d0013d536c"
+			"sha256": "ecac669eeac8569e2f444cc995c5a5e0c074621f53178857b4b6e025f9f2cede"
 		},
 		{
 			"counts": {
@@ -136,5 +136,5 @@
 		}
 	],
 	"openResponsibilities": [],
-	"fingerprint": "9d854f5667f994673dd7d8dd53b88139b37674d392dc675eabc4c336320fed3c"
+	"fingerprint": "3cd66e3efafa793dd3a1072230cde59ad670c562490575dae2955173baca253b"
 }
