@@ -9,14 +9,14 @@
       0
     ]
   },
-  "candidateId": "0.1.20-80f99f514-3c0db983d4fc",
-  "createdAt": "2026-08-03T02:27:35.811Z",
+  "candidateId": "0.1.21-8a9747034-9fc14ef7cb4c",
+  "createdAt": "2026-08-03T02:37:06.264Z",
   "source": {
-    "commit": "80f99f514b07d13f82ecef6bb42373acaf23638c",
-    "treeSha256": "3c0db983d4fcc5a8620d7f96bafd2bdf5766ce263030a19a02f1f5704f0e0588",
+    "commit": "8a974703496a824b8ec99020e8d37e08626f33c0",
+    "treeSha256": "9fc14ef7cb4c87e8ff427566d874ee9880fb553367414ca9b90d26773c2e173f",
     "clean": true,
     "files": 9927,
-    "bytes": 11764437
+    "bytes": 11764317
   },
   "packs": {
     "behavior": {
@@ -24,7 +24,7 @@
       "version": [
         0,
         1,
-        20
+        21
       ],
       "minimumEngineVersion": [
         1,
@@ -37,7 +37,7 @@
       "version": [
         0,
         1,
-        20
+        21
       ],
       "minimumEngineVersion": [
         1,
@@ -49,8 +49,8 @@
     "uiApiVersion": "2.1.0"
   },
   "artifact": {
-    "path": "bedrock/dist/createbedrock-0.1.20-9a7d15286226.mcaddon",
-    "sha256": "9a7d15286226157c412a12905dc85af26e5cc1bd238cf6807a663896ddebe544",
-    "sizeBytes": 4426035
+    "path": "bedrock/dist/createbedrock-0.1.21-ead0b10037e5.mcaddon",
+    "sha256": "ead0b10037e504941d0da1b2793d8c4a08c3a72a57696f3638ca89b4e4d1b2f2",
+    "sizeBytes": 4426336
   }
 }
