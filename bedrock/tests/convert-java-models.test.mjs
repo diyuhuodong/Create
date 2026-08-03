@@ -90,9 +90,10 @@ test("Crushing Wheel OBJ conversion emits standard cuboids instead of unsupporte
 		source: "v 0 0 0\nv 1 0 0\nf 1 2 1\nusemtl crushing_wheel_plates\n"
 	});
 	const cubes = geometry["minecraft:geometry"][0].bones[0].cubes;
-	assert.ok(cubes.length >= 10);
+	assert.ok(cubes.length >= 30);
 	assert.equal(JSON.stringify(geometry).includes("poly_mesh"), false);
 	assert.equal(cubes.some(cube => cube.uv.north.material_instance === "crushing_wheel_insert"), true);
+	assert.equal(cubes.filter(cube => cube.rotation?.[1] !== undefined).length, 28);
 	for (const axis of [0, 2]) {
 		const minimum = Math.min(...cubes.map(cube => cube.origin[axis]));
 		const maximum = Math.max(...cubes.map(cube => cube.origin[axis] + cube.size[axis]));

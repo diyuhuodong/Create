@@ -571,15 +571,16 @@ export function convertCrushingWheelObj({ identifier, source }) {
 	// Bedrock permits at most 1 + 14/16 blocks of geometry on an axis. Scale
 	// Java's 36-unit wheel footprint into the permitted 30-unit range.
 	const scaleFootprint = ([x, y, z, width, height, depth]) => [x * 5 / 6, y, z * 5 / 6, width * 5 / 6, height, depth * 5 / 6];
-	const rim = [
-		[-4, 1, -18, 8, 14, 10], [10, 1, -18, 8, 14, 10],
-		[-18, 1, -4, 10, 14, 8], [8, 1, -4, 10, 14, 8],
-		[-14, 1, -14, 8, 14, 8], [6, 1, -14, 8, 14, 8],
-		[-14, 1, 6, 8, 14, 8], [6, 1, 6, 8, 14, 8]
-	].map(bounds => {
-		const [x, y, z, width, height, depth] = scaleFootprint(bounds);
-		return cube([x, y, z], [width, height, depth], "crushing_wheel_plates");
+	const rotatedCuboids = (count, angle, origin, size, material) => Array.from({ length: count }, (_, index) => {
+		const [x, y, z, width, height, depth] = scaleFootprint([...origin, ...size]);
+		return cube([x, y, z], [width, height, depth], material, [0, index * angle, 0]);
 	});
+	// The source OBJ has a dense, toothed outline rather than the earlier octagonal
+	// proxy.  Twelve overlapping rim sections make a round stone body; sixteen
+	// shallow teeth preserve the characteristic Create silhouette.  Their maximum
+	// corner radius remains below 15 Bedrock units after the 5/6 scale.
+	const rim = rotatedCuboids(12, 30, [-3.75, 1, -14.5], [7.5, 14, 6], "crushing_wheel_plates");
+	const teeth = rotatedCuboids(16, 22.5, [-2.1, 0, -16.8], [4.2, 16, 3.2], "crushing_wheel_plates");
 	const hub = [
 		cube([-5 * 5 / 6, 4, -5 * 5 / 6], [10 * 5 / 6, 8, 10 * 5 / 6], "crushing_wheel_insert"),
 		cube([-2 * 5 / 6, -2, -2 * 5 / 6], [4 * 5 / 6, 20, 4 * 5 / 6], "axis"),
@@ -596,7 +597,7 @@ export function convertCrushingWheelObj({ identifier, source }) {
 				visible_bounds_height: 2,
 				visible_bounds_offset: [0, 0.5, 0]
 			},
-			bones: [{ name: "crushing_wheel", pivot: [0, 8, 0], cubes: [...rim, ...hub] }]
+			bones: [{ name: "crushing_wheel", pivot: [0, 8, 0], cubes: [...rim, ...teeth, ...hub] }]
 		}]
 	};
 }
