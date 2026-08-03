@@ -20,6 +20,7 @@ const DEVICE_DEFINITIONS = [
 	{
 		id: "crushing_wheel_controller",
 		blockId: "createbedrock:crushing_wheel_controller",
+		internal: true,
 		acceptanceIds: ["REDSTONE-CRUSHING-WHEEL-CONTROLLER-BLOCK", "REDSTONE-CRUSHING-WHEEL-CONTROLLER-BLOCK_ENTITY"],
 		input: false,
 		output: true,

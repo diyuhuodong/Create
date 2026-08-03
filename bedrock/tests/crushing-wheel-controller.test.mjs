@@ -1,9 +1,21 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { resolveCrushingWheelControllerPair } from "../behavior_pack/scripts/processing/crushing-wheel-controller.js";
+import { deriveCrushingWheelControllerLocations, resolveCrushingWheelControllerPair } from "../behavior_pack/scripts/processing/crushing-wheel-controller.js";
 
 const controller = { x: 0, y: 64, z: 0 };
+
+test("Crushing Wheel Controller is derived from the one-block gap between wheels", () => {
+	assert.deepEqual(deriveCrushingWheelControllerLocations([
+		{ location: { x: -1, y: 64, z: 0 } },
+		{ location: { x: 1, y: 64, z: 0 } },
+		{ location: { x: -1, y: 64, z: 0 } },
+		{ location: { x: -1, y: 64, z: 2 } }
+	]), [
+		{ x: 0, y: 64, z: 0 },
+		{ x: -1, y: 64, z: 1 }
+	]);
+});
 
 test("Crushing Wheel Controller only activates for opposing, counter-rotating wheel pairs", () => {
 	const resolved = resolveCrushingWheelControllerPair({

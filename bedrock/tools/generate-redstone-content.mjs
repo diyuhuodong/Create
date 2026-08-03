@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -12,7 +12,7 @@ const resourceRoot = resolve(bedrockRoot, "resource_pack");
 const CONTENT = {
 	analog_lever: { english: "Analog Lever", chinese: "模拟拉杆", geometry: "geometry.createbedrock.redstone_analog_lever", texture: "createbedrock_redstone_analog_lever" },
 	content_observer: { english: "Content Observer", chinese: "内容观察器", geometry: "geometry.createbedrock.redstone_content_observer", texture: "createbedrock_redstone_content_observer" },
-	crushing_wheel_controller: { english: "Crushing Wheel Controller", chinese: "粉碎轮控制器", geometry: "geometry.createbedrock.crushing_wheel_controller", texture: "createbedrock_brass_casing" },
+	crushing_wheel_controller: { english: "Crushing Wheel Controller", chinese: "粉碎轮控制器", geometry: "geometry.createbedrock.crushing_wheel_controller", internal: true },
 	display_link: { english: "Display Link", chinese: "显示链接器", geometry: "geometry.createbedrock.redstone_display_link", texture: "createbedrock_redstone_display_link" },
 	lectern_controller: { english: "Lectern Controller", chinese: "讲台控制器", geometry: "geometry.createbedrock.redstone_lectern_controller", texture: "createbedrock_brass_casing" },
 	nixie_tube: { english: "Nixie Tube", chinese: "数码管", geometry: "geometry.createbedrock.redstone_nixie_tube", texture: "createbedrock_redstone_nixie_tube" },
@@ -76,18 +76,22 @@ function blockDefinition(device) {
 		"minecraft:destructible_by_mining": { seconds_to_destroy: 1 },
 		"minecraft:redstone_conductivity": { redstone_conductor: true },
 		"minecraft:geometry": content.geometry,
-		"minecraft:item_visual": {
-			geometry: { identifier: content.geometry },
-			material_instances: {
+		...(content.internal ? {
+			"minecraft:selection_box": false
+		} : {
+			"minecraft:item_visual": {
+				geometry: { identifier: content.geometry },
+				material_instances: {
+					redstone_surface: { texture: content.texture, render_method: "opaque" },
+					"*": { texture: content.texture, render_method: "opaque" }
+				}
+			},
+			"minecraft:loot": `loot_tables/blocks/${identifier}.json`,
+			"minecraft:material_instances": {
 				redstone_surface: { texture: content.texture, render_method: "opaque" },
 				"*": { texture: content.texture, render_method: "opaque" }
 			}
-		},
-		"minecraft:loot": `loot_tables/blocks/${identifier}.json`,
-		"minecraft:material_instances": {
-			redstone_surface: { texture: content.texture, render_method: "opaque" },
-			"*": { texture: content.texture, render_method: "opaque" }
-		}
+		})
 	};
 	if (device.input) {
 		components["minecraft:redstone_consumer"] = { min_power: 0, propagates_power: false };
@@ -98,7 +102,7 @@ function blockDefinition(device) {
 		"minecraft:block": {
 			description: {
 				identifier: device.blockId,
-				menu_category: { category: "items", group: "itemGroup.name.misc" },
+				...(content.internal ? {} : { menu_category: { category: "items", group: "itemGroup.name.misc" } }),
 				properties: signalProperty(device),
 				traits: { "minecraft:placement_direction": { enabled_states: ["minecraft:facing_direction"] } }
 			},
@@ -152,8 +156,15 @@ async function appendTranslation(file, entries) {
 for (const device of REDSTONE_BLOCK_DEVICES) {
 	const identifier = blockIdentifier(device);
 	await writeJson(resolve(behaviorRoot, "blocks", `${identifier}.json`), blockDefinition(device));
-	await writeJson(resolve(behaviorRoot, "loot_tables", "blocks", `${identifier}.json`), lootDefinition(device));
-	await writeJson(resolve(behaviorRoot, "recipes", `${identifier}.json`), recipeDefinition(device));
+	if (CONTENT[device.id].internal) {
+		await Promise.all([
+			rm(resolve(behaviorRoot, "loot_tables", "blocks", `${identifier}.json`), { force: true }),
+			rm(resolve(behaviorRoot, "recipes", `${identifier}.json`), { force: true })
+		]);
+	} else {
+		await writeJson(resolve(behaviorRoot, "loot_tables", "blocks", `${identifier}.json`), lootDefinition(device));
+		await writeJson(resolve(behaviorRoot, "recipes", `${identifier}.json`), recipeDefinition(device));
+	}
 }
 
 await writeJson(resolve(behaviorRoot, "items", "linked_controller.json"), {

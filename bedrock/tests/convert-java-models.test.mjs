@@ -101,12 +101,11 @@ test("Crushing Wheel OBJ conversion emits standard cuboids instead of unsupporte
 	}
 });
 
-test("Crushing Wheel Controller uses a compact compatibility marker instead of wheel geometry", () => {
+test("Crushing Wheel Controller retains Java's invisible internal render contract", () => {
 	const geometry = convertCrushingWheelControllerProxy("geometry.createbedrock.crushing_wheel_controller");
 	const definition = geometry["minecraft:geometry"][0];
 	assert.equal(definition.description.identifier, "geometry.createbedrock.crushing_wheel_controller");
-	assert.equal(definition.bones[0].cubes.length, 3);
-	assert.equal(definition.bones[0].cubes.every(cube => cube.uv.north.material_instance === "redstone_surface"), true);
+	assert.equal(definition.bones[0].cubes, undefined);
 });
 
 test("Blaze Burner OBJ conversion retains a state-swappable brazier, blaze, and flame silhouette", () => {

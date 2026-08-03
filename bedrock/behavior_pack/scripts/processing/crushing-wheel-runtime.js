@@ -6,7 +6,7 @@ import { deserializeVersionedState } from "../kernel/versioned-state.js";
 import { CRUSHING_RECIPES } from "./generated/crushing-recipes.js";
 import { crushingBeltEndpoints, selectCrushingEntityInput } from "./crushing-wheel-belt-interface.js";
 import { CrushingWheelMachine } from "./crushing-wheel-machine.js";
-import { resolveCrushingWheelControllerPair } from "./crushing-wheel-controller.js";
+import { deriveCrushingWheelControllerLocations, resolveCrushingWheelControllerPair } from "./crushing-wheel-controller.js";
 import { supportedProcessingRecipes } from "./processing-item-support.js";
 import { registerMovingBlockDataAdapter } from "../contraptions/moving-block-data.js";
 import { createShardedMachineState } from "./sharded-machine-state.js";
@@ -122,19 +122,52 @@ function ensureWheel(block) {
 	return wheel;
 }
 
-function ensureController(block) {
-	const key = keyFor(block.dimension.id, block.location);
+function ensureControllerAt(dimensionId, location) {
+	const key = keyFor(dimensionId, location);
 	let controller = controllers.get(key);
 	if (!controller) {
 		controller = {
-			dimensionId: block.dimension.id,
-			location: { ...block.location },
-			machine: createCrushingWheelMachine(block.dimension.id, block.location)
+			dimensionId,
+			location: { ...location },
+			machine: createCrushingWheelMachine(dimensionId, location)
 		};
 		controllers.set(key, controller);
 	}
 	attachControllerPorts(controller);
 	return controller;
+}
+
+function ensureController(block) {
+	return ensureControllerAt(block.dimension.id, block.location);
+}
+
+function controllerForWheel(wheel) {
+	return [...controllers.values()].find(controller => controller.dimensionId === wheel.dimensionId
+		&& Math.abs(controller.location.x - wheel.location.x)
+		+ Math.abs(controller.location.y - wheel.location.y)
+		+ Math.abs(controller.location.z - wheel.location.z) === 1);
+}
+
+function reconcileControllers() {
+	const desired = new Map();
+	const wheelsByDimension = new Map();
+	for (const wheel of wheels.values()) {
+		const entries = wheelsByDimension.get(wheel.dimensionId) ?? [];
+		entries.push(wheel);
+		wheelsByDimension.set(wheel.dimensionId, entries);
+	}
+	for (const [dimensionId, entries] of wheelsByDimension) {
+		for (const location of deriveCrushingWheelControllerLocations(entries))
+			desired.set(keyFor(dimensionId, location), { dimensionId, location });
+	}
+	for (const entry of desired.values())
+		ensureControllerAt(entry.dimensionId, entry.location);
+	for (const [key, controller] of controllers) {
+		if (desired.has(key) || controller.machine.hasContents() || !controllerPortsRemovable(controller))
+			continue;
+		removeControllerPorts(controller);
+		controllers.delete(key);
+	}
 }
 
 function captureWheel(dimensionId, location) {
@@ -193,6 +226,7 @@ function restore() {
 		const restored = shardedState.read();
 		if (restored) {
 			restoreRecords(restored.records);
+			reconcileControllers();
 			for (const warning of restored.warnings)
 				console.warn(`[Create Bedrock] Ignored invalid crushing wheel shard ${warning.partition}: ${warning.error}`);
 			console.warn("[Create Bedrock] Restored sharded crushing wheel state");
@@ -211,6 +245,7 @@ function restore() {
 			upgrades: { 0: legacy => legacy }
 		});
 		restoreRecords(records);
+		reconcileControllers();
 		shardedState.markLegacyForMigration();
 		persist();
 	} catch (error) {
@@ -289,7 +324,7 @@ function tryExtractToPlayer(player, wheel) {
 
 function processWheel(key, getKineticWorld) {
 	const wheel = wheels.get(key);
-	if (!wheel)
+	if (!wheel || controllerForWheel(wheel))
 		return;
 	const update = wheel.machine.tick(getKineticWorld().speedAt(wheel.dimensionId, wheel.location));
 	if (update)
@@ -437,10 +472,7 @@ export function registerCrushingWheels(getKineticWorld) {
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
 		if (event.block.typeId === CRUSHING_WHEEL_BLOCK) {
 			ensureWheel(event.block);
-			persist();
-		}
-		if (event.block.typeId === CRUSHING_WHEEL_CONTROLLER_BLOCK) {
-			ensureController(event.block);
+			reconcileControllers();
 			persist();
 		}
 	});
@@ -457,31 +489,33 @@ export function registerCrushingWheels(getKineticWorld) {
 				console.warn(`[Create Bedrock] Crushing controller endpoint removal deferred: ${error}`);
 			}
 		}
+		reconcileControllers();
 		if (changed)
 			persist();
 	});
 	world.beforeEvents.playerBreakBlock.subscribe(event => {
-		if (![CRUSHING_WHEEL_BLOCK, CRUSHING_WHEEL_CONTROLLER_BLOCK].includes(event.block.typeId))
+		if (event.block.typeId !== CRUSHING_WHEEL_BLOCK)
 			return;
-		const machine = (event.block.typeId === CRUSHING_WHEEL_BLOCK ? wheels : controllers)
-			.get(keyFor(event.block.dimension.id, event.block.location));
-		if (machine?.machine.hasContents()) {
+		const wheel = wheels.get(keyFor(event.block.dimension.id, event.block.location));
+		const controller = wheel && controllerForWheel(wheel);
+		if (wheel?.machine.hasContents() || controller?.machine.hasContents()) {
 			event.cancel = true;
-			event.player.sendMessage("Cannot remove a crushing wheel or controller while it stores or processes items.");
+			event.player.sendMessage("Cannot remove a crushing wheel while it or its internal controller stores or processes items.");
 			return;
 		}
-		if (event.block.typeId === CRUSHING_WHEEL_CONTROLLER_BLOCK && machine && !controllerPortsRemovable(machine)) {
+		if (controller && !controllerPortsRemovable(controller)) {
 			event.cancel = true;
-			event.player.sendMessage("Cannot remove a crushing controller while a belt route or item transport is attached.");
+			event.player.sendMessage("Cannot remove a crushing wheel while its internal controller has a belt route or item transport attached.");
 		}
 	});
 	world.afterEvents.playerInteractWithBlock.subscribe(event => {
-		if (![CRUSHING_WHEEL_BLOCK, CRUSHING_WHEEL_CONTROLLER_BLOCK].includes(event.block.typeId))
+		if (event.block.typeId !== CRUSHING_WHEEL_BLOCK)
 			return;
-		const wheel = event.block.typeId === CRUSHING_WHEEL_BLOCK ? ensureWheel(event.block) : ensureController(event.block);
+		const wheel = ensureWheel(event.block);
+		const processor = controllerForWheel(wheel) ?? wheel;
 		const changed = event.itemStack
-			? tryInsertFromPlayer(event.player, wheel)
-			: tryExtractToPlayer(event.player, wheel);
+			? tryInsertFromPlayer(event.player, processor)
+			: tryExtractToPlayer(event.player, processor);
 		if (changed)
 			persist();
 	});

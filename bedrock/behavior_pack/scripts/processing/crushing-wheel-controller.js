@@ -19,6 +19,32 @@ function oppositeWheelLocation(controller, axis, distance) {
 }
 
 /**
+ * Java creates its controller in the single block between two wheels. This
+ * returns those internal locations from persisted wheel positions; kinetic
+ * direction and speed are checked separately by resolveCrushingWheelControllerPair.
+ */
+export function deriveCrushingWheelControllerLocations(wheels) {
+	if (!Array.isArray(wheels))
+		throw new TypeError("Crushing-wheel controller derivation requires a wheel array");
+	const locations = new Map();
+	for (let leftIndex = 0; leftIndex < wheels.length; leftIndex++) {
+		const left = assertLocation(wheels[leftIndex]?.location);
+		for (let rightIndex = leftIndex + 1; rightIndex < wheels.length; rightIndex++) {
+			const right = assertLocation(wheels[rightIndex]?.location);
+			const differences = AXES.filter(axis => left[axis] !== right[axis]);
+			if (differences.length !== 1)
+				continue;
+			const axis = differences[0];
+			if (Math.abs(left[axis] - right[axis]) !== 2)
+				continue;
+			const location = { ...left, [axis]: (left[axis] + right[axis]) / 2 };
+			locations.set(locationKey(location), location);
+		}
+	}
+	return [...locations.values()];
+}
+
+/**
  * Resolve the Java Create crushing-wheel arrangement without depending on a
  * live Bedrock Block object. A valid controller sits exactly between two
  * wheels with the same rotation axis; their rotations must oppose each other

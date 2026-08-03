@@ -84,6 +84,8 @@ function assertResourceDefinition(device, block) {
 	const geometry = components["minecraft:geometry"];
 	if (typeof geometry !== "string" || !geometry.startsWith("geometry.createbedrock."))
 		throw new Error(`S3-14 ${device.blockId} must use a purpose-specific converted geometry`);
+	if (device.internal)
+		return;
 	const material = components["minecraft:material_instances"]?.redstone_surface;
 	if (!material?.texture?.startsWith("createbedrock_"))
 		throw new Error(`S3-14 ${device.blockId} must bind a sourced redstone texture`);
@@ -106,19 +108,24 @@ export async function validateStage3RedstoneDeviceSourceContract({ bedrockRoot =
 	const chinese = translationMap(zhCn);
 	for (const device of REDSTONE_BLOCK_DEVICES) {
 		const name = identifier(device);
-		const [block, loot, recipe] = await Promise.all([
-			readJson(resolve(behaviorRoot, "blocks", `${name}.json`)),
-			readJson(resolve(behaviorRoot, "loot_tables", "blocks", `${name}.json`)),
-			readJson(resolve(behaviorRoot, "recipes", `${name}.json`))
-		]);
+		const block = await readJson(resolve(behaviorRoot, "blocks", `${name}.json`));
 		if (block.format_version !== "1.26.0" || block["minecraft:block"]?.description?.identifier !== device.blockId)
 			throw new Error(`S3-14 block definition is invalid for ${device.blockId}`);
-		if (loot.pools?.[0]?.entries?.[0]?.name !== device.blockId)
-			throw new Error(`S3-14 ${device.blockId} must explicitly drop itself`);
-		if (recipe["minecraft:recipe_shapeless"]?.result?.item !== device.blockId)
-			throw new Error(`S3-14 ${device.blockId} must have an obtainable recipe`);
-		if (!english.has(`tile.${device.blockId}.name`) || !chinese.has(`tile.${device.blockId}.name`))
-			throw new Error(`S3-14 ${device.blockId} requires English and Chinese translations`);
+		if (device.internal) {
+			if (block["minecraft:block"]?.description?.menu_category || block["minecraft:block"]?.components?.["minecraft:loot"])
+				throw new Error(`S3-14 ${device.blockId} must remain a hidden Java-internal block`);
+		} else {
+			const [loot, recipe] = await Promise.all([
+				readJson(resolve(behaviorRoot, "loot_tables", "blocks", `${name}.json`)),
+				readJson(resolve(behaviorRoot, "recipes", `${name}.json`))
+			]);
+			if (loot.pools?.[0]?.entries?.[0]?.name !== device.blockId)
+				throw new Error(`S3-14 ${device.blockId} must explicitly drop itself`);
+			if (recipe["minecraft:recipe_shapeless"]?.result?.item !== device.blockId)
+				throw new Error(`S3-14 ${device.blockId} must have an obtainable recipe`);
+			if (!english.has(`tile.${device.blockId}.name`) || !chinese.has(`tile.${device.blockId}.name`))
+				throw new Error(`S3-14 ${device.blockId} requires English and Chinese translations`);
+		}
 		assertResourceDefinition(device, block);
 		assertNativeInput(device, block);
 		assertNativeOutput(device, block);

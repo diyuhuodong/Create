@@ -604,9 +604,8 @@ export function convertCrushingWheelObj({ identifier, source }) {
 }
 
 // Java materializes this controller only as an invisible intermediary between
-// two opposing wheels. Bedrock exposes it as a placeable compatibility block,
-// so render a compact brass control core instead of incorrectly duplicating an
-// entire Crushing Wheel.
+// two opposing wheels. It deliberately has no renderable cubes in Bedrock as
+// well; runtime state owns the processing region between the visible wheels.
 export function convertCrushingWheelControllerProxy(identifier) {
 	return {
 		format_version: "1.21.0",
@@ -621,12 +620,7 @@ export function convertCrushingWheelControllerProxy(identifier) {
 			},
 			bones: [{
 				name: "crushing_wheel_controller",
-				pivot: [0, 8, 0],
-				cubes: [
-					cube([-5, 6, -5], [10, 4, 10], "redstone_surface"),
-					cube([-7, 7, -2], [14, 2, 4], "redstone_surface"),
-					cube([-2, 7, -7], [4, 2, 14], "redstone_surface")
-				]
+				pivot: [0, 8, 0]
 			}]
 		}]
 	};

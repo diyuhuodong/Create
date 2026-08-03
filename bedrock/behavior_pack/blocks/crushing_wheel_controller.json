@@ -3,10 +3,6 @@
   "minecraft:block": {
     "description": {
       "identifier": "createbedrock:crushing_wheel_controller",
-      "menu_category": {
-        "category": "items",
-        "group": "itemGroup.name.misc"
-      },
       "properties": {
         "createbedrock:powered": [
           0,
@@ -32,32 +28,7 @@
         "redstone_conductor": true
       },
       "minecraft:geometry": "geometry.createbedrock.crushing_wheel_controller",
-      "minecraft:item_visual": {
-        "geometry": {
-          "identifier": "geometry.createbedrock.crushing_wheel_controller"
-        },
-        "material_instances": {
-          "redstone_surface": {
-            "texture": "createbedrock_brass_casing",
-            "render_method": "opaque"
-          },
-          "*": {
-            "texture": "createbedrock_brass_casing",
-            "render_method": "opaque"
-          }
-        }
-      },
-      "minecraft:loot": "loot_tables/blocks/crushing_wheel_controller.json",
-      "minecraft:material_instances": {
-        "redstone_surface": {
-          "texture": "createbedrock_brass_casing",
-          "render_method": "opaque"
-        },
-        "*": {
-          "texture": "createbedrock_brass_casing",
-          "render_method": "opaque"
-        }
-      }
+      "minecraft:selection_box": false
     },
     "permutations": [
       {
