@@ -3,7 +3,7 @@
   "minecraft:recipe_shapeless": {
     "description": { "identifier": "createbedrock:andesite_door" },
     "tags": ["crafting_table"],
-    "ingredients": [{ "item": "minecraft:oak_door" }, { "item": "createbedrock:andesite_casing" }],
+    "ingredients": [{ "item": "minecraft:wooden_door" }, { "item": "createbedrock:andesite_casing" }],
     "result": { "item": "createbedrock:andesite_door" }
   }
 }

@@ -61,6 +61,63 @@ test("Bedrock staging fixes invalid block bounds and blend render methods", () =
 	assert.equal(components["minecraft:material_instances"]["*"].render_method, "blend");
 });
 
+test("Bedrock staging keeps material render modes compatible and removes only invalid sliding-door transforms", () => {
+	const door = {
+		"minecraft:block": {
+			description: { identifier: "createbedrock:brass_door" },
+			components: {
+				"minecraft:item_visual": {
+					material_instances: {
+						"*": { render_method: "blend" },
+						frame: { render_method: "opaque" }
+					}
+				}
+			},
+			permutations: [{ components: { "minecraft:transformation": { translation: [8, 0, 0] } } }]
+		}
+	};
+	assert.equal(normalizeBlockContent(door), true);
+	assert.equal(door["minecraft:block"].permutations[0].components["minecraft:transformation"], undefined);
+	assert.equal(door["minecraft:block"].components["minecraft:item_visual"].material_instances.frame.render_method, "blend");
+
+	const nonDoor = {
+		"minecraft:block": {
+			description: { identifier: "createbedrock:cardboard" },
+			permutations: [{ components: { "minecraft:transformation": { translation: [8, 0, 0] } } }]
+		}
+	};
+	assert.equal(normalizeBlockContent(nonDoor), false);
+	assert.deepEqual(nonDoor["minecraft:block"].permutations[0].components["minecraft:transformation"], { translation: [8, 0, 0] });
+});
+
+test("Bedrock staging uses a safe inventory geometry only for models rejected by Bedrock item visuals", () => {
+	const deployer = {
+		"minecraft:block": {
+			description: { identifier: "createbedrock:deployer" },
+			components: {
+				"minecraft:geometry": "geometry.createbedrock.deployer",
+				"minecraft:item_visual": { geometry: { identifier: "geometry.createbedrock.deployer" } }
+			}
+		}
+	};
+	assert.equal(normalizeBlockContent(deployer), true);
+	assert.equal(deployer["minecraft:block"].components["minecraft:geometry"], "geometry.createbedrock.deployer");
+	assert.equal(deployer["minecraft:block"].components["minecraft:item_visual"].geometry.identifier, "minecraft:geometry.full_block");
+
+	const verticalGearbox = {
+		"minecraft:block": {
+			description: { identifier: "createbedrock:vertical_gearbox" },
+			components: {
+				"minecraft:geometry": "geometry.createbedrock.gearbox",
+				"minecraft:item_visual": { geometry: { identifier: "geometry.createbedrock.gearbox" } }
+			}
+		}
+	};
+	assert.equal(normalizeBlockContent(verticalGearbox), true);
+	assert.equal(verticalGearbox["minecraft:block"].components["minecraft:geometry"], "minecraft:geometry.full_block");
+	assert.equal(verticalGearbox["minecraft:block"].components["minecraft:item_visual"].geometry.identifier, "minecraft:geometry.full_block");
+});
+
 test("Bedrock staging uses current state and menu schemas for block and item definitions", () => {
 	const block = {
 		"minecraft:block": {
@@ -84,10 +141,11 @@ test("Bedrock staging uses current state and menu schemas for block and item def
 
 test("Bedrock staging unlocks recipes that require current unlock metadata", () => {
 	const definition = {
-		"minecraft:recipe_shaped": { description: { identifier: "createbedrock:compatibility_test" } },
+		"minecraft:recipe_shaped": { description: { identifier: "createbedrock:compatibility_test" }, result: { count: 4, item: "createbedrock:schedule" } },
 		"minecraft:recipe_brewing_mix": { description: { identifier: "createbedrock:unchanged" } }
 	};
 	assert.equal(normalizeRecipeUnlocks(definition), true);
 	assert.deepEqual(definition["minecraft:recipe_shaped"].unlock, { context: "AlwaysUnlocked" });
+	assert.equal(definition["minecraft:recipe_shaped"].result.count, 1);
 	assert.equal(definition["minecraft:recipe_brewing_mix"].unlock, undefined);
 });

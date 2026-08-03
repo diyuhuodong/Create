@@ -13,6 +13,7 @@ const UNSUPPORTED_VANILLA_ITEMS = new Set([
 	"minecraft:item_frame",
 	"minecraft:oak_door"
 ]);
+const NON_STACKABLE_RESULTS = new Set(["createbedrock:schedule"]);
 
 async function recipeFiles(directory) {
 	const entries = await readdir(directory, { withFileTypes: true });
@@ -25,6 +26,10 @@ async function recipeFiles(directory) {
 export function normalizeRecipeUnlocks(definition) {
 	let changed = false;
 	for (const [type, recipe] of Object.entries(definition)) {
+		if (NON_STACKABLE_RESULTS.has(recipe?.result?.item) && recipe.result.count > 1) {
+			recipe.result.count = 1;
+			changed = true;
+		}
 		if (UNLOCKABLE_RECIPE_TYPES.has(type) && recipe?.unlock === undefined) {
 			recipe.unlock = { context: "AlwaysUnlocked" };
 			changed = true;

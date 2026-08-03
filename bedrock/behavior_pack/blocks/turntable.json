@@ -16,7 +16,7 @@
           "axis_top": { "texture": "createbedrock_axis_top", "render_method": "opaque" },
           "gearbox_top": { "texture": "createbedrock_gearbox_top", "render_method": "opaque" },
           "encased_chain_drive": { "texture": "createbedrock_encased_chain_drive", "render_method": "opaque" },
-          "stripped_spruce_log": { "texture": "stripped_spruce_log", "render_method": "opaque" },
+          "stripped_spruce_log": { "texture": "createbedrock_axis", "render_method": "opaque" },
           "*": { "texture": "createbedrock_axis", "render_method": "opaque" }
         }
       },
@@ -25,7 +25,7 @@
         "axis_top": { "texture": "createbedrock_axis_top", "render_method": "opaque" },
         "gearbox_top": { "texture": "createbedrock_gearbox_top", "render_method": "opaque" },
         "encased_chain_drive": { "texture": "createbedrock_encased_chain_drive", "render_method": "opaque" },
-        "stripped_spruce_log": { "texture": "stripped_spruce_log", "render_method": "opaque" },
+        "stripped_spruce_log": { "texture": "createbedrock_axis", "render_method": "opaque" },
         "*": { "texture": "createbedrock_axis", "render_method": "opaque" }
       },
       "minecraft:loot": "loot_tables/blocks/turntable.json"

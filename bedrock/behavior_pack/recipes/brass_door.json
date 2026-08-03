@@ -3,7 +3,7 @@
   "minecraft:recipe_shapeless": {
     "description": { "identifier": "createbedrock:brass_door" },
     "tags": ["crafting_table"],
-    "ingredients": [{ "item": "minecraft:oak_door" }, { "item": "createbedrock:brass_casing" }],
+    "ingredients": [{ "item": "minecraft:wooden_door" }, { "item": "createbedrock:brass_casing" }],
     "result": { "item": "createbedrock:brass_door" }
   }
 }

@@ -3,7 +3,7 @@
   "minecraft:recipe_shapeless": {
     "description": { "identifier": "createbedrock:train_door" },
     "tags": ["crafting_table"],
-    "ingredients": [{ "item": "minecraft:oak_door" }, { "item": "createbedrock:railway_casing" }],
+    "ingredients": [{ "item": "minecraft:wooden_door" }, { "item": "createbedrock:railway_casing" }],
     "result": { "item": "createbedrock:train_door" }
   }
 }

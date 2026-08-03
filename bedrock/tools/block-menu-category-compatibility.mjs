@@ -1,6 +1,21 @@
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
+const SLIDING_DOOR_IDENTIFIERS = new Set([
+	"createbedrock:andesite_door",
+	"createbedrock:brass_door",
+	"createbedrock:copper_door",
+	"createbedrock:framed_glass_door",
+	"createbedrock:train_door"
+]);
+const ITEM_VISUAL_FALLBACK_IDENTIFIERS = new Set([
+	"createbedrock:crushing_wheel",
+	"createbedrock:crushing_wheel_controller",
+	"createbedrock:deployer",
+	"createbedrock:vertical_gearbox"
+]);
+const BLOCK_GEOMETRY_FALLBACK_IDENTIFIERS = new Set(["createbedrock:vertical_gearbox"]);
+
 async function blockFiles(directory) {
 	const entries = await readdir(directory, { withFileTypes: true });
 	const nested = await Promise.all(entries.map(entry => entry.isDirectory()
@@ -61,10 +76,7 @@ function normalizeBlockGeometry(definition) {
 
 function normalizeBlockComponents(definition) {
 	let changed = false;
-	const normalizeComponents = components => {
-		if (!components || typeof components !== "object")
-			return;
-		const materials = components["minecraft:material_instances"];
+	const normalizeMaterials = materials => {
 		if (!materials || typeof materials !== "object")
 			return;
 		const entries = Object.entries(materials).filter(([, material]) => material && typeof material === "object");
@@ -84,11 +96,42 @@ function normalizeBlockComponents(definition) {
 			}
 		}
 	};
+	const normalizeComponents = components => {
+		if (!components || typeof components !== "object")
+			return;
+		normalizeMaterials(components["minecraft:material_instances"]);
+		normalizeMaterials(components["minecraft:item_visual"]?.material_instances);
+	};
 	const block = definition?.["minecraft:block"];
 	normalizeComponents(block?.components);
 	for (const permutation of block?.permutations ?? [])
 		normalizeComponents(permutation.components);
 	return changed;
+}
+
+function normalizeSlidingDoorTransformations(definition) {
+	const block = definition?.["minecraft:block"];
+	if (!SLIDING_DOOR_IDENTIFIERS.has(block?.description?.identifier))
+		return false;
+	let changed = false;
+	for (const permutation of block.permutations ?? []) {
+		if (!permutation?.components?.["minecraft:transformation"])
+			continue;
+		delete permutation.components["minecraft:transformation"];
+		changed = true;
+	}
+	return changed;
+}
+
+function normalizeOversizedItemVisuals(definition) {
+	const components = definition?.["minecraft:block"]?.components;
+	const identifier = definition?.["minecraft:block"]?.description?.identifier;
+	if (!ITEM_VISUAL_FALLBACK_IDENTIFIERS.has(identifier) || !components?.["minecraft:item_visual"]?.geometry)
+		return false;
+	components["minecraft:item_visual"].geometry.identifier = "minecraft:geometry.full_block";
+	if (BLOCK_GEOMETRY_FALLBACK_IDENTIFIERS.has(identifier))
+		components["minecraft:geometry"] = "minecraft:geometry.full_block";
+	return true;
 }
 
 function normalizeBlockBounds(definition) {
@@ -134,9 +177,11 @@ export function normalizeBlockContent(definition) {
 	const states = normalizeBlockStates(definition);
 	const geometry = normalizeBlockGeometry(definition);
 	const components = normalizeBlockComponents(definition);
+	const doorTransformations = normalizeSlidingDoorTransformations(definition);
+	const itemVisuals = normalizeOversizedItemVisuals(definition);
 	const bounds = normalizeBlockBounds(definition);
 	const renderMethods = normalizeMaterialRenderMethods(definition);
-	return menuCategory || states || geometry || components || bounds || renderMethods;
+	return menuCategory || states || geometry || components || doorTransformations || itemVisuals || bounds || renderMethods;
 }
 
 export async function normalizeStagedBlockContent({ behaviorPackRoot }) {
