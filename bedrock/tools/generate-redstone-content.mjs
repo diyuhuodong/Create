@@ -77,6 +77,11 @@ function blockDefinition(device) {
 		"minecraft:redstone_conductivity": { redstone_conductor: true },
 		"minecraft:geometry": content.geometry,
 		...(content.internal ? {
+			// Bedrock requires a material instance for every geometry declaration. The
+			// internal Crushing Wheel Controller has no cubes, so this remains invisible.
+			"minecraft:material_instances": {
+				"*": { texture: content.texture ?? "createbedrock_brass_casing", render_method: "opaque" }
+			},
 			"minecraft:selection_box": false
 		} : {
 			"minecraft:item_visual": {

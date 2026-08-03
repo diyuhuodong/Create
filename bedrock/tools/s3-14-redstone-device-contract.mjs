@@ -84,8 +84,11 @@ function assertResourceDefinition(device, block) {
 	const geometry = components["minecraft:geometry"];
 	if (typeof geometry !== "string" || !geometry.startsWith("geometry.createbedrock."))
 		throw new Error(`S3-14 ${device.blockId} must use a purpose-specific converted geometry`);
-	if (device.internal)
+	if (device.internal) {
+		if (!components["minecraft:material_instances"]?.["*"]?.texture)
+			throw new Error(`S3-14 ${device.blockId} must retain Bedrock's required geometry material instance`);
 		return;
+	}
 	const material = components["minecraft:material_instances"]?.redstone_surface;
 	if (!material?.texture?.startsWith("createbedrock_"))
 		throw new Error(`S3-14 ${device.blockId} must bind a sourced redstone texture`);

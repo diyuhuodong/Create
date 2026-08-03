@@ -28,6 +28,12 @@
         "redstone_conductor": true
       },
       "minecraft:geometry": "geometry.createbedrock.crushing_wheel_controller",
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "createbedrock_brass_casing",
+          "render_method": "opaque"
+        }
+      },
       "minecraft:selection_box": false
     },
     "permutations": [
