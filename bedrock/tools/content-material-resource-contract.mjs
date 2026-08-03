@@ -106,7 +106,7 @@ const FOOD_ITEMS = [
 		useAnimation: "drink",
 		useDuration: 2.1,
 		canAlwaysEat: true,
-		effects: [{ name: "haste", chance: 1, duration: 180, amplifier: 0 }],
+		runtimeEffect: { duration: 180 * 20, effect: "haste", amplifier: 0 },
 		usingConvertsTo: "minecraft:glass_bottle",
 		survivalDependency: "Create filling must produce Builder's Tea before this drink becomes survival-obtainable."
 	}
@@ -262,10 +262,16 @@ export async function validateContentMaterialResources({ bedrockRoot = defaultBe
 			|| itemComponents["minecraft:use_animation"] !== entry.useAnimation
 			|| itemComponents["minecraft:use_modifiers"]?.use_duration !== entry.useDuration)
 			throw new Error(`C1 food ${entry.identifier} must retain its Java hunger, saturation, stack, and use behavior`);
-		if (entry.canAlwaysEat && (food.can_always_eat !== true
-			|| JSON.stringify(food.effects) !== JSON.stringify(entry.effects)
-			|| food.using_converts_to !== entry.usingConvertsTo))
-			throw new Error(`C1 food ${entry.identifier} must retain its drink effect and glass-bottle return`);
+		if (entry.canAlwaysEat && (food.can_always_eat !== true || food.using_converts_to !== entry.usingConvertsTo))
+			throw new Error(`C1 food ${entry.identifier} must retain its always-drink behavior and glass-bottle return`);
+		if (entry.runtimeEffect) {
+			const runtime = await readFile(resolve(behaviorRoot, "scripts", "materials", "builders-tea-runtime.js"), "utf8");
+			if (food.effects !== undefined
+				|| !runtime.includes("world.afterEvents.itemUse.subscribe")
+				|| !runtime.includes("applyBuildersTeaEffect")
+				|| !runtime.includes("player.addEffect(plan.effect, plan.duration, plan.options)"))
+				throw new Error(`C1 food ${entry.identifier} must apply its drink effect through the supported item-use runtime`);
+		}
 		if (itemAtlas.texture_data?.[entry.texture]?.textures !== `textures/create_java/item/${entry.sourceTexture.slice(0, -4)}`)
 			throw new Error(`C1 food ${entry.identifier} is missing its item-atlas mapping`);
 		if (!JAVA_ITEM_TEXTURES.includes(entry.sourceTexture))

@@ -76,6 +76,18 @@ test("Bedrock staging keeps alpha-test material groups internally consistent", (
 	assert.equal(definition["minecraft:block"].components["minecraft:material_instances"].frame.render_method, "alpha_test");
 });
 
+test("Bedrock staging gives conflicting placeholder recipes distinct valid ingredients", () => {
+	const definition = {
+		"minecraft:recipe_shapeless": {
+			description: { identifier: "createbedrock:redstone_link" },
+			ingredients: [{ item: "minecraft:redstone" }, { item: "createbedrock:andesite_alloy" }],
+			result: { item: "createbedrock:redstone_link" }
+		}
+	};
+	assert.equal(normalizeRecipeUnlocks(definition), true);
+	assert.deepEqual(definition["minecraft:recipe_shapeless"].ingredients.at(-1), { item: "minecraft:ender_pearl" });
+});
+
 test("Bedrock staging keeps material render modes compatible and removes only invalid sliding-door transforms", () => {
 	const door = {
 		"minecraft:block": {

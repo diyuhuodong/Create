@@ -7478,7 +7478,7 @@
 				"resourceProjections": [],
 				"staticContracts": [],
 				"staticTests": [
-					"tests/stage6-static-contract.test.mjs"
+					"tests/builders-tea.test.mjs"
 				]
 			},
 			"evidenceState": "linked"

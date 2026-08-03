@@ -92,7 +92,7 @@ function normalizeBlockComponents(definition) {
 		if (!transparentMethod)
 			return;
 		for (const material of Object.values(materials)) {
-			if (material?.render_method === "opaque") {
+			if (material && typeof material === "object" && material.render_method !== transparentMethod) {
 				material.render_method = transparentMethod;
 				changed = true;
 			}

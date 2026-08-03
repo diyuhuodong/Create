@@ -14,7 +14,7 @@ await writeFile(output, source);
 for (const locale of ["en_US", "zh_CN"]) {
 	const languagePath = resolve(bedrockRoot, `resource_pack/texts/${locale}.lang`);
 	const existing = await readFile(languagePath, "utf8");
-	const withoutGenerated = existing.replace(/\n?# P7\.6_GENERATED_GUIDANCE_START[\s\S]*?# P7\.6_GENERATED_GUIDANCE_END\n?/g, "\n").trimEnd();
+	const withoutGenerated = existing.replace(/\n?#{1,2} P7\.6_GENERATED_GUIDANCE_START[\s\S]*?#{1,2} P7\.6_GENERATED_GUIDANCE_END\n?/g, "\n").trimEnd();
 	await writeFile(languagePath, `${withoutGenerated}\n${renderP76GuidanceLanguage(tutorials, locale)}`);
 }
 console.log(`Generated ${tutorials.length} guide families with ${tutorials.reduce((total, tutorial) => total + tutorial.pages.length, 0)} pages.`);

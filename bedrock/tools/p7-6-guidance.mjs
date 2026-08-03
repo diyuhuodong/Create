@@ -26,12 +26,12 @@ export function renderP76GuidanceCatalog(tutorials) {
 
 export function renderP76GuidanceLanguage(tutorials, locale) {
 	const chinese = locale === "zh_CN";
-	const lines = ["# P7.6_GENERATED_GUIDANCE_START"];
+	const lines = ["## P7.6_GENERATED_GUIDANCE_START"];
 	for (const tutorial of tutorials)
 		for (const page of tutorial.pages) {
 			lines.push(`${page.titleKey}=${chinese ? page.titleZh : page.title}`);
 			lines.push(`${page.bodyKey}=${(chinese ? page.bodyZh : page.body).replaceAll("\n", "\\n")}`);
 		}
-	lines.push("# P7.6_GENERATED_GUIDANCE_END");
+	lines.push("## P7.6_GENERATED_GUIDANCE_END");
 	return `${lines.join("\n")}\n`;
 }

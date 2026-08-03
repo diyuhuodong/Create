@@ -12,3 +12,9 @@ test("main passes a KineticWorld instance to display board and gauge runtimes", 
 	assert.match(source, /registerGauges\(getKineticWorldForTesting\(\)\)/);
 	assert.doesNotMatch(source, /register(?:DisplayBoards|Gauges)\(getKineticWorldForTesting\);/);
 });
+
+test("main wires the supported Builder's Tea haste runtime", async () => {
+	const source = await readFile(resolve(scriptsRoot, "main.js"), "utf8");
+	assert.match(source, /registerBuildersTea\(\)/);
+	assert.match(source, /getBuildersTeaDiagnostics/);
+});

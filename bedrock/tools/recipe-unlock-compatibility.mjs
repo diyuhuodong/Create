@@ -14,6 +14,26 @@ const UNSUPPORTED_VANILLA_ITEMS = new Set([
 	"minecraft:oak_door"
 ]);
 const NON_STACKABLE_RESULTS = new Set(["createbedrock:schedule"]);
+const RECIPE_DISAMBIGUATORS = new Map([
+	["createbedrock:brass_table_cloth", "minecraft:string"],
+	["createbedrock:copper_table_cloth", "minecraft:string"],
+	["createbedrock:content_observer", "minecraft:observer"],
+	["createbedrock:copycat_step", "minecraft:stone"],
+	["createbedrock:crushing_wheel_controller", "minecraft:piston"],
+	["createbedrock:p7_2/crafting/kinetics/clutch", "minecraft:iron_ingot"],
+	["createbedrock:display_link", "minecraft:comparator"],
+	["createbedrock:lectern_controller", "minecraft:lectern"],
+	["createbedrock:nixie_tube", "minecraft:redstone_lamp"],
+	["createbedrock:powered_latch", "minecraft:repeater"],
+	["createbedrock:powered_toggle_latch", "minecraft:tripwire_hook"],
+	["createbedrock:pulse_repeater", "minecraft:comparator"],
+	["createbedrock:pulse_timer", "minecraft:clock"],
+	["createbedrock:redstone_contact", "minecraft:iron_pressure_plate"],
+	["createbedrock:redstone_link", "minecraft:ender_pearl"],
+	["createbedrock:redstone_requester", "minecraft:hopper"],
+	["createbedrock:rotation_speed_controller", "minecraft:clock"],
+	["createbedrock:stock_link", "minecraft:compass"]
+]);
 
 async function recipeFiles(directory) {
 	const entries = await readdir(directory, { withFileTypes: true });
@@ -26,6 +46,11 @@ async function recipeFiles(directory) {
 export function normalizeRecipeUnlocks(definition) {
 	let changed = false;
 	for (const [type, recipe] of Object.entries(definition)) {
+		const discriminator = RECIPE_DISAMBIGUATORS.get(recipe?.description?.identifier);
+		if (discriminator && Array.isArray(recipe.ingredients) && !recipe.ingredients.some(ingredient => ingredient?.item === discriminator)) {
+			recipe.ingredients.push({ item: discriminator });
+			changed = true;
+		}
 		if (NON_STACKABLE_RESULTS.has(recipe?.result?.item) && recipe.result.count > 1) {
 			recipe.result.count = 1;
 			changed = true;

@@ -5965,7 +5965,7 @@
 		},
 		{
 			"area": "equipment",
-			"contract": "Audit src/main/java/com/simibubi/create/content/equipment/BuildersTeaItem.java against behavior_pack/scripts/equipment/equipment-runtime.js and tests/stage6-static-contract.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/equipment/BuildersTeaItem.java against behavior_pack/scripts/equipment/equipment-runtime.js and tests/builders-tea.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
 					"behavior_pack/scripts/equipment/equipment-runtime.js"
@@ -5974,7 +5974,7 @@
 					"P8.6/C3/equipment/com.simibubi.create.content.equipment.BuildersTeaItem"
 				],
 				"staticTests": [
-					"tests/stage6-static-contract.test.mjs"
+					"tests/builders-tea.test.mjs"
 				]
 			},
 			"owner": "C3/equipment",
