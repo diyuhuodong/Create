@@ -15,6 +15,14 @@ export const JAVA_MODELS = [
 	{ name: "toolbox", source: "toolbox/block.json", materialName: "toolbox" },
 	{ name: "hand_crank", source: "hand_crank/block.json" },
 	{ name: "shaft", source: "shaft.json" },
+	// The Java motor body is deliberately static. Its output shaft is rendered
+	// separately by the kinetic visual, matching Create's Flywheel partial.
+	{ name: "creative_motor", source: "creative_motor/block.json" },
+	{ name: "creative_motor_vertical", source: "creative_motor/block_vertical.json" },
+	{ name: "creative_motor_shaft", source: "shaft_half.json", converter: "creative_motor_shaft_proxy" },
+// The static block owns the Creative Motor casing. The entity visual contains
+// only Java's rotating SHAFT_HALF, split across its two source textures.
+	{ name: "creative_motor_visual", converter: "creative_motor_visual_proxy" },
 	{ name: "cogwheel", source: "cogwheel.json" },
 	{ name: "large_cogwheel", source: "large_cogwheel.json" },
 	{ name: "water_wheel", source: "water_wheel/block.json" },
@@ -626,6 +634,104 @@ export function convertCrushingWheelControllerProxy(identifier) {
 	};
 }
 
+// Create's motor block model intentionally has an empty `shaft` group. Java
+// renders AllPartialModels.SHAFT_HALF separately, from the block centre toward
+// its FACING side. Keep this exact partial in a dedicated bone so only the
+// output shaft rotates; the converted motor casing always stays still.
+export function convertCreativeMotorShaftProxy({ identifier, model }) {
+	const axis = model?.elements?.find(element => element?.name === "Axis");
+	if (!axis || !Array.isArray(axis.from) || !Array.isArray(axis.to) || !axis.faces)
+		throw new TypeError("Creative Motor shaft conversion requires the Java SHAFT_HALF Axis element");
+	const shaft = {
+		origin: [axis.from[0] - 8, axis.from[1], axis.from[2] - 8],
+		size: axis.to.map((coordinate, index) => coordinate - axis.from[index]),
+		uv: Object.fromEntries(Object.entries(axis.faces)
+			.map(([direction, faceDefinition]) => [direction, convertFace(faceDefinition, model.textures ?? {}, {}, undefined)])),
+		...convertRotation(axis.rotation)
+	};
+	return {
+		format_version: "1.21.0",
+		"minecraft:geometry": [{
+			description: {
+				identifier,
+				texture_width: 16,
+				texture_height: 16,
+				visible_bounds_width: 2,
+				visible_bounds_height: 2,
+				visible_bounds_offset: [0, 0.5, 0]
+			},
+			bones: [
+				{ name: "motor_orientation", pivot: [0, 8, 0] },
+				{
+					name: "motor_shaft",
+					parent: "motor_orientation",
+					pivot: [0, 8, 0],
+					cubes: [shaft]
+				}
+			]
+		}]
+	};
+}
+
+const CREATIVE_MOTOR_VISUAL_MATERIALS = ["axis", "axis_top"];
+
+function creativeMotorShaftCubesForMaterial(model, material) {
+	const axis = model?.elements?.find(element => element?.name === "Axis");
+	if (!axis || !Array.isArray(axis.from) || !Array.isArray(axis.to) || !axis.faces)
+		throw new TypeError("Creative Motor visual requires the Java SHAFT_HALF Axis element");
+	// Use the Steam & Gears convention for dynamic kinetic visuals: model the
+	// shaft on one fixed local axis (+Y), then orient its parent bone at runtime.
+	// This keeps the spin bone's axis invariant across all six motor facings.
+	const canonicalFace = Object.freeze({ north: "down", south: "up", east: "east", west: "west", up: "north", down: "south" });
+	const uv = Object.fromEntries(Object.entries(axis.faces)
+		.filter(([, faceDefinition]) => materialName(resolveTexture(faceDefinition.texture, model.textures ?? {}, {})) === material)
+		.map(([direction, faceDefinition]) => [canonicalFace[direction], {
+			...convertFace(faceDefinition, model.textures ?? {}, {}, undefined),
+			material_instance: "*"
+		}]));
+	if (Object.keys(uv).length === 0)
+		return [];
+	return [{
+		origin: [axis.from[0] - 8, 8, axis.from[1] - 8],
+		size: [axis.to[0] - axis.from[0], axis.to[2] - axis.from[2], axis.to[1] - axis.from[1]],
+		uv,
+		...convertRotation(axis.rotation)
+	}];
+}
+
+// Java's CreativeMotorRenderer rotates only SHAFT_HALF. Keep the Bedrock
+// visual equally small: it owns no casing bone and uses exactly one rotating
+// bone per source texture.
+export function convertCreativeMotorVisual({ identifier, shaftModel, material }) {
+	if (!CREATIVE_MOTOR_VISUAL_MATERIALS.includes(material))
+		throw new RangeError(`Unsupported Creative Motor visual material: ${material}`);
+	// Bedrock renders one texture per controller. The two shaft materials retain
+	// distinct animation bone names, so both stay synchronized.
+	const bonePrefix = `motor_${material}`;
+	return {
+		format_version: "1.21.0",
+		"minecraft:geometry": [{
+			description: {
+				identifier,
+				texture_width: 16,
+				texture_height: 16,
+				visible_bounds_width: 2,
+				visible_bounds_height: 2,
+				visible_bounds_offset: [0, 0.5, 0]
+			},
+			bones: [
+				{ name: `${bonePrefix}_shaft_orientation`, pivot: [0, 8, 0] },
+				{
+					name: `${bonePrefix}_shaft`,
+					parent: `${bonePrefix}_shaft_orientation`,
+					pivot: [0, 8, 0],
+					...(creativeMotorShaftCubesForMaterial(shaftModel, material).length > 0 ? { cubes: creativeMotorShaftCubesForMaterial(shaftModel, material) } : {})
+				}
+			]
+		}]
+	};
+}
+
 // Create renders the burner through several OBJ partials (cage, blaze, rods
 // and flame). Bedrock's current data-driven block geometry cannot consume OBJ
 // meshes or Flywheel partials, so this deliberately keeps the recognizable
@@ -738,7 +844,9 @@ export function convertGaugeProxy({ identifier, base, dial, head, level }) {
 
 export async function convertJavaModels(resourcePackRoot) {
 	const outputDirectory = resolve(resourcePackRoot, "models/blocks");
+	const entityOutputDirectory = resolve(resourcePackRoot, "models/entity");
 	await mkdir(outputDirectory, { recursive: true });
+	await mkdir(entityOutputDirectory, { recursive: true });
 	for (const entry of JAVA_MODELS) {
 		const source = entry.source && resolve(repositoryRoot, entry.sourceRoot ?? "src/main/resources/assets/create/models/block", entry.source);
 		if (entry.converter === "gauge_proxy") {
@@ -769,6 +877,27 @@ export async function convertJavaModels(resourcePackRoot) {
 		if (entry.converter === "crushing_wheel_controller_proxy") {
 			const geometry = convertCrushingWheelControllerProxy(`geometry.createbedrock.${entry.name}`);
 			await writeFile(resolve(outputDirectory, `${entry.name}.geo.json`), `${JSON.stringify(geometry, null, 2)}\n`);
+			continue;
+		}
+		if (entry.converter === "creative_motor_shaft_proxy") {
+			const model = JSON.parse(await readFile(source, "utf8"));
+			const geometry = convertCreativeMotorShaftProxy({ identifier: `geometry.createbedrock.${entry.name}`, model });
+			await writeFile(resolve(outputDirectory, `${entry.name}.geo.json`), `${JSON.stringify(geometry, null, 2)}\n`);
+			continue;
+		}
+		if (entry.converter === "creative_motor_visual_proxy") {
+			const shaftSource = await readFile(resolve(repositoryRoot, "src/main/resources/assets/create/models/block/shaft_half.json"), "utf8");
+			const shaft = JSON.parse(shaftSource);
+			for (const material of CREATIVE_MOTOR_VISUAL_MATERIALS) {
+				for (const orientation of ["horizontal", "vertical"]) {
+					const geometry = convertCreativeMotorVisual({
+						identifier: `geometry.createbedrock.creative_motor_visual_${material}_${orientation}`,
+						shaftModel: shaft,
+						material
+					});
+					await writeFile(resolve(entityOutputDirectory, `creative_motor_visual_${material}_${orientation}.geo.json`), `${JSON.stringify(geometry, null, 2)}\n`);
+				}
+			}
 			continue;
 		}
 		if (entry.converter === "blaze_burner_proxy") {

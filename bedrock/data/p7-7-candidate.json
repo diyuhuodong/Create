@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "state": "frozen",
+  "state": "uncreated",
   "target": {
     "id": "realm-console-1.26.0",
     "minimumEngineVersion": [
@@ -9,48 +9,9 @@
       0
     ]
   },
-  "candidateId": "0.1.30-1bb90dd18-055ac99e2b85",
-  "createdAt": "2026-08-03T06:58:57.998Z",
-  "source": {
-    "commit": "1bb90dd18c32b9ae7868aff498d5be0d9721470a",
-    "treeSha256": "055ac99e2b8528ee4479827ddb464ae235970e18f7727d2de0cf4f769a5e1455",
-    "clean": true,
-    "files": 9928,
-    "bytes": 11812403
-  },
-  "packs": {
-    "behavior": {
-      "uuid": "f0d04e1a-0b1f-4c23-8f2f-44d0dca3ba41",
-      "version": [
-        0,
-        1,
-        30
-      ],
-      "minimumEngineVersion": [
-        1,
-        26,
-        0
-      ]
-    },
-    "resource": {
-      "uuid": "ed3cbcf1-0d4e-4f0c-bcf7-f11aa568c32c",
-      "version": [
-        0,
-        1,
-        30
-      ],
-      "minimumEngineVersion": [
-        1,
-        26,
-        0
-      ]
-    },
-    "serverApiVersion": "2.8.0",
-    "uiApiVersion": "2.1.0"
-  },
-  "artifact": {
-    "path": "bedrock/dist/createbedrock-0.1.30-b78ee1617ed4.mcaddon",
-    "sha256": "b78ee1617ed4b5fd25a67313d1146e0878b71b029931f8d446318a7428518eb9",
-    "sizeBytes": 4428496
-  }
+  "candidateId": null,
+  "createdAt": null,
+  "source": null,
+  "packs": null,
+  "artifact": null
 }

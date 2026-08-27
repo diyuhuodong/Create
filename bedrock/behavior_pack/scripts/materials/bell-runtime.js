@@ -1,5 +1,6 @@
 import { EquipmentSlot, system, world } from "@minecraft/server";
 
+import { registerBlockComponent } from "../kernel/register-block-component.js";
 import { registerMovingBlockDataContributor } from "../contraptions/moving-block-data.js";
 import { registerNativeRedstoneEventHandler } from "../redstone/redstone-native-events.js";
 import {
@@ -154,7 +155,7 @@ export function registerBells() {
 		return false;
 	registered = true;
 	system.beforeEvents.startup.subscribe(event => {
-		event.blockComponentRegistry.registerCustomComponent(BELL_COMPONENT, {
+		registerBlockComponent(event.blockComponentRegistry, BELL_COMPONENT, {
 			onPlayerInteract(interaction) {
 				try { ringBell(interaction.block); } catch { failedUpdates++; }
 			},

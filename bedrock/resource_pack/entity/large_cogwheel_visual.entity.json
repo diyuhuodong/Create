@@ -1,0 +1,17 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "createbedrock:large_cogwheel_visual",
+      "geometry": { "default": "geometry.createbedrock.large_cogwheel" },
+      "materials": { "default": "entity_alphatest" },
+      "textures": { "default": "textures/create_java/block/large_cogwheel" },
+      "render_controllers": ["controller.render.createbedrock.contraption"],
+      "animations": {
+        "kinetic_visual_rotation": "animation.createbedrock.kinetic_visual_rotation",
+        "kinetic_visual_rotation_controller": "controller.animation.createbedrock.kinetic_visual_rotation"
+      },
+      "scripts": { "animate": ["kinetic_visual_rotation_controller"] }
+    }
+  }
+}

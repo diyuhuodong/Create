@@ -152,6 +152,12 @@
     "createbedrock_creative_fluid_tank": {
       "textures": "textures/create_java/block/creative_fluid_tank"
     },
+    "createbedrock_creative_casing": {
+      "textures": "textures/create_java/block/creative_casing"
+    },
+    "createbedrock_creative_motor": {
+      "textures": "textures/create_java/block/creative_motor"
+    },
     "createbedrock_encased_chain_drive": {
       "textures": "textures/create_java/block/encased_chain_drive"
     },

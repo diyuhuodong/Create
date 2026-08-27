@@ -3,19 +3,57 @@
   "minecraft:block": {
     "description": {
       "identifier": "createbedrock:creative_motor",
+      "properties": { "createbedrock:kinetic_visual": [0, 1] },
       "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
       "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
     },
     "components": {
       "minecraft:destructible_by_explosion": { "explosion_resistance": 6 },
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
-      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:geometry": "geometry.createbedrock.creative_motor",
       "minecraft:item_visual": {
-        "geometry": { "identifier": "minecraft:geometry.full_block" },
-        "material_instances": { "*": { "texture": "createbedrock_gearbox", "render_method": "opaque" } }
+        "geometry": { "identifier": "geometry.createbedrock.creative_motor" },
+        "material_instances": {
+          "creative_casing": { "texture": "createbedrock_creative_casing", "render_method": "opaque" },
+          "creative_motor": { "texture": "createbedrock_creative_motor", "render_method": "opaque" },
+          "flap_display_front": { "texture": "createbedrock_flap_display_front", "render_method": "opaque" },
+          "axis": { "texture": "createbedrock_axis", "render_method": "opaque" },
+          "*": { "texture": "createbedrock_creative_motor", "render_method": "opaque" }
+        }
       },
       "minecraft:loot": "loot_tables/blocks/creative_motor.json",
-      "minecraft:material_instances": { "*": { "texture": "createbedrock_gearbox", "render_method": "opaque" } }
-    }
+      "minecraft:material_instances": {
+        "creative_casing": { "texture": "createbedrock_creative_casing", "render_method": "opaque" },
+        "creative_motor": { "texture": "createbedrock_creative_motor", "render_method": "opaque" },
+        "flap_display_front": { "texture": "createbedrock_flap_display_front", "render_method": "opaque" },
+        "axis": { "texture": "createbedrock_axis", "render_method": "opaque" },
+        "*": { "texture": "createbedrock_creative_motor", "render_method": "opaque" }
+      }
+    },
+    "permutations": [
+      {
+        "condition": "query.block_state('minecraft:facing_direction') == 'down'",
+        "components": {
+          "minecraft:geometry": "geometry.createbedrock.creative_motor_vertical",
+          "minecraft:transformation": { "rotation": [180, 0, 0] }
+        }
+      },
+      {
+        "condition": "query.block_state('minecraft:facing_direction') == 'up'",
+        "components": { "minecraft:geometry": "geometry.createbedrock.creative_motor_vertical" }
+      },
+      {
+        "condition": "query.block_state('minecraft:facing_direction') == 'north'",
+        "components": { "minecraft:transformation": { "rotation": [0, 180, 0] } }
+      },
+      {
+        "condition": "query.block_state('minecraft:facing_direction') == 'west'",
+        "components": { "minecraft:transformation": { "rotation": [0, 90, 0] } }
+      },
+      {
+        "condition": "query.block_state('minecraft:facing_direction') == 'east'",
+        "components": { "minecraft:transformation": { "rotation": [0, 270, 0] } }
+      }
+    ]
   }
 }

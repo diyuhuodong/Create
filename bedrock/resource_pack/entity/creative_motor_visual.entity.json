@@ -1,0 +1,41 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "createbedrock:creative_motor_visual",
+      "geometry": {
+        "axis": "geometry.createbedrock.creative_motor_visual_axis_horizontal",
+        "axis_vertical": "geometry.createbedrock.creative_motor_visual_axis_vertical",
+        "axis_top": "geometry.createbedrock.creative_motor_visual_axis_top_horizontal",
+        "axis_top_vertical": "geometry.createbedrock.creative_motor_visual_axis_top_vertical"
+      },
+      "materials": { "default": "entity_alphatest" },
+      "textures": {
+        "axis": "textures/create_java/block/axis",
+        "axis_top": "textures/create_java/block/axis_top"
+      },
+      "render_controllers": [
+        "controller.render.createbedrock.creative_motor_axis",
+        "controller.render.createbedrock.creative_motor_axis_top"
+      ],
+      "animations": {
+        "creative_motor_shaft": "animation.createbedrock.creative_motor_shaft",
+        "creative_motor_shaft_controller": "controller.animation.createbedrock.creative_motor_shaft"
+      },
+      "scripts": {
+        "initialize": [
+          "variable.rotation_angle = 0;"
+        ],
+        "pre_animation": [
+          "variable.facing = query.property('createbedrock:facing');",
+          "variable.rpm = query.property('createbedrock:rpm');",
+          "variable.rotation_angle = variable.rotation_angle + variable.rpm * 6 * query.delta_time;",
+          "variable.axis_x = variable.facing == 0 ? 180 : variable.facing == 2 ? -90 : variable.facing == 3 ? 90 : 0;",
+          "variable.axis_y = 0;",
+          "variable.axis_z = variable.facing == 4 ? 90 : variable.facing == 5 ? -90 : 0;"
+        ],
+        "animate": ["creative_motor_shaft_controller"]
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { EquipmentSlot, system, world } from "@minecraft/server";
 
+import { registerBlockComponent } from "../kernel/register-block-component.js";
 import {
 	DESK_BELL_BLOCK,
 	DESK_BELL_SOUND,
@@ -101,7 +102,7 @@ export function registerDeskBell() {
 		return false;
 	registered = true;
 	system.beforeEvents.startup.subscribe(event => {
-		event.blockComponentRegistry.registerCustomComponent(DESK_BELL_INTERACTION_COMPONENT, {
+		registerBlockComponent(event.blockComponentRegistry, DESK_BELL_INTERACTION_COMPONENT, {
 			onPlayerInteract(interactionEvent) {
 				if (playerHasMainHandItem(interactionEvent.player))
 					return;

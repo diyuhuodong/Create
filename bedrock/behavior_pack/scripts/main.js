@@ -14,6 +14,7 @@ import { getSchematicDiagnostics, registerSchematics } from "./schematics/schema
 import { getSymmetryDiagnostics, registerSymmetryWand } from "./schematics/symmetry-runtime.js";
 import { getElevatorContactDiagnostics, registerElevatorContacts } from "./contraptions/elevator-contact-runtime.js";
 import { getKineticDiagnostics, getKineticWorldForTesting, registerKinetics } from "./kinetics/kinetic-runtime.js";
+import { getKineticVisualDiagnostics, registerKineticVisuals } from "./kinetics/kinetic-visual-runtime.js";
 import { getEquipmentDiagnostics, registerEquipment } from "./equipment/equipment-runtime.js";
 import { getLogisticsDiagnostics, registerLogistics } from "./logistics/logistics-runtime.js";
 import { getExternalEscrowDiagnostics, registerExternalEscrowTransfers } from "./logistics/external-escrow-runtime.js";
@@ -77,6 +78,7 @@ function storageDiagnostics() {
 }
 
 registerKinetics();
+registerKineticVisuals(getKineticWorldForTesting());
 registerEquipment();
 registerLogistics();
 registerExternalEscrowTransfers();
@@ -116,7 +118,7 @@ registerAcceptanceWorld({
 		contraptions: getContraptionDiagnostics,
 		fluids: getFluidDiagnostics,
 		kernel: getKernelDiagnostics,
-		kinetics: getKineticDiagnostics,
+		kinetics: () => ({ ...getKineticDiagnostics(), visuals: getKineticVisualDiagnostics() }),
 		logistics: () => ({ packages: getPackageDiagnostics(), runtime: getLogisticsDiagnostics() }),
 		processing: () => ({ ...getStage3ProcessingDiagnostics(), sequencedAssembly: getSequencedAssemblyDiagnostics() }),
 		trains: getTrainDiagnostics
@@ -150,6 +152,7 @@ registerTreeFertilizer();
 registerVerticalMobility();
 registerWorldshaper();
 registerKernelDiagnosticProvider("kinetics", getKineticDiagnostics);
+registerKernelDiagnosticProvider("kineticVisuals", getKineticVisualDiagnostics);
 registerKernelDiagnosticProvider("equipment", getEquipmentDiagnostics);
 registerKernelDiagnosticProvider("logistics", getLogisticsDiagnostics);
 registerKernelDiagnosticProvider("externalEscrow", getExternalEscrowDiagnostics);

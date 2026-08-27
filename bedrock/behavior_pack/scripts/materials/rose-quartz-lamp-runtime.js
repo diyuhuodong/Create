@@ -1,5 +1,6 @@
 import { system, world } from "@minecraft/server";
 
+import { registerBlockComponent } from "../kernel/register-block-component.js";
 import {
 	ROSE_QUARTZ_LAMP_BLOCK,
 	collectConnectedRoseQuartzLamps,
@@ -129,7 +130,7 @@ export function registerRoseQuartzLamp() {
 		return false;
 	registered = true;
 	system.beforeEvents.startup.subscribe(event => {
-		event.blockComponentRegistry.registerCustomComponent(ROSE_QUARTZ_LAMP_COMPONENT, {
+		registerBlockComponent(event.blockComponentRegistry, ROSE_QUARTZ_LAMP_COMPONENT, {
 			onRedstoneUpdate(redstoneEvent) {
 				try {
 					applyRoseQuartzLampInput(redstoneEvent.block, redstoneEvent.powerLevel);

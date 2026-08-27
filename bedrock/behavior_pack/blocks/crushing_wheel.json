@@ -3,6 +3,7 @@
   "minecraft:block": {
     "description": {
       "identifier": "createbedrock:crushing_wheel",
+      "properties": { "createbedrock:kinetic_visual": [0, 1] },
       "menu_category": {
         "category": "items",
         "group": "itemGroup.name.misc"
@@ -67,6 +68,12 @@
           "render_method": "opaque"
         }
       }
-    }
+    },
+    "permutations": [
+      {
+        "condition": "query.block_state('createbedrock:kinetic_visual') == 1",
+        "components": { "minecraft:geometry": "geometry.createbedrock.kinetic_visual_anchor" }
+      }
+    ]
   }
 }

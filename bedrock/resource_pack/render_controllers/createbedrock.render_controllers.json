@@ -22,6 +22,16 @@
       "textures": [
         "Texture.default"
       ]
+    },
+    "controller.render.createbedrock.creative_motor_axis": {
+      "geometry": "query.property('createbedrock:facing') < 2 ? Geometry.axis_vertical : Geometry.axis",
+      "materials": [{ "*": "Material.default" }],
+      "textures": ["Texture.axis"]
+    },
+    "controller.render.createbedrock.creative_motor_axis_top": {
+      "geometry": "query.property('createbedrock:facing') < 2 ? Geometry.axis_top_vertical : Geometry.axis_top",
+      "materials": [{ "*": "Material.default" }],
+      "textures": ["Texture.axis_top"]
     }
   }
 }

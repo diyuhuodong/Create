@@ -1,4 +1,5 @@
 import { system, world } from "@minecraft/server";
+import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
 
 import { enqueueUniqueKernelTask, registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { DeferredPersistence } from "../kernel/deferred-persistence.js";
@@ -6,11 +7,21 @@ import { ShardedStateStore } from "../kernel/sharded-state-store.js";
 import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-property-storage.js";
 import { KineticWorld } from "./kinetic-world.js";
+import {
+	CREATIVE_MOTOR_MAX_MAGNITUDE,
+	CREATIVE_MOTOR_MIN_MAGNITUDE,
+	creativeMotorFacingIndex,
+	creativeMotorSpeed,
+	isCreativeMotorValueBox,
+	nudgeCreativeMotorSpeed,
+	parseCreativeMotorMagnitude
+} from "./creative-motor-configuration.js";
 
 const kineticWorld = new KineticWorld();
 const LEGACY_PERSISTENCE_KEY = "createbedrock:kinetic_world_v1";
 const PERSISTENCE_SCHEMA_VERSION = 1;
 const BELT_CONNECTOR = "createbedrock:belt_connector";
+const WRENCH = "createbedrock:wrench";
 const CLUTCH_BLOCK = "createbedrock:clutch";
 const CREATIVE_MOTOR_BLOCK = "createbedrock:creative_motor";
 const GEARSHIFT_BLOCK = "createbedrock:gearshift";
@@ -352,16 +363,162 @@ function refreshWaterWheel(wheel) {
 		persist();
 }
 
-function cycleCreativeMotor(block) {
-	if (block?.typeId !== CREATIVE_MOTOR_BLOCK)
+function creativeMotorAt(dimensionId, location) {
+	try {
+		const block = world.getDimension(dimensionId).getBlock(location);
+		return block?.typeId === CREATIVE_MOTOR_BLOCK ? block : undefined;
+	} catch {
+		return undefined;
+	}
+}
+
+/**
+ * Rotate a Creative Motor around its six placement directions.
+ *
+ * Unlike most Create Bedrock blocks, motors use the placement-direction trait.
+ * Current Bedrock exposes that trait as named directions while older saves can
+ * still present numeric indices, so this intentionally bypasses the generic
+ * wrench state enumerator. Re-tracking the node also updates its output shaft
+ * axis and all connected kinetic networks immediately.
+ */
+export function rotateCreativeMotorFacing(block) {
+	if (block?.typeId !== CREATIVE_MOTOR_BLOCK || !block.setPermutation)
 		return false;
-	const speeds = [16, 32, 64, 128, 256, -16, -32, -64, -128, -256];
-	const current = kineticWorld.generatedSpeedAt(block.dimension.id, block.location);
-	const next = speeds[(speeds.indexOf(current) + 1) % speeds.length];
-	const changed = kineticWorld.setGeneratedSpeed(block.dimension.id, block.location, next);
+	const directions = ["south", "east", "north", "west", "up", "down"];
+	const namesByIndex = ["down", "up", "north", "south", "west", "east"];
+	let current;
+	try {
+		current = block.permutation?.getState?.("minecraft:facing_direction");
+	} catch {
+		return false;
+	}
+	const normalized = typeof current === "string" ? current : namesByIndex[creativeMotorFacingIndex(current)];
+	const index = directions.indexOf(normalized);
+	if (index < 0)
+		return false;
+	try {
+		block.setPermutation(block.permutation.withState("minecraft:facing_direction", directions[(index + 1) % directions.length]));
+		const updated = creativeMotorAt(block.dimension.id, block.location);
+		if (!updated)
+			return false;
+		kineticWorld.trackPlacedBlock(updated);
+		persist();
+		return true;
+	} catch (error) {
+		console.warn(`[Create Bedrock] Could not rotate Creative Motor: ${error}`);
+		return false;
+	}
+}
+
+function setCreativeMotorSpeed(block, speed) {
+	if (block?.typeId !== CREATIVE_MOTOR_BLOCK || !Number.isInteger(speed) || speed === 0)
+		return false;
+	const changed = kineticWorld.setGeneratedSpeed(block.dimension.id, block.location, speed);
 	if (changed)
 		persist();
 	return changed;
+}
+
+function showCreativeMotorExactConfiguration(block, player) {
+	if (block?.typeId !== CREATIVE_MOTOR_BLOCK)
+		return false;
+	const dimensionId = block.dimension.id;
+	const location = { ...block.location };
+	const openedSpeed = kineticWorld.generatedSpeedAt(dimensionId, location);
+	const magnitude = Math.max(CREATIVE_MOTOR_MIN_MAGNITUDE, Math.abs(openedSpeed));
+
+	new ModalFormData()
+		.title("创造马达：精确设置")
+		.label("与 Java Create 一致：转速由方向和 1–256 RPM 的幅度组成。")
+		.dropdown("方向", ["正转", "反转"], { defaultValueIndex: openedSpeed < 0 ? 1 : 0 })
+		.textField("转速幅度（RPM）", `${CREATIVE_MOTOR_MIN_MAGNITUDE}..${CREATIVE_MOTOR_MAX_MAGNITUDE}`, { defaultValue: String(magnitude) })
+		.submitButton("保存")
+		.show(player)
+		.then(response => {
+			if (response.canceled)
+				return false;
+			const currentBlock = creativeMotorAt(dimensionId, location);
+			if (!currentBlock) {
+				player.sendMessage?.("创造马达已被移除，未保存转速。");
+				return false;
+			}
+			if (kineticWorld.generatedSpeedAt(dimensionId, location) !== openedSpeed) {
+				player.sendMessage?.("创造马达转速已被其他操作修改，请重新打开配置。");
+				return false;
+			}
+			try {
+				const direction = response.formValues?.[0] === 1 ? -1 : 1;
+				const speed = creativeMotorSpeed(direction, parseCreativeMotorMagnitude(response.formValues?.[1]));
+				if (setCreativeMotorSpeed(currentBlock, speed))
+					player.sendMessage?.(`创造马达转速已设为 ${speed} RPM。`);
+				return true;
+			} catch (error) {
+				player.sendMessage?.(`无法保存创造马达转速：${error.message ?? error}`);
+				return false;
+			}
+		})
+		.catch(error => player.sendMessage?.(`无法打开创造马达配置：${error.message ?? error}`));
+	return true;
+}
+
+function showCreativeMotorConfiguration(block, player) {
+	if (block?.typeId !== CREATIVE_MOTOR_BLOCK)
+		return false;
+	const dimensionId = block.dimension.id;
+	const location = { ...block.location };
+	const speed = kineticWorld.generatedSpeedAt(dimensionId, location);
+	const form = new ActionFormData()
+		.title("创造马达")
+		.body(`当前转速：${speed} RPM\n\n这是输出端的数值框。使用快捷步进，或选择“精确设置”。`)
+		.button("加 1 RPM")
+		.button("加 32 RPM")
+		.button("减 1 RPM")
+		.button("减 32 RPM")
+		.button("精确设置…");
+	form.show(player)
+		.then(response => {
+			if (response.canceled || !Number.isInteger(response.selection))
+				return false;
+			const currentBlock = creativeMotorAt(dimensionId, location);
+			if (!currentBlock)
+				return false;
+			if (response.selection === 4)
+				return showCreativeMotorExactConfiguration(currentBlock, player);
+			const delta = [1, 32, -1, -32][response.selection];
+			const next = nudgeCreativeMotorSpeed(kineticWorld.generatedSpeedAt(dimensionId, location), delta);
+			if (setCreativeMotorSpeed(currentBlock, next))
+				player.sendMessage?.(`创造马达转速已设为 ${next} RPM。`);
+			return true;
+		})
+		.catch(error => player.sendMessage?.(`无法打开创造马达配置：${error.message ?? error}`));
+	return true;
+}
+
+function handleCreativeMotorValueBox(event) {
+	if (event.itemStack?.typeId !== WRENCH || event.player?.isSneaking || event.block?.typeId !== CREATIVE_MOTOR_BLOCK)
+		return false;
+	if (!isCreativeMotorValueBox({
+		blockFace: event.blockFace,
+		faceLocation: event.faceLocation,
+		facingDirection: event.block.permutation?.getState?.("minecraft:facing_direction")
+	}))
+		return false;
+
+	// Bedrock cannot map Java's mouse-wheel editing gesture directly. The same
+	// visible value box therefore opens an exact-RPM editor, while normal clicks
+	// outside it continue into the standard wrench rotation route.
+	event.cancel = true;
+	if (event.isFirstEvent === false)
+		return true;
+	const dimensionId = event.block.dimension.id;
+	const location = { ...event.block.location };
+	const player = event.player;
+	system.run(() => {
+		const block = creativeMotorAt(dimensionId, location);
+		if (block)
+			showCreativeMotorConfiguration(block, player);
+	});
+	return true;
 }
 
 export function registerKinetics() {
@@ -390,6 +547,14 @@ export function registerKinetics() {
 			} catch (error) {
 				console.warn(`[Create Bedrock] Could not remove large-water-wheel structure: ${error}`);
 			}
+		}
+	});
+
+	world.beforeEvents.playerInteractWithBlock.subscribe(event => {
+		try {
+			handleCreativeMotorValueBox(event);
+		} catch (error) {
+			console.warn(`[Create Bedrock] Could not route Creative Motor value-box interaction: ${error}`);
 		}
 	});
 
@@ -430,8 +595,6 @@ export function registerKinetics() {
 			persist();
 			console.warn(`[Create Bedrock] Hand crank activated at ${event.block.location.x}, ${event.block.location.y}, ${event.block.location.z}`);
 		}
-		if (!event.itemStack && cycleCreativeMotor(event.block))
-			console.warn("[Create Bedrock] Creative motor speed changed");
 		if (!event.itemStack && cycleSequencedGearshiftProgram(event.block))
 			event.player.sendMessage("Sequenced gearshift program changed. Apply a redstone pulse to start it.");
 	});

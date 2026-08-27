@@ -1,0 +1,51 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.createbedrock.kinetic_visual_rotation": {
+      "animation_length": 1,
+      "loop": true,
+      "bones": {
+        "java_model": {
+          "rotation": [
+            "query.property('createbedrock:axis') == 2 ? 90 : 0",
+            "query.anim_time * query.property('createbedrock:rpm') * 6",
+            "query.property('createbedrock:axis') == 0 ? 90 : 0"
+          ]
+        },
+        "crushing_wheel": {
+          "rotation": [
+            "query.property('createbedrock:axis') == 2 ? 90 : 0",
+            "query.anim_time * query.property('createbedrock:rpm') * 6",
+            "query.property('createbedrock:axis') == 0 ? 90 : 0"
+          ]
+        }
+      }
+    },
+    "animation.createbedrock.creative_motor_shaft": {
+      "animation_length": 1,
+      "loop": true,
+      "bones": {
+        "motor_axis_shaft_orientation": {
+          "rotation": [
+            "variable.axis_x",
+            "variable.axis_y",
+            "variable.axis_z"
+          ]
+        },
+        "motor_axis_top_shaft_orientation": {
+          "rotation": [
+            "variable.axis_x",
+            "variable.axis_y",
+            "variable.axis_z"
+          ]
+        },
+        "motor_axis_shaft": {
+          "rotation": [0, "variable.rotation_angle", 0]
+        },
+        "motor_axis_top_shaft": {
+          "rotation": [0, "variable.rotation_angle", 0]
+        }
+      }
+    }
+  }
+}

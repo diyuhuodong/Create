@@ -1,5 +1,6 @@
 import { system } from "@minecraft/server";
 
+import { registerBlockComponent } from "../kernel/register-block-component.js";
 import { EXPERIENCE_BLOCK, EXPERIENCE_PARTICLE, experienceBlockParticleLocation } from "./experience-block-particle.js";
 
 export const EXPERIENCE_BLOCK_PARTICLE_COMPONENT = "createbedrock:experience_block_particle";
@@ -25,7 +26,7 @@ export function registerExperienceBlockParticles() {
 		return false;
 	registered = true;
 	system.beforeEvents.startup.subscribe(event => {
-		event.blockComponentRegistry.registerCustomComponent(EXPERIENCE_BLOCK_PARTICLE_COMPONENT, {
+		registerBlockComponent(event.blockComponentRegistry, EXPERIENCE_BLOCK_PARTICLE_COMPONENT, {
 			onTick(tickEvent) {
 				try {
 					emitExperienceBlockParticle(tickEvent.block);

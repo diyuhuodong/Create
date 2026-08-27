@@ -1,0 +1,31 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.createbedrock.kinetic_visual_anchor",
+        "texture_width": 16,
+        "texture_height": 16,
+        "visible_bounds_width": 1,
+        "visible_bounds_height": 1,
+        "visible_bounds_offset": [0, 0.5, 0]
+      },
+      "bones": [{
+        "name": "kinetic_visual_anchor",
+        "pivot": [0, 8, 0],
+        "cubes": [{
+          "origin": [-0.01, 7.99, -0.01],
+          "size": [0.02, 0.02, 0.02],
+          "uv": {
+            "north": { "material_instance": "*", "uv": [0, 0], "uv_size": [1, 1] },
+            "south": { "material_instance": "*", "uv": [0, 0], "uv_size": [1, 1] },
+            "east": { "material_instance": "*", "uv": [0, 0], "uv_size": [1, 1] },
+            "west": { "material_instance": "*", "uv": [0, 0], "uv_size": [1, 1] },
+            "up": { "material_instance": "*", "uv": [0, 0], "uv_size": [1, 1] },
+            "down": { "material_instance": "*", "uv": [0, 0], "uv_size": [1, 1] }
+          }
+        }]
+      }]
+    }
+  ]
+}

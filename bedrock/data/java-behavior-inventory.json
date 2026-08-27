@@ -9745,16 +9745,16 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/base/KineticBlockEntityVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/base/KineticBlockEntityVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/kinetic-visual-contract.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.base.KineticBlockEntityVisual"
 				],
 				"staticTests": [
-					"tests/generate-stage3-visual-textures.test.mjs"
+					"tests/kinetic-visual-contract.test.mjs"
 				]
 			},
 			"owner": "C3/kinetics",
@@ -9785,10 +9785,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/base/OrientedRotatingVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/base/OrientedRotatingVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/generate-stage3-visual-textures.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.base.OrientedRotatingVisual"
@@ -9905,10 +9905,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/base/ShaftVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/base/ShaftVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/generate-stage3-visual-textures.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.base.ShaftVisual"
@@ -9925,10 +9925,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/base/SingleAxisRotatingVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/base/SingleAxisRotatingVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/generate-stage3-visual-textures.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.base.SingleAxisRotatingVisual"
@@ -10205,10 +10205,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/belt/BeltVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/belt-visuals.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/belt/BeltVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/belt-visuals.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.belt.BeltVisual"
@@ -10605,10 +10605,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/chainConveyor/ChainConveyorVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/core-material-chain-contract.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/chainConveyor/ChainConveyorVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/core-material-chain-contract.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.chainConveyor.ChainConveyorVisual"
@@ -11105,10 +11105,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/crank/HandCrankVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/crank/HandCrankVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/generate-stage3-visual-textures.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.crank.HandCrankVisual"
@@ -11165,10 +11165,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/crank/ValveHandleVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/crank/ValveHandleVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/generate-stage3-visual-textures.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.crank.ValveHandleVisual"
@@ -11325,10 +11325,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/deployer/DeployerActorVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/deployer/DeployerActorVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/generate-stage3-visual-textures.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.deployer.DeployerActorVisual"
@@ -11565,10 +11565,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/deployer/DeployerVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/deployer/DeployerVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/generate-stage3-visual-textures.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.deployer.DeployerVisual"
@@ -11685,10 +11685,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/drill/DrillActorVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/drill/DrillActorVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/generate-stage3-visual-textures.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.drill.DrillActorVisual"
@@ -11925,10 +11925,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/fan/FanVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/fan/FanVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/generate-stage3-visual-textures.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.fan.FanVisual"
@@ -12185,10 +12185,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/flywheel/FlywheelVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/flywheel/FlywheelVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/generate-stage3-visual-textures.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.flywheel.FlywheelVisual"
@@ -12365,10 +12365,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/gauge/GaugeVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/content-material-gauge-contract.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/gauge/GaugeVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/content-material-gauge-contract.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.gauge.GaugeVisual"
@@ -12485,10 +12485,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/gearbox/GearboxVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/gearbox/GearboxVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/generate-stage3-visual-textures.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.gearbox.GearboxVisual"
@@ -12765,10 +12765,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/mechanicalArm/ArmVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/mechanicalArm/ArmVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/generate-stage3-visual-textures.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.mechanicalArm.ArmVisual"
@@ -12945,10 +12945,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/mixer/MixerVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/mixer/MixerVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/generate-stage3-visual-textures.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.mixer.MixerVisual"
@@ -13205,10 +13205,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/press/PressVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/press/PressVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/generate-stage3-visual-textures.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.press.PressVisual"
@@ -13265,10 +13265,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/saw/SawActorVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/saw/SawActorVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/generate-stage3-visual-textures.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.saw.SawActorVisual"
@@ -13405,10 +13405,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/saw/SawVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/saw/SawVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/generate-stage3-visual-textures.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.saw.SawVisual"
@@ -13525,16 +13525,16 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/simpleRelays/BracketedKineticBlockEntityVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/simpleRelays/BracketedKineticBlockEntityVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/kinetic-visual-contract.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityVisual"
 				],
 				"staticTests": [
-					"tests/generate-stage3-visual-textures.test.mjs"
+					"tests/kinetic-visual-contract.test.mjs"
 				]
 			},
 			"owner": "C3/kinetics",
@@ -13645,10 +13645,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/simpleRelays/encased/EncasedCogVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/simpleRelays/encased/EncasedCogVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/generate-stage3-visual-textures.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogVisual"
@@ -14325,10 +14325,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/transmission/SplitShaftVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/generate-stage3-visual-textures.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/transmission/SplitShaftVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/generate-stage3-visual-textures.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.transmission.SplitShaftVisual"
@@ -14545,10 +14545,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/waterwheel/WaterWheelVisual.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/crushing-wheel-belt-interface.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/waterwheel/WaterWheelVisual.java against behavior_pack/scripts/kinetics/kinetic-visual-contract.js and tests/crushing-wheel-belt-interface.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.waterwheel.WaterWheelVisual"

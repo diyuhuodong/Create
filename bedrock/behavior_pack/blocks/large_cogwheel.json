@@ -3,6 +3,7 @@
   "minecraft:block": {
     "description": {
       "identifier": "createbedrock:large_cogwheel",
+      "properties": { "createbedrock:kinetic_visual": [0, 1] },
       "menu_category": { "category": "items", "group": "itemGroup.name.misc" },
       "traits": { "minecraft:placement_direction": { "enabled_states": ["minecraft:facing_direction"] } }
     },
@@ -29,7 +30,8 @@
     },
     "permutations": [
       { "condition": "query.block_state('minecraft:facing_direction') == 2 || query.block_state('minecraft:facing_direction') == 3", "components": { "minecraft:transformation": { "rotation": [90, 0, 0] } } },
-      { "condition": "query.block_state('minecraft:facing_direction') == 4 || query.block_state('minecraft:facing_direction') == 5", "components": { "minecraft:transformation": { "rotation": [0, 0, 90] } } }
+      { "condition": "query.block_state('minecraft:facing_direction') == 4 || query.block_state('minecraft:facing_direction') == 5", "components": { "minecraft:transformation": { "rotation": [0, 0, 90] } } },
+      { "condition": "query.block_state('createbedrock:kinetic_visual') == 1", "components": { "minecraft:geometry": "geometry.createbedrock.kinetic_visual_anchor" } }
     ]
   }
 }

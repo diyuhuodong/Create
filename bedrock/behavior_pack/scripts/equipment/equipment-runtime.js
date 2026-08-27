@@ -2,7 +2,7 @@ import { EquipmentSlot, ItemStack, system, world } from "@minecraft/server";
 import { ActionFormData } from "@minecraft/server-ui";
 
 import { CREATE_EFFECTS, emitCreateEffect, playCreateSound } from "../effects/effects-runtime.js";
-import { getKineticNetworkAt, getKineticSpeedAt } from "../kinetics/kinetic-runtime.js";
+import { getKineticNetworkAt, getKineticSpeedAt, rotateCreativeMotorFacing } from "../kinetics/kinetic-runtime.js";
 import { registerKernelTaskGroup, registerTickHandler } from "../kernel/index.js";
 import { ShardedStateStore } from "../kernel/sharded-state-store.js";
 import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-property-storage.js";
@@ -464,12 +464,14 @@ function applyHeldUpgrade(player, itemStack) {
 }
 
 function rotateBlock(block) {
+	if (block?.typeId === "createbedrock:creative_motor")
+		return rotateCreativeMotorFacing(block);
 	if (!block?.permutation?.getAllStates || !block.setPermutation)
 		return false;
 	const state = block.permutation.getAllStates();
 	const cycles = [
 		["minecraft:cardinal_direction", ["north", "east", "south", "west"]],
-		["minecraft:facing_direction", [2, 5, 3, 4]],
+			["minecraft:facing_direction", [2, 5, 3, 4]],
 		["createbedrock:axis", ["x", "z", "y"]]
 	];
 	for (const [name, values] of cycles) {
@@ -516,6 +518,8 @@ function registerEquipmentAdapters() {
 	registerWrenchHandler({
 		actions: ["rotate"],
 		id: "createbedrock:rotation",
+		// The kinetic router intercepts only a Creative Motor's visible RPM value
+		// box. Every other normal wrench click retains standard face-based rotation.
 		supports: ({ block }) => block?.typeId?.startsWith("createbedrock:") && !isBacktankBlock(block) && !isToolboxBlock(block),
 		invoke: ({ block }) => ({ handled: rotateBlock(block), reason: "no_rotatable_state" })
 	});
@@ -538,6 +542,23 @@ function registerEquipmentAdapters() {
 
 function wrenchBlock(player, block) {
 	return invokeWrenchHandler({ block, player, typeId: block?.typeId }, player.isSneaking ? "remove" : "rotate").handled;
+}
+
+function scheduleWrenchBlock(player, dimensionId, location) {
+	system.run(() => {
+		try {
+			const block = world.getDimension(dimensionId).getBlock(location);
+			if (!block)
+				return;
+			const handled = wrenchBlock(player, block);
+			player.onScreenDisplay?.setActionBar?.(handled
+				? `扳手：已调整 ${block.typeId.replace("createbedrock:", "")}`
+				: "扳手：该方块当前不能调整");
+		} catch (error) {
+			failedUpdates++;
+			console.warn(`[Create Bedrock] Wrench interaction failed: ${error}`);
+		}
+	});
 }
 
 function extendoRange(player) {
@@ -953,11 +974,23 @@ export function registerEquipment() {
 				showToolbox(event.player, event.block, state);
 		} catch { failedUpdates++; }
 	});
+	world.beforeEvents.playerInteractWithBlock.subscribe(event => {
+		// A custom item's itemStartUseOn event is not emitted consistently across
+		// Bedrock input modes. Intercept the initial block interaction instead,
+		// then perform the state mutation on the next safe script tick. Kinetics
+		// subscribes first and reserves a Creative Motor's value box by cancelling
+		// that event, so this intentionally leaves that narrow route alone.
+		// In current Bedrock builds this is true on the initial event. Treat only an
+		// explicit false as a held-input repeat so the wrench also remains usable on
+		// clients that omit the property from this event payload.
+		if (event.cancel || event.isFirstEvent === false || event.itemStack?.typeId !== "createbedrock:wrench")
+			return;
+		event.cancel = true;
+		scheduleWrenchBlock(event.player, event.block.dimension.id, { ...event.block.location });
+	});
 	world.afterEvents.itemStartUseOn.subscribe(event => {
 		try {
 			rememberPlacementItem(event.source, event.itemStack);
-			if (event.itemStack?.typeId === "createbedrock:wrench")
-				wrenchBlock(event.source, event.block);
 		} catch { failedUpdates++; }
 	});
 	world.afterEvents.itemUse.subscribe(event => {

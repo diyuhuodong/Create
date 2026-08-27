@@ -1,5 +1,6 @@
 import { system } from "@minecraft/server";
 
+import { registerBlockComponent } from "../kernel/register-block-component.js";
 import { dispatchNativeRedstoneUpdate } from "./redstone-native-events.js";
 import { NATIVE_REDSTONE_INPUT_COMPONENT } from "./redstone-target.js";
 
@@ -17,7 +18,7 @@ export function registerNativeRedstoneInputComponent() {
 		return false;
 	registered = true;
 	system.beforeEvents.startup.subscribe(event => {
-		event.blockComponentRegistry.registerCustomComponent(NATIVE_REDSTONE_INPUT_COMPONENT, {
+		registerBlockComponent(event.blockComponentRegistry, NATIVE_REDSTONE_INPUT_COMPONENT, {
 			onRedstoneUpdate(redstoneEvent) {
 				try {
 					dispatchNativeRedstoneUpdate({

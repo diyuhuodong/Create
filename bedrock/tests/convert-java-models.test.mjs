@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { addTankFillLevels, convertBlazeBurnerObj, convertCrushingWheelControllerProxy, convertCrushingWheelObj, convertCubeColumnParent, convertFullCubeParent, convertJavaModel } from "../tools/convert-java-models.mjs";
+import { addTankFillLevels, convertBlazeBurnerObj, convertCreativeMotorShaftProxy, convertCreativeMotorVisual, convertCrushingWheelControllerProxy, convertCrushingWheelObj, convertCubeColumnParent, convertFullCubeParent, convertJavaModel } from "../tools/convert-java-models.mjs";
 
 test("convertJavaModel preserves Java cube bounds, rotations, UVs, and materials", () => {
 	const geometry = convertJavaModel({
@@ -106,6 +106,60 @@ test("Crushing Wheel Controller retains Java's invisible internal render contrac
 	const definition = geometry["minecraft:geometry"][0];
 	assert.equal(definition.description.identifier, "geometry.createbedrock.crushing_wheel_controller");
 	assert.equal(definition.bones[0].cubes, undefined);
+});
+
+test("Creative Motor keeps its casing static and converts Java's protruding front shaft exactly", () => {
+	const geometry = convertCreativeMotorShaftProxy({
+		identifier: "geometry.createbedrock.creative_motor_shaft",
+		model: {
+			textures: { "0": "create:block/axis", "1": "create:block/axis_top" },
+			elements: [{
+				name: "Axis",
+				from: [6, 6, 8],
+				to: [10, 10, 16],
+				faces: {
+					north: { texture: "#1", uv: [6, 6, 10, 10], rotation: 180 },
+					south: { texture: "#1", uv: [6, 6, 10, 10] },
+					east: { texture: "#0", uv: [6, 0, 10, 8], rotation: 270 },
+					west: { texture: "#0", uv: [6, 0, 10, 8], rotation: 90 },
+					up: { texture: "#0", uv: [6, 0, 10, 8], rotation: 180 },
+					down: { texture: "#0", uv: [6, 0, 10, 8] }
+				}
+			}]
+		}
+	});
+	const bones = geometry["minecraft:geometry"][0].bones;
+	assert.equal(bones[0].name, "motor_orientation");
+	assert.equal(bones[1].name, "motor_shaft");
+	assert.equal(bones[1].parent, "motor_orientation");
+	assert.deepEqual(bones[1].cubes[0].origin, [-2, 6, 0]);
+	assert.deepEqual(bones[1].cubes[0].size, [4, 4, 8]);
+	assert.equal(bones[1].cubes[0].uv.south.material_instance, "axis_top");
+	assert.equal(bones[1].cubes[0].rotation, undefined);
+});
+
+test("Creative Motor visual contains only independently renderable rotating shaft bones", () => {
+	const geometry = convertCreativeMotorVisual({
+		identifier: "geometry.createbedrock.creative_motor_visual_axis",
+		material: "axis",
+		shaftModel: {
+			textures: { side: "create:block/axis", cap: "create:block/axis_top" },
+			elements: [{
+				name: "Axis", from: [6, 6, 8], to: [10, 10, 16],
+				faces: {
+					east: { texture: "#side", uv: [6, 0, 10, 8] },
+					south: { texture: "#cap", uv: [6, 6, 10, 10] }
+				}
+			}]
+		}
+	});
+	const bones = geometry["minecraft:geometry"][0].bones;
+	assert.deepEqual(bones.map(bone => bone.name), ["motor_axis_shaft_orientation", "motor_axis_shaft"]);
+	assert.deepEqual(Object.keys(bones[1].cubes[0].uv), ["east"]);
+	assert.deepEqual(bones[1].cubes[0].origin, [-2, 8, -2]);
+	assert.deepEqual(bones[1].cubes[0].size, [4, 8, 4]);
+	assert.equal(bones[1].parent, "motor_axis_shaft_orientation");
+	assert.throws(() => convertCreativeMotorVisual({ identifier: "invalid", shaftModel: {}, material: "not_a_java_texture" }));
 });
 
 test("Blaze Burner OBJ conversion retains a state-swappable brazier, blaze, and flame silhouette", () => {

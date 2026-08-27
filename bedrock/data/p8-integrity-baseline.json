@@ -41,7 +41,7 @@
 			"id": "behaviorInventory",
 			"path": "data/java-behavior-inventory.json",
 			"schemaVersion": 2,
-			"sha256": "923224b94ed631c440c1f3a5101649db45b85bf4bde76d06bcd043bb7cb648b4"
+			"sha256": "0e28dd9f1507964ad28a2a4b790042722f8deddf1945ac64acb642f8994ba2ee"
 		},
 		{
 			"counts": {
@@ -123,7 +123,7 @@
 			"id": "parityEvidence",
 			"path": "data/p8-parity-evidence-ledger.json",
 			"schemaVersion": 1,
-			"sha256": "dc9fa6f51a859a3b925c994b22bb2f253015479b47c9c97adf19adbb09948900"
+			"sha256": "feb3eb24f0072d66d3bc6d10776853857e90aa38f981c86afd5da4d3fd5b28ee"
 		},
 		{
 			"counts": {
@@ -136,5 +136,5 @@
 		}
 	],
 	"openResponsibilities": [],
-	"fingerprint": "3cd66e3efafa793dd3a1072230cde59ad670c562490575dae2955173baca253b"
+	"fingerprint": "fb62bb7e4480e0f0d5e239355cb399018d5c1d77c5a13f234dfb17b32d512981"
 }

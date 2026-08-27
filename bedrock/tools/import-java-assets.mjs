@@ -76,6 +76,8 @@ export const JAVA_BLOCK_TEXTURES = [
 	"copper_door_top.png",
 	"copper_underside.png",
 	"creative_fluid_tank.png",
+	"creative_casing.png",
+	"creative_motor.png",
 	"chute.png",
 	"chute_hole.png",
 	"depot_side.png",

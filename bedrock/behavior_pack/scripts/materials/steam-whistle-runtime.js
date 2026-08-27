@@ -1,5 +1,6 @@
 import { EquipmentSlot, system, world } from "@minecraft/server";
 
+import { registerBlockComponent } from "../kernel/register-block-component.js";
 import { inspectFluidTank } from "../fluids/fluid-runtime.js";
 import { registerMovingBlockDataContributor } from "../contraptions/moving-block-data.js";
 import { registerNativeRedstoneEventHandler } from "../redstone/redstone-native-events.js";
@@ -145,7 +146,7 @@ export function registerSteamWhistles() {
 		return false;
 	registered = true;
 	system.beforeEvents.startup.subscribe(event => {
-		event.blockComponentRegistry.registerCustomComponent(STEAM_WHISTLE_COMPONENT, {
+		registerBlockComponent(event.blockComponentRegistry, STEAM_WHISTLE_COMPONENT, {
 			onPlayerInteract(interaction) {
 				try {
 					if (!heldWhistle(interaction.player))

@@ -12195,7 +12195,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.base.KineticBlockEntityVisual"
@@ -12203,7 +12203,7 @@
 				"resourceProjections": [],
 				"staticContracts": [],
 				"staticTests": [
-					"tests/generate-stage3-visual-textures.test.mjs"
+					"tests/kinetic-visual-contract.test.mjs"
 				]
 			},
 			"evidenceState": "linked"
@@ -12245,7 +12245,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.base.OrientedRotatingVisual"
@@ -12395,7 +12395,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.base.ShaftVisual"
@@ -12420,7 +12420,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.base.SingleAxisRotatingVisual"
@@ -12770,7 +12770,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.belt.BeltVisual"
@@ -13270,7 +13270,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.chainConveyor.ChainConveyorVisual"
@@ -13895,7 +13895,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.crank.HandCrankVisual"
@@ -13970,7 +13970,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.crank.ValveHandleVisual"
@@ -14170,7 +14170,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.deployer.DeployerActorVisual"
@@ -14470,7 +14470,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.deployer.DeployerVisual"
@@ -14620,7 +14620,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.drill.DrillActorVisual"
@@ -14920,7 +14920,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.fan.FanVisual"
@@ -15245,7 +15245,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.flywheel.FlywheelVisual"
@@ -15470,7 +15470,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.gauge.GaugeVisual"
@@ -15620,7 +15620,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.gearbox.GearboxVisual"
@@ -15970,7 +15970,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.mechanicalArm.ArmVisual"
@@ -16195,7 +16195,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.mixer.MixerVisual"
@@ -16520,7 +16520,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.press.PressVisual"
@@ -16595,7 +16595,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.saw.SawActorVisual"
@@ -16770,7 +16770,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.saw.SawVisual"
@@ -16920,7 +16920,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.simpleRelays.BracketedKineticBlockEntityVisual"
@@ -16928,7 +16928,7 @@
 				"resourceProjections": [],
 				"staticContracts": [],
 				"staticTests": [
-					"tests/generate-stage3-visual-textures.test.mjs"
+					"tests/kinetic-visual-contract.test.mjs"
 				]
 			},
 			"evidenceState": "linked"
@@ -17070,7 +17070,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.simpleRelays.encased.EncasedCogVisual"
@@ -17920,7 +17920,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.transmission.SplitShaftVisual"
@@ -18195,7 +18195,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/kinetic-visual-contract.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.waterwheel.WaterWheelVisual"
