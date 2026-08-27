@@ -56,7 +56,7 @@ test("Wrench is a bound 3D attachable with a separately animated gear", async ()
 	assert.equal(geometry.bones.find(bone => bone.name === "wrench").binding, "q.item_slot_to_bone_name(context.item_slot)");
 	assert.equal(geometry.bones.find(bone => bone.name === "gear").cubes.length, 4);
 	assert.equal(JSON.parse(animationSource).animations["animation.createbedrock.wrench.gear_spin"].bones.gear.rotation[1], "query.life_time * 180.0");
-	assert.equal(JSON.parse(itemAtlasSource).texture_data.createbedrock_wrench.textures, "textures/create_java/item/wrench");
+	assert.equal(JSON.parse(itemAtlasSource).texture_data.createbedrock_wrench.textures, "textures/createbedrock/items/wrench_inventory");
 });
 
 test("Toolbox bindings migrate v1, cover nine hotbar slots, and reject stale CAS", () => {

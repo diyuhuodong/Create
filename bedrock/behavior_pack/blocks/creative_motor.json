@@ -53,6 +53,10 @@
       {
         "condition": "query.block_state('minecraft:facing_direction') == 'east'",
         "components": { "minecraft:transformation": { "rotation": [0, 270, 0] } }
+      },
+      {
+        "condition": "query.block_state('createbedrock:kinetic_visual') == 1",
+        "components": { "minecraft:geometry": "geometry.createbedrock.kinetic_visual_anchor" }
       }
     ]
   }

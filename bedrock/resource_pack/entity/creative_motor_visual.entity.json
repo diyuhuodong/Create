@@ -4,37 +4,33 @@
     "description": {
       "identifier": "createbedrock:creative_motor_visual",
       "geometry": {
-        "axis": "geometry.createbedrock.creative_motor_visual_axis_horizontal",
-        "axis_vertical": "geometry.createbedrock.creative_motor_visual_axis_vertical",
-        "axis_top": "geometry.createbedrock.creative_motor_visual_axis_top_horizontal",
-        "axis_top_vertical": "geometry.createbedrock.creative_motor_visual_axis_top_vertical"
+        "horizontal": "geometry.createbedrock.creative_motor_visual_horizontal",
+        "vertical": "geometry.createbedrock.creative_motor_visual_vertical"
       },
       "materials": { "default": "entity_alphatest" },
       "textures": {
-        "axis": "textures/create_java/block/axis",
-        "axis_top": "textures/create_java/block/axis_top"
+        "motor": "textures/createbedrock/kinetics/creative_motor_atlas"
       },
-      "render_controllers": [
-        "controller.render.createbedrock.creative_motor_axis",
-        "controller.render.createbedrock.creative_motor_axis_top"
-      ],
+      "render_controllers": ["controller.render.createbedrock.creative_motor"],
       "animations": {
-        "creative_motor_shaft": "animation.createbedrock.creative_motor_shaft",
-        "creative_motor_shaft_controller": "controller.animation.createbedrock.creative_motor_shaft"
+        "creative_motor_visual": "animation.createbedrock.creative_motor_visual",
+        "creative_motor_visual_controller": "controller.animation.createbedrock.creative_motor_visual"
       },
       "scripts": {
         "initialize": [
-          "variable.rotation_angle = 0;"
+          "variable.rotation_angle = 0;",
+          "variable.last_server_phase = 1000000;"
         ],
         "pre_animation": [
           "variable.facing = query.property('createbedrock:facing');",
           "variable.rpm = query.property('createbedrock:rpm');",
-          "variable.rotation_angle = variable.rotation_angle + variable.rpm * 6 * query.delta_time;",
-          "variable.axis_x = variable.facing == 0 ? 180 : variable.facing == 2 ? -90 : variable.facing == 3 ? 90 : 0;",
-          "variable.axis_y = 0;",
-          "variable.axis_z = variable.facing == 4 ? 90 : variable.facing == 5 ? -90 : 0;"
+          "variable.server_phase = query.property('createbedrock:phase');",
+          "variable.rotation_angle = variable.server_phase != variable.last_server_phase ? variable.server_phase : variable.rotation_angle + variable.rpm * 6 * query.delta_time;",
+          "variable.last_server_phase = variable.server_phase;",
+          "variable.root_x = variable.facing == 0 ? 180 : 0;",
+          "variable.root_y = variable.facing == 2 ? 180 : variable.facing == 4 ? 90 : variable.facing == 5 ? -90 : 0;"
         ],
-        "animate": ["creative_motor_shaft_controller"]
+        "animate": ["creative_motor_visual_controller"]
       }
     }
   }

@@ -4,10 +4,12 @@ import test from "node:test";
 import { KINETIC_VISUAL_ENTITY_TYPES, kineticVisualAxis, kineticVisualForBlock, kineticVisualId } from "../behavior_pack/scripts/kinetics/kinetic-visual-contract.js";
 
 test("kinetic visual contract maps the first dynamic kinetic blocks to dedicated entities", () => {
-	assert.equal(kineticVisualForBlock("createbedrock:creative_motor").hidesBlock, false);
+	assert.equal(kineticVisualForBlock("createbedrock:creative_motor").hidesBlock, true);
 	assert.equal(kineticVisualForBlock("createbedrock:creative_motor").usesFacing, true);
+	assert.equal(kineticVisualForBlock("createbedrock:creative_motor").usesPhase, true);
 	assert.equal(kineticVisualForBlock("createbedrock:shaft").entityType, "createbedrock:shaft_visual");
 	assert.equal(kineticVisualForBlock("createbedrock:crushing_wheel").entityType, "createbedrock:crushing_wheel_visual");
+	assert.equal(kineticVisualForBlock("createbedrock:crushing_wheel").usesPhase, true);
 	assert.equal(KINETIC_VISUAL_ENTITY_TYPES.length, 5);
 	assert.equal(kineticVisualForBlock("minecraft:stone"), undefined);
 });

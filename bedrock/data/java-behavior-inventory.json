@@ -6605,7 +6605,7 @@
 		},
 		{
 			"area": "equipment",
-			"contract": "Audit src/main/java/com/simibubi/create/content/equipment/sandPaper/SandPaperItemComponent.java against behavior_pack/scripts/equipment/equipment-runtime.js and tests/stage6-static-contract.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/equipment/sandPaper/SandPaperItemComponent.java against behavior_pack/scripts/equipment/equipment-runtime.js and tests/register-block-component.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
 					"behavior_pack/scripts/equipment/equipment-runtime.js"
@@ -6614,7 +6614,7 @@
 					"P8.6/C3/equipment/com.simibubi.create.content.equipment.sandPaper.SandPaperItemComponent"
 				],
 				"staticTests": [
-					"tests/stage6-static-contract.test.mjs"
+					"tests/register-block-component.test.mjs"
 				]
 			},
 			"owner": "C3/equipment",
@@ -12985,16 +12985,16 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/motor/CreativeMotorBlock.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/creative-fluid-port.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/motor/CreativeMotorBlock.java against behavior_pack/scripts/kinetics/creative-motor-configuration.js and tests/creative-motor-configuration.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/creative-motor-configuration.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.motor.CreativeMotorBlock"
 				],
 				"staticTests": [
-					"tests/creative-fluid-port.test.mjs"
+					"tests/creative-motor-configuration.test.mjs"
 				]
 			},
 			"owner": "C3/kinetics",
@@ -13005,16 +13005,16 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/motor/CreativeMotorBlockEntity.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/creative-fluid-port.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/motor/CreativeMotorBlockEntity.java against behavior_pack/scripts/kinetics/creative-motor-configuration.js and tests/creative-motor-configuration.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/creative-motor-configuration.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.motor.CreativeMotorBlockEntity"
 				],
 				"staticTests": [
-					"tests/creative-fluid-port.test.mjs"
+					"tests/creative-motor-configuration.test.mjs"
 				]
 			},
 			"owner": "C3/kinetics",
@@ -13025,16 +13025,16 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/motor/CreativeMotorGenerator.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/creative-fluid-port.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/motor/CreativeMotorGenerator.java against behavior_pack/scripts/kinetics/creative-motor-configuration.js and tests/creative-motor-configuration.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/creative-motor-configuration.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.motor.CreativeMotorGenerator"
 				],
 				"staticTests": [
-					"tests/creative-fluid-port.test.mjs"
+					"tests/creative-motor-configuration.test.mjs"
 				]
 			},
 			"owner": "C3/kinetics",
@@ -13045,16 +13045,16 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/motor/CreativeMotorRenderer.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/creative-fluid-port.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/motor/CreativeMotorRenderer.java against behavior_pack/scripts/kinetics/creative-motor-configuration.js and tests/creative-motor-configuration.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/creative-motor-configuration.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.motor.CreativeMotorRenderer"
 				],
 				"staticTests": [
-					"tests/creative-fluid-port.test.mjs"
+					"tests/creative-motor-configuration.test.mjs"
 				]
 			},
 			"owner": "C3/kinetics",
@@ -13065,10 +13065,10 @@
 		},
 		{
 			"area": "kinetics",
-			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/motor/KineticScrollValueBehaviour.java against behavior_pack/scripts/kinetics/kinetic-network.js and tests/kinetic-network.test.mjs.",
+			"contract": "Audit src/main/java/com/simibubi/create/content/kinetics/motor/KineticScrollValueBehaviour.java against behavior_pack/scripts/kinetics/creative-motor-value-board.js and tests/kinetic-network.test.mjs.",
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/creative-motor-value-board.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.motor.KineticScrollValueBehaviour"

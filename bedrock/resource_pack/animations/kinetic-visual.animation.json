@@ -21,28 +21,29 @@
         }
       }
     },
-    "animation.createbedrock.creative_motor_shaft": {
+    "animation.createbedrock.crushing_wheel_visual": {
       "animation_length": 1,
       "loop": true,
       "bones": {
-        "motor_axis_shaft_orientation": {
-          "rotation": [
-            "variable.axis_x",
-            "variable.axis_y",
-            "variable.axis_z"
-          ]
+        "crushing_wheel_orientation": {
+          "rotation": ["variable.root_x", 0, "variable.root_z"]
         },
-        "motor_axis_top_shaft_orientation": {
-          "rotation": [
-            "variable.axis_x",
-            "variable.axis_y",
-            "variable.axis_z"
-          ]
-        },
-        "motor_axis_shaft": {
+        "crushing_wheel": {
           "rotation": [0, "variable.rotation_angle", 0]
+        }
+      }
+    },
+    "animation.createbedrock.creative_motor_visual": {
+      "animation_length": 1,
+      "loop": true,
+      "bones": {
+        "motor_root": {
+          "rotation": ["variable.root_x", "variable.root_y", 0]
         },
-        "motor_axis_top_shaft": {
+        "motor_shaft_horizontal": {
+          "rotation": [0, 0, "variable.rotation_angle"]
+        },
+        "motor_shaft_vertical": {
           "rotation": [0, "variable.rotation_angle", 0]
         }
       }

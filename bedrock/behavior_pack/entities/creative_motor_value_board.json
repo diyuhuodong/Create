@@ -2,16 +2,16 @@
   "format_version": "1.26.0",
   "minecraft:entity": {
     "description": {
-      "identifier": "createbedrock:creative_motor_visual",
+      "identifier": "createbedrock:creative_motor_value_board",
       "is_experimental": false,
       "is_spawnable": false,
       "is_summonable": true,
       "properties": {
-        "createbedrock:axis": { "type": "int", "range": [0, 2], "default": 1, "client_sync": true },
-        "createbedrock:facing": { "type": "int", "range": [0, 5], "default": 3, "client_sync": true },
-        "createbedrock:rpm": { "type": "float", "range": [-256.0, 256.0], "default": 0.0, "client_sync": true },
-        "createbedrock:phase": { "type": "float", "range": [-360.0, 360.0], "default": 0.0, "client_sync": true },
-        "createbedrock:active": { "type": "bool", "default": false, "client_sync": true }
+        "createbedrock:face": { "type": "int", "range": [0, 5], "default": 3, "client_sync": true },
+        "createbedrock:digit_hundreds": { "type": "int", "range": [-1, 9], "default": -1, "client_sync": true },
+        "createbedrock:digit_tens": { "type": "int", "range": [-1, 9], "default": -1, "client_sync": true },
+        "createbedrock:digit_ones": { "type": "int", "range": [0, 9], "default": 0, "client_sync": true },
+        "createbedrock:reverse": { "type": "bool", "default": false, "client_sync": true }
       }
     },
     "components": {

@@ -7,14 +7,12 @@ import { ShardedStateStore } from "../kernel/sharded-state-store.js";
 import { deserializeVersionedState, serializeVersionedState } from "../kernel/versioned-state.js";
 import { createWorldDynamicPropertyStorage } from "../kernel/world-dynamic-property-storage.js";
 import { KineticWorld } from "./kinetic-world.js";
+import { registerCreativeMotorValueBoards } from "./creative-motor-value-board.js";
 import {
-	CREATIVE_MOTOR_MAX_MAGNITUDE,
-	CREATIVE_MOTOR_MIN_MAGNITUDE,
 	creativeMotorFacingIndex,
-	creativeMotorSpeed,
 	isCreativeMotorValueBox,
 	nudgeCreativeMotorSpeed,
-	parseCreativeMotorMagnitude
+	parseCreativeMotorSpeed
 } from "./creative-motor-configuration.js";
 
 const kineticWorld = new KineticWorld();
@@ -425,13 +423,11 @@ function showCreativeMotorExactConfiguration(block, player) {
 	const dimensionId = block.dimension.id;
 	const location = { ...block.location };
 	const openedSpeed = kineticWorld.generatedSpeedAt(dimensionId, location);
-	const magnitude = Math.max(CREATIVE_MOTOR_MIN_MAGNITUDE, Math.abs(openedSpeed));
 
 	new ModalFormData()
 		.title("创造马达：精确设置")
-		.label("与 Java Create 一致：转速由方向和 1–256 RPM 的幅度组成。")
-		.dropdown("方向", ["正转", "反转"], { defaultValueIndex: openedSpeed < 0 ? 1 : 0 })
-		.textField("转速幅度（RPM）", `${CREATIVE_MOTOR_MIN_MAGNITUDE}..${CREATIVE_MOTOR_MAX_MAGNITUDE}`, { defaultValue: String(magnitude) })
+		.label("输入有符号转速：正数为正转，负数为反转；范围 -256..-1 或 1..256 RPM。")
+		.textField("转速（RPM）", "例如 -16", { defaultValue: String(openedSpeed) })
 		.submitButton("保存")
 		.show(player)
 		.then(response => {
@@ -447,11 +443,13 @@ function showCreativeMotorExactConfiguration(block, player) {
 				return false;
 			}
 			try {
-				const direction = response.formValues?.[0] === 1 ? -1 : 1;
-				const speed = creativeMotorSpeed(direction, parseCreativeMotorMagnitude(response.formValues?.[1]));
-				if (setCreativeMotorSpeed(currentBlock, speed))
+				const speed = parseCreativeMotorSpeed(response.formValues?.[0]);
+				if (setCreativeMotorSpeed(currentBlock, speed)) {
 					player.sendMessage?.(`创造马达转速已设为 ${speed} RPM。`);
-				return true;
+					return true;
+				}
+				player.sendMessage?.(`创造马达转速未改变（当前为 ${kineticWorld.generatedSpeedAt(dimensionId, location)} RPM）。`);
+				return false;
 			} catch (error) {
 				player.sendMessage?.(`无法保存创造马达转速：${error.message ?? error}`);
 				return false;
@@ -469,12 +467,14 @@ function showCreativeMotorConfiguration(block, player) {
 	const speed = kineticWorld.generatedSpeedAt(dimensionId, location);
 	const form = new ActionFormData()
 		.title("创造马达")
-		.body(`当前转速：${speed} RPM\n\n这是输出端的数值框。使用快捷步进，或选择“精确设置”。`)
+		.body(`当前转速：${speed} RPM\n\n数值正负决定转向；可直接设置正转或反转。`)
 		.button("加 1 RPM")
 		.button("加 32 RPM")
 		.button("减 1 RPM")
 		.button("减 32 RPM")
-		.button("精确设置…");
+		.button("设为正转")
+		.button("设为反转")
+		.button("精确输入…");
 	form.show(player)
 		.then(response => {
 			if (response.canceled || !Number.isInteger(response.selection))
@@ -482,10 +482,14 @@ function showCreativeMotorConfiguration(block, player) {
 			const currentBlock = creativeMotorAt(dimensionId, location);
 			if (!currentBlock)
 				return false;
-			if (response.selection === 4)
+			if (response.selection === 6)
 				return showCreativeMotorExactConfiguration(currentBlock, player);
-			const delta = [1, 32, -1, -32][response.selection];
-			const next = nudgeCreativeMotorSpeed(kineticWorld.generatedSpeedAt(dimensionId, location), delta);
+			const currentSpeed = kineticWorld.generatedSpeedAt(dimensionId, location);
+			const next = response.selection === 4
+				? Math.max(1, Math.abs(currentSpeed))
+				: response.selection === 5
+					? -Math.max(1, Math.abs(currentSpeed))
+					: nudgeCreativeMotorSpeed(currentSpeed, [1, 32, -1, -32][response.selection]);
 			if (setCreativeMotorSpeed(currentBlock, next))
 				player.sendMessage?.(`创造马达转速已设为 ${next} RPM。`);
 			return true;
@@ -524,6 +528,7 @@ function handleCreativeMotorValueBox(event) {
 export function registerKinetics() {
 	registerKernelTaskGroup("kinetics", KINETIC_DIMENSION_TASK_BUDGET);
 	system.run(restore);
+	registerCreativeMotorValueBoards(kineticWorld);
 
 	world.afterEvents.playerPlaceBlock.subscribe(event => {
 		if (kineticWorld.trackPlacedBlock(event.block))

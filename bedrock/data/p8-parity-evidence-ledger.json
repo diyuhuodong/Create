@@ -8278,7 +8278,7 @@
 				"resourceProjections": [],
 				"staticContracts": [],
 				"staticTests": [
-					"tests/stage6-static-contract.test.mjs"
+					"tests/register-block-component.test.mjs"
 				]
 			},
 			"evidenceState": "linked"
@@ -16245,7 +16245,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/creative-motor-configuration.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.motor.CreativeMotorBlock"
@@ -16253,7 +16253,7 @@
 				"resourceProjections": [],
 				"staticContracts": [],
 				"staticTests": [
-					"tests/creative-fluid-port.test.mjs"
+					"tests/creative-motor-configuration.test.mjs"
 				]
 			},
 			"evidenceState": "linked"
@@ -16270,7 +16270,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/creative-motor-configuration.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.motor.CreativeMotorBlockEntity"
@@ -16278,7 +16278,7 @@
 				"resourceProjections": [],
 				"staticContracts": [],
 				"staticTests": [
-					"tests/creative-fluid-port.test.mjs"
+					"tests/creative-motor-configuration.test.mjs"
 				]
 			},
 			"evidenceState": "linked"
@@ -16295,7 +16295,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/creative-motor-configuration.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.motor.CreativeMotorGenerator"
@@ -16303,7 +16303,7 @@
 				"resourceProjections": [],
 				"staticContracts": [],
 				"staticTests": [
-					"tests/creative-fluid-port.test.mjs"
+					"tests/creative-motor-configuration.test.mjs"
 				]
 			},
 			"evidenceState": "linked"
@@ -16320,7 +16320,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/creative-motor-configuration.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.motor.CreativeMotorRenderer"
@@ -16328,7 +16328,7 @@
 				"resourceProjections": [],
 				"staticContracts": [],
 				"staticTests": [
-					"tests/creative-fluid-port.test.mjs"
+					"tests/creative-motor-configuration.test.mjs"
 				]
 			},
 			"evidenceState": "linked"
@@ -16345,7 +16345,7 @@
 			],
 			"evidence": {
 				"bedrockRuntime": [
-					"behavior_pack/scripts/kinetics/kinetic-network.js"
+					"behavior_pack/scripts/kinetics/creative-motor-value-board.js"
 				],
 				"platformScenarios": [
 					"P8.6/C3/kinetics/com.simibubi.create.content.kinetics.motor.KineticScrollValueBehaviour"

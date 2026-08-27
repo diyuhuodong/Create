@@ -3,15 +3,30 @@
   "minecraft:client_entity": {
     "description": {
       "identifier": "createbedrock:crushing_wheel_visual",
-      "geometry": { "default": "geometry.createbedrock.crushing_wheel" },
+      "geometry": { "default": "geometry.createbedrock.crushing_wheel_visual" },
       "materials": { "default": "entity_alphatest" },
-      "textures": { "default": "textures/create_java/block/crushing_wheel" },
+      "textures": { "default": "textures/createbedrock/kinetics/crushing_wheel_atlas" },
       "render_controllers": ["controller.render.createbedrock.contraption"],
       "animations": {
-        "kinetic_visual_rotation": "animation.createbedrock.kinetic_visual_rotation",
-        "kinetic_visual_rotation_controller": "controller.animation.createbedrock.kinetic_visual_rotation"
+        "crushing_wheel_visual": "animation.createbedrock.crushing_wheel_visual",
+        "crushing_wheel_visual_controller": "controller.animation.createbedrock.crushing_wheel_visual"
       },
-      "scripts": { "animate": ["kinetic_visual_rotation_controller"] }
+      "scripts": {
+        "initialize": [
+          "variable.rotation_angle = 0;",
+          "variable.last_server_phase = 1000000;"
+        ],
+        "pre_animation": [
+          "variable.axis = query.property('createbedrock:axis');",
+          "variable.rpm = query.property('createbedrock:rpm');",
+          "variable.server_phase = query.property('createbedrock:phase');",
+          "variable.rotation_angle = variable.server_phase != variable.last_server_phase ? variable.server_phase : variable.rotation_angle + variable.rpm * 6 * query.delta_time;",
+          "variable.last_server_phase = variable.server_phase;",
+          "variable.root_x = variable.axis == 2 ? 90 : 0;",
+          "variable.root_z = variable.axis == 0 ? 90 : 0;"
+        ],
+        "animate": ["crushing_wheel_visual_controller"]
+      }
     }
   }
 }

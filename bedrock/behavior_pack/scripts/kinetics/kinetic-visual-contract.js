@@ -1,11 +1,11 @@
 export const KINETIC_VISUALS = Object.freeze({
-	// The motor casing is a native block model. Only its rotating half-shaft is
-	// an entity visual; this avoids fragile multi-controller entity composition.
-	"createbedrock:creative_motor": { entityType: "createbedrock:creative_motor_visual", hidesBlock: false, usesFacing: true },
+	// The complete motor is one visual entity: root orientation, static casing,
+	// control panel, and its one rotating Java SHAFT_HALF child.
+	"createbedrock:creative_motor": { entityType: "createbedrock:creative_motor_visual", hidesBlock: true, usesFacing: true, usesPhase: true },
 	"createbedrock:shaft": { entityType: "createbedrock:shaft_visual", hidesBlock: true },
 	"createbedrock:cogwheel": { entityType: "createbedrock:cogwheel_visual", hidesBlock: true },
 	"createbedrock:large_cogwheel": { entityType: "createbedrock:large_cogwheel_visual", hidesBlock: true },
-	"createbedrock:crushing_wheel": { entityType: "createbedrock:crushing_wheel_visual", hidesBlock: true }
+	"createbedrock:crushing_wheel": { entityType: "createbedrock:crushing_wheel_visual", hidesBlock: true, usesPhase: true }
 });
 
 export const KINETIC_VISUAL_ENTITY_TYPES = Object.freeze(Object.values(KINETIC_VISUALS)

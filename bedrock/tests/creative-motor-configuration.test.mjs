@@ -4,6 +4,8 @@ import test from "node:test";
 import {
 	CREATIVE_MOTOR_MAX_SPEED,
 	CREATIVE_MOTOR_MIN_SPEED,
+	creativeMotorDirectionFromEditorValue,
+	creativeMotorFaceIndex,
 	creativeMotorFacingIndex,
 	creativeMotorSpeed,
 	isCreativeMotorValueBox,
@@ -28,6 +30,7 @@ test("creative motor wrench configuration rejects fractional, malformed, and out
 test("creative motor value box matches Java Create's active perpendicular side panels", () => {
 	assert.equal(creativeMotorFacingIndex("south"), 3);
 	assert.equal(creativeMotorFacingIndex("east"), 5);
+	assert.equal(creativeMotorFaceIndex("North"), 2);
 	// A north/south motor shows boxes on its upper and lateral panels, not its
 	// output face or underside.
 	assert.equal(isCreativeMotorValueBox({ blockFace: 1, facingDirection: 3, faceLocation: { x: 0.5, y: 1, z: 0.5 } }), true);
@@ -39,6 +42,7 @@ test("creative motor value box matches Java Create's active perpendicular side p
 	assert.equal(isCreativeMotorValueBox({ blockFace: 2, facingDirection: 1, faceLocation: { x: 0.5, y: 0.5, z: 0 } }), true);
 	assert.equal(isCreativeMotorValueBox({ blockFace: 1, facingDirection: 1, faceLocation: { x: 0.5, y: 1, z: 0.5 } }), false);
 	assert.equal(isCreativeMotorValueBox({ blockFace: 1, facingDirection: "south", faceLocation: { x: 0.5, y: 1, z: 0.5 } }), true);
+	assert.equal(isCreativeMotorValueBox({ blockFace: "UP", facingDirection: "south", faceLocation: { x: 0.5, y: 1, z: 0.5 } }), true);
 });
 
 test("creative motor editor uses a signed direction and non-zero Java magnitude", () => {
@@ -49,4 +53,9 @@ test("creative motor editor uses a signed direction and non-zero Java magnitude"
 	assert.equal(nudgeCreativeMotorSpeed(255, 32), 256);
 	assert.equal(nudgeCreativeMotorSpeed(-1, 1), 1);
 	assert.equal(nudgeCreativeMotorSpeed(1, -1), -1);
+	assert.equal(creativeMotorDirectionFromEditorValue(0), 1);
+	assert.equal(creativeMotorDirectionFromEditorValue(1), -1);
+	assert.equal(creativeMotorDirectionFromEditorValue("正转"), 1);
+	assert.equal(creativeMotorDirectionFromEditorValue("反转"), -1);
+	assert.throws(() => creativeMotorDirectionFromEditorValue(undefined));
 });

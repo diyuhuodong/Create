@@ -20,14 +20,23 @@ const FACING_DIRECTION_INDEX = Object.freeze({
 	east: 5
 });
 
+// Interaction events and raycasts both use Direction, but Script API releases
+// have exposed it as either the numeric enum or a named string. Normalising
+// here keeps the value board and its click target on the exact same faces.
+export function creativeMotorFaceIndex(face) {
+	if (Number.isInteger(face) && face >= 0 && face <= 5)
+		return face;
+	if (typeof face !== "string")
+		return undefined;
+	return FACING_DIRECTION_INDEX[face.toLowerCase()];
+}
+
 /**
  * Convert the modern placement-direction strings to Bedrock's numeric face
  * index. Numbers stay accepted solely to keep old saved permutations readable.
  */
 export function creativeMotorFacingIndex(facingDirection) {
-	if (Number.isInteger(facingDirection) && facingDirection >= 0 && facingDirection <= 5)
-		return facingDirection;
-	return FACING_DIRECTION_INDEX[facingDirection];
+	return creativeMotorFaceIndex(facingDirection);
 }
 
 function inValueBox(value) {
@@ -36,22 +45,23 @@ function inValueBox(value) {
 
 /** Whether a hit targets one of Java Create's visible Creative Motor value boxes. */
 export function isCreativeMotorValueBox({ blockFace, faceLocation, facingDirection }) {
+	const faceIndex = creativeMotorFaceIndex(blockFace);
 	const facingIndex = creativeMotorFacingIndex(facingDirection);
-	if (!Number.isInteger(blockFace) || !Number.isInteger(facingIndex) || !faceLocation)
+	if (!Number.isInteger(faceIndex) || !Number.isInteger(facingIndex) || !faceLocation)
 		return false;
-	const blockAxis = FACE_AXIS[blockFace];
+	const blockAxis = FACE_AXIS[faceIndex];
 	const facingAxis = FACE_AXIS[facingIndex];
 	if (!blockAxis || !facingAxis || blockAxis === facingAxis)
 		return false;
-	if (facingAxis !== "y" && blockFace === 0)
+	if (facingAxis !== "y" && faceIndex === 0)
 		return false;
 	// Direction is the Bedrock block-facing enum: down/up/north/south/west/east.
 	// Test only the two coordinates that lie in the selected face plane.
-	if (blockFace === 0 || blockFace === 1)
+	if (faceIndex === 0 || faceIndex === 1)
 		return inValueBox(faceLocation.x) && inValueBox(faceLocation.z);
-	if (blockFace === 2 || blockFace === 3)
+	if (faceIndex === 2 || faceIndex === 3)
 		return inValueBox(faceLocation.x) && inValueBox(faceLocation.y);
-	if (blockFace === 4 || blockFace === 5)
+	if (faceIndex === 4 || faceIndex === 5)
 		return inValueBox(faceLocation.z) && inValueBox(faceLocation.y);
 	return false;
 }
@@ -72,6 +82,26 @@ export function creativeMotorSpeed(direction, magnitude) {
 	if (!Number.isInteger(magnitude) || magnitude < CREATIVE_MOTOR_MIN_MAGNITUDE || magnitude > CREATIVE_MOTOR_MAX_MAGNITUDE)
 		throw new RangeError(`Speed magnitude must be between ${CREATIVE_MOTOR_MIN_MAGNITUDE} and ${CREATIVE_MOTOR_MAX_MAGNITUDE} RPM`);
 	return direction * magnitude;
+}
+
+/**
+ * Modal-form dropdowns have returned both indexes and labels across Script API
+ * versions. Accept each representation so choosing \"反转\" cannot silently
+ * fall through to the positive direction.
+ */
+export function creativeMotorDirectionFromEditorValue(value) {
+	if (value === 1 || value === true)
+		return -1;
+	if (value === 0 || value === false)
+		return 1;
+	if (typeof value !== "string")
+		throw new TypeError("Creative Motor direction selection is invalid");
+	const normalized = value.trim().toLowerCase();
+	if (["1", "reverse", "反转"].includes(normalized))
+		return -1;
+	if (["0", "forward", "正转"].includes(normalized))
+		return 1;
+	throw new TypeError("Creative Motor direction selection is invalid");
 }
 
 /** Apply an editor nudge while retaining Java Create's non-zero value range. */

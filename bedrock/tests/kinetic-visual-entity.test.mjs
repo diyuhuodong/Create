@@ -24,26 +24,43 @@ test("kinetic visual controllers resolve a distinct animation alias", async () =
 	}
 });
 
-test("creative motor visual renders only Java's rotating half shaft through one controller per shaft texture", async () => {
+test("creative motor visual renders the complete Java machine through one controller and one texture atlas", async () => {
 	const [entitySource, controllerSource, animationSource] = await Promise.all([
 		readFile(resolve(root, "resource_pack/entity/creative_motor_visual.entity.json"), "utf8"),
 		readFile(resolve(root, "resource_pack/render_controllers/createbedrock.render_controllers.json"), "utf8"),
 		readFile(resolve(root, "resource_pack/animations/kinetic-visual.animation.json"), "utf8")
 	]);
 	const entity = JSON.parse(entitySource)["minecraft:client_entity"].description;
-	assert.deepEqual(Object.keys(entity.textures), ["axis", "axis_top"]);
-	assert.equal(entity.render_controllers.length, 2);
-	assert.match(controllerSource, /controller\.render\.createbedrock\.creative_motor_axis_top/);
-	assert.match(controllerSource, /Geometry\.axis_top_vertical/);
-	assert.match(animationSource, /"motor_axis_shaft_orientation"/);
-	assert.match(animationSource, /"motor_axis_top_shaft_orientation"/);
-	assert.match(animationSource, /"variable\.axis_x"/);
+	assert.deepEqual(Object.keys(entity.textures), ["motor"]);
+	assert.equal(entity.render_controllers.length, 1);
+	assert.match(controllerSource, /controller\.render\.createbedrock\.creative_motor/);
+	assert.match(controllerSource, /Geometry\.vertical/);
+	assert.match(animationSource, /"motor_root"/);
+	assert.match(animationSource, /"motor_shaft_horizontal"/);
+	assert.match(animationSource, /"motor_shaft_vertical"/);
+	assert.match(entitySource, /creative_motor_atlas/);
+	assert.match(entitySource, /createbedrock:phase/);
+	assert.match(entitySource, /variable\.root_x/);
 	assert.match(animationSource, /"variable\.rotation_angle"/);
 	assert.match(entitySource, /"pre_animation"/);
-	assert.match(entitySource, /variable\.rotation_angle = variable\.rotation_angle \+ variable\.rpm \* 6 \* query\.delta_time/);
+	assert.match(entitySource, /variable\.server_phase/);
 });
 
-test("creative motor keeps its static block shell while its visual lookup shares the entity spawn position", async () => {
+test("crushing wheel uses the motor-style server phase and a separate orientation bone", async () => {
+	const [behaviorSource, entitySource, animationSource] = await Promise.all([
+		readFile(resolve(root, "behavior_pack/entities/crushing_wheel_visual.json"), "utf8"),
+		readFile(resolve(root, "resource_pack/entity/crushing_wheel_visual.entity.json"), "utf8"),
+		readFile(resolve(root, "resource_pack/animations/kinetic-visual.animation.json"), "utf8")
+	]);
+	assert.match(behaviorSource, /"createbedrock:phase"/);
+	assert.match(entitySource, /variable\.server_phase/);
+	assert.match(entitySource, /variable\.rotation_angle/);
+	assert.match(entitySource, /crushing_wheel_visual_controller/);
+	assert.match(animationSource, /"crushing_wheel_orientation"/);
+	assert.match(animationSource, /"crushing_wheel"/);
+});
+
+test("creative motor hides its static block only after a whole-machine visual is spawned at the shared location", async () => {
 	const [blockSource, contractSource, runtimeSource] = await Promise.all([
 		readFile(resolve(root, "behavior_pack/blocks/creative_motor.json"), "utf8"),
 		readFile(resolve(root, "behavior_pack/scripts/kinetics/kinetic-visual-contract.js"), "utf8"),
@@ -51,11 +68,16 @@ test("creative motor keeps its static block shell while its visual lookup shares
 	]);
 	const block = JSON.parse(blockSource)["minecraft:block"];
 	assert.deepEqual(block.description.properties["createbedrock:kinetic_visual"], [0, 1]);
-	assert.equal(block.permutations.some(permutation => permutation.condition === "query.block_state('createbedrock:kinetic_visual') == 1"), false);
-	assert.match(contractSource, /creative_motor[^\n]+hidesBlock: false/);
+	assert.equal(block.permutations.some(permutation => permutation.condition === "query.block_state('createbedrock:kinetic_visual') == 1"), true);
+	assert.match(contractSource, /creative_motor[^\n]+hidesBlock: true/);
+	assert.match(contractSource, /creative_motor[^\n]+usesPhase: true/);
 	assert.match(runtimeSource, /setVisualBlockState\(block, Boolean\(visual\.hidesBlock\)\)/);
+	assert.match(runtimeSource, /function advanceVisualPhase/);
+	assert.match(runtimeSource, /createbedrock:phase/);
 	assert.match(runtimeSource, /function visualLocation\(location\)/);
 	assert.match(runtimeSource, /dimension\.spawnEntity\(visual\.entityType, visualLocation\(node\.location\)\)/);
+	assert.match(runtimeSource, /const \[visual, \.\.\.duplicates\] = matches/);
+	assert.match(runtimeSource, /duplicate\.remove\(\)/);
 });
 
 test("creative motor opens its RPM editor only from the visible Java-style value box", async () => {
@@ -68,6 +90,28 @@ test("creative motor opens its RPM editor only from the visible Java-style value
 	assert.match(runtimeSource, /isCreativeMotorValueBox/);
 	assert.match(runtimeSource, /visible value box therefore opens an exact-RPM editor/);
 	assert.match(runtimeSource, /showCreativeMotorConfiguration\(block, player\)/);
+	assert.match(runtimeSource, /parseCreativeMotorSpeed/);
+	assert.match(runtimeSource, /设为反转/);
 	assert.doesNotMatch(runtimeSource, /CREATIVE_MOTOR_CONFIGURATION_HOLD_TICKS/);
 	assert.match(equipmentSource, /standard face-based rotation/);
+});
+
+test("creative motor projects Java-style RPM and direction onto the focused wrench value board", async () => {
+	const [boardEntitySource, clientEntitySource, runtimeSource, converterSource] = await Promise.all([
+		readFile(resolve(root, "behavior_pack/entities/creative_motor_value_board.json"), "utf8"),
+		readFile(resolve(root, "resource_pack/entity/creative_motor_value_board.entity.json"), "utf8"),
+		readFile(resolve(root, "behavior_pack/scripts/kinetics/creative-motor-value-board.js"), "utf8"),
+		readFile(resolve(root, "tools/convert-java-models.mjs"), "utf8")
+	]);
+	assert.match(boardEntitySource, /"createbedrock:digit_hundreds"/);
+	assert.match(boardEntitySource, /"createbedrock:reverse"/);
+	assert.match(boardEntitySource, /"is_summonable": true/);
+	assert.match(clientEntitySource, /creative_motor_value_board/);
+	assert.match(runtimeSource, /getBlockFromViewDirection/);
+	assert.match(runtimeSource, /isCreativeMotorValueBox/);
+	assert.match(runtimeSource, /faceLocation: hit\.faceLocation/);
+	assert.match(runtimeSource, /valueBoxCoordinate\(faceLocation\?\.x\)/);
+	assert.match(runtimeSource, /kineticWorld\.generatedSpeedAt/);
+	assert.match(converterSource, /function creativeMotorValueBoardAnimation/);
+	assert.match(converterSource, /digit_\$\{place\}/);
 });

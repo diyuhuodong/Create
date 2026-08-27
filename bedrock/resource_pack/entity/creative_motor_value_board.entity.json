@@ -1,0 +1,14 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "createbedrock:creative_motor_value_board",
+      "geometry": { "default": "geometry.createbedrock.creative_motor_value_board" },
+      "materials": { "default": "entity_alphatest" },
+      "textures": { "board": "textures/createbedrock/kinetics/creative_motor_value_board" },
+      "render_controllers": ["controller.render.createbedrock.creative_motor_value_board"],
+      "animations": { "creative_motor_value_board": "animation.createbedrock.creative_motor_value_board" },
+      "scripts": { "animate": ["creative_motor_value_board"] }
+    }
+  }
+}

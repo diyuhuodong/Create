@@ -225,7 +225,7 @@
       "textures": "textures/create_java/item/potato_cannon"
     },
     "createbedrock_wrench": {
-      "textures": "textures/create_java/item/wrench"
+      "textures": "textures/createbedrock/items/wrench_inventory"
     },
     "createbedrock_honey_bucket": {
       "textures": "textures/create_java/item/honey_bucket"

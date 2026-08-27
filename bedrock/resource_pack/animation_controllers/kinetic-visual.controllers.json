@@ -9,11 +9,19 @@
         }
       }
     },
-    "controller.animation.createbedrock.creative_motor_shaft": {
+    "controller.animation.createbedrock.crushing_wheel_visual": {
       "initial_state": "active",
       "states": {
         "active": {
-          "animations": ["creative_motor_shaft"]
+          "animations": ["crushing_wheel_visual"]
+        }
+      }
+    },
+    "controller.animation.createbedrock.creative_motor_visual": {
+      "initial_state": "active",
+      "states": {
+        "active": {
+          "animations": ["creative_motor_visual"]
         }
       }
     }

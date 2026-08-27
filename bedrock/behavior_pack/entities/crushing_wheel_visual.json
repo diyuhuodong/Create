@@ -9,6 +9,7 @@
       "properties": {
         "createbedrock:axis": { "type": "int", "range": [0, 2], "default": 1, "client_sync": true },
         "createbedrock:rpm": { "type": "float", "range": [-256.0, 256.0], "default": 0.0, "client_sync": true },
+        "createbedrock:phase": { "type": "float", "range": [-1000000.0, 1000000.0], "default": 0.0, "client_sync": true },
         "createbedrock:active": { "type": "bool", "default": false, "client_sync": true }
       }
     },

@@ -8,6 +8,7 @@ const VISUAL_ID_PROPERTY = "createbedrock:kinetic_visual_id";
 const VISUAL_AXIS_PROPERTY = "createbedrock:axis";
 const VISUAL_FACING_PROPERTY = "createbedrock:facing";
 const VISUAL_RPM_PROPERTY = "createbedrock:rpm";
+const VISUAL_PHASE_PROPERTY = "createbedrock:phase";
 const VISUAL_ACTIVE_PROPERTY = "createbedrock:active";
 const VISUAL_BLOCK_STATE = "createbedrock:kinetic_visual";
 const RECONCILE_INTERVAL = 5;
@@ -18,6 +19,43 @@ let registered = false;
 let ticks = 0;
 let visualCount = 0;
 let lastReconciled = 0;
+const phaseMemory = new Map();
+
+function normalizedDegrees(angle) {
+	const normalized = angle % 360;
+	return normalized < 0 ? normalized + 360 : normalized;
+}
+
+function phaseSeed(id) {
+	let hash = 2166136261;
+	for (const character of id) {
+		hash ^= character.charCodeAt(0);
+		hash = Math.imul(hash, 16777619);
+	}
+	return hash % 360;
+}
+
+// The entity property is client-synchronised and survives normal chunk entity
+// persistence. Memory advances the authoritative phase between syncs without
+// respawning the machine whenever its RPM changes.
+function advanceVisualPhase(id, entity, rpm) {
+	const now = system.currentTick;
+	let phase = phaseMemory.get(id);
+	if (!phase) {
+		const saved = Number(entity.getProperty(VISUAL_PHASE_PROPERTY));
+		phase = {
+			angle: Number.isFinite(saved) ? normalizedDegrees(saved) : phaseSeed(id),
+			rpm,
+			tick: now
+		};
+	} else {
+		phase.angle = normalizedDegrees(phase.angle + phase.rpm * 6 * ((now - phase.tick) / 20));
+		phase.rpm = rpm;
+		phase.tick = now;
+	}
+	phaseMemory.set(id, phase);
+	return phase.angle;
+}
 
 function setVisualBlockState(block, visible) {
 	const states = block?.permutation?.getAllStates?.();
@@ -33,11 +71,18 @@ function setVisualBlockState(block, visible) {
 
 function visualAt(dimension, type, location, id) {
 	try {
-		return dimension.getEntities({
+		const matches = dimension.getEntities({
 			type,
 			location: visualLocation(location),
 			maxDistance: 0.35
-		}).find(entity => entity.getDynamicProperty(VISUAL_ID_PROPERTY) === id);
+		}).filter(entity => entity.getDynamicProperty(VISUAL_ID_PROPERTY) === id);
+		const [visual, ...duplicates] = matches;
+		// Older visual packages could leave a same-id entity behind after a
+		// reload. Two overlapping entities with distinct client animation clocks
+		// look exactly like a flickering machine, so retain one authoritative copy.
+		for (const duplicate of duplicates)
+			duplicate.remove();
+		return visual;
 	} catch {
 		return undefined;
 	}
@@ -55,13 +100,15 @@ function visualFacing(block) {
 	return creativeMotorFacingIndex(facing) ?? 3;
 }
 
-function updateVisual(entity, node, speed, visual, block) {
+function updateVisual(entity, id, node, speed, visual, block) {
 	const rpm = Number.isFinite(speed) ? Math.max(-256, Math.min(256, speed)) : 0;
 	try {
 		entity.setProperty(VISUAL_AXIS_PROPERTY, kineticVisualAxis(node.axis));
 		if (visual.usesFacing)
 			entity.setProperty(VISUAL_FACING_PROPERTY, visualFacing(block));
 		entity.setProperty(VISUAL_RPM_PROPERTY, rpm);
+		if (visual.usesPhase)
+			entity.setProperty(VISUAL_PHASE_PROPERTY, advanceVisualPhase(id, entity, rpm));
 		entity.setProperty(VISUAL_ACTIVE_PROPERTY, Math.abs(rpm) > 0.0001);
 		return true;
 	} catch (error) {
@@ -97,7 +144,7 @@ function reconcileNode(kineticWorld, node) {
 		}
 	}
 
-	if (!updateVisual(entity, node, kineticWorld.speedAt(node.dimensionId, node.location), visual, block))
+	if (!updateVisual(entity, id, node, kineticWorld.speedAt(node.dimensionId, node.location), visual, block))
 		return false;
 	// Also restore legacy Creative Motors whose shell an earlier pack hid while
 	// it attempted to render the entire motor through a client entity.
@@ -109,12 +156,13 @@ function removeVisualsAt(dimension, location) {
 	let removed = 0;
 	for (const type of KINETIC_VISUAL_ENTITY_TYPES) {
 		try {
-			for (const entity of dimension.getEntities({
+				for (const entity of dimension.getEntities({
 				type,
 				location: visualLocation(location),
 				maxDistance: 0.35
-			})) {
-				entity.remove();
+				})) {
+					entity.remove();
+					phaseMemory.delete(kineticVisualId(dimension.id, location));
 				removed++;
 			}
 		} catch {
@@ -125,6 +173,8 @@ function removeVisualsAt(dimension, location) {
 }
 
 function sweepOrphans(activeIds) {
+	for (const id of phaseMemory.keys())
+		if (!activeIds.has(id)) phaseMemory.delete(id);
 	for (const dimensionId of DIMENSION_IDS) {
 		let dimension;
 		try {
